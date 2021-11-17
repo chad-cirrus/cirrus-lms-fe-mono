@@ -5,6 +5,9 @@ import { CirrusMaterialModule, UiModule } from '@cirrus/ui';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { StoreModule } from '@ngrx/store';
+import { configReducer } from './store/reducers/config.reducer';
+import { extModules } from './build-specifics';
 
 @NgModule({
   declarations: [AppComponent],
@@ -13,6 +16,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BrowserAnimationsModule,
     CirrusMaterialModule,
     UiModule,
+    StoreModule.forRoot({ config: configReducer }),
+    extModules,
   ],
   providers: [],
   bootstrap: [AppComponent],

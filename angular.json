@@ -323,6 +323,10 @@
                 {
                   "replace": "apps/courses/src/environments/environment.ts",
                   "with": "apps/courses/src/environments/environment.prod.ts"
+                },
+                {
+                  "replace": "apps/courses/src/app/build-specifics/index.ts",
+                  "with": "apps/courses/src/app/build-specifics/index.prod.ts"
                 }
               ],
               "outputHashing": "all"
