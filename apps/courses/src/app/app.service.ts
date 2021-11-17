@@ -9,9 +9,9 @@ import { map } from 'rxjs/operators';
 export class AppService {
   getConfigs(): Observable<IConfig> {
     const configs: IConfig = {
-      a: 'a',
-      b: 'b',
-      c: 'c',
+      a: 'test config a',
+      b: true,
+      c: 2000,
     };
     return timer(3000).pipe(map(() => ({ ...configs })));
   }

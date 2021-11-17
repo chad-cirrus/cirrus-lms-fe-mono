@@ -1,5 +1,5 @@
 export interface IConfig {
   a: string;
-  b: string;
-  c: string;
+  b: boolean;
+  c: number;
 }

@@ -14,12 +14,18 @@ export const initialState: AppState = {
   error: null,
   config: {
     a: '',
-    b: '',
-    c: '',
+    b: false,
+    c: 0,
   },
 };
 
 export const configReducer = createReducer(
   initialState,
-  on(appActions.fetchConfig, state => ({ ...state, busy: true, error: null }))
+  on(appActions.fetchConfig, state => ({ ...state, busy: true, error: null })),
+  on(appActions.fetchConfigSuccess, (state, { configs }) => ({
+    ...state,
+    busy: false,
+    error: null,
+    config: { ...configs },
+  }))
 );
