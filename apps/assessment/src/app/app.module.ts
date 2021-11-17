@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { CirrusMaterialModule } from '@cirrus/ui';
+import { CirrusMaterialModule, UiModule } from '@cirrus/ui';
 
 import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
@@ -14,6 +14,7 @@ import { RouterModule } from '@angular/router';
     RouterModule.forRoot([], { initialNavigation: 'enabledBlocking' }),
     BrowserAnimationsModule,
     CirrusMaterialModule,
+    UiModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
