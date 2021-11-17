@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'cirrus-test-alpha',
@@ -6,6 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./test-alpha.component.scss'],
 })
 export class TestAlphaComponent implements OnInit {
+
+  @Input() message = 'No Message Given'
+
   ngOnInit(): void {
     console.log('test alpah!');
   }
