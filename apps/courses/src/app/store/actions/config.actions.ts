@@ -1,10 +1,11 @@
+import { IConfig } from '@cirrus/models';
 import { createAction, props } from '@ngrx/store';
 
 export const fetchConfig = createAction('[app component] fetch config');
 
 export const fetchConfigSuccess = createAction(
   '[app componenet] fetchConfig success',
-  props<{ configs: any }>()
+  props<{ configs: IConfig }>()
 );
 
 export const fetchConfigFailure = createAction(

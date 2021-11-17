@@ -8,6 +8,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StoreModule } from '@ngrx/store';
 import { configReducer } from './store/reducers/config.reducer';
 import { extModules } from './build-specifics';
+import { EffectsModule } from '@ngrx/effects';
+import { ConfigEffects } from './store/effects/config.effects';
 
 @NgModule({
   declarations: [AppComponent],
@@ -18,6 +20,7 @@ import { extModules } from './build-specifics';
     UiModule,
     StoreModule.forRoot({ config: configReducer }),
     extModules,
+    EffectsModule.forRoot([ConfigEffects]),
   ],
   providers: [],
   bootstrap: [AppComponent],
