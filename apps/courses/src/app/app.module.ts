@@ -5,6 +5,11 @@ import { CirrusMaterialModule, UiModule } from '@cirrus/ui';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { StoreModule } from '@ngrx/store';
+import { configReducer } from './store/reducers/config.reducer';
+import { extModules } from './build-specifics';
+import { EffectsModule } from '@ngrx/effects';
+import { ConfigEffects } from './store/effects/config.effects';
 
 @NgModule({
   declarations: [AppComponent],
@@ -13,6 +18,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BrowserAnimationsModule,
     CirrusMaterialModule,
     UiModule,
+    StoreModule.forRoot({ config: configReducer }),
+    extModules,
+    EffectsModule.forRoot([ConfigEffects]),
   ],
   providers: [],
   bootstrap: [AppComponent],
