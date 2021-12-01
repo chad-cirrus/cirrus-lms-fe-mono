@@ -3,6 +3,7 @@ import { IConfig } from '@cirrus/models';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { fetchConfig } from './store/actions';
+import { AppState } from './store/reducers';
 import { selectConfigs } from './store/selectors/config.selectors';
 
 @Component({
@@ -14,7 +15,7 @@ export class AppComponent {
   title = 'courses';
   config$: Observable<IConfig> = this.store.select(selectConfigs);
 
-  constructor(private store: Store<{ config: any }>) {}
+  constructor(private store: Store<AppState>) {}
 
   ngOnInit() {
     this.store.dispatch(fetchConfig());

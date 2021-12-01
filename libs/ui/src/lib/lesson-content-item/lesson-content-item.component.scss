@@ -1,0 +1,16 @@
+@use 'variables' as *;
+
+div {
+  font-style: normal;
+  font-weight: normal;
+  margin-bottom: 8px;
+}
+
+div.title {
+  width: 100%;
+}
+
+div.subtitle {
+  width: 60%;
+  // color: $secondary-font-color-light-grey;
+}

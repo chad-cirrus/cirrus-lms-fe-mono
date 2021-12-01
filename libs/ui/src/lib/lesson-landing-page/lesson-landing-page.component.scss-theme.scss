@@ -1,0 +1,30 @@
+@use '~@angular/material/theming' as material;
+
+@mixin cirrus-lesson-landing-page-typography($typography-config) {
+  cirrus-lesson-landing-page {
+    .lesson-image {
+      h1 {
+        @include material.mat-typography-level-to-styles(
+          $typography-config,
+          display-3
+        );
+      }
+      h4 {
+        @include material.mat-typography-level-to-styles(
+          $typography-config,
+          display-2
+        );
+      }
+    }
+  }
+}
+
+@mixin cirrus-lesson-landing-page-theme($theme) {
+  $theme-colors: material.mat-get-color-config($theme);
+  $typography: material.mat-get-typography-config($theme);
+  $backgrounds: map-get($theme-colors, background);
+
+  @if $typography != null {
+    @include cirrus-lesson-landing-page-typography($typography);
+  }
+}

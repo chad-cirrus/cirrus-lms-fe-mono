@@ -297,12 +297,21 @@
             "inlineStyleLanguage": "scss",
             "assets": [
               "apps/courses/src/favicon.ico",
-              "apps/courses/src/assets"
+              "apps/courses/src/assets",
+              {
+                "input": "libs/ui/src/assets",
+                "glob": "**/*",
+                "output": "assets/ui"
+              }
             ],
             "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "apps/courses/src/styles.scss"
             ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "libs/ui/src/lib/styles"
+              ]
+            },
             "scripts": []
           },
           "configurations": {

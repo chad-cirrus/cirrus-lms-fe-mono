@@ -1,0 +1,36 @@
+@use '~@angular/material/theming' as material;
+@use 'variables' as var;
+
+@mixin cirrus-lesson-content-item-typography($typography-config) {
+  cirrus-lesson-content-item {
+    .title {
+      @include material.mat-typography-level-to-styles(
+        $typography-config,
+        display-2
+      );
+    }
+    .subtitle {
+      @include material.mat-typography-level-to-styles(
+        $typography-config,
+        body-2
+      );
+    }
+  }
+}
+
+@mixin cirrus-lesson-content-item-theme($theme) {
+  $theme-colors: material.mat-get-color-config($theme);
+  $typography: material.mat-get-typography-config($theme);
+  $backgrounds: map-get($theme-colors, background);
+
+  @if $typography != null {
+    @include cirrus-lesson-content-item-typography($typography);
+  }
+
+  cirrus-lesson-content-item {
+    background-color: material.mat-color($theme-colors, card);
+    .subtitle {
+      color: var.$secondary-font-color-light-grey;
+    }
+  }
+}

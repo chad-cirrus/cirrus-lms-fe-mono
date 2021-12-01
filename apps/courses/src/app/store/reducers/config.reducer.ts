@@ -3,13 +3,13 @@ import * as appActions from '../actions';
 
 import { IConfig } from '@cirrus/models';
 
-export interface AppState {
+export interface ConfigState {
   busy: boolean;
   error: any;
   config: IConfig;
 }
 
-export const initialState: AppState = {
+export const initialState: ConfigState = {
   busy: false,
   error: null,
   config: {
@@ -19,7 +19,7 @@ export const initialState: AppState = {
   },
 };
 
-export const configReducer = createReducer(
+export const reducer = createReducer(
   initialState,
   on(appActions.fetchConfig, state => ({ ...state, busy: true, error: null })),
   on(appActions.fetchConfigSuccess, (state, { configs }) => ({
@@ -27,5 +27,9 @@ export const configReducer = createReducer(
     busy: false,
     error: null,
     config: { ...configs },
+  })),
+  on(appActions.fetchConfigFailure, (state, { error }) => ({
+    ...initialState,
+    error,
   }))
 );

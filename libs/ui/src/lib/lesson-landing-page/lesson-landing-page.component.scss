@@ -1,0 +1,39 @@
+.lesson-image {
+  // background: url('/assets/ui/images/image21.png') no-repeat center center;
+  background: linear-gradient(
+      90deg,
+      #000000 0%,
+      rgba(0, 0, 0, 0.449675) 46.24%,
+      rgba(0, 0, 0, 0) 61.94%
+    ),
+    url('/assets/ui/images/image21.png') no-repeat center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 50vh;
+  padding: 8px;
+  .content {
+    margin-left: 40px;
+    button {
+      margin-top: 80px;
+      box-sizing: border-box;
+      border-radius: 300px;
+      width: 198px;
+      height: 66px;
+      font-weight: 500;
+      font-size: 21px;
+      line-height: 30px;
+    }
+  }
+}
+
+.cirrus-progress-row {
+  margin: 48px auto;
+  width: 80%;
+}
+
+.content-container {
+  margin: 0 auto;
+  width: 80%;
+}

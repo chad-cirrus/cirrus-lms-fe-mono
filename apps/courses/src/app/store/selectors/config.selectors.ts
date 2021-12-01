@@ -1,9 +1,10 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { AppState } from '../reducers/config.reducer';
+import { AppState } from '../reducers';
+import { ConfigState } from '../reducers/config.reducer';
 
-export const selectConfigFeature = createFeatureSelector<AppState>('config');
+export const selectConfigFeature = createFeatureSelector<ConfigState>('config');
 
 export const selectConfigs = createSelector(
   selectConfigFeature,
-  config => config.config
+  state => state.config
 );

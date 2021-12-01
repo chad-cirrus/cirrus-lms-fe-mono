@@ -1,16 +1,1 @@
-<h1>Hello Courses!!!</h1>
-
-<mat-toolbar color="primary">
-  <button mat-button [matMenuTriggerFor]="menu">Menu</button>
-  <mat-menu #menu="matMenu">
-    <button mat-menu-item routerLink="/home">Home</button>
-    <button mat-menu-item routerLink="/doers">Doers</button>
-    <button mat-menu-item routerLink="/todos">Todos</button>
-  </mat-menu>
-</mat-toolbar>
-
-<cirrus-test-alpha
-  [message]="'test test test'"
-></cirrus-test-alpha>
-
-<pre>{{ config$ | async | json }}</pre>
+<router-outlet></router-outlet>

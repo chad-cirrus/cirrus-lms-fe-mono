@@ -19,5 +19,8 @@
       "@cirrus/ui": ["libs/ui/src/index.ts"]
     }
   },
-  "exclude": ["node_modules", "tmp"]
+  "exclude": ["node_modules", "tmp"],
+  "angularCompilerOptions": {
+    "strictTemplates": true
+  }
 }
