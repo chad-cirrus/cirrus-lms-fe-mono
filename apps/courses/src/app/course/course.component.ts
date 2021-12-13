@@ -1,20 +1,27 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { ILesson } from '@cirrus/models';
-import { of } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/internal/Observable';
 import { map } from 'rxjs/operators';
-import { testData } from './testData';
+import { fetchLessons } from '../store/actions';
+import { LessonState } from '../store/reducers/lesson.reducer';
+import { selectLesson } from '../store/selectors/lessons.selector';
 
 @Component({
   selector: 'cirrus-course',
   templateUrl: './course.component.html',
   styleUrls: ['./course.component.scss'],
 })
-export class CourseComponent {
+export class CourseComponent implements OnInit {
   courseId$ = this.route.params.pipe(map(params => params['courseId']));
 
-  lesson$: Observable<ILesson> = of(testData.lesson);
+  lesson$: Observable<any> = this.store.select(selectLesson);
+  constructor(
+    private route: ActivatedRoute,
+    private store: Store<LessonState>
+  ) {}
 
-  constructor(private route: ActivatedRoute) {}
+  ngOnInit() {
+    this.store.dispatch(fetchLessons({ courseId: 12 }));
+  }
 }

@@ -10,11 +10,12 @@ module.exports = {
   },
   coverageDirectory: '../../coverage/libs/ui',
   transform: {
-    '^.+\\.(ts|js|html)$': 'jest-preset-angular',
+    '^.+\\.(ts|js|mjs|html|svg)$': 'jest-preset-angular',
   },
   snapshotSerializers: [
     'jest-preset-angular/build/serializers/no-ng-attributes',
     'jest-preset-angular/build/serializers/ng-snapshot',
     'jest-preset-angular/build/serializers/html-comment',
   ],
+  transformIgnorePatterns: ['node_modules/(?!.*.(mjs|ts)$)']
 };

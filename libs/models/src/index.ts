@@ -5,3 +5,4 @@ export * from './lib/IContentItem';
 export * from './lib/ProgressType';
 export * from './lib/IProgress';
 export * from './lib/IContent';
+export * from './lib/ILesson';

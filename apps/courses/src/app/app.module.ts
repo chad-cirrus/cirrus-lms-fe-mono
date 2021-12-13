@@ -13,6 +13,10 @@ import { ConfigEffects } from './store/effects/config.effects';
 import { CourseComponent } from './course/course.component';
 import { AppRoutingModule } from './app-routing.module';
 import { coursesReducers } from './store/reducers';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthHttpInterceptor } from './interceptors/AuthHttpInterceptor';
+import { LessonsEffects } from './store/effects/lessons.effects';
 
 @NgModule({
   declarations: [AppComponent, CourseComponent],
@@ -23,11 +27,19 @@ import { coursesReducers } from './store/reducers';
     UiModule,
     StoreModule.forRoot(coursesReducers),
     extModules,
-    EffectsModule.forRoot([ConfigEffects]),
+    EffectsModule.forRoot([ConfigEffects, LessonsEffects]),
     AppRoutingModule,
     FlexLayoutModule,
+    MatSidenavModule,
+    HttpClientModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthHttpInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

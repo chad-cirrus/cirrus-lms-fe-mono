@@ -3,7 +3,7 @@
   <div class="lesson-image" fxLayout="column" fxLayoutAlign="center start">
     <div class="content">
       <h1>{{lesson.title}}</h1>
-      <h4>{{lesson.subTitle}}</h4>
+      <h4>{{lesson.system_name}}</h4>
 
       <div fxLayout="row" fxLayoutGap="8px">
         <img [src]="profileImageUrl" alt="uh oh">
@@ -15,7 +15,7 @@
   </div>
 
   <div class="cirrus-progress-row" fxLayout="row" fxLayoutGap="24px">
-    <cirrus-progress-card fxFlex fxFlexAlign="stretch" *ngFor="let item of lesson.progess" [progress]="item"></cirrus-progress-card>
+    <cirrus-progress-card fxFlex fxFlexAlign="stretch" *ngFor="let item of progress" [progress]="item"></cirrus-progress-card>
   </div>
 
   <div class="content-container" fxLayout="column" fxLayoutAlign="space-between stretch">

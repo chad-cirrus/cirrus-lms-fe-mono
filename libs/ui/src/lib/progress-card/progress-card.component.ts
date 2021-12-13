@@ -6,16 +6,12 @@ import { IProgress, ProgressType } from '@cirrus/models';
   templateUrl: './progress-card.component.html',
   styleUrls: ['./progress-card.component.scss'],
 })
-export class ProgressCardComponent implements OnInit {
+export class ProgressCardComponent {
   @Input() progress: IProgress | undefined;
 
   get ProgressType() {
     return ProgressType;
   }
-
-  constructor() {}
-
-  ngOnInit(): void {}
 
   mapProgressTypeToUrl(type: ProgressType): string {
     switch (type) {

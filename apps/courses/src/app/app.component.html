@@ -1,1 +1,17 @@
-<router-outlet></router-outlet>
+
+<mat-sidenav-container>
+  <mat-sidenav #snav mode="over">
+    <div class="sidenav-menu" fxLayout="row">
+      <div fxFlex="80%">
+        <div class="workbook">Workbook</div>
+        <div class="lesson" *ngFor="let lesson of lessons">{{ lesson }}</div>
+      </div>
+        <span (click)="snav.toggle()" class="material-icons snav-toggle">menu_open</span>
+    </div>
+  </mat-sidenav>
+  <mat-sidenav-content>
+      <cirrus-progress-indicator *ngIf="lessonStateBusy$ | async"></cirrus-progress-indicator>
+      <span (click)="snav.toggle()" class="material-icons snav-open-button snav-toggle">menu_open</span>
+      <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

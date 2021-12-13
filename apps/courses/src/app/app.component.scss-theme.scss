@@ -1,0 +1,37 @@
+@use '~@angular/material/theming' as material;
+@use 'variables' as var;
+
+@mixin cirrus-app-component-typography($typography-config) {
+  .sidenav-menu {
+    .workbook {
+      @include material.mat-typography-level-to-styles(
+        $typography-config,
+        body-2
+      );
+    }
+    .lesson {
+      @include material.mat-typography-level-to-styles(
+        $typography-config,
+        body-2
+      );
+    }
+  }
+}
+
+@mixin cirrus-app-component($theme) {
+  $theme-colors: material.mat-get-color-config($theme);
+  $typography: material.mat-get-typography-config($theme);
+  $backgrounds: map-get($theme-colors, background);
+
+  @if $typography != null {
+    @include cirrus-app-component-typography($typography);
+  }
+
+  .mat-drawer {
+    background-color: var.$primary-background-color;
+  }
+
+  .mat-drawer-container {
+    background-color: var.$primary-background-color;
+  }
+}
