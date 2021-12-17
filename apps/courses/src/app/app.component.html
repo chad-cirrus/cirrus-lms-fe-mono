@@ -4,7 +4,7 @@
     <div class="sidenav-menu" fxLayout="row">
       <div fxFlex="80%">
         <div class="workbook">Workbook</div>
-        <div class="lesson" *ngFor="let lesson of lessons">{{ lesson }}</div>
+        <div class="lesson" *ngFor="let route of workbookRoutes$ | async">{{ route.title }}</div>
       </div>
         <span (click)="snav.toggle()" class="material-icons snav-toggle">menu_open</span>
     </div>

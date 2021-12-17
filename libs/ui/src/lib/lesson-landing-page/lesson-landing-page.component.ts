@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ILesson, IProgress, ProgressType } from '@cirrus/models';
 
 @Component({
@@ -6,7 +6,7 @@ import { ILesson, IProgress, ProgressType } from '@cirrus/models';
   templateUrl: './lesson-landing-page.component.html',
   styleUrls: ['./lesson-landing-page.component.scss'],
 })
-export class LessonLandingPageComponent implements OnInit {
+export class LessonLandingPageComponent {
   @Input() lesson: ILesson | null = {
     id: 0,
     system_desc: '',
@@ -50,13 +50,11 @@ export class LessonLandingPageComponent implements OnInit {
       totalCourses: 20,
     },
   ];
-  profileImageUrl = '/assets/ui/images/profile.png';
-  libraryImageUrl = '/assets/ui/images/library.png';
-  bookOpenImageUrl = '/assets/ui/images/book-open.png';
+  profileImageUrl = '/courses/assets/ui/images/profile.png';
+  libraryImageUrl = '/courses/assets/ui/images/library.png';
+  bookOpenImageUrl = '/courses/assets/ui/images/book-open.png';
 
   @Output() lessonStart = new EventEmitter();
-
-  ngOnInit(): void {}
 
   startLesson() {
     this.lessonStart.next();

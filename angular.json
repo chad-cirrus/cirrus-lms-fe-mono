@@ -8,12 +8,16 @@
       "architect": {
         "build": {
           "builder": "@nrwl/node:build",
-          "outputs": ["{options.outputPath}"],
+          "outputs": [
+            "{options.outputPath}"
+          ],
           "options": {
             "outputPath": "dist/apps/atc",
             "main": "apps/atc/src/main.ts",
             "tsConfig": "apps/atc/tsconfig.app.json",
-            "assets": ["apps/atc/src/assets"]
+            "assets": [
+              "apps/atc/src/assets"
+            ]
           },
           "configurations": {
             "production": {
@@ -37,14 +41,20 @@
         },
         "lint": {
           "builder": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
+          "outputs": [
+            "{options.outputFile}"
+          ],
           "options": {
-            "lintFilePatterns": ["apps/atc/**/*.ts"]
+            "lintFilePatterns": [
+              "apps/atc/**/*.ts"
+            ]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/atc"],
+          "outputs": [
+            "coverage/apps/atc"
+          ],
           "options": {
             "jestConfig": "apps/atc/jest.config.js",
             "passWithNoTests": true
@@ -61,7 +71,9 @@
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
-          "outputs": ["{options.outputPath}"],
+          "outputs": [
+            "{options.outputPath}"
+          ],
           "options": {
             "baseHref": "/courses/",
             "outputPath": "dist/apps/courses",
@@ -79,9 +91,13 @@
                 "output": "assets/ui"
               }
             ],
-            "styles": ["apps/courses/src/styles.scss"],
+            "styles": [
+              "apps/courses/src/styles.scss"
+            ],
             "stylePreprocessorOptions": {
-              "includePaths": ["libs/ui/src/lib/styles"]
+              "includePaths": [
+                "libs/ui/src/lib/styles"
+              ]
             },
             "scripts": []
           },
@@ -135,7 +151,8 @@
           },
           "defaultConfiguration": "development",
           "options": {
-            "port": 4201
+            "port": 4201,
+            "browserTarget": "courses:build:development"
           }
         },
         "extract-i18n": {
@@ -155,7 +172,9 @@
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/courses"],
+          "outputs": [
+            "coverage/apps/courses"
+          ],
           "options": {
             "jestConfig": "apps/courses/jest.config.js",
             "passWithNoTests": true
@@ -184,14 +203,20 @@
         },
         "lint": {
           "builder": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
+          "outputs": [
+            "{options.outputFile}"
+          ],
           "options": {
-            "lintFilePatterns": ["apps/courses-e2e/**/*.{js,ts}"]
+            "lintFilePatterns": [
+              "apps/courses-e2e/**/*.{js,ts}"
+            ]
           }
         }
       },
       "tags": [],
-      "implicitDependencies": ["courses"]
+      "implicitDependencies": [
+        "courses"
+      ]
     },
     "models": {
       "root": "libs/models",
@@ -200,14 +225,20 @@
       "architect": {
         "lint": {
           "builder": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
+          "outputs": [
+            "{options.outputFile}"
+          ],
           "options": {
-            "lintFilePatterns": ["libs/models/**/*.ts"]
+            "lintFilePatterns": [
+              "libs/models/**/*.ts"
+            ]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/models"],
+          "outputs": [
+            "coverage/libs/models"
+          ],
           "options": {
             "jestConfig": "libs/models/jest.config.js",
             "passWithNoTests": true
@@ -224,7 +255,9 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/ui"],
+          "outputs": [
+            "coverage/libs/ui"
+          ],
           "options": {
             "jestConfig": "libs/ui/jest.config.js",
             "passWithNoTests": true
@@ -233,7 +266,10 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["libs/ui/src/**/*.ts", "libs/ui/src/**/*.html"]
+            "lintFilePatterns": [
+              "libs/ui/src/**/*.ts",
+              "libs/ui/src/**/*.html"
+            ]
           }
         }
       },

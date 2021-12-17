@@ -1,5 +1,4 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { ConfigState } from '../reducers/config.reducer';
 import { LessonState } from '../reducers/lesson.reducer';
 
 export const selectLessonFeature = createFeatureSelector<LessonState>('lesson');

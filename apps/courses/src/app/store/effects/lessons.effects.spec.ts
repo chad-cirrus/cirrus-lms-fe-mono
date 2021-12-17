@@ -14,7 +14,6 @@ import { TestBed } from '@angular/core/testing';
 import { fetchLessons, fetchLessonsSuccess } from '../actions';
 import { ILesson } from '@cirrus/models';
 import { testData } from '@cirrus/ui';
-import { TestScheduler } from 'rxjs/testing';
 import { HttpClientModule } from '@angular/common/http';
 
 describe('lessons effects', () => {

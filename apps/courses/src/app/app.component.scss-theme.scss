@@ -6,13 +6,13 @@
     .workbook {
       @include material.mat-typography-level-to-styles(
         $typography-config,
-        body-2
+        headline
       );
     }
     .lesson {
       @include material.mat-typography-level-to-styles(
         $typography-config,
-        body-2
+        button
       );
     }
   }

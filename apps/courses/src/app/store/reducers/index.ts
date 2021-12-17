@@ -1,14 +1,14 @@
 import { ActionReducerMap } from '@ngrx/store';
-import * as fromConfig from './config.reducer';
 import * as fromLesson from './lesson.reducer';
+import * as fromWorkbookRoutes from './workbook-routes.reducer';
 import { LessonState } from './lesson.reducer';
 
 export interface AppState {
-  config: fromConfig.ConfigState;
   lesson: LessonState;
+  routes: fromWorkbookRoutes.WorkbookRoutesState;
 }
 
 export const coursesReducers: ActionReducerMap<AppState> = {
-  config: fromConfig.reducer,
   lesson: fromLesson.reducer,
+  routes: fromWorkbookRoutes.reducer,
 };

@@ -1,6 +1,5 @@
 import { ILesson } from '@cirrus/models';
 import { createReducer, on } from '@ngrx/store';
-import { fetchConfigFailure } from '../actions';
 import {
   fetchLessons,
   fetchLessonsSuccess,

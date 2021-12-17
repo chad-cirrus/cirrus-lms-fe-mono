@@ -16,13 +16,13 @@ export class ProgressCardComponent {
   mapProgressTypeToUrl(type: ProgressType): string {
     switch (type) {
       case ProgressType.Flight: {
-        return '/assets/ui/images/progress-flight.png';
+        return '/courses/assets/ui/images/progress-flight.png';
       }
       case ProgressType.Ground: {
-        return '/assets/ui/images/progress-ground.png';
+        return '/courses/assets/ui/images/progress-ground.png';
       }
       default: {
-        return '/assets/ui/images/progress-land.png';
+        return '/courses/assets/ui/images/progress-land.png';
       }
     }
   }
