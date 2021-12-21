@@ -5,6 +5,7 @@ export interface IContent {
   status?: boolean | null;
   score?: number | null;
   url: string;
+  estimated_time: string;
   created_at: string;
   updated_at: string;
   content_type: number;

@@ -6,4 +6,6 @@ export * from './lib/ProgressType';
 export * from './lib/IProgress';
 export * from './lib/IContent';
 export * from './lib/ILesson';
+export * from './lib/IPlayListItem';
 export * from './lib/IWorkBookRoutes';
+export * from './lib/IPlayListItem';

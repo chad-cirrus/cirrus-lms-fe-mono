@@ -1,0 +1,10 @@
+<div class="playlist-container" *ngFor="let item of playListItem" fxLayout="row" fxLayoutAlign="space-between center">
+  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
+    <mat-icon (click)="getMedia(item)">{{ item.type === type.Video ? 'play_circle' : 'article'}}</mat-icon>
+    <div>{{item.title}}</div>
+  </div>
+  <div *ngIf="item.status === status.Completed" fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="8px">
+    <mat-icon >check_circle</mat-icon>
+    <span>Completed</span>
+  </div>
+</div>

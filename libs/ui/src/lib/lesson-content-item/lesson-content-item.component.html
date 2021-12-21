@@ -1,2 +1,14 @@
-<div class="title">{{item?.title}}</div>
-<div class="subtitle">{{item?.subtitle}}</div>
+<div class="title-container"  fxLayout="row" fxLayoutAlign="space-between center" >
+  <div class="title-content">
+    <div class="title">{{item?.title}}</div>
+    <div class="subtitle">{{item?.subtitle}}</div>
+    <div class="subtitle">Estimated Time: {{ item?.estimated_time }}</div>
+  </div>
+  <img src="/courses/assets/ui/images/red-plane.png" alt="">
+</div>
+
+
+<cirrus-playlist
+  [playListItem]="playlist"
+  (fetchMedia)="fetchMedia($event)"
+></cirrus-playlist>

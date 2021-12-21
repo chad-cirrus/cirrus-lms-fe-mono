@@ -151,6 +151,7 @@
           },
           "defaultConfiguration": "development",
           "options": {
+            "host": "cirrusapproach.local",
             "port": 4201,
             "browserTarget": "courses:build:development"
           }

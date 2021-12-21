@@ -1,5 +1,11 @@
 @use 'variables' as *;
 
+:host {
+  margin-top: 24px;
+  margin-bottom: 48px;
+  padding: 0 24px;
+}
+
 div {
   font-style: normal;
   font-weight: normal;
@@ -12,5 +18,4 @@ div.title {
 
 div.subtitle {
   width: 60%;
-  // color: $secondary-font-color-light-grey;
 }

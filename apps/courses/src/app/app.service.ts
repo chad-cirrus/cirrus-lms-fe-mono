@@ -1,18 +1,21 @@
 import { Injectable } from '@angular/core';
-import { IConfig } from '@cirrus/models';
-import { Observable, timer } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { ActivatedRoute, NavigationEnd, Router, Event } from '@angular/router';
+import { Observable, of } from 'rxjs';
+import { filter, map, switchMap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AppService {
-  getConfigs(): Observable<IConfig> {
-    const configs: IConfig = {
-      a: 'test config a',
-      b: true,
-      c: 2000,
-    };
-    return timer(3000).pipe(map(() => ({ ...configs })));
-  }
+  courseId$: Observable<string | null> = this.router.events.pipe(
+    filter((event: Event) => event instanceof NavigationEnd),
+    map(() => this.route.root.firstChild),
+    switchMap(firstChild =>
+      firstChild
+        ? firstChild.paramMap.pipe(map(paramMap => paramMap.get('courseId')))
+        : of(null)
+    )
+  );
+
+  constructor(private router: Router, private route: ActivatedRoute) {}
 }

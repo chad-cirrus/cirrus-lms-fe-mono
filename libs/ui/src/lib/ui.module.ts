@@ -7,6 +7,7 @@ import { LessonLandingPageComponent } from './lesson-landing-page/lesson-landing
 import { LessonContentItemComponent } from './lesson-content-item/lesson-content-item.component';
 import { ProgressCardComponent } from './progress-card/progress-card.component';
 import { ProgressIndicatorComponent } from './progress-indicator/progress-indicator.component';
+import { PlaylistComponent } from './playlist/playlist.component';
 
 @NgModule({
   imports: [CommonModule, CirrusMaterialModule, FlexLayoutModule],
@@ -15,12 +16,14 @@ import { ProgressIndicatorComponent } from './progress-indicator/progress-indica
     LessonContentItemComponent,
     ProgressCardComponent,
     ProgressIndicatorComponent,
+    PlaylistComponent,
   ],
   exports: [
     LessonLandingPageComponent,
     LessonContentItemComponent,
     ProgressCardComponent,
     ProgressIndicatorComponent,
+    PlaylistComponent,
   ],
 })
 export class UiModule {}

@@ -16,10 +16,22 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthHttpInterceptor } from './interceptors/AuthHttpInterceptor';
 import { LessonsEffects } from './store/effects/lessons.effects';
+import { MediaContentDialogComponent } from './dialog-service/media-content-dialog/media-content-dialog.component';
 import { WorkbookRoutesEffects } from './store/effects/workbook-routes.effects';
+import { LessonComponent } from './course/lesson/lesson.component';
+import {
+  MatDialogConfig,
+  MAT_DIALOG_DEFAULT_OPTIONS,
+} from '@angular/material/dialog';
+import { CoursesDialogService } from './dialog-service/cirrus-dialog.service';
 
 @NgModule({
-  declarations: [AppComponent, CourseComponent],
+  declarations: [
+    AppComponent,
+    CourseComponent,
+    MediaContentDialogComponent,
+    LessonComponent,
+  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -34,10 +46,21 @@ import { WorkbookRoutesEffects } from './store/effects/workbook-routes.effects';
     HttpClientModule,
   ],
   providers: [
+    CoursesDialogService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthHttpInterceptor,
       multi: true,
+    },
+    {
+      provide: MAT_DIALOG_DEFAULT_OPTIONS,
+      useValue: {
+        ...new MatDialogConfig(),
+        width: '75vw',
+        closeOnNavigation: true,
+        panelClass: 'cirrus-media-player',
+        disableClose: true,
+      } as MatDialogConfig,
     },
   ],
   bootstrap: [AppComponent],

@@ -1,0 +1,26 @@
+@use '~@angular/material/theming' as material;
+@use 'variables' as var;
+
+@mixin cirrus-playlist-typography($typography-config) {
+  cirrus-playlist {
+    @include material.mat-typography-level-to-styles(
+      $typography-config,
+      body-2
+    );
+  }
+}
+
+@mixin cirrus-playlist-theme($theme) {
+  $theme-colors: material.mat-get-color-config($theme);
+  $typography: material.mat-get-typography-config($theme);
+  $backgrounds: map-get($theme-colors, background);
+
+  @if $typography != null {
+    @include cirrus-playlist-typography($typography);
+  }
+
+  cirrus-playlist {
+    background-color: material.mat-color($theme-colors, card);
+    color: var.$secondary-font-color-light-grey;
+  }
+}

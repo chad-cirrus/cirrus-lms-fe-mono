@@ -19,7 +19,7 @@
   </div>
 
   <div class="content-container" fxLayout="column" fxLayoutAlign="space-between stretch">
-    <cirrus-lesson-content-item *ngFor="let item of lesson.contents" [item]="item"></cirrus-lesson-content-item>
+    <cirrus-lesson-content-item *ngFor="let item of lesson.contents" [item]="item" (fetchMediaOutput)="fetchMedia($event)"></cirrus-lesson-content-item>
   </div>
 
 </ng-container>

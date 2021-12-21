@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ILesson, IWorkBookRoutes } from '@cirrus/models';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -11,11 +12,23 @@ export class CoursesService {
 
   constructor(private http: HttpClient) {}
 
-  getLessons(): Observable<ILesson> {
-    return this.http.get<ILesson>(this.baseUrl + '345/lessons/832');
+  getLessons(lessonId: number): Observable<ILesson> {
+    return this.http
+      .get<ILesson>(this.baseUrl + '345/lessons/' + lessonId)
+      .pipe(
+        map(lesson => ({
+          ...lesson,
+          contents: lesson.contents.map(content => ({
+            ...content,
+            estimated_time: '1:23',
+          })),
+        }))
+      );
   }
 
   getNavBarRoutes(courseId: number): Observable<IWorkBookRoutes[]> {
-    return this.http.get<IWorkBookRoutes[]>(this.baseUrl + '211/workbook');
+    return this.http.get<IWorkBookRoutes[]>(
+      this.baseUrl + courseId + '/workbook'
+    );
   }
 }

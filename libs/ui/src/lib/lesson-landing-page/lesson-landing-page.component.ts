@@ -1,5 +1,10 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { ILesson, IProgress, ProgressType } from '@cirrus/models';
+import {
+  ILesson,
+  IPlayListItem,
+  IProgress,
+  ProgressType,
+} from '@cirrus/models';
 
 @Component({
   selector: 'cirrus-lesson-landing-page',
@@ -55,8 +60,13 @@ export class LessonLandingPageComponent {
   bookOpenImageUrl = '/courses/assets/ui/images/book-open.png';
 
   @Output() lessonStart = new EventEmitter();
+  @Output() fetchMediaOutput = new EventEmitter<IPlayListItem>();
 
   startLesson() {
     this.lessonStart.next();
+  }
+
+  fetchMedia(item: IPlayListItem) {
+    this.fetchMediaOutput.next(item);
   }
 }

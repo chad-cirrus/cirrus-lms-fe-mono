@@ -90,6 +90,7 @@ $theme: material.mat-dark-theme(
 @include material.angular-material-theme($theme);
 @include cirrus-ui.cirrus-lesson-landing-page-theme($theme);
 @include cirrus-ui.cirrus-lesson-content-item-theme($theme);
+@include cirrus-ui.cirrus-playlist-theme($theme);
 @include app-component.cirrus-app-component($theme);
 
 html,
@@ -109,4 +110,10 @@ body {
 
 .mat-sidenav-container {
   height: 100%;
+}
+
+.cirrus-media-player {
+  .mat-dialog-container {
+    border-radius: 16px;
+  }
 }

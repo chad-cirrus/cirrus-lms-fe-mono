@@ -3,17 +3,21 @@
 
 @mixin cirrus-lesson-content-item-typography($typography-config) {
   cirrus-lesson-content-item {
-    .title {
-      @include material.mat-typography-level-to-styles(
-        $typography-config,
-        display-2
-      );
-    }
-    .subtitle {
-      @include material.mat-typography-level-to-styles(
-        $typography-config,
-        body-2
-      );
+    .title-container {
+      .title-content {
+        .title {
+          @include material.mat-typography-level-to-styles(
+            $typography-config,
+            display-2
+          );
+        }
+        .subtitle {
+          @include material.mat-typography-level-to-styles(
+            $typography-config,
+            body-2
+          );
+        }
+      }
     }
   }
 }
