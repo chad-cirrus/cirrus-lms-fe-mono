@@ -3,6 +3,7 @@ import {
   ILesson,
   IPlayListItem,
   IProgress,
+  IVideoMediaItem,
   ProgressType,
 } from '@cirrus/models';
 
@@ -55,18 +56,31 @@ export class LessonLandingPageComponent {
       totalCourses: 20,
     },
   ];
+  @Input() instructorView!: boolean | null;
   profileImageUrl = '/courses/assets/ui/images/profile.png';
   libraryImageUrl = '/courses/assets/ui/images/library.png';
   bookOpenImageUrl = '/courses/assets/ui/images/book-open.png';
 
-  @Output() lessonStart = new EventEmitter();
-  @Output() fetchMediaOutput = new EventEmitter<IPlayListItem>();
+  @Output() fetchMediaOutput = new EventEmitter<IVideoMediaItem>();
 
   startLesson() {
-    this.lessonStart.next();
+    const videoMediaItem: IVideoMediaItem = {
+      id: 148751763,
+      url: '148751763',
+      title: 'Intro Placeholder',
+      contentTitle: 'Intro Placeholder',
+    };
+    this.fetchMediaOutput.next(videoMediaItem);
   }
 
   fetchMedia(item: IPlayListItem) {
-    this.fetchMediaOutput.next(item);
+    const { id, url, title, contentTitle } = item;
+    const videoMediaItem: IVideoMediaItem = {
+      id,
+      url,
+      title,
+      contentTitle,
+    };
+    this.fetchMediaOutput.next(videoMediaItem);
   }
 }

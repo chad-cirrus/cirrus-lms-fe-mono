@@ -31,8 +31,15 @@
     @include cirrus-lesson-content-item-typography($typography);
   }
 
-  cirrus-lesson-content-item {
+  cirrus-lesson-content-item.student-view {
     background-color: material.mat-color($theme-colors, card);
+    .subtitle {
+      color: var.$secondary-font-color-light-grey;
+    }
+  }
+
+  cirrus-lesson-content-item.instructor-view {
+    background-color: var.$instructor-view-background;
     .subtitle {
       color: var.$secondary-font-color-light-grey;
     }

@@ -13,6 +13,7 @@ import {
 })
 export class LessonContentItemComponent {
   @Input() item: IContent | undefined;
+  @Input() instructorView!: boolean | null;
   @Output() fetchMediaOutput = new EventEmitter<IPlayListItem>();
 
   get playlist(): IPlayListItem[] {

@@ -1,0 +1,20 @@
+<div
+  class="instructor-view-container"
+  fxLayout="row"
+  fxLayoutAlign="space-between center"
+>
+  <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="12px">
+    <span class="material-icons"> chevron_left </span>
+    <span>Students</span>
+    <ul class="student-name">
+      <li>{{ student }}</li>
+    </ul>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="12px">
+    <div>Instructor View</div>
+    <mat-slide-toggle
+      color="accent"
+      [formControl]="viewToggle"
+    ></mat-slide-toggle>
+  </div>
+</div>

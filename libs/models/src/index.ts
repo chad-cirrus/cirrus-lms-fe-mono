@@ -9,3 +9,4 @@ export * from './lib/ILesson';
 export * from './lib/IPlayListItem';
 export * from './lib/IWorkBookRoutes';
 export * from './lib/IPlayListItem';
+export * from './lib/IVideoMediaItem';

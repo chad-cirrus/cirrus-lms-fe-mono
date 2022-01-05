@@ -24,6 +24,7 @@ import {
   MAT_DIALOG_DEFAULT_OPTIONS,
 } from '@angular/material/dialog';
 import { CoursesDialogService } from './dialog-service/cirrus-dialog.service';
+import { TopNavbarComponent } from './top-navbar/top-navbar.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { CoursesDialogService } from './dialog-service/cirrus-dialog.service';
     CourseComponent,
     MediaContentDialogComponent,
     LessonComponent,
+    TopNavbarComponent,
   ],
   imports: [
     BrowserModule,

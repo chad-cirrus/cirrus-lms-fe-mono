@@ -1,0 +1,16 @@
+:host {
+  display: block;
+  overflow: hidden;
+}
+
+mat-toolbar {
+  height: 7rem;
+  padding: 0 2rem;
+}
+span {
+  transform: scale(1.5);
+}
+img.avatar {
+  height: 3rem;
+  border-radius: 50%;
+}

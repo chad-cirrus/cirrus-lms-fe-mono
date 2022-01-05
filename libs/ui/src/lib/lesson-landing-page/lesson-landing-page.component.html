@@ -1,25 +1,62 @@
 <ng-container *ngIf="lesson">
-
   <div class="lesson-image" fxLayout="column" fxLayoutAlign="center start">
     <div class="content">
-      <h1>{{lesson.title}}</h1>
-      <h4>{{lesson.system_name}}</h4>
+      <h1>{{ lesson.title }}</h1>
+      <h4>{{ lesson.system_name }}</h4>
 
       <div fxLayout="row" fxLayoutGap="8px">
-        <img [src]="profileImageUrl" alt="uh oh">
-        <img [src]="libraryImageUrl" alt="uh oh">
-        <img [src]="bookOpenImageUrl" alt="uh oh">
+        <img [src]="profileImageUrl" alt="uh oh" />
+        <img [src]="libraryImageUrl" alt="uh oh" />
+        <img [src]="bookOpenImageUrl" alt="uh oh" />
       </div>
-      <button mat-raised-button color="accent" (click)="startLesson()">Start Lesson</button>
+      <button mat-raised-button color="accent" (click)="startLesson()">
+        Start Lesson
+      </button>
     </div>
   </div>
 
-  <div class="cirrus-progress-row" fxLayout="row" fxLayoutGap="24px">
-    <cirrus-progress-card fxFlex fxFlexAlign="stretch" *ngFor="let item of progress" [progress]="item"></cirrus-progress-card>
+  <div
+    *ngIf="!instructorView"
+    class="cirrus-progress-row"
+    fxLayout="row"
+    fxLayoutGap="24px"
+  >
+    <cirrus-progress-card
+      fxFlex
+      fxFlexAlign="stretch"
+      *ngFor="let item of progress"
+      [progress]="item"
+    ></cirrus-progress-card>
   </div>
 
-  <div class="content-container" fxLayout="column" fxLayoutAlign="space-between stretch">
-    <cirrus-lesson-content-item *ngFor="let item of lesson.contents" [item]="item" (fetchMediaOutput)="fetchMedia($event)"></cirrus-lesson-content-item>
+  <div
+    class="content-container"
+    [ngClass]="
+      instructorView ? 'instructor-intro-video' : 'student-intro-video'
+    "
+    fxLayout="column"
+    fxLayoutAlign="space-between stretch"
+  >
+    <div class="intro-video">
+      <h2>Intro Video</h2>
+      <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
+        <mat-icon (click)="startLesson()">play_circle</mat-icon>
+        <div>{{ instructorView ? 'Instructor' : 'Student' }} Intro</div>
+      </div>
+    </div>
   </div>
 
+  <div
+    class="content-container"
+    fxLayout="column"
+    fxLayoutAlign="space-between stretch"
+  >
+    <cirrus-lesson-content-item
+      [ngClass]="instructorView ? 'instructor-view' : 'student-view'"
+      *ngFor="let item of lesson.contents"
+      [instructorView]="instructorView"
+      [item]="item"
+      (fetchMediaOutput)="fetchMedia($event)"
+    ></cirrus-lesson-content-item>
+  </div>
 </ng-container>

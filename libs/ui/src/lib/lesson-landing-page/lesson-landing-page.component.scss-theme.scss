@@ -1,4 +1,5 @@
 @use '~@angular/material/theming' as material;
+@use 'variables' as var;
 
 @mixin cirrus-lesson-landing-page-typography($typography-config) {
   cirrus-lesson-landing-page {
@@ -16,6 +17,12 @@
         );
       }
     }
+    .lesson-intro-video {
+      @include material.mat-typography-level-to-styles(
+        $typography-config,
+        body-2
+      );
+    }
   }
 }
 
@@ -26,5 +33,18 @@
 
   @if $typography != null {
     @include cirrus-lesson-landing-page-typography($typography);
+  }
+
+  cirrus-lesson-landing-page {
+    .student-intro-video {
+      color: var.$secondary-font-color-light-grey;
+    }
+  }
+
+  cirrus-lesson-landing-page {
+    .instructor-intro-video {
+      color: var.$secondary-font-color-light-grey;
+      background-color: var.$instructor-view-background;
+    }
   }
 }

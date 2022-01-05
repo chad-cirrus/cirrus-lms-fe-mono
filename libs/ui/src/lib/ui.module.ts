@@ -8,15 +8,24 @@ import { LessonContentItemComponent } from './lesson-content-item/lesson-content
 import { ProgressCardComponent } from './progress-card/progress-card.component';
 import { ProgressIndicatorComponent } from './progress-indicator/progress-indicator.component';
 import { PlaylistComponent } from './playlist/playlist.component';
+import { InstructorBarComponent } from './instructor-bar/instructor-bar.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  imports: [CommonModule, CirrusMaterialModule, FlexLayoutModule],
+  imports: [
+    CommonModule,
+    CirrusMaterialModule,
+    FlexLayoutModule,
+    FormsModule,
+    ReactiveFormsModule,
+  ],
   declarations: [
     LessonLandingPageComponent,
     LessonContentItemComponent,
     ProgressCardComponent,
     ProgressIndicatorComponent,
     PlaylistComponent,
+    InstructorBarComponent,
   ],
   exports: [
     LessonLandingPageComponent,
@@ -24,6 +33,7 @@ import { PlaylistComponent } from './playlist/playlist.component';
     ProgressCardComponent,
     ProgressIndicatorComponent,
     PlaylistComponent,
+    InstructorBarComponent,
   ],
 })
 export class UiModule {}

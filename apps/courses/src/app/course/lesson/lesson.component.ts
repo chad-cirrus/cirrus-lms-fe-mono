@@ -1,13 +1,14 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ILesson, IPlayListItem } from '@cirrus/models';
+import { ILesson, IVideoMediaItem } from '@cirrus/models';
 import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, switchMap, take } from 'rxjs/operators';
 import { CoursesDialogService } from '../../dialog-service/cirrus-dialog.service';
 import { fetchLessons } from '../../store/actions';
 import { LessonState } from '../../store/reducers/lesson.reducer';
 import { selectLesson } from '../../store/selectors/lessons.selector';
+import { selectInstructorView } from '../../store/selectors/view.selector';
 
 @Component({
   selector: 'cirrus-lesson',
@@ -16,6 +17,8 @@ import { selectLesson } from '../../store/selectors/lessons.selector';
 })
 export class LessonComponent implements OnInit, OnDestroy {
   lesson$: Observable<ILesson> = this.store.select(selectLesson);
+  instructorView$: Observable<boolean> =
+    this.store.select(selectInstructorView);
   lessonSubscripton = new Subscription();
 
   constructor(
@@ -25,6 +28,8 @@ export class LessonComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
+    this.instructorView$.subscribe(console.log);
+
     this.lessonSubscripton.add(
       this.route.params
         .pipe(map(params => params['lessonId']))
@@ -39,12 +44,21 @@ export class LessonComponent implements OnInit, OnDestroy {
     this.lessonSubscripton.unsubscribe();
   }
 
-  fetchMedia(item: IPlayListItem) {
+  fetchMedia(item: IVideoMediaItem) {
     const trimmedUrl = item.url?.trim();
+
+    console.log(this.store);
+
     if (typeof trimmedUrl != 'undefined' && trimmedUrl && trimmedUrl.length) {
-      this.coursesDialog
-        .displayMediaContent(item)
-        .afterClosed()
+      this.store
+        .select(selectInstructorView)
+        .pipe(
+          take(1),
+          switchMap(view => {
+            console.log('view', view);
+            return this.coursesDialog.displayMediaContent(item).afterClosed();
+          })
+        )
         .subscribe(() => console.log('callback goes here'));
     }
   }

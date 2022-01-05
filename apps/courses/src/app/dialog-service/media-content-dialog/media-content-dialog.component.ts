@@ -35,7 +35,7 @@ export class MediaContentDialogComponent implements AfterViewInit {
       id: +this.data.url,
       responsive: true,
     });
-    player.on('play', () => console.log('we are playing!!!'));
+    player.play();
     player.on('pause', () => {
       player.getCurrentTime().then(time => console.log(time));
     });

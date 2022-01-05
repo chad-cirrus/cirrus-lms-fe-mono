@@ -1,19 +1,16 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { IPlayListItem } from '@cirrus/models';
+import { IVideoMediaItem } from '@cirrus/models';
 import { MediaContentDialogComponent } from './media-content-dialog/media-content-dialog.component';
 
 @Injectable()
 export class CoursesDialogService {
   constructor(private dialog: MatDialog) {}
 
-  displayMediaContent({ id, url, title, contentTitle }: IPlayListItem) {
+  displayMediaContent(videoMediatItem: IVideoMediaItem) {
     return this.dialog.open(MediaContentDialogComponent, {
       data: {
-        id,
-        url,
-        title,
-        contentTitle,
+        ...videoMediatItem,
       },
     });
   }

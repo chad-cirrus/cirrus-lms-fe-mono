@@ -33,7 +33,14 @@
 }
 
 .content-container {
-  margin: 0 auto;
+  margin: 16px auto 0 auto;
   width: 80%;
-  max-width: 900px;
+  border-radius: 6px;
+  .intro-video {
+    padding: 12px 24px;
+  }
+}
+
+.intro-video:hover {
+  cursor: pointer;
 }

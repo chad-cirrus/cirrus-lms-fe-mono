@@ -1,0 +1,8 @@
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'cirrus-top-navbar',
+  templateUrl: './top-navbar.component.html',
+  styleUrls: ['./top-navbar.component.scss'],
+})
+export class TopNavbarComponent {}

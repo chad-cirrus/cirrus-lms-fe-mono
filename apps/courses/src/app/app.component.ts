@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { delay } from 'rxjs/operators';
 import { AppService } from './app.service';
+import { setInstructorView } from './store/actions/view.actions';
 import { fetchWorkBookRoutes } from './store/actions/workbook-routes.actions';
 import { AppState } from './store/reducers';
 import { selectLessonStateBusy } from './store/selectors/lessons.selector';
@@ -25,5 +26,9 @@ export class AppComponent implements OnInit {
         this.store.dispatch(fetchWorkBookRoutes({ courseId }));
       }
     });
+  }
+
+  instructorViewMode(instructorView: boolean) {
+    this.store.dispatch(setInstructorView({ instructorView }));
   }
 }
