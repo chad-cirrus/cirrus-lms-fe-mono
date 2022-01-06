@@ -29,7 +29,7 @@ export class CoursesService {
 
   getNavBarRoutes(courseId: number): Observable<IWorkBookRoutes[]> {
     return this.http.get<IWorkBookRoutes[]>(
-      this.baseUrl + courseId + '/workbook'
+      `${this.baseUrl}/${courseId}/workbook`
     );
   }
 }
