@@ -4,6 +4,7 @@
 
 export const environment = {
   production: false,
+  baseUrl: 'http://cirrusapproach.local:3000',
 };
 
 /*

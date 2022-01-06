@@ -3,18 +3,19 @@ import { Injectable } from '@angular/core';
 import { ILesson, IWorkBookRoutes } from '@cirrus/models';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CoursesService {
-  private baseUrl = 'http://cirrusapproach.local:3000/api/v4/courses/';
+  private baseUrl = environment.baseUrl + '/api/v4/courses';
 
   constructor(private http: HttpClient) {}
 
-  getLessons(lessonId: number): Observable<ILesson> {
+  getLessons(courseId: number, lessonId: number): Observable<ILesson> {
     return this.http
-      .get<ILesson>(this.baseUrl + '345/lessons/' + lessonId)
+      .get<ILesson>(`${this.baseUrl}/${courseId}/lessons/${lessonId}`)
       .pipe(
         map(lesson => ({
           ...lesson,

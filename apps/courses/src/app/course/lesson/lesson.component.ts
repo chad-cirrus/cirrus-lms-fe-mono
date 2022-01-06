@@ -31,12 +31,9 @@ export class LessonComponent implements OnInit, OnDestroy {
     this.instructorView$.subscribe(console.log);
 
     this.lessonSubscripton.add(
-      this.route.params
-        .pipe(map(params => params['lessonId']))
-        .subscribe(lessonId => {
-          console.log('lesson id', lessonId);
-          this.store.dispatch(fetchLessons({ lessonId }));
-        })
+      this.route.params.subscribe(({ courseId, lessonId }) => {
+        this.store.dispatch(fetchLessons({ courseId, lessonId }));
+      })
     );
   }
 
