@@ -5,13 +5,17 @@
   ></cirrus-instructor-bar>
   <mat-sidenav-container>
     <mat-sidenav #snav mode="over">
-      <div class="sidenav-menu" fxLayout="row">
+      <div
+        *ngIf="courseId$ | async as courseId"
+        class="sidenav-menu"
+        fxLayout="row"
+      >
         <div fxFlex="80%">
           <div class="workbook">Workbook</div>
           <div
             class="lesson"
             *ngFor="let route of workbookRoutes$ | async"
-            [routerLink]="['/course', route.id]"
+            [routerLink]="[courseId, 'lessons', route.id]"
             routerLinkActive="router-link-active"
           >
             {{ route.title }}

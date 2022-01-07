@@ -34,4 +34,9 @@
   .mat-drawer-container {
     background-color: var.$primary-background-color;
   }
+
+  .router-link-active {
+    background-color: var.$background-color-white;
+    color: var.$secondary-font-color-light-black;
+  }
 }
