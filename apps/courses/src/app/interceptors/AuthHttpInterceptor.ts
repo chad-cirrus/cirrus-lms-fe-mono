@@ -16,8 +16,7 @@ export class AuthHttpInterceptor implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
     // const token = localStorage.getItem('access-token');
-    const token =
-      localStorage.getItem('access-token') || 'kbTpyxQ54sZbhyfFL1Nu';
+    const token = localStorage.getItem('cirrus-token');
 
     req = req.clone({
       setHeaders: { Authorization: `Bearer ${token}` },
@@ -29,7 +28,7 @@ export class AuthHttpInterceptor implements HttpInterceptor {
           const accessToken = val.headers.get('Access-Token');
 
           if (accessToken !== null) {
-            localStorage.setItem('access-token', accessToken);
+            localStorage.setItem('cirrus-token', accessToken);
           }
         }
       })
