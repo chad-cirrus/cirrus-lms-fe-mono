@@ -1,4 +1,9 @@
 .playlist-container {
   height: 4rem;
   border-bottom: 1px white solid;
+  .media-control {
+    mat-icon:hover {
+      cursor: pointer;
+    }
+  }
 }

@@ -41,6 +41,8 @@
   }
 }
 
-.intro-video:hover {
-  cursor: pointer;
+.intro-video {
+  mat-icon:hover {
+    cursor: pointer;
+  }
 }

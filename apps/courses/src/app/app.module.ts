@@ -58,10 +58,11 @@ import { TopNavbarComponent } from './top-navbar/top-navbar.component';
       provide: MAT_DIALOG_DEFAULT_OPTIONS,
       useValue: {
         ...new MatDialogConfig(),
-        width: '75vw',
+        width: '66vw',
         closeOnNavigation: true,
         panelClass: 'cirrus-media-player',
         disableClose: true,
+        maxHeight: '88vh',
       } as MatDialogConfig,
     },
   ],

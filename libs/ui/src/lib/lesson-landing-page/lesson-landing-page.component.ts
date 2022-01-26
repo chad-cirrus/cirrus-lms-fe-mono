@@ -65,8 +65,8 @@ export class LessonLandingPageComponent {
 
   startLesson() {
     const videoMediaItem: IVideoMediaItem = {
-      id: 148751763,
-      url: '148751763',
+      id: 377578235,
+      url: '377578235',
       title: 'Intro Placeholder',
       contentTitle: 'Intro Placeholder',
     };
