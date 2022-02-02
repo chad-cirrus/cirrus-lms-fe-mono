@@ -1,12 +1,14 @@
 import { createReducer, on } from '@ngrx/store';
-import { setInstructorView } from '../actions/view.actions';
+import { setInstructorView, setSideNavOpen } from '../actions/view.actions';
 
 export interface ViewState {
   instructorView: boolean;
+  sideNavOpen: boolean;
 }
 
 export const initialViewState: ViewState = {
   instructorView: false,
+  sideNavOpen: false,
 };
 
 export const reducer = createReducer(
@@ -14,5 +16,6 @@ export const reducer = createReducer(
   on(setInstructorView, (state, { instructorView }) => ({
     ...state,
     instructorView,
-  }))
+  })),
+  on(setSideNavOpen, (state, { sideNavOpen }) => ({ ...state, sideNavOpen }))
 );

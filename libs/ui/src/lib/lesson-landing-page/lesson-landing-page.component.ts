@@ -56,12 +56,17 @@ export class LessonLandingPageComponent {
       totalCourses: 20,
     },
   ];
-  @Input() instructorView!: boolean | null;
+  @Input() instructorView!: boolean;
+  @Input() sideNavOpen!: boolean;
   profileImageUrl = '/courses/assets/ui/images/profile.png';
   libraryImageUrl = '/courses/assets/ui/images/library.png';
   bookOpenImageUrl = '/courses/assets/ui/images/book-open.png';
 
   @Output() fetchMediaOutput = new EventEmitter<IVideoMediaItem>();
+
+  get lessonImageFxLayoutAlign() {
+    return this.sideNavOpen ? 'center center' : 'center start';
+  }
 
   startLesson() {
     const videoMediaItem: IVideoMediaItem = {

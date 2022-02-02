@@ -7,3 +7,8 @@ export const selectInstructorView = createSelector(
   selectViewFeature,
   state => state.instructorView
 );
+
+export const selectSideNavOpen = createSelector(
+  selectViewFeature,
+  state => state.sideNavOpen
+);

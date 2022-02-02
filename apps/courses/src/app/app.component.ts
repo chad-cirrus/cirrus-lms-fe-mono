@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { delay, distinctUntilChanged, share } from 'rxjs/operators';
 import { AppService } from './app.service';
-import { setInstructorView } from './store/actions/view.actions';
+import * as appActions from './store/actions';
 import { fetchWorkBookRoutes } from './store/actions/workbook-routes.actions';
 import { AppState } from './store/reducers';
 import { selectLessonStateBusy } from './store/selectors/lessons.selector';
@@ -29,6 +29,10 @@ export class AppComponent implements OnInit {
   }
 
   instructorViewMode(instructorView: boolean) {
-    this.store.dispatch(setInstructorView({ instructorView }));
+    this.store.dispatch(appActions.setInstructorView({ instructorView }));
+  }
+
+  handleOpenChanged(sideNavOpen: boolean) {
+    this.store.dispatch(appActions.setSideNavOpen({ sideNavOpen }));
   }
 }

@@ -3,12 +3,15 @@ import { ActivatedRoute } from '@angular/router';
 import { ILesson, IVideoMediaItem } from '@cirrus/models';
 import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
-import { map, switchMap, take } from 'rxjs/operators';
+import { switchMap, take } from 'rxjs/operators';
 import { CoursesDialogService } from '../../dialog-service/cirrus-dialog.service';
 import { fetchLessons } from '../../store/actions';
 import { LessonState } from '../../store/reducers/lesson.reducer';
 import { selectLesson } from '../../store/selectors/lessons.selector';
-import { selectInstructorView } from '../../store/selectors/view.selector';
+import {
+  selectInstructorView,
+  selectSideNavOpen,
+} from '../../store/selectors/view.selector';
 
 @Component({
   selector: 'cirrus-lesson',
@@ -19,6 +22,7 @@ export class LessonComponent implements OnInit, OnDestroy {
   lesson$: Observable<ILesson> = this.store.select(selectLesson);
   instructorView$: Observable<boolean> =
     this.store.select(selectInstructorView);
+  sideNavOpen$: Observable<boolean> = this.store.select(selectSideNavOpen);
   lessonSubscripton = new Subscription();
 
   constructor(

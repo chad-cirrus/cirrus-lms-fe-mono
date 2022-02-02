@@ -4,13 +4,13 @@
     (instructorView)="instructorViewMode($event)"
   ></cirrus-instructor-bar>
   <mat-sidenav-container>
-    <mat-sidenav #snav mode="over">
+    <mat-sidenav #snav mode="side" (openedChange)="handleOpenChanged($event)">
       <div
         *ngIf="courseId$ | async as courseId"
         class="sidenav-menu"
         fxLayout="row"
       >
-        <div fxFlex="80%">
+        <div fxLayout="column" fxLayoutAlign="space-around start">
           <div class="workbook">Workbook</div>
           <div
             class="lesson"

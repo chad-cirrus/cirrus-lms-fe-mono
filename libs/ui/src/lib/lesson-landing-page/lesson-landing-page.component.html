@@ -1,10 +1,23 @@
 <ng-container *ngIf="lesson">
-  <div class="lesson-image" fxLayout="column" fxLayoutAlign="center start">
+  <div
+    class="lesson-image"
+    [ngClass]="
+      sideNavOpen
+        ? 'lesson-image-no-gradient center-titles'
+        : 'lesson-image-gradient'
+    "
+    fxLayout="column"
+    [fxLayoutAlign]="sideNavOpen ? 'center center' : 'center start'"
+  >
     <div class="content">
       <h1>{{ lesson.title }}</h1>
       <h4>{{ lesson.system_name }}</h4>
 
-      <div fxLayout="row" fxLayoutGap="8px">
+      <div
+        fxLayout="row"
+        [fxLayoutAlign]="sideNavOpen ? 'center' : 'start'"
+        fxLayoutGap="8px"
+      >
         <img [src]="profileImageUrl" alt="uh oh" />
         <img [src]="libraryImageUrl" alt="uh oh" />
         <img [src]="bookOpenImageUrl" alt="uh oh" />
