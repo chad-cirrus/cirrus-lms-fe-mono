@@ -23,7 +23,7 @@ export class LessonComponent implements OnInit, OnDestroy {
   instructorView$: Observable<boolean> =
     this.store.select(selectInstructorView);
   sideNavOpen$: Observable<boolean> = this.store.select(selectSideNavOpen);
-  lessonSubscripton = new Subscription();
+  lessonSubscription = new Subscription();
 
   constructor(
     private route: ActivatedRoute,
@@ -34,7 +34,7 @@ export class LessonComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.instructorView$.subscribe(console.log);
 
-    this.lessonSubscripton.add(
+    this.lessonSubscription.add(
       this.route.params.subscribe(({ courseId, lessonId }) => {
         this.store.dispatch(fetchLessons({ courseId, lessonId }));
       })
@@ -42,7 +42,7 @@ export class LessonComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.lessonSubscripton.unsubscribe();
+    this.lessonSubscription.unsubscribe();
   }
 
   fetchMedia(item: IVideoMediaItem) {

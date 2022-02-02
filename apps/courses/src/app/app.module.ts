@@ -62,7 +62,7 @@ import { TopNavbarComponent } from './top-navbar/top-navbar.component';
         closeOnNavigation: true,
         panelClass: 'cirrus-media-player',
         disableClose: true,
-        maxHeight: '88vh',
+        maxHeight: '66vw',
       } as MatDialogConfig,
     },
   ],

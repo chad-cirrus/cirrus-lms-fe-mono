@@ -1,6 +1,7 @@
 <div class="container">
   <cirrus-top-navbar></cirrus-top-navbar>
   <cirrus-instructor-bar
+    *ngIf="(role$ | async) !== 'pilot'"
     (instructorView)="instructorViewMode($event)"
   ></cirrus-instructor-bar>
   <mat-sidenav-container>
