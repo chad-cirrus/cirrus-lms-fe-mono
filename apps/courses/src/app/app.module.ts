@@ -21,10 +21,15 @@ import { WorkbookRoutesEffects } from './store/effects/workbook-routes.effects';
 import { LessonComponent } from './course/lesson/lesson.component';
 import {
   MatDialogConfig,
+  MatDialogModule,
   MAT_DIALOG_DEFAULT_OPTIONS,
 } from '@angular/material/dialog';
 import { CoursesDialogService } from './dialog-service/cirrus-dialog.service';
 import { TopNavbarComponent } from './top-navbar/top-navbar.component';
+import { ScormContentDialogComponent } from './dialog-service/scorm-content-dialog/scorm-content-dialog.component';
+import { ContentPlayerComponent } from './dialog-service/content-player/content-player.component';
+import { MediaServerService } from './media.service';
+import { ScormComponent } from './dialog-service/content-player/scorm/scorm.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +38,9 @@ import { TopNavbarComponent } from './top-navbar/top-navbar.component';
     MediaContentDialogComponent,
     LessonComponent,
     TopNavbarComponent,
+    ScormContentDialogComponent,
+    ContentPlayerComponent,
+    ScormComponent,
   ],
   imports: [
     BrowserModule,
@@ -46,6 +54,7 @@ import { TopNavbarComponent } from './top-navbar/top-navbar.component';
     FlexLayoutModule,
     MatSidenavModule,
     HttpClientModule,
+    MatDialogModule,
   ],
   providers: [
     CoursesDialogService,
@@ -65,6 +74,7 @@ import { TopNavbarComponent } from './top-navbar/top-navbar.component';
         maxHeight: '66vw',
       } as MatDialogConfig,
     },
+    MediaServerService,
   ],
   bootstrap: [AppComponent],
 })

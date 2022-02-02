@@ -1,10 +1,13 @@
+import { CONTENT_TYPE } from '..';
+
 export interface IPlayListItem {
   id: number;
   title: string;
   contentTitle: string;
-  type: PlayListItemType;
+  type: CONTENT_TYPE;
   status: PlayListItemStatus;
   url?: string;
+  blob_directory: string;
 }
 
 export enum PlayListItemType {

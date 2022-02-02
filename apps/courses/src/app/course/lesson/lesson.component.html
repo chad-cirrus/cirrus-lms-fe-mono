@@ -1,6 +1,7 @@
 <cirrus-lesson-landing-page
   [lesson]="lesson$ | async"
   (fetchMediaOutput)="fetchMedia($event)"
+  (fetchScorm)="fetchScorm($event)"
   [instructorView]="(instructorView$ | async)!"
   [sideNavOpen]="(sideNavOpen$ | async)!"
 ></cirrus-lesson-landing-page>

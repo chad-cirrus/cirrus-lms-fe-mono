@@ -1,0 +1,44 @@
+<mat-dialog-content
+  id="content-player"
+  class="content-wrapper"
+  [ngClass]="{
+    'video-dialog-container ':
+      content?.content_type === 0 || content?.content_type === 1,
+    test: content?.content_type === 9 || content?.content_type === 10
+  }"
+>
+  <div class="content-wrapper" fxLayout="column wrap">
+    <div
+      class="full-width"
+      [ngClass]="{ 'content-player-wrapper-scorm': true }"
+    >
+      <cirrus-scorm [content]="content" [lesson]="data.lesson"></cirrus-scorm>
+    </div>
+  </div>
+  <div class="navbottom" fxFlex="100">
+    <button
+      mat-raised-button
+      class="dialog-buttons"
+      (click)="previousContent()"
+    >
+      <span class="previous"></span>
+    </button>
+    <div fxFlex=""></div>
+    <button
+      mat-raised-button
+      class="dialog-buttons"
+      tabindex="-1"
+      (click)="nextContent()"
+    >
+      <span class="next"></span>
+    </button>
+    <button
+      mat-dialog-close
+      mat-raised-button
+      class="dialog-buttons"
+      tabindex="-1"
+    >
+      <span class="close"></span>
+    </button>
+  </div>
+</mat-dialog-content>

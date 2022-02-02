@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import {
+  CONTENT_TYPE,
   IPlayListItem,
   PlayListItemStatus,
   PlayListItemType,
@@ -13,6 +14,10 @@ import {
 export class PlaylistComponent {
   @Input() playListItem: IPlayListItem[] | undefined;
   @Output() fetchMedia = new EventEmitter<IPlayListItem>();
+
+  get contentType() {
+    return CONTENT_TYPE;
+  }
 
   get type() {
     return PlayListItemType;

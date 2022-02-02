@@ -10,4 +10,6 @@ export * from './lib/IPlayListItem';
 export * from './lib/IWorkBookRoutes';
 export * from './lib/IPlayListItem';
 export * from './lib/IVideoMediaItem';
+export * from './lib/ContentType';
+export * from './lib/IInitialiFile';
 export * from './lib/ICirrusUser';

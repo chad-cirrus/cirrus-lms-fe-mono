@@ -69,7 +69,7 @@
       *ngFor="let item of lesson.contents"
       [instructorView]="instructorView"
       [item]="item"
-      (fetchMediaOutput)="fetchMedia($event)"
+      (fetchMediaOutput)="fetchMedia($event, item)"
     ></cirrus-lesson-content-item>
   </div>
 </ng-container>

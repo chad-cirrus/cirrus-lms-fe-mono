@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ILesson, IVideoMediaItem } from '@cirrus/models';
+import { CONTENT_TYPE, IContent, ILesson, IPlayListItem } from '@cirrus/models';
 import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 import { switchMap, take } from 'rxjs/operators';
@@ -45,10 +45,27 @@ export class LessonComponent implements OnInit, OnDestroy {
     this.lessonSubscription.unsubscribe();
   }
 
-  fetchMedia(item: IVideoMediaItem) {
-    const trimmedUrl = item.url?.trim();
+  fetchMedia(item: IPlayListItem) {
+    if (item.type === CONTENT_TYPE.vimeo) {
+      this.fetchVimeo(item);
+    } else {
+      this.fetchUnknownMedia(item);
+    }
+  }
 
-    console.log(this.store);
+  fetchUnknownMedia(item: IPlayListItem) {
+    this.coursesDialog.displayUnknownMedia(item).subscribe(console.log);
+  }
+
+  fetchScorm(content: IContent) {
+    this.coursesDialog
+      .displayContentPlayerComponent(content)
+      .afterClosed()
+      .subscribe(() => console.log('scorm is closed'));
+  }
+
+  fetchVimeo(item: IPlayListItem) {
+    const trimmedUrl = item.url?.trim();
 
     if (typeof trimmedUrl != 'undefined' && trimmedUrl && trimmedUrl.length) {
       this.store
@@ -56,7 +73,7 @@ export class LessonComponent implements OnInit, OnDestroy {
         .pipe(
           take(1),
           switchMap(view => {
-            console.log('view', view);
+            console.log('view', view); // todo: switch videos based on instructor view
             return this.coursesDialog.displayMediaContent(item).afterClosed();
           })
         )

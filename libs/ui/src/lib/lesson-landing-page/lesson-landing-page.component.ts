@@ -1,9 +1,12 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import {
+  CONTENT_TYPE,
+  IContent,
   ILesson,
   IPlayListItem,
   IProgress,
   IVideoMediaItem,
+  PlayListItemStatus,
   ProgressType,
 } from '@cirrus/models';
 
@@ -62,30 +65,31 @@ export class LessonLandingPageComponent {
   libraryImageUrl = '/courses/assets/ui/images/library.png';
   bookOpenImageUrl = '/courses/assets/ui/images/book-open.png';
 
-  @Output() fetchMediaOutput = new EventEmitter<IVideoMediaItem>();
+  @Output() fetchMediaOutput = new EventEmitter<IPlayListItem>();
+  @Output() fetchScorm = new EventEmitter<IContent>();
 
   get lessonImageFxLayoutAlign() {
     return this.sideNavOpen ? 'center center' : 'center start';
   }
 
   startLesson() {
-    const videoMediaItem: IVideoMediaItem = {
+    const videoMediaItem: IPlayListItem = {
       id: 377578235,
       url: '377578235',
       title: 'Intro Placeholder',
       contentTitle: 'Intro Placeholder',
+      type: CONTENT_TYPE.vimeo,
+      status: PlayListItemStatus.Unknown,
+      blob_directory: '',
     };
     this.fetchMediaOutput.next(videoMediaItem);
   }
 
-  fetchMedia(item: IPlayListItem) {
-    const { id, url, title, contentTitle } = item;
-    const videoMediaItem: IVideoMediaItem = {
-      id,
-      url,
-      title,
-      contentTitle,
-    };
-    this.fetchMediaOutput.next(videoMediaItem);
+  fetchMedia(item: IPlayListItem, content: IContent) {
+    if (content.blob_directory !== null) {
+      this.fetchScorm.next(content);
+    } else {
+      this.fetchMediaOutput.next(item);
+    }
   }
 }

@@ -1,0 +1,24 @@
+@mixin border-radius-vendor($radius) {
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  border-radius: $radius;
+}
+
+@mixin slider-filter-button($bg-color) {
+  padding: $filter-button-padding;
+  border: $filter-button-border;
+  width: $filter-button-width;
+  background-color: $bg-color;
+  border: 2px solid $template-accent-color;
+  height: 35px;
+}
+
+@mixin screen-media($width) {
+  @media screen and (max-width: $width) {
+    @content;
+  }
+}
+
+@mixin shadow($shadows...) {
+  box-shadow: $shadows;
+}

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import {
   AfterViewInit,
   Component,
@@ -7,14 +8,8 @@ import {
 } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DomSanitizer } from '@angular/platform-browser';
+import { IPlayListItem } from '@cirrus/models';
 import Player from '@vimeo/player';
-
-export interface DialogData {
-  id: number;
-  url: string;
-  title: string;
-  contentTitle: string;
-}
 
 @Component({
   selector: 'cirrus-media-content-dialog',
@@ -26,13 +21,13 @@ export class MediaContentDialogComponent implements AfterViewInit {
   cirrusvideoplayer!: ElementRef;
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: DialogData,
+    @Inject(MAT_DIALOG_DATA) public data: IPlayListItem,
     public sanitizer: DomSanitizer
   ) {}
 
   ngAfterViewInit(): void {
     const player = new Player(this.cirrusvideoplayer.nativeElement, {
-      id: +this.data.url,
+      id: +this.data.url!,
       responsive: true,
     });
     player.play();
