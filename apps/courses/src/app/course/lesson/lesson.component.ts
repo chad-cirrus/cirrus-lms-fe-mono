@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 import { switchMap, take } from 'rxjs/operators';
 import { CoursesDialogService } from '../../dialog-service/cirrus-dialog.service';
-import { fetchLessons } from '../../store/actions';
+import { fetchLessons, setSideNavOpen } from '../../store/actions';
 import { LessonState } from '../../store/reducers/lesson.reducer';
 import { selectLesson } from '../../store/selectors/lessons.selector';
 import {
@@ -79,5 +79,9 @@ export class LessonComponent implements OnInit, OnDestroy {
         )
         .subscribe(() => console.log('callback goes here'));
     }
+  }
+
+  openSideNav() {
+    this.store.dispatch(setSideNavOpen({ sideNavOpen: true }));
   }
 }

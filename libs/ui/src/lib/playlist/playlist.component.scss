@@ -1,8 +1,8 @@
 .playlist-container {
   height: 4rem;
-  border-bottom: 1px white solid;
+  border-bottom: 1px solid rgba(78, 78, 78, 0.4);
   .media-control {
-    mat-icon:hover {
+    img:hover {
       cursor: pointer;
     }
   }

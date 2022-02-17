@@ -5,16 +5,27 @@
   cirrus-lesson-landing-page {
     .lesson-image {
       h1 {
-        @include material.mat-typography-level-to-styles(
-          $typography-config,
-          display-3
-        );
+        // @include material.mat-typography-level-to-styles(
+        //   $typography-config,
+        //   display-3
+        // );
+        font-family: Akzidenz-Grotesk BQ;
+        font-size: 69px;
+        line-height: 100.9%;
+        /* or 70px */
+
+        letter-spacing: -0.045em;
       }
       h4 {
-        @include material.mat-typography-level-to-styles(
-          $typography-config,
-          display-2
-        );
+        // @include material.mat-typography-level-to-styles(
+        //   $typography-config,
+        //   display-2
+        // );
+        font-family: Akzidenz-Grotesk BQ;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 43.125px;
+        line-height: 100.9%;
       }
     }
     .lesson-intro-video {

@@ -7,6 +7,14 @@
       $typography-config,
       body-2
     );
+    font-family: Akzidenz-Grotesk BQ;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 130%;
+    /* or 23px */
+
+    letter-spacing: 0.02em;
   }
 }
 
@@ -21,6 +29,6 @@
 
   cirrus-playlist {
     background-color: material.mat-color($theme-colors, card);
-    color: var.$secondary-font-color-light-grey;
+    color: var.$gray4;
   }
 }

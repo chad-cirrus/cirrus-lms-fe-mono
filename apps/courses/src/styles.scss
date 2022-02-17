@@ -96,7 +96,7 @@ $theme: material.mat-dark-theme(
 html,
 body {
   position: relative;
-  height: 100%;
+  height: auto;
   background-color: $primary-background-color;
   margin: 0;
   color: $primary-font-color;
@@ -117,4 +117,12 @@ div {
   .mat-dialog-container {
     border-radius: 16px;
   }
+}
+
+.mat-drawer-container {
+  overflow: initial !important;
+}
+
+.mat-drawer-content {
+  overflow: initial !important;
 }

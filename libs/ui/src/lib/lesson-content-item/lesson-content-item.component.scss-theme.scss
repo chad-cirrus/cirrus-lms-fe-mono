@@ -6,16 +6,32 @@
     .title-container {
       .title-content {
         .title {
-          @include material.mat-typography-level-to-styles(
-            $typography-config,
-            display-2
-          );
+          // @include material.mat-typography-level-to-styles(
+          //   $typography-config,
+          //   display-2
+          // );
+          font-family: Akzidenz-Grotesk BQ;
+          font-style: normal;
+          font-weight: normal;
+          font-size: 46.08px;
+          line-height: 110.5%;
+          /* or 51px */
+
+          letter-spacing: -0.005em;
         }
         .subtitle {
-          @include material.mat-typography-level-to-styles(
-            $typography-config,
-            body-2
-          );
+          // @include material.mat-typography-level-to-styles(
+          //   $typography-config,
+          //   body-2
+          // );
+          font-family: Akzidenz-Grotesk BQ;
+          font-style: normal;
+          font-weight: normal;
+          font-size: 16.0335px;
+          line-height: 130%;
+          /* or 21px */
+
+          letter-spacing: 0.02em;
         }
       }
     }
@@ -29,6 +45,19 @@
 
   @if $typography != null {
     @include cirrus-lesson-content-item-typography($typography);
+  }
+
+  cirrus-lesson-content-item {
+    .title-container {
+      .title-content {
+        .title {
+          color: #ffffff;
+        }
+        .subtitle {
+          color: #d1d1d1;
+        }
+      }
+    }
   }
 
   cirrus-lesson-content-item.student-view {

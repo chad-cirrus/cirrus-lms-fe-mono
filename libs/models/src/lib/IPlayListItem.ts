@@ -18,4 +18,5 @@ export enum PlayListItemType {
 export enum PlayListItemStatus {
   Unknown,
   Completed,
+  InProgress,
 }

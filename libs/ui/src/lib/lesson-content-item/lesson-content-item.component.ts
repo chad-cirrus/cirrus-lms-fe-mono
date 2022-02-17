@@ -42,7 +42,7 @@ export class LessonContentItemComponent {
         type: CONTENT_TYPE.vimeo,
         title: 'Preflight Planning and Preparation',
         contentTitle: 'Primary Flight Controls',
-        status: PlayListItemStatus.Completed,
+        status: PlayListItemStatus.InProgress,
         url: '377578144',
         blob_directory: '',
       },

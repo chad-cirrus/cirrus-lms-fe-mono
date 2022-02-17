@@ -10,18 +10,25 @@
     fxLayoutAlign="start center"
     fxLayoutGap="8px"
   >
-    <mat-icon (click)="getMedia(item)">{{
-      item.type === contentType.vimeo ? 'play_circle' : 'article'
-    }}</mat-icon>
+    <img
+      [src]="
+        item.type === contentType.vimeo ? playButtonString : openDocumentString
+      "
+      (click)="getMedia(item)"
+    />
     <div>{{ item.title }}</div>
   </div>
   <div
-    *ngIf="item.status === status.Completed"
+    *ngIf="item.status !== status.Unknown"
     fxLayout="row"
     fxLayoutAlign="end center"
     fxLayoutGap="8px"
   >
-    <mat-icon>check_circle</mat-icon>
-    <span>Completed</span>
+    <img
+      [src]="item.status === status.Completed ? completeCheck : inProgress"
+    />
+    <span>{{
+      item.status === status.Completed ? 'Completed' : 'In Progress'
+    }}</span>
   </div>
 </div>

@@ -30,6 +30,7 @@ import { ScormContentDialogComponent } from './dialog-service/scorm-content-dial
 import { ContentPlayerComponent } from './dialog-service/content-player/content-player.component';
 import { MediaServerService } from './media.service';
 import { ScormComponent } from './dialog-service/content-player/scorm/scorm.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { ScormComponent } from './dialog-service/content-player/scorm/scorm.comp
     MatSidenavModule,
     HttpClientModule,
     MatDialogModule,
+    ReactiveFormsModule,
   ],
   providers: [
     CoursesDialogService,

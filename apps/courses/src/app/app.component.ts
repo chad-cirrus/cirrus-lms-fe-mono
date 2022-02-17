@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { delay, distinctUntilChanged, share, tap } from 'rxjs/operators';
+import { delay, distinctUntilChanged, map, share, tap } from 'rxjs/operators';
 import { AppService } from './app.service';
 import * as appActions from './store/actions';
 import { fetchWorkBookRoutes } from './store/actions/workbook-routes.actions';
@@ -10,6 +10,10 @@ import { selectWorkBookRoutes } from './store/selectors/workbook-routes.selector
 import { setCirrusUser } from './store/actions';
 import { ICirrusUser } from '@cirrus/models';
 import { selectRole } from './store/selectors/cirrus-user.selector';
+import { fromEvent, Observable } from 'rxjs';
+import { FormControl } from '@angular/forms';
+import { selectSideNavOpen } from './store/selectors/view.selector';
+import { MatSidenav } from '@angular/material/sidenav';
 
 @Component({
   selector: 'cirrus-root',
@@ -17,10 +21,27 @@ import { selectRole } from './store/selectors/cirrus-user.selector';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
+  student = 'John Doe';
+  viewToggle = new FormControl(false);
+  toggle$ = this.viewToggle.valueChanges;
   lessonStateBusy$ = this.store.select(selectLessonStateBusy).pipe(delay(1));
   workbookRoutes$ = this.store.select(selectWorkBookRoutes);
   role$ = this.store.select(selectRole).pipe(tap(role => console.log(role)));
   courseId$ = this.appService.courseId$.pipe(distinctUntilChanged(), share());
+  scrollTop$ = fromEvent(window, 'scroll').pipe(
+    map(event => event.target && event.target['documentElement'].scrollTop),
+    map(top => top > 160),
+    distinctUntilChanged()
+  );
+  sideNavOpen$: Observable<boolean> = this.store.select(selectSideNavOpen);
+  @ViewChild(MatSidenav) sideNav!: MatSidenav;
+
+  highPostion$ = this.role$.pipe(
+    map(role => (role === 'pilot' ? '2rem' : '5rem'))
+  );
+  lowPostion$ = this.role$.pipe(
+    map(role => (role === 'pilot' ? '9rem' : '12rem'))
+  );
 
   constructor(private store: Store<AppState>, private appService: AppService) {}
 
@@ -31,16 +52,20 @@ export class AppComponent implements OnInit {
       }
     });
 
-    console.log(localStorage.getItem('cirrus-user'));
     const cirrusUser = JSON.parse(
       <string>localStorage.getItem('cirrus-user')
     ) as ICirrusUser;
-    console.log(cirrusUser);
     this.store.dispatch(setCirrusUser({ cirrusUser }));
-  }
 
-  instructorViewMode(instructorView: boolean) {
-    this.store.dispatch(appActions.setInstructorView({ instructorView }));
+    this.viewToggle.valueChanges.subscribe(instructorView =>
+      this.store.dispatch(appActions.setInstructorView({ instructorView }))
+    );
+
+    this.sideNavOpen$.subscribe(open => {
+      if (open) {
+        this.sideNav.toggle();
+      }
+    });
   }
 
   handleOpenChanged(sideNavOpen: boolean) {

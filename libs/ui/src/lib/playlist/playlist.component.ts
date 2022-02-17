@@ -15,6 +15,22 @@ export class PlaylistComponent {
   @Input() playListItem: IPlayListItem[] | undefined;
   @Output() fetchMedia = new EventEmitter<IPlayListItem>();
 
+  get playButtonString() {
+    return '/courses/assets/ui/images/svg/video_play.svg';
+  }
+
+  get openDocumentString() {
+    return '/courses/assets/ui/images/svg/document_button.svg';
+  }
+
+  get completeCheck() {
+    return '/courses/assets/ui/images/svg/complete_check.svg';
+  }
+
+  get inProgress() {
+    return '/courses/assets/ui/images/svg/in_progress.svg';
+  }
+
   get contentType() {
     return CONTENT_TYPE;
   }

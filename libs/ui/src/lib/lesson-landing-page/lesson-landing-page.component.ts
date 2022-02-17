@@ -67,9 +67,14 @@ export class LessonLandingPageComponent {
 
   @Output() fetchMediaOutput = new EventEmitter<IPlayListItem>();
   @Output() fetchScorm = new EventEmitter<IContent>();
+  @Output() openSideNav = new EventEmitter();
 
   get lessonImageFxLayoutAlign() {
     return this.sideNavOpen ? 'center center' : 'center start';
+  }
+
+  get playListButtonFilledIn() {
+    return '/courses/assets/ui/images/svg/play_button_filled_in.svg';
   }
 
   startLesson() {
@@ -91,5 +96,23 @@ export class LessonLandingPageComponent {
     } else {
       this.fetchMediaOutput.next(item);
     }
+  }
+
+  mapProgressTypeToUrl(type: ProgressType): string {
+    switch (type) {
+      case ProgressType.Flight: {
+        return '/courses/assets/ui/images/progress-flight.png';
+      }
+      case ProgressType.Ground: {
+        return '/courses/assets/ui/images/progress-ground.png';
+      }
+      default: {
+        return '/courses/assets/ui/images/progress-land.png';
+      }
+    }
+  }
+
+  openSideNavClick() {
+    this.openSideNav.emit();
   }
 }

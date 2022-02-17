@@ -4,16 +4,22 @@
 @mixin cirrus-app-component-typography($typography-config) {
   .sidenav-menu {
     .workbook {
-      @include material.mat-typography-level-to-styles(
-        $typography-config,
-        headline
-      );
+      font-family: Akzidenz-Grotesk BQ;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 16px;
+      line-height: 20px;
+
+      letter-spacing: -0.015em;
     }
     .lesson {
-      @include material.mat-typography-level-to-styles(
-        $typography-config,
-        button
-      );
+      font-family: Akzidenz-Grotesk BQ;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 14px;
+      line-height: 20px;
+
+      letter-spacing: 0.03em;
     }
   }
 }
@@ -36,7 +42,6 @@
   }
 
   .router-link-active {
-    background-color: var.$background-color-white;
-    color: var.$secondary-font-color-light-black;
+    background-color: #1b1b1b;
   }
 }

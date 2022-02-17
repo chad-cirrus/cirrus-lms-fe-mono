@@ -1,34 +1,40 @@
 .sidenav-menu {
-  padding: 24px;
-  width: 20vw;
+  padding: 24px 32px;
+  width: 24vw;
   min-width: 300px;
-  .workbook {
-    margin-bottom: 0.5rem;
-  }
-  .lesson {
-    margin-left: 0.5rem;
-    margin-bottom: 1rem;
-    align-items: center;
-    height: 24px;
-    line-height: 24px;
-    padding: 0 8px;
-    border-radius: 5px;
-  }
-  .lesson:hover {
-    cursor: pointer;
+  .sidenav-menu-container {
+    width: 100%;
+    .header-row {
+      padding: 24px 32px;
+    }
+    .lesson {
+      margin-left: 0.5rem;
+      align-items: center;
+      height: 58px;
+      line-height: 58px;
+      padding: 0 24px;
+      border-radius: 14px;
+    }
+    .lesson:hover {
+      cursor: pointer;
+    }
   }
 }
 
-.snav-open-button {
-  position: fixed;
-  top: 12rem;
-  left: 32px;
-  transform: scaleX(-1);
-  -moz-transform: scaleX(-1);
-  -webkit-transform: scaleX(-1);
-  -ms-transform: scaleX(-1);
-}
-
-.snav-toggle {
+.snav-close-button {
   cursor: pointer;
+}
+
+.instructor-view-container {
+  background-color: #fbc219;
+  height: 3rem;
+  color: black;
+  padding: 0 2rem;
+  position: sticky;
+  top: 0px;
+  z-index: 1000;
+}
+
+ul.student-name {
+  padding-inline-start: 16px;
 }
