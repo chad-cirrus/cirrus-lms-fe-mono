@@ -101,13 +101,13 @@ export class LessonLandingPageComponent {
   mapProgressTypeToUrl(type: ProgressType): string {
     switch (type) {
       case ProgressType.Flight: {
-        return '/courses/assets/ui/images/progress-flight.png';
+        return '/courses/assets/ui/images/svg/progress-icon-flight.svg';
       }
       case ProgressType.Ground: {
-        return '/courses/assets/ui/images/progress-ground.png';
+        return '/courses/assets/ui/images/svg/progress-icon-ground.svg';
       }
       default: {
-        return '/courses/assets/ui/images/progress-land.png';
+        return '/courses/assets/ui/images/svg/progress-icon-land.svg';
       }
     }
   }

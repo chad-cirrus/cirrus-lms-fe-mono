@@ -28,20 +28,15 @@ export class AppComponent implements OnInit {
   workbookRoutes$ = this.store.select(selectWorkBookRoutes);
   role$ = this.store.select(selectRole).pipe(tap(role => console.log(role)));
   courseId$ = this.appService.courseId$.pipe(distinctUntilChanged(), share());
-  scrollTop$ = fromEvent(window, 'scroll').pipe(
+  scrolledPast$ = fromEvent(window, 'scroll').pipe(
     map(event => event.target && event.target['documentElement'].scrollTop),
     map(top => top > 160),
     distinctUntilChanged()
   );
   sideNavOpen$: Observable<boolean> = this.store.select(selectSideNavOpen);
   @ViewChild(MatSidenav) sideNav!: MatSidenav;
-
-  highPostion$ = this.role$.pipe(
-    map(role => (role === 'pilot' ? '2rem' : '5rem'))
-  );
-  lowPostion$ = this.role$.pipe(
-    map(role => (role === 'pilot' ? '9rem' : '12rem'))
-  );
+  ftgNotPilot = 160;
+  ftgPilot = 112;
 
   constructor(private store: Store<AppState>, private appService: AppService) {}
 
@@ -65,6 +60,11 @@ export class AppComponent implements OnInit {
       if (open) {
         this.sideNav.toggle();
       }
+    });
+
+    this.scrolledPast$.subscribe(past => {
+      this.ftgNotPilot = !past ? 160 : 48;
+      this.ftgPilot = !past ? 112 : 0;
     });
   }
 

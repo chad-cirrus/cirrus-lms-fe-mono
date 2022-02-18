@@ -25,7 +25,7 @@
     <mat-sidenav
       #snav
       fixedInViewport="true"
-      [fixedTopGap]="(role$ | async) !== 'pilot' ? 160 : 112"
+      [fixedTopGap]="(role$ | async) !== 'pilot' ? ftgNotPilot : ftgPilot"
       mode="side"
       (openedChange)="handleOpenChanged($event)"
     >
