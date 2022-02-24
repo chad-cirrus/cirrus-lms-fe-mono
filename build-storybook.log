@@ -1,0 +1,60 @@
+
+> nx run ui:build-storybook --projectBuildConfig=ui:build-storybook --outputDir=/var/folders/lx/_7r0v28d3918_xmgnj6ng2480000gn/T/chromatic--31882-5u3CtsNGfWro 
+
+>  NX  ui framework: @storybook/angular
+
+
+>  NX  Storybook builder starting ...
+
+info => Cleaning outputDir: /Users/walterharms/workspace/cirrus/mono-repo/cirrus/dist/storybook/ui
+info => Loading presets
+info => Copying static files: /Users/walterharms/workspace/cirrus/mono-repo/cirrus/libs/ui/src/assets at /Users/walterharms/workspace/cirrus/mono-repo/cirrus/dist/storybook/ui/
+info => Compiling manager..
+info => Compiling preview..
+(node:31899) [DEP0148] DeprecationWarning: Use of deprecated folder mapping "./" in the "exports" field module resolution of the package at /Users/walterharms/workspace/cirrus/mono-repo/cirrus/node_modules/tslib/package.json.
+Update this package.json to use a subpath pattern like "./*".
+(Use `node --trace-deprecation ...` to show where the warning was created)
+info => Using implicit CSS loaders
+info => Loading angular-cli config for angular >= 13.0.0
+info => Using angular browser target options from "ui:build-storybook"
+info => Using angular project with "tsConfig:/Users/walterharms/workspace/cirrus/mono-repo/cirrus/libs/ui/.storybook/tsconfig.json"
+info => Using default Webpack5 setup
+[BABEL] Note: The code generator has deoptimised the styling of /Users/walterharms/workspace/cirrus/mono-repo/cirrus/node_modules/@storybook/addon-docs/node_modules/prettier/standalone.js as it exceeds the max of 500KB.
+info => Manager built (45 s)
+info => Preview built (54 s)
+WARN /Users/walterharms/workspace/cirrus/mono-repo/cirrus/libs/ui/src/index.ts is part of the TypeScript compilation but it's unused.
+WARN Add only entry points to the 'files' or 'include' properties in your tsconfig.
+WARN /Users/walterharms/workspace/cirrus/mono-repo/cirrus/libs/ui/src/lib/cirrus-material.module.ts is part of the TypeScript compilation but it's unused.
+WARN Add only entry points to the 'files' or 'include' properties in your tsconfig.
+WARN /Users/walterharms/workspace/cirrus/mono-repo/cirrus/libs/ui/src/lib/ui.module.ts is part of the TypeScript compilation but it's unused.
+WARN Add only entry points to the 'files' or 'include' properties in your tsconfig.
+WARN /Users/walterharms/workspace/cirrus/mono-repo/cirrus/libs/ui/src/test-setup.ts is part of the TypeScript compilation but it's unused.
+WARN Add only entry points to the 'files' or 'include' properties in your tsconfig.
+WARN asset size limit: The following asset(s) exceed the recommended size limit (244 KiB).
+WARN This can impact web performance.
+WARN Assets: 
+WARN   image21.png (664 KiB)
+WARN   352.214f59a0.iframe.bundle.js (636 KiB)
+WARN   473.ed786aa4.iframe.bundle.js (663 KiB)
+WARN   110.cd6444ee.iframe.bundle.js (2.89 MiB)
+WARN entrypoint size limit: The following entrypoint(s) combined asset size exceeds the recommended limit (244 KiB). This can impact web performance.
+WARN Entrypoints:
+WARN   main (3.04 MiB)
+WARN       runtime~main.87a171e8.iframe.bundle.js
+WARN       110.cd6444ee.iframe.bundle.js
+WARN       main.css
+WARN       main.3298c008.iframe.bundle.js
+WARN 
+info => Output directory: /Users/walterharms/workspace/cirrus/mono-repo/cirrus/dist/storybook/ui
+
+>  NX  Storybook builder finished ...
+
+
+>  NX  Storybook files available in dist/storybook/ui
+
+
+———————————————————————————————————————————————
+
+>  NX   SUCCESS  Running target "build-storybook" succeeded
+
+

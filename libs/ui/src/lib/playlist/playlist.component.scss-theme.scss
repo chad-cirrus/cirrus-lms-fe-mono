@@ -1,5 +1,5 @@
 @use '~@angular/material/theming' as material;
-@use 'variables' as var;
+@use '../styles/variables' as var;
 
 @mixin cirrus-playlist-typography($typography-config) {
   cirrus-playlist {

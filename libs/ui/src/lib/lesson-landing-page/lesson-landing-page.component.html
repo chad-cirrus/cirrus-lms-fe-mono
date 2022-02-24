@@ -12,7 +12,7 @@
     <div class="content">
       <img
         class="snav-open-button"
-        src="/courses/assets/ui/images/svg/sidenav2.svg"
+        src="images/svg/sidenav2.svg"
         (click)="openSideNavClick()"
         [ngClass]="{
           open: sideNavOpen === true,
@@ -33,7 +33,7 @@
           fxLayoutAlign="space-between center"
           fxLayoutGap="8px"
         >
-          <img src="/courses/assets/ui/images/svg/not-started.svg" />
+          <img [src]="selfStudyProgressIcon" />
           <span> Self Study </span>
         </div>
         <div>
@@ -43,11 +43,11 @@
             fxLayoutAlign="space-between center"
             fxLayoutGap="8px"
           >
-            <img src="/courses/assets/ui/images/svg/not-started.svg" />
+            <img [src]="assessmentProgressIcon" />
             <span> Assessment </span>
           </div>
           <div class="sign-offs-warning-container">
-            <img src="/courses/assets/ui/images/svg/sign-off-warning.svg" />
+            <img src="images/svg/sign-off-warning.svg" />
             <span class="sign-offs-required"
               >Instructor sign offs required</span
             >
@@ -55,7 +55,7 @@
         </div>
       </div>
       <button mat-raised-button color="accent" (click)="startLesson()">
-        Start Lesson
+        {{ buttonText }}
       </button>
     </div>
   </div>

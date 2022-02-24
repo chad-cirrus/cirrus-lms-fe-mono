@@ -15,4 +15,14 @@ export interface ILesson {
   major_version: number;
   minor_version: number;
   contents: IContent[];
+  lesson_progress: LessonProgress;
+  self_study_progress: LessonProgress;
+  assessment_progress: LessonProgress;
+}
+
+export enum LessonProgress {
+  Unknown,
+  NotStarted,
+  InProgress,
+  Complete,
 }

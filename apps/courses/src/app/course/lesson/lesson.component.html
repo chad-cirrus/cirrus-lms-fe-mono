@@ -1,5 +1,5 @@
 <cirrus-lesson-landing-page
-  [lesson]="lesson$ | async"
+  [lesson]="(lesson$ | async)!"
   (fetchMediaOutput)="fetchMedia($event)"
   (fetchScorm)="fetchScorm($event)"
   [instructorView]="(instructorView$ | async)!"

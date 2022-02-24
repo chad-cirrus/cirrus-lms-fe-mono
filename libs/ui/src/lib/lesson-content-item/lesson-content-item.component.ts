@@ -4,7 +4,6 @@ import {
   IContent,
   IPlayListItem,
   PlayListItemStatus,
-  PlayListItemType,
 } from '@cirrus/models';
 
 @Component({

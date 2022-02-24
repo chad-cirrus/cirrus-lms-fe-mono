@@ -1,4 +1,4 @@
-import { ILesson } from '@cirrus/models';
+import { ILesson, LessonProgress } from '@cirrus/models';
 import { createReducer, on } from '@ngrx/store';
 import {
   fetchLessons,
@@ -34,6 +34,9 @@ export const initialLessonState: LessonState = {
     major_version: 0,
     minor_version: 0,
     contents: [],
+    lesson_progress: LessonProgress.Unknown,
+    self_study_progress: LessonProgress.Unknown,
+    assessment_progress: LessonProgress.Unknown,
   },
 };
 

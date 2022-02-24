@@ -5,7 +5,7 @@ import {
   ILesson,
   IPlayListItem,
   IProgress,
-  IVideoMediaItem,
+  LessonProgress,
   PlayListItemStatus,
   ProgressType,
 } from '@cirrus/models';
@@ -16,7 +16,7 @@ import {
   styleUrls: ['./lesson-landing-page.component.scss'],
 })
 export class LessonLandingPageComponent {
-  @Input() lesson: ILesson | null = {
+  @Input() lesson: ILesson = {
     id: 0,
     system_desc: '',
     created_at: '',
@@ -31,6 +31,9 @@ export class LessonLandingPageComponent {
     major_version: 0,
     minor_version: 0,
     contents: [],
+    lesson_progress: LessonProgress.Unknown,
+    self_study_progress: LessonProgress.Unknown,
+    assessment_progress: LessonProgress.Unknown,
   };
   @Input() progress: IProgress[] | null = [
     {
@@ -61,9 +64,9 @@ export class LessonLandingPageComponent {
   ];
   @Input() instructorView!: boolean;
   @Input() sideNavOpen!: boolean;
-  profileImageUrl = '/courses/assets/ui/images/profile.png';
-  libraryImageUrl = '/courses/assets/ui/images/library.png';
-  bookOpenImageUrl = '/courses/assets/ui/images/book-open.png';
+  profileImageUrl = 'images/profile.png';
+  libraryImageUrl = 'images/library.png';
+  bookOpenImageUrl = 'images/book-open.png';
 
   @Output() fetchMediaOutput = new EventEmitter<IPlayListItem>();
   @Output() fetchScorm = new EventEmitter<IContent>();
@@ -74,7 +77,33 @@ export class LessonLandingPageComponent {
   }
 
   get playListButtonFilledIn() {
-    return '/courses/assets/ui/images/svg/play_button_filled_in.svg';
+    return 'images/svg/play_button_filled_in.svg';
+  }
+
+  private buttonMapper = {
+    0: 'Get Started',
+    1: 'Get Started',
+    2: 'Resume Lesson',
+    3: 'Next Lesson',
+  };
+
+  get buttonText() {
+    return this.buttonMapper[this.lesson.lesson_progress];
+  }
+
+  private progressIconMapper = {
+    0: 'images/svg/not-started.svg',
+    1: 'images/svg/not-started.svg',
+    2: 'images/svg/in_progress.svg',
+    3: 'images/svg/complete_check.svg',
+  };
+
+  get selfStudyProgressIcon() {
+    return this.progressIconMapper[this.lesson.self_study_progress];
+  }
+
+  get assessmentProgressIcon() {
+    return this.progressIconMapper[this.lesson.assessment_progress];
   }
 
   startLesson() {
@@ -101,13 +130,13 @@ export class LessonLandingPageComponent {
   mapProgressTypeToUrl(type: ProgressType): string {
     switch (type) {
       case ProgressType.Flight: {
-        return '/courses/assets/ui/images/svg/progress-icon-flight.svg';
+        return 'images/svg/progress-icon-flight.svg';
       }
       case ProgressType.Ground: {
-        return '/courses/assets/ui/images/svg/progress-icon-ground.svg';
+        return 'images/svg/progress-icon-ground.svg';
       }
       default: {
-        return '/courses/assets/ui/images/svg/progress-icon-land.svg';
+        return 'images/svg/progress-icon-land.svg';
       }
     }
   }
