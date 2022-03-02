@@ -5,6 +5,15 @@ const app = express();
 
 app.use(express.static(path.join(__dirname, '..')));
 
+if (process.env.CREATE_STORYBOOK) {
+  app.use(express.static(path.join(__dirname, '..', '..', 'storybook', 'ui')));
+  app.get('/storybook/?*', (req, res) => {
+    res.sendFile(
+      path.join(__dirname, '..', '..', 'storybook', 'ui', 'index.html')
+    );
+  });
+}
+
 app.get('/courses/?*', (req, res) => {
   console.log('there it is');
   res.sendFile(path.join(__dirname, '..', 'courses', 'index.html'));
