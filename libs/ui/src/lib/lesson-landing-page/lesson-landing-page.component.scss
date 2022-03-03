@@ -89,6 +89,13 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 4rem;
+  .cirrus-progress-row {
+    mat-card {
+      .progress-type-icon {
+        height: 32px;
+      }
+    }
+  }
 }
 
 .cirrus-progress-row {
@@ -152,4 +159,9 @@ mat-card {
 
 cirrus-lesson-content-item.instructor-view {
   padding: 1rem;
+}
+
+.course-complete {
+  opacity: 0;
+  pointer-events: none;
 }

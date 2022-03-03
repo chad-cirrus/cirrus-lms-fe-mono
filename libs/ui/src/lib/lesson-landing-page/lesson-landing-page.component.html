@@ -46,7 +46,10 @@
             <img [src]="assessmentProgressIcon" />
             <span> Assessment </span>
           </div>
-          <div class="sign-offs-warning-container">
+          <div
+            class="sign-offs-warning-container"
+            *ngIf="lesson.assessment_progress !== lessonProgress.Complete"
+          >
             <img src="images/svg/sign-off-warning.svg" />
             <span class="sign-offs-required"
               >Instructor sign offs required</span
@@ -54,7 +57,12 @@
           </div>
         </div>
       </div>
-      <button mat-raised-button color="accent" (click)="startLesson()">
+      <button
+        mat-raised-button
+        color="accent"
+        (click)="startLesson()"
+        [ngClass]="{ 'course-complete': courseComplete }"
+      >
         {{ buttonText }}
       </button>
     </div>
@@ -69,7 +77,10 @@
       fxLayoutGap="24px"
     >
       <mat-card *ngFor="let item of progress" fxFlex="14">
-        <img [src]="mapProgressTypeToUrl(item.type)" />
+        <img
+          class="progress-type-icon"
+          [src]="mapProgressTypeToUrl(item.type)"
+        />
         <div class="progress-type">{{ item.type }}</div>
         <div>
           <span class="courses-completed">{{ item.completedCourses }}</span
@@ -89,7 +100,6 @@
       <div class="intro-video">
         <h2>Intro Video</h2>
         <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
-          <!-- <mat-icon (click)="startLesson()">play_circle</mat-icon> -->
           <img [src]="playListButtonFilledIn" (click)="startLesson()" />
           <div>{{ instructorView ? 'Instructor' : 'Student' }} Intro</div>
         </div>

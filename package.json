@@ -7,6 +7,7 @@
     "postinstall": "node ./decorate-angular-cli.js && ngcc --properties es2015 browser module main",
     "heroku-start": "node dist/apps/atc/main.js",
     "serve": "nx serve",
+    "serve:storybook:ui": "nx storybook ui --projectBuildConfig=ui:build-storybook",
     "start": "nx serve:production",
     "build": "bash ./build.sh",
     "build-projects": "nx run-many --target=build --projects=courses,atc",

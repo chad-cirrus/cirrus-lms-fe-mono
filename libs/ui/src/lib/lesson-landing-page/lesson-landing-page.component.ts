@@ -64,6 +64,8 @@ export class LessonLandingPageComponent {
   ];
   @Input() instructorView!: boolean;
   @Input() sideNavOpen!: boolean;
+  // eslint-disable-next-line @typescript-eslint/no-inferrable-types
+  @Input() courseComplete: boolean = false;
   profileImageUrl = 'images/profile.png';
   libraryImageUrl = 'images/library.png';
   bookOpenImageUrl = 'images/book-open.png';
@@ -104,6 +106,10 @@ export class LessonLandingPageComponent {
 
   get assessmentProgressIcon() {
     return this.progressIconMapper[this.lesson.assessment_progress];
+  }
+
+  get lessonProgress() {
+    return LessonProgress;
   }
 
   startLesson() {
