@@ -1,11 +1,14 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+/* eslint-disable @nrwl/nx/enforce-module-boundaries */
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import {
+  ASSESSMENT_TYPE,
   CONTENT_TYPE,
   IContent,
   ILesson,
   IPlayListItem,
   IProgress,
   LessonProgress,
+  LESSON_TYPE,
   PlayListItemStatus,
   ProgressType,
 } from '@cirrus/models';
@@ -15,26 +18,8 @@ import {
   templateUrl: './lesson-landing-page.component.html',
   styleUrls: ['./lesson-landing-page.component.scss'],
 })
-export class LessonLandingPageComponent {
-  @Input() lesson: ILesson = {
-    id: 0,
-    system_desc: '',
-    created_at: '',
-    updated_at: '',
-    system_name: '',
-    lesson_type: 0,
-    title: '',
-    overview: '',
-    is_archived: false,
-    contents_are_linear: false,
-    is_preview: false,
-    major_version: 0,
-    minor_version: 0,
-    contents: [],
-    lesson_progress: LessonProgress.Unknown,
-    self_study_progress: LessonProgress.Unknown,
-    assessment_progress: LessonProgress.Unknown,
-  };
+export class LessonLandingPageComponent implements OnInit {
+  @Input() lesson!: ILesson;
   @Input() progress: IProgress[] | null = [
     {
       type: ProgressType.Ground,
@@ -82,34 +67,24 @@ export class LessonLandingPageComponent {
     return 'images/svg/play_button_filled_in.svg';
   }
 
+  get lessonType() {
+    return LESSON_TYPE;
+  }
+
   private buttonMapper = {
     0: 'Get Started',
     1: 'Get Started',
     2: 'Resume Lesson',
     3: 'Next Lesson',
+    4: null,
   };
 
   get buttonText() {
-    return this.buttonMapper[this.lesson.lesson_progress];
+    return this.buttonMapper[this.lesson.lesson_progress ?? 0];
   }
 
-  private progressIconMapper = {
-    0: 'images/svg/not-started.svg',
-    1: 'images/svg/not-started.svg',
-    2: 'images/svg/in_progress.svg',
-    3: 'images/svg/complete_check.svg',
-  };
-
-  get selfStudyProgressIcon() {
-    return this.progressIconMapper[this.lesson.self_study_progress];
-  }
-
-  get assessmentProgressIcon() {
-    return this.progressIconMapper[this.lesson.assessment_progress];
-  }
-
-  get lessonProgress() {
-    return LessonProgress;
+  ngOnInit(): void {
+    console.log(this.lesson);
   }
 
   startLesson() {

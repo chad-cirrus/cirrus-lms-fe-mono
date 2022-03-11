@@ -1,8 +1,9 @@
+/* eslint-disable @nrwl/nx/enforce-module-boundaries */
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { moduleMetadata, Story, Meta } from '@storybook/angular';
+import { testData } from 'libs/models/src/testing/testData';
 import { PlaylistComponent } from '../playlist/playlist.component';
 import { LessonContentItemComponent } from './lesson-content-item.component';
-import { testData } from '../../testing/testData';
 
 export default {
   title: 'LessonContentItemComponent',

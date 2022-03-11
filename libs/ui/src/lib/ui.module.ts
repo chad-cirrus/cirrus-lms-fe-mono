@@ -10,6 +10,7 @@ import { ProgressIndicatorComponent } from './progress-indicator/progress-indica
 import { PlaylistComponent } from './playlist/playlist.component';
 import { InstructorBarComponent } from './instructor-bar/instructor-bar.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LessonProgressComponent } from './lesson-progress/lesson-progress.component';
 
 @NgModule({
   imports: [
@@ -26,6 +27,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ProgressIndicatorComponent,
     PlaylistComponent,
     InstructorBarComponent,
+    LessonProgressComponent,
   ],
   exports: [
     LessonLandingPageComponent,
@@ -34,6 +36,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ProgressIndicatorComponent,
     PlaylistComponent,
     InstructorBarComponent,
+    LessonProgressComponent,
   ],
 })
 export class UiModule {}

@@ -1,6 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { IInitialFile, ILesson, IWorkBookRoutes } from '@cirrus/models';
+import {
+  IInitialFile,
+  ILesson,
+  IWorkBookRoutes,
+  LessonHelper,
+} from '@cirrus/models';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
@@ -26,7 +31,12 @@ export class CoursesService {
             ...content,
             estimated_time: '1:23',
           })),
-        }))
+        })),
+        map(lesson => {
+          const returnLesson = LessonHelper.createLessonObject(lesson);
+
+          return returnLesson;
+        })
       );
   }
 

@@ -3,7 +3,10 @@ import { initialLessonState, reducer } from './lesson.reducer';
 
 describe('reducer: lesson', () => {
   it('should be busy when fetching lessons', () => {
-    const newState = reducer(initialLessonState, fetchLessons({ courseId: 1 }));
+    const newState = reducer(
+      initialLessonState,
+      fetchLessons({ courseId: 1, lessonId: 1 })
+    );
 
     expect(newState.busy).toEqual(true);
     expect(newState.error).toEqual(null);

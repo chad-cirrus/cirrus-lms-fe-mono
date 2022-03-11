@@ -1,0 +1,28 @@
+.self-study,
+.assessment {
+  font-family: Akzidenz-Grotesk BQ;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 32px;
+  line-height: 117%;
+  /* or 37px */
+
+  letter-spacing: 0.03em;
+
+  color: #ffffff;
+}
+
+.sign-offs-warning-container {
+  text-align: right;
+  .sign-offs-required {
+    margin-left: 8px;
+    font-family: Akzidenz-Grotesk BQ;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 24px;
+    /* identical to box height, or 171% */
+
+    color: #fbc219;
+  }
+}

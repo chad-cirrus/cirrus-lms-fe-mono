@@ -1,4 +1,4 @@
-import { ILesson, LessonProgress } from '@cirrus/models';
+import { ASSESSMENT_TYPE, ILesson, LessonProgress } from '@cirrus/models';
 import { createReducer, on } from '@ngrx/store';
 import {
   fetchLessons,
@@ -37,6 +37,13 @@ export const initialLessonState: LessonState = {
     lesson_progress: LessonProgress.Unknown,
     self_study_progress: LessonProgress.Unknown,
     assessment_progress: LessonProgress.Unknown,
+    assessment: ASSESSMENT_TYPE.none,
+    self_study: false,
+    order: null,
+    overview_image_url: '',
+    student_intro_video: '',
+    instructor_intro_video: '',
+    estimated_time: '',
   },
 };
 
@@ -46,7 +53,7 @@ export const reducer = createReducer(
   on(fetchLessonsSuccess, (state, { lesson }) => ({
     busy: false,
     error: null,
-    lesson,
+    lesson: lesson,
   })),
   on(fetchLessonsFailure, (state, { error }) => ({
     ...initialLessonState,

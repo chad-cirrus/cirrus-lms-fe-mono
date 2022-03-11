@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { ASSESSMENT_TYPE } from '..';
 import { IContent } from './IContent';
 
 export interface ILesson {
@@ -7,9 +9,10 @@ export interface ILesson {
   updated_at: string;
   system_name: string;
   lesson_type: number;
+  order: any;
   title: string;
   overview: string;
-  is_archived?: boolean | null;
+  is_archived: boolean;
   contents_are_linear: boolean;
   is_preview: boolean;
   major_version: number;
@@ -18,6 +21,12 @@ export interface ILesson {
   lesson_progress: LessonProgress;
   self_study_progress: LessonProgress;
   assessment_progress: LessonProgress;
+  assessment: ASSESSMENT_TYPE;
+  self_study: boolean;
+  overview_image_url: string;
+  student_intro_video: string;
+  instructor_intro_video: string;
+  estimated_time: string;
 }
 
 export enum LessonProgress {
@@ -25,4 +34,5 @@ export enum LessonProgress {
   NotStarted,
   InProgress,
   Complete,
+  NotRequired,
 }

@@ -13,8 +13,8 @@ import { EffectsMetadata, getEffectsMetadata } from '@ngrx/effects';
 import { TestBed } from '@angular/core/testing';
 import { fetchLessons, fetchLessonsSuccess } from '../actions';
 import { ILesson } from '@cirrus/models';
-import { testData } from '@cirrus/ui';
 import { HttpClientModule } from '@angular/common/http';
+import { testData } from '@cirrus/models';
 
 describe('lessons effects', () => {
   let actions: Observable<Action>;
@@ -47,7 +47,7 @@ describe('lessons effects', () => {
 
   describe('dispatching mergeMap effect', () => {
     it('should get the lesson', () => {
-      const action = fetchLessons({ lessonId: 1 });
+      const action = fetchLessons({ lessonId: 1, courseId: 1 });
       const lesson: ILesson = testData;
 
       jest.spyOn(service, 'getLessons').mockReturnValue(of(lesson));

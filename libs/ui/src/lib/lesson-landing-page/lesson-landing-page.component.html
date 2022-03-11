@@ -22,41 +22,10 @@
       <h1>{{ lesson.title }}</h1>
       <h4>{{ lesson.system_name }}</h4>
 
-      <div
-        fxLayout="row"
-        [fxLayoutAlign]="sideNavOpen ? 'center start' : 'start start'"
-        fxLayoutGap="24px"
-      >
-        <div
-          class="self-study"
-          fxLayout="row"
-          fxLayoutAlign="space-between center"
-          fxLayoutGap="8px"
-        >
-          <img [src]="selfStudyProgressIcon" />
-          <span> Self Study </span>
-        </div>
-        <div>
-          <div
-            class="assessment"
-            fxLayout="row"
-            fxLayoutAlign="space-between center"
-            fxLayoutGap="8px"
-          >
-            <img [src]="assessmentProgressIcon" />
-            <span> Assessment </span>
-          </div>
-          <div
-            class="sign-offs-warning-container"
-            *ngIf="lesson.assessment_progress !== lessonProgress.Complete"
-          >
-            <img src="images/svg/sign-off-warning.svg" />
-            <span class="sign-offs-required"
-              >Instructor sign offs required</span
-            >
-          </div>
-        </div>
-      </div>
+      <cirrus-lesson-progress
+        [sideNavOpen]="sideNavOpen"
+        [lesson]="lesson"
+      ></cirrus-lesson-progress>
       <button
         mat-raised-button
         color="accent"

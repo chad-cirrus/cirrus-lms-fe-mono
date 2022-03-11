@@ -13,3 +13,14 @@ export * from './lib/IVideoMediaItem';
 export * from './lib/ContentType';
 export * from './lib/IInitialiFile';
 export * from './lib/ICirrusUser';
+export * from './lib/LessonType';
+export * from './lib/AssessmentType';
+
+export * from './lib/classes/Content';
+export * from './lib/classes/ContentTask';
+export * from './lib/classes/Task';
+export * from './lib/classes/TaskCategory';
+export * from './lib/classes/Lesson';
+export * from './lib/classes/LessonHelper';
+
+export * from './testing/testData';
