@@ -45,27 +45,30 @@ export class LessonComponent implements OnInit, OnDestroy {
     this.lessonSubscription.unsubscribe();
   }
 
-  fetchMedia(item: IPlayListItem) {
-    if (item.type === CONTENT_TYPE.vimeo) {
-      this.fetchVimeo(item);
+  fetchMedia(content: IContent) {
+    if (content.content_type === CONTENT_TYPE.vimeo) {
+      this.fetchVimeo(content);
     } else {
-      this.fetchUnknownMedia(item);
+      this.fetchUnknownMedia(content);
     }
   }
 
-  fetchUnknownMedia(item: IPlayListItem) {
-    this.coursesDialog.displayUnknownMedia(item).subscribe(console.log);
+  fetchUnknownMedia(content: IContent) {
+    this.coursesDialog.displayUnknownMedia(content).subscribe(console.log);
   }
 
   fetchScorm(content: IContent) {
-    this.coursesDialog
-      .displayContentPlayerComponent(content)
-      .afterClosed()
-      .subscribe(() => console.log('scorm is closed'));
+    this.lesson$.pipe(take(1)).subscribe(lesson => {
+      console.log(lesson);
+      this.coursesDialog
+        .displayContentPlayerComponent(lesson, content)
+        .afterClosed()
+        .subscribe(() => console.log('scorm is closed'));
+    });
   }
 
-  fetchVimeo(item: IPlayListItem) {
-    const trimmedUrl = item.url?.trim();
+  fetchVimeo(content: IContent) {
+    const trimmedUrl = content.url?.trim();
 
     if (typeof trimmedUrl != 'undefined' && trimmedUrl && trimmedUrl.length) {
       this.store
@@ -74,7 +77,9 @@ export class LessonComponent implements OnInit, OnDestroy {
           take(1),
           switchMap(view => {
             console.log('view', view); // todo: switch videos based on instructor view
-            return this.coursesDialog.displayMediaContent(item).afterClosed();
+            return this.coursesDialog
+              .displayMediaContent(content)
+              .afterClosed();
           })
         )
         .subscribe(() => console.log('callback goes here'));

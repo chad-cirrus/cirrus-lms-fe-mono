@@ -1,18 +1,38 @@
 <div
-  class="title-container"
+  class="item-container"
+  [ngClass]="{ border: !lastItem }"
   fxLayout="row"
-  fxLayoutAlign="space-between start"
-  fxLayoutGap="8px"
+  fxLayoutAlign="space-between center"
 >
-  <div class="title-content">
-    <div class="title">{{ item?.title }}</div>
-    <div class="subtitle">{{ item?.subtitle }}</div>
-    <div class="subtitle">Estimated Time: {{ item?.estimated_time }}</div>
+  <div
+    class="media-control"
+    fxLayout="row"
+    fxLayoutAlign="start center"
+    fxLayoutGap="24px"
+  >
+    <img
+      [src]="
+        content?.content_type === contentType.vimeo
+          ? playButtonString
+          : openDocumentString
+      "
+      (click)="fetchMedia()"
+    />
+    <div class="title">{{ content?.title }}</div>
   </div>
-  <img src="images/red-plane.png" alt="" />
+  <div
+    *ngIf="content?.status !== contentStatus.NotStarted"
+    fxLayout="row"
+    fxLayoutAlign="end center"
+    fxLayoutGap="24px"
+  >
+    <img
+      [src]="
+        content?.status === contentStatus.Completed ? completeCheck : inProgress
+      "
+    />
+    <span>{{
+      content?.status === contentStatus.Completed ? 'Completed' : 'In Progress'
+    }}</span>
+  </div>
 </div>
-
-<cirrus-playlist
-  [playListItem]="playlist"
-  (fetchMedia)="fetchMedia($event)"
-></cirrus-playlist>

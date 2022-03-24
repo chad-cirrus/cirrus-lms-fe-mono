@@ -12,7 +12,7 @@
       class="full-width"
       [ngClass]="{ 'content-player-wrapper-scorm': true }"
     >
-      <cirrus-scorm [content]="content" [lesson]="data.lesson"></cirrus-scorm>
+      <cirrus-scorm [content]="content" [lesson]="lesson"></cirrus-scorm>
     </div>
   </div>
   <div class="navbottom" fxFlex="100">
@@ -35,7 +35,7 @@
     <button
       mat-dialog-close
       mat-raised-button
-      class="dialog-buttons"
+      class="dialog-buttons close-button"
       tabindex="-1"
     >
       <span class="close"></span>

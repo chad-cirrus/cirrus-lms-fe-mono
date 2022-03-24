@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { LessonProgressComponent } from './lesson-progress.component';
 
@@ -8,9 +9,9 @@ describe('LessonProgressComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ LessonProgressComponent ]
-    })
-    .compileComponents();
+      imports: [FlexLayoutModule],
+      declarations: [LessonProgressComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

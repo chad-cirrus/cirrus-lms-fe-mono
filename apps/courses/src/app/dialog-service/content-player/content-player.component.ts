@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { IContent, ILesson } from '@cirrus/models';
 
 @Component({
   selector: 'cirrus-content-player',
@@ -8,7 +9,8 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
   styleUrls: ['./content-player.component.scss'],
 })
 export class ContentPlayerComponent implements OnInit {
-  content: any;
+  content!: IContent;
+  lesson!: ILesson;
   comments = false;
   showComments = false;
   showContent = false;
@@ -17,6 +19,7 @@ export class ContentPlayerComponent implements OnInit {
 
   ngOnInit(): void {
     this.content = this.data.content;
+    this.lesson = this.data.lesson;
   }
 
   isFirstContentForLesson() {

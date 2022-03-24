@@ -1,0 +1,75 @@
+@use '~@angular/material/theming' as material;
+@use '../styles/variables' as var;
+
+@mixin cirrus-lesson-contents-typography($typography-config) {
+  cirrus-lesson-contents {
+    .content-container {
+      .title-content {
+        .title {
+          font-family: Akzidenz-Grotesk BQ;
+          font-size: 46px;
+          font-style: normal;
+          font-weight: 500;
+          line-height: 51px;
+          letter-spacing: -0.005em;
+          text-align: left;
+        }
+        .overview {
+          font-family: Akzidenz-Grotesk BQ;
+          font-size: 16px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 21px;
+          letter-spacing: 0.02em;
+          text-align: left;
+        }
+      }
+    }
+  }
+}
+
+@mixin cirrus-lesson-contents-theme($theme) {
+  $theme-colors: material.mat-get-color-config($theme);
+  $typography: material.mat-get-typography-config($theme);
+  $backgrounds: map-get($theme-colors, background);
+
+  @if $typography != null {
+    @include cirrus-lesson-contents-typography($typography);
+  }
+
+  cirrus-lesson-contents {
+    .title-content {
+      margin-bottom: 24px;
+      border-radius: 6px;
+    }
+    .contents-list-container {
+      border-radius: 6px;
+      .media-control {
+        color: #bdbdbd;
+      }
+    }
+  }
+
+  cirrus-lesson-contents {
+    .content-container.student-view {
+      .title-content {
+        background-color: material.mat-color($theme-colors, card);
+        .subtitle {
+          color: var.$secondary-font-color-light-grey;
+        }
+      }
+    }
+  }
+
+  cirrus-lesson-contents {
+    .content-container.instructor-view {
+      .title-content,
+      .contents-list-container {
+        background-color: var.$instructor-view-background;
+        .subtitle {
+          color: var.$secondary-font-color-light-grey;
+        }
+      }
+    }
+  }
+}

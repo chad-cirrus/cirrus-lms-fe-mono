@@ -1,15 +1,10 @@
 /* eslint-disable @nrwl/nx/enforce-module-boundaries */
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import {
-  ASSESSMENT_TYPE,
-  CONTENT_TYPE,
   IContent,
   ILesson,
-  IPlayListItem,
   IProgress,
-  LessonProgress,
   LESSON_TYPE,
-  PlayListItemStatus,
   ProgressType,
 } from '@cirrus/models';
 
@@ -18,7 +13,7 @@ import {
   templateUrl: './lesson-landing-page.component.html',
   styleUrls: ['./lesson-landing-page.component.scss'],
 })
-export class LessonLandingPageComponent implements OnInit {
+export class LessonLandingPageComponent {
   @Input() lesson!: ILesson;
   @Input() progress: IProgress[] | null = [
     {
@@ -55,7 +50,7 @@ export class LessonLandingPageComponent implements OnInit {
   libraryImageUrl = 'images/library.png';
   bookOpenImageUrl = 'images/book-open.png';
 
-  @Output() fetchMediaOutput = new EventEmitter<IPlayListItem>();
+  @Output() fetchMediaOutput = new EventEmitter<IContent>();
   @Output() fetchScorm = new EventEmitter<IContent>();
   @Output() openSideNav = new EventEmitter();
 
@@ -83,28 +78,45 @@ export class LessonLandingPageComponent implements OnInit {
     return this.buttonMapper[this.lesson.lesson_progress ?? 0];
   }
 
-  ngOnInit(): void {
-    console.log(this.lesson);
-  }
-
   startLesson() {
-    const videoMediaItem: IPlayListItem = {
-      id: 377578235,
-      url: '377578235',
-      title: 'Intro Placeholder',
-      contentTitle: 'Intro Placeholder',
-      type: CONTENT_TYPE.vimeo,
-      status: PlayListItemStatus.Unknown,
+    const content: IContent = {
+      id: 593,
+      order: 0,
+      title: 'Intro',
+      subtitle: 'Intro Video: Icing Awareness Course',
+      status: 'not_started',
+      score: 0,
+      url: '355991595',
+      meta_tags: [],
+      content_tasks: [],
+      quiz: null,
+      content_type: 0,
+      desc: 'Intro video for the icing awareness course.',
+      content_file: '',
+      placeholder_image:
+        'https://content.cirrusapproach.com/cirruslmsherokuprodcontainer/content-items/scorm/d754d0afe672c18526c66d5c2e2a8311.1_Intro.jpg',
+      jet_scoring: false,
+      content_html: '',
+      created_by: 'Cirrus Aircraft',
+      upload_image: '',
+      content_filename: '',
+      starter_file: '',
       blob_directory: '',
+      show_comments: true,
+      estimated_time: '',
+      created_at: '',
+      updated_at: '',
+      link_id: '',
+      version: 0,
     };
-    this.fetchMediaOutput.next(videoMediaItem);
+    this.fetchMediaOutput.next(content);
   }
 
-  fetchMedia(item: IPlayListItem, content: IContent) {
+  fetchMedia(content: IContent) {
     if (content.blob_directory !== null) {
       this.fetchScorm.next(content);
     } else {
-      this.fetchMediaOutput.next(item);
+      this.fetchMediaOutput.next(content);
     }
   }
 

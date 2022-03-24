@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 import { InstructorBarComponent } from './instructor-bar.component';
 
@@ -8,9 +10,9 @@ describe('InstructorBarComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ InstructorBarComponent ]
-    })
-    .compileComponents();
+      imports: [MatSlideToggleModule, ReactiveFormsModule],
+      declarations: [InstructorBarComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

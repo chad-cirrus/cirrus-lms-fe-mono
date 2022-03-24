@@ -1,0 +1,23 @@
+<div
+  class="content-container"
+  fxLayout="column"
+  fxLayoutAlign="space-between stretch"
+  [ngClass]="instructorView ? 'instructor-view' : 'student-view'"
+>
+  <div class="title-content">
+    <div class="title">{{ lesson?.system_desc }}</div>
+    <div class="overview" [innerHTML]="lesson?.overview"></div>
+  </div>
+  <div class="contents-list-container">
+    <div
+      *ngFor="let content of lesson.contents; let i = index"
+      class="content-item"
+    >
+      <cirrus-lesson-content-item
+        [content]="content"
+        [lastItem]="i === lesson.contents.length - 1"
+        (fetchMediaOutput)="handleFetchMedia($event)"
+      ></cirrus-lesson-content-item>
+    </div>
+  </div>
+</div>

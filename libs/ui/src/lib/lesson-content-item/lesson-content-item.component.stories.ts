@@ -1,8 +1,7 @@
 /* eslint-disable @nrwl/nx/enforce-module-boundaries */
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { moduleMetadata, Story, Meta } from '@storybook/angular';
-import { testData } from 'libs/models/src/testing/testData';
-import { PlaylistComponent } from '../playlist/playlist.component';
+import { testData, testData2 } from 'libs/models/src/testing/testData';
 import { LessonContentItemComponent } from './lesson-content-item.component';
 
 export default {
@@ -10,7 +9,6 @@ export default {
   component: LessonContentItemComponent,
   decorators: [
     moduleMetadata({
-      declarations: [PlaylistComponent],
       imports: [FlexLayoutModule],
     }),
   ],
@@ -25,12 +23,15 @@ const Template: Story<LessonContentItemComponent> = (
 
 export const Primary = Template.bind({});
 Primary.args = {
-  item: { ...testData.contents[0], estimated_time: '6:01' },
-  instructorView: false,
+  content: { ...testData.contents[0], estimated_time: '6:01' },
 };
 
-export const InstructorView = Template.bind({});
-InstructorView.args = {
-  item: { ...testData.contents[0], estimated_time: '6:01' },
-  instructorView: true,
+export const InProgress = Template.bind({});
+InProgress.args = {
+  content: { ...testData2.contents[0], estimated_time: '6:01' },
+};
+
+export const Completed = Template.bind({});
+Completed.args = {
+  content: { ...testData2.contents[1], estimated_time: '6:01' },
 };

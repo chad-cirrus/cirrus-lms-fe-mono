@@ -14,8 +14,8 @@ import { testData855 } from 'libs/models/src/testing/testData855';
 import { testDataIcingAwarenessCourse } from 'libs/models/src/testing/testDataIcingLesson';
 
 import { LessonContentItemComponent } from '../lesson-content-item/lesson-content-item.component';
+import { LessonContentsComponent } from '../lesson-contents/lesson-contents.component';
 import { LessonProgressComponent } from '../lesson-progress/lesson-progress.component';
-import { PlaylistComponent } from '../playlist/playlist.component';
 import { LessonLandingPageComponent } from './lesson-landing-page.component';
 
 export default {
@@ -25,8 +25,8 @@ export default {
     moduleMetadata({
       declarations: [
         LessonContentItemComponent,
-        PlaylistComponent,
         LessonProgressComponent,
+        LessonContentsComponent,
       ],
       imports: [MatButtonModule, FlexLayoutModule, MatCardModule],
     }),
@@ -78,6 +78,48 @@ Primary.args = {
     },
   ],
   instructorView: false,
+  sideNavOpen: false,
+  courseComplete: false,
+};
+
+export const InstructorView = Template.bind({});
+InstructorView.args = {
+  lesson: {
+    ...testData,
+    lesson_progress: LessonProgress.NotStarted,
+    self_study_progress: LessonProgress.NotStarted,
+    assessment_progress: LessonProgress.NotStarted,
+    assessment: ASSESSMENT_TYPE.flight,
+    self_study: true,
+  },
+  progress: [
+    {
+      type: ProgressType.Ground,
+      completedCourses: 5,
+      totalCourses: 10,
+    },
+    {
+      type: ProgressType.Flight,
+      completedCourses: 12,
+      totalCourses: 20,
+    },
+    {
+      type: ProgressType.Land,
+      completedCourses: 10,
+      totalCourses: 14,
+    },
+    {
+      type: ProgressType.Land,
+      completedCourses: 9,
+      totalCourses: 12,
+    },
+    {
+      type: ProgressType.Land,
+      completedCourses: 12,
+      totalCourses: 20,
+    },
+  ],
+  instructorView: true,
   sideNavOpen: false,
   courseComplete: false,
 };

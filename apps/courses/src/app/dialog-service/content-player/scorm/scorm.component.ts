@@ -51,15 +51,6 @@ export class ScormComponent implements AfterViewInit {
           this.data['cmi.suspend_data'] = '';
           return 'true';
         } else {
-          // if (progressItem.length && progressItem[0] && progressItem[0].scorm_progress) {
-          // if (progressItem[0].scorm_progress.includes('_isComplete')) {
-          // this.data['cmi.suspend_data'] = progressItem[0].scorm_progress;
-          // } else {
-          // this.data['cmi.suspend_data'] = progressItem[0].scorm_progress.replace(/"/g, '');
-          // }
-          // } else {
-          this.data['cmi.suspend_data'] = '';
-          // }
           return 'true';
         }
       },
@@ -124,7 +115,6 @@ export class ScormComponent implements AfterViewInit {
 
   ngAfterViewInit() {
     console.log('Route: ', 'scorm.component.ts');
-    window['API' as string] = this.api;
     this.loading = true;
     const { blob_directory } = this.content || '';
     this.mediaServerService
@@ -139,10 +129,13 @@ export class ScormComponent implements AfterViewInit {
         })
       )
       .subscribe(url => {
+        console.log(url);
         if (url) {
           this.url = this.sanitizer.bypassSecurityTrustResourceUrl(
             `${environment.baseUrl}/${url.toString()}`
           );
+          window['API' as string] = this.api;
+
           console.log('this.url: ', this.url);
         } else {
           this.url = null;

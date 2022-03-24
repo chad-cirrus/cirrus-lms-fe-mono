@@ -28,12 +28,6 @@
         line-height: 100.9%;
       }
     }
-    .lesson-intro-video {
-      @include material.mat-typography-level-to-styles(
-        $typography-config,
-        body-2
-      );
-    }
   }
 }
 
@@ -58,4 +52,21 @@
       background-color: var.$instructor-view-background;
     }
   }
+
+  // cirrus-lesson-landing-page {
+  //   .content-container.student-view {
+  //     .title-content {
+  //       background-color: material.mat-color($theme-colors, card);
+  //     }
+  //   }
+  // }
+
+  // cirrus-lesson-landing-page {
+  //   .content-container.instructor-view {
+  //     .title-content,
+  //     .contents-list-container {
+  //       background-color: var.$instructor-view-background;
+  //     }
+  //   }
+  // }
 }

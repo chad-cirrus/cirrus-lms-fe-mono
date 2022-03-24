@@ -1,22 +1,23 @@
 @use '../styles/variables' as *;
 
-:host {
-  margin-top: 24px;
-  margin-bottom: 48px;
-  padding: 12px 0;
-  border-radius: 6px;
-}
-
-div {
-  font-style: normal;
-  font-weight: normal;
-  margin-bottom: 8px;
-}
-
 div.title {
   width: 100%;
 }
 
 div.subtitle {
   width: 60%;
+}
+
+.item-container {
+  padding: 16px 0;
+  height: 4rem;
+  .media-control {
+    img:hover {
+      cursor: pointer;
+    }
+  }
+}
+
+.item-container.border {
+  border-bottom: 1px solid rgba(78, 78, 78, 0.4);
 }

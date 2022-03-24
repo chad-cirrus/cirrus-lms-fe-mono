@@ -59,7 +59,7 @@
     </div>
 
     <div
-      class="content-container"
+      class="introduction-container"
       [ngClass]="
         instructorView ? 'instructor-intro-video' : 'student-intro-video'
       "
@@ -75,18 +75,11 @@
       </div>
     </div>
 
-    <div
-      class="content-container"
-      fxLayout="column"
-      fxLayoutAlign="space-between stretch"
+    <cirrus-lesson-contents
+      [instructorView]="instructorView"
+      [lesson]="lesson"
+      (fetchMedia)="fetchMedia($event)"
     >
-      <cirrus-lesson-content-item
-        [ngClass]="instructorView ? 'instructor-view' : 'student-view'"
-        *ngFor="let item of lesson.contents"
-        [instructorView]="instructorView"
-        [item]="item"
-        (fetchMediaOutput)="fetchMedia($event, item)"
-      ></cirrus-lesson-content-item>
-    </div>
+    </cirrus-lesson-contents>
   </div>
 </ng-container>

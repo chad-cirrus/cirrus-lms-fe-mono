@@ -87,27 +87,25 @@
 
 .llp-container {
   max-width: 1200px;
-  margin: 0 auto;
   padding: 0 4rem;
+  margin: 0 auto;
   .cirrus-progress-row {
+    padding: 0 1rem;
     mat-card {
       .progress-type-icon {
         height: 32px;
       }
     }
   }
+  .introduction-container {
+    padding: 1rem;
+    margin: 24px auto;
+    border-radius: 5px;
+  }
 }
 
 .cirrus-progress-row {
   margin: 48px auto;
-}
-
-.content-container {
-  margin: 16px auto 0 auto;
-  border-radius: 6px;
-  .intro-video {
-    padding: 12px 0px;
-  }
 }
 
 .intro-video {
@@ -153,15 +151,17 @@ mat-card {
   letter-spacing: $secondary-font-color-grey;
 }
 
-.instructor-intro-video {
-  padding: 1rem;
-}
-
-cirrus-lesson-content-item.instructor-view {
-  padding: 1rem;
-}
+// .instructor-intro-video {
+//   padding: 1rem;
+// }
 
 .course-complete {
   opacity: 0;
   pointer-events: none;
+}
+
+.contents-list-container {
+  .content-item {
+    margin: 8px;
+  }
 }

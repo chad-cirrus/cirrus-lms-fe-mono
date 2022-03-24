@@ -2,10 +2,14 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { LessonLandingPageComponent } from './lesson-landing-page.component';
 
-import { testData } from '../../testing/testData';
-import { ProgressCardComponent } from '../progress-card/progress-card.component';
+// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
 import { CirrusMaterialModule } from '@cirrus/ui';
-import { LessonContentItemComponent } from '../lesson-content-item/lesson-content-item.component';
+import { testData } from '@cirrus/models';
+
+import { MockComponent } from 'ng-mocks';
+import { LessonContentsComponent } from '../lesson-contents/lesson-contents.component';
+import { LessonProgressComponent } from '../lesson-progress/lesson-progress.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 describe('LessonLandingPageComponent', () => {
   let component: LessonLandingPageComponent;
@@ -13,11 +17,11 @@ describe('LessonLandingPageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CirrusMaterialModule],
+      imports: [CirrusMaterialModule, FlexLayoutModule],
       declarations: [
         LessonLandingPageComponent,
-        ProgressCardComponent,
-        LessonContentItemComponent,
+        MockComponent(LessonContentsComponent),
+        MockComponent(LessonProgressComponent),
       ],
     }).compileComponents();
   });

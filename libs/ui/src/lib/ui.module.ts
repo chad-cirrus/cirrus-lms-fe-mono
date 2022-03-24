@@ -7,10 +7,10 @@ import { LessonLandingPageComponent } from './lesson-landing-page/lesson-landing
 import { LessonContentItemComponent } from './lesson-content-item/lesson-content-item.component';
 import { ProgressCardComponent } from './progress-card/progress-card.component';
 import { ProgressIndicatorComponent } from './progress-indicator/progress-indicator.component';
-import { PlaylistComponent } from './playlist/playlist.component';
 import { InstructorBarComponent } from './instructor-bar/instructor-bar.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LessonProgressComponent } from './lesson-progress/lesson-progress.component';
+import { LessonContentsComponent } from './lesson-contents/lesson-contents.component';
 
 @NgModule({
   imports: [
@@ -25,18 +25,18 @@ import { LessonProgressComponent } from './lesson-progress/lesson-progress.compo
     LessonContentItemComponent,
     ProgressCardComponent,
     ProgressIndicatorComponent,
-    PlaylistComponent,
     InstructorBarComponent,
     LessonProgressComponent,
+    LessonContentsComponent,
   ],
   exports: [
     LessonLandingPageComponent,
     LessonContentItemComponent,
     ProgressCardComponent,
     ProgressIndicatorComponent,
-    PlaylistComponent,
     InstructorBarComponent,
     LessonProgressComponent,
+    LessonContentsComponent,
   ],
 })
 export class UiModule {}
