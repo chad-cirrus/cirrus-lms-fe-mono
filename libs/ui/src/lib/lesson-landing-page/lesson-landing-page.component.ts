@@ -1,5 +1,5 @@
 /* eslint-disable @nrwl/nx/enforce-module-boundaries */
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import {
   IContent,
   ILesson,
@@ -27,29 +27,24 @@ export class LessonLandingPageComponent {
       totalCourses: 20,
     },
     {
-      type: ProgressType.Land,
+      type: ProgressType.Simulator,
       completedCourses: 10,
       totalCourses: 14,
     },
     {
-      type: ProgressType.Land,
+      type: ProgressType.Landings,
       completedCourses: 9,
       totalCourses: 12,
     },
     {
-      type: ProgressType.Land,
+      type: ProgressType.Assessment,
       completedCourses: 12,
       totalCourses: 20,
     },
   ];
   @Input() instructorView!: boolean;
   @Input() sideNavOpen!: boolean;
-  // eslint-disable-next-line @typescript-eslint/no-inferrable-types
-  @Input() courseComplete: boolean = false;
-  profileImageUrl = 'images/profile.png';
-  libraryImageUrl = 'images/library.png';
-  bookOpenImageUrl = 'images/book-open.png';
-
+  @Input() courseComplete = false;
   @Output() fetchMediaOutput = new EventEmitter<IContent>();
   @Output() fetchScorm = new EventEmitter<IContent>();
   @Output() openSideNav = new EventEmitter();
@@ -117,20 +112,6 @@ export class LessonLandingPageComponent {
       this.fetchScorm.next(content);
     } else {
       this.fetchMediaOutput.next(content);
-    }
-  }
-
-  mapProgressTypeToUrl(type: ProgressType): string {
-    switch (type) {
-      case ProgressType.Flight: {
-        return 'images/svg/progress-icon-flight.svg';
-      }
-      case ProgressType.Ground: {
-        return 'images/svg/progress-icon-ground.svg';
-      }
-      default: {
-        return 'images/svg/progress-icon-land.svg';
-      }
     }
   }
 

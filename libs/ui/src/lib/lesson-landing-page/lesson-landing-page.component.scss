@@ -6,16 +6,26 @@
   -o-background-size: cover;
   background-size: cover;
   .content {
-    .snav-open-button {
-      transform: scaleX(-1);
-      -moz-transform: scaleX(-1);
-      -webkit-transform: scaleX(-1);
-      -ms-transform: scaleX(-1);
+    button.snav-open-button {
+      background-color: rgba(31, 28, 28, 0.25);
       cursor: pointer;
       margin: 2rem 0 8rem 0;
+      font-family: $HelveticaNeue;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 16px;
+      /* identical to box height, or 100% */
+
+      text-transform: capitalize;
+
+      color: #ffffff;
+      width: 128px;
+      height: 39px;
+      border-radius: 100px;
     }
     margin-left: 40px;
-    button {
+    button.start-lesson {
       margin-top: 80px;
       margin-bottom: 8rem;
       box-sizing: border-box;
@@ -36,7 +46,7 @@
     }
     .self-study,
     .assessment {
-      font-family: Akzidenz-Grotesk BQ;
+      font-family: $primary_font;
       font-style: normal;
       font-weight: 500;
       font-size: 32px;
@@ -51,7 +61,7 @@
       text-align: right;
       .sign-offs-required {
         margin-left: 8px;
-        font-family: Akzidenz-Grotesk BQ;
+        font-family: $primary_font;
         font-style: normal;
         font-weight: 500;
         font-size: 14px;
@@ -97,63 +107,16 @@
       }
     }
   }
-  .introduction-container {
-    padding: 1rem;
-    margin: 24px auto;
-    border-radius: 5px;
-  }
 }
 
 .cirrus-progress-row {
   margin: 48px auto;
 }
 
-.intro-video {
-  img:hover {
-    cursor: pointer;
-  }
-}
-
-mat-card {
-  height: 100%;
-  box-sizing: border-box;
+cirrus-progress-card {
+  min-width: 130px;
   max-width: 150px;
-  img {
-    width: 20px;
-    margin-bottom: 4px;
-  }
-  .progress-type {
-    font-size: 12.793px;
-    line-height: 100.9%;
-    /* identical to box height, or 13px */
-
-    letter-spacing: -0.045em;
-    margin-bottom: 4px;
-    color: $secondary-font-color-light-grey-2;
-  }
 }
-
-.total-courses {
-  font-size: 23px;
-  line-height: 100%;
-  /* identical to box height, or 23px */
-
-  letter-spacing: -0.045em;
-
-  color: #969696;
-}
-
-.courses-completed {
-  font-size: 40px;
-  line-height: 100%;
-  /* or 45px */
-
-  letter-spacing: $secondary-font-color-grey;
-}
-
-// .instructor-intro-video {
-//   padding: 1rem;
-// }
 
 .course-complete {
   opacity: 0;

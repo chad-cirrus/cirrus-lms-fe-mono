@@ -10,15 +10,11 @@
     [fxLayoutAlign]="sideNavOpen ? 'center center' : 'center start'"
   >
     <div class="content">
-      <img
-        class="snav-open-button"
-        src="images/svg/sidenav2.svg"
-        (click)="openSideNavClick()"
-        [ngClass]="{
-          open: sideNavOpen === true,
-          closed: sideNavOpen === false
-        }"
-      />
+      <button mat-raised-button class="snav-open-button">
+        <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="16px">
+          <img src="images/svg/open_lessons.svg" /><span>Lessons</span>
+        </div>
+      </button>
       <h1>{{ lesson.title }}</h1>
       <h4>{{ lesson.system_name }}</h4>
 
@@ -27,6 +23,7 @@
         [lesson]="lesson"
       ></cirrus-lesson-progress>
       <button
+        class="start-lesson"
         mat-raised-button
         color="accent"
         (click)="startLesson()"
@@ -45,34 +42,10 @@
       fxLayoutAlign="space-between"
       fxLayoutGap="24px"
     >
-      <mat-card *ngFor="let item of progress" fxFlex="14">
-        <img
-          class="progress-type-icon"
-          [src]="mapProgressTypeToUrl(item.type)"
-        />
-        <div class="progress-type">{{ item.type }}</div>
-        <div>
-          <span class="courses-completed">{{ item.completedCourses }}</span
-          ><span class="total-courses">/{{ item.totalCourses }}</span>
-        </div>
-      </mat-card>
-    </div>
-
-    <div
-      class="introduction-container"
-      [ngClass]="
-        instructorView ? 'instructor-intro-video' : 'student-intro-video'
-      "
-      fxLayout="column"
-      fxLayoutAlign="space-between stretch"
-    >
-      <div class="intro-video">
-        <h2>Intro Video</h2>
-        <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
-          <img [src]="playListButtonFilledIn" (click)="startLesson()" />
-          <div>{{ instructorView ? 'Instructor' : 'Student' }} Intro</div>
-        </div>
-      </div>
+      <cirrus-progress-card
+        *ngFor="let item of progress"
+        [progress]="item"
+      ></cirrus-progress-card>
     </div>
 
     <cirrus-lesson-contents

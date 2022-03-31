@@ -1,5 +1,8 @@
 export enum ProgressType {
   Ground = 'Ground',
-  Land = 'Land',
+  Landings = 'Landings',
   Flight = 'Flight',
+  Simulator = 'Simulator',
+  Assessment = 'Assessment',
+  SelfStudy = 'SelfStudy',
 }

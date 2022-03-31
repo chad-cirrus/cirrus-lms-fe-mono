@@ -16,6 +16,7 @@ import { testDataIcingAwarenessCourse } from 'libs/models/src/testing/testDataIc
 import { LessonContentItemComponent } from '../lesson-content-item/lesson-content-item.component';
 import { LessonContentsComponent } from '../lesson-contents/lesson-contents.component';
 import { LessonProgressComponent } from '../lesson-progress/lesson-progress.component';
+import { ProgressCardComponent } from '../progress-card/progress-card.component';
 import { LessonLandingPageComponent } from './lesson-landing-page.component';
 
 export default {
@@ -27,6 +28,7 @@ export default {
         LessonContentItemComponent,
         LessonProgressComponent,
         LessonContentsComponent,
+        ProgressCardComponent,
       ],
       imports: [MatButtonModule, FlexLayoutModule, MatCardModule],
     }),
@@ -62,17 +64,17 @@ Primary.args = {
       totalCourses: 20,
     },
     {
-      type: ProgressType.Land,
+      type: ProgressType.Simulator,
       completedCourses: 10,
       totalCourses: 14,
     },
     {
-      type: ProgressType.Land,
+      type: ProgressType.Landings,
       completedCourses: 9,
       totalCourses: 12,
     },
     {
-      type: ProgressType.Land,
+      type: ProgressType.Assessment,
       completedCourses: 12,
       totalCourses: 20,
     },
@@ -104,17 +106,17 @@ InstructorView.args = {
       totalCourses: 20,
     },
     {
-      type: ProgressType.Land,
+      type: ProgressType.Simulator,
       completedCourses: 10,
       totalCourses: 14,
     },
     {
-      type: ProgressType.Land,
+      type: ProgressType.Landings,
       completedCourses: 9,
       totalCourses: 12,
     },
     {
-      type: ProgressType.Land,
+      type: ProgressType.Assessment,
       completedCourses: 12,
       totalCourses: 20,
     },
@@ -146,17 +148,17 @@ InProgress.args = {
       totalCourses: 20,
     },
     {
-      type: ProgressType.Land,
+      type: ProgressType.Simulator,
       completedCourses: 10,
       totalCourses: 14,
     },
     {
-      type: ProgressType.Land,
+      type: ProgressType.Landings,
       completedCourses: 9,
       totalCourses: 12,
     },
     {
-      type: ProgressType.Land,
+      type: ProgressType.Assessment,
       completedCourses: 12,
       totalCourses: 20,
     },
@@ -188,17 +190,17 @@ Complete.args = {
       totalCourses: 20,
     },
     {
-      type: ProgressType.Land,
+      type: ProgressType.Simulator,
       completedCourses: 10,
       totalCourses: 14,
     },
     {
-      type: ProgressType.Land,
+      type: ProgressType.Landings,
       completedCourses: 9,
       totalCourses: 12,
     },
     {
-      type: ProgressType.Land,
+      type: ProgressType.Assessment,
       completedCourses: 12,
       totalCourses: 20,
     },
@@ -230,17 +232,17 @@ NotStarted.args = {
       totalCourses: 20,
     },
     {
-      type: ProgressType.Land,
+      type: ProgressType.Simulator,
       completedCourses: 10,
       totalCourses: 14,
     },
     {
-      type: ProgressType.Land,
+      type: ProgressType.Landings,
       completedCourses: 9,
       totalCourses: 12,
     },
     {
-      type: ProgressType.Land,
+      type: ProgressType.Assessment,
       completedCourses: 12,
       totalCourses: 20,
     },
@@ -272,17 +274,17 @@ LastLessonCompleteCourse.args = {
       totalCourses: 20,
     },
     {
-      type: ProgressType.Land,
+      type: ProgressType.Simulator,
       completedCourses: 10,
       totalCourses: 14,
     },
     {
-      type: ProgressType.Land,
+      type: ProgressType.Landings,
       completedCourses: 9,
       totalCourses: 12,
     },
     {
-      type: ProgressType.Land,
+      type: ProgressType.Assessment,
       completedCourses: 12,
       totalCourses: 20,
     },
@@ -312,17 +314,17 @@ FlightAssessmentOnly.args = {
       totalCourses: 20,
     },
     {
-      type: ProgressType.Land,
+      type: ProgressType.Simulator,
       completedCourses: 10,
       totalCourses: 14,
     },
     {
-      type: ProgressType.Land,
+      type: ProgressType.Landings,
       completedCourses: 9,
       totalCourses: 12,
     },
     {
-      type: ProgressType.Land,
+      type: ProgressType.Assessment,
       completedCourses: 12,
       totalCourses: 20,
     },
@@ -349,17 +351,17 @@ IcingAwarenessCourse.args = {
       totalCourses: 20,
     },
     {
-      type: ProgressType.Land,
+      type: ProgressType.Simulator,
       completedCourses: 10,
       totalCourses: 14,
     },
     {
-      type: ProgressType.Land,
+      type: ProgressType.Landings,
       completedCourses: 9,
       totalCourses: 12,
     },
     {
-      type: ProgressType.Land,
+      type: ProgressType.Assessment,
       completedCourses: 12,
       totalCourses: 20,
     },
@@ -386,17 +388,17 @@ TakeOffsAndLandings.args = {
       totalCourses: 20,
     },
     {
-      type: ProgressType.Land,
+      type: ProgressType.Simulator,
       completedCourses: 10,
       totalCourses: 14,
     },
     {
-      type: ProgressType.Land,
+      type: ProgressType.Landings,
       completedCourses: 9,
       totalCourses: 12,
     },
     {
-      type: ProgressType.Land,
+      type: ProgressType.Assessment,
       completedCourses: 12,
       totalCourses: 20,
     },

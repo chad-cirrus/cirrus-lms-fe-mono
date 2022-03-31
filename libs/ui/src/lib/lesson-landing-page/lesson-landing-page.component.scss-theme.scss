@@ -9,23 +9,29 @@
         //   $typography-config,
         //   display-3
         // );
-        font-family: Akzidenz-Grotesk BQ;
-        font-size: 69px;
-        line-height: 100.9%;
-        /* or 70px */
+        font-family: var.$BertholdAkzidenzGroteskBE;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 59px;
+        line-height: 67px;
+        /* or 114% */
 
         letter-spacing: -0.045em;
+        text-transform: capitalize;
       }
       h4 {
         // @include material.mat-typography-level-to-styles(
         //   $typography-config,
         //   display-2
         // );
-        font-family: Akzidenz-Grotesk BQ;
+        font-family: var.$BertholdAkzidenzGroteskBE;
         font-style: normal;
-        font-weight: 500;
-        font-size: 43.125px;
-        line-height: 100.9%;
+        font-weight: 400;
+        font-size: 34px;
+        line-height: 117%;
+        /* identical to box height, or 40px */
+
+        letter-spacing: -0.045em;
       }
     }
   }
@@ -52,21 +58,4 @@
       background-color: var.$instructor-view-background;
     }
   }
-
-  // cirrus-lesson-landing-page {
-  //   .content-container.student-view {
-  //     .title-content {
-  //       background-color: material.mat-color($theme-colors, card);
-  //     }
-  //   }
-  // }
-
-  // cirrus-lesson-landing-page {
-  //   .content-container.instructor-view {
-  //     .title-content,
-  //     .contents-list-container {
-  //       background-color: var.$instructor-view-background;
-  //     }
-  //   }
-  // }
 }

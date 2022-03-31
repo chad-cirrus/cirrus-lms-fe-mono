@@ -16,7 +16,6 @@ export default {
 const Template: Story<ProgressCardComponent> = (
   args: ProgressCardComponent
 ) => ({
-  component: ProgressCardComponent,
   props: args,
 });
 
@@ -50,7 +49,34 @@ Ground.args = {
 export const Land = Template.bind({});
 Land.args = {
   progress: {
-    type: ProgressType.Land,
+    type: ProgressType.Landings,
+    completedCourses: 1,
+    totalCourses: 2,
+  },
+};
+
+export const Simulator = Template.bind({});
+Simulator.args = {
+  progress: {
+    type: ProgressType.Simulator,
+    completedCourses: 1,
+    totalCourses: 2,
+  },
+};
+
+export const Assessment = Template.bind({});
+Assessment.args = {
+  progress: {
+    type: ProgressType.Assessment,
+    completedCourses: 1,
+    totalCourses: 2,
+  },
+};
+
+export const SelfStudy = Template.bind({});
+SelfStudy.args = {
+  progress: {
+    type: ProgressType.SelfStudy,
     completedCourses: 1,
     totalCourses: 2,
   },

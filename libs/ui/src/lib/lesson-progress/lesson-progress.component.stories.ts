@@ -20,7 +20,6 @@ export default {
 const Template: Story<LessonProgressComponent> = (
   args: LessonProgressComponent
 ) => ({
-  component: LessonProgressComponent,
   props: args,
 });
 
@@ -36,34 +35,36 @@ Primary.args = {
   sideNavOpen: false,
 };
 
-export const SelfStudyOnly = Template.bind({});
-SelfStudyOnly.args = {
+export const SelfStudyInProgress = Template.bind({});
+SelfStudyInProgress.args = {
   lesson: {
     ...testData,
-    self_study_progress: LessonProgress.NotStarted,
+    self_study_progress: LessonProgress.InProgress,
     assessment: ASSESSMENT_TYPE.none,
     self_study: true,
   },
   sideNavOpen: false,
 };
 
-export const FlightAssessmentOnlyNotStarted = Template.bind({});
-FlightAssessmentOnlyNotStarted.args = {
+export const SelfStudyFlightAssessmentBothInProgress = Template.bind({});
+SelfStudyFlightAssessmentBothInProgress.args = {
   lesson: {
     ...testData,
-    assessment_progress: LessonProgress.NotStarted,
+    self_study_progress: LessonProgress.InProgress,
+    assessment_progress: LessonProgress.InProgress,
     assessment: ASSESSMENT_TYPE.flight,
-    self_study: false,
+    self_study: true,
   },
   sideNavOpen: false,
 };
 
-export const FlightAssessmentSelfStudyNotStarted = Template.bind({});
-FlightAssessmentSelfStudyNotStarted.args = {
+export const SelfStudyInProgressGroundAssessmentInProgress = Template.bind({});
+SelfStudyInProgressGroundAssessmentInProgress.args = {
   lesson: {
     ...testData,
+    self_study_progress: LessonProgress.InProgress,
     assessment_progress: LessonProgress.NotStarted,
-    assessment: ASSESSMENT_TYPE.flight,
+    assessment: ASSESSMENT_TYPE.ground,
     self_study: true,
   },
   sideNavOpen: false,
@@ -75,6 +76,17 @@ GroundAssessmentOnlyNotStarted.args = {
     ...testData,
     assessment_progress: LessonProgress.NotStarted,
     assessment: ASSESSMENT_TYPE.ground,
+    self_study: false,
+  },
+  sideNavOpen: false,
+};
+
+export const FlightAssessmentOnlyInProgress = Template.bind({});
+FlightAssessmentOnlyInProgress.args = {
+  lesson: {
+    ...testData,
+    assessment_progress: LessonProgress.InProgress,
+    assessment: ASSESSMENT_TYPE.flight,
     self_study: false,
   },
   sideNavOpen: false,

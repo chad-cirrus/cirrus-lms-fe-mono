@@ -6,7 +6,7 @@
     .content-container {
       .title-content {
         .title {
-          font-family: Akzidenz-Grotesk BQ;
+          font-family: var.$primary_font;
           font-size: 46px;
           font-style: normal;
           font-weight: 500;
@@ -15,7 +15,7 @@
           text-align: left;
         }
         .overview {
-          font-family: Akzidenz-Grotesk BQ;
+          font-family: var.$primary_font;
           font-size: 16px;
           font-style: normal;
           font-weight: 400;

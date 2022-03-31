@@ -1,6 +1,8 @@
+@use '../styles/variables' as var;
+
 .self-study,
 .assessment {
-  font-family: Akzidenz-Grotesk BQ;
+  font-family: var.$akzidenz-grotesk_bqlight;
   font-style: normal;
   font-weight: 500;
   font-size: 32px;
@@ -16,7 +18,7 @@
   text-align: right;
   .sign-offs-required {
     margin-left: 8px;
-    font-family: Akzidenz-Grotesk BQ;
+    font-family: var.$akzidenz-grotesk_bqlight;
     font-style: normal;
     font-weight: 500;
     font-size: 14px;

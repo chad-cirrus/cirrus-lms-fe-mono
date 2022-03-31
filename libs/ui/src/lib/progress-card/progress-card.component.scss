@@ -1,25 +1,33 @@
 @use '../styles/variables' as *;
 
 mat-card {
-  height: 100%;
+  height: 122px;
   box-sizing: border-box;
-  max-width: 150px;
+  width: 162px;
+  background: #131313;
+  border-radius: 5.10166px;
   img {
     width: 20px;
     margin-bottom: 4px;
   }
   .progress-type {
+    font-family: $BertholdAkzidenzGroteskBE;
+    font-style: normal;
+    font-weight: 400;
     font-size: 12.793px;
     line-height: 100.9%;
     /* identical to box height, or 13px */
 
     letter-spacing: -0.045em;
-    margin-bottom: 4px;
-    color: $secondary-font-color-light-grey-2;
+
+    color: #e5e5e5;
   }
 }
 
 .total-courses {
+  font-family: $BertholdAkzidenzGroteskBE;
+  font-style: normal;
+  font-weight: 400;
   font-size: 23px;
   line-height: 100%;
   /* identical to box height, or 23px */
@@ -30,9 +38,14 @@ mat-card {
 }
 
 .courses-completed {
-  font-size: 40px;
+  font-family: $BertholdAkzidenzGroteskBE;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 44.7755px;
   line-height: 100%;
   /* or 45px */
 
-  letter-spacing: $secondary-font-color-grey;
+  letter-spacing: -0.045em;
+
+  color: #e5e5e5;
 }

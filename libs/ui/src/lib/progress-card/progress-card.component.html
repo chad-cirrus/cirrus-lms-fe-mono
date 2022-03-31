@@ -1,8 +1,10 @@
-<mat-card *ngIf="progress">
-  <img [src]="mapProgressTypeToUrl(progress.type)" />
-  <div class="progress-type">{{ progress.type }}</div>
+<mat-card *ngIf="text" fxLayout="column" fxLayoutAlign="space-between start">
+  <img [src]="imageIcon" />
+  <div class="progress-type">
+    {{ text }}
+  </div>
   <div>
-    <span class="courses-completed">{{ progress.completedCourses }}</span
-    ><span class="total-courses">/{{ progress.totalCourses }}</span>
+    <span class="courses-completed">{{ completedCourses }}</span
+    ><span class="total-courses">/{{ totalCourses }}</span>
   </div>
 </mat-card>
