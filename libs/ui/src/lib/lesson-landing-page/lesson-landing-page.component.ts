@@ -1,4 +1,5 @@
 /* eslint-disable @nrwl/nx/enforce-module-boundaries */
+import { ViewportScroller } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import {
   IContent,
@@ -73,6 +74,8 @@ export class LessonLandingPageComponent {
     return this.buttonMapper[this.lesson.lesson_progress ?? 0];
   }
 
+  constructor(private scroller: ViewportScroller) {}
+
   startLesson() {
     const content: IContent = {
       id: 593,
@@ -104,7 +107,14 @@ export class LessonLandingPageComponent {
       link_id: '',
       version: 0,
     };
-    this.fetchMediaOutput.next(content);
+
+    document
+      .querySelector('#cirrus-lesson-contents')
+      ?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+    setTimeout(() => {
+      this.fetchMediaOutput.next(content);
+    }, 1000);
   }
 
   fetchMedia(content: IContent) {
