@@ -300,7 +300,7 @@
               "configFolder": "libs/ui/.storybook"
             },
             "styles": [
-              "libs/ui/src/lib/styles/storybook.styles.scss"
+              "libs/ui/src/lib/styles/cirrus-ui-styles.scss"
             ]
           },
           "configurations": {
