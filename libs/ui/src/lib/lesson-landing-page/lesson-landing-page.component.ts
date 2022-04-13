@@ -74,8 +74,6 @@ export class LessonLandingPageComponent {
     return this.buttonMapper[this.lesson.lesson_progress ?? 0];
   }
 
-  constructor(private scroller: ViewportScroller) {}
-
   startLesson() {
     const content: IContent = {
       id: 593,

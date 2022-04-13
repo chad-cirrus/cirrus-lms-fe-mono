@@ -5,17 +5,27 @@
   font-family: var.$akzidenz-grotesk_bqlight;
   font-style: normal;
   font-weight: 500;
-  font-size: 32px;
+  font-size: 15px;
   line-height: 117%;
-  /* or 37px */
+  /* identical to box height, or 18px */
 
   letter-spacing: 0.03em;
 
   color: #ffffff;
+  img {
+    height: 15px;
+  }
+  .assessment-progress-icon {
+    margin-top: 4px;
+  }
+  .chevron-right {
+    margin-top: 8px;
+  }
 }
 
 .sign-offs-warning-container {
-  text-align: right;
+  text-align: left;
+
   .sign-offs-required {
     margin-left: 8px;
     font-family: var.$akzidenz-grotesk_bqlight;
@@ -26,5 +36,37 @@
     /* identical to box height, or 171% */
 
     color: #fbc219;
+  }
+}
+
+@media (min-width: 992px) {
+  .self-study,
+  .assessment {
+    font-size: 32px;
+    .assessment-progress-icon {
+      margin-top: 4px;
+    }
+    .chevron-right {
+      margin-top: 8px;
+    }
+    img {
+      height: inherit;
+    }
+  }
+
+  .sign-offs-warning-container {
+    text-align: left;
+
+    .sign-offs-required {
+      margin-left: 8px;
+      font-family: var.$akzidenz-grotesk_bqlight;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 24px;
+      /* identical to box height, or 171% */
+
+      color: #fbc219;
+    }
   }
 }

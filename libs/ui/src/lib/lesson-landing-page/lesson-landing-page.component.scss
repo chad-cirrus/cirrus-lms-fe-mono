@@ -6,35 +6,27 @@
   -o-background-size: cover;
   background-size: cover;
   .content {
+    width: 100%;
     button.snav-open-button {
-      background-color: rgba(31, 28, 28, 0.25);
+      // background-color: rgba(31, 28, 28, 0.25);
+      background-color: #1b1b1b1b;
       cursor: pointer;
-      margin: 2rem 0 8rem 0;
-      font-family: $HelveticaNeue;
-      font-style: normal;
-      font-weight: 500;
-      font-size: 16px;
-      line-height: 16px;
-      /* identical to box height, or 100% */
-
-      text-transform: capitalize;
-
-      color: #ffffff;
-      width: 128px;
-      height: 39px;
-      border-radius: 100px;
+      margin: 1rem 0;
+      width: 100px;
+      height: 32px;
+      border-radius: 78.96px;
+      img {
+        height: 9.47px;
+      }
     }
-    margin-left: 40px;
+    margin-left: 0px;
+    padding: 0 40px;
     button.start-lesson {
-      margin-top: 80px;
-      margin-bottom: 8rem;
       box-sizing: border-box;
       border-radius: 300px;
-      width: 198px;
-      height: 66px;
-      font-weight: 500;
-      font-size: 21px;
-      line-height: 30px;
+      width: 100%;
+      margin: 1rem auto;
+      height: 48px;
     }
     .open {
       opacity: 0;
@@ -96,8 +88,6 @@
 }
 
 .llp-container {
-  max-width: 1200px;
-  padding: 0 4rem;
   margin: 0 auto;
   .cirrus-progress-row {
     padding: 0 1rem;
@@ -110,12 +100,22 @@
 }
 
 .cirrus-progress-row {
-  margin: 48px auto;
+  margin: 48px auto 12px auto;
+  overflow-x: scroll;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* IE 10+ */
+
+  &::-webkit-scrollbar {
+    background: transparent; /* Chrome/Safari/Webkit */
+    width: 0px;
+  }
+
 }
 
 cirrus-progress-card {
   min-width: 130px;
   max-width: 150px;
+  margin-right: 50px;
 }
 
 .course-complete {
@@ -126,5 +126,88 @@ cirrus-progress-card {
 .contents-list-container {
   .content-item {
     margin: 8px;
+  }
+}
+
+@media (min-width: 992px) {
+  .lesson-image {
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    .content {
+      margin-left: 40px;
+      button.start-lesson {
+        margin: 80px 0 8rem 0;
+        box-sizing: border-box;
+        border-radius: 300px;
+        width: 198px;
+        height: 66px;
+      }
+      .open {
+        opacity: 0;
+        pointer-events: none;
+      }
+      .closed {
+        opacity: 1;
+        pointer-events: all;
+      }
+      .self-study,
+      .assessment {
+        font-family: $primary_font;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 32px;
+        line-height: 117%;
+        /* or 37px */
+
+        letter-spacing: 0.03em;
+
+        color: #ffffff;
+      }
+      .sign-offs-warning-container {
+        text-align: right;
+        .sign-offs-required {
+          margin-left: 8px;
+          font-family: $primary_font;
+          font-style: normal;
+          font-weight: 500;
+          font-size: 14px;
+          line-height: 24px;
+          /* identical to box height, or 171% */
+
+          color: #fbc219;
+        }
+      }
+    }
+  }
+
+  .llp-container {
+    max-width: 1200px;
+    padding: 0 4rem;
+    margin: 0 auto;
+    .cirrus-progress-row {
+      padding: 0 1rem;
+      mat-card {
+        .progress-type-icon {
+          height: 32px;
+        }
+      }
+      margin: 48px auto;
+      overflow-x: hidden;
+      scrollbar-width: hidden; /* Firefox */
+      -ms-overflow-style: hidden;  /* IE 10+ */
+
+      &::-webkit-scrollbar {
+        background: hidden; /* Chrome/Safari/Webkit */
+        width: hidden;
+      }
+    }
+  }
+
+  cirrus-progress-card {
+    min-width: 130px;
+    max-width: 150px;
+    margin-right: inherit;
   }
 }

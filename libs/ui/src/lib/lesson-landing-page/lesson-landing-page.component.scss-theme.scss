@@ -5,33 +5,83 @@
   cirrus-lesson-landing-page {
     .lesson-image {
       h1 {
-        // @include material.mat-typography-level-to-styles(
-        //   $typography-config,
-        //   display-3
-        // );
         font-family: var.$BertholdAkzidenzGroteskBE;
         font-style: normal;
         font-weight: 400;
-        font-size: 59px;
-        line-height: 67px;
-        /* or 114% */
-
+        font-size: 24px;
+        line-height: 130%;
         letter-spacing: -0.045em;
-        text-transform: capitalize;
       }
       h4 {
-        // @include material.mat-typography-level-to-styles(
-        //   $typography-config,
-        //   display-2
-        // );
         font-family: var.$BertholdAkzidenzGroteskBE;
         font-style: normal;
         font-weight: 400;
-        font-size: 34px;
-        line-height: 117%;
-        /* identical to box height, or 40px */
+        font-size: 14px;
+        line-height: 100.9%;
+        letter-spacing: 0.02em;
+      }
+    }
+    .content {
+      button.snav-open-button {
+        font-family: var.$HelveticaNeue;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 24px;
+        text-transform: capitalize;
+        color: #ffffff;
+      }
+      button.start-lesson {
+        font-family: var.$primary_font;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 18px;
+      }
+    }
+  }
 
-        letter-spacing: -0.045em;
+  @media (min-width: 992px) {
+    cirrus-lesson-landing-page {
+      .lesson-image {
+        h1 {
+          font-family: var.$BertholdAkzidenzGroteskBE;
+          font-style: normal;
+          font-weight: 400;
+          font-size: 59px;
+          line-height: 67px;
+          letter-spacing: -0.045em;
+          text-transform: capitalize;
+        }
+        h4 {
+          font-family: var.$BertholdAkzidenzGroteskBE;
+          font-style: normal;
+          font-weight: 400;
+          font-size: 34px;
+          line-height: 117%;
+          letter-spacing: -0.045em;
+        }
+      }
+      .content {
+        button.snav-open-button {
+          background-color: rgba(31, 28, 28, 0.25);
+          cursor: pointer;
+          margin: 2rem 0 8rem 0;
+          font-family: var.$HelveticaNeue;
+          font-style: normal;
+          font-weight: 500;
+          font-size: 16px;
+          line-height: 16px;
+          text-transform: capitalize;
+          width: 128px;
+          height: 39px;
+          border-radius: 100px;
+        }
+        button.start-lesson {
+          font-weight: 500;
+          font-size: 21px;
+          line-height: 30px;
+        }
       }
     }
   }
@@ -47,8 +97,16 @@
   }
 
   cirrus-lesson-landing-page {
+    .llp-container.instructor-view {
+      background-color: #222222;
+    }
     .student-intro-video {
       color: var.$secondary-font-color-light-grey;
+    }
+    .content {
+      button.snav-open-button {
+        color: #ffffff;
+      }
     }
   }
 
@@ -56,6 +114,14 @@
     .instructor-intro-video {
       color: var.$secondary-font-color-light-grey;
       background-color: var.$instructor-view-background;
+    }
+  }
+
+  @media (min-width: 992px) {
+    cirrus-lesson-landing-page {
+      .llp-container.instructor-view {
+        background-color: inherit;
+      }
     }
   }
 }

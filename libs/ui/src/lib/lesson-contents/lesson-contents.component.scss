@@ -1,16 +1,40 @@
 .content-container {
-  .title-content {
-    padding: 1rem;
-  }
+  padding: 0 24px;
 }
+
 
 .course-complete {
   opacity: 0;
   pointer-events: none;
 }
 
+.title-content {
+  margin-bottom: 24px;
+  border-radius: 6px;
+  .title {
+    margin: 1rem 0;
+  }
+}
 .contents-list-container {
-  .content-item {
-    margin: 8px;
+  border-radius: 6px;
+}
+
+@media (min-width: 992px) {
+  .content-container {
+    padding: 0;
+    .title-content {
+      padding: 1rem;
+    }
+  }
+  .content-container {
+    .title-content {
+      padding: 1rem;
+    }
+  }
+
+  .contents-list-container {
+    .content-item {
+      margin: 8px;
+    }
   }
 }

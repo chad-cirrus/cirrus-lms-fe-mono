@@ -1,4 +1,4 @@
-<ng-container *ngIf="lesson">
+<div *ngIf="lesson">
   <div
     class="lesson-image"
     [ngClass]="
@@ -11,7 +11,12 @@
   >
     <div class="content">
       <button mat-raised-button class="snav-open-button">
-        <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="16px">
+        <div
+          fxLayout="row"
+          fxLayoutAlign="center center"
+          fxLayoutGap.gt-md="16px"
+          fxLayoutGap.lt-lg="8px"
+        >
           <img src="images/svg/open_lessons.svg" /><span>Lessons</span>
         </div>
       </button>
@@ -34,19 +39,22 @@
     </div>
   </div>
 
-  <div class="llp-container">
+  <div
+    class="llp-container"
+    [ngClass]="instructorView ? 'instructor-view' : 'student-view'"
+  >
     <div
       *ngIf="!instructorView && progress"
       class="cirrus-progress-row"
       fxLayout="row"
       fxLayoutAlign="space-between"
-      fxLayoutGap="24px"
     >
       <cirrus-progress-card
         *ngFor="let item of progress"
         [progress]="item"
       ></cirrus-progress-card>
     </div>
+    <br *ngIf="instructorView" />
 
     <cirrus-lesson-contents
       id="cirrus-lesson-contents"
@@ -56,4 +64,4 @@
     >
     </cirrus-lesson-contents>
   </div>
-</ng-container>
+</div>

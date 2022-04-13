@@ -17,25 +17,25 @@
     <div
       class="assessment"
       fxLayout="row"
-      fxLayoutAlign="space-between center"
+      fxLayoutAlign="space-between start"
       fxLayoutGap="8px"
     >
-      <img [src]="assessmentProgressIcon" />
-      <span>
+      <img class="assessment-progress-icon" [src]="assessmentProgressIcon" />
+      <div class="progress-type">
         {{
           this.lesson.assessment === assessmentType.flight
             ? 'Flight Assessment'
             : 'Ground Assessment'
         }}
-      </span>
-      <img src="images/svg/chevron_right.svg" />
-    </div>
-    <div
-      class="sign-offs-warning-container"
-      *ngIf="lesson.assessment_progress !== lessonProgress.Complete"
-    >
-      <img src="images/svg/sign-off-warning.svg" />
-      <span class="sign-offs-required">Instructor sign offs required</span>
+        <div
+          class="sign-offs-warning-container"
+          *ngIf="lesson.assessment_progress !== lessonProgress.Complete"
+        >
+          <img src="images/svg/sign-off-warning.svg" />
+          <span class="sign-offs-required">Instructor sign offs required</span>
+        </div>
+      </div>
+      <img class="chevron-right" src="images/svg/chevron_right.svg" />
     </div>
   </div>
 </div>

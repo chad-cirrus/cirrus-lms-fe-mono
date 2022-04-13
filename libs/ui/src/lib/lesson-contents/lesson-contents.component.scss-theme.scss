@@ -7,21 +7,50 @@
       .title-content {
         .title {
           font-family: var.$primary_font;
-          font-size: 46px;
           font-style: normal;
           font-weight: 500;
-          line-height: 51px;
+          font-size: 22px;
+          line-height: 110.5%;
+          /* or 24px */
+
           letter-spacing: -0.005em;
-          text-align: left;
         }
         .overview {
           font-family: var.$primary_font;
-          font-size: 16px;
           font-style: normal;
           font-weight: 400;
-          line-height: 21px;
+          font-size: 14px;
+          line-height: 130%;
+          /* or 18px */
+
           letter-spacing: 0.02em;
-          text-align: left;
+        }
+      }
+    }
+  }
+
+  @media (min-width: 992px) {
+    cirrus-lesson-contents {
+      .content-container {
+        .title-content {
+          .title {
+            font-family: var.$primary_font;
+            font-size: 46px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 51px;
+            letter-spacing: -0.005em;
+            text-align: left;
+          }
+          .overview {
+            font-family: var.$primary_font;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 21px;
+            letter-spacing: 0.02em;
+            text-align: left;
+          }
         }
       }
     }
@@ -38,15 +67,11 @@
   }
 
   cirrus-lesson-contents {
-    .title-content {
-      margin-bottom: 24px;
-      border-radius: 6px;
+    .overview {
+      color: #D1D1D1;
     }
-    .contents-list-container {
-      border-radius: 6px;
-      .media-control {
-        color: #bdbdbd;
-      }
+    .media-control {
+      color: #bdbdbd;
     }
   }
 

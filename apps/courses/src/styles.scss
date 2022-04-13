@@ -11,3 +11,9 @@
 @import 'cirrus-ui-styles';
 
 @include app-component.cirrus-app-component($theme);
+
+html,
+body {
+  overflow-x: hidden;
+  height: 100vh;
+}
