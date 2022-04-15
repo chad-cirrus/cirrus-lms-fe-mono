@@ -20,9 +20,11 @@ mat-card {
     letter-spacing: -0.045em;
 
     color: #e5e5e5;
+    margin: 5px 0 8px 0;
   }
 }
 
+.courses-slash,
 .total-courses {
   font-family: $BertholdAkzidenzGroteskBE;
   font-style: normal;
@@ -36,6 +38,7 @@ mat-card {
   color: #969696;
 }
 
+
 .courses-completed {
   font-family: $BertholdAkzidenzGroteskBE;
   font-style: normal;
@@ -47,4 +50,8 @@ mat-card {
   letter-spacing: -0.045em;
 
   color: #e5e5e5;
+}
+
+.courses-slash {
+  margin: 0 4px;
 }

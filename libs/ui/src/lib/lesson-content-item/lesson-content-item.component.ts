@@ -7,7 +7,23 @@ import { IContent, CONTENT_TYPE, CONTENT_STATUS } from '@cirrus/models';
   styleUrls: ['./lesson-content-item.component.scss'],
 })
 export class LessonContentItemComponent {
-  @Input() content: IContent | undefined;
+  private _content!: IContent;
+  private _content_type_icon!: string;
+
+  @Input()
+  set content(value: IContent) {
+    this._content = value;
+    this._content_type_icon = this.mapContentTypeToIcon(value.content_type);
+  }
+
+  get content() {
+    return this._content;
+  }
+
+  get content_type_icon() {
+    return this._content_type_icon;
+  }
+
   @Input() lastItem = false;
   @Output() fetchMediaOutput = new EventEmitter<IContent>();
 
@@ -37,5 +53,28 @@ export class LessonContentItemComponent {
 
   fetchMedia() {
     this.fetchMediaOutput.next(this.content);
+  }
+
+  private mapContentTypeToIcon(contentType: number): string {
+    switch (contentType) {
+      case 0:
+        return 'images/svg/video_play.svg';
+      case 4:
+        return 'images/svg/document_button.svg';
+      case 5:
+        return 'images/svg/quiz_lc_icon.svg';
+      case 6:
+        return 'images/svg/document_button.svg';
+      case 8:
+        return 'images/svg/rich_text_icon.svg';
+      case 9:
+        return 'images/svg/assessment_lc_icon.svg';
+      case 10:
+        return 'images/svg/assessment_lc_icon.svg';
+      case 11:
+        return 'images/svg/image_lc_icon.svg';
+      default:
+        return 'images/svg/document_button.svg';
+    }
   }
 }

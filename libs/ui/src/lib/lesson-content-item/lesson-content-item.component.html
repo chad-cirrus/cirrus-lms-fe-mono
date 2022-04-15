@@ -10,14 +10,7 @@
     fxLayoutAlign="start center"
     fxLayoutGap="24px"
   >
-    <img
-      [src]="
-        content?.content_type === contentType.vimeo
-          ? playButtonString
-          : openDocumentString
-      "
-      (click)="fetchMedia()"
-    />
+    <img [src]="this.content_type_icon" (click)="fetchMedia()" />
     <div class="title">{{ content?.title }}</div>
   </div>
   <div

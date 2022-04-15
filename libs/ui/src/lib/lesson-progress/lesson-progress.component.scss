@@ -28,13 +28,11 @@
 
   .sign-offs-required {
     margin-left: 8px;
-    font-family: var.$akzidenz-grotesk_bqlight;
+    font-family: var.$primary_font;
     font-style: normal;
     font-weight: 500;
     font-size: 14px;
     line-height: 24px;
-    /* identical to box height, or 171% */
-
     color: #fbc219;
   }
 }
@@ -59,7 +57,6 @@
 
     .sign-offs-required {
       margin-left: 8px;
-      font-family: var.$akzidenz-grotesk_bqlight;
       font-style: normal;
       font-weight: 500;
       font-size: 14px;

@@ -26,6 +26,49 @@ Primary.args = {
   content: { ...testData.contents[0], estimated_time: '6:01' },
 };
 
+export const Video = Template.bind({});
+Video.args = {
+  content: { ...testData.contents[0], estimated_time: '6:01' },
+};
+
+export const Document = Template.bind({});
+Document.args = {
+  content: { ...testData.contents[0], estimated_time: '6:01', content_type: 4 },
+};
+
+export const Quiz = Template.bind({});
+Quiz.args = {
+  content: { ...testData.contents[0], estimated_time: '6:01', content_type: 5 },
+};
+
+export const RTF = Template.bind({});
+RTF.args = {
+  content: { ...testData.contents[0], estimated_time: '6:01', content_type: 8 },
+};
+
+export const FlightAssessment = Template.bind({});
+FlightAssessment.args = {
+  content: { ...testData.contents[0], estimated_time: '6:01', content_type: 9 },
+};
+
+export const GroundAssessment = Template.bind({});
+GroundAssessment.args = {
+  content: {
+    ...testData.contents[0],
+    estimated_time: '6:01',
+    content_type: 10,
+  },
+};
+
+export const Image = Template.bind({});
+Image.args = {
+  content: {
+    ...testData.contents[0],
+    estimated_time: '6:01',
+    content_type: 11,
+  },
+};
+
 export const InProgress = Template.bind({});
 InProgress.args = {
   content: { ...testData2.contents[0], estimated_time: '6:01' },
