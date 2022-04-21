@@ -63,22 +63,16 @@
             <div><mat-icon>keyboard_arrow_left</mat-icon></div>
             <div>Back</div>
           </div>
-          <div class="menu-item" routerLink="courses/student-dashboard">
-            Student Dashboard
-          </div>
-          <div class="menu-item" routerLink="courses/instructor-dashboard">
-            Instructor Dashboard
-          </div>
           <div
             class="menu-item"
-            routerLink="courses/ctc-dashboard"
+            routerLink="ctc-dashboard"
             *ngIf="showCTCDashboard"
           >
             CTC Dashboard
           </div>
           <div
             class="menu-item"
-            routerLink="courses/admin-dashboard"
+            routerLink="admin-dashboard"
             *ngIf="showLMSDashboard"
           >
             LMS Dashboard
@@ -88,8 +82,3 @@
     </div>
   </section>
 </ng-template>
-
-
-  <!-- <div leftPane *ngFor="let item of menuItems">
-          <div class="menu-item">{{item}}</div>
-        </div> -->
