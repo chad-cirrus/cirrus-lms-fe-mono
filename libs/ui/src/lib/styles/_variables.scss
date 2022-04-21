@@ -1,7 +1,9 @@
 @use 'fonts';
+@use '../../assets/fonts/akzidenz-grotesk/akzidenz-grotesk_fonts';
 
 // primary font
-$primary_font: 'Akzidenz-Grotesk BQ';
+$primary_font: 'akzidenz-grotesk_bqregular';
+$AkzidenzGroteskBQ: 'akzidenz-grotesk_bqregular';
 $BertholdAkzidenzGroteskBE: 'Berthold Akzidenz Grotesk BE';
 $akzidenz-grotesk_bqlight: 'akzidenz-grotesk_bqlight';
 $HelveticaNeue: 'Helvetica Neue';

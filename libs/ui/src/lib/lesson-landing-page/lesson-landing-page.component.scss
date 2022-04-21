@@ -8,19 +8,18 @@
   .content {
     width: 100%;
     button.snav-open-button {
-      // background-color: rgba(31, 28, 28, 0.25);
       background-color: #1b1b1b1b;
       cursor: pointer;
       margin: 1rem 0;
-      width: 100px;
-      height: 32px;
+      width: 101px;
+      height: 30.77px;
       border-radius: 78.96px;
       img {
         height: 9.47px;
       }
     }
     margin-left: 0px;
-    padding: 0 40px;
+    padding: 0 16px;
     button.start-lesson {
       box-sizing: border-box;
       border-radius: 300px;
@@ -90,7 +89,6 @@
 .llp-container {
   margin: 0 auto;
   .cirrus-progress-row {
-    padding: 0 1rem;
     mat-card {
       .progress-type-icon {
         height: 32px;
@@ -115,7 +113,11 @@
 cirrus-progress-card {
   min-width: 130px;
   max-width: 150px;
-  margin-right: 50px;
+  margin-left: 25px;
+}
+
+cirrus-progress-card:last-child {
+  margin-right: 25px;
 }
 
 .course-complete {
@@ -129,7 +131,27 @@ cirrus-progress-card {
   }
 }
 
-@media (min-width: 992px) {
+@media (min-width: 600px) {
+  .lesson-image {
+    .content {
+      padding: 0 24px;
+      button.snav-open-button {
+        width: 128px;
+        height: 39px;
+        border-radius: 100px;
+      }
+      button.start-lesson {
+        margin: 16px 0 8rem 0;
+        box-sizing: border-box;
+        border-radius: 300px;
+        width: 198px;
+        height: 66px;
+      }
+    }
+  }
+}
+
+@media (min-width: 960px) {
   .lesson-image {
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -137,12 +159,16 @@ cirrus-progress-card {
     background-size: cover;
     .content {
       margin-left: 40px;
+      padding: 0 40px;
+      button.snav-open-button {
+        margin: 2rem 0 8rem 0;
+      }
       button.start-lesson {
         margin: 80px 0 8rem 0;
         box-sizing: border-box;
         border-radius: 300px;
-        width: 198px;
-        height: 66px;
+        width: 189px;
+        height: 67px;
       }
       .open {
         opacity: 0;
@@ -208,6 +234,6 @@ cirrus-progress-card {
   cirrus-progress-card {
     min-width: 130px;
     max-width: 150px;
-    margin-right: inherit;
+    margin-left: 0;
   }
 }

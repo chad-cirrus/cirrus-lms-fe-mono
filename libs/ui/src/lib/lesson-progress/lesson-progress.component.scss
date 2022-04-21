@@ -2,24 +2,18 @@
 
 .self-study,
 .assessment {
-  font-family: var.$akzidenz-grotesk_bqlight;
+  font-family: var.$AkzidenzGroteskBQ;
   font-style: normal;
   font-weight: 500;
   font-size: 15px;
   line-height: 117%;
-  /* identical to box height, or 18px */
-
   letter-spacing: 0.03em;
-
   color: #ffffff;
   img {
     height: 15px;
   }
-  .assessment-progress-icon {
-    margin-top: 4px;
-  }
-  .chevron-right {
-    margin-top: 8px;
+  .sign-offs-icon {
+    height: 7px;
   }
 }
 
@@ -27,26 +21,48 @@
   text-align: left;
 
   .sign-offs-required {
-    margin-left: 8px;
+    margin-left: 4px;
     font-family: var.$primary_font;
     font-style: normal;
     font-weight: 500;
-    font-size: 14px;
-    line-height: 24px;
+    font-size: 9px;
+    line-height: 14px;
     color: #fbc219;
   }
 }
 
-@media (min-width: 992px) {
+@media (min-width: 600px) {
+  .self-study,
+  .assessment {
+    font-size: 22px;
+    line-height: 27px;
+    img {
+      height: 24px;
+    }
+    .sign-offs-icon {
+      height: 10.2px;
+    }
+  }
+
+  .sign-offs-warning-container {
+    text-align: left;
+
+    .sign-offs-required {
+      margin-left: 8px;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 11.8987px;
+      line-height: 20px;
+
+      color: #fbc219;
+    }
+  }
+}
+
+@media (min-width: 960px) {
   .self-study,
   .assessment {
     font-size: 32px;
-    .assessment-progress-icon {
-      margin-top: 4px;
-    }
-    .chevron-right {
-      margin-top: 8px;
-    }
     img {
       height: inherit;
     }

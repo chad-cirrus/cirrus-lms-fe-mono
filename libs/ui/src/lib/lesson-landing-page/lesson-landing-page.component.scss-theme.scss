@@ -29,7 +29,6 @@
         font-size: 12px;
         line-height: 24px;
         text-transform: capitalize;
-        color: #ffffff;
       }
       button.start-lesson {
         font-family: var.$primary_font;
@@ -41,46 +40,52 @@
     }
   }
 
-  @media (min-width: 992px) {
+  @media (min-width: 600px) {
     cirrus-lesson-landing-page {
       .lesson-image {
         h1 {
-          font-family: var.$BertholdAkzidenzGroteskBE;
-          font-style: normal;
-          font-weight: 400;
-          font-size: 59px;
-          line-height: 67px;
-          letter-spacing: -0.045em;
-          text-transform: capitalize;
+          font-size: 45px;
+          line-height: 63px;
         }
         h4 {
-          font-family: var.$BertholdAkzidenzGroteskBE;
-          font-style: normal;
-          font-weight: 400;
-          font-size: 34px;
-          line-height: 117%;
+          font-size: 23px;
+          line-height: 32px;
           letter-spacing: -0.045em;
         }
       }
       .content {
         button.snav-open-button {
-          background-color: rgba(31, 28, 28, 0.25);
-          cursor: pointer;
-          margin: 2rem 0 8rem 0;
-          font-family: var.$HelveticaNeue;
-          font-style: normal;
-          font-weight: 500;
           font-size: 16px;
           line-height: 16px;
-          text-transform: capitalize;
-          width: 128px;
-          height: 39px;
-          border-radius: 100px;
         }
         button.start-lesson {
-          font-weight: 500;
           font-size: 21px;
           line-height: 30px;
+        }
+      }
+    }
+  }
+
+  @media (min-width: 960px) {
+    cirrus-lesson-landing-page {
+      .lesson-image {
+        h1 {
+          font-size: 59px;
+          line-height: 67px;
+        }
+        h4 {
+          font-size: 34px;
+          line-height: 117%;
+        }
+      }
+      .content {
+        button.snav-open-button {
+          font-size: 16px;
+          line-height: 16px;
+        }
+        button.start-lesson {
+          font-size: 21px;
+          line-height: 29px;
         }
       }
     }

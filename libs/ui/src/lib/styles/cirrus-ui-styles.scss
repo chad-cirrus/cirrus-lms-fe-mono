@@ -1,6 +1,7 @@
 @use '~@angular/material/theming' as material;
 @use './variables' as *;
 @use './fonts';
+@use '../../assets/fonts/akzidenz-grotesk/akzidenz-grotesk_fonts';
 @use './palette';
 
 @use './cirrus-ui-module.scss' as cirrus-ui;

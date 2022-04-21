@@ -5,22 +5,24 @@ mat-card {
   box-sizing: border-box;
   width: 162px;
   background: #131313;
-  border-radius: 5.10166px;
+  border-radius: 4.18169px;
+  width: 132.79px;
+  height: 100px;
+  padding: 8px 16px;
   img {
-    margin-bottom: 4px;
+    max-height: 18px;
   }
   .progress-type {
     font-family: $BertholdAkzidenzGroteskBE;
     font-style: normal;
     font-weight: 400;
-    font-size: 12.793px;
+    font-size: 11px;
     line-height: 100.9%;
-    /* identical to box height, or 13px */
+    /* identical to box height, or 11px */
 
     letter-spacing: -0.045em;
-
     color: #e5e5e5;
-    margin: 5px 0 8px 0;
+    margin: 8px 0;
   }
 }
 
@@ -29,9 +31,9 @@ mat-card {
   font-family: $BertholdAkzidenzGroteskBE;
   font-style: normal;
   font-weight: 400;
-  font-size: 23px;
+  font-size: 18.8525px;
   line-height: 100%;
-  /* identical to box height, or 23px */
+  /* identical to box height, or 19px */
 
   letter-spacing: -0.045em;
 
@@ -42,10 +44,11 @@ mat-card {
 .courses-completed {
   font-family: $BertholdAkzidenzGroteskBE;
   font-style: normal;
+  font-style: normal;
   font-weight: 400;
-  font-size: 44.7755px;
+  font-size: 36.7012px;
   line-height: 100%;
-  /* or 45px */
+  /* or 37px */
 
   letter-spacing: -0.045em;
 
@@ -54,4 +57,48 @@ mat-card {
 
 .courses-slash {
   margin: 0 4px;
+}
+
+@media (min-width: 600px) {
+  mat-card {
+    img {
+      max-height: 22px;
+    }
+    padding: 8px 16px;
+    width: 140.99px;
+    height: 106.18px;
+    .progress-type {
+      margin: 0 1px;
+      font-size: 11.1337px;
+    }
+  }
+
+  .courses-slash,
+  .total-courses {
+    font-size: 20.0168px;
+  }
+
+
+  .courses-completed {
+    font-size: 38.968px;
+  }
+}
+
+@media (min-width: 960px) {
+  mat-card {
+    .progress-type {
+      font-size: 12.793px;
+      margin: 5px 0 8px 0;
+    }
+  }
+
+  .courses-slash,
+  .total-courses {
+    font-size: 23px;
+  }
+
+
+  .courses-completed {
+    font-size: 44.7755px;
+  }
 }
