@@ -1,17 +1,20 @@
 <div class="main-container">
   <div class="header-container">
-    <cirrus-header [cirrusUser]="(cirrusUser$ | async)!" (hamburgerMenu)="openHamburgerMenu()"></cirrus-header>
+    <cirrus-header
+      [cirrusUser]="(cirrusUser$ | async)!"
+      (hamburgerMenu)="openHamburgerMenu()"
+    ></cirrus-header>
   </div>
   <div fxLayout="row">
     <div
-      [fxFlex]="collapse ? 10 : 15"
+      [fxFlex]="collapse ? '1 1 100px' : '1 1 200px'"
       class="sidenav"
       *ngIf="(isScreenSmall$ | async) === false"
     >
       <cirrus-side-nav
         [cirrusUser]="(cirrusUser$ | async)!"
         (emitCollapse)="toggleCollapse($event)"
-        [notificationCount]="(notificationCount$ | async)"
+        [notificationCount]="notificationCount$ | async"
       ></cirrus-side-nav>
     </div>
     <div class="content-container" [fxFlex]="100">
@@ -20,8 +23,10 @@
   </div>
 </div>
 
-
-
 <div *ngIf="showHamburgerMenu" class="hamburger-menu-container">
-  <cirrus-side-nav [cirrusUser]="(cirrusUser$ | async)!" (emitCollapse)="toggleCollapse($event)" [type]="'hamburger'"></cirrus-side-nav>
+  <cirrus-side-nav
+    [cirrusUser]="(cirrusUser$ | async)!"
+    (emitCollapse)="toggleCollapse($event)"
+    [type]="'hamburger'"
+  ></cirrus-side-nav>
 </div>
