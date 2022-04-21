@@ -16,7 +16,7 @@
         (displayPanel)="toggleDropdownDisplay($event)"
       ></cirrus-user-menus>
     </div>
-    <div *ngIf="isScreenSmall" [ngClass]="isDisplayingHamburger? 'dropdown-active' : 'dropdown'"  >
+    <div *ngIf="(isScreenSmall$ | async)" [ngClass]="isDisplayingHamburger? 'dropdown-active' : 'dropdown'"  >
       <cirrus-hamburger-menu [cirrusUser]="cirrusUser" (displayHamburger)="toggleHamburgerDisplay($event)"></cirrus-hamburger-menu>
     </div>
   </div>
