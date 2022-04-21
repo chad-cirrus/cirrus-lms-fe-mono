@@ -9,6 +9,7 @@
 @use 'cirrus-ui-module' as cirrus-ui;
 
 @import 'cirrus-ui-styles';
+@import "~@angular/cdk/overlay-prebuilt.css";
 
 @include app-component.cirrus-app-component($theme);
 

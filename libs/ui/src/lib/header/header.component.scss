@@ -1,0 +1,7 @@
+@use '../styles/variables' as *;
+
+
+.header-container {
+    border-bottom: 1px solid $border-grey;
+    padding: 20px 30px;
+}

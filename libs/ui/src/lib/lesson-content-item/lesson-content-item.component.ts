@@ -32,19 +32,19 @@ export class LessonContentItemComponent {
   }
 
   get playButtonString() {
-    return 'images/svg/video_play.svg';
+    return 'courses/images/svg/video_play.svg';
   }
 
   get openDocumentString() {
-    return 'images/svg/document_button.svg';
+    return 'courses/images/svg/document_button.svg';
   }
 
   get completeCheck() {
-    return 'images/svg/complete_check.svg';
+    return 'courses/images/svg/complete_check.svg';
   }
 
   get inProgress() {
-    return 'images/svg/in_progress.svg';
+    return 'courses/images/svg/in_progress.svg';
   }
 
   get contentStatus() {

@@ -1,0 +1,78 @@
+@use '../styles/variables' as *;
+
+
+.sidenav-container {
+  padding-top: 20px;
+  height: 100%;
+}
+
+.sidenav-container-hamburger {
+  height: 100%;
+  padding: 30px;
+  width: 620px;
+  background-color: $menu-gray;
+}
+
+
+.options-container {
+  padding: 20px;
+}
+
+
+.options {
+  padding: 25px 10px 40px;
+  border-top: 1px solid $border-grey;
+}
+
+.menu-items {
+  .active {
+    background-color: $border-grey;;
+  }
+
+  div {
+    padding: 15px;
+  }
+}
+
+.menu-items-expanded {
+  @extend .menu-items;
+  max-width: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  margin: 0 auto;
+  span {
+    color: rgba(255, 255, 255, 0.6)
+  };
+}
+
+.menu-items-collapsed {
+  @extend .menu-items;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.alarm-badge {
+  margin-top: 5px;
+}
+
+
+.image-container {
+  cursor: pointer;
+}
+
+.toggle-container {
+  display: flex;
+  margin-left: 15px;
+}
+
+
+@media screen and (max-width: 1060px) {
+  .menu-items {
+    margin-left: 5px;
+  }
+}
+
+

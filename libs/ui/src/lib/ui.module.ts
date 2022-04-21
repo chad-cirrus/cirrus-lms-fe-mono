@@ -11,6 +11,14 @@ import { InstructorBarComponent } from './instructor-bar/instructor-bar.componen
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LessonProgressComponent } from './lesson-progress/lesson-progress.component';
 import { LessonContentsComponent } from './lesson-contents/lesson-contents.component';
+import { HeaderDropdownComponent } from './header-dropdown/header-dropdown.component';
+import { RecentActivityComponent } from './recent-activity/recent-activity.component';
+import { MatBadgeModule } from '@angular/material/badge';
+
+import { OverlayModule } from '@angular/cdk/overlay';
+import { MenuSliderComponent } from './menu-slider/menu-slider.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { EditProfileComponent } from './edit-profile/edit-profile.component'
 
 @NgModule({
   imports: [
@@ -19,6 +27,9 @@ import { LessonContentsComponent } from './lesson-contents/lesson-contents.compo
     FlexLayoutModule,
     FormsModule,
     ReactiveFormsModule,
+    MatBadgeModule,
+    OverlayModule,
+    BrowserAnimationsModule
   ],
   declarations: [
     LessonLandingPageComponent,
@@ -28,6 +39,10 @@ import { LessonContentsComponent } from './lesson-contents/lesson-contents.compo
     InstructorBarComponent,
     LessonProgressComponent,
     LessonContentsComponent,
+    HeaderDropdownComponent,
+    RecentActivityComponent,
+    MenuSliderComponent,
+    EditProfileComponent,
   ],
   exports: [
     LessonLandingPageComponent,
@@ -37,6 +52,10 @@ import { LessonContentsComponent } from './lesson-contents/lesson-contents.compo
     InstructorBarComponent,
     LessonProgressComponent,
     LessonContentsComponent,
+    HeaderDropdownComponent,
+    RecentActivityComponent,
+    MenuSliderComponent,
+    EditProfileComponent,
   ],
 })
 export class UiModule {}

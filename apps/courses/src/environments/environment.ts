@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   baseUrl: 'http://cirrusapproach.local:3000',
+  profile: 'https://cirfullsb-cirrusaircraftvpo.cs41.force.com/approachsso/s/profile/',
 };
 
 /*

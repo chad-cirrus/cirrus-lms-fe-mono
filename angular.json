@@ -75,7 +75,7 @@
             "{options.outputPath}"
           ],
           "options": {
-            "baseHref": "/courses/",
+            "deployUrl": "/courses/",
             "outputPath": "dist/apps/courses",
             "index": "apps/courses/src/index.html",
             "main": "apps/courses/src/main.ts",

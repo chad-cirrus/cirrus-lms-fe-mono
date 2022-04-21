@@ -1,0 +1,95 @@
+<div cdkOverlayOrigin #originOveraly="cdkOverlayOrigin" (click)="toggleMenu()">
+  <cirrus-header-dropdown
+    [isScreenSmall]="isScreenSmall$ | async"
+    [cirrusUser]="cirrusUser"
+  ></cirrus-header-dropdown>
+</div>
+<ng-template
+  cdkConnectedOverlay
+  cdkConnectedOverlayHasBackdrop
+  cdkConnectedOverlayBackdropClass="cdk-overlay-transparent-backdrop"
+  [cdkConnectedOverlayOrigin]="originOveraly"
+  [cdkConnectedOverlayOpen]="(showPanel$ | async)!"
+>
+  <section>
+    <div [ngClass]="(isScreenSmall$ | async) === true ? 'dropdown-container-hamburger' : 'dropdown-container'">
+      <cirrus-menu-slider [activePane]="isLeftVisible ? 'left' : 'right'">
+        <div leftPane>
+          <div
+            *ngIf="showDashboard"
+            fxLayout="row"
+            fxLayoutAlign="space-between"
+            class="menu-item"
+            (click)="isLeftVisible = false"
+          >
+            <div>Dashboard</div>
+            <div><mat-icon>keyboard_arrow_right</mat-icon></div>
+          </div>
+
+          <div class="menu-item">
+            <a
+              [routerLink]="
+                'https://cirfullsb-cirrusaircraftvpo.cs41.force.com/approachsso/s/profile/' +
+                cirrusUser.salesforce_id
+              "
+            >
+              Edit Profile
+            </a>
+          </div>
+
+          <div class="menu-item-with-border" routerLink="purchase-history">
+            Purchase History
+          </div>
+          <div class="menu-item">
+            <a href="https://www.cirrusapproach.com/learn-to-fly/">
+              Learn to Fly
+            </a>
+          </div>
+          <div class="menu-item-with-border">
+            <a href="https://www.cirrusapproach.com/flight-fix/">
+              Flight Fix
+            </a>
+          </div>
+          <div class="menu-item" (click)="logout()">Logout</div>
+        </div>
+
+        <div rightPane fxLayout="column" fxLayoutAlign="center center">
+          <div
+            fxLayout="row"
+            class="menu-item"
+            (click)="isLeftVisible = true"
+            class="menu-item-with-border"
+          >
+            <div><mat-icon>keyboard_arrow_left</mat-icon></div>
+            <div>Back</div>
+          </div>
+          <div class="menu-item" routerLink="courses/student-dashboard">
+            Student Dashboard
+          </div>
+          <div class="menu-item" routerLink="courses/instructor-dashboard">
+            Instructor Dashboard
+          </div>
+          <div
+            class="menu-item"
+            routerLink="courses/ctc-dashboard"
+            *ngIf="showCTCDashboard"
+          >
+            CTC Dashboard
+          </div>
+          <div
+            class="menu-item"
+            routerLink="courses/admin-dashboard"
+            *ngIf="showLMSDashboard"
+          >
+            LMS Dashboard
+          </div>
+        </div>
+      </cirrus-menu-slider>
+    </div>
+  </section>
+</ng-template>
+
+
+  <!-- <div leftPane *ngFor="let item of menuItems">
+          <div class="menu-item">{{item}}</div>
+        </div> -->

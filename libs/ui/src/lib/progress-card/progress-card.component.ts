@@ -46,32 +46,32 @@ export class ProgressCardComponent {
     switch (type) {
       case ProgressType.Flight: {
         view.text = 'Flight Hrs';
-        view.imageIcon = 'images/svg/flight-hours-icon.svg';
+        view.imageIcon = 'courses/images/svg/flight-hours-icon.svg';
         return view;
       }
       case ProgressType.Ground: {
         view.text = 'Ground Hrs';
-        view.imageIcon = 'images/svg/ground-hours-icon.svg';
+        view.imageIcon = 'courses/images/svg/ground-hours-icon.svg';
         return view;
       }
       case ProgressType.Simulator: {
         view.text = 'Simulator Hrs';
-        view.imageIcon = 'images/svg/simulator_icon.svg';
+        view.imageIcon = 'courses/images/svg/simulator_icon.svg';
         return view;
       }
       case ProgressType.Landings: {
         view.text = 'Landings';
-        view.imageIcon = 'images/svg/landing_hours_icon.svg';
+        view.imageIcon = 'courses/images/svg/landing_hours_icon.svg';
         return view;
       }
       case ProgressType.SelfStudy: {
         view.text = 'Self Study';
-        view.imageIcon = 'images/svg/self-study.svg';
+        view.imageIcon = 'courses/images/svg/self-study.svg';
         return view;
       }
       default: {
         view.text = 'Assessment Tasks';
-        view.imageIcon = 'images/svg/assessment_icon.svg';
+        view.imageIcon = 'courses/images/svg/assessment_icon.svg';
         return view;
       }
     }

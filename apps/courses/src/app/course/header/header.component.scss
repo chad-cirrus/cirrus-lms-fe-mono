@@ -1,0 +1,42 @@
+@use '../styles/variables' as *;
+
+
+.header-container {
+    opacity: 9999;
+    height: 60px;
+    border-bottom: 1px solid $border-grey;
+    padding-left: 40px;
+
+}
+
+.dropdown {
+  height: 100%;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.dropdown-active {
+  @extend .dropdown;
+  background-color: $border-grey;
+}
+
+.dropdown-hamburger-container {
+  height: 100%;
+}
+
+.hamburger-menu-container {
+  height: 100%;
+  margin-right: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.hamburger-menu-container-active {
+  @extend .hamburger-menu-container;
+  background-color: $border-grey;
+}
+
+
+
+

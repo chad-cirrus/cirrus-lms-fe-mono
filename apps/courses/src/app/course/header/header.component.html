@@ -1,0 +1,23 @@
+<div
+  class="header-container"
+  fxLayout="row"
+  fxLayoutAlign="space-between center"
+>
+  <img src="courses/images/cirrus-logo.png" />
+  <div
+    fxLayout="row"
+    fxLayoutGap="5px"
+    fxLayoutAlign="space-between center"
+    class="dropdown-hamburger-container"
+  >
+    <div [ngClass]="isDisplayingDropdown ? 'hamburger-menu-container-active' : 'hamburger-menu-container'">
+      <cirrus-user-menus
+        [cirrusUser]="cirrusUser"
+        (displayPanel)="toggleDropdownDisplay($event)"
+      ></cirrus-user-menus>
+    </div>
+    <div *ngIf="isScreenSmall" [ngClass]="isDisplayingHamburger? 'dropdown-active' : 'dropdown'"  >
+      <cirrus-hamburger-menu [cirrusUser]="cirrusUser" (displayHamburger)="toggleHamburgerDisplay($event)"></cirrus-hamburger-menu>
+    </div>
+  </div>
+</div>

@@ -7,7 +7,7 @@ import {
   LessonHelper,
 } from '@cirrus/models';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { count, map, tap } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 
 @Injectable({
@@ -16,6 +16,10 @@ import { environment } from '../../environments/environment';
 export class CoursesService {
   private coursesUrl = 'api/v4/courses';
   private scormUrl = 'scorm';
+  notificationsCount$ = this.http.get<Notification[]>(`${environment.baseUrl}/api/v3/notifications/my-notifications`)
+  .pipe(
+    count()
+  )
 
   constructor(private http: HttpClient) {}
 
@@ -39,6 +43,7 @@ export class CoursesService {
         })
       );
   }
+
 
   getNavBarRoutes(courseId: number): Observable<IWorkBookRoutes[]> {
     return this.http.get<IWorkBookRoutes[]>(

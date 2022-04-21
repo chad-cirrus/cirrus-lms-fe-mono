@@ -15,6 +15,7 @@ export * from './lib/IInitialiFile';
 export * from './lib/ICirrusUser';
 export * from './lib/LessonType';
 export * from './lib/AssessmentType';
+export * from './lib/ROLE';
 
 export * from './lib/classes/Content';
 export * from './lib/classes/ContentTask';

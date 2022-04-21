@@ -12,3 +12,8 @@ export const selectSideNavOpen = createSelector(
   selectViewFeature,
   state => state.sideNavOpen
 );
+
+export const selectIsScreenSmall = createSelector(
+  selectViewFeature,
+  state => state.isScreenSmall
+);

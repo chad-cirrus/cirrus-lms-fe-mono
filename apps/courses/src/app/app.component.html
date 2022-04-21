@@ -1,73 +1,27 @@
-<cirrus-top-navbar></cirrus-top-navbar>
-<div
-  class="instructor-view-container"
-  fxLayout="row"
-  fxLayoutAlign="space-between center"
-  *ngIf="(role$ | async) !== 'pilot'"
->
-  <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="12px">
-    <span class="material-icons"> chevron_left </span>
-    <span>Students</span>
-    <ul class="student-name">
-      <li>{{ student }}</li>
-    </ul>
+<div class="main-container">
+  <div class="header-container">
+    <cirrus-header [cirrusUser]="(cirrusUser$ | async)!" (hamburgerMenu)="openHamburgerMenu()"></cirrus-header>
   </div>
-  <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="12px">
-    <div>Instructor View</div>
-    <mat-slide-toggle
-      color="accent"
-      [formControl]="viewToggle"
-    ></mat-slide-toggle>
+  <div fxLayout="row">
+    <div
+      [fxFlex]="collapse ? 10 : 15"
+      class="sidenav"
+      *ngIf="(isScreenSmall$ | async) === false"
+    >
+      <cirrus-side-nav
+        [cirrusUser]="(cirrusUser$ | async)!"
+        (emitCollapse)="toggleCollapse($event)"
+        [notificationCount]="(notificationCount$ | async)"
+      ></cirrus-side-nav>
+    </div>
+    <div class="content-container" [fxFlex]="100">
+      <router-outlet></router-outlet>
+    </div>
   </div>
 </div>
-<div class="container">
-  <mat-sidenav-container>
-    <mat-sidenav
-      #snav
-      fixedInViewport="true"
-      [fixedTopGap]="(role$ | async) !== 'pilot' ? ftgNotPilot : ftgPilot"
-      mode="side"
-      (openedChange)="handleOpenChanged($event)"
-    >
-      <div
-        *ngIf="courseId$ | async as courseId"
-        class="sidenav-menu"
-        fxLayout="row"
-        fxLayoutAlign="space-between start"
-      >
-        <div
-          class="sidenav-menu-container"
-          fxLayout="column"
-          fxLayoutAlign="space-between stretch"
-        >
-          <div
-            class="header-row"
-            fxLayout="row"
-            fxLayoutAlign="space-between start"
-          >
-            <div class="workbook">Workbook</div>
-            <img
-              (click)="snav.toggle()"
-              class="snav-close-button snav-toggle"
-              src="assets/images/svg/sidenav2.svg"
-            />
-          </div>
-          <div
-            class="lesson"
-            *ngFor="let route of workbookRoutes$ | async"
-            [routerLink]="[courseId, 'lessons', route.id]"
-            routerLinkActive="router-link-active"
-          >
-            {{ route.title }}
-          </div>
-        </div>
-      </div>
-    </mat-sidenav>
-    <mat-sidenav-content>
-      <cirrus-progress-indicator
-        *ngIf="lessonStateBusy$ | async"
-      ></cirrus-progress-indicator>
-      <router-outlet></router-outlet>
-    </mat-sidenav-content>
-  </mat-sidenav-container>
+
+
+
+<div *ngIf="showHamburgerMenu" class="hamburger-menu-container">
+  <cirrus-side-nav [cirrusUser]="(cirrusUser$ | async)!" (emitCollapse)="toggleCollapse($event)" [type]="'hamburger'"></cirrus-side-nav>
 </div>

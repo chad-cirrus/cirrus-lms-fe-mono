@@ -31,6 +31,15 @@ import { ContentPlayerComponent } from './dialog-service/content-player/content-
 import { MediaServerService } from './media.service';
 import { ScormComponent } from './dialog-service/content-player/scorm/scorm.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { SideNavComponent } from './course/side-nav/side-nav.component';
+import { HeaderComponent } from './course/header/header.component';
+import { CommonModule } from '@angular/common';
+import { MatBadgeModule } from '@angular/material/badge';
+import { NoopComponent } from './shared/noop/noop.component';
+import { UserMenusComponent } from './course/header/user-menus/user-menus.component';
+import { OverlayModule } from '@angular/cdk/overlay';
+import { A11yModule } from '@angular/cdk/a11y';
+import { HamburgerMenuComponent } from './course/header/hamburger-menu/hamburger-menu.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +51,11 @@ import { ReactiveFormsModule } from '@angular/forms';
     ScormContentDialogComponent,
     ContentPlayerComponent,
     ScormComponent,
+    SideNavComponent,
+    HeaderComponent,
+    NoopComponent,
+    UserMenusComponent,
+    HamburgerMenuComponent,
   ],
   imports: [
     BrowserModule,
@@ -57,6 +71,10 @@ import { ReactiveFormsModule } from '@angular/forms';
     HttpClientModule,
     MatDialogModule,
     ReactiveFormsModule,
+    CommonModule,
+    MatBadgeModule,
+    OverlayModule,
+    A11yModule,
   ],
   providers: [
     CoursesDialogService,
@@ -79,5 +97,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     MediaServerService,
   ],
   bootstrap: [AppComponent],
+  exports: [
+    HamburgerMenuComponent
+  ],
 })
 export class AppModule {}

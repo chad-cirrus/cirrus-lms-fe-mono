@@ -1,3 +1,6 @@
+@use '../styles/variables' as *;
+
+
 .sidenav-menu {
   padding: 24px 32px;
   width: 24vw;
@@ -38,3 +41,37 @@
 ul.student-name {
   padding-inline-start: 16px;
 }
+
+.sidenav {
+  height:94vh;
+  position: -webkit-sticky;
+  position: sticky;
+}
+
+.header-container {
+  top: 0;
+  position: sticky;
+  background-color: black;
+  z-index: 1;
+}
+
+.content-container {
+  overflow:scroll;
+}
+
+.hamburger-menu-container {
+  background-color: $menu-gray;
+
+  span {
+    font-size: 17px;
+    color: $secondary-font-color-grey;
+  }
+
+}
+.sidenav {
+  border-right: 1px solid $border-grey;
+}
+
+
+
+

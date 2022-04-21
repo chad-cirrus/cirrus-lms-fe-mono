@@ -17,6 +17,7 @@ export const intitialUserState: UserState = {
   sf_lms_role: '',
   full_sfid: '',
   ctc_admin: false,
+  name: 'Mike Yokey'
 };
 
 export const reducer = createReducer(

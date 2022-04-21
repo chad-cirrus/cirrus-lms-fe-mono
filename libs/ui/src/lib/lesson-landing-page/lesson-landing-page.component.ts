@@ -45,7 +45,11 @@ export class LessonLandingPageComponent {
   ];
   @Input() instructorView!: boolean;
   @Input() sideNavOpen!: boolean;
-  @Input() courseComplete = false;
+  // eslint-disable-next-line @typescript-eslint/no-inferrable-types
+  @Input() courseComplete: boolean = false;
+  profileImageUrl = 'course/images/profile.png';
+  libraryImageUrl = 'courses/images/library.png';
+  bookOpenImageUrl = 'courses/images/book-open.png';
   @Output() fetchMediaOutput = new EventEmitter<IContent>();
   @Output() fetchScorm = new EventEmitter<IContent>();
   @Output() openSideNav = new EventEmitter();
@@ -55,7 +59,7 @@ export class LessonLandingPageComponent {
   }
 
   get playListButtonFilledIn() {
-    return 'images/svg/play_button_filled_in.svg';
+    return 'courses/images/svg/play_button_filled_in.svg';
   }
 
   get lessonType() {
@@ -120,6 +124,20 @@ export class LessonLandingPageComponent {
       this.fetchScorm.next(content);
     } else {
       this.fetchMediaOutput.next(content);
+    }
+  }
+
+  mapProgressTypeToUrl(type: ProgressType): string {
+    switch (type) {
+      case ProgressType.Flight: {
+        return 'courses/images/svg/progress-icon-flight.svg';
+      }
+      case ProgressType.Ground: {
+        return 'courses/images/svg/progress-icon-ground.svg';
+      }
+      default: {
+        return 'courses/images/svg/progress-icon-land.svg';
+      }
     }
   }
 

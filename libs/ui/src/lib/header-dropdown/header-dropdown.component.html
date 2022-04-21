@@ -1,0 +1,38 @@
+
+<div
+  class="dropdown-container"
+  fxLayout="row"
+  fxLayoutGap.gt-sm="12px"
+  fxLayoutGap.lt-md="6px"
+  fxLayoutAlign="center center"
+  (menuOpened)="menuToggle()"
+  (menuClosed)="menuToggle()"
+>
+  <img src="courses/images/svg/profile.svg" />
+  <ng-container *ngIf="isScreenSmall">
+    <div>
+      <img
+        src="courses/images/svg/down-chevron.svg"
+        height="8.63px"
+        width="24px"
+      />
+    </div>
+  </ng-container>
+  <div>
+    <ng-container *ngIf="!isScreenSmall">
+      <div class="welcome-back">Welcome Back,</div>
+      <div fxLayout="row" fxLayoutGap="12px">
+        <div class="user-name">{{ cirrusUser.name || cirrusUser.email }}</div>
+        <ng-container>
+          <div>
+            <img
+              src="courses/images/svg/down-chevron.svg"
+              height="8.63px"
+              width="24px"
+            />
+          </div>
+        </ng-container>
+      </div>
+    </ng-container>
+  </div>
+</div>

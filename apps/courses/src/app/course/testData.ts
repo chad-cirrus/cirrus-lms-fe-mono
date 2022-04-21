@@ -1,3 +1,87 @@
+
+export const instructor: any = {
+admin: true,
+authentication_token: 'kbTpyxQ54sZbhyfFL1Nu',
+authentication_token_created_at: '2021-08-02T14:55:58.471Z',
+created_at: '2021-01-14T01:19:30.847Z',
+ctc_admin: false,
+deactivated: false,
+email: 'myockey@cirrusaircraft.com',
+full_sfid: '0054O000009hk3oQAA',
+name: 'Mike Instructor',
+id: 25524,
+nts_user_id: null,
+role: 'instructor',
+salesforce_id: '0054O000009hk3o',
+session_index: null,
+sf_lms_role: '1',
+token_expires: '2022-04-24T19:47:57.511Z',
+updated_at: '2022-03-25T19:47:57.511Z'
+}
+
+export const pilot: any = {
+  admin: true,
+  authentication_token: 'kbTpyxQ54sZbhyfFL1Nu',
+  authentication_token_created_at: '2021-08-02T14:55:58.471Z',
+  created_at: '2021-01-14T01:19:30.847Z',
+  ctc_admin: false,
+  deactivated: false,
+  email: 'myockey@cirrusaircraft.com',
+  full_sfid: '0054O000009hk3oQAA',
+  name: 'Mike Pilot',
+  id: 737,
+  nts_user_id: null,
+  role: 'pilot',
+  salesforce_id: '0054O000009hk3o',
+  session_index: null,
+  sf_lms_role: '1',
+  token_expires: '2022-04-24T19:47:57.511Z',
+  updated_at: '2022-03-25T19:47:57.511Z'
+  }
+
+  export const admin: any = {
+    admin: true,
+    authentication_token: 'kbTpyxQ54sZbhyfFL1Nu',
+    authentication_token_created_at: '2021-08-02T14:55:58.471Z',
+    created_at: '2021-01-14T01:19:30.847Z',
+    ctc_admin: false,
+    deactivated: false,
+    email: 'myockey@cirrusaircraft.com',
+    full_sfid: '0054O000009hk3oQAA',
+    name: 'Mike Admin',
+    id: 737,
+    nts_user_id: null,
+    role: 'admin',
+    salesforce_id: '0054O000009hk3o',
+    session_index: null,
+    sf_lms_role: '1',
+    token_expires: '2022-04-24T19:47:57.511Z',
+    updated_at: '2022-03-25T19:47:57.511Z'
+  }
+
+  export const ctc_admin: any = {
+    admin: true,
+    authentication_token: 'kbTpyxQ54sZbhyfFL1Nu',
+    authentication_token_created_at: '2021-08-02T14:55:58.471Z',
+    created_at: '2021-01-14T01:19:30.847Z',
+    ctc_admin: true,
+    deactivated: false,
+    email: 'myockey@cirrusaircraft.com',
+    full_sfid: '0054O000009hk3oQAA',
+    name: 'Mike CTC',
+    id: 737,
+    nts_user_id: null,
+    role: 'instructor',
+    salesforce_id: '0054O000009hk3o',
+    session_index: null,
+    sf_lms_role: '1',
+    token_expires: '2022-04-24T19:47:57.511Z',
+    updated_at: '2022-03-25T19:47:57.511Z'
+  }
+
+
+
+
 // import { ILesson } from '@cirrus/models';
 
 // export const testData: ILesson = {

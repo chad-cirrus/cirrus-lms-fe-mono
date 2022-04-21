@@ -41,10 +41,10 @@ export class LessonProgressComponent {
   }
 
   private progressIconMapper = {
-    0: 'images/svg/not-started.svg',
-    1: 'images/svg/not-started.svg',
-    2: 'images/svg/in_progress.svg',
-    3: 'images/svg/complete_check.svg',
+    0: 'courses/images/svg/not-started.svg',
+    1: 'courses/images/svg/not-started.svg',
+    2: 'courses/images/svg/in_progress.svg',
+    3: 'courses/images/svg/complete_check.svg',
     4: null,
   };
 

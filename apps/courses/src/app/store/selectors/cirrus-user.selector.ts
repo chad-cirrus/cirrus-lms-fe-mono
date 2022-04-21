@@ -4,6 +4,11 @@ import { UserState } from '../reducers/cirrus-user.reducer';
 export const selectCirrusUserFeature =
   createFeatureSelector<UserState>('cirrusUser');
 
+export const selectCirrusUser = createSelector(
+  selectCirrusUserFeature,
+  state => state
+);
+
 export const selectRole = createSelector(
   selectCirrusUserFeature,
   state => state && state.role
