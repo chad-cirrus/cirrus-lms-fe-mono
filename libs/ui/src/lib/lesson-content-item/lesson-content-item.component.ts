@@ -59,6 +59,8 @@ export class LessonContentItemComponent {
     switch (contentType) {
       case 0:
         return 'courses/images/svg/video_play.svg';
+      case 2:
+        return 'courses/images/svg/quiz_lc_icon.svg';
       case 4:
         return 'courses/images/svg/document_button.svg';
       case 5:

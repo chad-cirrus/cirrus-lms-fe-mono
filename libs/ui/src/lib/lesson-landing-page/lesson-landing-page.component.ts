@@ -1,5 +1,4 @@
 /* eslint-disable @nrwl/nx/enforce-module-boundaries */
-import { ViewportScroller } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import {
   IContent,

@@ -57,7 +57,8 @@ ul.student-name {
 
 .content-container {
   overflow-y: scroll;
-  height: 100vh;
+  overflow-x: hidden;
+  height: 94vh;
 }
 
 .hamburger-menu-container {
