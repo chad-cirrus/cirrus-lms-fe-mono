@@ -82,7 +82,7 @@ export class UserMenusComponent implements OnInit {
 
   logout() {
     this.userService.logout().subscribe(user => {
-      window.location.href = 'https://login.cirrusapproach.com/s/login/'
+      window.location.href = 'https://cirrusapproach.com'
     })
   }
 }

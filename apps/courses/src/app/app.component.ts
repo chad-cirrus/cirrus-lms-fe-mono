@@ -73,6 +73,7 @@ export class AppComponent implements OnInit {
       }
     });
 
+
     const cirrusUser = JSON.parse(
       <string>localStorage.getItem('cirrus-user')
     ) as ICirrusUser;

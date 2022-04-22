@@ -36,38 +36,8 @@
         <div
           fxLayout="row"
           fxLayoutGap="10px"
-          *ngIf="cirrusUser.role === 'pilot'"
-          routerLink="my-courses"
-          class="image-container"
-          routerLinkActive="active"
-        >
-          <img
-            src="courses/images/svg/my-courses.svg"
-            height="23px"
-            width="23px"
-          />
-          <span *ngIf="!collapse || type === 'hamburger'">My Courses</span>
-        </div>
-        <div
-          fxLayout="row"
-          fxLayoutGap="10px"
-          *ngIf="cirrusUser.role === 'pilot'"
-          routerLink="instructors"
-          class="image-container"
-          routerLinkActive="active"
-        >
-          <img
-            src="courses/images/svg/instructor.svg"
-            height="23px"
-            width="23px"
-          />
-          <span *ngIf="!collapse || type === 'hamburger'">Instructors</span>
-        </div>
-        <div
-          fxLayout="row"
-          fxLayoutGap="10px"
           *ngIf="
-            cirrusUser.role === 'instructor' || cirrusUser.role === 'admin'
+            cirrusUser.role !== 'pilot'
           "
           routerLink="my-students"
           class="image-container"
@@ -83,7 +53,20 @@
         <div
           fxLayout="row"
           fxLayoutGap="10px"
-          *ngIf="cirrusUser.role === 'pilot'"
+          routerLink="my-courses"
+          class="image-container"
+          routerLinkActive="active"
+        >
+          <img
+            src="courses/images/svg/my-courses.svg"
+            height="23px"
+            width="23px"
+          />
+          <span *ngIf="!collapse || type === 'hamburger'">My Courses</span>
+        </div>
+        <div
+          fxLayout="row"
+          fxLayoutGap="10px"
           routerLink="course-catalog"
           class="image-container"
           routerLinkActive="active"
@@ -94,6 +77,20 @@
             width="23px"
           />
           <span *ngIf="!collapse || type === 'hamburger'">Course Catalog</span>
+        </div>
+        <div
+          fxLayout="row"
+          fxLayoutGap="10px"
+          routerLink="instructors"
+          class="image-container"
+          routerLinkActive="active"
+        >
+          <img
+            src="courses/images/svg/instructor.svg"
+            height="23px"
+            width="23px"
+          />
+          <span *ngIf="!collapse || type === 'hamburger'">Instructors</span>
         </div>
         <div
           fxLayout="row"
