@@ -21,15 +21,8 @@ export class SideNavComponent implements OnInit {
 
 
   constructor(
-    private breakpointObserver: BreakpointObserver,
-    private router: Router
-  ) {
-    this.router.events
-      .pipe(filter(event => event instanceof NavigationEnd))
-      .subscribe(event => {
-        this.currentUrl = event['url'].slice(9, event['url'].length);
-      });
-  }
+    private breakpointObserver: BreakpointObserver
+  ) {}
 
   ngOnInit(): void {
     this.isScreenTablet$ = this.breakpointObserver

@@ -3,6 +3,7 @@
     <cirrus-header
       [cirrusUser]="(cirrusUser$ | async)!"
       (hamburgerMenu)="openHamburgerMenu()"
+      [notificationCount]="notificationCount$ | async"
     ></cirrus-header>
   </div>
   <div fxLayout="row">

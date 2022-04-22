@@ -32,10 +32,10 @@ const routes: Routes = [
           'reports',
           'help-center',
           'purchase-history',
-          'ctc-dashboard',
-          'admin-dashboard',
+          'ctc',
+          'admin',
           'student-dashboard',
-          'instructor-dashboard',
+          'training-partners',
           'edit-profile'
         ].includes(url[0].path)
       ) {

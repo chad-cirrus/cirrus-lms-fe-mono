@@ -15,6 +15,7 @@ export class HeaderComponent {
   @Input() cirrusUser!: ICirrusUser;
   @Output() hamburgerMenu = new EventEmitter();
   isDisplayingDropdown!: boolean;
+  @Input() notificationCount!: number;
   isDisplayingHamburger!: boolean;
   isScreenSmall$ = this.store.pipe(
     select(selectIsScreenSmall)

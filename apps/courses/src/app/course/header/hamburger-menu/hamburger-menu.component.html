@@ -21,9 +21,10 @@
     <div class="dropdown-container">
       <cirrus-menu-slider [type]="'hamburger'" [activePane]="isLeftVisible ? 'left' : 'right'">
         <div leftPane>
-          <cirrus-side-nav [type]="'hamburger'" [cirrusUser]="cirrusUser"></cirrus-side-nav>
+          <cirrus-side-nav [type]="'hamburger'" [notificationCount]="notificationCount" [cirrusUser]="cirrusUser"></cirrus-side-nav>
         </div>
       </cirrus-menu-slider>
     </div>
   </section>
 </ng-template>
+

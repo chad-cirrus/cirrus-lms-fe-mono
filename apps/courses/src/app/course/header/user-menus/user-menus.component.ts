@@ -42,7 +42,7 @@ export class UserMenusComponent implements OnInit {
   @Input()
   set cirrusUser(value: ICirrusUser) {
     this._cirrusUser = value;
-    this.showDashboard = value && value?.role !== 'pilot';
+    this.showDashboard = value && (value.ctc_admin || value.role === 'admin')
     this.showCTCDashboard =
       this.cirrusUser.ctc_admin || this.cirrusUser.role === 'admin';
     this.showLMSDashboard = this.cirrusUser.role === 'admin';

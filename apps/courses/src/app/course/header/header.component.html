@@ -17,7 +17,7 @@
       ></cirrus-user-menus>
     </div>
     <div *ngIf="(isScreenSmall$ | async)" [ngClass]="isDisplayingHamburger? 'dropdown-active' : 'dropdown'"  >
-      <cirrus-hamburger-menu [cirrusUser]="cirrusUser" (displayHamburger)="toggleHamburgerDisplay($event)"></cirrus-hamburger-menu>
+      <cirrus-hamburger-menu [cirrusUser]="cirrusUser" [notificationCount]="notificationCount" (displayHamburger)="toggleHamburgerDisplay($event)"></cirrus-hamburger-menu>
     </div>
   </div>
 </div>

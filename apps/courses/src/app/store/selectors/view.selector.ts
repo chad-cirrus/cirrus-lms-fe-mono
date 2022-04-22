@@ -17,3 +17,4 @@ export const selectIsScreenSmall = createSelector(
   selectViewFeature,
   state => state.isScreenSmall
 );
+

@@ -18,7 +18,7 @@ export class CoursesService {
   private scormUrl = 'scorm';
   notificationsCount$ = this.http.get<Notification[]>(`${environment.baseUrl}/api/v3/notifications/my-notifications`)
   .pipe(
-    count()
+    map(notif => notif.length)
   )
 
   constructor(private http: HttpClient) {}

@@ -12,7 +12,7 @@ import { map, tap } from 'rxjs/operators';
 export class HamburgerMenuComponent implements OnInit {
   @Input() cirrusUser!: ICirrusUser
   @Output() displayHamburger = new EventEmitter<any>();
-
+  @Input() notificationCount!: number;
   isLeftVisible = true;
   showPanel$!: Observable<boolean>;
   private togglePanel = new BehaviorSubject(false);

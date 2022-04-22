@@ -81,7 +81,7 @@
         <div
           fxLayout="row"
           fxLayoutGap="10px"
-          routerLink="instructors"
+          routerLink="training-partners"
           class="image-container"
           routerLinkActive="active"
         >
@@ -122,7 +122,7 @@
       <div fxLayout="row" fxLayoutGap="25px" class="image-container">
         <span
           class="alarm-badge"
-          matBadge="{{ notificationCount }}"
+          matBadge="{{ notificationCount > 0 ? notificationCount : '' }}"
           matBadgeColor="warn"
           matBadgeOverlap="false"
           ><img src="courses/images/svg/alarm.svg"
@@ -152,7 +152,7 @@
     >
       <div fxLayout="row" fxLayoutGap="10px">
         <span
-          matBadge="{{ notificationCount }}"
+          matBadge="{{ notificationCount > 0 ? notificationCount : '' }}"
           matBadgeColor="warn"
           [matBadgeOverlap]="type === 'hamburger'"
           ><img src="courses/images/svg/alarm.svg"
