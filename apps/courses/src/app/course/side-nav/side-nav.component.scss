@@ -21,7 +21,11 @@
 
 .options {
   padding: 25px 10px 40px;
+}
+.border {
+  width: 100%;
   border-top: 1px solid $border-grey;
+  padding-bottom: 20px;
 }
 
 .menu-items {

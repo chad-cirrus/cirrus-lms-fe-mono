@@ -112,6 +112,7 @@
   </div>
 
   <div [ngClass]="type === 'hamburger' ? '' : 'options-container'">
+    <div class="border"></div>
     <div
       *ngIf="!collapse; else collapsed"
       class="options"
