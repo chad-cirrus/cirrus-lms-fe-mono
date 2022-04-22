@@ -5,7 +5,6 @@ import { Observable } from 'rxjs';
 import { AppState } from '../../store/reducers';
 import { selectIsScreenSmall } from '../../store/selectors/view.selector';
 
-
 @Component({
   selector: 'cirrus-header',
   templateUrl: './header.component.html',
@@ -13,29 +12,24 @@ import { selectIsScreenSmall } from '../../store/selectors/view.selector';
 })
 export class HeaderComponent {
   @Input() cirrusUser!: ICirrusUser;
+  @Input() cirrusImpersonationReturnUser!: ICirrusUser;
   @Output() hamburgerMenu = new EventEmitter();
   isDisplayingDropdown!: boolean;
   @Input() notificationCount!: number;
   isDisplayingHamburger!: boolean;
-  isScreenSmall$ = this.store.pipe(
-    select(selectIsScreenSmall)
-  )
+  isScreenSmall$ = this.store.pipe(select(selectIsScreenSmall));
 
   constructor(private store: Store<AppState>) {}
 
-
   toggleDropdownDisplay(e: Observable<any>) {
-    e.subscribe(data => this.isDisplayingDropdown = data)
+    e.subscribe(data => (this.isDisplayingDropdown = data));
   }
 
-
   toggleHamburgerDisplay(e: Observable<any>) {
-      e.subscribe(data => this.isDisplayingHamburger = data)
-    }
-
+    e.subscribe(data => (this.isDisplayingHamburger = data));
+  }
 
   openHamburgerMenu() {
     this.hamburgerMenu.emit('dksjfkajsf');
   }
-
 }

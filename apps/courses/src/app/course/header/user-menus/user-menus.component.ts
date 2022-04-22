@@ -15,9 +15,7 @@ import { UserService } from '../../../user/user.service';
 import { Router } from '@angular/router';
 import { LessonState } from '../../../store/reducers/lesson.reducer';
 import { Store } from '@ngrx/store';
-import {
-  selectIsScreenSmall,
-} from '../../../store/selectors/view.selector';
+import { selectIsScreenSmall } from '../../../store/selectors/view.selector';
 
 @Component({
   selector: 'cirrus-user-menus',
@@ -25,14 +23,14 @@ import {
   styleUrls: ['./user-menus.component.scss'],
 })
 export class UserMenusComponent implements OnInit {
+  @Input() cirrusImpersonationReturnUser!: ICirrusUser;
   @Output() displayPanel = new EventEmitter<any>();
   isLeftVisible = true;
   showPanel$!: Observable<boolean>;
   private togglePanel = new BehaviorSubject(false);
   togglePanel$ = this.togglePanel.asObservable();
 
-  isScreenSmall$: Observable<boolean> =
-  this.store.select(selectIsScreenSmall);
+  isScreenSmall$: Observable<boolean> = this.store.select(selectIsScreenSmall);
 
   private _cirrusUser!: ICirrusUser;
   showDashboard = false;
@@ -42,7 +40,7 @@ export class UserMenusComponent implements OnInit {
   @Input()
   set cirrusUser(value: ICirrusUser) {
     this._cirrusUser = value;
-    this.showDashboard = value && (value.ctc_admin || value.role === 'admin')
+    this.showDashboard = value && (value.ctc_admin || value.role === 'admin');
     this.showCTCDashboard =
       this.cirrusUser.ctc_admin || this.cirrusUser.role === 'admin';
     this.showLMSDashboard = this.cirrusUser.role === 'admin';
@@ -60,7 +58,7 @@ export class UserMenusComponent implements OnInit {
     public dialog: MatDialog,
     private userService: UserService,
     private router: Router,
-    private store: Store<LessonState>,
+    private store: Store<LessonState>
   ) {}
 
   @ViewChild(CdkConnectedOverlay, { static: true })
@@ -82,7 +80,29 @@ export class UserMenusComponent implements OnInit {
 
   logout() {
     this.userService.logout().subscribe(user => {
-      window.location.href = 'https://cirrusapproach.com'
-    })
+      window.location.href = 'https://cirrusapproach.com';
+    });
+  }
+
+  impersonationLogout() {
+    console.log('impersonation logout');
+    localStorage.setItem(
+      'cirrus-token',
+      localStorage.getItem('cirrus-impersonation-return') ?? ''
+    );
+    localStorage.setItem(
+      'cirrus-user',
+      localStorage.getItem('cirrus-impersonation-return-user') ?? ''
+    );
+    localStorage.setItem(
+      'cirrus-role',
+      localStorage.getItem('cirrus-impersonation-return-role') ?? ''
+    );
+
+    localStorage.removeItem('cirrus-impersonation-return-role');
+    localStorage.removeItem('cirrus-impersonation-return');
+    localStorage.removeItem('cirrus-impersonation-return-user');
+
+    this.router.navigate(['admin']);
   }
 }

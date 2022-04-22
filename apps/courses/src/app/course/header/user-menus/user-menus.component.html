@@ -12,7 +12,13 @@
   [cdkConnectedOverlayOpen]="(showPanel$ | async)!"
 >
   <section>
-    <div [ngClass]="(isScreenSmall$ | async) === true ? 'dropdown-container-hamburger' : 'dropdown-container'">
+    <div
+      [ngClass]="
+        (isScreenSmall$ | async) === true
+          ? 'dropdown-container-hamburger'
+          : 'dropdown-container'
+      "
+    >
       <cirrus-menu-slider [activePane]="isLeftVisible ? 'left' : 'right'">
         <div leftPane>
           <div
@@ -50,7 +56,20 @@
               Flight Fix
             </a>
           </div>
-          <div class="menu-item" (click)="logout()">Logout</div>
+          <div
+            *ngIf="!cirrusImpersonationReturnUser?.id"
+            class="menu-item"
+            (click)="logout()"
+          >
+            Logout
+          </div>
+          <div
+            *ngIf="cirrusImpersonationReturnUser?.id"
+            class="menu-item"
+            (click)="impersonationLogout()"
+          >
+            Impersonation Logout
+          </div>
         </div>
 
         <div rightPane fxLayout="column" fxLayoutAlign="center center">

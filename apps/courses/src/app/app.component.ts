@@ -9,14 +9,16 @@ import { selectLessonStateBusy } from './store/selectors/lessons.selector';
 import { selectWorkBookRoutes } from './store/selectors/workbook-routes.selector';
 import { setCirrusUser } from './store/actions';
 import { ICirrusUser } from '@cirrus/models';
-import { admin, ctc_admin, instructor, pilot } from '../app/course/testData';
 import {
   selectCirrusUser,
   selectRole,
 } from './store/selectors/cirrus-user.selector';
-import { fromEvent, Observable } from 'rxjs';
+import { fromEvent, Observable, of } from 'rxjs';
 import { FormControl } from '@angular/forms';
-import { selectSideNavOpen, selectIsScreenSmall } from './store/selectors/view.selector';
+import {
+  selectSideNavOpen,
+  selectIsScreenSmall,
+} from './store/selectors/view.selector';
 import { MatSidenav } from '@angular/material/sidenav';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { CoursesService } from './course/course.service';
@@ -34,6 +36,7 @@ export class AppComponent implements OnInit {
   workbookRoutes$ = this.store.select(selectWorkBookRoutes);
   role$ = this.store.select(selectRole);
   cirrusUser$ = this.store.select(selectCirrusUser);
+  cirrusImpersonateReturnUser$!: Observable<ICirrusUser>;
   courseId$ = this.appService.courseId$.pipe(distinctUntilChanged(), share());
   scrolledPast$ = fromEvent(window, 'scroll').pipe(
     map(event => event.target && event.target['documentElement'].scrollTop),
@@ -45,7 +48,7 @@ export class AppComponent implements OnInit {
   @ViewChild(MatSidenav) sideNav!: MatSidenav;
   ftgNotPilot = 160;
   ftgPilot = 112;
-  isScreenSmall$: Observable<boolean> = this.store.select(selectIsScreenSmall)
+  isScreenSmall$: Observable<boolean> = this.store.select(selectIsScreenSmall);
   collapse!: boolean;
   showHamburgerMenu = false;
 
@@ -57,15 +60,16 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-   this.breakpointObserver
+    this.breakpointObserver
       .observe('(max-width: 600px)')
       .pipe(
         map(({ matches }) => {
           return matches;
         })
-      ).subscribe(isScreenSmall => {
-        this.store.dispatch(appActions.setIsScreenSmall({ isScreenSmall }))
-      })
+      )
+      .subscribe(isScreenSmall => {
+        this.store.dispatch(appActions.setIsScreenSmall({ isScreenSmall }));
+      });
 
     this.courseId$.subscribe(id => {
       if (id) {
@@ -73,6 +77,11 @@ export class AppComponent implements OnInit {
       }
     });
 
+    this.cirrusImpersonateReturnUser$ = of(
+      JSON.parse(
+        <string>localStorage.getItem('cirrus-impersonation-return-user')
+      ) as ICirrusUser
+    );
 
     const cirrusUser = JSON.parse(
       <string>localStorage.getItem('cirrus-user')
