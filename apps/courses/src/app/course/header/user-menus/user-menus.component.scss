@@ -32,6 +32,10 @@
 
 .menu-item:hover {
   background-color: $border-grey;
+  color: white;;
+  a {
+    color: white;
+  }
 }
 
 .menu-item-with-border {

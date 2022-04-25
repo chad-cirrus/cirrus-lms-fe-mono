@@ -41,6 +41,7 @@
   }
 }
 
+
 .menu-items-expanded {
   @extend .menu-items;
   max-width: 200px;
@@ -51,6 +52,11 @@
   span {
     color: rgba(255, 255, 255, 0.6)
   };
+}
+
+
+.image-container:hover {
+  @extend .active;
 }
 
 .menu-items-collapsed {
