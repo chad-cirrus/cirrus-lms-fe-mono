@@ -30,7 +30,10 @@
 
 .menu-items {
   .active {
-    background-color: $border-grey;;
+    background-color: $border-grey;
+    span {
+      color: white !important;
+    }
   }
 
   div {
