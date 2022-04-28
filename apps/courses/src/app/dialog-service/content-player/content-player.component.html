@@ -1,44 +1,27 @@
-<mat-dialog-content
-  id="content-player"
-  class="content-wrapper"
-  [ngClass]="{
-    'video-dialog-container ':
-      content?.content_type === 0 || content?.content_type === 1,
-    test: content?.content_type === 9 || content?.content_type === 10
-  }"
->
+<mat-dialog-content id="content-player" class="content-wrapper">
   <div class="content-wrapper" fxLayout="column wrap">
-    <div
-      class="full-width"
-      [ngClass]="{ 'content-player-wrapper-scorm': true }"
-    >
-      <cirrus-scorm [content]="content" [lesson]="lesson"></cirrus-scorm>
-    </div>
-  </div>
-  <div class="navbottom" fxFlex="100">
-    <button
-      mat-raised-button
-      class="dialog-buttons"
-      (click)="previousContent()"
-    >
-      <span class="previous"></span>
-    </button>
-    <div fxFlex=""></div>
-    <button
-      mat-raised-button
-      class="dialog-buttons"
-      tabindex="-1"
-      (click)="nextContent()"
-    >
-      <span class="next"></span>
-    </button>
-    <button
-      mat-dialog-close
-      mat-raised-button
-      class="dialog-buttons close-button"
-      tabindex="-1"
-    >
-      <span class="close"></span>
-    </button>
+    <div class="full-width">Test</div>
   </div>
 </mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-raised-button class="dialog-buttons" (click)="previousContent()">
+    <span class="previous">Previous</span>
+  </button>
+  <div fxFlex></div>
+  <button
+    mat-raised-button
+    class="dialog-buttons"
+    tabindex="-1"
+    (click)="nextContent()"
+  >
+    <span class="next">Next</span>
+  </button>
+  <button
+    mat-dialog-close
+    mat-raised-button
+    class="dialog-buttons close-button"
+    tabindex="-1"
+  >
+    <span class="close">Close</span>
+  </button>
+</mat-dialog-actions>

@@ -1,0 +1,42 @@
+.lesson-contents-header {
+  font-family: 'Akzidenz-Grotesk BQ';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 21px;
+  line-height: 29px;
+  /* identical to box height, or 138% */
+
+  letter-spacing: -0.005em;
+
+  /* Gray/Pure white */
+
+  color: #FFFFFF;
+}
+.menu-items {
+  margin-top: 32px;
+  .item-container {
+    margin-bottom: 16px;
+    .item {
+      padding: 8px;
+      .item-text {
+        font-family: 'Akzidenz-Grotesk BQ';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 22px;
+        /* identical to box height, or 138% */
+
+        letter-spacing: 0.02em;
+
+        /* Gray/gray-6 */
+
+        color: #969696;
+      }
+    }
+    .item-seperator {
+      margin-top: 8px;
+      height: 1px;
+      background-color: #3A3A3A;
+    }
+  }
+}

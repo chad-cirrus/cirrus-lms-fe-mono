@@ -1,6 +1,7 @@
 /* eslint-disable @nrwl/nx/enforce-module-boundaries */
 export * from './lib/ui.module';
 export * from './lib/cirrus-material.module';
+export * from './lib/lesson-content-player/lesson-content-player.component';
 
 // export * from '../../models/src/testing/testData';
 export * from '../../models/src/testing/testDataIcingLesson';

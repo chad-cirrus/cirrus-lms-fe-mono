@@ -119,11 +119,11 @@ export class LessonLandingPageComponent {
   }
 
   fetchMedia(content: IContent) {
-    if (content.blob_directory !== null) {
-      this.fetchScorm.next(content);
-    } else {
-      this.fetchMediaOutput.next(content);
-    }
+    // if (content.blob_directory !== null) {
+    //   this.fetchScorm.next(content);
+    // } else {
+    this.fetchMediaOutput.next(content);
+    // }
   }
 
   mapProgressTypeToUrl(type: ProgressType): string {

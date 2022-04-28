@@ -1,0 +1,19 @@
+<div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="16px">
+  <img [src]="leftChevron" alt="left-chevron" (click)="close()" />
+  <span class="lesson-contents-header">Lesson Contents</span>
+</div>
+<div class="menu-items" fxLayout="column" fxLayoutAlign="space-between stretch">
+  <div class="item-container" *ngFor="let item of menuItems; let i = index">
+    <div
+      class="item"
+      fxLayout="row"
+      fxLayoutAlign="start center"
+      fxLayoutGap="16px"
+    >
+      <span><img [src]="item.icon" alt="icon" /></span>
+      <span class="item-text">{{ item.text }}</span>
+    </div>
+    <div *ngIf="i !== menuItems.length - 1" class="item-seperator"></div>
+  </div>
+  <br />
+</div>

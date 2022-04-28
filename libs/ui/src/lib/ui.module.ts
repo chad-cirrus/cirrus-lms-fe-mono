@@ -18,7 +18,9 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { MenuSliderComponent } from './menu-slider/menu-slider.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { EditProfileComponent } from './edit-profile/edit-profile.component'
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
+import { LessonContentPlayerComponent } from './lesson-content-player/lesson-content-player.component';
+import { LessonContentPlayerMenuComponent } from './lesson-content-player-menu/lesson-content-player-menu.component'
 
 @NgModule({
   imports: [
@@ -43,6 +45,8 @@ import { EditProfileComponent } from './edit-profile/edit-profile.component'
     RecentActivityComponent,
     MenuSliderComponent,
     EditProfileComponent,
+    LessonContentPlayerComponent,
+    LessonContentPlayerMenuComponent,
   ],
   exports: [
     LessonLandingPageComponent,
@@ -56,6 +60,8 @@ import { EditProfileComponent } from './edit-profile/edit-profile.component'
     RecentActivityComponent,
     MenuSliderComponent,
     EditProfileComponent,
+    LessonContentPlayerComponent,
+    LessonContentPlayerMenuComponent,
   ],
 })
 export class UiModule {}

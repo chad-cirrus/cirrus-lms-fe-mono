@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { CONTENT_TYPE, IContent, ILesson, IPlayListItem } from '@cirrus/models';
 import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
-import { switchMap, take } from 'rxjs/operators';
+import { switchMap, take, tap } from 'rxjs/operators';
 import { CoursesDialogService } from '../../dialog-service/cirrus-dialog.service';
 import { fetchLessons, setSideNavOpen } from '../../store/actions';
 import { LessonState } from '../../store/reducers/lesson.reducer';
@@ -19,7 +19,10 @@ import {
   styleUrls: ['./lesson.component.scss'],
 })
 export class LessonComponent implements OnInit, OnDestroy {
-  lesson$: Observable<ILesson> = this.store.select(selectLesson);
+  private _lesson!: ILesson;
+  lesson$: Observable<ILesson> = this.store
+    .select(selectLesson)
+    .pipe(tap(lesson => (this._lesson = lesson)));
   instructorView$: Observable<boolean> =
     this.store.select(selectInstructorView);
   sideNavOpen$: Observable<boolean> = this.store.select(selectSideNavOpen);
@@ -46,11 +49,20 @@ export class LessonComponent implements OnInit, OnDestroy {
   }
 
   fetchMedia(content: IContent) {
-    if (content.content_type === CONTENT_TYPE.vimeo) {
-      this.fetchVimeo(content);
-    } else {
-      this.fetchUnknownMedia(content);
-    }
+    console.log(content, this._lesson);
+
+    this.coursesDialog.displayContentPlayerComponent(this._lesson, content);
+
+    // this.coursesDialog
+    //   .displayMediaContent(content)
+    //   .afterClosed()
+    //   .subscribe(() => console.log('closed'));
+
+    // if (content.content_type === CONTENT_TYPE.vimeo) {
+    //   this.fetchVimeo(content);
+    // } else {
+    //   this.fetchUnknownMedia(content);
+    // }
   }
 
   fetchUnknownMedia(content: IContent) {

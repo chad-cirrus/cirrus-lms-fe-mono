@@ -83,22 +83,20 @@ import { HamburgerMenuComponent } from './course/header/hamburger-menu/hamburger
       useClass: AuthHttpInterceptor,
       multi: true,
     },
-    {
-      provide: MAT_DIALOG_DEFAULT_OPTIONS,
-      useValue: {
-        ...new MatDialogConfig(),
-        width: '66vw',
-        closeOnNavigation: true,
-        panelClass: 'cirrus-media-player',
-        disableClose: true,
-        maxHeight: '66vw',
-      } as MatDialogConfig,
-    },
+    // {
+    //   provide: MAT_DIALOG_DEFAULT_OPTIONS,
+    //   useValue: {
+    //     ...new MatDialogConfig(),
+    //     width: '66vw',
+    //     closeOnNavigation: true,
+    //     panelClass: 'cirrus-media-player',
+    //     disableClose: true,
+    //     maxHeight: '66vw',
+    //   } as MatDialogConfig,
+    // },
     MediaServerService,
   ],
   bootstrap: [AppComponent],
-  exports: [
-    HamburgerMenuComponent
-  ],
+  exports: [HamburgerMenuComponent],
 })
 export class AppModule {}
