@@ -1,0 +1,48 @@
+
+<div class="overlay-container">
+  <div fxLayout="row" fxLayoutAlign="space-between" class="title-text" >
+    <div>Lessons</div>
+    <div *ngIf="data.id"><img src='courses/images/svg/close.svg' (click)="close()"/></div>
+  </div>
+  <cdk-accordion class="example-accordion">
+    <cdk-accordion-item
+      *ngFor="let w of workbook.stages; let index = index" class="stage-container"
+      #accordionItem="cdkAccordionItem"
+      class="example-accordion-item"
+      role="button"
+      tabindex="0"
+      [attr.id]="'accordion-header-' + index"
+      [attr.aria-expanded]="accordionItem.expanded"
+      [attr.aria-controls]="'accordion-body-' + index">
+      <div class="example-accordion-item-header" (click)="accordionItem.toggle()">
+        <div class="stage-title" fxLayout="row" fxLayoutAlign="space-between">
+          <div>Stage {{index + 1}}</div>
+          <img [src]="accordionItem.expanded ? 'courses/images/svg/up-chevron.svg' : 'courses/images/svg/down-chevron.svg'"/>
+        </div>
+      </div>
+      <div
+        role="region"
+        [style.display]="accordionItem.expanded ? '' : 'none'"
+        [attr.id]="'accordion-body-' + index"
+        [attr.aria-labelledby]="'accordion-header-' + index">
+        <div *ngFor="let l of w.lessons" (click)="navigate(l)">
+          <div fxLayout="row" class="lesson-content-container" fxLayoutAlign="none end" fxLayoutGap="15px">
+            <div *ngIf="l.progress.status === 'completed'">
+              <img [src]="completeCheck"/>
+            </div>
+            <div *ngIf="l.progress.status === 'not_started'">
+              <img [src]="notStarted"/>
+            </div>
+            <div *ngIf="l.progress.status === 'in_progress'">
+              <img [src]="inProgress"/>
+            </div>
+            <div>
+              <div class="stage-index">{{l.stage_lesson_index}}</div>
+              <div class="lesson-title-text">{{l.title}}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </cdk-accordion-item>
+  </cdk-accordion>
+</div>

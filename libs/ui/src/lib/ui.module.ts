@@ -14,13 +14,21 @@ import { LessonContentsComponent } from './lesson-contents/lesson-contents.compo
 import { HeaderDropdownComponent } from './header-dropdown/header-dropdown.component';
 import { RecentActivityComponent } from './recent-activity/recent-activity.component';
 import { MatBadgeModule } from '@angular/material/badge';
-
+import { CdkAccordionModule } from '@angular/cdk/accordion';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { MenuSliderComponent } from './menu-slider/menu-slider.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+
+import { StagesOverlayComponent } from './stages-overlay/stages-overlay.component';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatDialogModule, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+
+
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { LessonContentPlayerComponent } from './lesson-content-player/lesson-content-player.component';
 import { LessonContentPlayerMenuComponent } from './lesson-content-player-menu/lesson-content-player-menu.component'
+
 
 @NgModule({
   imports: [
@@ -31,10 +39,19 @@ import { LessonContentPlayerMenuComponent } from './lesson-content-player-menu/l
     ReactiveFormsModule,
     MatBadgeModule,
     OverlayModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    CdkAccordionModule,
+    MatSidenavModule,
+    MatDialogModule
+
+  ],
+  providers: [
+    { provide: MAT_DIALOG_DATA, useValue: {} },
+    { provide: MatDialogRef, useValue: {} }
   ],
   declarations: [
     LessonLandingPageComponent,
+
     LessonContentItemComponent,
     ProgressCardComponent,
     ProgressIndicatorComponent,
@@ -45,8 +62,10 @@ import { LessonContentPlayerMenuComponent } from './lesson-content-player-menu/l
     RecentActivityComponent,
     MenuSliderComponent,
     EditProfileComponent,
+    StagesOverlayComponent,
     LessonContentPlayerComponent,
     LessonContentPlayerMenuComponent,
+
   ],
   exports: [
     LessonLandingPageComponent,
@@ -60,8 +79,10 @@ import { LessonContentPlayerMenuComponent } from './lesson-content-player-menu/l
     RecentActivityComponent,
     MenuSliderComponent,
     EditProfileComponent,
+    CdkAccordionModule,
     LessonContentPlayerComponent,
     LessonContentPlayerMenuComponent,
+
   ],
 })
 export class UiModule {}

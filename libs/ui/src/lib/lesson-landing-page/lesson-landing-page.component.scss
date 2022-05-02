@@ -1,5 +1,36 @@
 @use '../styles/variables' as *;
 
+.mat-dialog-container {
+  padding: 0 !important;
+}
+
+button.snav-open-button {
+  background-color: rgba(31, 31, 31, 1);
+  cursor: pointer;
+  margin: 1rem 0;
+  width: 75px;
+  height: 30.77px;
+  border-top-left-radius: 78.96px;
+  border-bottom-left-radius: 78.96px;
+  img {
+    height: 9.47px;
+  }
+}
+
+.btn-container {
+  padding-top: 15px;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.dropdown-container {
+  width: 407px;
+  height: 600px;
+  box-sizing: border-box;
+  background: rgba(31, 31, 31, 1);
+}
+
 .lesson-image {
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -7,17 +38,6 @@
   background-size: cover;
   .content {
     width: 100%;
-    button.snav-open-button {
-      background-color: #1b1b1b1b;
-      cursor: pointer;
-      margin: 1rem 0;
-      width: 101px;
-      height: 30.77px;
-      border-radius: 78.96px;
-      img {
-        height: 9.47px;
-      }
-    }
     margin-left: 0px;
     padding: 0 16px;
     button.start-lesson {
@@ -136,9 +156,7 @@ cirrus-progress-card:last-child {
     .content {
       padding: 0 24px;
       button.snav-open-button {
-        width: 128px;
         height: 39px;
-        border-radius: 100px;
       }
       button.start-lesson {
         margin: 16px 0 8rem 0;

@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { CONTENT_TYPE, IContent, ILesson, IPlayListItem } from '@cirrus/models';
+import { ActivatedRoute, Route, Router } from '@angular/router';
+import { CONTENT_TYPE, IContent, ILesson, IPlayListItem, Lesson } from '@cirrus/models';
 import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 import { switchMap, take, tap } from 'rxjs/operators';
@@ -10,8 +10,10 @@ import { LessonState } from '../../store/reducers/lesson.reducer';
 import { selectLesson } from '../../store/selectors/lessons.selector';
 import {
   selectInstructorView,
+  selectIsScreenSmall,
   selectSideNavOpen,
 } from '../../store/selectors/view.selector';
+import { selectWorkBookRoutes } from '../../store/selectors/workbook-routes.selector';
 
 @Component({
   selector: 'cirrus-lesson',
@@ -25,13 +27,18 @@ export class LessonComponent implements OnInit, OnDestroy {
     .pipe(tap(lesson => (this._lesson = lesson)));
   instructorView$: Observable<boolean> =
     this.store.select(selectInstructorView);
+    isScreenSmall$: Observable<boolean> =
+    this.store.select(selectIsScreenSmall);
   sideNavOpen$: Observable<boolean> = this.store.select(selectSideNavOpen);
   lessonSubscription = new Subscription();
+  workbook$: Observable<any> =
+    this.store.select(selectWorkBookRoutes)
 
   constructor(
     private route: ActivatedRoute,
     private store: Store<LessonState>,
-    private coursesDialog: CoursesDialogService
+    private coursesDialog: CoursesDialogService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -101,4 +108,10 @@ export class LessonComponent implements OnInit, OnDestroy {
   openSideNav() {
     this.store.dispatch(setSideNavOpen({ sideNavOpen: true }));
   }
+
+  navigate(payload: any) {
+    const { course, lesson } = payload
+    this.router.navigate([`/courses/${course.id}/lessons/${lesson.id}`]);
+  }
+
 }

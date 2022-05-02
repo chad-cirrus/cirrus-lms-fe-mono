@@ -1,12 +1,15 @@
 /* eslint-disable @nrwl/nx/enforce-module-boundaries */
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import {
   IContent,
   ILesson,
   IProgress,
+  Lesson,
   LESSON_TYPE,
   ProgressType,
 } from '@cirrus/models';
+import { StagesOverlayComponent } from '../stages-overlay/stages-overlay.component';
 
 @Component({
   selector: 'cirrus-lesson-landing-page',
@@ -14,7 +17,9 @@ import {
   styleUrls: ['./lesson-landing-page.component.scss'],
 })
 export class LessonLandingPageComponent {
+  showFiller = false;
   @Input() lesson!: ILesson;
+  @Input() isScreenSmall!: boolean;
   @Input() progress: IProgress[] | null = [
     {
       type: ProgressType.Ground,
@@ -44,6 +49,7 @@ export class LessonLandingPageComponent {
   ];
   @Input() instructorView!: boolean;
   @Input() sideNavOpen!: boolean;
+  @Input() workbook: any;
   // eslint-disable-next-line @typescript-eslint/no-inferrable-types
   @Input() courseComplete: boolean = false;
   profileImageUrl = 'course/images/profile.png';
@@ -52,6 +58,10 @@ export class LessonLandingPageComponent {
   @Output() fetchMediaOutput = new EventEmitter<IContent>();
   @Output() fetchScorm = new EventEmitter<IContent>();
   @Output() openSideNav = new EventEmitter();
+  @Output() navigateToLesson = new EventEmitter<any>();
+
+  constructor(private dialog: MatDialog) {}
+
 
   get lessonImageFxLayoutAlign() {
     return this.sideNavOpen ? 'center center' : 'center start';
@@ -143,4 +153,25 @@ export class LessonLandingPageComponent {
   openSideNavClick() {
     this.openSideNav.emit();
   }
+
+  navigate(payload: any) {
+    this.navigateToLesson.emit(payload)
+  }
+
+  openModal() {
+    const dialogRef = this.dialog.open(StagesOverlayComponent, {
+      data: this.workbook,
+      maxWidth: '100vw',
+      maxHeight: '100vh',
+      height: '100%',
+      width: '100%'
+    })
+    dialogRef.afterClosed().subscribe(result => {
+      const payload = { lesson: result, course: this.workbook }
+      this.navigate(payload);
+    });
+
+
+  }
+
 }

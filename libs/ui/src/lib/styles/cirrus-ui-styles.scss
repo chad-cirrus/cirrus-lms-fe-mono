@@ -111,11 +111,16 @@ div {
   background-color: rgba(0, 0, 0, 0.69);
 }
 
+
+
+
 .cirrus-media-player {
   .mat-dialog-container {
-    border-radius: 16px;
+    border-radius: 0;
+    padding: 0;
   }
 }
+
 
 .mat-drawer-container {
   overflow: initial !important;

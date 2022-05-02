@@ -5,4 +5,7 @@
   [instructorView]="(instructorView$ | async)!"
   [sideNavOpen]="(sideNavOpen$ | async)!"
   (openSideNav)="openSideNav()"
+  [workbook]="(workbook$ | async)!"
+  (navigateToLesson)="navigate($event)"
+  [isScreenSmall]="(isScreenSmall$ | async)!"
 ></cirrus-lesson-landing-page>
