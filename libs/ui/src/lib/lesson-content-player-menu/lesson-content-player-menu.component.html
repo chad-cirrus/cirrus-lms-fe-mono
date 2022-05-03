@@ -9,6 +9,7 @@
       fxLayout="row"
       fxLayoutAlign="start center"
       fxLayoutGap="16px"
+      (click)="emitPlayContent(item.id)"
     >
       <span><img [src]="item.icon" alt="icon" /></span>
       <span class="item-text">{{ item.text }}</span>

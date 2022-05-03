@@ -16,6 +16,8 @@ export * from './lib/ICirrusUser';
 export * from './lib/LessonType';
 export * from './lib/AssessmentType';
 export * from './lib/ROLE';
+export * from './lib/IContentPlayerMenuItem';
+export * from './lib/ContentType';
 
 export * from './lib/classes/Content';
 export * from './lib/classes/ContentTask';
@@ -25,3 +27,5 @@ export * from './lib/classes/Lesson';
 export * from './lib/classes/LessonHelper';
 
 export * from './testing/testData';
+export * from './testing/testData853b';
+export * from './testing/testData855b';

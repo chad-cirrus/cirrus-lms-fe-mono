@@ -22,18 +22,22 @@ Primary.args = {
     {
       icon: 'courses/images/svg/assessment_lc_icon.svg',
       text: 'Intro',
+      id: 0,
     },
     {
       icon: 'courses/images/svg/video_play.svg',
       text: 'Review Lesson Objective',
+      id: 0,
     },
     {
       icon: 'courses/images/svg/quiz_lc_icon.svg',
       text: 'Completion Standards',
+      id: 0,
     },
     {
       icon: 'courses/images/svg/video_play.svg',
       text: 'Preflight Planning and Preparation',
+      id: 0,
     },
   ],
 };

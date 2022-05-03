@@ -18,17 +18,24 @@ import { CdkAccordionModule } from '@angular/cdk/accordion';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { MenuSliderComponent } from './menu-slider/menu-slider.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
-
 import { StagesOverlayComponent } from './stages-overlay/stages-overlay.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatDialogModule, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-
+import {
+  MatDialogModule,
+  MAT_DIALOG_DATA,
+  MatDialogRef,
+} from '@angular/material/dialog';
 
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { LessonContentPlayerComponent } from './lesson-content-player/lesson-content-player.component';
-import { LessonContentPlayerMenuComponent } from './lesson-content-player-menu/lesson-content-player-menu.component'
-
+import { LessonContentPlayerMenuComponent } from './lesson-content-player-menu/lesson-content-player-menu.component';
+import { VideoPlayerComponent } from './video-player/video-player.component';
+import { PlaceholderDirective } from './helpers/Placeholder.directive';
+import { DownloadContentComponent } from './download-content/download-content.component';
+import { ContentImageComponent } from './content-image/content-image.component';
+import { ContentRichTextComponent } from './content-rich-text/content-rich-text.component';
+import { CirrusSanitizerService } from './shared/cirrus-sanitizer.service';
+import { AssessmentComponent } from './assessment/assessment.component';
 
 @NgModule({
   imports: [
@@ -42,12 +49,7 @@ import { LessonContentPlayerMenuComponent } from './lesson-content-player-menu/l
     BrowserAnimationsModule,
     CdkAccordionModule,
     MatSidenavModule,
-    MatDialogModule
-
-  ],
-  providers: [
-    { provide: MAT_DIALOG_DATA, useValue: {} },
-    { provide: MatDialogRef, useValue: {} }
+    MatDialogModule,
   ],
   declarations: [
     LessonLandingPageComponent,
@@ -65,7 +67,12 @@ import { LessonContentPlayerMenuComponent } from './lesson-content-player-menu/l
     StagesOverlayComponent,
     LessonContentPlayerComponent,
     LessonContentPlayerMenuComponent,
-
+    VideoPlayerComponent,
+    PlaceholderDirective,
+    DownloadContentComponent,
+    ContentImageComponent,
+    ContentRichTextComponent,
+    AssessmentComponent,
   ],
   exports: [
     LessonLandingPageComponent,
@@ -82,7 +89,16 @@ import { LessonContentPlayerMenuComponent } from './lesson-content-player-menu/l
     CdkAccordionModule,
     LessonContentPlayerComponent,
     LessonContentPlayerMenuComponent,
-
+    VideoPlayerComponent,
+    DownloadContentComponent,
+    ContentImageComponent,
+    ContentRichTextComponent,
+    AssessmentComponent,
+  ],
+  providers: [
+    { provide: MAT_DIALOG_DATA, useValue: {} },
+    { provide: MatDialogRef, useValue: {} },
+    CirrusSanitizerService,
   ],
 })
 export class UiModule {}

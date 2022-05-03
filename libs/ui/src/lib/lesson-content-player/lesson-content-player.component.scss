@@ -11,8 +11,9 @@
 .center {
   height: 95vh;
   padding-left: 16px;
-  mat-dialog-content {
+  .lcp-content {
     width: 100%;
+    max-height: max-content;
     .header {
       font-family: 'Berthold Akzidenz Grotesk BE';
       font-style: normal;

@@ -9,13 +9,14 @@ div.subtitle {
 }
 
 .item-container {
-  padding: 16px 0;
+  padding: 16px;
   height: 4rem;
-  .media-control {
-    img:hover {
-      cursor: pointer;
-    }
-  }
+}
+
+.item-container:hover {
+  cursor: pointer;
+  background-color: $lesson-content-item-hover;
+  border-radius: 6px;
 }
 
 .item-container.border {

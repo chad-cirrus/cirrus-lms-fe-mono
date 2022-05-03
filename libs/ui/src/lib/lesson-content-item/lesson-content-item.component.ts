@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { IContent, CONTENT_TYPE, CONTENT_STATUS } from '@cirrus/models';
+import { mapContentTypeToIcon } from '../helpers/ContentTypeToIconMapper';
 
 @Component({
   selector: 'cirrus-lesson-content-item',
@@ -13,7 +14,7 @@ export class LessonContentItemComponent {
   @Input()
   set content(value: IContent) {
     this._content = value;
-    this._content_type_icon = this.mapContentTypeToIcon(value.content_type);
+    this._content_type_icon = mapContentTypeToIcon(value.content_type);
   }
 
   get content() {
@@ -53,30 +54,5 @@ export class LessonContentItemComponent {
 
   fetchMedia() {
     this.fetchMediaOutput.next(this.content);
-  }
-
-  private mapContentTypeToIcon(contentType: number): string {
-    switch (contentType) {
-      case 0:
-        return 'courses/images/svg/video_play.svg';
-      case 2:
-        return 'courses/images/svg/quiz_lc_icon.svg';
-      case 4:
-        return 'courses/images/svg/document_button.svg';
-      case 5:
-        return 'courses/images/svg/quiz_lc_icon.svg';
-      case 6:
-        return 'courses/images/svg/document_button.svg';
-      case 8:
-        return 'courses/images/svg/rich_text_icon.svg';
-      case 9:
-        return 'courses/images/svg/assessment_lc_icon.svg';
-      case 10:
-        return 'courses/images/svg/assessment_lc_icon.svg';
-      case 11:
-        return 'courses/images/svg/image_lc_icon.svg';
-      default:
-        return 'courses/images/svg/document_button.svg';
-    }
   }
 }

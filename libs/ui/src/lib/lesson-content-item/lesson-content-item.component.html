@@ -3,6 +3,7 @@
   [ngClass]="{ border: !lastItem }"
   fxLayout="row"
   fxLayoutAlign="space-between center"
+  (click)="fetchMedia()"
 >
   <div
     class="media-control"
@@ -10,7 +11,7 @@
     fxLayoutAlign="start center"
     fxLayoutGap="24px"
   >
-    <img [src]="this.content_type_icon" (click)="fetchMedia()" />
+    <img [src]="this.content_type_icon" />
     <div class="title">{{ content?.title }}</div>
   </div>
   <div

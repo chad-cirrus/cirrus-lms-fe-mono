@@ -16,20 +16,12 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthHttpInterceptor } from './interceptors/AuthHttpInterceptor';
 import { LessonsEffects } from './store/effects/lessons.effects';
-import { MediaContentDialogComponent } from './dialog-service/media-content-dialog/media-content-dialog.component';
 import { WorkbookRoutesEffects } from './store/effects/workbook-routes.effects';
 import { LessonComponent } from './course/lesson/lesson.component';
-import {
-  MatDialogConfig,
-  MatDialogModule,
-  MAT_DIALOG_DEFAULT_OPTIONS,
-} from '@angular/material/dialog';
-import { CoursesDialogService } from './dialog-service/cirrus-dialog.service';
+import { MatDialogModule } from '@angular/material/dialog';
 import { TopNavbarComponent } from './top-navbar/top-navbar.component';
 import { ScormContentDialogComponent } from './dialog-service/scorm-content-dialog/scorm-content-dialog.component';
-import { ContentPlayerComponent } from './dialog-service/content-player/content-player.component';
 import { MediaServerService } from './media.service';
-import { ScormComponent } from './dialog-service/content-player/scorm/scorm.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SideNavComponent } from './course/side-nav/side-nav.component';
 import { HeaderComponent } from './course/header/header.component';
@@ -40,17 +32,15 @@ import { UserMenusComponent } from './course/header/user-menus/user-menus.compon
 import { OverlayModule } from '@angular/cdk/overlay';
 import { A11yModule } from '@angular/cdk/a11y';
 import { HamburgerMenuComponent } from './course/header/hamburger-menu/hamburger-menu.component';
+import { ContentPlayerModule } from './content-player/content-player.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     CourseComponent,
-    MediaContentDialogComponent,
     LessonComponent,
     TopNavbarComponent,
     ScormContentDialogComponent,
-    ContentPlayerComponent,
-    ScormComponent,
     SideNavComponent,
     HeaderComponent,
     NoopComponent,
@@ -75,25 +65,14 @@ import { HamburgerMenuComponent } from './course/header/hamburger-menu/hamburger
     MatBadgeModule,
     OverlayModule,
     A11yModule,
+    ContentPlayerModule,
   ],
   providers: [
-    CoursesDialogService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthHttpInterceptor,
       multi: true,
     },
-    // {
-    //   provide: MAT_DIALOG_DEFAULT_OPTIONS,
-    //   useValue: {
-    //     ...new MatDialogConfig(),
-    //     width: '66vw',
-    //     closeOnNavigation: true,
-    //     panelClass: 'cirrus-media-player',
-    //     disableClose: true,
-    //     maxHeight: '66vw',
-    //   } as MatDialogConfig,
-    // },
     MediaServerService,
   ],
   bootstrap: [AppComponent],

@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MediaContentDialogComponent } from './media-content-dialog.component';
+import { ContentRichTextComponent } from './content-rich-text.component';
 
-describe('MediaContentDialogComponent', () => {
-  let component: MediaContentDialogComponent;
-  let fixture: ComponentFixture<MediaContentDialogComponent>;
+describe('ContentRichTextComponent', () => {
+  let component: ContentRichTextComponent;
+  let fixture: ComponentFixture<ContentRichTextComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ MediaContentDialogComponent ]
+      declarations: [ ContentRichTextComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MediaContentDialogComponent);
+    fixture = TestBed.createComponent(ContentRichTextComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

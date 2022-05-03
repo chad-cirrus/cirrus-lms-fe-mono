@@ -1,10 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, Route, Router } from '@angular/router';
-import { CONTENT_TYPE, IContent, ILesson, IPlayListItem, Lesson } from '@cirrus/models';
+import { ActivatedRoute, Router } from '@angular/router';
+import { IContent, ILesson } from '@cirrus/models';
 import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
-import { switchMap, take, tap } from 'rxjs/operators';
-import { CoursesDialogService } from '../../dialog-service/cirrus-dialog.service';
+import { take, tap } from 'rxjs/operators';
+import { ContentPlayerDialogService } from '../../content-player/content-player-dialog.service';
 import { fetchLessons, setSideNavOpen } from '../../store/actions';
 import { LessonState } from '../../store/reducers/lesson.reducer';
 import { selectLesson } from '../../store/selectors/lessons.selector';
@@ -27,17 +27,15 @@ export class LessonComponent implements OnInit, OnDestroy {
     .pipe(tap(lesson => (this._lesson = lesson)));
   instructorView$: Observable<boolean> =
     this.store.select(selectInstructorView);
-    isScreenSmall$: Observable<boolean> =
-    this.store.select(selectIsScreenSmall);
+  isScreenSmall$: Observable<boolean> = this.store.select(selectIsScreenSmall);
   sideNavOpen$: Observable<boolean> = this.store.select(selectSideNavOpen);
   lessonSubscription = new Subscription();
-  workbook$: Observable<any> =
-    this.store.select(selectWorkBookRoutes)
+  workbook$: Observable<any> = this.store.select(selectWorkBookRoutes);
 
   constructor(
     private route: ActivatedRoute,
     private store: Store<LessonState>,
-    private coursesDialog: CoursesDialogService,
+    private contentPlayerDialogService: ContentPlayerDialogService,
     private router: Router
   ) {}
 
@@ -56,53 +54,20 @@ export class LessonComponent implements OnInit, OnDestroy {
   }
 
   fetchMedia(content: IContent) {
-    console.log(content, this._lesson);
-
-    this.coursesDialog.displayContentPlayerComponent(this._lesson, content);
-
-    // this.coursesDialog
-    //   .displayMediaContent(content)
-    //   .afterClosed()
-    //   .subscribe(() => console.log('closed'));
-
-    // if (content.content_type === CONTENT_TYPE.vimeo) {
-    //   this.fetchVimeo(content);
-    // } else {
-    //   this.fetchUnknownMedia(content);
-    // }
-  }
-
-  fetchUnknownMedia(content: IContent) {
-    this.coursesDialog.displayUnknownMedia(content).subscribe(console.log);
+    this.contentPlayerDialogService.displayContentPlayerComponent(
+      this._lesson,
+      content.id
+    );
   }
 
   fetchScorm(content: IContent) {
     this.lesson$.pipe(take(1)).subscribe(lesson => {
       console.log(lesson);
-      this.coursesDialog
-        .displayContentPlayerComponent(lesson, content)
+      this.contentPlayerDialogService
+        .displayContentPlayerComponent(lesson, content.id)
         .afterClosed()
         .subscribe(() => console.log('scorm is closed'));
     });
-  }
-
-  fetchVimeo(content: IContent) {
-    const trimmedUrl = content.url?.trim();
-
-    if (typeof trimmedUrl != 'undefined' && trimmedUrl && trimmedUrl.length) {
-      this.store
-        .select(selectInstructorView)
-        .pipe(
-          take(1),
-          switchMap(view => {
-            console.log('view', view); // todo: switch videos based on instructor view
-            return this.coursesDialog
-              .displayMediaContent(content)
-              .afterClosed();
-          })
-        )
-        .subscribe(() => console.log('callback goes here'));
-    }
   }
 
   openSideNav() {
@@ -110,8 +75,7 @@ export class LessonComponent implements OnInit, OnDestroy {
   }
 
   navigate(payload: any) {
-    const { course, lesson } = payload
+    const { course, lesson } = payload;
     this.router.navigate([`/courses/${course.id}/lessons/${lesson.id}`]);
   }
-
 }

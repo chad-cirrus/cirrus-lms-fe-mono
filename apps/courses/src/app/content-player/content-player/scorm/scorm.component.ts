@@ -5,17 +5,13 @@ import {
   AfterViewInit,
   Component,
   EventEmitter,
-  Input,
   Output,
-  SecurityContext,
   ViewChild,
 } from '@angular/core';
-import { DomSanitizer, SafeValue } from '@angular/platform-browser';
+import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { IContent, ILesson } from '@cirrus/models';
 import { environment } from 'apps/courses/src/environments/environment';
-import { of } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { LessonContentComponent } from 'libs/ui/src/lib/LessonContentComponent';
 import { MediaServerService } from '../../../media.service';
 
 @Component({
@@ -23,10 +19,10 @@ import { MediaServerService } from '../../../media.service';
   templateUrl: './scorm.component.html',
   styleUrls: ['./scorm.component.scss'],
 })
-export class ScormComponent implements AfterViewInit {
-  @Input() content!: IContent;
-  @Input() lesson!: ILesson;
-  @Input() lesson_id!: number;
+export class ScormComponent
+  extends LessonContentComponent
+  implements AfterViewInit
+{
   @Output() create_scorm: EventEmitter<any> = new EventEmitter<any>();
   @Output() update_scorm: EventEmitter<any> = new EventEmitter<any>();
   @ViewChild('frame') frame: any;
@@ -42,6 +38,7 @@ export class ScormComponent implements AfterViewInit {
     private router: Router,
     private mediaServerService: MediaServerService
   ) {
+    super();
     const route = this.router.url;
     this.api = {
       LMSInitialize: function () {
@@ -117,18 +114,8 @@ export class ScormComponent implements AfterViewInit {
     console.log('Route: ', 'scorm.component.ts');
     this.loading = true;
     const { blob_directory } = this.content || '';
-    this.mediaServerService
-      .scormStartingUrl(blob_directory)
-      .pipe(
-        catchError(err => {
-          this.url = null;
-          console.log(err);
-          this.loading = false;
-
-          return of('');
-        })
-      )
-      .subscribe(url => {
+    this.mediaServerService.scormStartingUrl(blob_directory).subscribe(
+      url => {
         console.log(url);
         if (url) {
           this.url = this.sanitizer.bypassSecurityTrustResourceUrl(
@@ -141,6 +128,12 @@ export class ScormComponent implements AfterViewInit {
           this.url = null;
         }
         this.loading = false;
-      });
+      },
+      error => {
+        this.url = null;
+        console.log(error);
+        this.loading = false;
+      }
+    );
   }
 }

@@ -8,7 +8,7 @@ import { LessonContentPlayerMenuComponent } from '../lesson-content-player-menu/
 import { LessonContentPlayerComponent } from './lesson-content-player.component';
 
 const lesson: ILesson = testData;
-const content: IContent = testData.contents[0];
+const id: number = testData.contents[0].id;
 
 export default {
   title: 'LessonContentPlayerComponent',
@@ -36,7 +36,7 @@ const Template: Story<LessonContentPlayerComponent> = (
 export const Primary = Template.bind({});
 Primary.args = {
   data: {
-    content,
+    id,
     lesson,
   },
 };
