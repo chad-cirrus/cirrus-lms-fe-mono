@@ -6,6 +6,7 @@ export * from './lib/download-content/download-content.component';
 export * from './lib/video-player/video-player.component';
 export * from './lib/content-rich-text/content-rich-text.component';
 export * from './lib/content-image/content-image.component';
+export * from './lib/interactive/interactive.component';
 export * from './lib/assessment/assessment.component';
 export * from './lib/LessonContentComponent';
 export * from './lib/helpers/Placeholder.directive';

@@ -38,6 +38,7 @@ import { ContentImageComponent } from './content-image/content-image.component';
 import { ContentRichTextComponent } from './content-rich-text/content-rich-text.component';
 import { CirrusSanitizerService } from './shared/cirrus-sanitizer.service';
 import { AssessmentComponent } from './assessment/assessment.component';
+import { InteractiveComponent } from './interactive/interactive.component';
 
 @NgModule({
   imports: [
@@ -75,6 +76,7 @@ import { AssessmentComponent } from './assessment/assessment.component';
     ContentImageComponent,
     ContentRichTextComponent,
     AssessmentComponent,
+    InteractiveComponent,
   ],
   exports: [
     LessonLandingPageComponent,
@@ -97,6 +99,7 @@ import { AssessmentComponent } from './assessment/assessment.component';
     ContentImageComponent,
     ContentRichTextComponent,
     AssessmentComponent,
+    InteractiveComponent,
   ],
   providers: [
     { provide: MAT_DIALOG_DATA, useValue: {} },
