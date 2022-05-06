@@ -89,6 +89,7 @@ export class LessonComponent implements OnInit, OnDestroy {
 
   navigate(payload: any) {
     this.sidenav.close();
+    this.store.dispatch(setSideNavOpen({ sideNavOpen: false }));
     const { course, lesson } = payload;
     this.router.navigate([`/courses/${course.id}/lessons/${lesson.id}`]);
   }

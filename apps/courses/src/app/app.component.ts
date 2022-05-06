@@ -89,17 +89,6 @@ export class AppComponent implements OnInit {
     this.viewToggle.valueChanges.subscribe(instructorView =>
       this.store.dispatch(appActions.setInstructorView({ instructorView }))
     );
-
-    this.sideNavOpen$.subscribe(open => {
-      if (open) {
-        this.sideNav.toggle();
-      }
-    });
-
-    this.scrolledPast$.subscribe(past => {
-      this.ftgNotPilot = !past ? 160 : 48;
-      this.ftgPilot = !past ? 112 : 0;
-    });
   }
 
   openHamburgerMenu() {
