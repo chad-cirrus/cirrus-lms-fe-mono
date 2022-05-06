@@ -1,17 +1,17 @@
-import { IWorkBookRoutes } from '@cirrus/models';
+import { IWorkBook } from '@cirrus/models';
 import { createAction, props } from '@ngrx/store';
 
-export const fetchWorkBookRoutes = createAction(
+export const fetchWorkbook = createAction(
   '[Courses Component] Fetch Workbook Routes',
   props<{ courseId: number }>()
 );
 
-export const fetchWorkBookRoutesSuccess = createAction(
+export const fetchWorkbookSuccess = createAction(
   '[Courses Component] Fetch Workbook Routes Success',
-  props<{ routes: IWorkBookRoutes[] }>()
+  props<{ workbook: IWorkBook }>()
 );
 
-export const fetchWorkBookRoutesFailure = createAction(
+export const fetchWorkbookFailure = createAction(
   '[Courses Component] Fetch Workbook Routes Failure',
   props<{ error: any }>()
 );

@@ -1,38 +1,48 @@
-import { IWorkBookRoutes } from '@cirrus/models';
+import { IWorkBook } from '@cirrus/models';
 import { createReducer, on } from '@ngrx/store';
 import {
-  fetchWorkBookRoutes,
-  fetchWorkBookRoutesFailure,
-  fetchWorkBookRoutesSuccess,
+  fetchWorkbook,
+  fetchWorkbookFailure,
+  fetchWorkbookSuccess,
 } from '../actions/workbook-routes.actions';
 
 export interface WorkbookRoutesState {
   busy: boolean;
   error: any;
-  routes: IWorkBookRoutes[];
+  workbook: IWorkBook;
 }
+
+const initialWorkbook: IWorkBook = {
+  id: 0,
+  progress: {
+    id: 0,
+    status: '',
+  },
+  name: '',
+  stages: [],
+};
 
 export const initialWorkbookRoutesState: WorkbookRoutesState = {
   busy: false,
   error: null,
-  routes: [],
+  workbook: initialWorkbook,
 };
 
 export const reducer = createReducer(
   initialWorkbookRoutesState,
-  on(fetchWorkBookRoutes, state => ({ ...state, busy: true, error: null })),
-  on(fetchWorkBookRoutesSuccess, (state, { routes }) => ({
+  on(fetchWorkbook, state => ({ ...state, busy: true, error: null })),
+  on(fetchWorkbookSuccess, (state, { workbook }) => ({
     busy: false,
     error: null,
-    routes,
+    workbook,
   })),
-  on(fetchWorkBookRoutesFailure, (state, { error }) => ({
+  on(fetchWorkbookFailure, (state, { error }) => ({
     busy: false,
-    routes: [],
+    workbook: initialWorkbook,
     error,
   }))
 );
 
-export const getRoutes = (state: WorkbookRoutesState) => state.routes;
+export const getWorkbook = (state: WorkbookRoutesState) => state.workbook;
 export const getRoutesBusy = (state: WorkbookRoutesState) => state.busy;
 export const getRoutesError = (state: WorkbookRoutesState) => state.error;

@@ -1,13 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import {
-  IInitialFile,
-  ILesson,
-  IWorkBookRoutes,
-  LessonHelper,
-} from '@cirrus/models';
+import { IInitialFile, ILesson, IWorkBook, LessonHelper } from '@cirrus/models';
 import { Observable } from 'rxjs';
-import { count, map, tap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 
 @Injectable({
@@ -16,10 +11,11 @@ import { environment } from '../../environments/environment';
 export class CoursesService {
   private coursesUrl = 'api/v4/courses';
   private scormUrl = 'scorm';
-  notificationsCount$ = this.http.get<Notification[]>(`${environment.baseUrl}/api/v3/notifications/my-notifications`)
-  .pipe(
-    map(notif => notif.length)
-  )
+  notificationsCount$ = this.http
+    .get<Notification[]>(
+      `${environment.baseUrl}/api/v3/notifications/my-notifications`
+    )
+    .pipe(map(notif => notif.length));
 
   constructor(private http: HttpClient) {}
 
@@ -44,9 +40,8 @@ export class CoursesService {
       );
   }
 
-
-  getNavBarRoutes(courseId: number): Observable<IWorkBookRoutes[]> {
-    return this.http.get<IWorkBookRoutes[]>(
+  getWorkbook(courseId: number): Observable<IWorkBook> {
+    return this.http.get<IWorkBook>(
       `${environment.baseUrl}/${this.coursesUrl}/${courseId}/workbook`
     );
   }

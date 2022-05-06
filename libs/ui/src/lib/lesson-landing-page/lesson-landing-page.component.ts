@@ -1,10 +1,18 @@
 /* eslint-disable @nrwl/nx/enforce-module-boundaries */
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ViewChild,
+  ViewRef,
+} from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import {
   IContent,
   ILesson,
-  IProgress,
+  ICourseProgress,
   Lesson,
   LESSON_TYPE,
   ProgressType,
@@ -17,10 +25,12 @@ import { StagesOverlayComponent } from '../stages-overlay/stages-overlay.compone
   styleUrls: ['./lesson-landing-page.component.scss'],
 })
 export class LessonLandingPageComponent {
+  @ViewChild('drawer') drawer: any;
   showFiller = false;
   @Input() lesson!: ILesson;
+  @Input() lessonId!: number;
   @Input() isScreenSmall!: boolean;
-  @Input() progress: IProgress[] | null = [
+  @Input() progress: ICourseProgress[] | null = [
     {
       type: ProgressType.Ground,
       completedCourses: 5,
@@ -61,7 +71,6 @@ export class LessonLandingPageComponent {
   @Output() navigateToLesson = new EventEmitter<any>();
 
   constructor(private dialog: MatDialog) {}
-
 
   get lessonImageFxLayoutAlign() {
     return this.sideNavOpen ? 'center center' : 'center start';
@@ -155,7 +164,8 @@ export class LessonLandingPageComponent {
   }
 
   navigate(payload: any) {
-    this.navigateToLesson.emit(payload)
+    this.drawer.close();
+    this.navigateToLesson.emit(payload);
   }
 
   openModal() {
@@ -164,14 +174,15 @@ export class LessonLandingPageComponent {
       maxWidth: '100vw',
       maxHeight: '100vh',
       height: '100%',
-      width: '100%'
-    })
+      width: '100%',
+    });
     dialogRef.afterClosed().subscribe(result => {
-      const payload = { lesson: result, course: this.workbook }
+      const payload = { lesson: result, course: this.workbook };
       this.navigate(payload);
     });
-
-
   }
 
+  emitOpenSideNav() {
+    this.openSideNav.emit();
+  }
 }

@@ -42,9 +42,15 @@
 .lesson-content-container {
   padding: 20px 31px;
 }
+.lesson-content-container-active {
+  padding: 20px 31px;
+  background-color: $border-grey;
+}
 
 .lesson-content-container:hover {
   cursor: pointer;
+  background-color: $border-grey;
 }
+
 
 

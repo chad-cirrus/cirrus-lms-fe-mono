@@ -3,10 +3,9 @@ import { Store } from '@ngrx/store';
 import { delay, distinctUntilChanged, map, share } from 'rxjs/operators';
 import { AppService } from './app.service';
 import * as appActions from './store/actions';
-import { fetchWorkBookRoutes } from './store/actions/workbook-routes.actions';
+import { fetchWorkbook } from './store/actions/workbook-routes.actions';
 import { AppState } from './store/reducers';
 import { selectLessonStateBusy } from './store/selectors/lessons.selector';
-import { selectWorkBookRoutes } from './store/selectors/workbook-routes.selector';
 import { setCirrusUser } from './store/actions';
 import { ICirrusUser } from '@cirrus/models';
 import {
@@ -33,7 +32,6 @@ export class AppComponent implements OnInit {
   viewToggle = new FormControl(false);
   toggle$ = this.viewToggle.valueChanges;
   lessonStateBusy$ = this.store.select(selectLessonStateBusy).pipe(delay(1));
-  workbookRoutes$ = this.store.select(selectWorkBookRoutes);
   role$ = this.store.select(selectRole);
   cirrusUser$ = this.store.select(selectCirrusUser);
   cirrusImpersonateReturnUser$!: Observable<ICirrusUser>;
@@ -73,7 +71,7 @@ export class AppComponent implements OnInit {
 
     this.courseId$.subscribe(id => {
       if (id) {
-        this.store.dispatch(fetchWorkBookRoutes({ courseId: +id }));
+        this.store.dispatch(fetchWorkbook({ courseId: +id }));
       }
     });
 

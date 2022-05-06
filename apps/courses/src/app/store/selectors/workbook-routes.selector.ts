@@ -5,9 +5,9 @@ import * as fromReducer from '../reducers/workbook-routes.reducer';
 export const selectWorkbookRoutesFeature =
   createFeatureSelector<WorkbookRoutesState>('routes');
 
-export const selectWorkBookRoutes = createSelector(
+export const selectWorkbook = createSelector(
   selectWorkbookRoutesFeature,
-  fromReducer.getRoutes
+  fromReducer.getWorkbook
 );
 
 export const selectWorkbookRoutesBusy = createSelector(

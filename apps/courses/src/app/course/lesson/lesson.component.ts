@@ -1,9 +1,10 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { MatSidenav } from '@angular/material/sidenav';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IContent, ILesson } from '@cirrus/models';
 import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
-import { take, tap } from 'rxjs/operators';
+import { filter, switchMap, take, tap } from 'rxjs/operators';
 import { ContentPlayerDialogService } from '../../content-player/content-player-dialog.service';
 import { fetchLessons, setSideNavOpen } from '../../store/actions';
 import { LessonState } from '../../store/reducers/lesson.reducer';
@@ -13,7 +14,7 @@ import {
   selectIsScreenSmall,
   selectSideNavOpen,
 } from '../../store/selectors/view.selector';
-import { selectWorkBookRoutes } from '../../store/selectors/workbook-routes.selector';
+import { selectWorkbook } from '../../store/selectors/workbook-routes.selector';
 
 @Component({
   selector: 'cirrus-lesson',
@@ -30,7 +31,11 @@ export class LessonComponent implements OnInit, OnDestroy {
   isScreenSmall$: Observable<boolean> = this.store.select(selectIsScreenSmall);
   sideNavOpen$: Observable<boolean> = this.store.select(selectSideNavOpen);
   lessonSubscription = new Subscription();
-  workbook$: Observable<any> = this.store.select(selectWorkBookRoutes);
+  workbook$ = this.store
+    .select(selectWorkbook)
+    .pipe(filter(workbook => workbook.id !== 0));
+  lessonId!: number;
+  @ViewChild('snav') sidenav!: MatSidenav;
 
   constructor(
     private route: ActivatedRoute,
@@ -44,6 +49,7 @@ export class LessonComponent implements OnInit, OnDestroy {
 
     this.lessonSubscription.add(
       this.route.params.subscribe(({ courseId, lessonId }) => {
+        this.lessonId = parseInt(lessonId);
         this.store.dispatch(fetchLessons({ courseId, lessonId }));
       })
     );
@@ -71,10 +77,18 @@ export class LessonComponent implements OnInit, OnDestroy {
   }
 
   openSideNav() {
+    console.log('open open open');
     this.store.dispatch(setSideNavOpen({ sideNavOpen: true }));
+    this.sidenav.toggle();
+  }
+
+  close() {
+    this.store.dispatch(setSideNavOpen({ sideNavOpen: false }));
+    this.sidenav.toggle();
   }
 
   navigate(payload: any) {
+    this.sidenav.close();
     const { course, lesson } = payload;
     this.router.navigate([`/courses/${course.id}/lessons/${lesson.id}`]);
   }

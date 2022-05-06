@@ -18,6 +18,7 @@ import { CdkAccordionModule } from '@angular/cdk/accordion';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { MenuSliderComponent } from './menu-slider/menu-slider.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 import { StagesOverlayComponent } from './stages-overlay/stages-overlay.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import {
@@ -29,6 +30,7 @@ import {
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { LessonContentPlayerComponent } from './lesson-content-player/lesson-content-player.component';
 import { LessonContentPlayerMenuComponent } from './lesson-content-player-menu/lesson-content-player-menu.component';
+
 import { VideoPlayerComponent } from './video-player/video-player.component';
 import { PlaceholderDirective } from './helpers/Placeholder.directive';
 import { DownloadContentComponent } from './download-content/download-content.component';
@@ -89,6 +91,7 @@ import { AssessmentComponent } from './assessment/assessment.component';
     CdkAccordionModule,
     LessonContentPlayerComponent,
     LessonContentPlayerMenuComponent,
+    StagesOverlayComponent,
     VideoPlayerComponent,
     DownloadContentComponent,
     ContentImageComponent,

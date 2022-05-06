@@ -1,11 +1,37 @@
-<cirrus-lesson-landing-page
-  [lesson]="(lesson$ | async)!"
-  (fetchMediaOutput)="fetchMedia($event)"
-  (fetchScorm)="fetchScorm($event)"
-  [instructorView]="(instructorView$ | async)!"
-  [sideNavOpen]="(sideNavOpen$ | async)!"
-  (openSideNav)="openSideNav()"
-  [workbook]="(workbook$ | async)!"
-  (navigateToLesson)="navigate($event)"
-  [isScreenSmall]="(isScreenSmall$ | async)!"
-></cirrus-lesson-landing-page>
+<mat-sidenav-container>
+  <mat-sidenav
+    #snav
+    mode="over"
+    position="end"
+    fixedInViewport="true"
+    fixedTopGap="52"
+  >
+    <mat-nav-list>
+      <ng-container *ngIf="workbook$ | async as workbook">
+        <ng-container *ngIf="lesson$ | async as lesson">
+          <cirrus-stages-overlay
+            [workbook]="workbook"
+            (closeSideNav)="close()"
+            (navigateToLesson)="navigate($event)"
+            [lessonId]="lesson.id"
+          ></cirrus-stages-overlay>
+        </ng-container>
+      </ng-container>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <cirrus-lesson-landing-page
+      [lesson]="(lesson$ | async)!"
+      (fetchMediaOutput)="fetchMedia($event)"
+      (fetchScorm)="fetchScorm($event)"
+      [instructorView]="(instructorView$ | async)!"
+      [sideNavOpen]="(sideNavOpen$ | async)!"
+      (openSideNav)="openSideNav()"
+      [workbook]="(workbook$ | async)!"
+      (navigateToLesson)="navigate($event)"
+      [isScreenSmall]="(isScreenSmall$ | async)!"
+      [lessonId]="lessonId"
+    ></cirrus-lesson-landing-page>
+  </mat-sidenav-content>
+</mat-sidenav-container>

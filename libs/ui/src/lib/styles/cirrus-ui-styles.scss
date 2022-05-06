@@ -111,13 +111,14 @@ div {
   background-color: rgba(0, 0, 0, 0.69);
 }
 
+.mat-dialog-container {
+  padding: 0 !important;
 .cirrus-media-player {
   .mat-dialog-container {
     border-radius: 0;
     padding: 0;
   }
 }
-
 
 .mat-drawer-container {
   overflow: initial !important;
@@ -135,3 +136,7 @@ img {
   max-width: 90%;
 }
 
+.mat-drawer.mat-drawer-end {
+  background: transparent;
+}
+}

@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { IProgress, ProgressType } from '@cirrus/models';
+import { ICourseProgress, ProgressType } from '@cirrus/models';
 
 export interface IProgressView {
   text: string;
@@ -34,7 +34,7 @@ export class ProgressCardComponent {
   }
 
   @Input()
-  set progress(progress: IProgress) {
+  set progress(progress: ICourseProgress) {
     this._text = this.mapProgressTypeToUrl(progress.type).text;
     this._imageIcon = this.mapProgressTypeToUrl(progress.type).imageIcon;
     this._completedCourses = progress.completedCourses;

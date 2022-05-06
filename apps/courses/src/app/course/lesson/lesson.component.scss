@@ -1,0 +1,16 @@
+button {
+  position: sticky;
+  top: 2rem;
+  right: 0;
+}
+
+mat-sidenav {
+  min-width: 100vw;
+  min-height: 100vh;
+}
+
+@media (min-width: 960px) {
+  mat-sidenav {
+    min-width: 30rem;
+  }
+}

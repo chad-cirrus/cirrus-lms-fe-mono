@@ -1,4 +1,4 @@
-<div *ngIf="lesson">
+<div *ngIf="lesson" [ngStyle]="{ position: sideNavOpen ? 'fixed' : 'inherit' }">
   <div
     class="lesson-image"
     [ngClass]="
@@ -14,8 +14,8 @@
         <button
           type="button"
           mat-raised-button
-          class="snav-open-button"
-          (click)="isScreenSmall ? openModal() : drawer.toggle()"
+          [ngClass]="isScreenSmall ? 'snav-mobile' : 'snav-desktop'"
+          (click)="emitOpenSideNav()"
         >
           <div
             fxLayout="row"
@@ -27,19 +27,6 @@
           </div>
         </button>
       </div>
-      <mat-drawer-container class="example-container" autosize>
-        <mat-drawer
-          #drawer
-          class="dropdown-container"
-          mode="side"
-          position="end"
-        >
-          <cirrus-stages-overlay
-            [workbook]="workbook"
-            (navigateToLesson)="navigate($event)"
-          ></cirrus-stages-overlay>
-        </mat-drawer>
-      </mat-drawer-container>
     </div>
     <div class="content">
       <h1>{{ lesson.title }}</h1>
