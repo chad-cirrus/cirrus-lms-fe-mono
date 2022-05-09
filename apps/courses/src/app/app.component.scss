@@ -60,6 +60,9 @@ ul.student-name {
   overflow-x: hidden;
   height: 94vh;
 }
+.content-container.stop-scrolling {
+  overflow: hidden;
+}
 
 .hamburger-menu-container {
   background-color: $menu-gray;

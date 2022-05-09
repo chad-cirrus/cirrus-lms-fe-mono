@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { IContent, ILesson } from '@cirrus/models';
 import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
-import { filter, switchMap, take, tap } from 'rxjs/operators';
+import { filter, take, tap } from 'rxjs/operators';
 import { ContentPlayerDialogService } from '../../content-player/content-player-dialog.service';
 import { fetchLessons, setSideNavOpen } from '../../store/actions';
 import { LessonState } from '../../store/reducers/lesson.reducer';

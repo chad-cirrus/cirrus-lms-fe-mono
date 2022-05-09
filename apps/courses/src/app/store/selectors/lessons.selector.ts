@@ -20,7 +20,7 @@ export const selectContentPlayerSubState = createSelector(
   selectLesson,
   lesson => ({
     contents: lesson.contents,
-    system_name: lesson.system_name,
+    lesson_title: lesson.title,
     menuItems: lesson.contents.map(
       c =>
         ({

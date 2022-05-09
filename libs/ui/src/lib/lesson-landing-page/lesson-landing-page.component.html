@@ -1,14 +1,8 @@
-<div *ngIf="lesson" [ngStyle]="{ position: sideNavOpen ? 'fixed' : 'inherit' }">
-  <div
-    class="lesson-image"
-    [ngClass]="
-      sideNavOpen
-        ? 'lesson-image-no-gradient center-titles'
-        : 'lesson-image-gradient'
-    "
-    fxLayout="column"
-    [fxLayoutAlign]="sideNavOpen ? 'center center' : 'center start'"
-  >
+<div
+  *ngIf="lesson"
+  [ngStyle]="{ 'overflow-anchor': sideNavOpen ? 'none' : 'inherit' }"
+>
+  <div class="lesson-image" fxLayout="column" fxLayoutAlign="center start">
     <div class="btn-container">
       <div class="example-sidenav-content">
         <button
@@ -32,10 +26,7 @@
       <h1>{{ lesson.title }}</h1>
       <h4>{{ lesson.system_name }}</h4>
 
-      <cirrus-lesson-progress
-        [sideNavOpen]="sideNavOpen"
-        [lesson]="lesson"
-      ></cirrus-lesson-progress>
+      <cirrus-lesson-progress [lesson]="lesson"></cirrus-lesson-progress>
       <button
         class="start-lesson"
         mat-raised-button

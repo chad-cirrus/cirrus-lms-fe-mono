@@ -33,7 +33,7 @@ export class ContentPlayerComponent
   menuOpen$ = this._menuOpen.asObservable();
   menuItems!: IContentPlayerMenuItem[];
   contents!: IContent[];
-  system_name!: string;
+  lesson_title!: string;
   title!: string;
   id!: number;
 
@@ -52,7 +52,7 @@ export class ContentPlayerComponent
       this.subState$.subscribe(state => {
         (this.contents = state.contents),
           (this.menuItems = state.menuItems),
-          (this.system_name = state.system_name),
+          (this.lesson_title = state.lesson_title),
           (this.title = state.contents.filter(
             c => c.id === this.data.id
           )[0].title);

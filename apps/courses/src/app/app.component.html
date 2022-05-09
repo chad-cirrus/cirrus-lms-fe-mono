@@ -19,7 +19,11 @@
         [notificationCount]="notificationCount$ | async"
       ></cirrus-side-nav>
     </div>
-    <div class="content-container" [fxFlex]="100">
+    <div
+      class="content-container"
+      [fxFlex]="100"
+      [ngClass]="{ 'stop-scrolling': sideNavOpen$ | async }"
+    >
       <router-outlet></router-outlet>
     </div>
   </div>

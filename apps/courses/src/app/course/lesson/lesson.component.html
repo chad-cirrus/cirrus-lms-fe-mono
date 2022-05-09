@@ -4,7 +4,8 @@
     mode="over"
     position="end"
     fixedInViewport="true"
-    fixedTopGap="52"
+    [fixedTopGap]="(isScreenSmall$ | async) ? '0' : '52'"
+    disableClose="true"
   >
     <mat-nav-list>
       <ng-container *ngIf="workbook$ | async as workbook">
