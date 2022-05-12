@@ -21,6 +21,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { StagesOverlayComponent } from './stages-overlay/stages-overlay.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatCardModule } from '@angular/material/card';
+
 import {
   MatDialogModule,
   MAT_DIALOG_DATA,
@@ -38,7 +40,18 @@ import { ContentImageComponent } from './content-image/content-image.component';
 import { ContentRichTextComponent } from './content-rich-text/content-rich-text.component';
 import { CirrusSanitizerService } from './shared/cirrus-sanitizer.service';
 import { AssessmentComponent } from './assessment/assessment.component';
+
+import { MatTabsModule } from '@angular/material/tabs';
+import { TaskComponent } from './task/task.component';
+import { CompletionStandardsComponent } from './completion-standards/completion-standards.component';
+
+
 import { InteractiveComponent } from './interactive/interactive.component';
+import { AttemptsComponent } from './attempts/attempts.component';
+import { AttemptFeedbackComponent } from './attempt-feedback/attempt-feedback.component';
+import { LogbookComponent } from './logbook/logbook.component';
+
+
 
 @NgModule({
   imports: [
@@ -53,6 +66,8 @@ import { InteractiveComponent } from './interactive/interactive.component';
     CdkAccordionModule,
     MatSidenavModule,
     MatDialogModule,
+    MatTabsModule,
+    MatCardModule
   ],
   declarations: [
     LessonLandingPageComponent,
@@ -76,7 +91,16 @@ import { InteractiveComponent } from './interactive/interactive.component';
     ContentImageComponent,
     ContentRichTextComponent,
     AssessmentComponent,
+
+    TaskComponent,
+    CompletionStandardsComponent,
+
     InteractiveComponent,
+    TaskComponent,
+    CompletionStandardsComponent,
+    AttemptsComponent,
+    AttemptFeedbackComponent,
+    LogbookComponent,
   ],
   exports: [
     LessonLandingPageComponent,
@@ -99,7 +123,15 @@ import { InteractiveComponent } from './interactive/interactive.component';
     ContentImageComponent,
     ContentRichTextComponent,
     AssessmentComponent,
+
+    TaskComponent,
+    CompletionStandardsComponent,
+
     InteractiveComponent,
+     AttemptsComponent,
+     AttemptFeedbackComponent,
+     LogbookComponent,
+
   ],
   providers: [
     { provide: MAT_DIALOG_DATA, useValue: {} },

@@ -28,6 +28,9 @@ export class Lesson implements ILesson {
   student_intro_video: string;
   instructor_intro_video: string;
   estimated_time: string;
+  course_id: number;
+  stage_id: number;
+  course_attempt_id: number;
 
   /**
    *
@@ -53,7 +56,11 @@ export class Lesson implements ILesson {
     overview_image_url: string,
     student_intro_video: string,
     instructor_intro_video: string,
-    estimated_time: string
+    estimated_time: string,
+    course_id: number,
+    course_attempt_id: number,
+    stage_id: number
+
   ) {
     this.id = id;
     this.system_desc = system_desc;
@@ -79,6 +86,10 @@ export class Lesson implements ILesson {
     this.student_intro_video = student_intro_video;
     this.instructor_intro_video = instructor_intro_video;
     this.estimated_time = estimated_time;
+    this.course_id = course_id;
+    this.stage_id = stage_id;
+    this.course_attempt_id = course_attempt_id
+
   }
 
   private determineProgress(contents: Content[]): LessonProgress {

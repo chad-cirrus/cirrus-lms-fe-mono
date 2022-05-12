@@ -1,0 +1,60 @@
+<div class="title">ATTEMPTS</div>
+
+<div class="attempts-container" *ngIf="!mobile">
+  <div *ngFor="let a of attempts; let i = index">
+    <div fxLayout="row" fxLayoutAlign="space-between" [ngClass]="i + 1 === attempts.length ? 'last-attempt' : 'attempt'">
+      <div fxLayout="row" fxLayoutAlign="none center"  fxLayoutGap="15px">
+        <img
+          height="8px"
+          width="8px"
+          [src]="
+            a.passed
+              ? 'courses/images/svg/green-ellipse.svg'
+              : 'courses/images/svg/red-ellipse.svg'
+          "
+        />
+        <div class="index">{{ i + 1 }}</div>
+        <div class="value">{{ a.passed ? 'Passed' : 'Missed' }}</div>
+      </div>
+      <div fxLayout="row" fxLayoutGap="12px">
+        <div class="value">Instructor: {{ a.instructor_name }}</div>
+        <div class="value">|</div>
+        <div [ngClass]="a.missed ? 'value date' : 'value passed'">
+          {{ a.created_at | date: 'longDate' }}
+        </div>
+        <img *ngIf="a.missed" src="courses/images/svg/right-chevron.svg" (click)="nav(a)" />
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="mobile">
+  <div *ngFor="let a of attempts; let i = index" >
+    <div fxLayout="row" fxLayoutAlign="space-between center" class="attempts-container-mobile">
+      <div>
+        <div fxLayout="row" fxLayoutAlign="none center" fxLayoutGap="15px">
+          <img
+            height="8px"
+            width="8px"
+            [src]="
+              a.passed
+                ? 'courses/images/svg/green-ellipse.svg'
+                : 'courses/images/svg/red-ellipse.svg'
+            "
+          />
+          <div class="index">{{ i + 1 }}</div>
+          <div class="value">{{ a.passed ? 'Passed' : 'Missed' }}</div>
+        </div>
+
+        <div class="value">Instructor: {{ a.instructor_name }}</div>
+
+        <div [ngClass]="a.missed ? 'value date' : 'value passed'">
+          {{ a.created_at | date: 'longDate' }}
+        </div>
+      </div>
+      <div>
+        <img *ngIf="a.missed" src="courses/images/svg/right-chevron.svg" (click)="nav(a)"/>
+      </div>
+    </div>
+  </div>
+</div>

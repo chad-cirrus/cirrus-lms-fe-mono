@@ -1,0 +1,177 @@
+<div class="task-container">
+  <div
+    fxLayout="row"
+    class="filter-btn-container"
+    fxLayoutAlign="none center"
+    fxLayoutGap="24px"
+  >
+    <button class="filter-btn">Filter Tasks</button>
+    <div>
+      Showing {{ tasks.length }} /
+      {{ tasks.length }}
+    </div>
+  </div>
+
+  <mat-card
+    fxLayout="row"
+    class="header-container"
+    *ngIf="!tablet"
+  >
+    <div fxFlex="1 1 auto" class="first-header">TASK</div>
+    <div fxFlex="1 1 auto" class="header">TYPE</div>
+    <div fxFlex="1 1 auto" class="header">REQUIRED</div>
+    <div fxFlex="1 1 auto" class="header">PASSED</div>
+    <div fxFlex="1 1 auto" class="header">MISSED</div>
+    <div fxFlex="2 1 auto" class="header">STATUS</div>
+    <div fxFlex="1 1 auto" class="header"></div>
+  </mat-card>
+
+  <div *ngFor="let c of tasks">
+    <mat-card
+      [fxLayout]="!tablet? 'row' : 'column'"
+      [ngClass]="mobile ? 'mobile-card' : 'card'"
+    >
+      <div
+        fxLayout="row"
+        [ngClass]="!tablet ? 'first-row' : 'row'"
+        fxFlex="1 1 auto"
+      >
+        <div class="title" fxFlex="30" *ngIf="tablet">
+          TASK
+        </div>
+        <div class="value first">
+          <div>{{ c.name }}</div>
+          <div class="sub-task">Manuvers</div>
+        </div>
+      </div>
+      <div
+        fxLayout="row"
+        [ngClass]="!tablet ? 'row-item-desktop' : 'row'"
+        fxFlex="1 1 auto"
+      >
+        <div class="title" fxFlex="30" *ngIf="tablet">
+          TYPE
+        </div>
+        <div class="value">{{ c.task_type }}</div>
+      </div>
+      <div
+        fxLayout="row"
+        [ngClass]="!tablet ? 'row-item-desktop' : 'row'"
+        fxFlex="1 1 auto"
+      >
+        <div class="title" fxFlex="30" *ngIf="tablet">
+          REQUIRED
+        </div>
+        <div class="value">{{ c.required_successful_attempts }}</div>
+      </div>
+      <div
+        fxLayout="row"
+        [ngClass]="!tablet ? 'row-item-desktop' : 'row'"
+        fxFlex="1 1 auto"
+      >
+        <div class="title" fxFlex="30" *ngIf="tablet">
+          PASSED
+        </div>
+        <div class="value">{{c.passed_count}}</div>
+      </div>
+      <div
+        fxLayout="row"
+        [ngClass]="!tablet ? 'row-item-desktop' : 'row'"
+        fxFlex="1 1 auto"
+      >
+        <div class="title" fxFlex="30" *ngIf="tablet">
+          MISSED
+        </div>
+        <div class="value">{{c.missed_count}}</div>
+      </div>
+      <div
+        fxLayout="row"
+        [ngClass]="!tablet ? 'row-item-desktop' : 'row'"
+        fxFlex="1 1 auto"
+      >
+        <div class="title" fxFlex="30" *ngIf="tablet">
+          STATUS
+        </div>
+        <div
+          fxLayout="row"
+          fxLayoutGap="8px"
+          fxLayoutAlign="none center"
+          [ngSwitch]="'not_started'"
+        >
+          <img
+            *ngSwitchCase="c.status"
+            src="courses/images/svg/complete_check.svg"
+            height="18px"
+            width="18px"
+          />
+          <div *ngSwitchCase="'completed'">Completed</div>
+
+          <img
+            *ngSwitchCase="'in_progress'"
+            src="courses/images/svg/in_progress.svg"
+            height="18px"
+            width="18px"
+          />
+          <div *ngSwitchCase="'in_progress'">In Progress</div>
+
+          <img
+            *ngSwitchCase="'deferred'"
+            src="courses/images/svg/deferred.svg"
+            height="18px"
+            width="18px"
+          />
+          <div *ngSwitchCase="'deferred'">Deferred</div>
+
+          <img
+            *ngSwitchCase="'not_started'"
+            src="courses/images/svg/not-started.svg"
+            height="18px"
+            width="18px"
+          />
+          <div *ngSwitchCase="'not_started'">Not Started</div>
+        </div>
+      </div>
+      <div
+        fxLayout="row"
+        [ngClass]="!tablet ? 'row-item-desktop' : 'row-last'"
+        fxFlex="1 1 auto"
+        [fxLayoutAlign]="
+          !tablet
+            ? 'center center'
+            : 'space-between center'
+        "
+      >
+        <div class="title" fxFlex="30" *ngIf="tablet">
+          Details
+        </div>
+        <cdk-accordion class="example-accordion">
+          <cdk-accordion-item
+            #accordionItem="cdkAccordionItem"
+            class="example-accordion-item"
+            role="button"
+            tabindex="0"
+            [attr.id]="'accordion-header-' + c"
+            [attr.aria-expanded]="accordionItem.expanded"
+            [attr.aria-controls]="'accordion-body-' + c">
+            <div class="example-accordion-item-header" (click)="accordionItem.toggle()">
+              <span class="example-accordion-item-description">
+                <img  height="7.33px"  width="20.17px" [src]="accordionItem.expanded ? 'courses/images/svg/up-chevron.svg' : 'courses/images/svg/down-chevron.svg'"/>
+              </span>
+            </div>
+          </cdk-accordion-item>
+        </cdk-accordion>
+      </div>
+    </mat-card>
+    <div
+    [ngClass]="mobile ? 'acc-item-body-mobile' : 'acc-item-body'"
+    role="region"
+    [style.display]="accordionItem.expanded ? '' : 'none'"
+    [attr.id]="'accordion-body-' + c"
+    [attr.aria-labelledby]="'accordion-header-' + c">
+    <div *ngIf="c.task_attempts.length">
+      <cirrus-attempts [attempts]="c.task_attempts" [mobile]="mobile" (emitRow)="handleEmitRow($event)"></cirrus-attempts>
+    </div>
+    <cirrus-completion-standards [standards]="c.standards"></cirrus-completion-standards>
+  </div>
+  </div>
+</div>

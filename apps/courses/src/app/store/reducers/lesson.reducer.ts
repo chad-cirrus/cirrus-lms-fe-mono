@@ -44,6 +44,9 @@ export const initialLessonState: LessonState = {
     student_intro_video: '',
     instructor_intro_video: '',
     estimated_time: '',
+    course_attempt_id: 0,
+    course_id: 0,
+    stage_id: 0,
   },
 };
 

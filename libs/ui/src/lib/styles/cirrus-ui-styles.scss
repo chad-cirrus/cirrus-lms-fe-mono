@@ -136,7 +136,36 @@ img {
   max-width: 90%;
 }
 
+.tabs-container {
+  .mat-card {
+    background-color: rgba(0, 0, 0, 0.32);
+  }
+}
+
+
+
 .mat-drawer.mat-drawer-end {
   background: transparent;
 }
 }
+
+.tabs-container {
+  .mat-card {
+    background-color: rgba(0, 0, 0, 0.32);
+  }
+}
+
+
+.mat-tab-label {
+  width: 50%;
+}
+.mat-ink-bar {
+  background-color: white !important;
+  width: 50%;
+}
+.mat-tab-header-pagination-controls-enabled .mat-tab-header-pagination {
+  display: none;
+}
+
+
+

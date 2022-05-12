@@ -1,0 +1,100 @@
+@use '../styles/variables' as *;
+
+
+
+.task-container {
+  font-family: $primary_font;
+
+  .card {
+    border-bottom: 1px solid $border-grey;
+  }
+
+  .mobile-card {
+    padding-top: 50px;
+
+  }
+
+  .value {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 20px;
+    letter-spacing: 0.03em;
+    color: $light-grey;
+  }
+
+  .title {
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 19px;
+    letter-spacing: -0.005em;
+  }
+
+  .first {
+    color: white;
+    font-weight: 500;
+  }
+
+  .row {
+    width: 100%;
+    height: 68px;
+    align-items: center;
+    border-bottom: 1px solid $border-grey;
+  }
+
+  .row-last {
+    @extend .row;
+    border-bottom: none;
+  }
+
+  .first-header {
+    max-width: 25rem;
+
+  }
+
+
+  .first-row {
+    @extend .row;
+    border-bottom: none;
+    max-width: 25rem;
+  }
+
+  .sub-task {
+    color: $secondary-font-color-grey;
+  }
+
+  .row-item-desktop {
+    @extend .row;
+    border-bottom: none;
+    max-width: 8.5rem;
+  }
+
+  .header {
+    max-width: 8.5rem;
+  }
+
+
+
+  .filter-btn-container {
+    padding-top: 37px;
+    padding-bottom: 60px;
+    .filter-btn {
+      background-color: $border-grey;
+      border: 1px solid $border-grey;
+      color: white;
+      border-radius: 60px;
+      width: 130px;
+      height: 40px;
+      border: none;
+    }
+  }
+
+  .acc-item-body {
+    padding: 0px 47px 0px 16px;
+  }
+  .acc-item-body-mobile {
+    padding: 0px 20px 0px 26px;
+  }
+}
+

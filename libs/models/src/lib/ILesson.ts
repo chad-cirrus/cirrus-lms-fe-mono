@@ -27,6 +27,9 @@ export interface ILesson {
   student_intro_video: string;
   instructor_intro_video: string;
   estimated_time: string;
+  course_id: number,
+  course_attempt_id: number;
+  stage_id: number
 }
 
 export enum LessonProgress {

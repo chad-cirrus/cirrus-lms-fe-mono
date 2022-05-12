@@ -4,6 +4,9 @@ import { ILesson, LessonProgress } from '../lib/ILesson';
 export const testData855: ILesson = {
   id: 855,
   lesson_type: 2,
+  course_attempt_id: 0,
+  course_id: 0,
+  stage_id: 0,
   order: null,
   system_name: 'Lesson 1 - Takeoffs and Landings Flight Syllabus',
   title: 'Lesson 1',

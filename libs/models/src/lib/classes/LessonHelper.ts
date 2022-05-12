@@ -28,7 +28,10 @@ export class LessonHelper {
       lessonJson.overview_image_url,
       lessonJson.student_intro_video,
       lessonJson.instructor_intro_video,
-      lessonJson.estimated_time
+      lessonJson.estimated_time,
+      lessonJson.course_id,
+      lessonJson.course_attempt_id,
+      lessonJson.stage_id
     );
   }
 

@@ -1,0 +1,61 @@
+@use '../styles/variables' as *;
+
+
+
+.tabs-container {
+
+  .body-container-desktop {
+    margin-right: 100px;
+  }
+
+  .body-container-mobile {
+    margin-right: 41px;
+  }
+
+  // border-bottom: none!important;
+
+  .mat-ripple.mat-tab-label.mat-focus-indicator.mat-tab-disabled {
+    display: none;
+  }
+
+
+  .mat-table {
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.32);
+  }
+
+  tr.mat-row {
+    height: 68px;
+  }
+
+
+
+  .tasks {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 1rem;
+    line-height: 20px;
+    letter-spacing: 0.03em;
+  }
+
+  .mat-tab-labels {
+    display: flex;
+    justify-content: space-around;
+  }
+  .mat-tab-label-content {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 1.313rem;
+    line-height: 29px;
+    letter-spacing: -0.005em;
+  }
+
+  .mat-tab-header {
+    padding: 55px 0px 0px;
+  }
+
+
+  .image {
+    padding-right: 10px;
+  }
+}

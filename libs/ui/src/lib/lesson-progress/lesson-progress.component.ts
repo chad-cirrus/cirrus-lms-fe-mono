@@ -33,6 +33,10 @@ export class LessonProgressComponent {
     student_intro_video: '',
     instructor_intro_video: '',
     estimated_time: '',
+    stage_id: 0,
+    course_attempt_id: 0,
+    course_id: 0
+
   };
   @Input() selfStudy = false;
 

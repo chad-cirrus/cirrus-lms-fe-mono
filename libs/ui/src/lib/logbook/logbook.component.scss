@@ -1,0 +1,48 @@
+@use '../styles/variables' as *;
+
+.logbook-item-container {
+  background-color: $lesson-content-item-hover;
+  margin: 37px 0px 15px 3px;
+  padding: 15px 17px 16px 18px;
+  border-radius: 10px;
+}
+
+.logbook-item-expanded {
+  font-size: 1rem;
+  color: $light-grey;
+  border-bottom: 1px solid $border-grey2;
+  height: 34px;
+  padding: 0px 6px 0px 6px;
+}
+
+.logbook-item-expanded-last {
+  @extend .logbook-item-expanded;
+  border-bottom: none;
+}
+
+.title {
+  font-size: 1.125rem;
+  font-weight: 500;
+  padding: 27px 0px 0px 6px;
+}
+
+.log-type {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.airport {
+  font-size: 1.063rem;
+  font-weight: 500;
+}
+
+.hours {
+  font-size: 1.125rem;
+}
+
+.approach-types {
+  font-size: 1rem;
+  color: $light-grey;
+}
+
+

@@ -205,6 +205,9 @@ export const testIcingContentsOneInprogress: IContent[] = [
 export const testDataIcingAwarenessCourse: ILesson = {
   id: 757,
   lesson_type: 0,
+  course_attempt_id: 0,
+  course_id: 0,
+  stage_id: 0,
   order: null,
   system_name: 'Introduction - Icing Awareness Course',
   title: 'Introduction',

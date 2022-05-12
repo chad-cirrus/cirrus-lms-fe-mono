@@ -10,11 +10,12 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { IContent, IContentPlayerMenuItem } from '@cirrus/models';
 import { LessonContentComponent } from '@cirrus/ui';
 import { select, Store } from '@ngrx/store';
-import { BehaviorSubject, Subscription } from 'rxjs';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { PlaceholderDirective } from '../PlaceHolderDirective';
 import { AppState } from '../../store/reducers';
 import { selectContentPlayerSubState } from '../../store/selectors/lessons.selector';
 import { componentDictionary } from '../component-dictionary';
+import { selectIsScreenSmall } from '../../store/selectors/view.selector';
 
 @Component({
   selector: 'cirrus-content-player',
@@ -33,9 +34,19 @@ export class ContentPlayerComponent
   menuOpen$ = this._menuOpen.asObservable();
   menuItems!: IContentPlayerMenuItem[];
   contents!: IContent[];
+
+  tasks: any;
+  logbook: any;
+  system_name!: string;
+
   lesson_title!: string;
+
   title!: string;
   id!: number;
+  isScreenSmall$: Observable<boolean> = this.store.select(selectIsScreenSmall);
+  addPadding = false;
+
+
 
   @ViewChild(PlaceholderDirective) vcref!: PlaceholderDirective;
 
@@ -48,6 +59,8 @@ export class ContentPlayerComponent
   ) {}
 
   ngOnInit(): void {
+    this.tasks = this.data['tasks']
+    this.logbook = this.data['logbook']
     this.subscription.add(
       this.subState$.subscribe(state => {
         (this.contents = state.contents),
@@ -56,11 +69,14 @@ export class ContentPlayerComponent
           (this.title = state.contents.filter(
             c => c.id === this.data.id
           )[0].title);
+          console.log('state', state)
+
       })
     );
   }
 
   ngAfterViewInit(): void {
+
     setTimeout(() => {
       this.playContent(this.data.id);
     }, 100);
@@ -93,12 +109,15 @@ export class ContentPlayerComponent
   }
 
   playContent(id: number) {
+    this.addPadding = false;
     this.vcref.ViewContainerRef.clear();
 
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const content = this.contents.find(c => c.id === id)!;
     this.id = id;
     this.title = content.title;
+    this.addPadding = [9, 10].indexOf(content.content_type) < 0
+
 
     const lessonContentComponentRef =
       this.vcref.ViewContainerRef.createComponent(
@@ -108,5 +127,8 @@ export class ContentPlayerComponent
     const component =
       lessonContentComponentRef.instance as LessonContentComponent;
     component.content = content;
+    component.tasks = this.tasks
+    component.logbook = this.logbook
+    this.menuOpen$.subscribe(data => component.menuOpen = data)
   }
 }

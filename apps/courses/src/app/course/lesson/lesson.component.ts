@@ -1,10 +1,13 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 import { ActivatedRoute, Router } from '@angular/router';
-import { IContent, ILesson } from '@cirrus/models';
+import { IContent, ILesson, Lesson } from '@cirrus/models';
 import { Store } from '@ngrx/store';
-import { Observable, Subscription } from 'rxjs';
-import { filter, take, tap } from 'rxjs/operators';
+
+import { combineLatest, Observable, Subscription } from 'rxjs';
+import { filter, map, take, tap } from 'rxjs/operators';
+
+
 import { ContentPlayerDialogService } from '../../content-player/content-player-dialog.service';
 import { fetchLessons, setSideNavOpen } from '../../store/actions';
 import { LessonState } from '../../store/reducers/lesson.reducer';
@@ -15,6 +18,7 @@ import {
   selectSideNavOpen,
 } from '../../store/selectors/view.selector';
 import { selectWorkbook } from '../../store/selectors/workbook-routes.selector';
+import { TaskService } from '../../task.service';
 
 @Component({
   selector: 'cirrus-lesson',
@@ -23,6 +27,7 @@ import { selectWorkbook } from '../../store/selectors/workbook-routes.selector';
 })
 export class LessonComponent implements OnInit, OnDestroy {
   private _lesson!: ILesson;
+  stage_id: any;
   lesson$: Observable<ILesson> = this.store
     .select(selectLesson)
     .pipe(tap(lesson => (this._lesson = lesson)));
@@ -41,12 +46,11 @@ export class LessonComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private store: Store<LessonState>,
     private contentPlayerDialogService: ContentPlayerDialogService,
-    private router: Router
+    private router: Router,
+    private taskService: TaskService
   ) {}
 
   ngOnInit() {
-    this.instructorView$.subscribe(console.log);
-
     this.lessonSubscription.add(
       this.route.params.subscribe(({ courseId, lessonId }) => {
         this.lessonId = parseInt(lessonId);
@@ -60,20 +64,45 @@ export class LessonComponent implements OnInit, OnDestroy {
   }
 
   fetchMedia(content: IContent) {
-    this.contentPlayerDialogService.displayContentPlayerComponent(
-      this._lesson,
-      content.id
-    );
+    if (content.content_type === 9 || content.content_type === 10) {
+      const { course_attempt_id, stage_id, course_id } = this._lesson;
+      const payload = {
+        course_attempt_id,
+        content_id: content.id,
+        lesson_id: this._lesson.id,
+        stage_id,
+      };
+      const tasks$ = this.taskService.getTasks(payload)
+      const logbook$ = this.taskService.getLogbook(payload)
+
+
+
+      combineLatest([this.lesson$, tasks$, logbook$])
+        .pipe(take(1))
+        .subscribe(([lessons, tasks, logbook]) => {
+          this.contentPlayerDialogService.displayContentPlayerComponent(
+            lessons,
+            content.id,
+            tasks,
+            logbook
+          );
+        });
+    } else {
+      this.contentPlayerDialogService.displayContentPlayerComponent(
+        this._lesson,
+        content.id
+      );
+    }
   }
 
   fetchScorm(content: IContent) {
-    this.lesson$.pipe(take(1)).subscribe(lesson => {
-      console.log(lesson);
-      this.contentPlayerDialogService
-        .displayContentPlayerComponent(lesson, content.id)
-        .afterClosed()
-        .subscribe(() => console.log('scorm is closed'));
-    });
+    // this.lesson$.pipe(take(1)).subscribe(lesson => {
+    //   console.log(lesson);
+    //   this.contentPlayerDialogService
+    //     .displayContentPlayerComponent(lesson, content.id, )
+    //     .afterClosed()
+    //     .subscribe(() => console.log('scorm is closed'));
+    // });
   }
 
   openSideNav() {

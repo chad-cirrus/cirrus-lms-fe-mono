@@ -1,5 +1,6 @@
 <div fxLayout="row" fxLayoutAlign="space-between start">
   <div
+    *ngIf="(isScreenSmall$ | async) === false"
     class="left"
     [fxFlex]="(menuOpen$ | async) === false ? '1 1 100px' : '2 2 350px'"
     [ngClass]="{ 'add-border': (menuOpen$ | async) }"
@@ -31,7 +32,7 @@
       <div
         class="content-wrapper"
         fxLayout="column wrap"
-        [ngClass]="{ 'add-padding': (menuOpen$ | async) === false }"
+        [ngClass]="{ 'add-padding': (menuOpen$ | async) === false && addPadding }"
       >
         <div class="full-width">
           <div cirrusPlaceholder></div>

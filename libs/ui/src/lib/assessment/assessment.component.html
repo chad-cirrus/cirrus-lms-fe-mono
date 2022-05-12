@@ -1,1 +1,40 @@
-<pre>{{ content.content_tasks | json }}</pre>
+<div class="tabs-container">
+  <mat-tab-group
+    color="transparent"
+    #tabs
+    [ngClass]="[
+      (tablet$ | async) === false && (mobile$ | async) === false && !menuOpen
+        ? 'body-container-desktop'
+        : (tablet$ | async) === false && (mobile$ | async) === false && menuOpen
+        ? ''
+        : 'body-container-mobile'
+    ]"
+  >
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <img src="courses/images/svg/assessment3.svg" class="image" />
+        <span>Tasks</span>
+      </ng-template>
+      <cirrus-task
+        [tasks]="tasks"
+        [content]="content"
+        [tablet]="tablet$ | async"
+        [mobile]="mobile$ | async"
+        (emitRow)="handleEmitRow($event)"
+      ></cirrus-task>
+    </mat-tab>
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <img src="courses/images/svg/logbook.svg" class="image" />
+        <span>Logbook Entry</span>
+      </ng-template>
+      <cirrus-logbook [logbook]="logbook"></cirrus-logbook>
+    </mat-tab>
+    <mat-tab disabled="true">
+      <cirrus-attempt-feedback
+        [attempt]="attempt"
+        (emitBack)="handleBack()"
+      ></cirrus-attempt-feedback>
+    </mat-tab>
+  </mat-tab-group>
+</div>

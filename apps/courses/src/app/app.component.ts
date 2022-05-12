@@ -69,6 +69,7 @@ export class AppComponent implements OnInit {
         this.store.dispatch(appActions.setIsScreenSmall({ isScreenSmall }));
       });
 
+
     this.courseId$.subscribe(id => {
       if (id) {
         this.store.dispatch(fetchWorkbook({ courseId: +id }));

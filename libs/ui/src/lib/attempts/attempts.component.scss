@@ -1,0 +1,47 @@
+@use '../styles/variables' as *;
+
+
+
+.attempts-container {
+  padding: 0px 46px 0px 20px;
+  border-radius: 10px;
+}
+
+.attempts-container-mobile {
+  background-color: $lesson-content-item-hover;
+  margin-top: 15px;
+  padding: 13px 17px;
+}
+
+.title {
+  padding-top: 27px;
+  font-size: .875rem;
+  color: $secondary-font-color-grey
+}
+
+.attempt {
+  padding: 17px 0px;
+  border-bottom: 1px solid $border-grey;
+}
+
+.last-attempt {
+  padding: 17px 0px;
+}
+
+.index {
+  font-size: 1rem;
+}
+
+.value {
+  font-size: .875rem;
+  color: $secondary-font-color-grey;
+}
+
+.date {
+  padding-right: 50px;
+}
+
+.passed {
+  padding-right: 70px;
+}
+

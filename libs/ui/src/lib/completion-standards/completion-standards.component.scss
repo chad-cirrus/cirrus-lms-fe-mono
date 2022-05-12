@@ -1,0 +1,16 @@
+@use '../styles/variables' as *;
+
+.standards-container {
+  padding-top: 42px;
+}
+
+.title {
+  font-size: .875rem;
+  color: $secondary-font-color-grey
+}
+
+.standard {
+  font-size: 1rem;
+  padding: 17px 0px;
+  border-bottom: 1px solid $border-grey;
+}

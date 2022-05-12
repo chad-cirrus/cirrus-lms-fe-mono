@@ -8,7 +8,7 @@ export interface IContent {
   score: number;
   url: string;
   meta_tags: string[];
-  content_tasks: IContentTask[];
+  content_tasks: any[];
   estimated_time: string;
   content_type: number;
   desc: string;
@@ -61,3 +61,6 @@ export interface ITaskCategory {
   created_at: string;
   updated_at: string;
 }
+
+
+

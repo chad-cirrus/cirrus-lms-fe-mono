@@ -9,6 +9,9 @@ import {
 export const testDataReccurent853: ILesson = {
   id: 853,
   lesson_type: 2,
+  course_attempt_id: 0,
+  course_id: 0,
+  stage_id: 0,
   order: null,
   system_name: 'Lesson 1 - VFR Recurrent',
   title: 'Lesson 1',
