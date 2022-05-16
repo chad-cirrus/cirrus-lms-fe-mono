@@ -20,10 +20,11 @@ export class AssessmentComponent extends LessonContentComponent implements OnIni
   mobile$!: Observable<boolean>;
 
 
+
+
   constructor(private breakpointObserver: BreakpointObserver) {super()}
 
   ngOnInit(): void {
-    console.log('menu', this.menuOpen)
     this.tablet$ = this.breakpointObserver.observe('(max-width: 959px)').pipe(
       map(({ matches }) => {
         return matches;
@@ -39,12 +40,22 @@ export class AssessmentComponent extends LessonContentComponent implements OnIni
 
 
   handleBack() {
+    this.show()
     this.tabGroup.selectedIndex = 0;
   }
 
-  handleEmitRow($event: Attempt) {
+  handleEmitRow($event: any) {
     this.tabGroup.selectedIndex = 2;
-    this.attempt = $event;
+    this.hide()
+    this.attempt = $event.event;
+  }
+
+  hide() {
+    this.hidePrevAndNext.emit(true)
+  }
+
+  show() {
+    this.hidePrevAndNext.emit(false)
   }
 
 

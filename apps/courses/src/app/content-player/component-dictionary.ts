@@ -16,5 +16,6 @@ export const componentDictionary = {
   [CONTENT_TYPE.richText]: ContentRichTextComponent,
   [CONTENT_TYPE.image]: ContentImageComponent,
   [CONTENT_TYPE.flight_assessment]: AssessmentComponent,
+  [CONTENT_TYPE.ground_assessment]: AssessmentComponent,
   [CONTENT_TYPE.interactive]: InteractiveComponent,
 };

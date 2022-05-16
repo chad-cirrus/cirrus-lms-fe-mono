@@ -31,10 +31,12 @@
       <cirrus-logbook [logbook]="logbook"></cirrus-logbook>
     </mat-tab>
     <mat-tab disabled="true">
-      <cirrus-attempt-feedback
+      <ng-template matTabContent>
+        <cirrus-attempt-feedback
         [attempt]="attempt"
         (emitBack)="handleBack()"
       ></cirrus-attempt-feedback>
+      </ng-template>
     </mat-tab>
   </mat-tab-group>
 </div>

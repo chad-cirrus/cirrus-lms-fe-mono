@@ -20,8 +20,9 @@ export class AttemptsComponent {
 
 
 
-  nav(row: Attempt){
-    this.emitRow.emit(row)
+  nav(row: Attempt, i: number){
+    const payload = {event: row, index: i }
+    this.emitRow.emit(payload)
   }
 
 

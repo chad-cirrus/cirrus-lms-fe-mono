@@ -89,7 +89,7 @@ export class LessonComponent implements OnInit, OnDestroy {
         this._lesson,
         content.id
       );
-    }
+
   }
 
   fetchScorm(content: IContent) {

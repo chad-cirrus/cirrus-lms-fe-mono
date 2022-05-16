@@ -35,11 +35,12 @@
         [ngClass]="{ 'add-padding': (menuOpen$ | async) === false && addPadding }"
       >
         <div class="full-width">
-          <div cirrusPlaceholder></div>
+          <div cirrusPlaceholder ></div>
         </div>
       </div>
     </div>
     <mat-dialog-actions
+      *ngIf="!hideBtns"
       fxLayout="row"
       fxLayoutAlign="space-between start"
       [ngClass]="{ 'add-padding': (menuOpen$ | async) === false }"

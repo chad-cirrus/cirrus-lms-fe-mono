@@ -26,7 +26,7 @@
     <div fxFlex="1 1 auto" class="header"></div>
   </mat-card>
 
-  <div *ngFor="let c of tasks">
+  <div *ngFor="let c of tasks; let i = index">
     <mat-card
       [fxLayout]="!tablet? 'row' : 'column'"
       [ngClass]="mobile ? 'mobile-card' : 'card'"
@@ -96,10 +96,10 @@
           fxLayout="row"
           fxLayoutGap="8px"
           fxLayoutAlign="none center"
-          [ngSwitch]="'not_started'"
+          [ngSwitch]="c.status"
         >
           <img
-            *ngSwitchCase="c.status"
+            *ngSwitchCase="'completed'"
             src="courses/images/svg/complete_check.svg"
             height="18px"
             width="18px"
@@ -175,3 +175,4 @@
   </div>
   </div>
 </div>
+

@@ -2,6 +2,10 @@
 
 
 
+.back-btn {
+  padding-top: 26px;
+}
+
 .title {
   padding-top: 74px;
   font-size: 1.313rem;
@@ -21,3 +25,16 @@
   font-size: 1rem;
   color: $secondary-font-color-grey;
 }
+
+
+.reasons-list-item {
+  padding: 20px 0px 20px 9px;
+  font-size: 1rem;
+  border-bottom: 1px solid $border-grey3;
+}
+
+.reasons-list-item-last {
+  @extend .reasons-list-item;
+  border-bottom: none;
+}
+

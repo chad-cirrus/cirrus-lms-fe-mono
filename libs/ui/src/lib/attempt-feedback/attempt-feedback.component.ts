@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Attempt } from '@cirrus/models';
 
 @Component({
@@ -6,10 +6,15 @@ import { Attempt } from '@cirrus/models';
   templateUrl: './attempt-feedback.component.html',
   styleUrls: ['./attempt-feedback.component.scss']
 })
-export class AttemptFeedbackComponent {
+export class AttemptFeedbackComponent implements OnInit {
 
   @Input() attempt!: Attempt;
   @Output() emitBack = new EventEmitter();
+
+ngOnInit(): void {
+    console.log('attempt', this.attempt)
+
+}
 
   back() {
     this.emitBack.emit()

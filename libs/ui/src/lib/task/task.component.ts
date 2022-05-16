@@ -1,8 +1,6 @@
-import { BreakpointObserver } from '@angular/cdk/layout';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Attempt, IContent, Task } from '@cirrus/models';
-import { Observable } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Attempt, IContent, ITask } from '@cirrus/models';
 
 @Component({
   selector: 'cirrus-task',
@@ -10,14 +8,14 @@ import { map, tap } from 'rxjs/operators';
   styleUrls: ['./task.component.scss'],
 })
 export class TaskComponent {
-  @Input() tasks!: Task[];
+  @Input() tasks!: ITask[];
   @Input() content!: IContent;
   @Input() tablet!: boolean | null;
   @Input() mobile!: boolean | null;
   @Output() emitRow = new EventEmitter();
 
 
-  handleEmitRow($event: Attempt) {
+  handleEmitRow($event: any) {
     this.emitRow.emit($event)
   }
 }

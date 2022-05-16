@@ -1,3 +1,4 @@
+
 import {
   Directive,
   EventEmitter,
@@ -7,6 +8,7 @@ import {
   Output,
 } from '@angular/core';
 import {
+  ITask,
   IContent,
   IProgress,
   PROGRESS_STATUS,
@@ -14,12 +16,15 @@ import {
   Task,
 } from '@cirrus/models';
 
+
 @Directive()
 export abstract class LessonContentComponent implements OnInit, OnDestroy {
   private _content!: IContent;
-  private _tasks: Task[] = [];
+  private _tasks: ITask[] = [];
   private _logbook: ILessonFlightLog[] = [];
   private _menuOpen!: boolean;
+
+  @Output() hidePrevAndNext = new EventEmitter<boolean>();
 
   @Input()
   public get content(): IContent {
@@ -33,12 +38,12 @@ export abstract class LessonContentComponent implements OnInit, OnDestroy {
   @Output() updateProgress = new EventEmitter<IProgress>();
 
   @Input()
-  public get tasks(): Task[] {
+  public get tasks(): ITask[] {
     return this._tasks;
   }
 
-  public set tasks(value: Task[]) {
-    this._tasks = value;
+  public set tasks(value: ITask[]) {
+    this._tasks = value
   }
 
   @Input()

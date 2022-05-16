@@ -7,21 +7,20 @@ import {
   ViewChild,
 } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import {
-  IContent,
-  IContentPlayerMenuItem,
-  IProgress,
-  PROGRESS_STATUS,
-} from '@cirrus/models';
+
+import { IContent, IContentPlayerMenuItem, ILessonFlightLog, ITask, Lesson } from '@cirrus/models';
+
 import { LessonContentComponent } from '@cirrus/ui';
 import { select, Store } from '@ngrx/store';
-import { BehaviorSubject, Observable, Subscription } from 'rxjs';
+import { BehaviorSubject, forkJoin, Observable, Subscription } from 'rxjs';
 import { PlaceholderDirective } from '../PlaceHolderDirective';
 import { AppState } from '../../store/reducers';
 import { selectContentPlayerSubState } from '../../store/selectors/lessons.selector';
 import { componentDictionary } from '../component-dictionary';
 import { completeProgress, startProgress } from '../../store/actions';
 import { selectIsScreenSmall } from '../../store/selectors/view.selector';
+import { TaskService } from '../../task.service';
+import { createComponent } from '@angular/compiler/src/core';
 
 @Component({
   selector: 'cirrus-content-player',
@@ -40,6 +39,7 @@ export class ContentPlayerComponent
   menuOpen$ = this._menuOpen.asObservable();
   menuItems!: IContentPlayerMenuItem[];
   contents!: IContent[];
+  lesson!: Lesson;
 
   tasks: any;
   logbook: any;
@@ -51,6 +51,7 @@ export class ContentPlayerComponent
   id!: number;
   isScreenSmall$: Observable<boolean> = this.store.select(selectIsScreenSmall);
   addPadding = false;
+  hideBtns = false;
 
   @ViewChild(PlaceholderDirective) vcref!: PlaceholderDirective;
 
@@ -59,12 +60,17 @@ export class ContentPlayerComponent
     public data: {
       id: number;
     },
-    private store: Store<AppState>
+    private store: Store<AppState>,
+    private taskService: TaskService
   ) {}
 
   ngOnInit(): void {
-    this.tasks = this.data['tasks'];
-    this.logbook = this.data['logbook'];
+
+    this.tasks = this.data['tasks']
+    this.logbook = this.data['logbook']
+    this.lesson = this.data['lesson']
+
+
     this.subscription.add(
       this.subState$.subscribe(state => {
         (this.contents = state.contents),
@@ -109,15 +115,53 @@ export class ContentPlayerComponent
     }
   }
 
+  getAssessment(content_id: number) {
+
+      const { course_attempt_id, stage_id } = this.lesson;
+      const payload = {
+        course_attempt_id,
+        content_id: content_id,
+        lesson_id: this.lesson.id,
+        stage_id,
+      };
+      const tasks$ = this.taskService.getTasks(payload)
+      const logbook$ = this.taskService.getLogbook(payload)
+      return forkJoin([tasks$, logbook$])
+
+  }
+
+
   playContent(id: number) {
-    this.addPadding = false;
     this.vcref.ViewContainerRef.clear();
+    let tasks: ITask[] = []
+    let logbook: ILessonFlightLog[] = []
+    this.addPadding = false;
+
 
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const content = this.contents.find(c => c.id === id)!;
+    this.addPadding = [9, 10].indexOf(content.content_type) < 0;
+
+    if (content.content_type === 9 || content.content_type === 10) {
+     const assessment = this.getAssessment(content.id);
+     assessment.subscribe(data => {
+      tasks = data[0];
+      logbook = data[1];
+      this.createComponent(id, content, tasks, logbook)
+     })
+    } else {
+      this.createComponent(id, content, tasks, logbook)
+    }
+  }
+
+
+
+  createComponent(id: number, content: IContent, tasks: ITask[], logbook: ILessonFlightLog[] ) {
     this.id = id;
     this.title = content.title;
+
     this.addPadding = [9, 10].indexOf(content.content_type) < 0;
+
 
     const lessonContentComponentRef =
       this.vcref.ViewContainerRef.createComponent(
@@ -126,9 +170,11 @@ export class ContentPlayerComponent
 
     const component =
       lessonContentComponentRef.instance as LessonContentComponent;
-    component.content = content;
-    component.tasks = this.tasks;
-    component.logbook = this.logbook;
+
+      component.content = content;
+      component.tasks = tasks;
+      component.logbook = logbook
+      component.hidePrevAndNext.subscribe(value => this.hideBtns = value);
     this.menuOpen$.subscribe(data => (component.menuOpen = data));
     component.updateProgress.subscribe(progress =>
       this.updateProgress(progress)

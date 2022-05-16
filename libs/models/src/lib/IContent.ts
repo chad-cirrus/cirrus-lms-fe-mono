@@ -49,6 +49,12 @@ export interface ITask {
   standards: string[];
   task_category: ITaskCategory;
   is_archived: boolean;
+  task_type: string;
+  required_successful_attempts: number;
+  passed_count: number;
+  missed_count: number;
+  status: string;
+  task_attempts: [];
 }
 
 export interface ITaskCategory {

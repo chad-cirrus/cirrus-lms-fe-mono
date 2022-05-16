@@ -22,7 +22,7 @@
         <div [ngClass]="a.missed ? 'value date' : 'value passed'">
           {{ a.created_at | date: 'longDate' }}
         </div>
-        <img *ngIf="a.missed" src="courses/images/svg/right-chevron.svg" (click)="nav(a)" />
+        <img *ngIf="a.missed" src="courses/images/svg/right-chevron.svg" (click)="nav(a, i)" />
       </div>
     </div>
   </div>
@@ -53,7 +53,7 @@
         </div>
       </div>
       <div>
-        <img *ngIf="a.missed" src="courses/images/svg/right-chevron.svg" (click)="nav(a)"/>
+        <img *ngIf="a.missed" src="courses/images/svg/right-chevron.svg" (click)="nav(a, i)"/>
       </div>
     </div>
   </div>

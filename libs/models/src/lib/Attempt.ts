@@ -16,5 +16,5 @@ export interface Attempt {
   standards_missed: [];
   task_id: number;
   user_id: number;
-
+  task_name: string;
 }
