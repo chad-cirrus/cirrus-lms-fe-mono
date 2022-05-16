@@ -22,7 +22,9 @@ export * from './lib/PROGRESS_STATUS';
 export * from './lib/IProgress';
 export * from './lib/IProgessUpdateResponses';
 export * from './lib/Attempt';
-export * from './lib/ILessonFlightLog'
+export * from './lib/ILessonFlightLog';
+export * from './lib/PROGRESS_TYPE';
+export * from './lib/PROGRESS_STATUS';
 
 export * from './lib/classes/ContentTask';
 export * from './lib/classes/Task';

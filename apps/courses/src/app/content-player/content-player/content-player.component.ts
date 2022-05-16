@@ -52,8 +52,6 @@ export class ContentPlayerComponent
   isScreenSmall$: Observable<boolean> = this.store.select(selectIsScreenSmall);
   addPadding = false;
 
-
-
   @ViewChild(PlaceholderDirective) vcref!: PlaceholderDirective;
 
   constructor(
@@ -65,8 +63,8 @@ export class ContentPlayerComponent
   ) {}
 
   ngOnInit(): void {
-    this.tasks = this.data['tasks']
-    this.logbook = this.data['logbook']
+    this.tasks = this.data['tasks'];
+    this.logbook = this.data['logbook'];
     this.subscription.add(
       this.subState$.subscribe(state => {
         (this.contents = state.contents),
@@ -75,14 +73,11 @@ export class ContentPlayerComponent
           (this.title = state.contents.filter(
             c => c.id === this.data.id
           )[0].title);
-          console.log('state', state)
-
       })
     );
   }
 
   ngAfterViewInit(): void {
-
     setTimeout(() => {
       this.playContent(this.data.id);
     }, 100);
@@ -122,8 +117,7 @@ export class ContentPlayerComponent
     const content = this.contents.find(c => c.id === id)!;
     this.id = id;
     this.title = content.title;
-    this.addPadding = [9, 10].indexOf(content.content_type) < 0
-
+    this.addPadding = [9, 10].indexOf(content.content_type) < 0;
 
     const lessonContentComponentRef =
       this.vcref.ViewContainerRef.createComponent(
@@ -133,9 +127,9 @@ export class ContentPlayerComponent
     const component =
       lessonContentComponentRef.instance as LessonContentComponent;
     component.content = content;
-    component.tasks = this.tasks
-    component.logbook = this.logbook
-    this.menuOpen$.subscribe(data => component.menuOpen = data)
+    component.tasks = this.tasks;
+    component.logbook = this.logbook;
+    this.menuOpen$.subscribe(data => (component.menuOpen = data));
     component.updateProgress.subscribe(progress =>
       this.updateProgress(progress)
     );
