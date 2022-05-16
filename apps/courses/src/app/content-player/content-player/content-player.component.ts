@@ -8,7 +8,9 @@ import {
 } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
-import { IContent, IContentPlayerMenuItem, ILessonFlightLog, ITask, Lesson } from '@cirrus/models';
+
+import { IContent, IContentPlayerMenuItem, ILessonFlightLog, IProgress, ITask, ILesson, PROGRESS_STATUS } from '@cirrus/models';
+
 
 import { LessonContentComponent } from '@cirrus/ui';
 import { select, Store } from '@ngrx/store';
@@ -39,7 +41,8 @@ export class ContentPlayerComponent
   menuOpen$ = this._menuOpen.asObservable();
   menuItems!: IContentPlayerMenuItem[];
   contents!: IContent[];
-  lesson!: Lesson;
+  lesson!: ILesson;
+
 
   tasks: any;
   logbook: any;
