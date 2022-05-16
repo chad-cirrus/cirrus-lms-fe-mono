@@ -15,18 +15,12 @@
     <div class="title">{{ content?.title }}</div>
   </div>
   <div
-    *ngIf="content?.status !== contentStatus.NotStarted"
+    *ngIf="true"
     fxLayout="row"
     fxLayoutAlign="end center"
     fxLayoutGap="24px"
   >
-    <img
-      [src]="
-        content?.status === contentStatus.Completed ? completeCheck : inProgress
-      "
-    />
-    <span>{{
-      content?.status === contentStatus.Completed ? 'Completed' : 'In Progress'
-    }}</span>
+    <img [src]="imageSrc" />
+    <span>{{ progressText }}</span>
   </div>
 </div>

@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { ASSESSMENT_TYPE, ILesson, LessonProgress } from '@cirrus/models';
+import { ASSESSMENT_TYPE, ILesson } from '@cirrus/models';
+import { progressIconMapper } from '../helpers/ProgressIconMapper';
 
 @Component({
   selector: 'cirrus-lesson-progress',
@@ -7,11 +8,14 @@ import { ASSESSMENT_TYPE, ILesson, LessonProgress } from '@cirrus/models';
   styleUrls: ['./lesson-progress.component.scss'],
 })
 export class LessonProgressComponent {
-  @Input() sideNavOpen!: boolean;
-  @Input() lesson: ILesson = {
+  private _selfStudy = false;
+  private _selfStudyIconSrc = '';
+  private _groundAssessment = false;
+  private _flightAssessment = false;
+  private _assessmentProgressIcon = '';
+  private _lesson: ILesson = {
     id: 0,
     system_desc: '',
-    created_at: '',
     updated_at: '',
     system_name: '',
     lesson_type: 0,
@@ -23,44 +27,76 @@ export class LessonProgressComponent {
     major_version: 0,
     minor_version: 0,
     contents: [],
-    lesson_progress: LessonProgress.Unknown,
-    self_study_progress: LessonProgress.Unknown,
-    assessment_progress: LessonProgress.Unknown,
-    assessment: ASSESSMENT_TYPE.none,
-    self_study: false,
-    order: null,
+    order: 0,
     overview_image_url: '',
     student_intro_video: '',
     instructor_intro_video: '',
-    estimated_time: '',
-    stage_id: 0,
+    instructor_overview: '',
+    instructor_contents: [],
+    progress: {
+      id: 0,
+      status: 'unknown',
+    },
+    course_id: 0,
     course_attempt_id: 0,
-    course_id: 0
-
+    stage_id: 0,
   };
-  @Input() selfStudy = false;
+
+  @Input() sideNavOpen!: boolean;
+
+  @Input()
+  set lesson(value: ILesson) {
+    this._lesson = value;
+    this._selfStudy = value.lesson_type === 0;
+    if (this._selfStudy) {
+      this._selfStudyIconSrc = progressIconMapper(this.lesson.progress.status);
+    }
+    this._flightAssessment =
+      value.lesson_type === 2 ||
+      value.contents.map(c => c.content_type).filter(ct => ct === 9).length > 0;
+    this._groundAssessment =
+      value.lesson_type === 1 ||
+      value.contents.map(c => c.content_type).filter(ct => ct === 10).length >
+        0;
+
+    if (this._flightAssessment || this._groundAssessment) {
+      const status = this.getStatus(value);
+      this._assessmentProgressIcon = progressIconMapper(status);
+    }
+  }
+
+  get lesson() {
+    return this._lesson;
+  }
+
+  get selfStudy() {
+    return this._selfStudy;
+  }
+
+  get groundAssessment() {
+    return this._groundAssessment;
+  }
+
+  get flightAssessment() {
+    return this._flightAssessment;
+  }
 
   get assessmentType() {
     return ASSESSMENT_TYPE;
   }
 
-  private progressIconMapper = {
-    0: 'courses/images/svg/not-started.svg',
-    1: 'courses/images/svg/not-started.svg',
-    2: 'courses/images/svg/in_progress.svg',
-    3: 'courses/images/svg/complete_check.svg',
-    4: null,
-  };
-
-  get selfStudyProgressIcon() {
-    return this.progressIconMapper[this.lesson.self_study_progress ?? 0];
+  get selfStudyIconSrc() {
+    return this._selfStudyIconSrc;
   }
 
   get assessmentProgressIcon() {
-    return this.progressIconMapper[this.lesson.assessment_progress ?? 0];
+    return this._assessmentProgressIcon;
   }
 
-  get lessonProgress() {
-    return LessonProgress;
+  private getStatus(lesson: ILesson): string {
+    if (lesson.lesson_type !== 0) {
+      return lesson.progress.status;
+    }
+    return lesson.contents[0].progress.status;
   }
 }

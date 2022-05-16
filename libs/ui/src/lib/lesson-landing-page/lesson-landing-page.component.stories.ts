@@ -2,12 +2,8 @@
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
-import {
-  ASSESSMENT_TYPE,
-  LessonProgress,
-  ProgressType,
-  LessonHelper,
-} from '@cirrus/models';
+import { MatDialogModule } from '@angular/material/dialog';
+import { ctdContents, ctdLesson, ProgressType } from '@cirrus/models';
 import { moduleMetadata, Story, Meta } from '@storybook/angular';
 import { testData } from 'libs/models/src/testing/testData';
 import { testData855 } from 'libs/models/src/testing/testData855';
@@ -30,7 +26,12 @@ export default {
         LessonContentsComponent,
         ProgressCardComponent,
       ],
-      imports: [MatButtonModule, FlexLayoutModule, MatCardModule],
+      imports: [
+        MatButtonModule,
+        FlexLayoutModule,
+        MatCardModule,
+        MatDialogModule,
+      ],
     }),
   ],
 } as Meta<LessonLandingPageComponent>;
@@ -44,13 +45,44 @@ const Template: Story<LessonLandingPageComponent> = (
 
 export const Primary = Template.bind({});
 Primary.args = {
+  lesson: testData,
+  progress: [
+    {
+      type: ProgressType.Ground,
+      completedCourses: 5,
+      totalCourses: 10,
+    },
+    {
+      type: ProgressType.Flight,
+      completedCourses: 12,
+      totalCourses: 20,
+    },
+    {
+      type: ProgressType.Simulator,
+      completedCourses: 10,
+      totalCourses: 14,
+    },
+    {
+      type: ProgressType.Landings,
+      completedCourses: 9,
+      totalCourses: 12,
+    },
+    {
+      type: ProgressType.Assessment,
+      completedCourses: 12,
+      totalCourses: 20,
+    },
+  ],
+  instructorView: false,
+  sideNavOpen: false,
+  courseComplete: false,
+};
+
+export const CrashTestDummy = Template.bind({});
+CrashTestDummy.args = {
   lesson: {
-    ...testData,
-    lesson_progress: LessonProgress.NotStarted,
-    self_study_progress: LessonProgress.NotStarted,
-    assessment_progress: LessonProgress.NotStarted,
-    assessment: ASSESSMENT_TYPE.flight,
-    self_study: true,
+    ...ctdLesson,
+    contents: ctdContents,
   },
   progress: [
     {
@@ -86,14 +118,7 @@ Primary.args = {
 
 export const InstructorView = Template.bind({});
 InstructorView.args = {
-  lesson: {
-    ...testData,
-    lesson_progress: LessonProgress.NotStarted,
-    self_study_progress: LessonProgress.NotStarted,
-    assessment_progress: LessonProgress.NotStarted,
-    assessment: ASSESSMENT_TYPE.flight,
-    self_study: true,
-  },
+  lesson: testData,
   progress: [
     {
       type: ProgressType.Ground,
@@ -128,14 +153,7 @@ InstructorView.args = {
 
 export const InProgress = Template.bind({});
 InProgress.args = {
-  lesson: {
-    ...testData,
-    lesson_progress: LessonProgress.InProgress,
-    self_study_progress: LessonProgress.InProgress,
-    assessment_progress: LessonProgress.InProgress,
-    assessment: ASSESSMENT_TYPE.flight,
-    self_study: true,
-  },
+  lesson: { ...testData, progress: { id: 0, status: 'in_progress' } },
   progress: [
     {
       type: ProgressType.Ground,
@@ -168,16 +186,9 @@ InProgress.args = {
   courseComplete: false,
 };
 
-export const Complete = Template.bind({});
-Complete.args = {
-  lesson: {
-    ...testData,
-    lesson_progress: LessonProgress.Complete,
-    self_study_progress: LessonProgress.Complete,
-    assessment_progress: LessonProgress.Complete,
-    assessment: ASSESSMENT_TYPE.flight,
-    self_study: true,
-  },
+export const Completed = Template.bind({});
+Completed.args = {
+  lesson: { ...testData, progress: { id: 0, status: 'completed' } },
   progress: [
     {
       type: ProgressType.Ground,
@@ -212,14 +223,7 @@ Complete.args = {
 
 export const NotStarted = Template.bind({});
 NotStarted.args = {
-  lesson: {
-    ...testData,
-    lesson_progress: LessonProgress.NotStarted,
-    self_study_progress: LessonProgress.NotStarted,
-    assessment_progress: LessonProgress.NotStarted,
-    assessment: ASSESSMENT_TYPE.flight,
-    self_study: true,
-  },
+  lesson: testData,
   progress: [
     {
       type: ProgressType.Ground,
@@ -254,14 +258,7 @@ NotStarted.args = {
 
 export const LastLessonCompleteCourse = Template.bind({});
 LastLessonCompleteCourse.args = {
-  lesson: {
-    ...testData,
-    lesson_progress: LessonProgress.Complete,
-    self_study_progress: LessonProgress.Complete,
-    assessment_progress: LessonProgress.Complete,
-    assessment: ASSESSMENT_TYPE.flight,
-    self_study: true,
-  },
+  lesson: { ...testData, progress: { id: 0, status: 'completed' } },
   progress: [
     {
       type: ProgressType.Ground,
@@ -296,12 +293,7 @@ LastLessonCompleteCourse.args = {
 
 export const FlightAssessmentOnly = Template.bind({});
 FlightAssessmentOnly.args = {
-  lesson: {
-    ...testData,
-    lesson_progress: LessonProgress.NotStarted,
-    assessment_progress: LessonProgress.NotStarted,
-    self_study: false,
-  },
+  lesson: { ...testData, lesson_type: 2 },
   progress: [
     {
       type: ProgressType.Ground,
@@ -336,9 +328,7 @@ FlightAssessmentOnly.args = {
 
 export const IcingAwarenessCourse = Template.bind({});
 IcingAwarenessCourse.args = {
-  lesson: {
-    ...LessonHelper.createLessonObject(testDataIcingAwarenessCourse),
-  },
+  lesson: testDataIcingAwarenessCourse,
   progress: [
     {
       type: ProgressType.Ground,
@@ -373,9 +363,7 @@ IcingAwarenessCourse.args = {
 
 export const TakeOffsAndLandings = Template.bind({});
 TakeOffsAndLandings.args = {
-  lesson: {
-    ...LessonHelper.createLessonObject(testData855),
-  },
+  lesson: testData855,
   progress: [
     {
       type: ProgressType.Ground,

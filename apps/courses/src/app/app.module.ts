@@ -33,6 +33,7 @@ import { OverlayModule } from '@angular/cdk/overlay';
 import { A11yModule } from '@angular/cdk/a11y';
 import { HamburgerMenuComponent } from './course/header/hamburger-menu/hamburger-menu.component';
 import { ContentPlayerModule } from './content-player/content-player.module';
+import { ProgressEffects } from './store/effects/progress.effects';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,11 @@ import { ContentPlayerModule } from './content-player/content-player.module';
     UiModule,
     StoreModule.forRoot(coursesReducers),
     extModules,
-    EffectsModule.forRoot([LessonsEffects, WorkbookRoutesEffects]),
+    EffectsModule.forRoot([
+      LessonsEffects,
+      WorkbookRoutesEffects,
+      ProgressEffects,
+    ]),
     AppRoutingModule,
     FlexLayoutModule,
     MatSidenavModule,

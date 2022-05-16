@@ -7,7 +7,12 @@ import {
   ViewChild,
 } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { IContent, IContentPlayerMenuItem } from '@cirrus/models';
+import {
+  IContent,
+  IContentPlayerMenuItem,
+  IProgress,
+  PROGRESS_STATUS,
+} from '@cirrus/models';
 import { LessonContentComponent } from '@cirrus/ui';
 import { select, Store } from '@ngrx/store';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
@@ -15,6 +20,7 @@ import { PlaceholderDirective } from '../PlaceHolderDirective';
 import { AppState } from '../../store/reducers';
 import { selectContentPlayerSubState } from '../../store/selectors/lessons.selector';
 import { componentDictionary } from '../component-dictionary';
+import { completeProgress, startProgress } from '../../store/actions';
 import { selectIsScreenSmall } from '../../store/selectors/view.selector';
 
 @Component({
@@ -130,5 +136,16 @@ export class ContentPlayerComponent
     component.tasks = this.tasks
     component.logbook = this.logbook
     this.menuOpen$.subscribe(data => component.menuOpen = data)
+    component.updateProgress.subscribe(progress =>
+      this.updateProgress(progress)
+    );
+  }
+
+  updateProgress(progress: IProgress) {
+    if (progress.status === PROGRESS_STATUS.in_progress) {
+      this.store.dispatch(startProgress({ id: progress.id }));
+    } else {
+      this.store.dispatch(completeProgress({ id: progress.id }));
+    }
   }
 }

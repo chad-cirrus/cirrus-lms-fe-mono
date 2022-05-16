@@ -1,4 +1,11 @@
-import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  OnDestroy,
+  ViewChild,
+} from '@angular/core';
+import { PROGRESS_STATUS } from '@cirrus/models';
 import Player from '@vimeo/player';
 import { LessonContentComponent } from '../LessonContentComponent';
 
@@ -9,7 +16,7 @@ import { LessonContentComponent } from '../LessonContentComponent';
 })
 export class VideoPlayerComponent
   extends LessonContentComponent
-  implements AfterViewInit
+  implements AfterViewInit, OnDestroy
 {
   @ViewChild('cirrusvideoplayer', { static: false })
   cirrusvideoplayer!: ElementRef;
@@ -22,6 +29,19 @@ export class VideoPlayerComponent
     player.play();
     player.on('pause', () => {
       player.getCurrentTime().then(time => console.log(time));
+    });
+    player.on('ended', () => {
+      this.updateProgress.emit({
+        id: this.content.progress.id,
+        status: PROGRESS_STATUS.completed,
+      });
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.updateProgress.emit({
+      id: this.content.progress.id,
+      status: PROGRESS_STATUS.completed,
     });
   }
 }

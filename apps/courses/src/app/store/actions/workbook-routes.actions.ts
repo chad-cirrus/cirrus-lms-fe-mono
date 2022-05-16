@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { IWorkBook } from '@cirrus/models';
 import { createAction, props } from '@ngrx/store';
 

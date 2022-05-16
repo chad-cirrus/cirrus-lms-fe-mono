@@ -30,7 +30,6 @@ import {
 } from '@angular/material/dialog';
 
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
-import { LessonContentPlayerComponent } from './lesson-content-player/lesson-content-player.component';
 import { LessonContentPlayerMenuComponent } from './lesson-content-player-menu/lesson-content-player-menu.component';
 
 import { VideoPlayerComponent } from './video-player/video-player.component';
@@ -83,7 +82,6 @@ import { LogbookComponent } from './logbook/logbook.component';
     MenuSliderComponent,
     EditProfileComponent,
     StagesOverlayComponent,
-    LessonContentPlayerComponent,
     LessonContentPlayerMenuComponent,
     VideoPlayerComponent,
     PlaceholderDirective,
@@ -115,7 +113,6 @@ import { LogbookComponent } from './logbook/logbook.component';
     MenuSliderComponent,
     EditProfileComponent,
     CdkAccordionModule,
-    LessonContentPlayerComponent,
     LessonContentPlayerMenuComponent,
     StagesOverlayComponent,
     VideoPlayerComponent,

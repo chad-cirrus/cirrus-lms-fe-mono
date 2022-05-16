@@ -85,7 +85,6 @@ export class UserMenusComponent implements OnInit {
   }
 
   impersonationLogout() {
-    console.log('impersonation logout');
     localStorage.setItem(
       'cirrus-token',
       localStorage.getItem('cirrus-impersonation-return') ?? ''

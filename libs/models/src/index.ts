@@ -18,16 +18,17 @@ export * from './lib/AssessmentType';
 export * from './lib/ROLE';
 export * from './lib/IContentPlayerMenuItem';
 export * from './lib/ContentType';
+export * from './lib/PROGRESS_STATUS';
+export * from './lib/IProgress';
+export * from './lib/IProgessUpdateResponses';
 export * from './lib/Attempt';
 export * from './lib/ILessonFlightLog'
 
-export * from './lib/classes/Content';
 export * from './lib/classes/ContentTask';
 export * from './lib/classes/Task';
 export * from './lib/classes/TaskCategory';
-export * from './lib/classes/Lesson';
-export * from './lib/classes/LessonHelper';
 
 export * from './testing/testData';
+export * from './testing/crashTestDummy';
 export * from './testing/testData853b';
 export * from './testing/testData855b';

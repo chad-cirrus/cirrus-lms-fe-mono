@@ -1,9 +1,10 @@
-import { IContentPlayerMenuItem } from '@cirrus/models';
+import { IContentPlayerMenuItem, ILesson } from '@cirrus/models';
 import { mapContentTypeToIcon } from '@cirrus/ui';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { LessonState } from '../reducers/lesson.reducer';
+import * as fromLesson from '../reducers/lesson.reducer';
 
-export const selectLessonFeature = createFeatureSelector<LessonState>('lesson');
+export const selectLessonFeature =
+  createFeatureSelector<fromLesson.LessonState>('lesson');
 
 export const selectLesson = createSelector(
   selectLessonFeature,
@@ -16,8 +17,28 @@ export const selectContent = (contentId: number) =>
     lesson => lesson.contents.filter(c => c.id === contentId)[0]
   );
 
-export const selectContentPlayerSubState = createSelector(
+export const selectLessonContents = createSelector(
+  selectLessonFeature,
+  state => state.lessonContents
+);
+
+export const selectAllLessonContents = createSelector(
+  selectLessonContents,
+  fromLesson.selectAllLessonContents
+);
+
+export const selectLessonWithContentEntities = createSelector(
   selectLesson,
+  selectAllLessonContents,
+  (lesson, contents) =>
+    ({
+      ...lesson,
+      contents,
+    } as ILesson)
+);
+
+export const selectContentPlayerSubState = createSelector(
+  selectLessonWithContentEntities,
   lesson => ({
     contents: lesson.contents,
     lesson_title: lesson.title,
@@ -27,6 +48,7 @@ export const selectContentPlayerSubState = createSelector(
           icon: mapContentTypeToIcon(c.content_type),
           text: c.title,
           id: c.id,
+          progress: c.progress,
         } as IContentPlayerMenuItem)
     ),
   })

@@ -1,6 +1,18 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { IContent, CONTENT_TYPE, CONTENT_STATUS } from '@cirrus/models';
+import { IContent } from '@cirrus/models';
 import { mapContentTypeToIcon } from '../helpers/ContentTypeToIconMapper';
+import { progressIconMapper } from '../helpers/ProgressIconMapper';
+
+const progressTextMapper = (progress: string): string => {
+  const dictionary: { [key: string]: string } = {
+    ['not_started']: 'Not Started',
+    ['in_progress']: 'In Progress',
+    ['completed']: 'Completed',
+    ['failed']: 'Failed',
+  };
+
+  return dictionary[progress];
+};
 
 @Component({
   selector: 'cirrus-lesson-content-item',
@@ -10,11 +22,15 @@ import { mapContentTypeToIcon } from '../helpers/ContentTypeToIconMapper';
 export class LessonContentItemComponent {
   private _content!: IContent;
   private _content_type_icon!: string;
+  private _imageSrc!: string;
+  private _progressText!: string;
 
   @Input()
   set content(value: IContent) {
     this._content = value;
     this._content_type_icon = mapContentTypeToIcon(value.content_type);
+    this._imageSrc = progressIconMapper(value.progress.status);
+    this._progressText = progressTextMapper(value.progress.status);
   }
 
   get content() {
@@ -25,32 +41,16 @@ export class LessonContentItemComponent {
     return this._content_type_icon;
   }
 
+  get imageSrc() {
+    return this._imageSrc;
+  }
+
+  get progressText() {
+    return this._progressText;
+  }
+
   @Input() lastItem = false;
   @Output() fetchMediaOutput = new EventEmitter<IContent>();
-
-  get contentType() {
-    return CONTENT_TYPE;
-  }
-
-  get playButtonString() {
-    return 'courses/images/svg/video_play.svg';
-  }
-
-  get openDocumentString() {
-    return 'courses/images/svg/document_button.svg';
-  }
-
-  get completeCheck() {
-    return 'courses/images/svg/complete_check.svg';
-  }
-
-  get inProgress() {
-    return 'courses/images/svg/in_progress.svg';
-  }
-
-  get contentStatus() {
-    return CONTENT_STATUS;
-  }
 
   fetchMedia() {
     this.fetchMediaOutput.next(this.content);

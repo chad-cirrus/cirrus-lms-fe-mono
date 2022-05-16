@@ -23,21 +23,37 @@ Primary.args = {
       icon: 'courses/images/svg/assessment_lc_icon.svg',
       text: 'Intro',
       id: 0,
+      progress: {
+        id: 0,
+        status: 'not_started',
+      },
     },
     {
       icon: 'courses/images/svg/video_play.svg',
-      text: 'Review Lesson Objective',
+      text: 'SR22 TKS Anti-Ice System POH Supplement (Perspective+ Avionics Only)',
       id: 0,
+      progress: {
+        id: 0,
+        status: 'not_started',
+      },
     },
     {
       icon: 'courses/images/svg/quiz_lc_icon.svg',
-      text: 'Completion Standards',
+      text: 'SR22T TKS Anti-Ice System POH Supplement (Perspective+ Avionics Only)',
       id: 0,
+      progress: {
+        id: 0,
+        status: 'not_started',
+      },
     },
     {
       icon: 'courses/images/svg/video_play.svg',
-      text: 'Preflight Planning and Preparation',
+      text: 'SR22T TKS Anti-Ice System POH Supplement',
       id: 0,
+      progress: {
+        id: 0,
+        status: 'not_started',
+      },
     },
   ],
 };

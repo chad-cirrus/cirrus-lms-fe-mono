@@ -1,15 +1,17 @@
+import { IProgress } from './IProgress';
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export interface IContent {
   id: number;
   order: number;
   title: string;
   subtitle: string;
-  status: string;
+  progress: IProgress;
   score: number;
   url: string;
   meta_tags: string[];
-  content_tasks: any[];
-  estimated_time: string;
+  content_tasks: IContentTask[];
+  quiz: any;
   content_type: number;
   desc: string;
   content_file: string;
@@ -22,11 +24,6 @@ export interface IContent {
   starter_file: string;
   blob_directory: string;
   show_comments: boolean;
-  created_at: string;
-  updated_at: string;
-  link_id: string;
-  version: number;
-  quiz: any;
 }
 
 export enum CONTENT_STATUS {

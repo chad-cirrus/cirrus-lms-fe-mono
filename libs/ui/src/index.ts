@@ -1,7 +1,6 @@
 /* eslint-disable @nrwl/nx/enforce-module-boundaries */
 export * from './lib/ui.module';
 export * from './lib/cirrus-material.module';
-export * from './lib/lesson-content-player/lesson-content-player.component';
 export * from './lib/download-content/download-content.component';
 export * from './lib/video-player/video-player.component';
 export * from './lib/content-rich-text/content-rich-text.component';

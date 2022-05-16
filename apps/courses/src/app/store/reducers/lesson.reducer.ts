@@ -1,15 +1,36 @@
-import { ASSESSMENT_TYPE, ILesson, LessonProgress } from '@cirrus/models';
+import { IContent, ILesson } from '@cirrus/models';
+import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 import { createReducer, on } from '@ngrx/store';
+import {
+  completeProgress,
+  completeProgressFailure,
+  completeProgressSuccess,
+  startProgress,
+  startProgressFailure,
+  startProgressSuccess,
+} from '../actions';
 import {
   fetchLessons,
   fetchLessonsSuccess,
   fetchLessonsFailure,
 } from '../actions/lessons.actions';
+import {
+  handleStartProgressSuccess,
+  handleCompleteProgressSuccess,
+} from './handlers';
 
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
+export interface LessonContentsState extends EntityState<IContent> {}
+
+export const lessonContentsEntityAdapter: EntityAdapter<IContent> =
+  createEntityAdapter<IContent>();
+
+export const initialContents = lessonContentsEntityAdapter.getInitialState();
 export interface LessonState {
   busy: boolean;
   error: any;
   lesson: ILesson;
+  lessonContents: LessonContentsState;
 }
 
 export interface LessonPartialState {
@@ -22,7 +43,6 @@ export const initialLessonState: LessonState = {
   lesson: {
     id: 0,
     system_desc: '',
-    created_at: '',
     updated_at: '',
     system_name: '',
     lesson_type: 0,
@@ -34,32 +54,67 @@ export const initialLessonState: LessonState = {
     major_version: 0,
     minor_version: 0,
     contents: [],
-    lesson_progress: LessonProgress.Unknown,
-    self_study_progress: LessonProgress.Unknown,
-    assessment_progress: LessonProgress.Unknown,
-    assessment: ASSESSMENT_TYPE.none,
-    self_study: false,
-    order: null,
+    order: 0,
     overview_image_url: '',
     student_intro_video: '',
     instructor_intro_video: '',
-    estimated_time: '',
-    course_attempt_id: 0,
+    instructor_contents: [],
+    instructor_overview: '',
+    progress: {
+      id: 0,
+      status: '',
+    },
     course_id: 0,
+    course_attempt_id: 0,
     stage_id: 0,
   },
+  lessonContents: lessonContentsEntityAdapter.getInitialState(),
 };
 
 export const reducer = createReducer(
   initialLessonState,
   on(fetchLessons, state => ({ ...state, busy: true, error: null })),
   on(fetchLessonsSuccess, (state, { lesson }) => ({
+    ...state,
     busy: false,
     error: null,
-    lesson: lesson,
+    lesson: {
+      ...lesson,
+      contents: [],
+    },
+    lessonContents: lessonContentsEntityAdapter.setAll(
+      lesson.contents,
+      state.lessonContents
+    ),
   })),
-  on(fetchLessonsFailure, (state, { error }) => ({
+  on(fetchLessonsFailure, ({ error }) => ({
     ...initialLessonState,
+    error,
+  })),
+  on(startProgress, state => ({ ...state, busy: true, error: null })),
+  on(startProgressSuccess, (state, { responses }) =>
+    handleStartProgressSuccess(state, responses)
+  ),
+  on(startProgressFailure, (state, { error }) => ({
+    ...state,
+    busy: false,
+    error,
+  })),
+  on(completeProgress, state => ({ ...state, busy: true, error: null })),
+  on(completeProgressSuccess, (state, { responses }) =>
+    handleCompleteProgressSuccess(state, responses)
+  ),
+  on(completeProgressFailure, (state, { error }) => ({
+    ...state,
+    busy: false,
     error,
   }))
 );
+
+const { selectIds, selectEntities, selectAll, selectTotal } =
+  lessonContentsEntityAdapter.getSelectors();
+
+export const selectLessonContentIds = selectIds;
+export const selectLessonContentEntities = selectEntities;
+export const selectAllLessonContents = selectAll;
+export const selectTotalLessonContents = selectTotal;

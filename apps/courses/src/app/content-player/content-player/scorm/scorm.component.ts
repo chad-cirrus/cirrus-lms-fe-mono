@@ -111,19 +111,15 @@ export class ScormComponent
   }
 
   ngAfterViewInit() {
-    console.log('Route: ', 'scorm.component.ts');
     this.loading = true;
     const { blob_directory } = this.content || '';
     this.mediaServerService.scormStartingUrl(blob_directory).subscribe(
       url => {
-        console.log(url);
         if (url) {
           this.url = this.sanitizer.bypassSecurityTrustResourceUrl(
             `${environment.baseUrl}/${url.toString()}`
           );
           window['API' as string] = this.api;
-
-          console.log('this.url: ', this.url);
         } else {
           this.url = null;
         }

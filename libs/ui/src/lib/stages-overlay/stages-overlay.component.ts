@@ -1,14 +1,12 @@
 import {
-  AfterViewInit,
   Component,
   EventEmitter,
   Input,
-  OnInit,
   Output,
   ViewChild,
   ViewChildren,
 } from '@angular/core';
-import { IStage, IStageLesson, IWorkBook, Lesson } from '@cirrus/models';
+import { IStage, IStageLesson, IWorkBook, ILesson } from '@cirrus/models';
 import { CdkAccordion, CdkAccordionItem } from '@angular/cdk/accordion';
 
 @Component({
@@ -16,7 +14,7 @@ import { CdkAccordion, CdkAccordionItem } from '@angular/cdk/accordion';
   templateUrl: './stages-overlay.component.html',
   styleUrls: ['./stages-overlay.component.scss'],
 })
-export class StagesOverlayComponent implements OnInit, AfterViewInit {
+export class StagesOverlayComponent {
   @ViewChild('accordion') accordion!: CdkAccordion;
   @ViewChildren('accordionItem') accordionItems!: CdkAccordionItem[];
   @Input() workbook!: IWorkBook;
@@ -26,7 +24,6 @@ export class StagesOverlayComponent implements OnInit, AfterViewInit {
   @Input()
   set lessonId(value: number) {
     this._lessonId = value;
-    console.log('lesson id', this._lessonId);
   }
 
   get lessonId() {
@@ -35,23 +32,6 @@ export class StagesOverlayComponent implements OnInit, AfterViewInit {
 
   @Output() navigateToLesson = new EventEmitter<any>();
   @Output() closeSideNav = new EventEmitter();
-  expandedIndex = 0;
-
-  ngOnInit(): void {
-    setTimeout(() => {
-      const index = this.findAccordianIndex();
-      console.log(this.accordion, index);
-    }, 3000);
-    console.log('lesson id', this.lessonId);
-  }
-
-  ngAfterViewInit(): void {
-    setTimeout(() => {
-      this.accordion;
-      console.log('accordian item', this.accordionItems);
-    }, 100);
-    console.log('hey', this.lessonId);
-  }
 
   get completeCheck() {
     return 'courses/images/svg/complete_check.svg';
@@ -78,7 +58,7 @@ export class StagesOverlayComponent implements OnInit, AfterViewInit {
   findAccordianIndex() {
     let index = 0;
     this.workbook.stages.map((s: any, i: number) => {
-      s.lessons.filter((l: Lesson) => {
+      s.lessons.filter((l: ILesson) => {
         if (l.id === this.lessonId) {
           index = i;
         }

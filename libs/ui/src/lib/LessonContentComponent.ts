@@ -1,8 +1,8 @@
-import { Directive, Input } from '@angular/core';
-import { IContent, ILessonFlightLog, Task } from '@cirrus/models';
+import { Directive, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { IContent, IProgress, PROGRESS_STATUS, ILessonFlightLog, Task } from '@cirrus/models';
 
 @Directive()
-export abstract class LessonContentComponent {
+export abstract class LessonContentComponent implements OnInit {
   private _content!: IContent;
   private _tasks: Task[] = [];
   private _logbook: ILessonFlightLog[] = [];
@@ -17,6 +17,18 @@ export abstract class LessonContentComponent {
     this._content = value;
   }
 
+  @Output() updateProgress = new EventEmitter<IProgress>();
+
+  ngOnInit(): void {
+    const {
+      progress: { id },
+    } = this.content;
+
+    this.updateProgress.emit({
+      id,
+      status: PROGRESS_STATUS.in_progress,
+    });
+  }
   @Input()
   public get tasks(): Task[] {
     return this._tasks;

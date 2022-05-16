@@ -1,18 +1,10 @@
 // eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
-import {
-  ASSESSMENT_TYPE,
-  IContent,
-  ILesson,
-  LessonProgress,
-} from '@cirrus/models';
+import { ILesson } from '@cirrus/models';
 
 export const testDataReccurent853: ILesson = {
   id: 853,
   lesson_type: 2,
-  course_attempt_id: 0,
-  course_id: 0,
-  stage_id: 0,
-  order: null,
+  order: 0,
   system_name: 'Lesson 1 - VFR Recurrent',
   title: 'Lesson 1',
   system_desc: 'The first lesson of the VFR Recurrent Course.',
@@ -27,14 +19,12 @@ export const testDataReccurent853: ILesson = {
   overview_image_url: '',
   student_intro_video: '',
   instructor_intro_video: '',
-  estimated_time: '',
   contents: [
     {
       id: 684,
       order: 0,
       title: 'Lesson 1 Instructor Assessment',
       subtitle: 'Lesson 1 Instructor Assessment',
-      status: 'not_started',
       score: 0,
       url: '',
       meta_tags: [],
@@ -798,17 +788,19 @@ export const testDataReccurent853: ILesson = {
       starter_file: '',
       blob_directory: '',
       show_comments: true,
-      estimated_time: '',
-      created_at: '',
-      updated_at: '',
-      link_id: '',
-      version: 0,
+      progress: {
+        id: 0,
+        status: 'not_started',
+      },
     },
   ],
-  created_at: '',
-  lesson_progress: LessonProgress.Unknown,
-  self_study_progress: LessonProgress.Unknown,
-  assessment_progress: LessonProgress.Unknown,
-  assessment: ASSESSMENT_TYPE.none,
-  self_study: false,
+  progress: {
+    id: 0,
+    status: 'in_progress',
+  },
+  instructor_overview: '',
+  instructor_contents: [],
+  course_id: 0,
+  course_attempt_id: 0,
+  stage_id: 0,
 };

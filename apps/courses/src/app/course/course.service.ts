@@ -1,6 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { IInitialFile, ILesson, IWorkBook, LessonHelper } from '@cirrus/models';
+import {
+  IInitialFile,
+  ILesson,
+  IProgress,
+  IProgressUpdateResponses,
+  IWorkBook,
+} from '@cirrus/models';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
@@ -20,24 +26,9 @@ export class CoursesService {
   constructor(private http: HttpClient) {}
 
   getLessons(courseId: number, lessonId: number): Observable<ILesson> {
-    return this.http
-      .get<ILesson>(
-        `${environment.baseUrl}/${this.coursesUrl}/${courseId}/lessons/${lessonId}`
-      )
-      .pipe(
-        map(lesson => ({
-          ...lesson,
-          contents: lesson.contents.map(content => ({
-            ...content,
-            estimated_time: '1:23',
-          })),
-        })),
-        map(lesson => {
-          const returnLesson = LessonHelper.createLessonObject(lesson);
-
-          return returnLesson;
-        })
-      );
+    return this.http.get<ILesson>(
+      `${environment.baseUrl}/${this.coursesUrl}/${courseId}/lessons/${lessonId}`
+    );
   }
 
   getWorkbook(courseId: number): Observable<IWorkBook> {
@@ -49,6 +40,20 @@ export class CoursesService {
   getScorm(blob_directory: string): Observable<IInitialFile> {
     return this.http.get<IInitialFile>(
       `${environment.baseUrl}/${this.scormUrl}/${blob_directory}`
+    );
+  }
+
+  startProgress(id: number): Observable<IProgressUpdateResponses> {
+    return this.http.post<IProgressUpdateResponses>(
+      `${environment.baseUrl}/api/v4/progresses/${id}/start`,
+      {}
+    );
+  }
+
+  completeProgress(id: number): Observable<IProgressUpdateResponses> {
+    return this.http.post<IProgressUpdateResponses>(
+      `${environment.baseUrl}/api/v4/progresses/${id}/complete`,
+      {}
     );
   }
 }

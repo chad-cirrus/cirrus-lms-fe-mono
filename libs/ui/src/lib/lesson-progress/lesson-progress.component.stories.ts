@@ -5,6 +5,7 @@ import { MatCardModule } from '@angular/material/card';
 import { LessonProgress, ASSESSMENT_TYPE } from '@cirrus/models';
 import { moduleMetadata, Story, Meta } from '@storybook/angular';
 import { testData } from 'libs/models/src/testing/testData';
+import { testDataReccurent853 } from 'libs/models/src/testing/testData853';
 import { LessonProgressComponent } from './lesson-progress.component';
 
 export default {
@@ -25,48 +26,25 @@ const Template: Story<LessonProgressComponent> = (
 
 export const Primary = Template.bind({});
 Primary.args = {
-  lesson: {
-    ...testData,
-    self_study_progress: LessonProgress.NotStarted,
-    assessment_progress: LessonProgress.NotStarted,
-    assessment: ASSESSMENT_TYPE.flight,
-    self_study: true,
-  },
+  lesson: testData,
   sideNavOpen: false,
 };
 
 export const SelfStudyInProgress = Template.bind({});
 SelfStudyInProgress.args = {
-  lesson: {
-    ...testData,
-    self_study_progress: LessonProgress.InProgress,
-    assessment: ASSESSMENT_TYPE.none,
-    self_study: true,
-  },
+  lesson: testData,
   sideNavOpen: false,
 };
 
 export const SelfStudyFlightAssessmentBothInProgress = Template.bind({});
 SelfStudyFlightAssessmentBothInProgress.args = {
-  lesson: {
-    ...testData,
-    self_study_progress: LessonProgress.InProgress,
-    assessment_progress: LessonProgress.InProgress,
-    assessment: ASSESSMENT_TYPE.flight,
-    self_study: true,
-  },
+  lesson: testData,
   sideNavOpen: false,
 };
 
 export const SelfStudyInProgressGroundAssessmentInProgress = Template.bind({});
 SelfStudyInProgressGroundAssessmentInProgress.args = {
-  lesson: {
-    ...testData,
-    self_study_progress: LessonProgress.InProgress,
-    assessment_progress: LessonProgress.NotStarted,
-    assessment: ASSESSMENT_TYPE.ground,
-    self_study: true,
-  },
+  lesson: testData,
   sideNavOpen: false,
 };
 
@@ -74,20 +52,13 @@ export const GroundAssessmentOnlyNotStarted = Template.bind({});
 GroundAssessmentOnlyNotStarted.args = {
   lesson: {
     ...testData,
-    assessment_progress: LessonProgress.NotStarted,
-    assessment: ASSESSMENT_TYPE.ground,
-    self_study: false,
+    lesson_type: 2,
   },
   sideNavOpen: false,
 };
 
 export const FlightAssessmentOnlyInProgress = Template.bind({});
 FlightAssessmentOnlyInProgress.args = {
-  lesson: {
-    ...testData,
-    assessment_progress: LessonProgress.InProgress,
-    assessment: ASSESSMENT_TYPE.flight,
-    self_study: false,
-  },
+  lesson: testDataReccurent853,
   sideNavOpen: false,
 };

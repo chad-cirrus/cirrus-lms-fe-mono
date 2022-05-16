@@ -15,7 +15,6 @@ if (process.env.CREATE_STORYBOOK) {
 }
 
 app.get('/courses/?*', (req, res) => {
-  console.log('there it is');
   res.sendFile(path.join(__dirname, '..', 'courses', 'index.html'));
 });
 

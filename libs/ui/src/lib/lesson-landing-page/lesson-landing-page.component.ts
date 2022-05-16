@@ -3,17 +3,14 @@ import {
   Component,
   EventEmitter,
   Input,
-  OnInit,
   Output,
   ViewChild,
-  ViewRef,
 } from '@angular/core';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import {
   IContent,
   ILesson,
   ICourseProgress,
-  Lesson,
   LESSON_TYPE,
   ProgressType,
 } from '@cirrus/models';
@@ -80,20 +77,14 @@ export class LessonLandingPageComponent {
     return 'courses/images/svg/play_button_filled_in.svg';
   }
 
-  get lessonType() {
-    return LESSON_TYPE;
-  }
-
-  private buttonMapper = {
-    0: 'Get Started',
-    1: 'Get Started',
-    2: 'Resume Lesson',
-    3: 'Next Lesson',
-    4: null,
-  };
-
   get buttonText() {
-    return this.buttonMapper[this.lesson.lesson_progress ?? 0];
+    const dictionary: { [key: string]: string } = {
+      ['not_started']: 'Get Started',
+      ['in_progress']: 'Resume Lesson',
+      ['completed']: 'Next Lesson',
+      ['failed']: '',
+    };
+    return dictionary[this.lesson.progress.status];
   }
 
   startLesson() {
@@ -102,7 +93,6 @@ export class LessonLandingPageComponent {
       order: 0,
       title: 'Intro',
       subtitle: 'Intro Video: Icing Awareness Course',
-      status: 'not_started',
       score: 0,
       url: '355991595',
       meta_tags: [],
@@ -121,11 +111,10 @@ export class LessonLandingPageComponent {
       starter_file: '',
       blob_directory: '',
       show_comments: true,
-      estimated_time: '',
-      created_at: '',
-      updated_at: '',
-      link_id: '',
-      version: 0,
+      progress: {
+        id: 0,
+        status: 'not_started',
+      },
     };
 
     document
@@ -138,25 +127,7 @@ export class LessonLandingPageComponent {
   }
 
   fetchMedia(content: IContent) {
-    // if (content.blob_directory !== null) {
-    //   this.fetchScorm.next(content);
-    // } else {
     this.fetchMediaOutput.next(content);
-    // }
-  }
-
-  mapProgressTypeToUrl(type: ProgressType): string {
-    switch (type) {
-      case ProgressType.Flight: {
-        return 'courses/images/svg/progress-icon-flight.svg';
-      }
-      case ProgressType.Ground: {
-        return 'courses/images/svg/progress-icon-ground.svg';
-      }
-      default: {
-        return 'courses/images/svg/progress-icon-land.svg';
-      }
-    }
   }
 
   openSideNavClick() {

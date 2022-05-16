@@ -1,10 +1,15 @@
 import { IWorkBook } from '@cirrus/models';
 import { createReducer, on } from '@ngrx/store';
+import { completeProgressSuccess, startProgressSuccess } from '../actions';
 import {
   fetchWorkbook,
   fetchWorkbookFailure,
   fetchWorkbookSuccess,
 } from '../actions/workbook-routes.actions';
+import {
+  handleCompleteProgressSuccessInWorkbookReduer,
+  handleStartProgressSuccessInWorkbookReduer,
+} from './handlers';
 
 export interface WorkbookRoutesState {
   busy: boolean;
@@ -40,7 +45,13 @@ export const reducer = createReducer(
     busy: false,
     workbook: initialWorkbook,
     error,
-  }))
+  })),
+  on(startProgressSuccess, (state, { responses }) =>
+    handleStartProgressSuccessInWorkbookReduer(state, responses)
+  ),
+  on(completeProgressSuccess, (state, { responses }) =>
+    handleCompleteProgressSuccessInWorkbookReduer(state, responses)
+  )
 );
 
 export const getWorkbook = (state: WorkbookRoutesState) => state.workbook;
