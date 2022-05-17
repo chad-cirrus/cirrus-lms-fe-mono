@@ -17,7 +17,7 @@
         <div class="value">{{ a.passed ? 'Passed' : 'Missed' }}</div>
       </div>
       <div fxLayout="row" fxLayoutGap="12px">
-        <div class="value">Instructor: {{ a.instructor_name }}</div>
+        <div class="value" *ngIf="a.instructor_name">Instructor: {{ a.instructor_name }}</div>
         <div class="value">|</div>
         <div [ngClass]="a.missed ? 'value date' : 'value passed'">
           {{ a.created_at | date: 'longDate' }}
@@ -46,7 +46,7 @@
           <div class="value">{{ a.passed ? 'Passed' : 'Missed' }}</div>
         </div>
 
-        <div class="value">Instructor: {{ a.instructor_name }}</div>
+        <div class="value" *ngIf="a.instructor_name">Instructor: {{ a.instructor_name }}</div>
 
         <div [ngClass]="a.missed ? 'value date' : 'value passed'">
           {{ a.created_at | date: 'longDate' }}

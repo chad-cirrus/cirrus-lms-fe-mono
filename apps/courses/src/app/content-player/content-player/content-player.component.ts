@@ -14,15 +14,16 @@ import { IContent, IContentPlayerMenuItem, ILessonFlightLog, IProgress, ITask, I
 
 import { LessonContentComponent } from '@cirrus/ui';
 import { select, Store } from '@ngrx/store';
-import { BehaviorSubject, forkJoin, Observable, Subscription } from 'rxjs';
+import { BehaviorSubject, forkJoin, Observable, of, Subscription } from 'rxjs';
 import { PlaceholderDirective } from '../PlaceHolderDirective';
 import { AppState } from '../../store/reducers';
-import { selectContentPlayerSubState } from '../../store/selectors/lessons.selector';
+import { selectCheckOffRequired, selectContentPlayerSubState } from '../../store/selectors/lessons.selector';
 import { componentDictionary } from '../component-dictionary';
 import { completeProgress, startProgress } from '../../store/actions';
 import { selectIsScreenSmall } from '../../store/selectors/view.selector';
 import { TaskService } from '../../task.service';
 import { createComponent } from '@angular/compiler/src/core';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'cirrus-content-player',
@@ -34,7 +35,9 @@ export class ContentPlayerComponent
 {
   subState$ = this.store.pipe(select(selectContentPlayerSubState));
   private subscription = new Subscription();
-
+  checkoutOffsRequired$ = this.store.pipe(
+    select(selectCheckOffRequired)
+  )
   menuIcon = 'courses/images/svg/LcpMenuIcon.svg';
   closeIcon = 'courses/images/svg/content-player-close.svg';
   private _menuOpen = new BehaviorSubject<boolean>(false);

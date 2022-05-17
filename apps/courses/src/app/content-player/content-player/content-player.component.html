@@ -1,4 +1,5 @@
 <div fxLayout="row" fxLayoutAlign="space-between start">
+
   <div
     *ngIf="(isScreenSmall$ | async) === false"
     class="left"
@@ -28,7 +29,18 @@
         <span> {{ lesson_title }} </span>
         <img [src]="closeIcon" mat-dialog-close />
       </div>
-      <div class="sub-header">{{ title }}</div>
+      <div fxLayout="row" fxLayoutAlign="none center" fxLayoutGap="7px">
+        <div class="sub-header">{{ title }}</div>
+        <div *ngIf="checkoutOffsRequired$ | async">
+          <div fxLayoutAlign="none center">
+            <img
+              class="sign-offs-icon"
+              src="courses/images/svg/sign-off-warning.svg"
+            />
+            <span class="sign-offs-required">Instructor sign offs required</span>
+          </div>
+        </div>
+      </div>
       <div
         class="content-wrapper"
         fxLayout="column wrap"

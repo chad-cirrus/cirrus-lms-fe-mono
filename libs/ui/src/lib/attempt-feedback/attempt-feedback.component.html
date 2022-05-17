@@ -10,7 +10,7 @@
 <div class="info-container">
   <div>Task: {{attempt.task_name}} </div>
   <div>Date: {{attempt.created_at | date: 'longDate'}}</div>
-  <div>Instructor: {{attempt.instructor_name}}</div>
+  <div *ngIf="attempt.instructor_name">Instructor: {{attempt.instructor_name}}</div>
 </div>
 
   <div class="reasons-title">REASONS FOR MISSING TASK</div>

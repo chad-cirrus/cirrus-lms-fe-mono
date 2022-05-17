@@ -1,4 +1,4 @@
-import { IContentPlayerMenuItem, ILesson } from '@cirrus/models';
+import { CONTENT_TYPE, IContentPlayerMenuItem, ILesson } from '@cirrus/models';
 import { mapContentTypeToIcon } from '@cirrus/ui';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import * as fromLesson from '../reducers/lesson.reducer';
@@ -58,3 +58,13 @@ export const selectLessonStateBusy = createSelector(
   selectLessonFeature,
   state => state.busy
 );
+
+export const selectCheckOffRequired = createSelector(
+  selectLessonWithContentEntities,
+  state => state.contents.filter(content =>(content.content_type === CONTENT_TYPE.flight_assessment) || (content.content_type === CONTENT_TYPE.ground_assessment))
+          .map(content => content.progress.status)
+          .filter(status => status !== 'completed').length
+          > 0
+);
+
+
