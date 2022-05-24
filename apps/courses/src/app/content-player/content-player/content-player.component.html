@@ -31,7 +31,7 @@
       </div>
       <div fxLayout="row" fxLayoutAlign="none center" fxLayoutGap="7px">
         <div class="sub-header">{{ title }}</div>
-        <div *ngIf="checkoutOffsRequired$ | async">
+        <div *ngIf="(checkoutOffsRequired$ | async) && (currentContentType === 9 || currentContentType === 10)">
           <div fxLayoutAlign="none center">
             <img
               class="sign-offs-icon"

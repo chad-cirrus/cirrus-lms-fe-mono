@@ -9,7 +9,7 @@ import {
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 
-import { IContent, IContentPlayerMenuItem, ILessonFlightLog, IProgress, ITask, ILesson, PROGRESS_STATUS } from '@cirrus/models';
+import { IContent, IContentPlayerMenuItem, ILessonFlightLog, IProgress, ITask, ILesson, PROGRESS_STATUS, LessonStatus } from '@cirrus/models';
 
 
 import { LessonContentComponent } from '@cirrus/ui';
@@ -22,6 +22,9 @@ import { componentDictionary } from '../component-dictionary';
 import { completeProgress, startProgress } from '../../store/actions';
 import { selectIsScreenSmall } from '../../store/selectors/view.selector';
 import { TaskService } from '../../task.service';
+
+import { tap } from 'rxjs/operators';
+
 
 
 @Component({
@@ -47,6 +50,8 @@ export class ContentPlayerComponent
   isIntro!: boolean;
   contentForIntro!: IContent;
   overview!: string;
+
+  currentContentType!: number;
 
   tasks: any;
   logbook: any;
@@ -128,7 +133,7 @@ export class ContentPlayerComponent
 
   nextContent() {
     let nextIndex;
-    if((this.contentForIntro && this.contentForIntro.id) || this.overview){
+    if(this.playFirstContent()){
       nextIndex = 0;
     } else {
       nextIndex = this.menuItems.map(i => i.id).indexOf(this.id) + 1;
@@ -136,6 +141,12 @@ export class ContentPlayerComponent
     if (nextIndex !== this.menuItems.length) {
       this.playContent(this.menuItems[nextIndex].id);
     }
+  }
+
+  playFirstContent(): boolean{
+   const isIntroOrOverview =  (this.contentForIntro && !!this.contentForIntro.id) || this.overview.length > 0;
+   const progressHasNotStarted = this.lesson.progress.status === LessonStatus.NOT_STARTED
+   return isIntroOrOverview && progressHasNotStarted
   }
 
   getAssessment(content_id: number) {
@@ -163,6 +174,7 @@ export class ContentPlayerComponent
 
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const content = this.contents.find(c => c.id === id)!;
+    this.currentContentType = content.content_type
     this.addPadding = [9, 10].indexOf(content.content_type) < 0;
 
     if (content.content_type === 9 || content.content_type === 10) {

@@ -31,17 +31,21 @@ export class VideoPlayerComponent
       player.getCurrentTime().then(time => console.log(time));
     });
     player.on('ended', () => {
-      this.updateProgress.emit({
-        id: this.content.progress.id,
-        status: PROGRESS_STATUS.completed,
-      });
+      if(this.content.progress) {
+        this.updateProgress.emit({
+          id: this.content.progress.id,
+          status: PROGRESS_STATUS.completed,
+        });
+      }
     });
   }
 
   ngOnDestroy(): void {
-    this.updateProgress.emit({
-      id: this.content.progress.id,
-      status: PROGRESS_STATUS.completed,
-    });
+    if(this.content.progress) {
+      this.updateProgress.emit({
+        id: this.content.progress.id,
+        status: PROGRESS_STATUS.completed,
+      });
+    }
   }
 }
