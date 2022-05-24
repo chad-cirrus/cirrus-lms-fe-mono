@@ -62,9 +62,30 @@ export class LessonComponent implements OnInit, OnDestroy {
     this.lessonSubscription.unsubscribe();
   }
 
+  displayOverview(overview: string) {
+    this.contentPlayerDialogService.displayContentPlayerComponent(
+      this._lesson,
+      0,
+      undefined,
+      undefined,
+      undefined,
+      overview
+    );
+  }
+
+  fetchMediaForIntroVideo(content: IContent) {
+    this.contentPlayerDialogService.displayContentPlayerComponent(
+      this._lesson,
+      content.id,
+      undefined,
+      undefined,
+      content
+    );
+  }
+
   fetchMedia(content: IContent) {
     if (content.content_type === 9 || content.content_type === 10) {
-      const { course_attempt_id, stage_id, course_id } = this._lesson;
+      const { course_attempt_id, stage_id } = this._lesson;
       const payload = {
         course_attempt_id,
         content_id: content.id,

@@ -92,73 +92,73 @@
   <div class="title">TIME</div>
   <div fxLayout="row" fxLayoutAlign="space-between center" class="logbook-item-expanded">
     <div>Ground instruction</div>
-    <div>{{ l.completed_ground_instruction_hours }}</div>
+    <div>{{ l.completed_ground_instruction_hours || 0 }}</div>
   </div>
   <div fxLayout="row" fxLayoutAlign="space-between center" class="logbook-item-expanded">
     <div>Total flight </div>
-    <div>{{ l.completed_total_hours }}</div>
+    <div>{{ l.completed_total_hours || 0 }}</div>
   </div>
   <div fxLayout="row" fxLayoutAlign="space-between center" class="logbook-item-expanded">
     <div>Simulator </div>
-    <div>{{ l.completed_sim_hours }}</div>
+    <div>{{ l.completed_sim_hours || 0 }}</div>
   </div>
   <div fxLayout="row" fxLayoutAlign="space-between center" class="logbook-item-expanded">
     <div>Dual received </div>
-    <div>{{ l.completed_dual_received_hours }}</div>
+    <div>{{ l.completed_dual_received_hours || 0 }}</div>
   </div>
   <div fxLayout="row" fxLayoutAlign="space-between center" class="logbook-item-expanded">
     <div>Cross country </div>
-    <div>{{ l.completed_cross_country_hours }}</div>
+    <div>{{ l.completed_cross_country_hours || 0 }}</div>
   </div>
   <div fxLayout="row" fxLayoutAlign="space-between center" class="logbook-item-expanded">
     <div>Cross country legs </div>
-    <div>{{ l.completed_cross_country_legs }}</div>
+    <div>{{ l.completed_cross_country_legs || 0 }}</div>
   </div>
   <div fxLayout="row" fxLayoutAlign="space-between center" class="logbook-item-expanded">
-    <div>Han Solo </div>
-    <div>{{ l.completed_solo_hours }}</div>
+    <div>Solo </div>
+    <div>{{ l.completed_solo_hours || 0 }}</div>
   </div>
   <div fxLayout="row" fxLayoutAlign="space-between center" class="logbook-item-expanded-last">
     <div>PIC</div>
-    <div>{{ l.completed_pic_hours }}</div>
+    <div>{{ l.completed_pic_hours || 0}}</div>
   </div>
 
   <div class="title">CONDITIONS</div>
   <div fxLayout="row" fxLayoutAlign="space-between center" class="logbook-item-expanded">
     <div>Night</div>
-    <div>{{ l.completed_night_hours }}</div>
+    <div>{{ l.completed_night_hours || 0}}</div>
   </div>
   <div fxLayout="row" fxLayoutAlign="space-between center" class="logbook-item-expanded">
     <div>Actual Instrument</div>
-    <div>{{ l.completed_actual_instrument_hours }}</div>
+    <div>{{ l.completed_actual_instrument_hours || 0 }}</div>
   </div>
   <div fxLayout="row" fxLayoutAlign="space-between center" class="logbook-item-expanded">
     <div>Simulated Instrument</div>
-    <div>{{ l.completed_simulated_instrument_hours }}</div>
+    <div>{{ l.completed_simulated_instrument_hours || 0 }}</div>
   </div>
   <div fxLayout="row" fxLayoutAlign="space-between center" class="logbook-item-expanded">
     <div>Track nav aid</div>
-    <div>{{ l.completed_track_nav_aid_hours }}</div>
+    <div>{{ l.completed_track_nav_aid_hours || 0 }}</div>
   </div>
   <div fxLayout="row" fxLayoutAlign="space-between center" class="logbook-item-expanded">
     <div>Holding patterns</div>
-    <div>{{ l.completed_holding_patterns }}</div>
+    <div>{{ l.completed_holding_patterns || 0 }}</div>
   </div>
   <div fxLayout="row" fxLayoutAlign="space-between center" class="logbook-item-expanded">
     <div>Night Landings</div>
-    <div>{{ l.completed_night_landings }}</div>
+    <div>{{ l.completed_night_landings || 0 }}</div>
   </div>
   <div fxLayout="row" fxLayoutAlign="space-between center" class="logbook-item-expanded">
     <div>Day landings</div>
-    <div>{{ l.completed_day_landings }}</div>
+    <div>{{ l.completed_day_landings || 0 }}</div>
   </div>
   <div fxLayout="row" fxLayoutAlign="space-between center" class="logbook-item-expanded">
     <div>Day takeoffs</div>
-    <div>{{ l.completed_day_takeoffs }}</div>
+    <div>{{ l.completed_day_takeoffs || 0 }}</div>
   </div>
   <div fxLayout="row" fxLayoutAlign="space-between center" class="logbook-item-expanded-last">
     <div>Night takeoffs</div>
-    <div>{{ l.completed_night_takeoffs}}</div>
+    <div>{{ l.completed_night_takeoffs || 0}}</div>
   </div>
   <div class="title">APPROACHES</div>
   <div *ngFor="let approach of l.approaches" fxLayout="row" fxLayoutGap="6px" class="approach-types">
@@ -168,6 +168,9 @@
   </div>
 
   <div class="title">INSTRUCTOR FEEDBACK</div>
-    <div class="logbook-item-expanded-last">{{l.instructor_feedback}}</div>
+    <div class="logbook-item-expanded-last" *ngIf="l.instructor_feedback; else no_feedback">{{l.instructor_feedback}}</div>
+    <ng-template #no_feedback >
+      <div class="logbook-item-expanded-last">Your instructor has not given any feedback for this logbook entry.</div>
+    </ng-template>
   </div>
 </div>

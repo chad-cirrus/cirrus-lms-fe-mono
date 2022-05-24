@@ -3,7 +3,6 @@
 
 
 .attempts-container {
-  padding: 0px 46px 0px 20px;
   border-radius: 10px;
 }
 
@@ -20,12 +19,23 @@
 }
 
 .attempt {
-  padding: 17px 0px;
+  padding: 17px 10px 17px 10px;
   border-bottom: 1px solid $border-grey;
 }
 
 .last-attempt {
-  padding: 17px 0px;
+  padding: 17px 10px 17px 10px;
+}
+
+.attempt:hover {
+  cursor: pointer;
+  background-color: $border-grey;
+}
+
+.last-attempt:hover {
+  cursor: pointer;
+  background-color: $border-grey;
+
 }
 
 .index {

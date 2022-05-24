@@ -2,7 +2,7 @@
 
 <div class="attempts-container" *ngIf="!mobile">
   <div *ngFor="let a of attempts; let i = index">
-    <div fxLayout="row" fxLayoutAlign="space-between" [ngClass]="i + 1 === attempts.length ? 'last-attempt' : 'attempt'">
+    <div fxLayout="row" fxLayoutAlign="space-between" [ngClass]="i + 1 === attempts.length ? 'last-attempt' : 'attempt'" (click)="nav(a, i)">
       <div fxLayout="row" fxLayoutAlign="none center"  fxLayoutGap="15px">
         <img
           height="8px"
@@ -22,7 +22,7 @@
         <div [ngClass]="a.missed ? 'value date' : 'value passed'">
           {{ a.created_at | date: 'longDate' }}
         </div>
-        <img *ngIf="a.missed" src="courses/images/svg/right-chevron.svg" (click)="nav(a, i)" />
+        <img *ngIf="a.missed" src="courses/images/svg/right-chevron.svg" />
       </div>
     </div>
   </div>
@@ -30,7 +30,7 @@
 
 <div *ngIf="mobile">
   <div *ngFor="let a of attempts; let i = index" >
-    <div fxLayout="row" fxLayoutAlign="space-between center" class="attempts-container-mobile">
+    <div fxLayout="row" fxLayoutAlign="space-between center" class="attempts-container-mobile" (click)="nav(a, i)">
       <div>
         <div fxLayout="row" fxLayoutAlign="none center" fxLayoutGap="15px">
           <img
@@ -53,7 +53,7 @@
         </div>
       </div>
       <div>
-        <img *ngIf="a.missed" src="courses/images/svg/right-chevron.svg" (click)="nav(a, i)"/>
+        <img *ngIf="a.missed" src="courses/images/svg/right-chevron.svg"/>
       </div>
     </div>
   </div>

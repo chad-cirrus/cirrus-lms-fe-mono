@@ -23,6 +23,7 @@ export abstract class LessonContentComponent implements OnInit, OnDestroy {
   private _tasks: ITask[] = [];
   private _logbook: ILessonFlightLog[] = [];
   private _menuOpen!: boolean;
+  private _overview!: string;
 
   @Output() hidePrevAndNext = new EventEmitter<boolean>();
 
@@ -62,14 +63,30 @@ export abstract class LessonContentComponent implements OnInit, OnDestroy {
 
   public set menuOpen(value: boolean) {
     this._menuOpen = value;
+
   }
 
+  @Input()
+  public get overview(): string {
+    return this._overview;
+  }
+
+  public set overview(value: string) {
+    this._overview = value
+  }
+
+
+
   ngOnInit(): void {
-    this.emitStart();
+    if(!this.overview){
+      this.emitStart();
+    }
   }
 
   ngOnDestroy(): void {
-    this.emitUpdateComplete();
+    if(!this.overview) {
+      this.emitUpdateComplete();
+    }
   }
 
   emitStart() {

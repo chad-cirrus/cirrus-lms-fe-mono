@@ -22,8 +22,7 @@ import { componentDictionary } from '../component-dictionary';
 import { completeProgress, startProgress } from '../../store/actions';
 import { selectIsScreenSmall } from '../../store/selectors/view.selector';
 import { TaskService } from '../../task.service';
-import { createComponent } from '@angular/compiler/src/core';
-import { tap } from 'rxjs/operators';
+
 
 @Component({
   selector: 'cirrus-content-player',
@@ -45,7 +44,9 @@ export class ContentPlayerComponent
   menuItems!: IContentPlayerMenuItem[];
   contents!: IContent[];
   lesson!: ILesson;
-
+  isIntro!: boolean;
+  contentForIntro!: IContent;
+  overview!: string;
 
   tasks: any;
   logbook: any;
@@ -71,32 +72,43 @@ export class ContentPlayerComponent
   ) {}
 
   ngOnInit(): void {
-
     this.tasks = this.data['tasks']
     this.logbook = this.data['logbook']
     this.lesson = this.data['lesson']
+    this.contentForIntro = this.data['content']
+    this.overview = this.data['overview']
 
 
-    this.subscription.add(
-      this.subState$.subscribe(state => {
-        (this.contents = state.contents),
-          (this.menuItems = state.menuItems),
-          (this.lesson_title = state.lesson_title),
-          (this.title = state.contents.filter(
-            c => c.id === this.data.id
-          )[0].title);
-      })
-    );
+      this.subscription.add(
+        this.subState$.subscribe(state => {
+          (this.contents = state.contents),
+            (this.menuItems = state.menuItems),
+            (this.lesson_title = state.lesson_title),
+            (this.title = state.contents.filter(
+              c => c.id === this.data.id
+            )[0].title);
+        })
+      );
+
+
   }
 
   ngAfterViewInit(): void {
     setTimeout(() => {
-      this.playContent(this.data.id);
+      this.contentRouter()
     }, 100);
   }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+  }
+
+  contentRouter() {
+    if(this.overview) {
+      this.playOverview(this.overview)
+      return;
+    }
+    this.contentForIntro && this.contentForIntro.id ? this.playIntroContent() : this.playContent(this.data.id);
   }
 
   toggleMenu() {
@@ -115,7 +127,12 @@ export class ContentPlayerComponent
   }
 
   nextContent() {
-    const nextIndex = this.menuItems.map(i => i.id).indexOf(this.id) + 1;
+    let nextIndex;
+    if((this.contentForIntro && this.contentForIntro.id) || this.overview){
+      nextIndex = 0;
+    } else {
+      nextIndex = this.menuItems.map(i => i.id).indexOf(this.id) + 1;
+    }
     if (nextIndex !== this.menuItems.length) {
       this.playContent(this.menuItems[nextIndex].id);
     }
@@ -159,6 +176,38 @@ export class ContentPlayerComponent
       this.createComponent(id, content, tasks, logbook)
     }
   }
+
+
+  playIntroContent() {
+    this.id = this.contentForIntro.id;
+    this.title = this.contentForIntro.title;
+
+    this.addPadding = true
+
+    const lessonContentComponentRef =
+      this.vcref.ViewContainerRef.createComponent(
+        componentDictionary[0]
+      );
+
+    const component =
+      lessonContentComponentRef.instance as LessonContentComponent;
+      component.content = this.contentForIntro
+  }
+
+
+  playOverview(overview: string) {
+    this.title = 'Overview'
+    const lessonContentComponentRef =
+      this.vcref.ViewContainerRef.createComponent(
+        componentDictionary[8]
+      );
+
+    const component =
+      lessonContentComponentRef.instance as LessonContentComponent;
+      component.overview = overview
+
+  }
+
 
 
 

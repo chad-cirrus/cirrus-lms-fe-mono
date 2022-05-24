@@ -19,14 +19,36 @@ export interface ILesson {
   updated_at: string;
   contents: IContent[];
   overview_image_url: string;
-  student_intro_video: string;
-  instructor_intro_video: string;
+  student_intro_video: StudentIntroVideo;
+  instructor_intro_video: InstructorIntroVideo;
   instructor_contents: IContent[];
   progress: IProgress;
   course_id: number;
   course_attempt_id: number;
   stage_id: number;
 }
+
+export interface StudentIntroVideo {
+  content: IContent;
+  content_id: number;
+  created_at: string;
+  hidden: boolean;
+  required: boolean;
+  id: number;
+  title: string;
+  updated_at: string;
+}
+
+export interface InstructorIntroVideo {
+  content_id: number;
+  created_at: string;
+  hidden: boolean;
+  required: boolean;
+  id: number;
+  title: string;
+  updated_at: string;
+}
+
 
 export enum LessonProgress {
   Unknown,

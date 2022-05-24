@@ -13,6 +13,8 @@ import {
   ICourseProgress,
   LESSON_TYPE,
   ProgressType,
+  LessonStatus,
+  LessonProgress,
 } from '@cirrus/models';
 import { StagesOverlayComponent } from '../stages-overlay/stages-overlay.component';
 
@@ -63,9 +65,11 @@ export class LessonLandingPageComponent {
   libraryImageUrl = 'courses/images/library.png';
   bookOpenImageUrl = 'courses/images/book-open.png';
   @Output() fetchMediaOutput = new EventEmitter<IContent>();
+  @Output() fetchMediaOutputIntro = new EventEmitter<IContent>();
   @Output() fetchScorm = new EventEmitter<IContent>();
   @Output() openSideNav = new EventEmitter();
   @Output() navigateToLesson = new EventEmitter<any>();
+  @Output() displayOverviewOutput = new EventEmitter<string>();
 
   constructor(private dialog: MatDialog) {}
 
@@ -88,42 +92,41 @@ export class LessonLandingPageComponent {
   }
 
   startLesson() {
-    const content: IContent = {
-      id: 593,
-      order: 0,
-      title: 'Intro',
-      subtitle: 'Intro Video: Icing Awareness Course',
-      score: 0,
-      url: '355991595',
-      meta_tags: [],
-      content_tasks: [],
-      quiz: null,
-      content_type: 0,
-      desc: 'Intro video for the icing awareness course.',
-      content_file: '',
-      placeholder_image:
-        'https://content.cirrusapproach.com/cirruslmsherokuprodcontainer/content-items/scorm/d754d0afe672c18526c66d5c2e2a8311.1_Intro.jpg',
-      jet_scoring: false,
-      content_html: '',
-      created_by: 'Cirrus Aircraft',
-      upload_image: '',
-      content_filename: '',
-      starter_file: '',
-      blob_directory: '',
-      show_comments: true,
-      progress: {
-        id: 0,
-        status: 'not_started',
-      },
-    };
+    const {student_intro_video, overview } = this.lesson;
 
-    document
+    if(!student_intro_video && this.lesson.progress.status === LessonStatus.NOT_STARTED) {
+      setTimeout(() => {
+        this.displayOverview(overview)
+      }, 1000)
+    }
+
+    let content: IContent;
+    if(student_intro_video && this.lesson.progress.status === LessonStatus.NOT_STARTED) {
+      content = this.lesson.student_intro_video.content
+      document
+      .querySelector('#cirrus-lesson-contents')
+      ?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+    setTimeout(() => {
+      this.fetchMediaOutputIntro.next(content);
+    }, 1000);
+    } else {
+      content = (this.lesson.contents.find((c) => c.progress.status === LessonStatus.NOT_STARTED)) || this.lesson.contents[0]
+      document
       .querySelector('#cirrus-lesson-contents')
       ?.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
     setTimeout(() => {
       this.fetchMediaOutput.next(content);
     }, 1000);
+    }
+
+
+  }
+
+
+  displayOverview(overview: string) {
+    this.displayOverviewOutput.next(overview);
   }
 
   fetchMedia(content: IContent) {

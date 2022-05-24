@@ -25,9 +25,12 @@ export class ContentRichTextComponent
 
   ngOnInit(): void {
     console.log('noop', this.content);
+    console.log('overview', this.overview)
 
-    this._html = this.cirrusSanitizer.getSafeHtml(this.content.content_html);
+    this._html = this.cirrusSanitizer.getSafeHtml(this.overview ? this.overview : this.content.content_html);
 
-    this.emitStart();
+    if(!this.overview) {
+      this.emitStart();
+    }
   }
 }
