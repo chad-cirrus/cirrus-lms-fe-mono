@@ -2,7 +2,8 @@
 
 <div class="attempts-container" *ngIf="!mobile">
   <div *ngFor="let a of attempts; let i = index">
-    <div fxLayout="row" fxLayoutAlign="space-between" [ngClass]="i + 1 === attempts.length ? 'last-attempt' : 'attempt'" (click)="nav(a, i)">
+    <div fxLayout="row" fxLayoutAlign="space-between"
+      [ngClass]="i + 1 === attempts.length ? (a.missed ? 'last-attempt-missed': 'last-attempt') : (a.missed ? 'attempt-missed' : 'attempt')" (click)="nav(a, i)">
       <div fxLayout="row" fxLayoutAlign="none center"  fxLayoutGap="15px">
         <img
           height="8px"

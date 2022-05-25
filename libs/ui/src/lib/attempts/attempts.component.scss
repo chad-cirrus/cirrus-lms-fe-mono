@@ -23,19 +23,28 @@
   border-bottom: 1px solid $border-grey;
 }
 
+.attempt-missed {
+  padding: 17px 10px 17px 10px;
+  border-bottom: 1px solid $border-grey;
+}
+
 .last-attempt {
   padding: 17px 10px 17px 10px;
 }
 
-.attempt:hover {
+.last-attempt-missed {
+  padding: 17px 10px 17px 10px;
+}
+
+
+.attempt-missed:hover {
   cursor: pointer;
   background-color: $border-grey;
 }
 
-.last-attempt:hover {
+.last-attempt-missed:hover {
   cursor: pointer;
   background-color: $border-grey;
-
 }
 
 .index {
