@@ -37,23 +37,6 @@ export const selectLessonWithContentEntities = createSelector(
     } as ILesson)
 );
 
-export const selectContentPlayerSubState = createSelector(
-  selectLessonWithContentEntities,
-  lesson => ({
-    contents: lesson.contents,
-    lesson_title: lesson.title,
-    menuItems: lesson.contents.map(
-      c =>
-        ({
-          icon: mapContentTypeToIcon(c.content_type),
-          text: c.title,
-          id: c.id,
-          progress: c.progress,
-        } as IContentPlayerMenuItem)
-    ),
-  })
-);
-
 export const selectLessonStateBusy = createSelector(
   selectLessonFeature,
   state => state.busy
@@ -61,10 +44,13 @@ export const selectLessonStateBusy = createSelector(
 
 export const selectCheckOffRequired = createSelector(
   selectLessonWithContentEntities,
-  state => state.contents.filter(content =>(content.content_type === CONTENT_TYPE.flight_assessment) || (content.content_type === CONTENT_TYPE.ground_assessment))
-          .map(content => content.progress.status)
-          .filter(status => status !== 'completed').length
-          > 0
+  state =>
+    state.contents
+      .filter(
+        content =>
+          content.content_type === CONTENT_TYPE.flight_assessment ||
+          content.content_type === CONTENT_TYPE.ground_assessment
+      )
+      .map(content => content.progress.status)
+      .filter(status => status !== 'completed').length > 0
 );
-
-

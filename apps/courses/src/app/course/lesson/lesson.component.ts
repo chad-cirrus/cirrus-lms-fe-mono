@@ -1,15 +1,24 @@
+import { ComponentType } from '@angular/cdk/portal';
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSidenav } from '@angular/material/sidenav';
 import { ActivatedRoute, Router } from '@angular/router';
-import { IContent, ILesson } from '@cirrus/models';
+import { IContent, ILesson, IWorkBook } from '@cirrus/models';
+import {
+  CompletionDialogComponent,
+  CourseCompletionComponent,
+  LESSON_COMPLETION_CTA,
+} from '@cirrus/ui';
 import { Store } from '@ngrx/store';
 
 import { combineLatest, Observable, Subscription } from 'rxjs';
-import { filter, map, take, tap } from 'rxjs/operators';
+import { filter, take, tap, withLatestFrom } from 'rxjs/operators';
 
 import { ContentPlayerDialogService } from '../../content-player/content-player-dialog.service';
+import { findNextLesson } from '../../shared/find-next-lesson';
 import { fetchLessons, setSideNavOpen } from '../../store/actions';
 import { LessonState } from '../../store/reducers/lesson.reducer';
+import { selectCirrusUser } from '../../store/selectors/cirrus-user.selector';
 import { selectLessonWithContentEntities } from '../../store/selectors/lessons.selector';
 import {
   selectInstructorView,
@@ -18,6 +27,7 @@ import {
 } from '../../store/selectors/view.selector';
 import { selectWorkbook } from '../../store/selectors/workbook-routes.selector';
 import { TaskService } from '../../task.service';
+import { CoursesService } from '../course.service';
 
 @Component({
   selector: 'cirrus-lesson',
@@ -26,7 +36,7 @@ import { TaskService } from '../../task.service';
 })
 export class LessonComponent implements OnInit, OnDestroy {
   private _lesson!: ILesson;
-  stage_id: any;
+  stage_id!: number;
   lesson$: Observable<ILesson> = this.store
     .select(selectLessonWithContentEntities)
     .pipe(tap(lesson => (this._lesson = lesson)));
@@ -38,23 +48,84 @@ export class LessonComponent implements OnInit, OnDestroy {
   workbook$ = this.store
     .select(selectWorkbook)
     .pipe(filter(workbook => workbook.id !== 0));
+  coursId!: number;
   lessonId!: number;
   @ViewChild('snav') sidenav!: MatSidenav;
+  lessonCompleted$!: Observable<string>;
 
   constructor(
     private route: ActivatedRoute,
     private store: Store<LessonState>,
     private contentPlayerDialogService: ContentPlayerDialogService,
     private router: Router,
-    private taskService: TaskService
+    private taskService: TaskService,
+    private courseService: CoursesService,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit() {
     this.lessonSubscription.add(
       this.route.params.subscribe(({ courseId, lessonId }) => {
+        this.coursId = parseInt(courseId);
         this.lessonId = parseInt(lessonId);
         this.store.dispatch(fetchLessons({ courseId, lessonId }));
       })
+    );
+
+    this.lessonCompleted$ = this.courseService.lessonComplete$;
+    this.lessonSubscription.add(
+      this.lessonCompleted$
+        .pipe(
+          withLatestFrom(this.workbook$, this.store.select(selectCirrusUser))
+        )
+        .subscribe(([progress_type, workbook, user]) => {
+          const component: ComponentType<
+            CompletionDialogComponent | CourseCompletionComponent
+          > =
+            progress_type === 'lesson'
+              ? CompletionDialogComponent
+              : CourseCompletionComponent;
+          const data =
+            progress_type === 'lesson'
+              ? {
+                  lesson: this._lesson.title,
+                }
+              : {
+                  badge: 'courses/images/svg/AvionicsCourse2.svg',
+                  course: workbook.name,
+                  student: user.name,
+                };
+
+          this.dialog
+            .open(component, {
+              data,
+              panelClass: 'fullscreen-dialog',
+              height: '100vh',
+              width: '100%',
+            })
+            .afterClosed()
+            .pipe(withLatestFrom(this.workbook$))
+            .subscribe(([response, workbook]) => {
+              if (response === LESSON_COMPLETION_CTA.nextLesson) {
+                const nextLesson = findNextLesson(workbook);
+                if (nextLesson > 0) {
+                  this.router.navigate([
+                    `/courses/${this.coursId}/lessons/${nextLesson}`,
+                  ]);
+                }
+              } else if (
+                response === LESSON_COMPLETION_CTA.downloadCertificate
+              ) {
+                console.log('we will download certificate');
+              } else if (
+                response === LESSON_COMPLETION_CTA.downloadTranscript
+              ) {
+                console.log('we will download transcript');
+              } else {
+                console.log('none of the above');
+              }
+            });
+        })
     );
   }
 
@@ -132,6 +203,7 @@ export class LessonComponent implements OnInit, OnDestroy {
     this.sidenav.toggle();
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   navigate(payload: any) {
     this.sidenav.close();
     this.store.dispatch(setSideNavOpen({ sideNavOpen: false }));

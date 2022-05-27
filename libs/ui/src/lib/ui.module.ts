@@ -44,13 +44,14 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { TaskComponent } from './task/task.component';
 import { CompletionStandardsComponent } from './completion-standards/completion-standards.component';
 
-
 import { InteractiveComponent } from './interactive/interactive.component';
 import { AttemptsComponent } from './attempts/attempts.component';
 import { AttemptFeedbackComponent } from './attempt-feedback/attempt-feedback.component';
 import { LogbookComponent } from './logbook/logbook.component';
-
-
+import { NotificationComponent } from './testdialog/notification.component';
+import { ButtonComponent } from './testdialog/button.component';
+import { CompletionDialogComponent } from './completion-dialog/completion-dialog.component';
+import { CourseCompletionComponent } from './course-completion/course-completion.component';
 
 @NgModule({
   imports: [
@@ -66,11 +67,10 @@ import { LogbookComponent } from './logbook/logbook.component';
     MatSidenavModule,
     MatDialogModule,
     MatTabsModule,
-    MatCardModule
+    MatCardModule,
   ],
   declarations: [
     LessonLandingPageComponent,
-
     LessonContentItemComponent,
     ProgressCardComponent,
     ProgressIndicatorComponent,
@@ -89,16 +89,18 @@ import { LogbookComponent } from './logbook/logbook.component';
     ContentImageComponent,
     ContentRichTextComponent,
     AssessmentComponent,
-
     TaskComponent,
     CompletionStandardsComponent,
-
     InteractiveComponent,
     TaskComponent,
     CompletionStandardsComponent,
     AttemptsComponent,
     AttemptFeedbackComponent,
     LogbookComponent,
+    NotificationComponent,
+    ButtonComponent,
+    CompletionDialogComponent,
+    CourseCompletionComponent,
   ],
   exports: [
     LessonLandingPageComponent,
@@ -120,15 +122,16 @@ import { LogbookComponent } from './logbook/logbook.component';
     ContentImageComponent,
     ContentRichTextComponent,
     AssessmentComponent,
-
     TaskComponent,
     CompletionStandardsComponent,
-
     InteractiveComponent,
-     AttemptsComponent,
-     AttemptFeedbackComponent,
-     LogbookComponent,
-
+    AttemptsComponent,
+    AttemptFeedbackComponent,
+    LogbookComponent,
+    NotificationComponent,
+    ButtonComponent,
+    CompletionDialogComponent,
+    CourseCompletionComponent,
   ],
   providers: [
     { provide: MAT_DIALOG_DATA, useValue: {} },

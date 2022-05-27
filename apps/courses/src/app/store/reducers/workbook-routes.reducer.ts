@@ -6,10 +6,7 @@ import {
   fetchWorkbookFailure,
   fetchWorkbookSuccess,
 } from '../actions/workbook-routes.actions';
-import {
-  handleCompleteProgressSuccessInWorkbookReduer,
-  handleStartProgressSuccessInWorkbookReduer,
-} from './handlers';
+import { handleProgressSuccessInWorkbookReducer } from './workbook.handlers';
 
 export interface WorkbookRoutesState {
   busy: boolean;
@@ -46,12 +43,16 @@ export const reducer = createReducer(
     workbook: initialWorkbook,
     error,
   })),
-  on(startProgressSuccess, (state, { responses }) =>
-    handleStartProgressSuccessInWorkbookReduer(state, responses)
-  ),
-  on(completeProgressSuccess, (state, { responses }) =>
-    handleCompleteProgressSuccessInWorkbookReduer(state, responses)
-  )
+  on(startProgressSuccess, completeProgressSuccess, (state, { responses }) => {
+    if (
+      responses.progresses.filter(r => r.progress_type !== 'content').length ===
+      0
+    ) {
+      return state;
+    }
+
+    return handleProgressSuccessInWorkbookReducer(state, responses);
+  })
 );
 
 export const getWorkbook = (state: WorkbookRoutesState) => state.workbook;

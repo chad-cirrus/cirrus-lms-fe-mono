@@ -31,6 +31,8 @@ export class VideoPlayerComponent
       player.getCurrentTime().then(time => console.log(time));
     });
     player.on('ended', () => {
+      console.log('content', this.content)
+
       if(this.content.progress) {
         this.updateProgress.emit({
           id: this.content.progress.id,

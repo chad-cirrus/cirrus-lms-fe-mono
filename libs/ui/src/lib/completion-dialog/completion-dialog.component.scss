@@ -1,0 +1,99 @@
+.container {
+  padding: 2rem 2rem 3rem 2rem;
+  height: 100%
+}
+
+.main {
+  .message {
+    font-family: 'Berthold Akzidenz Grotesk BE';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 23px;
+    line-height: 32px;
+    /* or 139% */
+
+    text-align: center;
+    letter-spacing: -0.045em;
+    color: #FFFFFF;
+  }
+
+}
+
+.buttons {
+  .review-lesson,
+  .next-lesson {
+    align-items: center;
+    justify-content: center;
+    border-radius: 60px;
+    width: 245px;
+    height: 40px;
+
+    font-family: 'Akzidenz-Grotesk BQ';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 17px;
+    line-height: 23px;
+    /* or 138% */
+
+    display: flex;
+    align-items: center;
+    text-align: center;
+    letter-spacing: -0.005em;
+  }
+  .review-lesson {
+    background-color: #3A3A3A;
+  }
+  .next-lesson {
+    background-color: #0077C8;
+  }
+}
+
+@media (min-width: 600px) {
+  .main {
+    min-height: 45vh;
+    padding-bottom: 2rem;
+    .message {
+      font-size: 30px;
+      line-height: 38px;
+      /* identical to box height, or 121% */
+    }
+  }
+
+  .buttons {
+    min-height: 45vh;
+    padding-top: 3rem;
+    .review-lesson,
+    .next-lesson {
+      width: 245px;
+      height: 60px;
+
+      font-size: 17px;
+      line-height: 23px;
+      /* or 138% */
+      letter-spacing: -0.005em;
+    }
+  }
+}
+
+@media (min-width: 960px) {
+  .main {
+    padding-bottom: 3rem;
+    .message {
+      font-size: 38px;
+      line-height: 46px;
+      /* identical to box height, or 121% */
+    }
+  }
+
+  .buttons {
+    padding-top: 3rem;
+    .review-lesson,
+    .next-lesson {
+      width: 245px;
+      height: 60px;
+
+      font-size: 26px;
+      line-height: 36px;
+    }
+  }
+}

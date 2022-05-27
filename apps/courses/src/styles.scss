@@ -20,13 +20,6 @@ body {
   height: 100vh;
 }
 
-.fullscreen-dialog {
-  max-width: 100% !important;
-  .mat-dialog-container {
-    background-color: black;
-  }
-}
-
 .mat-dialog-content {
   max-height: initial;
 }

@@ -12,19 +12,22 @@ import { LessonContentComponent } from '../LessonContentComponent';
   styleUrls: ['./assessment.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class AssessmentComponent extends LessonContentComponent implements OnInit {
-
+export class AssessmentComponent
+  extends LessonContentComponent
+  implements OnInit
+{
   @ViewChild('tabs') tabGroup!: MatTabGroup;
   attempt!: Attempt;
   tablet$!: Observable<boolean>;
   mobile$!: Observable<boolean>;
 
-
-
-
-  constructor(private breakpointObserver: BreakpointObserver) {super()}
+  constructor(private breakpointObserver: BreakpointObserver) {
+    super();
+  }
 
   ngOnInit(): void {
+    super.ngOnInit();
+
     this.tablet$ = this.breakpointObserver.observe('(max-width: 959px)').pipe(
       map(({ matches }) => {
         return matches;
@@ -38,25 +41,22 @@ export class AssessmentComponent extends LessonContentComponent implements OnIni
     );
   }
 
-
   handleBack() {
-    this.show()
+    this.show();
     this.tabGroup.selectedIndex = 0;
   }
 
   handleEmitRow($event: any) {
     this.tabGroup.selectedIndex = 2;
-    this.hide()
+    this.hide();
     this.attempt = $event.event;
   }
 
   hide() {
-    this.hidePrevAndNext.emit(true)
+    this.hidePrevAndNext.emit(true);
   }
 
   show() {
-    this.hidePrevAndNext.emit(false)
+    this.hidePrevAndNext.emit(false);
   }
-
-
 }

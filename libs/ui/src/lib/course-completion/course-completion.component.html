@@ -1,0 +1,46 @@
+<div
+  class="container"
+  fxLayout="column"
+  fxLayoutAlign="start center"
+  fxLayoutGap.lt-sm="3rem"
+>
+  <div class="close" fxLayout="row" fxLayoutAlign="end center">
+    <img src="courses/images/svg/close.svg" mat-dialog-close="nothing" />
+  </div>
+  <div
+    class="main"
+    fxLayout="column"
+    fxLayoutAlign="end center"
+    fxLayoutAlign.lt-sm="start center"
+    fxLayoutGap="1rem"
+    fxLayoutGap.lt-sm="1rem"
+  >
+    <div class="badge"><img [src]="data.badge" alt="oops!" /></div>
+    <div class="salutation">Congratulations, {{ data.student }}!</div>
+    <div class="message">You've completed the {{ data.course }}</div>
+  </div>
+  <div
+    class="buttons"
+    fxLayout="row"
+    fxLayout.lt-sm="column"
+    fxLayoutAlign="center start"
+    fxLayoutAlign.lt-sm="center center"
+    fxLayoutGap="1.5rem"
+    fxLayoutGap.lt-sm="1.5rem"
+  >
+    <button
+      class="download-certificate"
+      mat-raised-button
+      [mat-dialog-close]="lessonCompletionCta.downloadCertificate"
+    >
+      Download Certificate
+    </button>
+    <button
+      class="download-transcript"
+      mat-raised-button
+      [mat-dialog-close]="lessonCompletionCta.downloadTranscript"
+    >
+      Download Transcript
+    </button>
+  </div>
+</div>

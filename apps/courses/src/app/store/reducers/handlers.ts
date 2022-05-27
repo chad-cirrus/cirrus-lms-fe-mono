@@ -1,7 +1,6 @@
 import {
   IProgressUpdateResponses,
   IProgress,
-  IStage,
   IProgressUpdateResponse,
 } from '@cirrus/models';
 import {
@@ -9,7 +8,6 @@ import {
   lessonContentsEntityAdapter,
   LessonState,
 } from './lesson.reducer';
-import { WorkbookRoutesState } from './workbook-routes.reducer';
 
 export const handleUpdateLessonProgress = ({
   progresses,
@@ -21,11 +19,11 @@ export const handleUpdateLessonProgress = ({
 };
 
 export const handleLessonContentsProgressUpdate = (
-  { progresses }: IProgressUpdateResponses,
+  progresses: IProgressUpdateResponse[],
   state: LessonContentsState
 ): LessonContentsState => {
   const { item_id, id, status } = progresses.filter(
-    p => p.progressable_type === 'Content'
+    p => p.progress_type === 'content'
   )[0];
   return lessonContentsEntityAdapter.updateOne(
     {
@@ -48,14 +46,22 @@ export const handleStartProgressSuccess = (
   ...state,
   lesson: {
     ...state.lesson,
-    progress: handleUpdateLessonProgress(responses),
+    progress: responses.progresses.filter(
+      p => p.progressable_type === 'Lesson'
+    )[0]
+      ? handleUpdateLessonProgress(responses)
+      : state.lesson.progress,
   },
   busy: false,
   error: null,
-  lessonContents: handleLessonContentsProgressUpdate(
-    responses,
-    state.lessonContents
-  ),
+  lessonContents: responses.progresses.filter(
+    p => p.progress_type === 'content'
+  )[0]
+    ? handleLessonContentsProgressUpdate(
+        responses.progresses,
+        state.lessonContents
+      )
+    : state.lessonContents,
 });
 
 export const handleCompleteProgressSuccess = (
@@ -65,80 +71,25 @@ export const handleCompleteProgressSuccess = (
   ...state,
   busy: false,
   error: null,
-  lessonContents: handleLessonContentsProgressUpdate(
-    responses,
-    state.lessonContents
-  ),
+  lesson:
+    responses.progresses.length &&
+    responses.progresses.filter(p => p.progress_type === 'lesson')[0]
+      ? {
+          ...state.lesson,
+          progress: {
+            id: responses.progresses.filter(
+              p => p.progress_type === 'lesson'
+            )[0].id,
+            status: responses.progresses.filter(
+              p => p.progress_type === 'lesson'
+            )[0].status,
+          },
+        }
+      : state.lesson,
+  lessonContents: responses.progresses.length
+    ? handleLessonContentsProgressUpdate(
+        responses.progresses,
+        state.lessonContents
+      )
+    : state.lessonContents,
 });
-
-export const handleStartProgressSuccessInWorkbookReduer = (
-  state: WorkbookRoutesState,
-  responses: IProgressUpdateResponses
-): WorkbookRoutesState => {
-  const stageUpdate = responses.progresses.filter(
-    p => p.progress_type === 'stage'
-  )[0];
-
-  const lessonUpdate = responses.progresses.filter(
-    p => p.progress_type === 'lesson'
-  )[0];
-
-  return {
-    ...state,
-    workbook: {
-      ...state.workbook,
-      stages: updateStages(state.workbook.stages, stageUpdate, lessonUpdate),
-    },
-  };
-};
-
-export const handleCompleteProgressSuccessInWorkbookReduer = (
-  state: WorkbookRoutesState,
-  responses: IProgressUpdateResponses
-): WorkbookRoutesState => {
-  const lessonUpdate = responses.progresses.filter(
-    p => p.progress_type === 'lesson'
-  )[0];
-
-  if (lessonUpdate) {
-    return {
-      ...state,
-      workbook: {
-        ...state.workbook,
-        stages: state.workbook.stages.map(stage => ({
-          ...stage,
-          lessons: stage.lessons.map(lesson => ({
-            ...lesson,
-            progress:
-              lesson.progress.id === lessonUpdate.id
-                ? { id: lessonUpdate.id, status: lessonUpdate.status }
-                : lesson.progress,
-          })),
-        })),
-      },
-    };
-  } else {
-    return state;
-  }
-};
-
-function updateStages(
-  stages: IStage[],
-  stageUpdate: IProgressUpdateResponse,
-  lessonUpdate: IProgressUpdateResponse
-): IStage[] {
-  return stages.map(stage => ({
-    ...stage,
-    progress:
-      stage.progress.id === stageUpdate.id
-        ? { id: stageUpdate.id, status: stageUpdate.status }
-        : stage.progress,
-    lessons: stage.lessons.map(lesson => ({
-      ...lesson,
-      progress:
-        lesson.progress.id === lessonUpdate.id
-          ? { id: lessonUpdate.id, status: lessonUpdate.status }
-          : lesson.progress,
-    })),
-  }));
-}

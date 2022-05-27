@@ -1,4 +1,3 @@
-
 import {
   Directive,
   EventEmitter,
@@ -13,9 +12,7 @@ import {
   IProgress,
   PROGRESS_STATUS,
   ILessonFlightLog,
-  Task,
 } from '@cirrus/models';
-
 
 @Directive()
 export abstract class LessonContentComponent implements OnInit, OnDestroy {
@@ -44,7 +41,7 @@ export abstract class LessonContentComponent implements OnInit, OnDestroy {
   }
 
   public set tasks(value: ITask[]) {
-    this._tasks = value
+    this._tasks = value;
   }
 
   @Input()
@@ -63,7 +60,6 @@ export abstract class LessonContentComponent implements OnInit, OnDestroy {
 
   public set menuOpen(value: boolean) {
     this._menuOpen = value;
-
   }
 
   @Input()
@@ -72,38 +68,28 @@ export abstract class LessonContentComponent implements OnInit, OnDestroy {
   }
 
   public set overview(value: string) {
-    this._overview = value
+    this._overview = value;
   }
 
-
-
   ngOnInit(): void {
-    if(!this.overview){
-      this.emitStart();
+    if (!this.overview && this.content?.progress) {
+      const {
+        progress: { id },
+      } = this.content;
+
+      this.updateProgress.emit({
+        id,
+        status: PROGRESS_STATUS.in_progress,
+      });
     }
   }
 
   ngOnDestroy(): void {
-    if(!this.overview) {
-      this.emitUpdateComplete();
+    if (!this.overview) {
+      this.updateProgress.emit({
+        id: this.content.progress.id,
+        status: PROGRESS_STATUS.completed,
+      });
     }
-  }
-
-  emitStart() {
-    const {
-      progress: { id },
-    } = this.content;
-
-    this.updateProgress.emit({
-      id,
-      status: PROGRESS_STATUS.in_progress,
-    });
-  }
-
-  emitUpdateComplete() {
-    this.updateProgress.emit({
-      id: this.content.progress.id,
-      status: PROGRESS_STATUS.completed,
-    });
   }
 }

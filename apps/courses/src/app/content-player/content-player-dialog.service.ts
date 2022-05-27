@@ -7,7 +7,14 @@ import { ContentPlayerComponent } from './content-player/content-player.componen
 export class ContentPlayerDialogService {
   constructor(private dialog: MatDialog) {}
 
-  displayContentPlayerComponent(lesson: ILesson, id: number, tasks?: ITask[], logbook?: ILessonFlightLog[], content?: IContent, overview?: string) {
+  displayContentPlayerComponent(
+    lesson: ILesson,
+    id: number,
+    tasks?: ITask[],
+    logbook?: ILessonFlightLog[],
+    content?: IContent,
+    overview?: string
+  ) {
     return this.dialog.open(ContentPlayerComponent, {
       data: {
         lesson,
@@ -15,7 +22,7 @@ export class ContentPlayerDialogService {
         tasks,
         logbook,
         content,
-        overview
+        overview,
       },
       panelClass: 'fullscreen-dialog',
       height: '100vh',

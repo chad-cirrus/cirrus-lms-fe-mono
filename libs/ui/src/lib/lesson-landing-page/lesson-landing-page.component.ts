@@ -11,7 +11,6 @@ import {
   IContent,
   ILesson,
   ICourseProgress,
-  LESSON_TYPE,
   ProgressType,
   LessonStatus,
   LessonProgress,
@@ -24,9 +23,31 @@ import { StagesOverlayComponent } from '../stages-overlay/stages-overlay.compone
   styleUrls: ['./lesson-landing-page.component.scss'],
 })
 export class LessonLandingPageComponent {
+  private _lesson!: ILesson;
+  private _buttonText!: string;
+
+  @Input()
+  set lesson(value: ILesson) {
+    this._lesson = value;
+    const dictionary: { [key: string]: string } = {
+      ['not_started']: 'Get Started',
+      ['in_progress']: 'Resume Lesson',
+      ['completed']: 'Next Lesson',
+      ['failed']: '',
+    };
+    this._buttonText = dictionary[this.lesson.progress.status];
+  }
+
+  get lesson() {
+    return this._lesson;
+  }
+
+  get buttonText() {
+    return this._buttonText;
+  }
+
   @ViewChild('drawer') drawer: any;
   showFiller = false;
-  @Input() lesson!: ILesson;
   @Input() lessonId!: number;
   @Input() isScreenSmall!: boolean;
   @Input() progress: ICourseProgress[] | null = [
@@ -81,49 +102,45 @@ export class LessonLandingPageComponent {
     return 'courses/images/svg/play_button_filled_in.svg';
   }
 
-  get buttonText() {
-    const dictionary: { [key: string]: string } = {
-      ['not_started']: 'Get Started',
-      ['in_progress']: 'Resume Lesson',
-      ['completed']: 'Next Lesson',
-      ['failed']: '',
-    };
-    return dictionary[this.lesson.progress.status];
-  }
-
   startLesson() {
-    const {student_intro_video, overview } = this.lesson;
+    const { student_intro_video, overview } = this.lesson;
 
-    if(!student_intro_video && this.lesson.progress.status === LessonStatus.NOT_STARTED) {
+    if (
+      !student_intro_video &&
+      this.lesson.progress.status === LessonStatus.NOT_STARTED
+    ) {
       setTimeout(() => {
-        this.displayOverview(overview)
-      }, 1000)
+        this.displayOverview(overview);
+      }, 1000);
     }
 
     let content: IContent;
-    if(student_intro_video && this.lesson.progress.status === LessonStatus.NOT_STARTED) {
-      content = this.lesson.student_intro_video.content
+    if (
+      student_intro_video &&
+      this.lesson.progress.status === LessonStatus.NOT_STARTED
+    ) {
+      content = this.lesson.student_intro_video.content;
       document
-      .querySelector('#cirrus-lesson-contents')
-      ?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        .querySelector('#cirrus-lesson-contents')
+        ?.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
-    setTimeout(() => {
-      this.fetchMediaOutputIntro.next(content);
-    }, 1000);
+      setTimeout(() => {
+        this.fetchMediaOutputIntro.next(content);
+      }, 1000);
     } else {
-      content = (this.lesson.contents.find((c) => c.progress.status === LessonStatus.NOT_STARTED)) || this.lesson.contents[0]
+      content =
+        this.lesson.contents.find(
+          c => c.progress.status === LessonStatus.NOT_STARTED
+        ) || this.lesson.contents[0];
       document
-      .querySelector('#cirrus-lesson-contents')
-      ?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        .querySelector('#cirrus-lesson-contents')
+        ?.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
-    setTimeout(() => {
-      this.fetchMediaOutput.next(content);
-    }, 1000);
+      setTimeout(() => {
+        this.fetchMediaOutput.next(content);
+      }, 1000);
     }
-
-
   }
-
 
   displayOverview(overview: string) {
     this.displayOverviewOutput.next(overview);

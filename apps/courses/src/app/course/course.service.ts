@@ -6,15 +6,21 @@ import {
   IProgress,
   IProgressUpdateResponses,
   IWorkBook,
+  PROGRESS_STATUS,
+  PROGRESS_TYPE,
 } from '@cirrus/models';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, Subject } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
+import { completeProgressHandler } from '../shared/complete-progress.handler';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CoursesService {
+  private _lessonCompleted = new Subject<string>();
+  lessonComplete$ = this._lessonCompleted.asObservable();
+
   private coursesUrl = 'api/v4/courses';
   private scormUrl = 'scorm';
   notificationsCount$ = this.http
@@ -44,16 +50,45 @@ export class CoursesService {
   }
 
   startProgress(id: number): Observable<IProgressUpdateResponses> {
-    return this.http.post<IProgressUpdateResponses>(
-      `${environment.baseUrl}/api/v4/progresses/${id}/start`,
-      {}
-    );
+    return this.http
+      .post<IProgressUpdateResponses>(
+        `${environment.baseUrl}/api/v4/progresses/${id}/start`,
+        {}
+      )
+      .pipe(
+        map(responses =>
+          responses
+            ? responses
+            : ({ progresses: [] } as IProgressUpdateResponses)
+        )
+      );
   }
 
   completeProgress(id: number): Observable<IProgressUpdateResponses> {
-    return this.http.post<IProgressUpdateResponses>(
-      `${environment.baseUrl}/api/v4/progresses/${id}/complete`,
-      {}
-    );
+    return this.http
+      .post<IProgressUpdateResponses>(
+        `${environment.baseUrl}/api/v4/progresses/${id}/complete`,
+        {}
+      )
+      .pipe(
+        map(responses =>
+          responses
+            ? responses
+            : ({ progresses: [] } as IProgressUpdateResponses)
+        ),
+        tap(responses => {
+          const { progresses } = responses;
+          const { progress_type } = completeProgressHandler(progresses);
+
+          if (
+            [
+              PROGRESS_TYPE.course.toString(),
+              PROGRESS_TYPE.lesson.toString(),
+            ].includes(progress_type)
+          ) {
+            this._lessonCompleted.next(progress_type);
+          }
+        })
+      );
   }
 }

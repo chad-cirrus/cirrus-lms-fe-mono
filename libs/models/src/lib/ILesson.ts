@@ -20,7 +20,7 @@ export interface ILesson {
   contents: IContent[];
   overview_image_url: string;
   student_intro_video: StudentIntroVideo;
-  instructor_intro_video: InstructorIntroVideo;
+  instructor_intro_video?: InstructorIntroVideo;
   instructor_contents: IContent[];
   progress: IProgress;
   course_id: number;
@@ -48,7 +48,6 @@ export interface InstructorIntroVideo {
   title: string;
   updated_at: string;
 }
-
 
 export enum LessonProgress {
   Unknown,

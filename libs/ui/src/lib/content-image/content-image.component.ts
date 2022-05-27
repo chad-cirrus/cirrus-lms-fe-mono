@@ -18,6 +18,7 @@ export class ContentImageComponent extends LessonContentComponent {
 
   @Input()
   set content(content: IContent) {
+    super.content = content;
     this._upload_image = this.cirrusSanitizer.getSafeResourceUrl(
       content.upload_image
     );
