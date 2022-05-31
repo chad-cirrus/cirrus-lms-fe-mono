@@ -9,12 +9,12 @@
     fxLayout="row"
     fxLayoutAlign="space-between start"
     fxLayoutGap="8px"
-    *ngIf="lesson.lesson_type === 0"
+    *ngIf="selfStudy"
   >
     <img [src]="selfStudyIconSrc" />
     <span> Self Study </span>
   </div>
-  <div *ngIf="groundAssessment || flightAssessment">
+  <div *ngIf="groundAssessment">
     <div
       class="assessment"
       fxLayout="row"
@@ -23,7 +23,29 @@
     >
       <img class="assessment-progress-icon" [src]="assessmentProgressIcon" />
       <div class="progress-type">
-        {{ flightAssessment ? 'Flight Assessment' : 'Ground Assessment' }}
+        Ground Assessment
+        <div class="sign-offs-warning-container" *ngIf="true">
+          <img
+            class="sign-offs-icon"
+            src="courses/images/svg/sign-off-warning.svg"
+          />
+          <span class="sign-offs-required">Instructor sign offs required</span>
+        </div>
+      </div>
+      <img class="chevron-right" src="courses/images/svg/chevron_right.svg" />
+    </div>
+  </div>
+
+  <div *ngIf="flightAssessment">
+    <div
+      class="assessment"
+      fxLayout="row"
+      fxLayoutAlign="space-between start"
+      fxLayoutGap="8px"
+    >
+      <img class="assessment-progress-icon" [src]="assessmentProgressIcon" />
+      <div class="progress-type">
+        Flight Assessment
         <div class="sign-offs-warning-container" *ngIf="true">
           <img
             class="sign-offs-icon"
