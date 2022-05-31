@@ -28,6 +28,7 @@ export class LessonLandingPageComponent {
   private _lesson!: ILesson;
   private _buttonText!: string;
 
+
   @Input()
   set lesson(value: ILesson) {
     this._lesson = value;
@@ -38,7 +39,9 @@ export class LessonLandingPageComponent {
       ['failed']: '',
     };
     this._buttonText = dictionary[this.lesson.progress.status];
+    this._progress = this.setProgressForCard();
   }
+
 
   get lesson() {
     return this._lesson;
@@ -52,16 +55,8 @@ export class LessonLandingPageComponent {
   showFiller = false;
 
   private _progress!: ICourseProgress[];
-  private _lesson!: ILesson;
-  @Input()
-  set lesson(lesson: ILesson) {
-    this._lesson = lesson;
-    this._progress = this.setProgressForCard();
-  }
 
-  get lesson() {
-    return this._lesson;
-  }
+
 
   get progress() {
     return this._progress;
