@@ -21,6 +21,8 @@ import {
 import { MatSidenav } from '@angular/material/sidenav';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { CoursesService } from './course/course.service';
+import { ActivatedRoute, NavigationEnd } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'cirrus-root',
@@ -54,10 +56,18 @@ export class AppComponent implements OnInit {
     private store: Store<AppState>,
     private appService: AppService,
     private breakpointObserver: BreakpointObserver,
-    private courseService: CoursesService
-  ) {}
+    private courseService: CoursesService,
+    private router: Router,
+    private route:ActivatedRoute
+  ) {
+    router.events.subscribe(d => console.log('d', d))
+  }
 
   ngOnInit() {
+
+
+
+
     this.breakpointObserver
       .observe('(max-width: 600px)')
       .pipe(
@@ -103,4 +113,9 @@ export class AppComponent implements OnInit {
   handleOpenChanged(sideNavOpen: boolean) {
     this.store.dispatch(appActions.setSideNavOpen({ sideNavOpen }));
   }
+
+  navigateToCourse() {
+    this.router.navigate([`/courses}`]);
+  }
+
 }

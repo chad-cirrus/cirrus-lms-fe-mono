@@ -1,5 +1,15 @@
 @use '../styles/variables' as *;
 
+.content-container {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height: 100%;
+}
+
+.breadcrumb-container {
+  height: 55px;
+  padding-left: 65px;
+}
 
 .sidenav-menu {
   padding: 24px 32px;
@@ -55,10 +65,13 @@ ul.student-name {
   z-index: 1;
 }
 
-.content-container {
+
+
+.outlet-container {
   overflow-y: scroll;
   overflow-x: hidden;
-  height: 94vh;
+  height: 100vh;
+  padding-bottom: 150px;
 }
 .content-container.stop-scrolling {
   overflow: hidden;
@@ -76,6 +89,7 @@ ul.student-name {
 .sidenav {
   border-right: 1px solid $border-grey;
 }
+
 
 
 
