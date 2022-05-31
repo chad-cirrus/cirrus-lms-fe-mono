@@ -15,7 +15,7 @@ export class ProgressCardComponent {
   private _text!: string;
   private _imageIcon!: string;
   private _completedCourses!: number;
-  private _totalCourses!: number;
+  private _totalCourses!: number | undefined;
 
   get text() {
     return this._text;

@@ -157,6 +157,15 @@ export const testData: ILesson = {
   course_id: 0,
   course_attempt_id: 0,
   stage_id: 0,
+  lesson_stats: {
+    content_completed: 0,
+    content_total: 0,
+    ground_hours_completed :0,
+    flight_hours_completed: 0,
+    landings_completed: 0,
+    assessmennt_tasks_total: 0,
+    assessment_tasks_completed: 0
+  }
 };
 
 export const testData2: ILesson = {
@@ -314,4 +323,13 @@ export const testData2: ILesson = {
   },
   instructor_overview: '',
   instructor_contents: [],
+  lesson_stats: {
+    content_completed: 0,
+    content_total: 0,
+    ground_hours_completed :0,
+    flight_hours_completed: 0,
+    landings_completed: 0,
+    assessmennt_tasks_total: 0,
+    assessment_tasks_completed: 0
+  }
 };

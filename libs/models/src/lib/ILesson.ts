@@ -26,6 +26,18 @@ export interface ILesson {
   course_id: number;
   course_attempt_id: number;
   stage_id: number;
+  lesson_stats: LessonStats
+}
+
+
+export interface LessonStats {
+  content_completed: number;
+  content_total: number;
+  ground_hours_completed :number;
+  flight_hours_completed: number;
+  landings_completed: number;
+  assessmennt_tasks_total: number;
+  assessment_tasks_completed: number;
 }
 
 export interface StudentIntroVideo {

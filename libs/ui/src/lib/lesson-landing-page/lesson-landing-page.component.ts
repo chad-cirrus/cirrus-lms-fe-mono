@@ -1,8 +1,10 @@
 /* eslint-disable @nrwl/nx/enforce-module-boundaries */
 import {
+  AfterViewInit,
   Component,
   EventEmitter,
   Input,
+  OnInit,
   Output,
   ViewChild,
 } from '@angular/core';
@@ -48,35 +50,27 @@ export class LessonLandingPageComponent {
 
   @ViewChild('drawer') drawer: any;
   showFiller = false;
+
+  private _progress!: ICourseProgress[];
+  private _lesson!: ILesson;
+  @Input()
+  set lesson(lesson: ILesson) {
+    this._lesson = lesson;
+    this._progress = this.setProgressForCard();
+  }
+
+  get lesson() {
+    return this._lesson;
+  }
+
+  get progress() {
+    return this._progress;
+  }
+
+
   @Input() lessonId!: number;
   @Input() isScreenSmall!: boolean;
-  @Input() progress: ICourseProgress[] | null = [
-    {
-      type: ProgressType.Ground,
-      completedCourses: 5,
-      totalCourses: 10,
-    },
-    {
-      type: ProgressType.Flight,
-      completedCourses: 12,
-      totalCourses: 20,
-    },
-    {
-      type: ProgressType.Simulator,
-      completedCourses: 10,
-      totalCourses: 14,
-    },
-    {
-      type: ProgressType.Landings,
-      completedCourses: 9,
-      totalCourses: 12,
-    },
-    {
-      type: ProgressType.Assessment,
-      completedCourses: 12,
-      totalCourses: 20,
-    },
-  ];
+
   @Input() instructorView!: boolean;
   @Input() sideNavOpen!: boolean;
   @Input() workbook: any;
@@ -93,6 +87,83 @@ export class LessonLandingPageComponent {
   @Output() displayOverviewOutput = new EventEmitter<string>();
 
   constructor(private dialog: MatDialog) {}
+
+  setProgressForCard() {
+    let progress: ICourseProgress[] = [];
+
+    const { lesson_type, lesson_stats } = this.lesson;
+    const {
+      ground_hours_completed,
+      content_completed,
+      content_total,
+      flight_hours_completed,
+      landings_completed,
+      assessmennt_tasks_total,
+      assessment_tasks_completed,
+    } = lesson_stats;
+
+    switch (lesson_type) {
+      case 0:
+        progress = [
+          {
+            type: ProgressType.SelfStudy,
+            completedCourses: content_completed,
+            totalCourses: content_total,
+          },
+        ];
+        break;
+      case 1:
+        progress = [
+          {
+            type: ProgressType.SelfStudy,
+            completedCourses: content_completed,
+            totalCourses: content_total,
+          },
+          {
+            type: ProgressType.Ground,
+            completedCourses: ground_hours_completed,
+          },
+          {
+            type: ProgressType.Assessment,
+            completedCourses: assessment_tasks_completed,
+            totalCourses: assessmennt_tasks_total,
+          },
+        ];
+        break;
+
+      case 2:
+        progress = [
+          {
+            type: ProgressType.SelfStudy,
+            completedCourses: content_completed,
+            totalCourses: content_total,
+          },
+          {
+            type: ProgressType.Flight,
+            completedCourses: flight_hours_completed,
+          },
+          {
+            type: ProgressType.Ground,
+            completedCourses: ground_hours_completed,
+          },
+          {
+            type: ProgressType.Landings,
+            completedCourses: landings_completed,
+          },
+          {
+            type: ProgressType.Assessment,
+            completedCourses: assessment_tasks_completed,
+            totalCourses: assessmennt_tasks_total,
+          },
+        ];
+        break;
+
+      default:
+        break;
+    }
+
+    return progress;
+  }
 
   get lessonImageFxLayoutAlign() {
     return this.sideNavOpen ? 'center center' : 'center start';

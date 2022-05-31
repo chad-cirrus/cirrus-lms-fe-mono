@@ -5,7 +5,7 @@
   </div>
   <div>
     <span class="courses-completed">{{ completedCourses }}</span>
-    <span class="courses-slash">/</span>
-    <span class="total-courses">{{ totalCourses }}</span>
+    <span class="courses-slash"  *ngIf="totalCourses">/</span>
+    <span class="total-courses" *ngIf="totalCourses">{{ totalCourses }}</span>
   </div>
 </mat-card>

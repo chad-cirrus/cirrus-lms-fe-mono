@@ -904,4 +904,13 @@ export const testData855: ILesson = {
   },
   instructor_overview: '',
   instructor_contents: [],
+  lesson_stats: {
+    content_completed: 0,
+    content_total: 0,
+    ground_hours_completed :0,
+    flight_hours_completed: 0,
+    landings_completed: 0,
+    assessmennt_tasks_total: 0,
+    assessment_tasks_completed: 0
+  }
 };
