@@ -45,9 +45,10 @@ export class LessonComponent implements OnInit, OnDestroy {
   isScreenSmall$: Observable<boolean> = this.store.select(selectIsScreenSmall);
   sideNavOpen$: Observable<boolean> = this.store.select(selectSideNavOpen);
   lessonSubscription = new Subscription();
-  workbook$ = this.store
-    .select(selectWorkbook)
-    .pipe(filter(workbook => workbook.id !== 0));
+  workbook$ = this.store.select(selectWorkbook).pipe(
+    tap(workbook => console.log('workbook in lesson component', workbook)),
+    filter(workbook => workbook.id !== 0)
+  );
   coursId!: number;
   lessonId!: number;
   @ViewChild('snav') sidenav!: MatSidenav;
