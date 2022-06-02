@@ -11,17 +11,20 @@
 }
 
 .title-text {
-  font-size: 16px;
+  font-size: 1.063rem;
   font-weight: 500;
-  padding: 25px 16px 36px;
+  padding: 35px 16px;
+  img:hover {
+    cursor: pointer;
+  }
 }
 
 .stage-title {
   font-family: $BertholdAkzidenzGroteskBE;
   border-top: 1px solid $border-grey !important;
   border-bottom: 1px solid $border-grey;
-  font-size: 19px;
-  padding: 15px 31px;
+  font-size: 1.188rem;
+  padding: 11px 31px;
 }
 
 .stage-title:hover{
@@ -39,17 +42,21 @@
   font-size: 16px;
 }
 
-.lesson-content-container {
-  padding: 20px 31px;
-}
+.lesson-content-container,
 .lesson-content-container-active {
-  padding: 20px 31px;
+  margin-left: 0.5rem;
+  width: calc(100% - 25px);
+  padding: 10px 20px;
+  border-radius: 0 5px 5px 0;
+}
+
+.lesson-content-container-active {
   background-color: $border-grey;
 }
 
 .lesson-content-container:hover {
-  cursor: pointer;
   background-color: $border-grey;
+  cursor: pointer;
 }
 
 

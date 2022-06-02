@@ -7,10 +7,12 @@ button {
 mat-sidenav {
   min-width: 100vw;
   min-height: 100vh;
+  background-color: transparent;
 }
 
 @media (min-width: 960px) {
   mat-sidenav {
-    min-width: 30rem;
+    min-width: 25rem;
+    max-width: 25rem;
   }
 }

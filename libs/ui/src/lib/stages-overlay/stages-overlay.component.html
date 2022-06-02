@@ -1,7 +1,7 @@
 <div class="overlay-container">
   <div fxLayout="row" fxLayoutAlign="space-between" class="title-text">
     <div>Lessons</div>
-    <img src="courses/images/svg/close.svg" (click)="close()" />
+    <img src="courses/images/svg/nav-close.svg" (click)="close()" />
   </div>
   <cdk-accordion
     class="example-accordion"
@@ -49,7 +49,7 @@
                 ? 'lesson-content-container-active'
                 : 'lesson-content-container'
             "
-            fxLayoutAlign="none end"
+            fxLayoutAlign="start center"
             fxLayoutGap="15px"
           >
             <div *ngIf="l.progress.status === 'completed'">
@@ -61,7 +61,7 @@
             <div *ngIf="l.progress.status === 'in_progress'">
               <img [src]="inProgress" height="22px" width="22px" />
             </div>
-            <div>
+            <div fxLayout="column" fxLayoutAlign="space-between">
               <div class="stage-index">{{ l.stage_lesson_index }}</div>
               <div class="lesson-title-text">{{ l.title }}</div>
             </div>
