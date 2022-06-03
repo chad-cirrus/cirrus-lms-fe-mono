@@ -1,73 +1,81 @@
-<div class="overlay-container">
+<div class="overlay-container" fxLayout="column">
   <div fxLayout="row" fxLayoutAlign="space-between" class="title-text">
     <div>Lessons</div>
-    <img src="courses/images/svg/nav-close.svg" (click)="close()" />
+    <img
+      class="close-icon"
+      src="courses/images/svg/nav-close.svg"
+      (click)="close()"
+    />
   </div>
-  <cdk-accordion
-    class="example-accordion"
-    #accordion="cdkAccordion"
-    multi="true"
-  >
-    <cdk-accordion-item
-      *ngFor="let stage of workbook?.stages; let index = index"
-      class="stage-container"
-      #accordionItem="cdkAccordionItem"
-      class="example-accordion-item"
-      role="button"
-      tabindex="0"
-      [attr.id]="'accordion-header-' + index"
-      [attr.aria-expanded]="accordionItem.expanded"
-      [attr.aria-controls]="'accordion-body-' + index"
-      [expanded]="expanded(stage)"
+  <div class="accordian-container" fxFlex="1 1 100%">
+    <cdk-accordion
+      class="stages-overlay-accordion"
+      #accordion="cdkAccordion"
+      multi="true"
     >
-      <div
-        class="example-accordion-item-header"
-        (click)="accordionItem.toggle()"
+      <cdk-accordion-item
+        *ngFor="let stage of workbook?.stages; let index = index"
+        class="stage-container"
+        #accordionItem="cdkAccordionItem"
+        class="stages-overlay-accordion-item"
+        role="button"
+        tabindex="0"
+        [attr.id]="'accordion-header-' + index"
+        [attr.aria-expanded]="accordionItem.expanded"
+        [attr.aria-controls]="'accordion-body-' + index"
+        [expanded]="expanded(stage)"
       >
-        <div class="stage-title" fxLayout="row" fxLayoutAlign="space-between">
-          <div>Stage {{ index + 1 }}</div>
-          <img
-            [src]="
-              accordionItem.expanded
-                ? 'courses/images/svg/up-chevron.svg'
-                : 'courses/images/svg/down-chevron.svg'
-            "
-          />
+        <div
+          class="stages-overlay-accordion-item-header"
+          (click)="accordionItem.toggle()"
+        >
+          <div class="stage-title" fxLayout="row" fxLayoutAlign="space-between">
+            <div>Stage {{ index + 1 }}</div>
+            <img
+              [src]="
+                accordionItem.expanded
+                  ? 'courses/images/svg/up-chevron.svg'
+                  : 'courses/images/svg/down-chevron.svg'
+              "
+            />
+          </div>
         </div>
-      </div>
-      <div
-        role="region"
-        [style.display]="accordionItem.expanded ? '' : 'none'"
-        [attr.id]="'accordion-body-' + index"
-        [attr.aria-labelledby]="'accordion-header-' + index"
-      >
-        <div *ngFor="let l of stage.lessons" (click)="navigate(l)">
+        <div class="items-container">
           <div
-            fxLayout="row"
-            [ngClass]="
-              l.id === lessonId
-                ? 'lesson-content-container-active'
-                : 'lesson-content-container'
-            "
-            fxLayoutAlign="start center"
-            fxLayoutGap="15px"
+            role="region"
+            [style.display]="accordionItem.expanded ? '' : 'none'"
+            [attr.id]="'accordion-body-' + index"
+            [attr.aria-labelledby]="'accordion-header-' + index"
           >
-            <div *ngIf="l.progress.status === 'completed'">
-              <img [src]="completeCheck" height="22px" width="22px" />
-            </div>
-            <div *ngIf="l.progress.status === 'not_started'">
-              <img [src]="notStarted" height="22px" width="22px" />
-            </div>
-            <div *ngIf="l.progress.status === 'in_progress'">
-              <img [src]="inProgress" height="22px" width="22px" />
-            </div>
-            <div fxLayout="column" fxLayoutAlign="space-between">
-              <div class="stage-index">{{ l.stage_lesson_index }}</div>
-              <div class="lesson-title-text">{{ l.title }}</div>
+            <div *ngFor="let l of stage.lessons" (click)="navigate(l)">
+              <div
+                fxLayout="row"
+                [ngClass]="
+                  l.id === lessonId
+                    ? 'lesson-content-container-active'
+                    : 'lesson-content-container'
+                "
+                fxLayoutAlign="start center"
+                fxLayoutGap="15px"
+              >
+                <div *ngIf="l.progress.status === 'completed'">
+                  <img [src]="completeCheck" height="22px" width="22px" />
+                </div>
+                <div *ngIf="l.progress.status === 'not_started'">
+                  <img [src]="notStarted" height="22px" width="22px" />
+                </div>
+                <div *ngIf="l.progress.status === 'in_progress'">
+                  <img [src]="inProgress" height="22px" width="22px" />
+                </div>
+                <div fxLayout="column" fxLayoutAlign="space-between">
+                  <div class="stage-index">{{ l.stage_lesson_index }}</div>
+                  <div class="lesson-title-text">{{ l.title }}</div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </cdk-accordion-item>
-  </cdk-accordion>
+      </cdk-accordion-item>
+    </cdk-accordion>
+  </div>
 </div>

@@ -1,35 +1,41 @@
-
 @use '../styles/variables' as *;
-
 
 .overlay-container {
   background: rgba(31, 31, 31, 1);
-  height: 813px;
+  height: 100vh;
   font-family: $primary_font;
-  padding: 0px 5px;
-  overflow-y:auto
+  padding: 0rem 0.313rem 0.4rem 0.313rem;
+  .title-text {
+    font-size: 1.063rem;
+    font-weight: 500;
+    padding: 35px 16px;
+    img:hover {
+      cursor: pointer;
+    }
+    img {
+      height: 1.125rem;
+      width: 1.125rem;
+    }
+  }
+  .accordian-container {
+    max-height: 42rem;
+    overflow: auto;
+  }
 }
 
-.title-text {
-  font-size: 1.063rem;
-  font-weight: 500;
-  padding: 35px 16px;
-  img:hover {
-    cursor: pointer;
-  }
+.stages-overlay-accordion-item:first-child .stage-title {
+  border-top: 1px solid $border-grey !important;
 }
 
 .stage-title {
   font-family: $BertholdAkzidenzGroteskBE;
-  border-top: 1px solid $border-grey !important;
   border-bottom: 1px solid $border-grey;
   font-size: 1.188rem;
-  padding: 11px 31px;
+  padding: 1.313rem 1.938rem;
 }
 
 .stage-title:hover{
   cursor: pointer;
-
 }
 
 .stage-index {
@@ -44,7 +50,7 @@
 
 .lesson-content-container,
 .lesson-content-container-active {
-  margin-left: 0.5rem;
+  margin: 0.125rem 0.5rem;
   width: calc(100% - 25px);
   padding: 10px 20px;
   border-radius: 0 5px 5px 0;
@@ -59,5 +65,10 @@
   cursor: pointer;
 }
 
+@media (min-width: 960px) {
+  .overlay-container {
+    height: 49.125rem;
+  }
+}
 
 
