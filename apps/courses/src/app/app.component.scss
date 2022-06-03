@@ -4,6 +4,26 @@
   height: 100%;
 }
 
+.course-name {
+  border-bottom: 1px solid black;
+}
+
+.course-name:hover {
+  border-bottom: 1px solid white;
+}
+
+.bullet {
+  color: $secondary-font-color-grey;
+}
+
+.chev-left {
+  cursor: pointer;
+}
+
+.lesson-title {
+  color: $secondary-font-color-grey;
+}
+
 .breadcrumb-container {
   height: 55px;
   padding-left: 65px;

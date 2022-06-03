@@ -25,8 +25,12 @@
       [ngClass]="{ 'stop-scrolling': sideNavOpen$ | async }"
     >
     <div fxLayout="row" class="breadcrumb-container" (click)="navigateToCourse()" fxLayoutGap="15px" fxLayoutAlign="none center">
-      <img src="courses/images/svg/chevron-left-white.svg"/>
-      <div>Course name</div>
+      <span fxLayout="row" fxLayoutGap="15px"  class="chev-left">
+        <img src="courses/images/svg/chevron-left-white.svg"/>
+        <div class="course-name">Course name</div>
+      </span>
+      <div class="bullet">&#8226;</div>
+      <div class="lesson-title">{{(lesson$ | async)?.title}}</div>
     </div>
     <div class="outlet-container">
       <router-outlet></router-outlet>

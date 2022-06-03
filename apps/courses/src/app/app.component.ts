@@ -5,9 +5,9 @@ import { AppService } from './app.service';
 import * as appActions from './store/actions';
 import { fetchWorkbook } from './store/actions/workbook-routes.actions';
 import { AppState } from './store/reducers';
-import { selectLessonStateBusy } from './store/selectors/lessons.selector';
+import { selectLesson, selectLessonStateBusy } from './store/selectors/lessons.selector';
 import { setCirrusUser } from './store/actions';
-import { ICirrusUser } from '@cirrus/models';
+import { ICirrusUser, ILesson } from '@cirrus/models';
 import {
   selectCirrusUser,
   selectRole,
@@ -36,6 +36,8 @@ export class AppComponent implements OnInit {
   toggle$ = this.viewToggle.valueChanges;
   lessonStateBusy$ = this.store.select(selectLessonStateBusy).pipe(delay(1));
   role$ = this.store.select(selectRole);
+  lesson$: Observable<ILesson> = this.store
+  .select(selectLesson)
   cirrusUser$ = this.store.select(selectCirrusUser);
   cirrusImpersonateReturnUser$!: Observable<ICirrusUser>;
   courseId$ = this.appService.courseId$.pipe(distinctUntilChanged(), share());
