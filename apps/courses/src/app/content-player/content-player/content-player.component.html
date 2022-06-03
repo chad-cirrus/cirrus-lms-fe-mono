@@ -1,7 +1,8 @@
-<div fxLayout="row" fxLayoutAlign="space-between start">
-
+<div fxLayout="row" class="content-player">
   <div
-    *ngIf="(isScreenSmall$ | async) === false"
+    *ngIf="
+      (isScreenSmall$ | async) === false && (isScreenTablet$ | async) === false
+    "
     class="left"
     [fxFlex]="(menuOpen$ | async) === false ? '1 1 100px' : '2 2 350px'"
     [ngClass]="{ 'add-border': (menuOpen$ | async) }"
@@ -18,51 +19,65 @@
       (playContent)="playContent($event)"
     ></cirrus-lesson-content-player-menu>
   </div>
-  <div
-    class="center"
-    fxFlex="9 9 auto"
-    fxLayout="column"
-    fxLayoutAlign="space-between start"
-  >
+  <div class="center" fxLayout="column">
     <div class="lcp-content">
-      <div class="header" fxLayout="row" fxLayoutAlign="space-between center">
-        <span> {{ lesson_title }} </span>
-        <img [src]="closeIcon" mat-dialog-close />
-      </div>
-      <div fxLayout="row" fxLayoutAlign="none center" fxLayoutGap="7px">
-        <div class="sub-header">{{ title }}</div>
-        <div *ngIf="(checkoutOffsRequired$ | async) && (currentContentType === 9 || currentContentType === 10)">
-          <div fxLayoutAlign="none center">
-            <img
-              class="sign-offs-icon"
-              src="courses/images/svg/sign-off-warning.svg"
-            />
-            <span class="sign-offs-required">Instructor sign off required</span>
+      <div class="header-container">
+        <div class="header" fxLayout="row" fxLayoutAlign="space-between center">
+          <span> {{ lesson_title }} </span>
+          <img [src]="closeIcon" mat-dialog-close />
+        </div>
+        <div
+          fxLayout="row"
+          fxLayout.xs="column"
+          fxLayoutAlign="none center"
+          fxLayoutAlign.xs="none none"
+          fxLayoutGap="14px"
+          class="sub-header-container"
+        >
+          <div class="sub-header">{{ title }}</div>
+          <div
+            *ngIf="
+              (checkoutOffsRequired$ | async) &&
+              (currentContentType === 9 || currentContentType === 10)
+            "
+          >
+            <div fxLayoutAlign="none center">
+              <img
+                class="sign-offs-icon"
+                src="courses/images/svg/sign-off-warning.svg"
+              />
+              <span class="sign-offs-required"
+                >Instructor sign off required</span
+              >
+            </div>
           </div>
         </div>
       </div>
       <div
         class="content-wrapper"
-        fxLayout="column wrap"
-        [ngClass]="{ 'add-padding': (menuOpen$ | async) === false && addPadding }"
+        [ngClass]="{
+          'add-padding': (menuOpen$ | async) === false && addPadding
+        }"
       >
-        <div class="full-width">
-          <div cirrusPlaceholder ></div>
+        <div >
+          <div cirrusPlaceholder></div>
         </div>
+        <div class="action-container">
+          <mat-dialog-actions
+            *ngIf="!hideBtns"
+            fxLayout="row"
+            fxLayoutAlign="space-between start"
+            [ngClass]="{ 'add-padding': (menuOpen$ | async) === false }"
+          >
+            <button mat-raised-button (click)="previousContent()">
+              <span class="previous">Previous</span>
+            </button>
+            <button mat-raised-button (click)="nextContent()">
+              <span class="next">Next</span>
+            </button>
+          </mat-dialog-actions>
+      </div>
       </div>
     </div>
-    <mat-dialog-actions
-      *ngIf="!hideBtns"
-      fxLayout="row"
-      fxLayoutAlign="space-between start"
-      [ngClass]="{ 'add-padding': (menuOpen$ | async) === false }"
-    >
-      <button mat-raised-button (click)="previousContent()">
-        <span class="previous">Previous</span>
-      </button>
-      <button mat-raised-button (click)="nextContent()">
-        <span class="next">Next</span>
-      </button>
-    </mat-dialog-actions>
   </div>
 </div>

@@ -1,9 +1,15 @@
 @use '../styles/variables' as *;
 
 
-
 .task-container {
   font-family: $primary_font;
+
+
+  .showing-text {
+    color: $secondary-font-color-grey;
+    font-size: .875rem;
+  }
+
 
   .card {
     border-bottom: 1px solid $border-grey;
@@ -11,6 +17,7 @@
 
   .mobile-card {
     padding-top: 50px;
+    border-bottom: none;
 
   }
 
@@ -26,52 +33,61 @@
   .title {
     font-size: 0.875rem;
     font-style: normal;
-    font-weight: 500;
+    font-family: $bqmedium-font;
     line-height: 19px;
     letter-spacing: -0.005em;
   }
 
   .first {
+    max-width: 146px;
     color: white;
-    font-weight: 500;
+    font-family: $bqmedium-font;
   }
 
   .row {
     width: 100%;
-    height: 68px;
     align-items: center;
     border-bottom: 1px solid $border-grey;
+    padding: 15px 0px 15px 0px;
+    min-width: 6rem;
   }
 
   .row-last {
     @extend .row;
-    border-bottom: none;
+    padding: 0;
+
   }
 
   .first-header {
-    max-width: 25rem;
-
+    width: 100%;
+    font-family: $bqmedium-font;
+    min-width: 200px;
   }
 
 
   .first-row {
     @extend .row;
+    padding: 0;
     border-bottom: none;
-    max-width: 25rem;
+    min-width: 200px;
   }
 
   .sub-task {
+    padding-top: 4px;
     color: $secondary-font-color-grey;
+    font-size: .625rem;
   }
 
   .row-item-desktop {
     @extend .row;
+    padding: 0;
     border-bottom: none;
-    max-width: 8.5rem;
   }
 
   .header {
-    max-width: 8.5rem;
+    width: 100%;
+    font-family: $bqmedium-font;
+    min-width: 2rem;
   }
 
 
@@ -91,10 +107,21 @@
   }
 
   .acc-item-body {
-    padding: 0px 47px 0px 16px;
+    padding: 0px 22px 0px 27px;
   }
   .acc-item-body-mobile {
-    padding: 0px 20px 0px 26px;
+    padding: 0px 0px 0px 26px;
+  }
+
+  .border-top {
+    // ng class if card above is toggled
+    // border-top: 1px solid $border-grey;
+
+  }
+
+  .detail-caret {
+    padding-right: 15px;
+    cursor: pointer;
   }
 }
 

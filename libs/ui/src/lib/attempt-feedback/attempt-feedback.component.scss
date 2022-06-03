@@ -3,10 +3,12 @@
 
 
 .back-btn {
+  cursor: pointer;
   padding-top: 26px;
 }
 
 .title {
+  font-family: $bqmedium-font;
   padding-top: 74px;
   font-size: 1.313rem;
   font-weight: 500;
@@ -21,6 +23,7 @@
 }
 
 .reasons-title {
+  font-family: $bqmedium-font;
   padding: 48px 0px 31px 0px;
   font-size: 1rem;
   color: $secondary-font-color-grey;
@@ -36,5 +39,14 @@
 .reasons-list-item-last {
   @extend .reasons-list-item;
   border-bottom: none;
+}
+
+.back-breadcrumb {
+  font-family: $bqmedium-font;
+  font-size: 1.063rem;
+}
+
+.container {
+  padding-left: 42px;
 }
 

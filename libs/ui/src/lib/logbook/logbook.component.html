@@ -1,176 +1,294 @@
-<div *ngFor="let l of logbook; let i = index"  class="logbook-item-container">
-  <div
-    fxLayout="row"
-    fxLayout.xs="column"
-    fxLayoutAlign="space-between"
-    fxLayoutGap="10px"
-  >
-    <div>
-      {{ l.lesson_flight_log_date | date: 'longDate' }}
 
+<div *ngFor="let l of logbook; let i = index" class="logbook-item-container">
+  <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap.lt-sm="10px">
+    <div fxFlex="50" fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="space-between" fxLayoutAlign.lt-sm="none" fxLayoutGap.lt-sm="10px">
+      <div>
+        {{ l.lesson_flight_log_date | date: 'longDate' }}
+      </div>
+      <div class="log-type">{{ l.flight_log_type | titlecase }}</div>
+      <div fxLayout="row" fxLayoutGap="14px">
+        <div class="airport">{{ l.from_airport }}</div>
+        <img src="courses/images/svg/right-arrow.svg" height="20px" width="50px"/>
+        <div class="airport">{{ l.to_airport }}</div>
+      </div>
     </div>
-        <div class="log-type">{{ l.flight_log_type | titlecase }}</div>
-    <div fxLayout="row" fxLayoutGap="14px">
-      <div class="airport">{{ l.from_airport }}</div>
-      <img src="courses/images/svg/right-arrow.svg" />
-      <div class="airport">{{ l.to_airport }}</div>
-    </div>
-    <div class="hours">{{ l.completed_total_hours }} hrs</div>
-    <div fxLayout="row" fxLayoutAlign="center">
-      <cdk-accordion class="example-accordion">
-        <cdk-accordion-item
-          #accordionItem="cdkAccordionItem"
-          class="example-accordion-item"
-          role="button"
-          tabindex="0"
-          [attr.id]="'accordion-header-' + l"
-          [attr.aria-expanded]="accordionItem.expanded"
-          [attr.aria-controls]="'accordion-body-' + l"
-        >
-          <div
-            class="example-accordion-item-header"
-            (click)="accordionItem.toggle()"
+    <div fxFlex="50" fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="end" fxLayoutAlign.xs="none" fxLayoutGap="44px" fxLayoutGap.xs="10px">
+      <div class="hours">{{ l.completed_total_hours }} hrs</div>
+      <div fxLayout="row" fxLayoutAlign="center" class="caret-container">
+        <cdk-accordion class="example-accordion">
+          <cdk-accordion-item
+            #accordionItem="cdkAccordionItem"
+            class="example-accordion-item"
+            role="button"
+            tabindex="0"
+            [attr.id]="'accordion-header-' + l"
+            [attr.aria-expanded]="accordionItem.expanded"
+            [attr.aria-controls]="'accordion-body-' + l"
           >
-            <span class="example-accordion-item-description">
-              <img
-                [src]="
-                  accordionItem.expanded
-                    ? 'courses/images/svg/up-chevron.svg'
-                    : 'courses/images/svg/down-chevron.svg'
-                "
-              />
-            </span>
-          </div>
-        </cdk-accordion-item>
-      </cdk-accordion>
+            <div
+            class="caret"
+              (click)="accordionItem.toggle()"
+            >
+              <span>
+                <img
+                  height="7.33px"
+                  width="20.17px"
+                  [src]="
+                    accordionItem.expanded
+                      ? 'courses/images/svg/up-chevron.svg'
+                      : 'courses/images/svg/down-chevron.svg'
+                  "
+                />
+              </span>
+            </div>
+          </cdk-accordion-item>
+        </cdk-accordion>
+      </div>
     </div>
   </div>
+
   <div
     role="region"
     [style.display]="accordionItem.expanded ? '' : 'none'"
     [attr.id]="'accordion-body-' + l"
     [attr.aria-labelledby]="'accordion-header-' + l"
   >
-  <div class="title">GENERAL</div>
-  <div fxLayout="row" fxLayoutAlign="space-between center" class="logbook-item-expanded">
-    <div>Date</div>
-    <div>{{ l.lesson_flight_log_date | date: 'longDate' }}</div>
-  </div>
-  <div fxLayout="row" fxLayoutAlign="space-between center" class="logbook-item-expanded">
-    <div>Aircraft Make</div>
-    <div>{{ l.aircraft_make }}</div>
-  </div>
-  <div fxLayout="row" fxLayoutAlign="space-between center" class="logbook-item-expanded">
-    <div>Aircraft Model</div>
-    <div>{{ l.aircraft_model }}</div>
-  </div>
-  <div fxLayout="row" fxLayoutAlign="space-between center" class="logbook-item-expanded">
-    <div>Aircraft ID</div>
-    <div>{{ l.aircraft_tail_id }}</div>
-  </div>
-  <div fxLayout="row" fxLayoutAlign="space-between center" class="logbook-item-expanded">
-    <div>From</div>
-    <div>{{ l.from_airport }}</div>
-  </div>
-  <div fxLayout="row" fxLayoutAlign="space-between center" class="logbook-item-expanded">
-    <div>To</div>
-    <div>{{ l.to_airport }}</div>
-  </div>
-  <div fxLayout="row" fxLayoutAlign="space-between center" class="logbook-item-expanded">
-    <div>Route</div>
-    <div>{{ l.route_path }}</div>
-  </div>
-  <div fxLayout="row" fxLayoutAlign="space-between center" class="logbook-item-expanded">
-    <div>Hobbs In</div>
-    <div>{{ l.hobbs_in }}</div>
-  </div>
-  <div fxLayout="row" fxLayoutAlign="space-between center" class="logbook-item-expanded-last">
-    <div>Hobbs Out</div>
-    <div>{{ l.hobbs_out }}</div>
-  </div>
+    <div class="title">GENERAL</div>
+    <div
+      fxLayout="row"
+      fxLayoutAlign="space-between center"
+      class="logbook-item-expanded"
+    >
+      <div>Date</div>
+      <div>{{ l.lesson_flight_log_date | date: 'longDate' }}</div>
+    </div>
+    <div
+      fxLayout="row"
+      fxLayoutAlign="space-between center"
+      class="logbook-item-expanded"
+    >
+      <div>Aircraft Make</div>
+      <div>{{ l.aircraft_make }}</div>
+    </div>
+    <div
+      fxLayout="row"
+      fxLayoutAlign="space-between center"
+      class="logbook-item-expanded"
+    >
+      <div>Aircraft Model</div>
+      <div>{{ l.aircraft_model }}</div>
+    </div>
+    <div
+      fxLayout="row"
+      fxLayoutAlign="space-between center"
+      class="logbook-item-expanded"
+    >
+      <div>Aircraft ID</div>
+      <div>{{ l.aircraft_tail_id }}</div>
+    </div>
+    <div
+      fxLayout="row"
+      fxLayoutAlign="space-between center"
+      class="logbook-item-expanded"
+    >
+      <div>From</div>
+      <div>{{ l.from_airport }}</div>
+    </div>
+    <div
+      fxLayout="row"
+      fxLayoutAlign="space-between center"
+      class="logbook-item-expanded"
+    >
+      <div>To</div>
+      <div>{{ l.to_airport }}</div>
+    </div>
+    <div
+      fxLayout="row"
+      fxLayoutAlign="space-between center"
+      class="logbook-item-expanded"
+    >
+      <div>Route</div>
+      <div>{{ l.route_path }}</div>
+    </div>
+    <div
+      fxLayout="row"
+      fxLayoutAlign="space-between center"
+      class="logbook-item-expanded"
+    >
+      <div>Hobbs In</div>
+      <div>{{ l.hobbs_in }}</div>
+    </div>
+    <div
+      fxLayout="row"
+      fxLayoutAlign="space-between center"
+      class="logbook-item-expanded-last"
+    >
+      <div>Hobbs Out</div>
+      <div>{{ l.hobbs_out }}</div>
+    </div>
 
-  <div class="title">TIME</div>
-  <div fxLayout="row" fxLayoutAlign="space-between center" class="logbook-item-expanded">
-    <div>Ground instruction</div>
-    <div>{{ l.completed_ground_instruction_hours || 0 }}</div>
-  </div>
-  <div fxLayout="row" fxLayoutAlign="space-between center" class="logbook-item-expanded">
-    <div>Total flight </div>
-    <div>{{ l.completed_total_hours || 0 }}</div>
-  </div>
-  <div fxLayout="row" fxLayoutAlign="space-between center" class="logbook-item-expanded">
-    <div>Simulator </div>
-    <div>{{ l.completed_sim_hours || 0 }}</div>
-  </div>
-  <div fxLayout="row" fxLayoutAlign="space-between center" class="logbook-item-expanded">
-    <div>Dual received </div>
-    <div>{{ l.completed_dual_received_hours || 0 }}</div>
-  </div>
-  <div fxLayout="row" fxLayoutAlign="space-between center" class="logbook-item-expanded">
-    <div>Cross country </div>
-    <div>{{ l.completed_cross_country_hours || 0 }}</div>
-  </div>
-  <div fxLayout="row" fxLayoutAlign="space-between center" class="logbook-item-expanded">
-    <div>Cross country legs </div>
-    <div>{{ l.completed_cross_country_legs || 0 }}</div>
-  </div>
-  <div fxLayout="row" fxLayoutAlign="space-between center" class="logbook-item-expanded">
-    <div>Solo </div>
-    <div>{{ l.completed_solo_hours || 0 }}</div>
-  </div>
-  <div fxLayout="row" fxLayoutAlign="space-between center" class="logbook-item-expanded-last">
-    <div>PIC</div>
-    <div>{{ l.completed_pic_hours || 0}}</div>
-  </div>
+    <div class="title">TIME</div>
+    <div
+      fxLayout="row"
+      fxLayoutAlign="space-between center"
+      class="logbook-item-expanded"
+    >
+      <div>Ground instruction</div>
+      <div>{{ l.completed_ground_instruction_hours || 0 }}</div>
+    </div>
+    <div
+      fxLayout="row"
+      fxLayoutAlign="space-between center"
+      class="logbook-item-expanded"
+    >
+      <div>Total flight</div>
+      <div>{{ l.completed_total_hours || 0 }}</div>
+    </div>
+    <div
+      fxLayout="row"
+      fxLayoutAlign="space-between center"
+      class="logbook-item-expanded"
+    >
+      <div>Simulator</div>
+      <div>{{ l.completed_sim_hours || 0 }}</div>
+    </div>
+    <div
+      fxLayout="row"
+      fxLayoutAlign="space-between center"
+      class="logbook-item-expanded"
+    >
+      <div>Dual received</div>
+      <div>{{ l.completed_dual_received_hours || 0 }}</div>
+    </div>
+    <div
+      fxLayout="row"
+      fxLayoutAlign="space-between center"
+      class="logbook-item-expanded"
+    >
+      <div>Cross country</div>
+      <div>{{ l.completed_cross_country_hours || 0 }}</div>
+    </div>
+    <div
+      fxLayout="row"
+      fxLayoutAlign="space-between center"
+      class="logbook-item-expanded"
+    >
+      <div>Cross country legs</div>
+      <div>{{ l.completed_cross_country_legs || 0 }}</div>
+    </div>
+    <div
+      fxLayout="row"
+      fxLayoutAlign="space-between center"
+      class="logbook-item-expanded"
+    >
+      <div>Solo</div>
+      <div>{{ l.completed_solo_hours || 0 }}</div>
+    </div>
+    <div
+      fxLayout="row"
+      fxLayoutAlign="space-between center"
+      class="logbook-item-expanded-last"
+    >
+      <div>PIC</div>
+      <div>{{ l.completed_pic_hours || 0 }}</div>
+    </div>
 
-  <div class="title">CONDITIONS</div>
-  <div fxLayout="row" fxLayoutAlign="space-between center" class="logbook-item-expanded">
-    <div>Night</div>
-    <div>{{ l.completed_night_hours || 0}}</div>
-  </div>
-  <div fxLayout="row" fxLayoutAlign="space-between center" class="logbook-item-expanded">
-    <div>Actual Instrument</div>
-    <div>{{ l.completed_actual_instrument_hours || 0 }}</div>
-  </div>
-  <div fxLayout="row" fxLayoutAlign="space-between center" class="logbook-item-expanded">
-    <div>Simulated Instrument</div>
-    <div>{{ l.completed_simulated_instrument_hours || 0 }}</div>
-  </div>
-  <div fxLayout="row" fxLayoutAlign="space-between center" class="logbook-item-expanded">
-    <div>Track nav aid</div>
-    <div>{{ l.completed_track_nav_aid_hours || 0 }}</div>
-  </div>
-  <div fxLayout="row" fxLayoutAlign="space-between center" class="logbook-item-expanded">
-    <div>Holding patterns</div>
-    <div>{{ l.completed_holding_patterns || 0 }}</div>
-  </div>
-  <div fxLayout="row" fxLayoutAlign="space-between center" class="logbook-item-expanded">
-    <div>Night Landings</div>
-    <div>{{ l.completed_night_landings || 0 }}</div>
-  </div>
-  <div fxLayout="row" fxLayoutAlign="space-between center" class="logbook-item-expanded">
-    <div>Day landings</div>
-    <div>{{ l.completed_day_landings || 0 }}</div>
-  </div>
-  <div fxLayout="row" fxLayoutAlign="space-between center" class="logbook-item-expanded">
-    <div>Day takeoffs</div>
-    <div>{{ l.completed_day_takeoffs || 0 }}</div>
-  </div>
-  <div fxLayout="row" fxLayoutAlign="space-between center" class="logbook-item-expanded-last">
-    <div>Night takeoffs</div>
-    <div>{{ l.completed_night_takeoffs || 0}}</div>
-  </div>
-  <div class="title">APPROACHES</div>
-  <div *ngFor="let approach of l.approaches" fxLayout="row" fxLayoutGap="6px" class="approach-types">
-      <div>{{approach.type}}</div>
-      <div>{{approach.airport}}</div>
-      <div>{{approach.runway}}</div>
-  </div>
+    <div class="title">CONDITIONS</div>
+    <div
+      fxLayout="row"
+      fxLayoutAlign="space-between center"
+      class="logbook-item-expanded"
+    >
+      <div>Night</div>
+      <div>{{ l.completed_night_hours || 0 }}</div>
+    </div>
+    <div
+      fxLayout="row"
+      fxLayoutAlign="space-between center"
+      class="logbook-item-expanded"
+    >
+      <div>Actual Instrument</div>
+      <div>{{ l.completed_actual_instrument_hours || 0 }}</div>
+    </div>
+    <div
+      fxLayout="row"
+      fxLayoutAlign="space-between center"
+      class="logbook-item-expanded"
+    >
+      <div>Simulated Instrument</div>
+      <div>{{ l.completed_simulated_instrument_hours || 0 }}</div>
+    </div>
+    <div
+      fxLayout="row"
+      fxLayoutAlign="space-between center"
+      class="logbook-item-expanded"
+    >
+      <div>Track nav aid</div>
+      <div>{{ l.completed_track_nav_aid_hours || 0 }}</div>
+    </div>
+    <div
+      fxLayout="row"
+      fxLayoutAlign="space-between center"
+      class="logbook-item-expanded"
+    >
+      <div>Holding patterns</div>
+      <div>{{ l.completed_holding_patterns || 0 }}</div>
+    </div>
+    <div
+      fxLayout="row"
+      fxLayoutAlign="space-between center"
+      class="logbook-item-expanded"
+    >
+      <div>Night Landings</div>
+      <div>{{ l.completed_night_landings || 0 }}</div>
+    </div>
+    <div
+      fxLayout="row"
+      fxLayoutAlign="space-between center"
+      class="logbook-item-expanded"
+    >
+      <div>Day landings</div>
+      <div>{{ l.completed_day_landings || 0 }}</div>
+    </div>
+    <div
+      fxLayout="row"
+      fxLayoutAlign="space-between center"
+      class="logbook-item-expanded"
+    >
+      <div>Day takeoffs</div>
+      <div>{{ l.completed_day_takeoffs || 0 }}</div>
+    </div>
+    <div
+      fxLayout="row"
+      fxLayoutAlign="space-between center"
+      class="logbook-item-expanded-last"
+    >
+      <div>Night takeoffs</div>
+      <div>{{ l.completed_night_takeoffs || 0 }}</div>
+    </div>
+    <div class="title">APPROACHES</div>
+    <div
+      *ngFor="let approach of l.approaches"
+      fxLayout="row"
+      fxLayoutGap="6px"
+      class="approach-types"
+    >
+      <div>{{ approach.type }}</div>
+      <div>{{ approach.airport }}</div>
+      <div>{{ approach.runway }}</div>
+    </div>
 
-  <div class="title">INSTRUCTOR FEEDBACK</div>
-    <div class="logbook-item-expanded-last" *ngIf="l.instructor_feedback; else no_feedback">{{l.instructor_feedback}}</div>
-    <ng-template #no_feedback >
-      <div class="logbook-item-expanded-last">Your instructor has not given any feedback for this logbook entry.</div>
+    <div class="title">INSTRUCTOR FEEDBACK</div>
+    <div
+      class="logbook-item-expanded-last"
+      *ngIf="l.instructor_feedback; else no_feedback"
+    >
+      {{ l.instructor_feedback }}
+    </div>
+    <ng-template #no_feedback>
+      <div class="logbook-item-expanded-last">
+        Your instructor has not given any feedback for this logbook entry.
+      </div>
     </ng-template>
   </div>
 </div>

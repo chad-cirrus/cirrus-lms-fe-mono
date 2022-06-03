@@ -17,6 +17,7 @@ import { FormControl } from '@angular/forms';
 import {
   selectSideNavOpen,
   selectIsScreenSmall,
+  selectIsScreenTablet
 } from './store/selectors/view.selector';
 import { MatSidenav } from '@angular/material/sidenav';
 import { BreakpointObserver } from '@angular/cdk/layout';
@@ -49,6 +50,8 @@ export class AppComponent implements OnInit {
   ftgNotPilot = 160;
   ftgPilot = 112;
   isScreenSmall$: Observable<boolean> = this.store.select(selectIsScreenSmall);
+  isScreenTablet$: Observable<boolean> = this.store.select(selectIsScreenTablet);
+
   collapse!: boolean;
   showHamburgerMenu = false;
 
@@ -58,15 +61,20 @@ export class AppComponent implements OnInit {
     private breakpointObserver: BreakpointObserver,
     private courseService: CoursesService,
     private router: Router,
-    private route:ActivatedRoute
-  ) {
-    router.events.subscribe(d => console.log('d', d))
-  }
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit() {
-
-
-
+    this.breakpointObserver
+      .observe('(max-width: 950px)')
+      .pipe(
+        map(({ matches }) => {
+          return matches;
+        })
+      )
+      .subscribe(isScreenTablet => {
+        this.store.dispatch(appActions.setIsScreenTablet({ isScreenTablet }));
+      });
 
     this.breakpointObserver
       .observe('(max-width: 600px)')
@@ -78,7 +86,6 @@ export class AppComponent implements OnInit {
       .subscribe(isScreenSmall => {
         this.store.dispatch(appActions.setIsScreenSmall({ isScreenSmall }));
       });
-
 
     this.courseId$.subscribe(id => {
       if (id) {
@@ -117,5 +124,4 @@ export class AppComponent implements OnInit {
   navigateToCourse() {
     this.router.navigate([`/courses}`]);
   }
-
 }

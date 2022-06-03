@@ -1,5 +1,7 @@
 @use '../styles/variables' as *;
 
+
+
   .sign-offs-required {
     margin-left: 4px;
     font-family: $primary_font;
@@ -22,9 +24,18 @@
 .center {
   height: 95vh;
   padding-left: 16px;
+  width: 100%;
+
+  .action-container {
+    padding-top: 100px;
+  }
+
   .lcp-content {
     width: 100%;
     max-height: max-content;
+    .header-container {
+      padding: 46px 20px 0px 21px;
+    }
     .header {
       font-family: 'Berthold Akzidenz Grotesk BE';
       font-style: normal;
@@ -34,6 +45,9 @@
       /* identical to box height, or 138% */
 
       letter-spacing: -0.045em;
+    }
+    .sub-header-container {
+      padding-top: 15px;
     }
     .sub-header {
       font-family: 'Akzidenz-Grotesk BQ';

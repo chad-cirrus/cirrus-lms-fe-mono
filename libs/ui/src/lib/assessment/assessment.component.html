@@ -13,7 +13,7 @@
     <mat-tab>
       <ng-template mat-tab-label>
         <img src="courses/images/svg/assessment3.svg" class="image" />
-        <span>Tasks</span>
+        <span class="title">Tasks</span>
       </ng-template>
       <cirrus-task
         [tasks]="tasks"
@@ -26,7 +26,7 @@
     <mat-tab>
       <ng-template mat-tab-label>
         <img src="courses/images/svg/logbook.svg" class="image" />
-        <span>Logbook Entry</span>
+        <span class="title">Logbook {{(tablet$ | async) === false && (mobile$ | async) === false ? 'Entry' : ''}}</span>
       </ng-template>
       <cirrus-logbook [logbook]="logbook"></cirrus-logbook>
     </mat-tab>

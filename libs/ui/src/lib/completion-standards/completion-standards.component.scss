@@ -2,15 +2,32 @@
 
 .standards-container {
   padding-top: 42px;
+  padding-bottom: 61px;
+}
+
+.standards-container-mobile-tablet {
+  @extend .standards-container;
 }
 
 .title {
+  font-family: $bqmedium-font;
   font-size: .875rem;
-  color: $secondary-font-color-grey
+  color: $secondary-font-color-grey;
+  padding-bottom: 19px;
 }
 
 .standard {
   font-size: 1rem;
   padding: 17px 0px;
   border-bottom: 1px solid $border-grey;
+}
+
+
+.standard-mobile {
+  @extend .standard;
+  padding-left: 5px;
+}
+
+.last-item {
+  border: none;
 }

@@ -10,6 +10,7 @@
   background-color: $lesson-content-item-hover;
   margin-top: 15px;
   padding: 13px 17px;
+  border-radius: 5px;
 }
 
 .title {
@@ -26,6 +27,7 @@
 .attempt-missed {
   padding: 17px 10px 17px 10px;
   border-bottom: 1px solid $border-grey;
+  border-radius: 5px;
 }
 
 .last-attempt {
@@ -34,6 +36,11 @@
 
 .last-attempt-missed {
   padding: 17px 10px 17px 10px;
+  border-radius: 5px;
+}
+
+.row {
+  padding: 4px;
 }
 
 

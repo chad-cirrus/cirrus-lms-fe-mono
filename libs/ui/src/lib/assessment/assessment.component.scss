@@ -3,9 +3,9 @@
 
 
 .tabs-container {
-
-  .body-container-desktop {
-    margin-right: 100px;
+  max-width: 1000px;
+  .title {
+    font-family: $bqmedium-font;
   }
 
   .body-container-mobile {

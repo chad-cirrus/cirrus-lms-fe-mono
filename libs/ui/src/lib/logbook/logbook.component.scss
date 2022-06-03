@@ -21,18 +21,21 @@
 }
 
 .title {
+  font-family: $bqmedium-font;
   font-size: 1.125rem;
   font-weight: 500;
-  padding: 27px 0px 0px 6px;
+  padding: 27px 0px 10px 6px;
 }
 
 .log-type {
+  font-family: $bqmedium-font;
   font-size: 1rem;
   font-weight: 500;
 }
 
 .airport {
-  font-size: 1.063rem;
+  font-family: $bqmedium-font;
+  font-size: 1.313rem;
   font-weight: 500;
 }
 
@@ -41,8 +44,59 @@
 }
 
 .approach-types {
+  padding-left: 6px;
   font-size: 1rem;
   color: $light-grey;
 }
+
+.caret-container {
+  border-top: 1px solid $border-grey;
+  }
+
+  .caret {
+    padding-top: 15px;
+  }
+
+
+@media (max-width: 992px) {
+
+  .airport {
+    font-family: $bqmedium-font;
+    font-size: 1.063rem;
+    font-weight: 500;
+  }
+
+  .hours {
+    font-size: 1rem;
+  }
+
+
+}
+
+@media (min-width: 600px) {
+
+  .airport {
+    font-family: $bqmedium-font;
+    font-size: 1.063rem;
+    font-weight: 500;
+  }
+
+  .hours {
+    font-size: 1rem;
+  }
+
+  .caret-container {
+    border-top: none;
+    }
+
+    .caret {
+      cursor: pointer;
+      padding: 0;
+    }
+
+
+
+}
+
 
 

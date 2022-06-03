@@ -14,3 +14,8 @@ export const setIsScreenSmall = createAction(
   '[app component] set is screen small',
   props<{ isScreenSmall: boolean }>()
 )
+
+export const setIsScreenTablet = createAction(
+  '[app component] set is screen tablet',
+  props<{ isScreenTablet: boolean }>()
+)

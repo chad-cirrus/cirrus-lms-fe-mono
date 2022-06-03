@@ -31,7 +31,7 @@ import {
 } from '../../store/selectors/lessons.selector';
 import { componentDictionary } from '../component-dictionary';
 import { completeProgress, startProgress } from '../../store/actions';
-import { selectIsScreenSmall } from '../../store/selectors/view.selector';
+import { selectIsScreenSmall, selectIsScreenTablet } from '../../store/selectors/view.selector';
 import { TaskService } from '../../task.service';
 
 @Component({
@@ -66,6 +66,8 @@ export class ContentPlayerComponent
   title!: string;
   id!: number;
   isScreenSmall$: Observable<boolean> = this.store.select(selectIsScreenSmall);
+  isScreenTablet$: Observable<boolean> = this.store.select(selectIsScreenTablet);
+
   addPadding = false;
   hideBtns = false;
 

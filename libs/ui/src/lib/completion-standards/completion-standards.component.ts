@@ -6,7 +6,9 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./completion-standards.component.scss']
 })
 export class CompletionStandardsComponent {
-  @Input() standards!: string[]
+  @Input() standards!: string[];
+  @Input() tabletOrMobile!: boolean | null;
+
 
 
 }

@@ -34,7 +34,7 @@
   <div *ngFor="let a of attempts; let i = index" >
     <div fxLayout="row" fxLayoutAlign="space-between center" class="attempts-container-mobile" (click)="a.missed ? nav(a, i) : null">
       <div>
-        <div fxLayout="row" fxLayoutAlign="none center" fxLayoutGap="15px">
+        <div fxLayout="row" class="row" fxLayoutAlign="none center" fxLayoutGap="15px">
           <img
             height="8px"
             width="8px"
@@ -48,9 +48,9 @@
           <div class="value">{{ a.passed ? 'Passed' : 'Missed' }}</div>
         </div>
 
-        <div class="value" *ngIf="a.instructor_name">Instructor: {{ a.instructor_name }}</div>
+        <div class="value row" *ngIf="a.instructor_name">Instructor: {{ a.instructor_name }}</div>
 
-        <div [ngClass]="a.missed ? 'value date' : 'value passed'">
+        <div [ngClass]="a.missed ? 'value date' : 'value passed'" class="row" >
           {{ a.created_at | date: 'longDate' }}
         </div>
       </div>

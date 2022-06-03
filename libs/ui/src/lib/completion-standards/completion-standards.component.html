@@ -1,8 +1,8 @@
 
-<div class="standards-container">
+<div [ngClass]="tabletOrMobile ? 'standards-container-mobile-tablet' : 'standards-container'">
   <div class="title">COMPLETION STANDARDS</div>
-  <div *ngFor="let s of standards">
-    <div class="standard">
+  <div *ngFor="let s of standards; let last = last">
+    <div [ngClass]="tabletOrMobile ? 'standard-mobile' : 'standard'" [class.last-item]="last">
       {{s}}
     </div>
   </div>
