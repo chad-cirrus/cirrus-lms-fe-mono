@@ -36,7 +36,7 @@ export interface LessonStats {
   ground_hours_completed :number;
   flight_hours_completed: number;
   landings_completed: number;
-  assessmennt_tasks_total: number;
+  assessment_tasks_total: number;
   assessment_tasks_completed: number;
 }
 

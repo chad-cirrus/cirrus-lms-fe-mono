@@ -93,9 +93,10 @@ export class LessonLandingPageComponent {
       content_total,
       flight_hours_completed,
       landings_completed,
-      assessmennt_tasks_total,
+      assessment_tasks_total,
       assessment_tasks_completed,
     } = lesson_stats;
+
 
     switch (lesson_type) {
       case 0:
@@ -121,7 +122,7 @@ export class LessonLandingPageComponent {
           {
             type: ProgressType.Assessment,
             completedCourses: assessment_tasks_completed,
-            totalCourses: assessmennt_tasks_total,
+            totalCourses: assessment_tasks_completed,
           },
         ];
         break;
@@ -148,7 +149,7 @@ export class LessonLandingPageComponent {
           {
             type: ProgressType.Assessment,
             completedCourses: assessment_tasks_completed,
-            totalCourses: assessmennt_tasks_total,
+            totalCourses: assessment_tasks_total,
           },
         ];
         break;

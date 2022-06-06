@@ -163,7 +163,7 @@ export const testData: ILesson = {
     ground_hours_completed :0,
     flight_hours_completed: 0,
     landings_completed: 0,
-    assessmennt_tasks_total: 0,
+    assessment_tasks_total: 0,
     assessment_tasks_completed: 0
   }
 };
@@ -329,7 +329,7 @@ export const testData2: ILesson = {
     ground_hours_completed :0,
     flight_hours_completed: 0,
     landings_completed: 0,
-    assessmennt_tasks_total: 0,
+    assessment_tasks_total: 0,
     assessment_tasks_completed: 0
   }
 };
