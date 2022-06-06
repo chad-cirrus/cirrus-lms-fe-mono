@@ -1,0 +1,12 @@
+
+
+
+<div class="container" fxLayout="column" fxLayoutAlign="center center">
+  <div [ngClass]="(mobile$ | async) === true ? 'mobile-title' : 'title'">View the content for {{content.title}}</div>
+  <div class="new-tab-message">This will open in a new tab</div>
+
+  <a mat-raised-button [href]="content.content_file"  target="_blank"
+  >
+    <span class="previous">View Content</span>
+  </a>
+</div>

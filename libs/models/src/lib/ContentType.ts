@@ -12,3 +12,10 @@ export enum CONTENT_TYPE {
   ground_assessment,
   image,
 }
+
+
+
+
+
+
+

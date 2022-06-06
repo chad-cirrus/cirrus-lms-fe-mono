@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DownloadContentComponent } from './download-content.component';
+import { PdfComponent } from './pdf.component';
 
-describe('DownloadContentComponent', () => {
-  let component: DownloadContentComponent;
-  let fixture: ComponentFixture<DownloadContentComponent>;
+describe('PdfComponent', () => {
+  let component: PdfComponent;
+  let fixture: ComponentFixture<PdfComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DownloadContentComponent ]
+      declarations: [ PdfComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DownloadContentComponent);
+    fixture = TestBed.createComponent(PdfComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -52,6 +52,7 @@ import { NotificationComponent } from './testdialog/notification.component';
 import { ButtonComponent } from './testdialog/button.component';
 import { CompletionDialogComponent } from './completion-dialog/completion-dialog.component';
 import { CourseCompletionComponent } from './course-completion/course-completion.component';
+import { PdfComponent } from './pdf/pdf.component';
 
 @NgModule({
   imports: [
@@ -101,6 +102,7 @@ import { CourseCompletionComponent } from './course-completion/course-completion
     ButtonComponent,
     CompletionDialogComponent,
     CourseCompletionComponent,
+    PdfComponent,
   ],
   exports: [
     LessonLandingPageComponent,
@@ -132,6 +134,7 @@ import { CourseCompletionComponent } from './course-completion/course-completion
     ButtonComponent,
     CompletionDialogComponent,
     CourseCompletionComponent,
+    PdfComponent,
   ],
   providers: [
     { provide: MAT_DIALOG_DATA, useValue: {} },

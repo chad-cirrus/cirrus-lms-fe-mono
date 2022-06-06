@@ -250,7 +250,8 @@ export class ContentPlayerComponent
     this.id = id;
     this.title = content.title;
 
-    this.addPadding = [9, 10].indexOf(content.content_type) < 0;
+
+    this.addPadding = [9, 10, 6].indexOf(content.content_type) < 0;
 
     const lessonContentComponentRef =
       this.vcref.ViewContainerRef.createComponent(

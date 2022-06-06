@@ -59,7 +59,7 @@
           'add-padding': (menuOpen$ | async) === false && addPadding
         }"
       >
-        <div >
+        <div [ngClass]="currentContentType === 6 ? 'pdf' : ''">
           <div cirrusPlaceholder></div>
         </div>
         <div class="action-container">
