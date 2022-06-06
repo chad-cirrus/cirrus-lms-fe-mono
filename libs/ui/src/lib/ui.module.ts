@@ -34,7 +34,6 @@ import { LessonContentPlayerMenuComponent } from './lesson-content-player-menu/l
 
 import { VideoPlayerComponent } from './video-player/video-player.component';
 import { PlaceholderDirective } from './helpers/Placeholder.directive';
-import { DownloadContentComponent } from './download-content/download-content.component';
 import { ContentImageComponent } from './content-image/content-image.component';
 import { ContentRichTextComponent } from './content-rich-text/content-rich-text.component';
 import { CirrusSanitizerService } from './shared/cirrus-sanitizer.service';
@@ -86,7 +85,6 @@ import { PdfComponent } from './pdf/pdf.component';
     LessonContentPlayerMenuComponent,
     VideoPlayerComponent,
     PlaceholderDirective,
-    DownloadContentComponent,
     ContentImageComponent,
     ContentRichTextComponent,
     AssessmentComponent,
@@ -120,7 +118,6 @@ import { PdfComponent } from './pdf/pdf.component';
     LessonContentPlayerMenuComponent,
     StagesOverlayComponent,
     VideoPlayerComponent,
-    DownloadContentComponent,
     ContentImageComponent,
     ContentRichTextComponent,
     AssessmentComponent,
