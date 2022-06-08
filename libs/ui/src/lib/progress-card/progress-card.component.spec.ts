@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ProgressType } from '@cirrus/models';
+import { ICourseProgress, ProgressType } from '@cirrus/models';
 import { CirrusMaterialModule } from '../cirrus-material.module';
 
 import { ProgressCardComponent } from './progress-card.component';
@@ -42,6 +42,44 @@ describe('ProgressCardComponent', () => {
     ).toContain('5');
     expect(
       progressTypeElement.querySelector('.total-courses').textContent
-    ).toContain('/10');
+    ).toContain('10');
   });
+
+
+  it('should display round numbers for courses completed', () => {
+   const progress: ICourseProgress = {
+      type: ProgressType.SelfStudy,
+      completedCourses: 2.2,
+      totalCourses: 5.5
+    }
+
+    component.progress = progress
+    fixture.detectChanges();
+    const progressTypeElement = fixture.debugElement.nativeElement;
+    const text = progressTypeElement.querySelector('.courses-completed')
+    const format = parseInt(text.textContent)
+    expect(
+      Number.isInteger(format)
+    ).toBeTruthy()
+  })
+
+  it('should display round numbers for total courses', () => {
+    const progress: ICourseProgress = {
+       type: ProgressType.SelfStudy,
+       completedCourses: 2.2,
+       totalCourses: 5.5
+     }
+
+     component.progress = progress
+     fixture.detectChanges();
+     const progressTypeElement = fixture.debugElement.nativeElement;
+     const text = progressTypeElement.querySelector('.total-courses')
+     const format = parseInt(text.textContent)
+     expect(
+       Number.isInteger(format)
+     ).toBeTruthy()
+   })
+
+
+
 });

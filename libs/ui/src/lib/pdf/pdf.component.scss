@@ -3,6 +3,7 @@
 
 .container {
   height: 100%;
+  font-family: 'Akzidenz-Grotesk BQ';
 
   .mobile-title {
     font-family: $bqmedium-font;
@@ -27,7 +28,7 @@
       margin-top: 39px;
       width: 188px;
       height: 48px;
-      background: $primary-action-color;
+      background: $primary-action-color-2;
       border-radius: 60px;
 
       span {
