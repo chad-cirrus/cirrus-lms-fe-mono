@@ -4,8 +4,6 @@
   padding: 0 !important;
 }
 
-
-
 button.snav-open-button {
   background-color: rgba(31, 31, 31, 1);
   cursor: pointer;
@@ -63,21 +61,22 @@ mat-drawer {
   .content {
     width: 100%;
     margin-left: 0px;
-    padding: 2rem 1rem 0 1rem;
+    padding: 4rem 1rem 0;
+    .mat-divider {
+      border-top-color: rgba(255, 255, 255);
+      margin-right: -1rem;
+    }
+    h1,
+    h4 {
+      max-width: 75%;
+      margin: 0.5rem 0 1rem 0;
+    }
     button.start-lesson {
       box-sizing: border-box;
-      border-radius: 300px;
+      border-radius: 60px;
       width: 100%;
       margin: 1rem auto;
       height: 48px;
-    }
-    .open {
-      opacity: 0;
-      pointer-events: none;
-    }
-    .closed {
-      opacity: 1;
-      pointer-events: all;
     }
     .self-study,
     .assessment {
@@ -111,6 +110,15 @@ mat-drawer {
 
 .llp-container {
   margin: 0 auto;
+  padding: 0.5rem 1.5rem;
+  .open {
+    opacity: 0;
+    pointer-events: none;
+  }
+  .closed {
+    opacity: 1;
+    pointer-events: all;
+  }
   .cirrus-progress-row {
     mat-card {
       .progress-type-icon {
@@ -121,7 +129,7 @@ mat-drawer {
 }
 
 .cirrus-progress-row {
-  margin: 48px auto 12px auto;
+  margin: .75rem auto;
   overflow-x: scroll;
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none;  /* IE 10+ */
@@ -162,11 +170,11 @@ cirrus-progress-card:last-child {
         height: 39px;
       }
       button.start-lesson {
-        margin: 16px 0 8rem 0;
+        margin: 2rem 0 8rem 0;
         box-sizing: border-box;
         border-radius: 300px;
-        width: 198px;
-        height: 66px;
+        width: 160px;
+        height: 45px;
       }
     }
   }
@@ -179,6 +187,9 @@ cirrus-progress-card:last-child {
     -o-background-size: cover;
     background-size: cover;
     .content {
+      .mat-divider {
+        margin-right: 0;
+      }
       margin-left: 40px;
       padding: 6rem 2.5rem 0 2.5rem;
       button.snav-open-button {
@@ -234,12 +245,6 @@ cirrus-progress-card:last-child {
     padding: 0 4rem;
     margin: 0 auto;
     .cirrus-progress-row {
-      padding: 0 1rem;
-      mat-card {
-        .progress-type-icon {
-          height: 32px;
-        }
-      }
       margin: 48px auto;
       overflow-x: hidden;
       scrollbar-width: hidden; /* Firefox */
@@ -250,11 +255,23 @@ cirrus-progress-card:last-child {
         width: hidden;
       }
     }
-  }
 
-  cirrus-progress-card {
-    min-width: 130px;
-    max-width: 150px;
-    margin-left: 0;
+    .intro-video {
+      padding: 1rem;
+      .intro-video-title {
+        cursor: pointer;
+        font-family: $bqmedium-font;
+        font-size: 1.313rem;
+        color: white;
+      }
+      .intro-video-play {
+        cursor: pointer;
+        padding: 20px 0px 37px 0px;
+        .intro-video-subtitle {
+          font-size: 1rem;
+          color: $gray4;
+        }
+      }
+    }
   }
 }

@@ -14,6 +14,7 @@ import {
 export class LessonContentsComponent {
   @Input() instructorView!: boolean;
   @Input() lesson!: ILesson;
+  @Input() isSmallScreen = false;
 
   @Output() fetchMedia = new EventEmitter<IContent>();
 

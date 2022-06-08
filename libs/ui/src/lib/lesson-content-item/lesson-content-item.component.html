@@ -3,13 +3,14 @@
   [ngClass]="{ border: !lastItem }"
   fxLayout="row"
   fxLayoutAlign="space-between center"
+  fxLayoutGap="0.5rem"
   (click)="fetchMedia()"
 >
   <div
     class="media-control"
     fxLayout="row"
     fxLayoutAlign="start center"
-    fxLayoutGap="24px"
+    fxLayoutGap="0.5rem"
   >
     <img [src]="this.content_type_icon" />
     <div class="title">{{ content?.title }}</div>
@@ -21,6 +22,6 @@
     fxLayoutGap="24px"
   >
     <img [src]="imageSrc" />
-    <span>{{ progressText }}</span>
+    <span *ngIf="!isSmallScreen">{{ progressText }}</span>
   </div>
 </div>

@@ -14,6 +14,7 @@
       class="content-item"
     >
       <cirrus-lesson-content-item
+        [isSmallScreen]="isSmallScreen"
         [content]="content"
         [lastItem]="i === lesson.contents.length - 1"
         (fetchMediaOutput)="handleFetchMedia($event)"

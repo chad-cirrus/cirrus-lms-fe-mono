@@ -42,38 +42,37 @@ export class ProgressCardComponent {
   }
 
   mapProgressTypeToUrl(type: ProgressType): IProgressView {
-    const view: IProgressView = { text: '', imageIcon: '' };
-    switch (type) {
-      case ProgressType.Flight: {
-        view.text = 'Flight Hrs';
-        view.imageIcon = 'courses/images/svg/flight-hours-icon.svg';
-        return view;
-      }
-      case ProgressType.Ground: {
-        view.text = 'Ground Hrs';
-        view.imageIcon = 'courses/images/svg/ground-hours-icon.svg';
-        return view;
-      }
-      case ProgressType.Simulator: {
-        view.text = 'Simulator Hrs';
-        view.imageIcon = 'courses/images/svg/simulator_icon.svg';
-        return view;
-      }
-      case ProgressType.Landings: {
-        view.text = 'Landings';
-        view.imageIcon = 'courses/images/svg/landing_hours_icon.svg';
-        return view;
-      }
-      case ProgressType.SelfStudy: {
-        view.text = 'Self Study';
-        view.imageIcon = 'courses/images/svg/self-study.svg';
-        return view;
-      }
-      default: {
-        view.text = 'Assessment Tasks';
-        view.imageIcon = 'courses/images/svg/assessment_icon.svg';
-        return view;
-      }
-    }
+    const dictionary: { [key: string]: IProgressView } = {
+      [ProgressType.Flight]: {
+        text: 'Flight Hrs',
+        imageIcon: 'courses/images/svg/flight-hours-icon.svg',
+      },
+      [ProgressType.Ground]: {
+        text: 'Ground Hrs',
+        imageIcon: 'courses/images/svg/ground-hours-icon.svg',
+      },
+      [ProgressType.CrossCountry]: {
+        text: 'Cross Country Hrs',
+        imageIcon: 'courses/images/svg/cross-country-icon.svg',
+      },
+      [ProgressType.Simulator]: {
+        text: 'Simulator Hrs',
+        imageIcon: 'courses/images/svg/simulator_icon.svg',
+      },
+      [ProgressType.Landings]: {
+        text: 'Landings',
+        imageIcon: 'courses/images/svg/landing_hours_icon.svg',
+      },
+      [ProgressType.Assessment]: {
+        text: 'Assessment Tasks',
+        imageIcon: 'courses/images/svg/assessment_icon.svg',
+      },
+      [ProgressType.SelfStudy]: {
+        text: 'Self Study',
+        imageIcon: 'courses/images/svg/self-study.svg',
+      },
+    };
+
+    return dictionary[type];
   }
 }

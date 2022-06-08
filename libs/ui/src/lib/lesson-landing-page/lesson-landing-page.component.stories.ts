@@ -76,6 +76,43 @@ Primary.args = {
   instructorView: false,
   sideNavOpen: false,
   courseComplete: false,
+  isScreenSmall: false,
+};
+
+export const PrimaryMobile = Template.bind({});
+PrimaryMobile.args = {
+  lesson: testData,
+  progress: [
+    {
+      type: ProgressType.Ground,
+      completedCourses: 5,
+      totalCourses: 10,
+    },
+    {
+      type: ProgressType.Flight,
+      completedCourses: 12,
+      totalCourses: 20,
+    },
+    {
+      type: ProgressType.Simulator,
+      completedCourses: 10,
+      totalCourses: 14,
+    },
+    {
+      type: ProgressType.Landings,
+      completedCourses: 9,
+      totalCourses: 12,
+    },
+    {
+      type: ProgressType.Assessment,
+      completedCourses: 12,
+      totalCourses: 20,
+    },
+  ],
+  instructorView: false,
+  sideNavOpen: false,
+  courseComplete: false,
+  isScreenSmall: true,
 };
 
 export const CrashTestDummy = Template.bind({});

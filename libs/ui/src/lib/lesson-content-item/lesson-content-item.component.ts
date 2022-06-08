@@ -49,6 +49,7 @@ export class LessonContentItemComponent {
     return this._progressText;
   }
 
+  @Input() isSmallScreen = false;
   @Input() lastItem = false;
   @Output() fetchMediaOutput = new EventEmitter<IContent>();
 

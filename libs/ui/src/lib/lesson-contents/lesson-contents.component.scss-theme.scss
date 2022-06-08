@@ -9,8 +9,8 @@
           font-family: var.$primary_font;
           font-style: normal;
           font-weight: 500;
-          font-size: 22px;
-          line-height: 110.5%;
+          font-size: 1.313rem;
+          line-height: 1.813rem;
           /* or 24px */
 
           letter-spacing: -0.005em;
@@ -19,8 +19,8 @@
           font-family: var.$primary_font;
           font-style: normal;
           font-weight: 400;
-          font-size: 14px;
-          line-height: 130%;
+          font-size: 1rem;
+          line-height: 1.375rem;
           /* or 18px */
 
           letter-spacing: 0.02em;
@@ -34,12 +34,13 @@
       .content-container {
         .title-content {
           .title {
-            font-size: 34px;
-            line-height: 47px;
+            font-size: 2.125rem;
+            line-height: 2.938rem;
           }
           .overview {
-            font-size: 18px;
-            line-height: 25px;
+            font-size: 1.125rem;
+            line-height: 1.625rem;
+            letter-spacing: 0.02em;
           }
         }
       }
@@ -51,13 +52,13 @@
       .content-container {
         .title-content {
           .title {
-            font-size: 46px;
-            line-height: 51px;
+            font-size: 2.875rem;
+            line-height: 3.188rem;
             text-align: left;
           }
           .overview {
-            font-size: 16px;
-            line-height: 21px;
+            font-size: 1rem;
+            line-height: 1.313rem;
             text-align: left;
           }
         }

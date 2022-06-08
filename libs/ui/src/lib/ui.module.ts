@@ -51,6 +51,7 @@ import { NotificationComponent } from './testdialog/notification.component';
 import { ButtonComponent } from './testdialog/button.component';
 import { CompletionDialogComponent } from './completion-dialog/completion-dialog.component';
 import { CourseCompletionComponent } from './course-completion/course-completion.component';
+import { LessonProgressStatsComponent } from './lesson-progress-stats/lesson-progress-stats.component';
 import { PdfComponent } from './pdf/pdf.component';
 
 @NgModule({
@@ -100,6 +101,7 @@ import { PdfComponent } from './pdf/pdf.component';
     ButtonComponent,
     CompletionDialogComponent,
     CourseCompletionComponent,
+    LessonProgressStatsComponent,
     PdfComponent,
   ],
   exports: [
@@ -131,6 +133,7 @@ import { PdfComponent } from './pdf/pdf.component';
     ButtonComponent,
     CompletionDialogComponent,
     CourseCompletionComponent,
+    LessonProgressStatsComponent,
     PdfComponent,
   ],
   providers: [

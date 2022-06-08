@@ -24,8 +24,8 @@
     </div>
     <div class="content">
       <h1>{{ lesson.title }}</h1>
+      <mat-divider></mat-divider>
       <h4>An introduction to your first lesson as a student pilot</h4>
-
       <cirrus-lesson-progress [lesson]="lesson"></cirrus-lesson-progress>
       <button
         class="start-lesson"
@@ -49,10 +49,27 @@
       fxLayout="row"
       fxLayoutAlign="space-between"
     >
-      <cirrus-progress-card
-        *ngFor="let item of progress"
-        [progress]="item"
-      ></cirrus-progress-card>
+      <cirrus-lesson-progress-stats
+        [progress]="progress"
+      ></cirrus-lesson-progress-stats>
+    </div>
+    <div
+      class="intro-video"
+      *ngIf="
+        lesson.student_intro_video &&
+        lesson.student_intro_video.content.content_type === 0
+      "
+    >
+      <div class="intro-video-title">Intro Video</div>
+      <div
+        fxLayout="row"
+        fxLayoutGap="18px"
+        class="intro-video-play"
+        (click)="playIntroVideo()"
+      >
+        <img src="courses/images/svg/video_play.svg" />
+        <div class="intro-video-subtitle">Student Intro</div>
+      </div>
     </div>
     <br *ngIf="instructorView" />
 
@@ -61,6 +78,7 @@
       [instructorView]="instructorView"
       [lesson]="lesson"
       (fetchMedia)="fetchMedia($event)"
+      [isSmallScreen]="isScreenSmall"
     >
     </cirrus-lesson-contents>
   </div>

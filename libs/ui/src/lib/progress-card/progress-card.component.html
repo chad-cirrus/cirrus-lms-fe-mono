@@ -1,11 +1,16 @@
-<mat-card *ngIf="text" fxLayout="column" fxLayoutAlign="space-between start">
+<div
+  class="progress-card"
+  *ngIf="text"
+  fxLayout="column"
+  fxLayoutAlign="space-between start"
+>
   <img [src]="imageIcon" />
   <div class="progress-type">
     {{ text }}
   </div>
   <div>
     <span class="courses-completed">{{ completedCourses }}</span>
-    <span class="courses-slash"  *ngIf="totalCourses">/</span>
+    <span class="courses-slash" *ngIf="totalCourses">/</span>
     <span class="total-courses" *ngIf="totalCourses">{{ totalCourses }}</span>
   </div>
-</mat-card>
+</div>

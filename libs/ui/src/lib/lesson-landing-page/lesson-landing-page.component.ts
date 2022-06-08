@@ -28,7 +28,6 @@ export class LessonLandingPageComponent {
   private _lesson!: ILesson;
   private _buttonText!: string;
 
-
   @Input()
   set lesson(value: ILesson) {
     this._lesson = value;
@@ -41,7 +40,6 @@ export class LessonLandingPageComponent {
     this._buttonText = dictionary[this.lesson.progress.status];
     this._progress = this.setProgressForCard();
   }
-
 
   get lesson() {
     return this._lesson;
@@ -56,12 +54,9 @@ export class LessonLandingPageComponent {
 
   private _progress!: ICourseProgress[];
 
-
-
   get progress() {
     return this._progress;
   }
-
 
   @Input() lessonId!: number;
   @Input() isScreenSmall!: boolean;
@@ -96,7 +91,6 @@ export class LessonLandingPageComponent {
       assessment_tasks_total,
       assessment_tasks_completed,
     } = lesson_stats;
-
 
     switch (lesson_type) {
       case 0:
@@ -242,5 +236,15 @@ export class LessonLandingPageComponent {
 
   emitOpenSideNav() {
     this.openSideNav.emit();
+  }
+
+  playIntroVideo() {
+    const content = this.lesson.student_intro_video.content;
+    document
+      .querySelector('#cirrus-lesson-contents')
+      ?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    setTimeout(() => {
+      this.fetchMediaOutputIntro.next(content);
+    }, 1000);
   }
 }

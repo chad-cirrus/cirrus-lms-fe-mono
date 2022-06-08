@@ -5,4 +5,5 @@ export enum ProgressType {
   Simulator = 'Simulator',
   Assessment = 'Assessment',
   SelfStudy = 'SelfStudy',
+  CrossCountry = 'CrossCountry',
 }
