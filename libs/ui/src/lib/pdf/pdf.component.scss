@@ -8,15 +8,18 @@
   .mobile-title {
     font-family: $bqmedium-font;
     font-size: 1.063rem;
+    text-align: center;
   }
 
   .title {
     font-family: $bqmedium-font;
     font-size: 1.625rem;
+    text-align: center;
+
   }
   .new-tab-message {
     font-size: 1.125rem;
-    padding-top: 10px;
+    padding-top: 25px;
     color: $secondary-font-color-grey;
   }
 

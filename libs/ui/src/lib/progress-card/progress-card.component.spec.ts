@@ -46,10 +46,10 @@ describe('ProgressCardComponent', () => {
   });
 
 
-  it('should display round numbers for courses completed', () => {
+  it('should display round number or one decimal for courses completed', () => {
    const progress: ICourseProgress = {
       type: ProgressType.SelfStudy,
-      completedCourses: 2.2,
+      completedCourses: 2.55,
       totalCourses: 5.5
     }
 
@@ -57,29 +57,14 @@ describe('ProgressCardComponent', () => {
     fixture.detectChanges();
     const progressTypeElement = fixture.debugElement.nativeElement;
     const text = progressTypeElement.querySelector('.courses-completed')
-    const format = parseInt(text.textContent)
+    const format = text.textContent
+    const index = format.indexOf('.');
+    const numbersAfterDec = index === -1 ? true  : format.slice(index + 1).length < 2
+
     expect(
-      Number.isInteger(format)
+      numbersAfterDec
     ).toBeTruthy()
   })
-
-  it('should display round numbers for total courses', () => {
-    const progress: ICourseProgress = {
-       type: ProgressType.SelfStudy,
-       completedCourses: 2.2,
-       totalCourses: 5.5
-     }
-
-     component.progress = progress
-     fixture.detectChanges();
-     const progressTypeElement = fixture.debugElement.nativeElement;
-     const text = progressTypeElement.querySelector('.total-courses')
-     const format = parseInt(text.textContent)
-     expect(
-       Number.isInteger(format)
-     ).toBeTruthy()
-   })
-
 
 
 });

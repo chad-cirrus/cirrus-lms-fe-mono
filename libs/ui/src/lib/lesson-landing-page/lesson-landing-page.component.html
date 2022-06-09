@@ -73,7 +73,8 @@
     </div>
     <br *ngIf="instructorView" />
 
-    <cirrus-lesson-contents
+    <div #contentList >
+      <cirrus-lesson-contents
       id="cirrus-lesson-contents"
       [instructorView]="instructorView"
       [lesson]="lesson"
@@ -81,5 +82,7 @@
       [isSmallScreen]="isScreenSmall"
     >
     </cirrus-lesson-contents>
+    </div>
+
   </div>
 </div>

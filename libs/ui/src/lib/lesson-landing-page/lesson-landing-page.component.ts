@@ -2,6 +2,7 @@
 import {
   AfterViewInit,
   Component,
+  ElementRef,
   EventEmitter,
   Input,
   OnInit,
@@ -27,6 +28,7 @@ import { StagesOverlayComponent } from '../stages-overlay/stages-overlay.compone
 export class LessonLandingPageComponent {
   private _lesson!: ILesson;
   private _buttonText!: string;
+
 
   @Input()
   set lesson(value: ILesson) {
@@ -166,41 +168,22 @@ export class LessonLandingPageComponent {
 
   startLesson() {
     const { student_intro_video, overview } = this.lesson;
-
     if (
       !student_intro_video &&
       this.lesson.progress.status === LessonStatus.NOT_STARTED
     ) {
       setTimeout(() => {
         this.displayOverview(overview);
+        return;
       }, 1000);
     }
-
-    let content: IContent;
     if (
       student_intro_video &&
       this.lesson.progress.status === LessonStatus.NOT_STARTED
     ) {
-      content = this.lesson.student_intro_video.content;
-      document
-        .querySelector('#cirrus-lesson-contents')
-        ?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-
-      setTimeout(() => {
-        this.fetchMediaOutputIntro.next(content);
-      }, 1000);
+     this.playIntroVideo()
     } else {
-      content =
-        this.lesson.contents.find(
-          c => c.progress.status === LessonStatus.NOT_STARTED
-        ) || this.lesson.contents[0];
-      document
-        .querySelector('#cirrus-lesson-contents')
-        ?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-
-      setTimeout(() => {
-        this.fetchMediaOutput.next(content);
-      }, 1000);
+      this.playCurrentContent()
     }
   }
 
@@ -239,11 +222,21 @@ export class LessonLandingPageComponent {
     this.openSideNav.emit();
   }
 
+  playCurrentContent() {
+   const content =
+    this.lesson.contents.find(
+      c => c.progress.status === LessonStatus.NOT_STARTED
+    ) || this.lesson.contents[0];
+
+  setTimeout(() => {
+    this.fetchMediaOutput.next(content);
+  }, 1000);
+  }
+
+
+
   playIntroVideo() {
-    const content = this.lesson.student_intro_video.content;
-    document
-      .querySelector('#cirrus-lesson-contents')
-      ?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    const content: IContent = this.lesson.student_intro_video.content;
     setTimeout(() => {
       this.fetchMediaOutputIntro.next(content);
     }, 1000);
