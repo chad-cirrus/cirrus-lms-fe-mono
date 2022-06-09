@@ -39,6 +39,7 @@ export class ProgressCardComponent {
     this._imageIcon = this.mapProgressTypeToUrl(progress.type).imageIcon;
     this._completedCourses = progress.completedCourses;
     this._totalCourses = progress.totalCourses;
+
   }
 
   mapProgressTypeToUrl(type: ProgressType): IProgressView {

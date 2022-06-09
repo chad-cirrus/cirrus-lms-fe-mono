@@ -92,6 +92,7 @@ export class LessonLandingPageComponent {
       assessment_tasks_completed,
     } = lesson_stats;
 
+
     switch (lesson_type) {
       case 0:
         progress = [
@@ -116,7 +117,7 @@ export class LessonLandingPageComponent {
           {
             type: ProgressType.Assessment,
             completedCourses: assessment_tasks_completed,
-            totalCourses: assessment_tasks_completed,
+            totalCourses: assessment_tasks_total,
           },
         ];
         break;
