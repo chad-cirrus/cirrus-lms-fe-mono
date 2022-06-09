@@ -8,14 +8,17 @@
   .mobile-title {
     font-family: $bqmedium-font;
     font-size: 1.063rem;
+    max-width: 75%;
     text-align: center;
+    line-height: 130%;
   }
 
   .title {
     font-family: $bqmedium-font;
     font-size: 1.625rem;
+    max-width: 75%;
     text-align: center;
-
+    line-height: 130%;
   }
   .new-tab-message {
     font-size: 1.125rem;

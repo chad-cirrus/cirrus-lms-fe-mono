@@ -7,21 +7,21 @@ import { LessonContentComponent } from '../LessonContentComponent';
 @Component({
   selector: 'cirrus-pdf',
   templateUrl: './pdf.component.html',
-  styleUrls: ['./pdf.component.scss']
+  styleUrls: ['./pdf.component.scss'],
 })
-export class PdfComponent extends LessonContentComponent implements OnInit{
-
+export class PdfComponent extends LessonContentComponent implements OnInit {
   mobile$!: Observable<boolean>;
 
-
-  constructor(private breakpointObserver: BreakpointObserver) {super() }
+  constructor(private breakpointObserver: BreakpointObserver) {
+    super();
+  }
 
   ngOnInit(): void {
+    super.ngOnInit();
     this.mobile$ = this.breakpointObserver.observe('(max-width: 600px)').pipe(
       map(({ matches }) => {
         return matches;
       })
     );
   }
-
 }
