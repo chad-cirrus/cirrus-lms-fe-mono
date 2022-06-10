@@ -24,6 +24,10 @@ export class ContentImageComponent extends LessonContentComponent {
     );
   }
 
+  get content(): IContent {
+    return super.content;
+  }
+
   constructor(private cirrusSanitizer: CirrusSanitizerService) {
     super();
   }

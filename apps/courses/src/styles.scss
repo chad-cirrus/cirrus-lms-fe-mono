@@ -24,3 +24,10 @@ body {
   max-height: initial;
 }
 
+.overview {           // probably for desktop only
+  width: 95%;
+  img {
+    max-width: 100%;
+  }
+}
+

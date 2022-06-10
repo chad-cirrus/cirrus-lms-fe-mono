@@ -25,12 +25,12 @@ export abstract class LessonContentComponent implements OnInit, OnDestroy {
   @Output() hidePrevAndNext = new EventEmitter<boolean>();
 
   @Input()
-  public get content(): IContent {
-    return this._content;
-  }
-
   public set content(value: IContent) {
     this._content = value;
+  }
+
+  public get content(): IContent {
+    return this._content;
   }
 
   @Output() updateProgress = new EventEmitter<IProgress>();

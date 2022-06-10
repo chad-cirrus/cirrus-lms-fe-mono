@@ -18,7 +18,12 @@ export class InteractiveComponent extends LessonContentComponent {
 
   @Input()
   set content(content: IContent) {
+    super.content = content;
     this._url = this.cirrusSanitizer.getSafeResourceUrl(content.content_file);
+  }
+
+  get content(): IContent {
+    return super.content;
   }
 
   constructor(private cirrusSanitizer: CirrusSanitizerService) {
