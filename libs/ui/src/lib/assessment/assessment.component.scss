@@ -4,9 +4,16 @@
 
 .tabs-container {
   max-width: 1000px;
-  .title {
+  .mat-tab-label-active {
     font-family: $bqmedium-font;
+    color: white;
+    opacity: 1 !important;
   }
+
+  .mat-tab-label-content {
+    padding-bottom: 18px;
+  }
+
 
   .body-container-mobile {
     margin-right: 41px;

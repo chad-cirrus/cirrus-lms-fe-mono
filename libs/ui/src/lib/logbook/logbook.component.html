@@ -2,7 +2,7 @@
 <div *ngFor="let l of logbook; let i = index" class="logbook-item-container">
   <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap.lt-sm="10px">
     <div fxFlex="50" fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="space-between" fxLayoutAlign.lt-sm="none" fxLayoutGap.lt-sm="10px">
-      <div>
+      <div class="hours">
         {{ l.lesson_flight_log_date | date: 'longDate' }}
       </div>
       <div class="log-type">{{ l.flight_log_type | titlecase }}</div>
@@ -53,6 +53,7 @@
     [attr.id]="'accordion-body-' + l"
     [attr.aria-labelledby]="'accordion-header-' + l"
   >
+    <div class="border"></div>
     <div class="title">GENERAL</div>
     <div
       fxLayout="row"
