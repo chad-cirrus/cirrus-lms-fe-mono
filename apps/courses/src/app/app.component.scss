@@ -1,5 +1,6 @@
 @use '../styles/variables' as *;
 
+
 .content-container {
   height: 100%;
 }
@@ -86,6 +87,7 @@ ul.student-name {
 
 
 .outlet-container {
+  position: relative;
   overflow-y: scroll;
   overflow-x: hidden;
   height: 100vh;
@@ -108,6 +110,21 @@ ul.student-name {
   border-right: 1px solid $border-grey;
 }
 
+
+
+
+
+.spinner-container {
+  z-index: 9999;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  .spinner {
+    stroke: $primary-action-color !important;
+  }
+}
 
 
 

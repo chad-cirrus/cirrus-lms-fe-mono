@@ -33,6 +33,7 @@
       <div class="lesson-title">{{(lesson$ | async)?.title}}</div>
     </div>
     <div class="outlet-container">
+      <div *ngIf="loadingIndicator$ | async" class="spinner-container"><mat-spinner color="accent"></mat-spinner></div>
       <router-outlet></router-outlet>
     </div>
     </div>
