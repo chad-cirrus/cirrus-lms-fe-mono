@@ -14,6 +14,8 @@ import { LessonContentsComponent } from '../lesson-contents/lesson-contents.comp
 import { LessonProgressComponent } from '../lesson-progress/lesson-progress.component';
 import { ProgressCardComponent } from '../progress-card/progress-card.component';
 import { LessonLandingPageComponent } from './lesson-landing-page.component';
+import { MatDividerModule } from '@angular/material/divider';
+import { LessonProgressStatsComponent } from '../lesson-progress-stats/lesson-progress-stats.component';
 
 export default {
   title: 'LessonLandingPageComponent',
@@ -25,12 +27,14 @@ export default {
         LessonProgressComponent,
         LessonContentsComponent,
         ProgressCardComponent,
+        LessonProgressStatsComponent,
       ],
       imports: [
         MatButtonModule,
         FlexLayoutModule,
         MatCardModule,
         MatDialogModule,
+        MatDividerModule,
       ],
     }),
   ],

@@ -40,7 +40,7 @@ export class LessonLandingPageComponent {
       ['failed']: '',
     };
     this._buttonText = dictionary[this.lesson.progress.status];
-    this._progress = this.setProgressForCard();
+    if (!this._progress) this._progress = this.setProgressForCard();
   }
 
   get lesson() {
@@ -58,6 +58,10 @@ export class LessonLandingPageComponent {
 
   get progress() {
     return this._progress;
+  }
+
+  set progress(progress: ICourseProgress[]) {
+    this._progress = progress;
   }
 
   @Input() lessonId!: number;
