@@ -3,12 +3,12 @@ import { ILesson } from '../lib/ILesson';
 
 export const ctdLesson: ILesson = {
   id: 0,
-  system_desc: '',
+  system_desc: 'System Description',
   updated_at: '',
   system_name: 'Test System Name',
   lesson_type: 0,
   title: 'Test Title',
-  overview: '',
+  overview: "<h2>Lesson Overview</h2><p>Sample content produced by a rich text editor in the Lesson Builder.</p><p>Mystery, core, and paralysis. Death at the habitat surprisingly engage that is when real starships yell. Friendship at the parallel universe was the mind of sensor, transformed to a cold transformator. The starlight travel is a united processor. Moons walk on honor at captain's quarters! Klingons are the cosmonauts of the most unusual love. Galactic parasites, to the bridge. It is a quirky definition, sir. All of those emitters place unrelated, most unusual phenomenans. The planet is more space now than species. senior and mechanically chemical. All of those astronauts manifest united, virtual green people. The cosmonaut is more transformator now than ship. ugly and surprisingly brave. Wildly command an astronaut. The ugly ferengi bravely deserves the cosmonaut. Dosis walk with rumour at the final wormhole! Where is the post-apocalyptic star? I fight this adventure, it's called bare advice. History at the planet was the coordinates of collision course, deserved to a modern sensor. Ionic cannon at the planet was the adventure of sensor, handled to a neutral star.</p>",
   is_archived: false,
   contents_are_linear: false,
   is_preview: false,
