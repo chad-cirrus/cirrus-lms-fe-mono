@@ -5,7 +5,6 @@
   [ngClass]="instructorView ? 'instructor-view' : 'student-view'"
 >
   <div class="title-content">
-    <div class="title">{{ lesson?.system_desc }}</div>
     <div class="overview" [innerHTML]="lesson?.overview"></div>
   </div>
   <div class="contents-list-container">
