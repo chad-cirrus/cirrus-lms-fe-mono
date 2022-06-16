@@ -2,39 +2,66 @@
 
 <div class="attempts-container" *ngIf="!mobile">
   <div *ngFor="let a of attempts; let i = index">
-    <div fxLayout="row" fxLayoutAlign="space-between"
-      [ngClass]="i + 1 === attempts.length ? (a.missed ? 'last-attempt-missed': 'last-attempt') : (a.missed ? 'attempt-missed' : 'attempt')" (click)="a.missed ? nav(a, i) : null">
+    <div
+      class="attempt-item-container"
+      (click)="a.missed ? nav(a, i) : null"
+    >
+    <div class="inside" fxLayout="row"
+    fxLayoutAlign="none center"
+    [ngClass]="
+    i + 1 === attempts.length
+      ? a.missed
+        ? 'last-attempt-missed'
+        : 'last-attempt'
+      : a.missed
+      ? 'attempt-missed'
+      : 'attempt'
+  "
+    >
 
-      <div fxLayout="row" fxLayoutAlign="none center"  fxLayoutGap="15px">
-        <img
-          height="8px"
-          width="8px"
-          [src]="
-            a.passed
-              ? 'courses/images/svg/green-ellipse.svg'
-              : 'courses/images/svg/red-ellipse.svg'
-          "
-        />
-        <div class="index">{{ i + 1 }}</div>
-        <div class="value">{{ a.passed ? 'Passed' : 'Missed' }}</div>
-      </div>
-      <div fxLayout="row" fxLayoutGap="12px">
-        <div class="value" *ngIf="a.instructor_name">Instructor: {{ a.instructor_name }}</div>
-        <div class="value">|</div>
-        <div [ngClass]="a.missed ? 'value date' : 'value passed'">
-          {{ a.created_at | date: 'longDate' }}
+        <div fxFlex="50" fxLayoutGap="15px" fxLayout="row"     fxLayoutAlign="none center">
+          <img
+            height="8px"
+            width="8px"
+            [src]="
+              a.passed
+                ? 'courses/images/svg/green-ellipse.svg'
+                : 'courses/images/svg/red-ellipse.svg'
+            "
+          />
+          <div class="index">{{ i + 1 }}</div>
+          <div class="value">{{ a.passed ? 'Passed' : 'Missed' }}</div>
         </div>
-        <img *ngIf="a.missed" src="courses/images/svg/right-chevron.svg" />
+        <div fxFlex="50"  fxLayoutGap="12px" fxLayout="row" fxLayoutAlign="end">
+          <div class="value" *ngIf="a.instructor_name">
+            Instructor: {{ a.instructor_name }}
+          </div>
+          <div class="value">|</div>
+          <div [ngClass]="a.missed ? 'value date' : 'value passed'">
+            {{ a.created_at | date: 'longDate' }}
+          </div>
+          <img *ngIf="a.missed" src="courses/images/svg/right-chevron.svg" />
+        </div>
+        </div>
       </div>
-    </div>
   </div>
 </div>
 
 <div *ngIf="mobile">
-  <div *ngFor="let a of attempts; let i = index" >
-    <div fxLayout="row" fxLayoutAlign="space-between center" class="attempts-container-mobile" (click)="a.missed ? nav(a, i) : null">
+  <div *ngFor="let a of attempts; let i = index">
+    <div
+      fxLayout="row"
+      fxLayoutAlign="space-between center"
+      [ngClass]="a.missed ? 'attempts-container-mobile-missed' : 'attempts-container-mobile'"
+      (click)="a.missed ? nav(a, i) : null"
+    >
       <div>
-        <div fxLayout="row" class="row" fxLayoutAlign="none center" fxLayoutGap="15px">
+        <div
+          fxLayout="row"
+          class="row"
+          fxLayoutAlign="none center"
+          fxLayoutGap="15px"
+        >
           <img
             height="8px"
             width="8px"
@@ -48,14 +75,16 @@
           <div class="value">{{ a.passed ? 'Passed' : 'Missed' }}</div>
         </div>
 
-        <div class="value row" *ngIf="a.instructor_name">Instructor: {{ a.instructor_name }}</div>
+        <div class="value row" *ngIf="a.instructor_name">
+          Instructor: {{ a.instructor_name }}
+        </div>
 
-        <div [ngClass]="a.missed ? 'value date' : 'value passed'" class="row" >
+        <div [ngClass]="a.missed ? 'value date' : 'value passed'" class="row">
           {{ a.created_at | date: 'longDate' }}
         </div>
       </div>
       <div>
-        <img *ngIf="a.missed" src="courses/images/svg/right-chevron.svg"/>
+        <img *ngIf="a.missed" src="courses/images/svg/right-chevron.svg" />
       </div>
     </div>
   </div>

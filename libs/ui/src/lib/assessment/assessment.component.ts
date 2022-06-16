@@ -1,5 +1,5 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
-import { Component, ViewEncapsulation, ViewChild, OnInit } from '@angular/core';
+import { Component, ViewEncapsulation, ViewChild, OnInit, Input } from '@angular/core';
 import { MatTabGroup } from '@angular/material/tabs';
 import { Attempt } from '@cirrus/models';
 import { Observable } from 'rxjs';
@@ -20,13 +20,24 @@ export class AssessmentComponent
   attempt!: Attempt;
   tablet$!: Observable<boolean>;
   mobile$!: Observable<boolean>;
+  _isMenuOpen!: boolean;
 
   constructor(private breakpointObserver: BreakpointObserver) {
     super();
   }
 
+  @Input()
+  public get menuOpen(): boolean {
+    return this._isMenuOpen;
+  }
+
+  public set menuOpen(value: boolean) {
+    this._isMenuOpen= value;
+  }
+
   ngOnInit(): void {
     super.ngOnInit();
+    console.log('menu', this.menuOpen)
 
     this.tablet$ = this.breakpointObserver.observe('(max-width: 959px)').pipe(
       map(({ matches }) => {

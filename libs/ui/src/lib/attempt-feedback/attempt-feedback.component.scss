@@ -5,6 +5,10 @@
 .back-btn {
   cursor: pointer;
   padding-top: 26px;
+  img {
+    height: 21px;
+    width: 21px;
+  }
 }
 
 .title {
@@ -15,9 +19,12 @@
   line-height: 29px;
 }
 
+
+
 .info-container {
-  padding-top: 6px;
+  padding-top: 8px;
   div {
+    font-size: 1rem;
     padding-top: 8px;
   }
 }
@@ -47,6 +54,15 @@
 }
 
 .container {
+  padding-right: 21px;
   padding-left: 42px;
 }
+
+@media (max-width: 600px) {
+  .container {
+    padding-left: 0;
+  }
+
+}
+
 

@@ -108,9 +108,11 @@
 
   .acc-item-body {
     padding: 0px 22px 0px 27px;
+    border-bottom: 1px solid $border-grey;
   }
+
   .acc-item-body-mobile {
-    padding: 0px 0px 0px 26px;
+    border-bottom: 1px solid $border-grey;
   }
 
   .border-top {
@@ -123,5 +125,45 @@
     padding-right: 15px;
     cursor: pointer;
   }
+
+  .mat-card {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
 }
 
+
+
+
+
+
+
+@media (min-width: 325px) and (max-width: 600px) {
+  .task-container {
+    .first {
+      max-width: none;
+    }
+    .title {
+      padding-left: 5px;
+    }
+  }
+}
+
+@media (min-width: 601px) and (max-width: 959px) {
+  .task-container {
+    .first {
+      max-width: none;
+    }
+    .title {
+      padding-left: 21px;
+    }
+  }
+}
+
+@media (min-width: 960px) {
+  .task-container {
+    .first, .sub-task, .first-header  {
+      padding-left: 7px;
+    }
+  }
+}

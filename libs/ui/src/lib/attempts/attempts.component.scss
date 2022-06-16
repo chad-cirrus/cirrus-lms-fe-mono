@@ -12,31 +12,55 @@
   padding: 13px 17px;
   border-radius: 5px;
 }
+.attempts-container-mobile-missed {
+  background-color: $lesson-content-item-hover;
+  margin-top: 15px;
+  padding: 13px 17px;
+  border-radius: 5px;
+  cursor: pointer;
+}
 
 .title {
+  font-family: $bqmedium-font;
   padding-top: 27px;
   font-size: .875rem;
   color: $secondary-font-color-grey
 }
 
 .attempt {
-  padding: 17px 10px 17px 10px;
+  padding: 7px 11px 7px 11px;
+
+}
+
+.last-attempt {
+  padding: 7px 11px 7px 11px;
+
+}
+
+.attempt-item-container {
+  padding: 8px 0px 8px 0px;
   border-bottom: 1px solid $border-grey;
 }
 
 .attempt-missed {
-  padding: 17px 10px 17px 10px;
-  border-bottom: 1px solid $border-grey;
+  padding: 7px 11px 7px 11px;
   border-radius: 5px;
-}
 
-.last-attempt {
-  padding: 17px 10px 17px 10px;
 }
 
 .last-attempt-missed {
-  padding: 17px 10px 17px 10px;
+  padding: 7px 11px 7px 11px;
   border-radius: 5px;
+}
+
+.attempt-missed:hover {
+  cursor: pointer;
+  background-color: $lesson-content-item-hover
+}
+
+.last-attempt-missed:hover {
+  cursor: pointer;
+  background-color: $lesson-content-item-hover;
 }
 
 .row {
@@ -44,15 +68,8 @@
 }
 
 
-.attempt-missed:hover {
-  cursor: pointer;
-  background-color: $border-grey;
-}
 
-.last-attempt-missed:hover {
-  cursor: pointer;
-  background-color: $border-grey;
-}
+
 
 .index {
   font-size: 1rem;

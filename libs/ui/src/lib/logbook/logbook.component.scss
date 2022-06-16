@@ -1,8 +1,13 @@
 @use '../styles/variables' as *;
 
+
+.container {
+  margin-top: 27px;
+}
+
 .logbook-item-container {
   background-color: $lesson-content-item-hover;
-  margin: 37px 0px 15px 3px;
+  margin: 15px 0px 15px 3px;
   padding: 15px 17px 16px 18px;
   border-radius: 10px;
 }
@@ -16,7 +21,7 @@
   font-size: 1rem;
   color: $light-grey;
   border-bottom: 1px solid $border-grey2;
-  height: 34px;
+  min-height: 34px;
   padding: 0px 6px 0px 6px;
 }
 
@@ -34,8 +39,7 @@
 
 .log-type {
   font-family: $bqmedium-font;
-  font-size: 1rem;
-  font-weight: 500;
+  font-size: 1.063rem;
 }
 
 .airport {
@@ -45,7 +49,11 @@
 }
 
 .hours {
-  font-size: 1.125rem;
+  font-size: 1.063rem;
+}
+
+.date {
+  font-size: 1.063rem;
 }
 
 .approach-types {
@@ -54,41 +62,8 @@
   color: $light-grey;
 }
 
-.caret-container {
-  border-top: 1px solid $border-grey;
-  }
 
-  .caret {
-    padding-top: 15px;
-  }
-
-
-@media (max-width: 992px) {
-
-  .airport {
-    font-family: $bqmedium-font;
-    font-size: 1.063rem;
-    font-weight: 500;
-  }
-
-  .hours {
-    font-size: 1rem;
-  }
-
-
-}
-
-@media (min-width: 600px) {
-
-  .airport {
-    font-family: $bqmedium-font;
-    font-size: 1.063rem;
-    font-weight: 500;
-  }
-
-  .hours {
-    font-size: 1rem;
-  }
+@media (min-width: 325px) and (max-width: 600px)  {
 
   .caret-container {
     border-top: none;
@@ -98,8 +73,6 @@
       cursor: pointer;
       padding: 0;
     }
-
-
 
 }
 

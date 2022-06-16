@@ -35,7 +35,7 @@
         [ngClass]="!tablet ? 'first-row' : 'row'"
         fxFlex="1 1 auto"
       >
-        <div class="title" [fxFlex]="mobile ? 30 : 20" *ngIf="tablet">
+        <div class="title" fxFlex="25" *ngIf="tablet">
           TASK
         </div>
         <div>
@@ -48,7 +48,7 @@
         [ngClass]="!tablet ? 'row-item-desktop' : 'row'"
         fxFlex="1 1 auto"
       >
-        <div class="title" [fxFlex]="mobile ? 30 : 20" *ngIf="tablet">
+        <div class="title" fxFlex="25" *ngIf="tablet">
           TYPE
         </div>
         <div class="value">{{ c.task_type | titlecase }}</div>
@@ -58,7 +58,7 @@
         [ngClass]="!tablet ? 'row-item-desktop' : 'row'"
         fxFlex="1 1 auto"
       >
-        <div class="title" [fxFlex]="mobile ? 30 : 20" *ngIf="tablet">
+        <div class="title" fxFlex="25" *ngIf="tablet">
           REQUIRED
         </div>
         <div class="value">{{ c.required_successful_attempts }}</div>
@@ -68,7 +68,7 @@
         [ngClass]="!tablet ? 'row-item-desktop' : 'row'"
         fxFlex="1 1 auto"
       >
-        <div class="title" [fxFlex]="mobile ? 30 : 20" *ngIf="tablet">
+        <div class="title" fxFlex="25" *ngIf="tablet">
           PASSED
         </div>
         <div class="value">{{c.passed_count}}</div>
@@ -78,7 +78,7 @@
         [ngClass]="!tablet ? 'row-item-desktop' : 'row'"
         fxFlex="1 1 auto"
       >
-        <div class="title" [fxFlex]="mobile ? 30 : 20" *ngIf="tablet">
+        <div class="title" fxFlex="25" *ngIf="tablet">
           MISSED
         </div>
         <div class="value">{{c.missed_count}}</div>
@@ -88,7 +88,7 @@
         [ngClass]="!tablet ? 'row-item-desktop' : 'row'"
         fxFlex="1 1 auto"
       >
-        <div class="title" [fxFlex]="mobile ? 30 : 20" *ngIf="tablet">
+        <div class="title" fxFlex="25" *ngIf="tablet">
           STATUS
         </div>
         <div
@@ -140,7 +140,7 @@
             : 'space-between center'
         "
       >
-        <div class="title" [fxFlex]="mobile ? 30 : 20" *ngIf="tablet">
+        <div class="title" fxFlex="25" *ngIf="tablet">
           Details
         </div>
         <cdk-accordion class="example-accordion">

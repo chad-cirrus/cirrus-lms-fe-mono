@@ -3,7 +3,15 @@
 
 
 .tabs-container {
-  max-width: 1000px;
+
+  .tabs-container-open {
+    padding-left: 58px;
+    padding-right: 77px;
+  }
+
+  .tabs-container-closed {
+    padding-right: 133px;
+  }
   .mat-tab-label-active {
     font-family: $bqmedium-font;
     color: white;
@@ -14,10 +22,6 @@
     padding-bottom: 18px;
   }
 
-
-  .body-container-mobile {
-    margin-right: 41px;
-  }
 
   // border-bottom: none!important;
 
@@ -65,4 +69,32 @@
   .image {
     padding-right: 10px;
   }
+
 }
+
+
+  @media (min-width: 325px) and (max-width: 600px)  {
+    .tabs-container {
+      .tabs-container-closed {
+        padding-right: 19px;
+        padding-left: 16px;
+      }
+    }
+  }
+
+
+  @media (min-width: 601px) and (max-width: 992px)  {
+    // .tabs-container {
+    //   .tabs-container-open {
+    //     padding-left: 58px;
+    //   }
+    // }
+    .tabs-container {
+      .tabs-container-closed {
+        padding-right: 43px;
+        padding-left: 34px;
+      }
+    }
+  }
+
+
