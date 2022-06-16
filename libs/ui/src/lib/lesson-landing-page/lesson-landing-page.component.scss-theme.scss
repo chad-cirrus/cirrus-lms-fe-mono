@@ -34,8 +34,8 @@
         font-family: var.$primary_font;
         font-style: normal;
         font-weight: 500;
-        font-size: 17px;
-        line-height: 23px;
+        font-size: 1.063;
+        line-height: 1;
         letter-spacing: -0.005em;
       }
     }
@@ -57,10 +57,6 @@
           font-size: 16px;
           line-height: 16px;
         }
-        button.start-lesson {
-          font-size: 17px;
-          line-height: 23px;
-        }
       }
     }
   }
@@ -79,10 +75,6 @@
         button.snav-open-button {
           font-size: 16px;
           line-height: 16px;
-        }
-        button.start-lesson {
-          font-size: 21px;
-          line-height: 29px;
         }
       }
     }

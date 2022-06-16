@@ -76,7 +76,7 @@ mat-drawer {
       box-sizing: border-box;
       border-radius: 60px;
       width: 100%;
-      margin: 1rem auto;
+      margin: 30px auto;
       height: 48px;
     }
     .self-study,
@@ -168,7 +168,7 @@ cirrus-progress-card:last-child {
     .content {
       padding: 3rem 1.5rem 0 1.5rem;
       h1 {
-        margin-bottom: 30px
+        margin: 0 0 30px;
       }
       h4 {
         margin: 25px 0 30px;
@@ -177,11 +177,11 @@ cirrus-progress-card:last-child {
         height: 39px;
       }
       button.start-lesson {
-        margin: 2rem 0 8rem 0;
+        margin: 35px 0 80px;
         box-sizing: border-box;
         border-radius: 300px;
         width: 160px;
-        height: 45px;
+        height: 40px;
       }
     }
   }
@@ -206,11 +206,10 @@ cirrus-progress-card:last-child {
         margin: 2rem 0 8rem 0;
       }
       button.start-lesson {
-        margin: 80px 0 8rem 0;
+        margin: 55px 0 150px;
         box-sizing: border-box;
         border-radius: 300px;
-        width: 189px;
-        height: 67px;
+        width: 151px;
       }
       .open {
         opacity: 0;
