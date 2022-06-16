@@ -2,7 +2,7 @@
 
 <div class="container">
   <div *ngFor="let l of logbook; let i = index" class="logbook-item-container">
-    <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign.gt-xs="none center"  fxLayoutGap.xs="10px" >
+    <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign.gt-xs="none center"  fxLayoutGap.xs="20px" >
         <div class="date" fxFlex="27">
           {{ l.lesson_flight_log_date | date: 'longDate' }}
         </div>
