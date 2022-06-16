@@ -65,14 +65,12 @@ mat-drawer {
     h1 {
       width: 75%;
       max-width: 545px;
+      margin-bottom: 20px
     }
     h4 {
       width: 75%;
       max-width: 420px;
-    }
-    h1,
-    h4 {
-      margin: 0.5rem 0 1rem 0;
+      margin: 15px 0 30px;
     }
     button.start-lesson {
       box-sizing: border-box;
@@ -169,6 +167,12 @@ cirrus-progress-card:last-child {
   .lesson-image {
     .content {
       padding: 3rem 1.5rem 0 1.5rem;
+      h1 {
+        margin-bottom: 30px
+      }
+      h4 {
+        margin: 25px 0 30px;
+      }
       button.snav-open-button {
         height: 39px;
       }
@@ -195,6 +199,9 @@ cirrus-progress-card:last-child {
       }
       margin-left: 40px;
       padding: 6rem 2.5rem 0 2.5rem;
+      h4 {
+        margin: 25px 0 50px;
+      }
       button.snav-open-button {
         margin: 2rem 0 8rem 0;
       }
