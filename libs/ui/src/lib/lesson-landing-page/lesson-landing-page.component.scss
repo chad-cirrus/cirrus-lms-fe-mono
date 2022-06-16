@@ -47,12 +47,8 @@ mat-drawer {
 }
 
 .lesson-image {
-  background: linear-gradient(
-    90deg,
-    #000000 0%,
-    rgba(0, 0, 0, 0.449675) 46.24%,
-    rgba(0, 0, 0, 0) 61.94%
-  ),
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0.33) 44.11%, rgba(0, 0, 0, 0) 61.94%),
+  linear-gradient(360deg,#000000 1.79%,rgba(0,0,0,.24) 19.37%,rgba(0,0,0,0) 25%),
   url('../../assets/images/image21.png') no-repeat center;
   background-size: cover;
   -webkit-background-size: cover;
