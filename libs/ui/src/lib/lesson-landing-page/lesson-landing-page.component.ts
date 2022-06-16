@@ -1,11 +1,8 @@
 /* eslint-disable @nrwl/nx/enforce-module-boundaries */
 import {
-  AfterViewInit,
   Component,
-  ElementRef,
   EventEmitter,
   Input,
-  OnInit,
   Output,
   ViewChild,
 } from '@angular/core';
@@ -16,7 +13,6 @@ import {
   ICourseProgress,
   ProgressType,
   LessonStatus,
-  LessonProgress,
 } from '@cirrus/models';
 import { StagesOverlayComponent } from '../stages-overlay/stages-overlay.component';
 
@@ -28,7 +24,15 @@ import { StagesOverlayComponent } from '../stages-overlay/stages-overlay.compone
 export class LessonLandingPageComponent {
   private _lesson!: ILesson;
   private _buttonText!: string;
+  private _progress!: ICourseProgress[];
 
+  get progress() {
+    return this._progress;
+  }
+
+  set progress(progress: ICourseProgress[]) {
+    this._progress = progress;
+  }
 
   @Input()
   set lesson(value: ILesson) {
@@ -40,7 +44,7 @@ export class LessonLandingPageComponent {
       ['failed']: '',
     };
     this._buttonText = dictionary[this.lesson.progress.status];
-    if (!this._progress) this._progress = this.setProgressForCard();
+    this._progress = this.setProgressForCard(); // todo null check
   }
 
   get lesson() {
@@ -53,16 +57,6 @@ export class LessonLandingPageComponent {
 
   @ViewChild('drawer') drawer: any;
   showFiller = false;
-
-  private _progress!: ICourseProgress[];
-
-  get progress() {
-    return this._progress;
-  }
-
-  set progress(progress: ICourseProgress[]) {
-    this._progress = progress;
-  }
 
   @Input() lessonId!: number;
   @Input() isScreenSmall!: boolean;
@@ -97,7 +91,6 @@ export class LessonLandingPageComponent {
       assessment_tasks_total,
       assessment_tasks_completed,
     } = lesson_stats;
-
 
     switch (lesson_type) {
       case 0:
@@ -185,9 +178,9 @@ export class LessonLandingPageComponent {
       student_intro_video &&
       this.lesson.progress.status === LessonStatus.NOT_STARTED
     ) {
-     this.playIntroVideo()
+      this.playIntroVideo();
     } else {
-      this.playCurrentContent()
+      this.playCurrentContent();
     }
   }
 
@@ -227,17 +220,15 @@ export class LessonLandingPageComponent {
   }
 
   playCurrentContent() {
-   const content =
-    this.lesson.contents.find(
-      c => c.progress.status === LessonStatus.NOT_STARTED
-    ) || this.lesson.contents[0];
+    const content =
+      this.lesson.contents.find(
+        c => c.progress.status === LessonStatus.NOT_STARTED
+      ) || this.lesson.contents[0];
 
-  setTimeout(() => {
-    this.fetchMediaOutput.next(content);
-  }, 1000);
+    setTimeout(() => {
+      this.fetchMediaOutput.next(content);
+    }, 1000);
   }
-
-
 
   playIntroVideo() {
     const content: IContent = this.lesson.student_intro_video.content;
