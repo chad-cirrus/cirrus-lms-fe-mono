@@ -86,7 +86,7 @@ mat-drawer {
       font-family: $primary_font;
       font-style: normal;
       font-weight: 500;
-      font-size: 32px;
+      font-size: 1;
       line-height: 117%;
       /* or 37px */
 
@@ -105,7 +105,7 @@ mat-drawer {
         line-height: 24px;
         /* identical to box height, or 171% */
 
-        color: #fbc219;
+        color: #FFFF00;
       }
     }
   }
@@ -237,7 +237,7 @@ cirrus-progress-card:last-child {
           line-height: 24px;
           /* identical to box height, or 171% */
 
-          color: #fbc219;
+          color: #FFFF00;
         }
       }
     }

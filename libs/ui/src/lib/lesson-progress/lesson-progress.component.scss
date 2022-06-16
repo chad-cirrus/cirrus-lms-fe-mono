@@ -4,9 +4,9 @@
 .assessment {
   font-family: 'akzidenz-grotesk_bqlight';
   font-style: normal;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 117%;
+  font-weight: 300;
+  font-size: 1rem;
+  line-height: 1.1;
   letter-spacing: 0.03em;
   color: #ffffff;
   img {
@@ -21,21 +21,20 @@
   text-align: left;
 
   .sign-offs-required {
-    margin-left: 4px;
+    margin-left: 5px;
     font-family: var.$primary_font;
     font-style: normal;
     font-weight: 500;
-    font-size: 9px;
-    line-height: 14px;
-    color: #fbc219;
+    font-size: .625rem;
+    line-height: 1;
+    color: #FFFF00;
   }
 }
 
 @media (min-width: 600px) {
   .self-study,
   .assessment {
-    font-size: 22px;
-    line-height: 27px;
+    font-size: 1.25rem;
     img {
       height: 24px;
     }
@@ -46,25 +45,15 @@
 
   .sign-offs-warning-container {
     text-align: left;
-
-    .sign-offs-required {
-      margin-left: 8px;
-      font-style: normal;
-      font-weight: 400;
-      font-size: 11.8987px;
-      line-height: 20px;
-
-      color: #fbc219;
-    }
   }
 }
 
 @media (min-width: 960px) {
   .self-study,
   .assessment {
-    font-size: 32px;
+    font-size: 1.625rem;
     img {
-      height: inherit;
+      height: 28px;
     }
   }
 
@@ -72,14 +61,7 @@
     text-align: left;
 
     .sign-offs-required {
-      margin-left: 8px;
-      font-style: normal;
-      font-weight: 500;
-      font-size: 14px;
-      line-height: 24px;
-      /* identical to box height, or 171% */
-
-      color: #fbc219;
+      font-size: .875rem;
     }
   }
 }
