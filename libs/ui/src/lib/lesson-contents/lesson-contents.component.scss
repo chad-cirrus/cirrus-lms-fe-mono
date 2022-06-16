@@ -34,7 +34,7 @@
 
   .contents-list-container {
     .content-item {
-      margin: 0.5rem;
+      margin: 0 0.5rem;
     }
   }
 }
@@ -42,7 +42,7 @@
 @media (min-width: 960px) {
   .contents-list-container {
     .content-item {
-      margin: 1rem;
+      margin: 0 1rem;
     }
   }
 }
