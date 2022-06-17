@@ -9,6 +9,7 @@
     font-size: 1.063rem;
     font-weight: 500;
     padding: 35px 16px;
+    border-bottom: 1px solid $border-grey;
     img:hover {
       cursor: pointer;
     }
@@ -17,19 +18,21 @@
       width: 1.125rem;
     }
   }
+  .stages-overlay-accordion-item.ng-star-inserted {
+    display: block;
+    border-bottom: 1px solid $border-grey;
+  }
   .accordian-container {
     max-height: 42rem;
     overflow: auto;
   }
-}
-
-.stages-overlay-accordion-item:first-child .stage-title {
-  border-top: 1px solid $border-grey !important;
+  .accordion-body {
+    padding-bottom: 20px;
+  }
 }
 
 .stage-title {
   font-family: $BertholdAkzidenzGroteskBE;
-  border-bottom: 1px solid $border-grey;
   font-size: 1.188rem;
   padding: 1.313rem 1.938rem;
 }
