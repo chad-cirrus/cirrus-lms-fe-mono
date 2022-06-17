@@ -1,9 +1,8 @@
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CirrusMaterialModule, HeaderDropdownComponent } from '@cirrus/ui';
 
 import { Meta, moduleMetadata, Story } from '@storybook/angular';
-import { CirrusMaterialModule } from '../../../../../../libs/ui/src/lib/cirrus-material.module';
-import { HeaderDropdownComponent } from '../../../../../../libs/ui/src/lib/header-dropdown/header-dropdown.component';
 import { HeaderComponent } from './header.component';
 
 export default {
@@ -34,6 +33,7 @@ Primary.args = {
     created_at: '2021-01-14T01:19:30.847Z',
     ctc_admin: false,
     deactivated: false,
+    name: 'me',
     email: 'myockey@cirrusaircraft.com',
     full_sfid: '0054O000009hk3oQAA',
     id: 25524,
@@ -56,6 +56,7 @@ Student.args = {
     created_at: '2021-01-14T01:19:30.847Z',
     ctc_admin: false,
     deactivated: false,
+    name: 'me',
     email: 'myockey@cirrusaircraft.com',
     full_sfid: '0054O000009hk3oQAA',
     id: 25524,
@@ -78,6 +79,7 @@ Instructor.args = {
     created_at: '2021-01-14T01:19:30.847Z',
     ctc_admin: false,
     deactivated: false,
+    name: 'me',
     email: 'myockey@cirrusaircraft.com',
     full_sfid: '0054O000009hk3oQAA',
     id: 25524,
@@ -100,6 +102,7 @@ CTC.args = {
     created_at: '2021-01-14T01:19:30.847Z',
     ctc_admin: false,
     deactivated: false,
+    name: 'me',
     email: 'myockey@cirrusaircraft.com',
     full_sfid: '0054O000009hk3oQAA',
     id: 25524,
@@ -122,6 +125,7 @@ LMS.args = {
     created_at: '2021-01-14T01:19:30.847Z',
     ctc_admin: false,
     deactivated: false,
+    name: 'me',
     email: 'myockey@cirrusaircraft.com',
     full_sfid: '0054O000009hk3oQAA',
     id: 25524,

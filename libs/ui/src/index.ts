@@ -12,7 +12,8 @@ export * from './lib/helpers/ContentTypeToIconMapper';
 export * from './lib/completion-dialog/completion-dialog.component';
 export * from './lib/course-completion/course-completion.component';
 export * from './lib/completion-dialog/LessonCompletionCtas';
-export * from './lib/pdf/pdf.component'
+export * from './lib/pdf/pdf.component';
+export * from './lib/header-dropdown/header-dropdown.component';
 
 // export * from '../../models/src/testing/testData';
 export * from '../../models/src/testing/testDataIcingLesson';
