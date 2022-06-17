@@ -3,41 +3,44 @@
 
 @mixin cirrus-lesson-content-item-typography($typography-config) {
   cirrus-lesson-content-item {
-    .playlist-container {
-      .media-control {
+    .item-container {
+      .media-control,
+      .progress-column {
         // @include material.mat-typography-level-to-styles(
         //   $typography-config,
         //   display-2
         // );
         //styleName: Desktop/Medium Body - Regular;
-        font-family: var.$primary_font;
+        font-family: 'Akzidenz-Grotesk BQ';
         font-style: normal;
         font-weight: 400;
-        font-size: 14px;
+        font-size: 0.875rem;
         line-height: 130%;
         /* or 18px */
 
         letter-spacing: 0.02em;
-
       }
     }
   }
 
   @media (min-width: 600px) {
     cirrus-lesson-content-item {
-      .playlist-container {
-        .media-control {
-          font-size: 18px;
-        }
-      }
-    }
-  }
+      .item-container {
+        .media-control,
+        .progress-column {
+          // @include material.mat-typography-level-to-styles(
+          //   $typography-config,
+          //   display-2
+          // );
+          //styleName: Desktop/Medium Body - Regular;
+          font-family: 'Akzidenz-Grotesk BQ';
+          font-style: normal;
+          font-weight: 400;
+          font-size: 1.125rem;
+          line-height: 130%;
+          /* or 18px */
 
-  @media (min-width: 960px) {
-    cirrus-lesson-content-item {
-      .playlist-container {
-        .media-control {
-          font-size: 18px;
+          letter-spacing: 0.02em;
         }
       }
     }
@@ -54,9 +57,12 @@
   }
 
   cirrus-lesson-content-item {
-    .playlist-container {
+    .item-container {
       .media-control {
-        color: #bdbdbd;
+        color: #c4c4c4;
+      }
+      .progress-column {
+        color: #c4c4c4;
       }
     }
   }

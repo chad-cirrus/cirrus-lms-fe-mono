@@ -43,7 +43,7 @@ export const testData: ILesson = {
       quiz: 0,
       progress: {
         id: 0,
-        status: 'not_started',
+        status: 'completed',
       },
     },
     {
@@ -99,7 +99,7 @@ export const testData: ILesson = {
       quiz: 0,
       progress: {
         id: 0,
-        status: 'not_started',
+        status: 'in_progress',
       },
     },
   ],
@@ -111,24 +111,25 @@ export const testData: ILesson = {
       order: 0,
       quiz: '',
       content_tasks: [],
-      progress: {id: 1, status: 'not_completed'},
+      progress: { id: 1, status: 'not_completed' },
       content_file: '',
-      content_filename: "",
+      content_filename: '',
       content_html: '',
       content_type: 0,
-      created_by: "Cirrus Aircraft",
-      desc: "Perspective & Perspective+ Avionics Course",
+      created_by: 'Cirrus Aircraft',
+      desc: 'Perspective & Perspective+ Avionics Course',
       id: 401,
       jet_scoring: false,
       meta_tags: [],
-      placeholder_image: "https://cirrusapproachherokuprod.blob.core.windows.net/cirruslmsherokuprodcontainer/content-items/content-files/5c480eb38443724475091bf0d91ba12.2.png",
+      placeholder_image:
+        'https://cirrusapproachherokuprod.blob.core.windows.net/cirruslmsherokuprodcontainer/content-items/content-files/5c480eb38443724475091bf0d91ba12.2.png',
       score: 0,
       show_comments: true,
       starter_file: '',
-      subtitle: "Hello Cockpit [2.1]",
-      title: "Hello Cockpit [2.1]",
+      subtitle: 'Hello Cockpit [2.1]',
+      title: 'Hello Cockpit [2.1]',
       upload_image: '',
-      url: "309005652",
+      url: '309005652',
     },
 
     content_id: 401,
@@ -137,16 +138,16 @@ export const testData: ILesson = {
     id: 1,
     title: '',
     updated_at: '',
-    created_at: ''
+    created_at: '',
   },
   instructor_intro_video: {
     content_id: 401,
-    created_at: "2022-05-18T15:55:59.249Z",
+    created_at: '2022-05-18T15:55:59.249Z',
     hidden: false,
     id: 69,
     required: false,
-    title: "hello",
-    updated_at: "2022-05-18T15:55:59.249Z"
+    title: 'hello',
+    updated_at: '2022-05-18T15:55:59.249Z',
   },
   progress: {
     id: 0,
@@ -160,12 +161,12 @@ export const testData: ILesson = {
   lesson_stats: {
     content_completed: 0,
     content_total: 0,
-    ground_hours_completed :0,
+    ground_hours_completed: 0,
     flight_hours_completed: 0,
     landings_completed: 0,
     assessment_tasks_total: 0,
-    assessment_tasks_completed: 0
-  }
+    assessment_tasks_completed: 0,
+  },
 };
 
 export const testData2: ILesson = {
@@ -280,24 +281,25 @@ export const testData2: ILesson = {
       order: 0,
       quiz: '',
       content_tasks: [],
-      progress: {id: 1, status: 'not_completed'},
+      progress: { id: 1, status: 'not_completed' },
       content_file: '',
-      content_filename: "",
+      content_filename: '',
       content_html: '',
       content_type: 0,
-      created_by: "Cirrus Aircraft",
-      desc: "Perspective & Perspective+ Avionics Course",
+      created_by: 'Cirrus Aircraft',
+      desc: 'Perspective & Perspective+ Avionics Course',
       id: 401,
       jet_scoring: false,
       meta_tags: [],
-      placeholder_image: "https://cirrusapproachherokuprod.blob.core.windows.net/cirruslmsherokuprodcontainer/content-items/content-files/5c480eb38443724475091bf0d91ba12.2.png",
+      placeholder_image:
+        'https://cirrusapproachherokuprod.blob.core.windows.net/cirruslmsherokuprodcontainer/content-items/content-files/5c480eb38443724475091bf0d91ba12.2.png',
       score: 0,
       show_comments: true,
       starter_file: '',
-      subtitle: "Hello Cockpit [2.1]",
-      title: "Hello Cockpit [2.1]",
+      subtitle: 'Hello Cockpit [2.1]',
+      title: 'Hello Cockpit [2.1]',
       upload_image: '',
-      url: "309005652",
+      url: '309005652',
     },
 
     content_id: 401,
@@ -306,16 +308,16 @@ export const testData2: ILesson = {
     id: 1,
     title: '',
     updated_at: '',
-    created_at: ''
+    created_at: '',
   },
   instructor_intro_video: {
     content_id: 401,
-    created_at: "2022-05-18T15:55:59.249Z",
+    created_at: '2022-05-18T15:55:59.249Z',
     hidden: false,
     id: 69,
     required: false,
-    title: "hello",
-    updated_at: "2022-05-18T15:55:59.249Z"
+    title: 'hello',
+    updated_at: '2022-05-18T15:55:59.249Z',
   },
   progress: {
     id: 0,
@@ -326,10 +328,10 @@ export const testData2: ILesson = {
   lesson_stats: {
     content_completed: 0,
     content_total: 0,
-    ground_hours_completed :0,
+    ground_hours_completed: 0,
     flight_hours_completed: 0,
     landings_completed: 0,
     assessment_tasks_total: 0,
-    assessment_tasks_completed: 0
-  }
+    assessment_tasks_completed: 0,
+  },
 };

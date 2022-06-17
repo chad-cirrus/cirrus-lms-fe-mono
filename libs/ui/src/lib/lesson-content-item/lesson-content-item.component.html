@@ -10,18 +10,19 @@
     class="media-control"
     fxLayout="row"
     fxLayoutAlign="start center"
-    fxLayoutGap="0.5rem"
+    fxLayoutGap="16px"
   >
     <img [src]="this.content_type_icon" />
     <div class="title">{{ content?.title }}</div>
   </div>
   <div
+    class="progress-column"
     *ngIf="true"
     fxLayout="row"
     fxLayoutAlign="end center"
-    fxLayoutGap="24px"
+    fxLayoutGap="12px"
   >
     <img [src]="imageSrc" />
-    <span *ngIf="!isSmallScreen">{{ progressText }}</span>
+    <span>{{ progressText }}</span>
   </div>
 </div>
