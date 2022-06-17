@@ -6,6 +6,10 @@
   border-radius: 10px;
 }
 
+.border {
+  border-right: 1px solid $border-grey;
+}
+
 .attempts-container-mobile {
   background-color: $lesson-content-item-hover;
   margin-top: 15px;
@@ -32,14 +36,14 @@
 
 }
 
-.last-attempt {
-  padding: 7px 11px 7px 11px;
-
-}
-
 .attempt-item-container {
   padding: 8px 0px 8px 0px;
   border-bottom: 1px solid $border-grey;
+}
+
+.attempt-item-container-missed {
+  padding: 8px 0px 8px 0px;
+  border-bottom: none;
 }
 
 .attempt-missed {
@@ -48,28 +52,14 @@
 
 }
 
-.last-attempt-missed {
-  padding: 7px 11px 7px 11px;
-  border-radius: 5px;
-}
-
 .attempt-missed:hover {
   cursor: pointer;
   background-color: $lesson-content-item-hover
 }
 
-.last-attempt-missed:hover {
-  cursor: pointer;
-  background-color: $lesson-content-item-hover;
-}
-
 .row {
   padding: 4px;
 }
-
-
-
-
 
 .index {
   font-size: 1rem;

@@ -3,23 +3,17 @@
 <div class="attempts-container" *ngIf="!mobile">
   <div *ngFor="let a of attempts; let i = index">
     <div
-      class="attempt-item-container"
+      [ngClass]="i + 1 === attempts.length ? 'attempt-item-container-missed' : 'attempt-item-container'"
       (click)="a.missed ? nav(a, i) : null"
     >
     <div class="inside" fxLayout="row"
     fxLayoutAlign="none center"
-    [ngClass]="
-    i + 1 === attempts.length
-      ? a.missed
-        ? 'last-attempt-missed'
-        : 'last-attempt'
-      : a.missed
+    [ngClass]=" a.missed
       ? 'attempt-missed'
       : 'attempt'
   "
     >
-
-        <div fxFlex="50" fxLayoutGap="15px" fxLayout="row"     fxLayoutAlign="none center">
+        <div fxFlex="50" fxLayoutGap="15px" fxLayout="row"  fxLayoutAlign="none center">
           <img
             height="8px"
             width="8px"
@@ -32,11 +26,11 @@
           <div class="index">{{ i + 1 }}</div>
           <div class="value">{{ a.passed ? 'Passed' : 'Missed' }}</div>
         </div>
-        <div fxFlex="50"  fxLayoutGap="12px" fxLayout="row" fxLayoutAlign="end">
+        <div fxFlex="50" fxLayoutGap="12px" fxLayout="row" fxLayoutAlign="end">
           <div class="value" *ngIf="a.instructor_name">
             Instructor: {{ a.instructor_name }}
           </div>
-          <div class="value">|</div>
+          <div class="border"></div>
           <div [ngClass]="a.missed ? 'value date' : 'value passed'">
             {{ a.created_at | date: 'longDate' }}
           </div>
