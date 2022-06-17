@@ -21,6 +21,7 @@ export class AssessmentComponent
   tablet$!: Observable<boolean>;
   mobile$!: Observable<boolean>;
   _isMenuOpen!: boolean;
+  attempt_index!: number;
 
   constructor(private breakpointObserver: BreakpointObserver) {
     super();
@@ -61,6 +62,7 @@ export class AssessmentComponent
     this.tabGroup.selectedIndex = 2;
     this.hide();
     this.attempt = $event.event;
+    this.attempt_index = $event.index
   }
 
   hide() {

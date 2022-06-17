@@ -9,6 +9,7 @@ import { Attempt } from '@cirrus/models';
 export class AttemptFeedbackComponent {
 
   @Input() attempt!: Attempt;
+  @Input() attempt_index!: number;
   @Output() emitBack = new EventEmitter();
 
 
