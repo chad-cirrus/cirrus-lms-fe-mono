@@ -15,9 +15,12 @@
 
 html,
 body {
-  overflow-x: hidden;
-  overflow-y: hidden;
-  height: 100vh;
+  height: 100%;
+}
+
+main {
+  height: calc(100vh - 60px);
+  overflow: hidden;
 }
 
 .mat-dialog-content {

@@ -7,7 +7,7 @@
       [notificationCount]="notificationCount$ | async"
     ></cirrus-header>
   </div>
-  <div fxLayout="row">
+  <main fxLayout="row">
     <div
       [fxFlex]="collapse ? '1 1 100px' : '1 1 200px'"
       class="sidenav"
@@ -37,7 +37,7 @@
       <router-outlet></router-outlet>
     </div>
     </div>
-  </div>
+  </main>
 </div>
 
 <div *ngIf="showHamburgerMenu" class="hamburger-menu-container">
