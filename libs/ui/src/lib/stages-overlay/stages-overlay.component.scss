@@ -75,9 +75,9 @@
   cursor: pointer;
 }
 
-@media (min-width: 960px) {
+@media (min-width: 600px) {
   .overlay-container {
-    height: 49.125rem;
+    height: calc(100vh - 115px);
   }
 }
 
