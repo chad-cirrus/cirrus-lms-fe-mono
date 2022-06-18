@@ -24,6 +24,10 @@ body {
   max-height: initial;
 }
 
+.mat-drawer-inner-container { 
+  overflow: hidden !important; 
+}
+
 .overview {           // probably for desktop only
   width: 95%;
   img {
