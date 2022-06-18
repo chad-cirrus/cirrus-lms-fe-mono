@@ -35,6 +35,13 @@
   font-family: $BertholdAkzidenzGroteskBE;
   font-size: 1.188rem;
   padding: 1.313rem 1.938rem;
+  img {
+    transition: ease-in-out transform .25s;
+  }
+}
+
+.stages-overlay-accordion-item[aria-expanded="true"] .stage-title img {
+  transform: rotate(180deg);
 }
 
 .stage-title:hover{
