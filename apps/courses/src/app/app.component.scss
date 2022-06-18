@@ -89,9 +89,9 @@ ul.student-name {
 .outlet-container {
   position: relative;
   overflow-y: scroll;
-  overflow-x: hidden;
-  height: 100vh;
-  padding-bottom: 150px;
+  overflow-y: scroll;
+  height: calc(100vh - 105px);
+  padding-bottom: 60px;
 }
 .content-container.stop-scrolling {
   overflow: hidden;
