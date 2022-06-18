@@ -6,12 +6,13 @@ button {
 
 mat-sidenav {
   min-width: 100vw;
-  min-height: 100vh;
+  height: 100vh;
   background-color: transparent;
 }
 
-@media (min-width: 960px) {
+@media (min-width: 600px) {
   mat-sidenav {
+    height: calc(100vh - 107px);
     min-width: 25rem;
     max-width: 25rem;
   }
