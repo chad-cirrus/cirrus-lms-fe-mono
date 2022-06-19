@@ -31,10 +31,9 @@ main {
   overflow: hidden !important; 
 }
 
-.overview {           // probably for desktop only
-  width: 95%;
+//max-width for wysiwyg content images
+.overview {
   img {
     max-width: 100%;
   }
 }
-
