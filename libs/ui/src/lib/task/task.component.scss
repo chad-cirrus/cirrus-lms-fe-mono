@@ -19,8 +19,10 @@
     padding-top: 50px;
   }
 
-  .single-task:nth-child(2) .mobile-card {
-    padding-top: 0px;
+  .single-task:nth-child(2) {
+    .mobile-card, .tablet-card {
+      padding-top: 0px;
+    }
   }
 
   .tablet-card {
