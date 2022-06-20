@@ -30,8 +30,8 @@
           (click)="accordionItem.toggle()"
         >
           <div class="stage-title" fxLayout="row" fxLayoutAlign="space-between">
-            <div>Stage {{ index + 1 }}</div>
-            <img [src]="'courses/images/svg/up-chevron.svg'"/>
+            <div>{{ stage.name }}</div>
+            <img src="courses/images/svg/up-chevron.svg"/>
           </div>
         </div>
         <div class="items-container">
