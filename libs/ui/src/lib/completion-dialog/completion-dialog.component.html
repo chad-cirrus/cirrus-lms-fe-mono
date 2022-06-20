@@ -1,38 +1,35 @@
 <div class="container" fxLayout="column" fxLayoutAlign="space-between">
   <div class="close" fxLayout="row" fxLayoutAlign="end center">
-    <img src="courses/images/svg/close.svg" mat-dialog-close />
+    <img src="courses/images/svg/close-btn-heavy.svg" mat-dialog-close />
   </div>
   <div
     class="main"
-    fxLayout="column"
-    fxLayoutAlign="end center"
-    fxLayoutAlign.lt-sm="space-between center"
-    fxLayoutGap="8rem"
   >
     <div class="message">You've completed {{ data.lesson }}</div>
-  </div>
-  <div
-    class="buttons"
-    fxLayout="row"
-    fxLayout.lt-sm="column"
-    fxLayoutAlign="center start"
-    fxLayoutAlign.lt-sm="center center"
-    fxLayoutGap="2.5rem"
-    fxLayoutGap.lt-sm="1.5rem"
-  >
-    <button
-      class="review-lesson"
-      mat-raised-button
-      [mat-dialog-close]="lessonCompletionCta.reviewLesson"
+    
+    <div
+      class="buttons"
+      fxLayout="row"
+      fxLayout.lt-sm="column"
+      fxLayoutAlign="center start"
+      fxLayoutAlign.lt-sm="center center"
+      fxLayoutGap="2.5rem"
+      fxLayoutGap.lt-sm="1.5rem"
     >
-      Review Lesson
-    </button>
-    <button
-      class="next-lesson"
-      mat-raised-button
-      [mat-dialog-close]="lessonCompletionCta.nextLesson"
-    >
-      Next Lesson
-    </button>
+      <button
+        class="review-lesson"
+        mat-raised-button
+        [mat-dialog-close]="lessonCompletionCta.reviewLesson"
+      >
+        Review Lesson
+      </button>
+      <button
+        class="next-lesson"
+        mat-raised-button
+        [mat-dialog-close]="lessonCompletionCta.nextLesson"
+      >
+        Next Lesson
+      </button>
+    </div>
   </div>
 </div>

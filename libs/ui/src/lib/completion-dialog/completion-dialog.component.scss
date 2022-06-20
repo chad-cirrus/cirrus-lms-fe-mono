@@ -4,14 +4,22 @@
 }
 
 .main {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 95%;
+  padding: 0px 15px;
   .message {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
     font-family: 'Berthold Akzidenz Grotesk BE';
     font-style: normal;
     font-weight: 400;
     font-size: 1.438rem;
-    line-height: 2rem;
-    /* or 139% */
-
+    line-height: 1.2;
     text-align: center;
     letter-spacing: -0.045em;
     color: #FFFFFF;
@@ -19,20 +27,22 @@
 }
 
 .buttons {
+  position: absolute;
+  left: 50%;
+  bottom: 57px;
+  transform: translateX(-50%);
   .review-lesson,
   .next-lesson {
     align-items: center;
     justify-content: center;
-    border-radius: 3.75rem;
-    width: 15.625rem;
-    height: 2.5rem;
+    border-radius: 60px;
+    width: 250px;
+    height: 40px;
 
-    font-family: 'Akzidenz-Grotesk BQ';
+    font-family: 'akzidenz-grotesk_bqmedium';
     font-style: normal;
     font-weight: 500;
     font-size: 1.063rem;
-    line-height: 1.438rem;
-    /* or 138% */
 
     display: flex;
     align-items: center;
@@ -49,46 +59,46 @@
 
 @media (min-width: 600px) {
   .main {
-    min-height: 35%;
-    padding-bottom: 2rem;
+    height: auto;
     .message {
+      position: relative;
+      transform: unset;
+      left: 0;
+      top: 0;
       font-size: 1.875rem;
-      line-height: 2.375rem;
-      /* identical to box height, or 121% */
+      margin-bottom: 100px;
     }
   }
 
   .buttons {
-    min-height: 65%;
-    padding-top: 3rem;
+    position: relative;
+    left: 0;
+    bottom: 0;
+    transform: unset;
     .review-lesson,
     .next-lesson {
-      width: 15.313rem;
-      height: 3.75rem;
+      width: 200px;
+      height: 48px;
 
-      font-size: 1.063rem;
-      line-height: 1.438rem;
-      /* or 138% */
-      letter-spacing: -0.005em;
+      font-size: 1.0625rem;
     }
   }
 }
 
 @media (min-width: 960px) {
   .main {
-    padding-bottom: 3rem;
     .message {
       font-size: 2.375rem;
-      line-height: 2.875rem;
-      /* identical to box height, or 121% */
+      margin-bottom: 131px;
     }
   }
 
   .buttons {
     .review-lesson,
     .next-lesson {
+      width: 245px;
+      height: 60px;
       font-size: 1.625rem;
-      line-height: 2.25rem;
     }
   }
 }
