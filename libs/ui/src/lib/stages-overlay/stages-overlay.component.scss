@@ -6,16 +6,20 @@
   font-family: $primary_font;
   padding: 0rem 0.313rem 0.4rem 0.313rem;
   .title-text {
+    font-family: "akzidenz-grotesk_bqmedium";
     font-size: 1.063rem;
-    font-weight: 500;
     padding: 35px 16px;
     border-bottom: 1px solid $border-grey;
     img:hover {
       cursor: pointer;
     }
     img {
-      height: 1.125rem;
-      width: 1.125rem;
+      height: 22px;
+      width: auto;
+    }
+    .lesson-nav-title img {
+      height: 17px;
+      margin-right: 15px;
     }
   }
   .stages-overlay-accordion-item.ng-star-inserted {
