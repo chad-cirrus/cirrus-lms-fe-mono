@@ -37,3 +37,8 @@ main {
     max-width: 100%;
   }
 }
+
+//cursor for images set to button
+img[type="button"] {
+  cursor: pointer;
+}
