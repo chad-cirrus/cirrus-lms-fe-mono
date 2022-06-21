@@ -23,7 +23,9 @@
 
   <mat-sidenav-content>
     <cirrus-lesson-landing-page
+      [checkoutOffsRequired]="checkoutOffsRequired$ | async"
       [lesson]="(lesson$ | async)!"
+      (playNextLessonContent)="playNextLessonContent($event)"
       (fetchMediaOutput)="fetchMedia($event)"
       (fetchMediaOutputIntro)="fetchMediaForIntroVideo($event)"
       (fetchScorm)="fetchScorm($event)"

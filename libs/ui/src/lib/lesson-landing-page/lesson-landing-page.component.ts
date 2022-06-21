@@ -13,6 +13,7 @@ import {
   ICourseProgress,
   ProgressType,
   LessonStatus,
+  IStage,
 } from '@cirrus/models';
 import { StagesOverlayComponent } from '../stages-overlay/stages-overlay.component';
 
@@ -60,7 +61,7 @@ export class LessonLandingPageComponent {
 
   @Input() lessonId!: number;
   @Input() isScreenSmall!: boolean;
-
+  @Input() checkoutOffsRequired!: boolean | null;
   @Input() instructorView!: boolean;
   @Input() sideNavOpen!: boolean;
   @Input() workbook: any;
@@ -75,6 +76,7 @@ export class LessonLandingPageComponent {
   @Output() openSideNav = new EventEmitter();
   @Output() navigateToLesson = new EventEmitter<any>();
   @Output() displayOverviewOutput = new EventEmitter<string>();
+  @Output() playNextLessonContent = new EventEmitter();
 
   constructor(private dialog: MatDialog) {}
 
@@ -219,11 +221,19 @@ export class LessonLandingPageComponent {
     this.openSideNav.emit();
   }
 
+
+
   playCurrentContent() {
     const content =
       this.lesson.contents.find(
         c => c.progress.status === LessonStatus.NOT_STARTED
-      ) || this.lesson.contents[0];
+      )
+
+      if(!content) {
+        this.playNextLessonContent.emit(this.workbook);
+        return;
+      }
+
 
     setTimeout(() => {
       this.fetchMediaOutput.next(content);

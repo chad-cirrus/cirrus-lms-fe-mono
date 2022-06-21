@@ -9,7 +9,7 @@ import {
   CourseCompletionComponent,
   LESSON_COMPLETION_CTA,
 } from '@cirrus/ui';
-import { Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
 
 import { combineLatest, Observable, Subscription } from 'rxjs';
 import { filter, take, tap, withLatestFrom } from 'rxjs/operators';
@@ -19,7 +19,7 @@ import { findNextLesson } from '../../shared/find-next-lesson';
 import { fetchLessons, setSideNavOpen } from '../../store/actions';
 import { LessonState } from '../../store/reducers/lesson.reducer';
 import { selectCirrusUser } from '../../store/selectors/cirrus-user.selector';
-import { selectLessonWithContentEntities } from '../../store/selectors/lessons.selector';
+import { selectCheckOffRequired, selectLessonWithContentEntities } from '../../store/selectors/lessons.selector';
 import {
   selectInstructorView,
   selectIsScreenSmall,
@@ -37,6 +37,7 @@ import { CoursesService } from '../course.service';
 export class LessonComponent implements OnInit, OnDestroy {
   private _lesson!: ILesson;
   stage_id!: number;
+  checkoutOffsRequired$ = this.store.pipe(select(selectCheckOffRequired));
   lesson$: Observable<ILesson> = this.store
     .select(selectLessonWithContentEntities)
     .pipe(tap(lesson => (this._lesson = lesson)));
@@ -192,6 +193,13 @@ export class LessonComponent implements OnInit, OnDestroy {
         .afterClosed()
         .subscribe(() => console.log('scorm is closed'));
     });
+  }
+
+  playNextLessonContent($event:any) {
+   const nextLesson = findNextLesson($event)
+   this.router.navigate([
+    `/courses/${this.coursId}/lessons/${nextLesson}`
+  ]);
   }
 
   openSideNav() {

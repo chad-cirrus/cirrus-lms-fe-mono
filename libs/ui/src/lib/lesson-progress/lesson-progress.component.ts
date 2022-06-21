@@ -14,6 +14,7 @@ export class LessonProgressComponent {
   private _flightAssessment = false;
   private _assessmentProgressIcon = '';
 
+
   private _lesson: ILesson = {
     id: 0,
     system_desc: '',
@@ -95,7 +96,7 @@ export class LessonProgressComponent {
 
 
   @Input() sideNavOpen!: boolean;
-
+  @Input() checkoutOffsRequired!: boolean | null;
   @Input()
   set lesson(value: ILesson) {
     this._lesson = value;
