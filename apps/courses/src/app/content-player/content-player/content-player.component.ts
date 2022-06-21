@@ -31,7 +31,10 @@ import {
 } from '../../store/selectors/lessons.selector';
 import { componentDictionary } from '../component-dictionary';
 import { completeProgress, startProgress } from '../../store/actions';
-import { selectIsScreenSmall, selectIsScreenTablet } from '../../store/selectors/view.selector';
+import {
+  selectIsScreenSmall,
+  selectIsScreenTablet,
+} from '../../store/selectors/view.selector';
 import { TaskService } from '../../task.service';
 
 @Component({
@@ -46,6 +49,7 @@ export class ContentPlayerComponent
   checkoutOffsRequired$ = this.store.pipe(select(selectCheckOffRequired));
   menuIcon = 'courses/images/svg/LcpMenuIcon.svg';
   closeIcon = 'courses/images/svg/content-player-close.svg';
+  upChevron = 'courses/images/svg/up-chevron.svg';
   private _menuOpen = new BehaviorSubject<boolean>(false);
   menuOpen$ = this._menuOpen.asObservable();
   menuItems!: IContentPlayerMenuItem[];
@@ -54,6 +58,8 @@ export class ContentPlayerComponent
   isIntro!: boolean;
   contentForIntro!: IContent;
   overview!: string;
+  leftChevron = 'courses/images/svg/mobile-left-chevron.svg';
+  rightChevron = 'courses/images/svg/mobile-right-chevron.svg';
 
   currentContentType!: number;
 
@@ -66,7 +72,8 @@ export class ContentPlayerComponent
   title!: string;
   id!: number;
   isScreenSmall$: Observable<boolean> = this.store.select(selectIsScreenSmall);
-  isScreenTablet$: Observable<boolean> = this.store.select(selectIsScreenTablet);
+  isScreenTablet$: Observable<boolean> =
+    this.store.select(selectIsScreenTablet);
 
   addPadding = false;
   hideBtns = false;
@@ -249,7 +256,6 @@ export class ContentPlayerComponent
   ) {
     this.id = id;
     this.title = content.title;
-
 
     this.addPadding = [9, 10, 6].indexOf(content.content_type) < 0;
 

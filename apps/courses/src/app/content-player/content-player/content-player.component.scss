@@ -1,97 +1,262 @@
 @use '../styles/variables' as *;
 
-
 .pdf {
   height: 57vh;
 }
 
-  .sign-offs-required {
-    margin-left: 4px;
-    font-family: $primary_font;
-    font-style: normal;
-    font-weight: 500;
-    font-size: .875rem;
-    line-height: 14px;
-    color: $alert-yellow;
-  }
-.left {
-  height: 95vh;
-  width: 100%;
-  padding-top: 8px;
-  padding-right: 16px;
-}
-.left.add-border {
-  border-right: 1px solid #3A3A3A;
+.sign-offs-required {
+  margin-left: 4px;
+  font-family: $primary_font;
+  font-style: normal;
+  font-weight: 500;
+  font-size: .875rem;
+  line-height: 14px;
+  color: $alert-yellow;
 }
 
-.center {
-  height: 95vh;
-  padding-left: 16px;
-  width: 100%;
+.lcp-container {
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  padding: 1rem;
 
-  .action-container {
-    padding-top: 100px;
+  .content-player-sidenav {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 200;
+    background-color: black;
   }
 
-  .lcp-content {
+  .content-player {
+    height: 100%;
     width: 100%;
-    max-height: max-content;
-    .header-container {
-      padding: 46px 20px 0px 21px;
-    }
-    .header {
-      font-family: 'Berthold Akzidenz Grotesk BE';
-      font-style: normal;
-      font-weight: 400;
-      font-size: 34px;
-      line-height: 47px;
-      /* identical to box height, or 138% */
 
-      letter-spacing: -0.045em;
-    }
-    .sub-header-container {
-      padding-top: 15px;
-    }
-    .sub-header {
-      font-family: 'Akzidenz-Grotesk BQ';
-      font-style: normal;
-      font-weight: 400;
-      font-size: 24px;
-      line-height: 25px;
-      /* identical to box height, or 104% */
+    .content-player-header {
+      padding: 0 1rem;
 
-      letter-spacing: 0.02em;
-    }
-    .content-wrapper {
-      margin-top: 24px;
-    }
-    .content-wrapper.add-padding {
-      padding-right: 100px;
-    }
-  }
-  mat-dialog-actions {
-    width: 100%;
-    button {
-      width: 130px;
-      background: #3A3A3A;
-      border-radius: 60px;
+      .title-block {
+        max-width: 66%;
+        font-family: 'Berthold Akzidenz Grotesk BE';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 1rem;
+        line-height: 1.125rem;
+        letter-spacing: -0.045em;
 
-      span {
-        // typography
+        .sub-header {
+          font-family: 'Akzidenz-Grotesk BQ';
+          font-style: normal;
+          font-weight: 400;
+          font-size: 1rem;
+          line-height: 1.375rem;
+          letter-spacing: 0.02em;
+        }
+      }
+
+      .close-icon {
+        max-width: 1.109rem;
+      }
+    }
+
+    .content-player-body {
+      padding: 1rem 0;
+
+      .body-center {
+        height: 100%;
+        width: 100%;
+        overflow: scroll;
+      }
+
+      .body-left,
+      .body-right {
+        button {
+          display: none;
+        }
+      }
+    }
+
+    .content-player-body.adjust-padding {
+      padding: 0 2rem;
+    }
+
+    .content-player-footer {
+      padding: 1rem;
+
+      button {
+        width: 38px;
+        height: 38px;
+        background: #3A3A3A;
+        border-radius: 19px;
+        min-width: 38px;
+      }
+
+      .next-button {
+        background-color: #0077C8;
+        ;
+      }
+    }
+
+    .mobile-content-menu {
+      border-top: 1px solid #3A3A3A;
+      ;
+      padding: 1rem;
+
+      .menu-icon {
+        width: 26px;
+        height: 14px;
+      }
+
+      .menu-label {
         font-family: 'Akzidenz-Grotesk BQ';
         font-style: normal;
         font-weight: 500;
-        font-size: 17px;
-        line-height: 23px;
-        /* or 135% */
+        font-size: 1.063rem;
+        line-height: 1.438rem;
         letter-spacing: -0.005em;
-
-        color: #FFFFFF;
       }
     }
   }
+}
 
-  mat-dialog-actions.add-padding {
-    padding-right: 100px;
+// landscape
+@media (min-width: 600px) {
+  .lcp-container {
+    .content-player {
+      .content-player-header {
+        span {
+          font-size: 1rem;
+          line-height: 112%;
+          margin-bottom: 8px !important;
+        }
+
+        .sub-header {
+          font-size: 0.875rem;
+          line-height: 150%;
+        }
+      }
+
+      .content-player-body {
+        display: inline-flex;
+
+        .body-center {
+          width: 100%;
+        }
+
+        .body-left,
+        .body-right {
+          height: 100%;
+
+          button {
+            display: block;
+            width: 38px;
+            height: 38px;
+            background: #3A3A3A;
+            border-radius: 19px;
+            min-width: 38px;
+          }
+        }
+
+        .body-left {
+          margin: 0 5rem 0 1rem;
+        }
+
+        .body-right {
+          margin: 0 1rem 0 5rem;
+
+          button {
+            background-color: #0077C8;
+          }
+        }
+      }
+
+      .content-player-footer {
+        display: none;
+      }
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .lcp-container {
+    .content-player {
+      .content-player-body {
+        .body-left {
+          margin: 0 2rem 0 1rem;
+        }
+
+        .body-right {
+          margin: 0 1rem 0 2rem;
+        }
+      }
+    }
+  }
+}
+
+
+// desktop
+@media (min-width: 960px) {
+  .lcp-container {
+    height: 100vh;
+    width: 98vw;
+
+    .content-player-sidenav {
+      position: inherit;
+      width: 40%;
+    }
+
+    .content-player-sidenav.add-border {
+      padding: 2rem;
+      border-right: 1px solid #3A3A3A;
+    }
+
+    .content-player {
+      .content-player-body {
+        display: inline-flex;
+
+        .body-left,
+        .body-right {
+          width: 5vw;
+
+          button {
+            display: none;
+          }
+        }
+      }
+
+      .content-player-footer {
+        display: block;
+        padding: 1rem 7rem;
+
+        button {
+          width: 130px;
+          background: #3A3A3A;
+          border-radius: 60px;
+
+          span {
+            // typography
+            font-family: 'Akzidenz-Grotesk BQ';
+            font-style: normal;
+            font-weight: 500;
+            font-size: 17px;
+            line-height: 23px;
+            /* or 135% */
+            letter-spacing: -0.005em;
+
+            color: #FFFFFF;
+          }
+        }
+      }
+
+      .content-player-footer.adjust-padding {
+        padding: 1rem 2rem;
+      }
+
+      .mobile-content-menu {
+        display: none !important;
+      }
+    }
   }
 }

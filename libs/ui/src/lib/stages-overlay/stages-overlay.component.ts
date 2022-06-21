@@ -16,7 +16,7 @@ import { CdkAccordion, CdkAccordionItem } from '@angular/cdk/accordion';
   templateUrl: './stages-overlay.component.html',
   styleUrls: ['./stages-overlay.component.scss'],
 })
-export class StagesOverlayComponent implements OnChanges {
+export class StagesOverlayComponent {
   @ViewChild('accordion') accordion!: CdkAccordion;
   @ViewChildren('accordionItem') accordionItems!: CdkAccordionItem[];
   @Input() workbook!: IWorkBook;
@@ -47,9 +47,6 @@ export class StagesOverlayComponent implements OnChanges {
     return 'courses/images/svg/not-started.svg';
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log('changes', changes);
-  }
   navigate(lesson: IStageLesson) {
     this.lessonId = lesson.id;
     const payload = { lesson, course: this.workbook };

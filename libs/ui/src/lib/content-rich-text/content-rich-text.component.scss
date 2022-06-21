@@ -1,0 +1,47 @@
+:host {
+  padding: 1rem 0;
+  height: 55vh;
+  width: 100%;
+  overflow: scroll;
+}
+
+// landscape
+@media (min-width: 600px) {
+  :host {
+    height: 65vh;
+  }
+}
+
+// ipad mini
+@media (min-width: 768px) {
+  :host {
+    width: 100%;
+    height: 85vh;
+  }
+}
+
+// ipad air
+@media (min-width: 819px) {
+  :host {
+    height: 85vh;
+  }
+}
+
+// iphone 12 and xr
+@media only screen
+  and (min-device-width: 819px)
+  and (max-device-width: 959px)
+  and (-webkit-min-device-pixel-ratio: 2)
+  and (orientation: landscape) {
+    :host {
+      height: 63vh;
+    }
+}
+
+@media (min-width: 960px) {
+  :host {
+    overflow-x: hidden;
+    height: 75vh;
+    width: 100%;
+  }
+}

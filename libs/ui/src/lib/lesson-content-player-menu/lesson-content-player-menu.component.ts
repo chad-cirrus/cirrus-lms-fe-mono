@@ -10,7 +10,9 @@ import { progressIconMapper } from '../helpers/ProgressIconMapper';
 export class LessonContentPlayerMenuComponent {
   private _menuItems: IContentPlayerMenuItem[] = [];
 
-  leftChevron = 'courses/images/svg/LeftChevron.svg';
+  leftChevron = 'courses/images/svg/desktop-sn-l-chevron.svg';
+  downChevron = 'courses/images/svg/down-chevron.svg';
+  menuIcon = 'courses/images/svg/LcpMenuIcon.svg';
   @Output() closeMenu = new EventEmitter<void>();
   @Output() playContent = new EventEmitter<number>();
 

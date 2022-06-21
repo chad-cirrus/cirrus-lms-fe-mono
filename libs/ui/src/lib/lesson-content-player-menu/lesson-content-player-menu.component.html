@@ -1,9 +1,32 @@
-<div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="16px">
+<div
+  class="lcp-menu-header"
+  fxLayout="row"
+  fxLayoutAlign="start center"
+  fxLayoutGap="16px"
+  fxHide.lt-md
+>
   <img [src]="leftChevron" alt="left-chevron" (click)="close()" />
   <span class="lesson-contents-header">Lesson Contents</span>
 </div>
+<div
+  class="mobile-lcp-menu-header"
+  fxLayout="row"
+  fxLayoutAlign="space-between center"
+  fxLayoutGap="1rem"
+  fxHide.gt-sm
+  (click)="close()"
+>
+  <img class="mobile-menu-icon" [src]="menuIcon" fxFlex="nogrow" />
+  <span class="lesson-contents-header">Lesson Contents</span>
+  <img class="mobile-down-chevron" [src]="downChevron" alt="down-chevron" />
+</div>
 <div class="menu-items" fxLayout="column" fxLayoutAlign="space-between stretch">
-  <div class="item-container" *ngFor="let item of menuItems; let i = index">
+  <div
+    class="item-container"
+    *ngFor="let item of menuItems; let i = index"
+    fxLayout="column"
+    fxLayoutAlign="center start"
+  >
     <div
       class="item"
       fxLayout="row"
@@ -14,7 +37,6 @@
       <div><img [src]="item.icon" alt="icon" /></div>
       <div class="item-text">{{ item.text }}</div>
     </div>
-    <div *ngIf="i !== menuItems.length - 1" class="item-seperator"></div>
   </div>
   <br />
 </div>

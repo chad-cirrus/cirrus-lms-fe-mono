@@ -5,7 +5,10 @@ import { AppService } from './app.service';
 import * as appActions from './store/actions';
 import { fetchWorkbook } from './store/actions/workbook-routes.actions';
 import { AppState } from './store/reducers';
-import { selectLesson, selectLessonStateBusy } from './store/selectors/lessons.selector';
+import {
+  selectLesson,
+  selectLessonStateBusy,
+} from './store/selectors/lessons.selector';
 import { setCirrusUser } from './store/actions';
 import { ICirrusUser, ILesson } from '@cirrus/models';
 import {
@@ -17,7 +20,7 @@ import { FormControl } from '@angular/forms';
 import {
   selectSideNavOpen,
   selectIsScreenSmall,
-  selectIsScreenTablet
+  selectIsScreenTablet,
 } from './store/selectors/view.selector';
 import { MatSidenav } from '@angular/material/sidenav';
 import { BreakpointObserver } from '@angular/cdk/layout';
@@ -36,11 +39,12 @@ export class AppComponent implements OnInit {
   viewToggle = new FormControl(false);
   toggle$ = this.viewToggle.valueChanges;
   lessonStateBusy$ = this.store.select(selectLessonStateBusy).pipe(delay(1));
-  workbookStateBusy$ = this.store.select(selectWorkbookRoutesBusy).pipe(delay(1));
+  workbookStateBusy$ = this.store
+    .select(selectWorkbookRoutesBusy)
+    .pipe(delay(1));
 
   role$ = this.store.select(selectRole);
-  lesson$: Observable<ILesson> = this.store
-  .select(selectLesson)
+  lesson$: Observable<ILesson> = this.store.select(selectLesson);
   cirrusUser$ = this.store.select(selectCirrusUser);
   cirrusImpersonateReturnUser$!: Observable<ICirrusUser>;
   courseId$ = this.appService.courseId$.pipe(distinctUntilChanged(), share());
@@ -55,9 +59,10 @@ export class AppComponent implements OnInit {
   ftgNotPilot = 160;
   ftgPilot = 112;
   isScreenSmall$: Observable<boolean> = this.store.select(selectIsScreenSmall);
-  isScreenTablet$: Observable<boolean> = this.store.select(selectIsScreenTablet);
+  isScreenTablet$: Observable<boolean> =
+    this.store.select(selectIsScreenTablet);
 
-  loadingIndicator$ = merge(this.lessonStateBusy$, this.workbookStateBusy$).pipe(tap((busy) =>  console.log('busy', busy)))
+  loadingIndicator$ = merge(this.lessonStateBusy$, this.workbookStateBusy$);
 
   collapse!: boolean;
   showHamburgerMenu = false;

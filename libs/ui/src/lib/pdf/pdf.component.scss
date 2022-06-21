@@ -1,6 +1,10 @@
 
 @use '../styles/variables' as *;
 
+:host {
+  height: 100%;
+}
+
 .container {
   height: 100%;
   font-family: 'Akzidenz-Grotesk BQ';
@@ -15,7 +19,7 @@
 
   .title {
     font-family: $bqmedium-font;
-    font-size: 1.625rem;
+    font-size: 1.063rem;
     max-width: 75%;
     text-align: center;
     line-height: 130%;
@@ -50,6 +54,33 @@
         color: #FFFFFF;
       }
     }
+}
+
+@media (min-width: 960px) {
+
+.container {
+  height: 100%;
+  font-family: 'Akzidenz-Grotesk BQ';
+
+  .title {
+    font-size: 1.625rem;
+  }
+  .new-tab-message {
+    font-size: 1.125rem;
+  }
+
+
+    a {
+      span {
+        // typography
+        font-size: 17px;
+        line-height: 23px;
+        /* or 135% */
+        letter-spacing: -0.005em;
+      }
+    }
+}
 
 
 }
+
