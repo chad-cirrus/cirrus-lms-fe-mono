@@ -5017,7 +5017,7 @@
     "@typescript-eslint/types" "4.33.0"
     eslint-visitor-keys "^2.0.0"
 
-"@vimeo/player@^2.17.2":
+"@vimeo/player@^2.17.0":
   version "2.17.0"
   resolved "https://registry.yarnpkg.com/@vimeo/player/-/player-2.17.0.tgz#82402a9e8efbaa8878d6598b8e7bc61c45f4fa1c"
   integrity sha512-FcxYriSax045wffBh7lwdNl7Wrki1rqPzzdXz+5ix1JAiCgxqdRe9q6MQD+e8DBC2qK7CFaaBhRs5wUfYP028A==
