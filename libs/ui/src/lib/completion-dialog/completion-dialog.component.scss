@@ -9,12 +9,14 @@
   top: 50%;
   transform: translate(-50%, -50%);
   width: 95%;
+  height: 100%;
   padding: 0px 15px;
   .message {
     position: absolute;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
+    width: 100%;
     font-family: 'Berthold Akzidenz Grotesk BE';
     font-style: normal;
     font-weight: 400;
@@ -23,6 +25,7 @@
     text-align: center;
     letter-spacing: -0.045em;
     color: #FFFFFF;
+    padding: 0 5px;
   }
 }
 
