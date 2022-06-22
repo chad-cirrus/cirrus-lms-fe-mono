@@ -28,7 +28,13 @@
 
 .breadcrumb-container {
   height: 55px;
-  padding-left: 65px;
+  padding-left: 16px;
+  @media (min-width: 600px) {
+    padding-left: 24px;
+  }
+  @media (min-width: 960px) {
+    padding-left: 65px;
+  }
 }
 
 .sidenav-menu {

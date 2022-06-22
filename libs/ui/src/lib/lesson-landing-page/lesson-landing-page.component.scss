@@ -57,10 +57,10 @@ mat-drawer {
   .content {
     width: 100%;
     margin-left: 0px;
-    padding: 4rem 1rem 0;
+    padding: 64px 16px 0;
     .mat-divider {
       border-top-color: rgba(255, 255, 255);
-      margin-right: -1rem;
+      margin-right: -16px;
     }
     h1 {
       max-width: 450px;
@@ -107,7 +107,7 @@ mat-drawer {
 
 .llp-container {
   margin: 0 auto;
-  padding: 0.5rem 1.5rem;
+  padding: 8px 24px;
   .open {
     opacity: 0;
     pointer-events: none;
@@ -126,7 +126,7 @@ mat-drawer {
 }
 
 .cirrus-progress-row {
-  margin: .75rem auto;
+  margin: 12px auto;
   overflow-x: scroll;
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none;  /* IE 10+ */
@@ -162,7 +162,7 @@ cirrus-progress-card:last-child {
 @media (min-width: 600px) {
   .lesson-image {
     .content {
-      padding: 3rem 1.5rem 0 1.5rem;
+      padding: 48px 24px 0 24px;
       h1 {
         margin: 0 0 30px;
         max-width: 600px;
@@ -195,7 +195,7 @@ cirrus-progress-card:last-child {
         margin-right: 0;
       }
       margin-left: 40px;
-      padding: 6rem 2.5rem 0 2.5rem;
+      padding: 96px 40px 0 40px;
       h4 {
         margin: 25px 0 50px;
       }
@@ -248,7 +248,7 @@ cirrus-progress-card:last-child {
 
   .llp-container {
     max-width: 1200px;
-    padding: 0 4rem;
+    padding: 0 64px;
     margin: 0 auto;
     .cirrus-progress-row {
       margin: -45px auto 45px;
@@ -263,7 +263,7 @@ cirrus-progress-card:last-child {
     }
 
     .intro-video {
-      padding: 1rem;
+      padding: 16px;
       .intro-video-title {
         cursor: pointer;
         font-family: $bqmedium-font;
@@ -274,7 +274,7 @@ cirrus-progress-card:last-child {
         cursor: pointer;
         padding: 20px 0px 37px 0px;
         .intro-video-subtitle {
-          font-size: 1rem;
+          font-size: 16px;
           color: $gray4;
         }
       }
