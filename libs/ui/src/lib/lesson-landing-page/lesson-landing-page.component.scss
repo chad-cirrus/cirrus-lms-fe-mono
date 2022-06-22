@@ -63,8 +63,7 @@ mat-drawer {
       margin-right: -1rem;
     }
     h1 {
-      width: 75%;
-      max-width: 545px;
+      max-width: 450px;
       margin-bottom: 20px
     }
     h4 {
@@ -166,6 +165,7 @@ cirrus-progress-card:last-child {
       padding: 3rem 1.5rem 0 1.5rem;
       h1 {
         margin: 0 0 30px;
+        max-width: 600px;
       }
       h4 {
         margin: 25px 0 30px;

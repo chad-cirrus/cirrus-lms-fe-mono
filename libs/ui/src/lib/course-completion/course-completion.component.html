@@ -1,32 +1,29 @@
+<div class="close">
+  <img src="courses/images/svg/close.svg" mat-dialog-close="nothing" />
+</div>
+
 <div
   class="container"
   fxLayout="column"
-  fxLayoutAlign="start center"
-  fxLayoutGap.lt-sm="3rem"
+  fxLayoutAlign="center"
 >
-  <div class="close" fxLayout="row" fxLayoutAlign="end center">
-    <img src="courses/images/svg/close.svg" mat-dialog-close="nothing" />
-  </div>
   <div
     class="main"
     fxLayout="column"
     fxLayoutAlign="end center"
     fxLayoutAlign.lt-sm="start center"
-    fxLayoutGap="1.875rem"
-    fxLayoutGap.lt-sm="1rem"
   >
     <div class="badge"><img [src]="data.badge" alt="cirrus badge" /></div>
     <div class="salutation">Congratulations, {{ data.student }}!</div>
     <div class="message">You've completed the {{ data.course }}</div>
-  </div>
-  <div
+
+    <div
     class="buttons"
     fxLayout="row"
     fxLayout.lt-sm="column"
     fxLayoutAlign="center start"
     fxLayoutAlign.lt-sm="center center"
     fxLayoutGap="1.5rem"
-    fxLayoutGap.lt-sm="1.5rem"
   >
     <button
       class="download-certificate"
@@ -42,5 +39,6 @@
     >
       Download Transcript
     </button>
+  </div>
   </div>
 </div>
