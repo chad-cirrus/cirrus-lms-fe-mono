@@ -25,6 +25,7 @@
       <div class="progress-type">
         Ground Assessment
         <div class="sign-offs-warning-container" *ngIf="checkoutOffsRequired">
+
           <img
             class="sign-offs-icon"
             src="courses/images/svg/yellow-warning-icon.svg"
@@ -46,7 +47,7 @@
       <img class="assessment-progress-icon" [src]="assessmentProgressIcon" />
       <div class="progress-type">
         Flight Assessment
-        <div class="sign-offs-warning-container" *ngIf="true">
+        <div class="sign-offs-warning-container" *ngIf="checkoutOffsRequired">
           <img
             class="sign-offs-icon"
             src="courses/images/svg/yellow-warning-icon.svg"
