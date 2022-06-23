@@ -10,120 +10,140 @@
       (playContent)="playContent($event)"
     ></cirrus-lesson-content-player-menu>
   </div>
-  <div class="content-player" fxLayout="column" fxLayoutAlign="center stretch">
-    <div
-      class="content-player-header"
-      fxLayout="row"
-      fxLayoutAlign="space-between start"
-      fxFlex="nogrow"
+  <div class="content-player" fxLayout="row">
+
+    <div 
+      fxFlex="0 0 120px"
+      class="content-player-sidenav-button-container"
+      *ngIf="(menuOpen$ | async) === false"
+      fxHide.lt-md
     >
       <img
-        *ngIf="(menuOpen$ | async) === false"
-        [src]="menuIcon"
-        (click)="this.toggleMenu()"
-        fxHide.lt-sm
-      />
-      <div
-        class="title-block"
-        fxLayout="column"
-        fxLayoutAlign="start start"
-        fxLayoutGap="1rem"
+      [src]="menuIcon"
+      (click)="this.toggleMenu()"
+    />
+    </div>
+
+    <div 
+      [fxFlex]="100"
+      class="content-player-main" 
+      fxLayout="column" 
+      fxLayoutAlign="center stretch"
       >
-        <span> {{ lesson_title }} </span>
-        <div class="sub-header">{{ title }}</div>
+      <div
+        class="content-player-header"
+        fxLayout="row"
+        fxLayoutAlign="space-between"
+        fxFlex="nogrow"
+        [ngClass]="{ 'adjust-padding': (menuOpen$ | async) }"
+      >
         <div
-          *ngIf="
-            (checkoutOffsRequired$ | async) &&
-            (currentContentType === 9 || currentContentType === 10)
-          "
+          class="title-block"
+          fxLayout="column"
+          fxLayoutAlign="start start"
+          fxLayoutGap="20px"
         >
-          <div fxLayoutAlign="none center">
-            <img
-              class="sign-offs-icon"
-              src="courses/images/svg/sign-off-warning.svg"
-            />
-            <span class="sign-offs-required">Instructor sign off required</span>
+          <span> {{ lesson_title }} </span>
+          <div class="sub-header">{{ title }}</div>
+          <div
+            *ngIf="
+              (checkoutOffsRequired$ | async) &&
+              (currentContentType === 9 || currentContentType === 10)
+            "
+          >
+            <div fxLayoutAlign="none center">
+              <img
+                class="sign-offs-icon"
+                src="courses/images/svg/sign-off-warning.svg"
+              />
+              <span class="sign-offs-required">Instructor sign off required</span>
+            </div>
           </div>
         </div>
+        <img class="close-icon" [src]="closeIcon" mat-dialog-close />
       </div>
-      <img class="close-icon" [src]="closeIcon" mat-dialog-close />
-    </div>
-    <div
-      class="content-player-body"
-      fxFlex="grow"
-      [ngClass]="{ 'adjust-padding': (menuOpen$ | async) }"
-      fxLayout="row"
-      fxLayoutAlign="space-between start"
-    >
-      <div class="body-left" fxLayout="column" fxLayoutAlign="center center">
-        <button
-          class="thumb-left"
-          mat-raised-button
-          (click)="previousContent()"
-        >
-          <img class="left-chevron" [src]="leftChevron" alt="l" />
-        </button>
-      </div>
-      <div fxLayout="column" class="body-center">
-        <div cirrusPlaceholder></div>
-      </div>
-      <div class="body-right" fxLayout="column" fxLayoutAlign="center center">
-        <button class="thumb-right" mat-raised-button (click)="nextContent()">
-          <img class="right-chevron" [src]="rightChevron" alt="r" />
-        </button>
-      </div>
-    </div>
-    <div
-      class="content-player-footer"
-      fxFlex="nogrow"
-      [ngClass]="{ 'adjust-padding': (menuOpen$ | async) }"
-    >
       <div
-        *ngIf="!hideBtns"
+        class="content-player-body"
+        fxFlex="grow"
+        [ngClass]="{ 'adjust-padding': (menuOpen$ | async) }"
         fxLayout="row"
         fxLayoutAlign="space-between start"
-        [ngClass]="{ 'add-padding': (menuOpen$ | async) === false }"
       >
-        <button
-          class="right-button"
-          mat-raised-button
-          (click)="previousContent()"
-        >
-          <span class="previous" fxHide.lt-sm>Previous</span>
-          <img class="left-chevron" [src]="leftChevron" alt="l" fxHide.gt-sm />
-        </button>
-        <button class="next-button" mat-raised-button (click)="nextContent()">
-          <span class="next" fxHide.lt-sm>Next</span>
-          <img
-            class="right-chevron"
-            [src]="rightChevron"
-            alt="r"
-            fxHide.gt-sm
-          />
-        </button>
+        <div class="body-left" fxLayout="column" fxLayoutAlign="center center">
+          <button
+            class="thumb-left"
+            mat-raised-button
+            (click)="previousContent()"
+          >
+            <img class="left-chevron" [src]="leftChevron" alt="l" />
+          </button>
+        </div>
+        <div fxLayout="column" class="body-center">
+          <div cirrusPlaceholder></div>
+        </div>
+        <div class="body-right" fxLayout="column" fxLayoutAlign="center center">
+          <button class="thumb-right" mat-raised-button (click)="nextContent()">
+            <img class="right-chevron" [src]="rightChevron" alt="r" />
+          </button>
+        </div>
       </div>
-    </div>
-    <div
-      class="mobile-content-menu"
-      fxLayout="row"
-      fxLayoutAlign="space-between center"
-      fxLayoutGap="1rem"
-      [fxHide.gt-xs]="true"
-    >
-      <img
-        class="menu-icon"
-        *ngIf="(menuOpen$ | async) === false"
-        [src]="menuIcon"
+      <div
+        class="content-player-footer"
+        fxFlex="nogrow"
+        [ngClass]="{ 'adjust-padding': (menuOpen$ | async) }"
+      >
+        <div
+          *ngIf="!hideBtns"
+          fxLayout="row"
+          fxLayoutAlign="space-between start"
+          [ngClass]="{ 'add-padding': (menuOpen$ | async) === false }"
+        >
+          <button
+            class="right-button"
+            mat-raised-button
+            (click)="previousContent()"
+          >
+            <span class="previous" fxHide.lt-sm>Previous</span>
+            <img 
+              class="left-chevron" 
+              [src]="leftChevron" 
+              alt="l" 
+              fxHide.gt-xs 
+            />
+          </button>
+          <button class="next-button" mat-raised-button (click)="nextContent()">
+            <span class="next" fxHide.lt-sm>Next</span>
+            <img
+              class="right-chevron"
+              [src]="rightChevron"
+              alt="r"
+              fxHide.gt-xs
+            />
+          </button>
+        </div>
+      </div>
+      <div
+        class="mobile-content-menu"
+        fxLayout="row"
+        fxLayoutAlign="space-between center"
+        fxLayoutGap="1rem"
+        [fxHide.gt-sm]="true"
         (click)="this.toggleMenu()"
-        fxFlex="nogrow"
-      />
-      <div class="menu-label" fxFlex="grow">Lesson Contents</div>
-      <img
-        class="up-chevron"
-        [src]="upChevron"
-        alt="up-chevron"
-        fxFlex="nogrow"
-      />
+      >
+        <img
+          class="menu-icon"
+          *ngIf="(menuOpen$ | async) === false"
+          src="courses/images/svg/lesson-icon-heavy.svg"
+          fxFlex="nogrow"
+        />
+        <div class="menu-label" fxFlex="grow">Lesson Contents</div>
+        <img
+          class="up-chevron"
+          [src]="upChevron"
+          alt="up-chevron"
+          fxFlex="nogrow"
+        />
+      </div>
     </div>
   </div>
 </div>

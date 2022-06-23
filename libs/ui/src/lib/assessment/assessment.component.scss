@@ -4,14 +4,6 @@
 
 .tabs-container {
 
-  .tabs-container-open {
-    padding-left: 58px;
-    padding-right: 77px;
-  }
-
-  .tabs-container-closed {
-    padding-right: 133px;
-  }
   .mat-tab-label-active {
     font-family: $bqmedium-font;
     color: white;
@@ -61,40 +53,8 @@
     letter-spacing: -0.005em;
   }
 
-  .mat-tab-header {
-    padding: 55px 0px 0px;
-  }
-
-
   .image {
     padding-right: 10px;
   }
 
 }
-
-
-  @media (min-width: 325px) and (max-width: 600px)  {
-    .tabs-container {
-      .tabs-container-closed {
-        padding-right: 31px;
-        padding-left: 16px;
-      }
-    }
-  }
-
-
-  @media (min-width: 601px) and (max-width: 992px)  {
-    // .tabs-container {
-    //   .tabs-container-open {
-    //     padding-left: 58px;
-    //   }
-    // }
-    .tabs-container {
-      .tabs-container-closed {
-        padding-right: 43px;
-        padding-left: 34px;
-      }
-    }
-  }
-
-

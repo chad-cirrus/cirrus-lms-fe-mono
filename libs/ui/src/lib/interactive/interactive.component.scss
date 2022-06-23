@@ -1,12 +1,12 @@
 :host {
-  height: 1vh;
+  height: 100%;
 }
 
 .my-wrapper {
   position: relative;
   overflow: hidden;
   width: 100%;
-  padding-top: 75%; /* 16:9 Aspect Ratio (divide 9 by 16 = 0.5625) */
+  height: 100%;
 }
 
 .cirrus-iframe {

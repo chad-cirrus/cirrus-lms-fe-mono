@@ -4,8 +4,9 @@
   fxLayoutAlign="start center"
   fxLayoutGap="16px"
   fxHide.lt-md
+  (click)="close()"
 >
-  <img [src]="leftChevron" alt="left-chevron" (click)="close()" />
+  <img [src]="leftChevron" alt="left-chevron" />
   <span class="lesson-contents-header">Lesson Contents</span>
 </div>
 <div
@@ -20,7 +21,7 @@
   <span class="lesson-contents-header">Lesson Contents</span>
   <img class="mobile-down-chevron" [src]="downChevron" alt="down-chevron" />
 </div>
-<div class="menu-items" fxLayout="column" fxLayoutAlign="space-between stretch">
+<div class="menu-items" fxLayout="column">
   <div
     class="item-container"
     *ngFor="let item of menuItems; let i = index"
@@ -38,5 +39,4 @@
       <div class="item-text">{{ item.text }}</div>
     </div>
   </div>
-  <br />
 </div>

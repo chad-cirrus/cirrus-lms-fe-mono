@@ -5,12 +5,13 @@
 }
 
 .sign-offs-required {
-  margin-left: 4px;
+  margin-left: 6px;
   font-family: $primary_font;
   font-style: normal;
   font-weight: 500;
   font-size: .875rem;
   line-height: 14px;
+  letter-spacing: .02em;
   color: $alert-yellow;
 }
 
@@ -18,7 +19,8 @@
   height: 100vh;
   width: 100vw;
   overflow: hidden;
-  padding: 1rem;
+  padding: 16px;
+  background: #1f1f1f;
 
   .content-player-sidenav {
     position: absolute;
@@ -27,47 +29,59 @@
     width: 100vw;
     height: 100vh;
     z-index: 200;
-    background-color: black;
+    background-color: #1f1f1f;
+    &:after {
+      content: " ";
+      display: block;
+      position: absolute;
+      left: 0;
+      height: 100px;
+      width: 100%;
+      bottom: 0;
+      background: linear-gradient(360deg, #1f1f1f 35%, rgba(31, 31, 31, 0) 100%);
+    }
   }
 
   .content-player {
     height: 100%;
+    flex: 1 1 100%;
     width: 100%;
 
     .content-player-header {
-      padding: 0 1rem;
+      margin: 22px 0;
 
       .title-block {
-        max-width: 66%;
         font-family: 'Berthold Akzidenz Grotesk BE';
         font-style: normal;
         font-weight: 400;
         font-size: 1rem;
-        line-height: 1.125rem;
+        line-height: 1.1;
         letter-spacing: -0.045em;
+        margin-right: 15px;
 
         .sub-header {
           font-family: 'Akzidenz-Grotesk BQ';
           font-style: normal;
           font-weight: 400;
           font-size: 1rem;
-          line-height: 1.375rem;
           letter-spacing: 0.02em;
         }
       }
 
       .close-icon {
-        max-width: 1.109rem;
+        width: 22px;
+        height: auto;
       }
     }
 
     .content-player-body {
-      padding: 1rem 0;
+      height: 100%;
+      width: 100%;
+      overflow: scroll;
 
       .body-center {
-        height: 100%;
         width: 100%;
-        overflow: scroll;
+        height: 100%;
       }
 
       .body-left,
@@ -78,12 +92,8 @@
       }
     }
 
-    .content-player-body.adjust-padding {
-      padding: 0 2rem;
-    }
-
     .content-player-footer {
-      padding: 1rem;
+      padding: 16px 0;
 
       button {
         width: 38px;
@@ -100,9 +110,10 @@
     }
 
     .mobile-content-menu {
+      width: 100vw;
+      margin-left: -16px;
+      padding: 22px 16px 6px;
       border-top: 1px solid #3A3A3A;
-      ;
-      padding: 1rem;
 
       .menu-icon {
         width: 26px;
@@ -110,12 +121,17 @@
       }
 
       .menu-label {
-        font-family: 'Akzidenz-Grotesk BQ';
+        font-family: 'akzidenz-grotesk_bqmedium';
         font-style: normal;
         font-weight: 500;
-        font-size: 1.063rem;
-        line-height: 1.438rem;
+        font-size: 1.0625rem;
+        line-height: 1;
         letter-spacing: -0.005em;
+      }
+
+      .up-chevron {
+        width: 24px;
+        height: 24px;
       }
     }
   }
@@ -125,101 +141,25 @@
 @media (min-width: 600px) {
   .lcp-container {
     .content-player {
+
       .content-player-header {
-        span {
-          font-size: 1rem;
-          line-height: 112%;
-          margin-bottom: 8px !important;
-        }
+        margin: 34px 0 38px;
 
-        .sub-header {
-          font-size: 0.875rem;
-          line-height: 150%;
+        .title-block {
+          font-size: 1.4375rem;
+
+          .sub-header {
+            font-size: 1.25rem;
+          }
         }
       }
 
       .content-player-body {
         display: inline-flex;
 
-        .body-center {
-          width: 100%;
-        }
-
-        .body-left,
-        .body-right {
-          height: 100%;
-
-          button {
-            display: block;
-            width: 38px;
-            height: 38px;
-            background: #3A3A3A;
-            border-radius: 19px;
-            min-width: 38px;
-          }
-        }
-
-        .body-left {
-          margin: 0 5rem 0 1rem;
-        }
-
-        .body-right {
-          margin: 0 1rem 0 5rem;
-
-          button {
-            background-color: #0077C8;
-          }
-        }
-      }
-
-      .content-player-footer {
-        display: none;
-      }
-    }
-  }
-}
-
-@media (min-width: 768px) {
-  .lcp-container {
-    .content-player {
-      .content-player-body {
-        .body-left {
-          margin: 0 2rem 0 1rem;
-        }
-
-        .body-right {
-          margin: 0 1rem 0 2rem;
-        }
-      }
-    }
-  }
-}
-
-
-// desktop
-@media (min-width: 960px) {
-  .lcp-container {
-    height: 100vh;
-    width: 98vw;
-
-    .content-player-sidenav {
-      position: inherit;
-      width: 40%;
-    }
-
-    .content-player-sidenav.add-border {
-      padding: 2rem;
-      border-right: 1px solid #3A3A3A;
-    }
-
-    .content-player {
-      .content-player-body {
-        display: inline-flex;
-
-        .body-left,
-        .body-right {
-          width: 5vw;
-
+        .body-left, .body-right {
+          margin: 0;
+          width: 0;
           button {
             display: none;
           }
@@ -228,7 +168,7 @@
 
       .content-player-footer {
         display: block;
-        padding: 1rem 7rem;
+        padding: 16px 0;
 
         button {
           width: 130px;
@@ -249,11 +189,56 @@
           }
         }
       }
+    }
+  }
+}
 
-      .content-player-footer.adjust-padding {
-        padding: 1rem 2rem;
+// desktop
+@media (min-width: 960px) {
+  .lcp-container {
+    padding-right: 35px;
+
+    .content-player-sidenav {
+      position: relative;
+      width: auto;
+      flex: 0 1 340px;
+      margin-top: -16px;
+    }
+    .content-player-sidenav.add-border {
+      padding: 50px 16px 0 0;
+      border-right: 1px solid #3A3A3A;
+    }
+
+    .content-player {
+      .content-player-sidenav-button-container {
+        img {
+          cursor: pointer;
+          margin: 40px 0 0 19px;
+        }
       }
 
+      .content-player-header {
+        .title-block {
+          font-size: 2.125rem;
+
+          .sub-header {
+            font-size: 1.5625rem;
+          }
+        }
+      }
+
+      .content-player-body {
+        display: inline-flex;
+      }
+
+      .content-player-header, .content-player-body, .content-player-footer {
+          &.adjust-padding {
+          padding-left: 35px;
+        }
+      }
+    }
+    
+    .content-player-footer {
       .mobile-content-menu {
         display: none !important;
       }
