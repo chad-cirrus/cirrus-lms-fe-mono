@@ -162,9 +162,7 @@ export class ContentPlayerComponent
         } else {
           const firstNonCompleteContentIndex =
             this.findFirstNonCompleteContentIndex();
-          this.dialogRef.close();
-
-          this.playContent(this.menuItems[firstNonCompleteContentIndex].id);
+            this.playContent(this.menuItems[firstNonCompleteContentIndex].id);
         }
       } else {
         this.dialogRef.close();
