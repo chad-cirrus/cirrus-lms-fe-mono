@@ -4,6 +4,10 @@ import { ILesson } from '../lib/ILesson';
 export const ctdLesson: ILesson = {
   id: 0,
   system_desc: 'System Description',
+  subtitle: '',
+  thumbnail_image_url: '',
+  mobile_hero_image_url: '',
+  desktop_hero_image_url: '',
   updated_at: '',
   system_name: 'Test System Name',
   lesson_type: 0,

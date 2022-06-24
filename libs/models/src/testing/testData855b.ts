@@ -6,6 +6,10 @@ export const testData855: ILesson = {
   lesson_type: 2,
   order: 0,
   system_name: 'Lesson 1 - Takeoffs and Landings Flight Syllabus',
+  subtitle: '',
+  thumbnail_image_url: '',
+  mobile_hero_image_url: '',
+  desktop_hero_image_url: '',
   title: 'Lesson 1',
   system_desc: 'The first lesson of the Takeoffs of Landings Flight Syllabus.',
   overview:

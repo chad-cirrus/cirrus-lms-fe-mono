@@ -7,6 +7,10 @@ export const testData: ILesson = {
     'The SR Series Systems self-study lesson for flight training courses.',
 
   updated_at: '2020-02-14T20:21:44.256Z',
+  subtitle: '',
+  thumbnail_image_url: '',
+  mobile_hero_image_url: '',
+  desktop_hero_image_url: '',
   system_name: 'SR Series Systems Self Study Lesson - Flight Training Courses',
   lesson_type: 0,
   title: 'Systems',
@@ -179,6 +183,10 @@ export const testData2: ILesson = {
   stage_id: 0,
   system_name: 'SR Series Systems Self Study Lesson - Flight Training Courses',
   lesson_type: 0,
+  subtitle: '',
+  thumbnail_image_url: '',
+  mobile_hero_image_url: '',
+  desktop_hero_image_url: '',
   title: 'Systems',
   overview:
     "<div><b>Self-Study Lesson</b></div><div>Estimated Lesson Time: 2.0 Hours</div><div><br></div><div>Learning about the aircraft's systems is fundamental to transitioning into your Cirrus. This lesson is designed to better connect you with your Cirrus by developing a comprehensive understanding, from the inside out.&nbsp;</div><div><br></div>",

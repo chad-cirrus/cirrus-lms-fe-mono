@@ -2,7 +2,17 @@
   *ngIf="lesson"
   [ngStyle]="{ 'overflow-anchor': sideNavOpen ? 'none' : 'inherit' }"
 >
-  <div class="lesson-image" fxLayout="column" fxLayoutAlign="center start">
+
+  <div class="lesson-image"
+  fxLayout="column" fxLayoutAlign="center start"
+  [ngStyle]="
+  {
+    'background': 'linear-gradient(90deg, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0.33) 44.11%, rgba(0, 0, 0, 0) 61.94%),
+    linear-gradient(360deg,#000000 1.79%,rgba(0,0,0,.24) 19.37%,rgba(0,0,0,0) 25%),
+    url('+ (isScreenSmall ? (lesson.mobile_hero_image_url | encodeUri): lesson.desktop_hero_image_url | encodeUri) +') no-repeat center'
+  }
+  "
+    >
     <div class="btn-container">
       <div class="example-sidenav-content">
         <button
@@ -23,7 +33,7 @@
     <div class="content">
       <h1>{{ lesson.title }}</h1>
       <mat-divider></mat-divider>
-      <h4>An introduction to your first lesson as a student pilot</h4>
+      <h4>{{lesson.subtitle}}</h4>
       <cirrus-lesson-progress [lesson]="lesson" [checkoutOffsRequired]="checkoutOffsRequired"></cirrus-lesson-progress>
       <button
         class="start-lesson"

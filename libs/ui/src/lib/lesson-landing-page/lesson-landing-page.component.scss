@@ -47,13 +47,10 @@ mat-drawer {
 }
 
 .lesson-image {
-  background: linear-gradient(90deg, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0.33) 44.11%, rgba(0, 0, 0, 0) 61.94%),
-  linear-gradient(360deg,#000000 1.79%,rgba(0,0,0,.24) 19.37%,rgba(0,0,0,0) 25%),
-  url('../../assets/images/image21.png') no-repeat center;
-  background-size: cover;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
+  -webkit-background-size: cover !important;;
+  -moz-background-size: cover !important;;
+  -o-background-size: cover !important;;
+  background-size: cover !important;
   .content {
     width: 100%;
     margin-left: 0px;
@@ -186,10 +183,6 @@ cirrus-progress-card:last-child {
 
 @media (min-width: 960px) {
   .lesson-image {
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
     .content {
       .mat-divider {
         margin-right: 0;

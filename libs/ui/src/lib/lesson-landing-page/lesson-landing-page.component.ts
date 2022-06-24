@@ -16,6 +16,8 @@ import {
   IStage,
 } from '@cirrus/models';
 import { StagesOverlayComponent } from '../stages-overlay/stages-overlay.component';
+import { DomSanitizer } from '@angular/platform-browser';
+
 
 @Component({
   selector: 'cirrus-lesson-landing-page',
@@ -68,6 +70,7 @@ export class LessonLandingPageComponent {
   // eslint-disable-next-line @typescript-eslint/no-inferrable-types
   @Input() courseComplete: boolean = false;
   profileImageUrl = 'course/images/profile.png';
+  bgImage:any;
   libraryImageUrl = 'courses/images/library.png';
   bookOpenImageUrl = 'courses/images/book-open.png';
   @Output() fetchMediaOutput = new EventEmitter<IContent>();
@@ -78,7 +81,8 @@ export class LessonLandingPageComponent {
   @Output() displayOverviewOutput = new EventEmitter<string>();
   @Output() playNextLessonContent = new EventEmitter();
 
-  constructor(private dialog: MatDialog) {}
+  constructor(private dialog: MatDialog, private sanitizer: DomSanitizer
+    ) {}
 
   setProgressForCard() {
     let progress: ICourseProgress[] = [];
@@ -164,6 +168,7 @@ export class LessonLandingPageComponent {
   get playListButtonFilledIn() {
     return 'courses/images/svg/play_button_filled_in.svg';
   }
+
 
   startLesson() {
     const { student_intro_video, overview } = this.lesson;

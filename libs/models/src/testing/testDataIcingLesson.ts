@@ -196,6 +196,10 @@ export const testDataIcingAwarenessCourse: ILesson = {
   order: 0,
   system_name: 'Introduction - Icing Awareness Course',
   title: 'Introduction',
+  subtitle: '',
+  thumbnail_image_url: '',
+  mobile_hero_image_url: '',
+  desktop_hero_image_url: '',
   system_desc: 'The introduction lesson for the icing awareness course. ',
   overview:
     '\u003cdiv\u003e\u003cdiv\u003eEstimated Lesson Time: 15 minutes\u003c/div\u003e\u003cdiv\u003e\u003cbr\u003e\u003c/div\u003e\u003cdiv\u003eFlight into known or forecast icing conditions comes with its own unique set of operational considerations, requiring the highest level of preparation and situational awareness throughout the flight - from preflight planning through touchdown. The TKS flight into known icing (FIKI) anti-ice system dramatically increases the safety and utility of your Cirrus, providing an extra layer of protection when conditions turn icy.\u003c/div\u003e\u003cdiv\u003e\u003cbr\u003e\u003c/div\u003e\u003cdiv\u003eAs pilot-in-command, you must successfully complete this course within 24 months of any flight into forecast or known icing conditions. Your course must be reset in order to receive a new completion date.\u003c/div\u003e\u003c/div\u003e\u003cdiv\u003e\u003cbr\u003e\u003c/div\u003e',

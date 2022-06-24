@@ -6,6 +6,7 @@ export interface ILesson {
   id: number;
   system_name: string;
   lesson_type: number;
+  subtitle: string;
   order: number;
   title: string;
   system_desc: string;
@@ -26,6 +27,9 @@ export interface ILesson {
   course_id: number;
   course_attempt_id: number;
   stage_id: number;
+  thumbnail_image_url: string;
+  mobile_hero_image_url: string;
+  desktop_hero_image_url: string;
   lesson_stats: LessonStats
 }
 
