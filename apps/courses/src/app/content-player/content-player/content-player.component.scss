@@ -84,13 +84,6 @@
         width: 100%;
         height: 100%;
       }
-
-      .body-left,
-      .body-right {
-        button {
-          display: none;
-        }
-      }
     }
 
     .content-player-footer {
@@ -102,11 +95,13 @@
         background: #3A3A3A;
         border-radius: 19px;
         min-width: 38px;
+        .right-chevron, .left-chevron {
+          display: block;
+        }
       }
 
       .next-button {
         background-color: #0077C8;
-        ;
       }
     }
 
@@ -138,7 +133,6 @@
   }
 }
 
-// landscape
 @media (min-width: 600px) {
   .lcp-container {
     .content-player {
@@ -157,14 +151,6 @@
 
       .content-player-body {
         display: inline-flex;
-
-        .body-left, .body-right {
-          margin: 0;
-          width: 0;
-          button {
-            display: none;
-          }
-        }
       }
 
       .content-player-footer {
@@ -187,6 +173,9 @@
             letter-spacing: -0.005em;
 
             color: #FFFFFF;
+          }
+          .right-chevron, .left-chevron {
+            display: none;
           }
         }
       }
@@ -246,3 +235,50 @@
     }
   }
 }
+
+//mobile landscape only
+/* Landscape */
+@media only screen 
+  and (min-device-width: 320px) 
+  and (max-device-width: 950px) 
+  and (-webkit-min-device-pixel-ratio: 2)
+  and (orientation: landscape) {
+    .lcp-container {
+      .content-player {
+        .content-player-header {
+          margin: 0px 0 16px;
+          .title-block {
+            font-size: 1rem;
+            .sub-header {
+              font-size: 1rem;
+            }
+          }
+        }
+        .content-player-body {
+          padding: 0 54px;
+        }
+        .content-player-footer {
+          width: 100%;
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          transform: translate(-50%, -50%);
+          padding: 0 16px;
+          button {
+            width: 38px;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            .next, .previous {
+              display: none;
+            }
+            .right-chevron, .left-chevron {
+              display: block;
+            }
+          }
+        }
+      }
+    }
+  }
+  
