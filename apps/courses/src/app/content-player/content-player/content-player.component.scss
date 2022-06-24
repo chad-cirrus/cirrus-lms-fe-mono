@@ -78,7 +78,7 @@
       position: relative;
       height: 100%;
       width: 100%;
-      overflow: scroll;
+      overflow-y: scroll;
 
       .body-center {
         width: 100%;
@@ -191,7 +191,8 @@
     .content-player-sidenav {
       position: relative;
       width: auto;
-      flex: 0 1 340px;
+      flex: 1 1 25%;
+      max-width: 340px;
       margin-top: -16px;
     }
     .content-player-sidenav.add-border {
