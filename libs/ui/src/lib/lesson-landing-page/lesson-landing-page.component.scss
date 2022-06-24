@@ -113,6 +113,23 @@ mat-drawer {
     opacity: 1;
     pointer-events: all;
   }
+  .intro-video {
+    padding: 16px 0;
+    .intro-video-title {
+      cursor: pointer;
+      font-family: $bqmedium-font;
+      font-size: 1.313rem;
+      color: white;
+    }
+    .intro-video-play {
+      cursor: pointer;
+      padding: 20px 0px 37px 0px;
+      .intro-video-subtitle {
+        font-size: 16px;
+        color: $gray4;
+      }
+    }
+  }
   .cirrus-progress-row {
     mat-card {
       .progress-type-icon {
@@ -254,23 +271,8 @@ cirrus-progress-card:last-child {
         width: hidden;
       }
     }
-
     .intro-video {
       padding: 16px;
-      .intro-video-title {
-        cursor: pointer;
-        font-family: $bqmedium-font;
-        font-size: 1.313rem;
-        color: white;
-      }
-      .intro-video-play {
-        cursor: pointer;
-        padding: 20px 0px 37px 0px;
-        .intro-video-subtitle {
-          font-size: 16px;
-          color: $gray4;
-        }
-      }
     }
   }
 }
