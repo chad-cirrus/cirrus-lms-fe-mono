@@ -28,6 +28,7 @@ import {
 import { selectWorkbook } from '../../store/selectors/workbook-routes.selector';
 import { TaskService } from '../../task.service';
 import { CoursesService } from '../course.service';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'cirrus-lesson',
@@ -53,6 +54,8 @@ export class LessonComponent implements OnInit, OnDestroy {
   lessonId!: number;
   @ViewChild('snav') sidenav!: MatSidenav;
   lessonCompleted$!: Observable<string>;
+  defaultMobile = environment.defaultMobile;
+  defaultDesktop = environment.defaultDesktop;
 
   constructor(
     private route: ActivatedRoute,

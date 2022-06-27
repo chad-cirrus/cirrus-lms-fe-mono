@@ -6,6 +6,8 @@ export const environment = {
   production: false,
   baseUrl: 'http://cirrusapproach.local:3000',
   profile: 'https://cirfullsb-cirrusaircraftvpo.cs41.force.com/approachsso/s/profile/',
+  defaultMobile: "https://cirrusapproachherokuprod.blob.core.windows.net/cirruslmsherokudevcontainer/content-items/images/default-lesson-hero-mobile.jpg",
+  defaultDesktop: "https://cirrusapproachherokuprod.blob.core.windows.net/cirruslmsherokudevcontainer/content-items/images/default-lesson-hero-desktop.jpg"
 };
 
 /*

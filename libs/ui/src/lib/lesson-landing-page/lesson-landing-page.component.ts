@@ -12,11 +12,12 @@ import {
   ILesson,
   ICourseProgress,
   ProgressType,
-  LessonStatus,
-  IStage,
+  LessonStatus
 } from '@cirrus/models';
 import { StagesOverlayComponent } from '../stages-overlay/stages-overlay.component';
 import { DomSanitizer } from '@angular/platform-browser';
+
+
 
 
 @Component({
@@ -41,7 +42,9 @@ export class LessonLandingPageComponent {
 
   @Input()
   set isScreenSmall(value) {
-   this.bgImage = this.setBackgroundImage(value)
+    if(this.lesson){
+      this.bgImage = this.setBackgroundImage(value)
+    }
   }
 
   get isScreenSmall() {
@@ -51,6 +54,9 @@ export class LessonLandingPageComponent {
 
   @Input()
   set lesson(value: ILesson) {
+    if(value.id === 0){
+      return;
+    }
     this._lesson = value;
     this.bgImage = this.setBackgroundImage(this.isScreenSmall)
     const dictionary: { [key: string]: string } = {
@@ -86,8 +92,8 @@ export class LessonLandingPageComponent {
   profileImageUrl = 'course/images/profile.png';
   bgImage:any;
 
-  defaultMobile = "https://cirrusapproachherokuprod.blob.core.windows.net/cirruslmsherokudevcontainer/content-items/images/default-lesson-hero-mobile.jpg";
-  defaultDesktop = "https://cirrusapproachherokuprod.blob.core.windows.net/cirruslmsherokudevcontainer/content-items/images/default-lesson-hero-desktop.jpg"
+  @Input() defaultMobile!: string;
+  @Input() defaultDesktop!: string;
 
 
   libraryImageUrl = 'courses/images/library.png';
