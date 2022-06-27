@@ -78,11 +78,3 @@
   background-color: $border-grey;
   cursor: pointer;
 }
-
-@media (min-width: 600px) {
-  .overlay-container {
-    height: calc(100% - 115px);
-  }
-}
-
-
