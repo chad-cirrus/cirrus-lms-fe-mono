@@ -16,6 +16,7 @@ import { ProgressCardComponent } from '../progress-card/progress-card.component'
 import { LessonLandingPageComponent } from './lesson-landing-page.component';
 import { MatDividerModule } from '@angular/material/divider';
 import { LessonProgressStatsComponent } from '../lesson-progress-stats/lesson-progress-stats.component';
+import { EncodeUriPipe } from '../encode-uri.pipe';
 
 export default {
   title: 'LessonLandingPageComponent',
@@ -28,6 +29,7 @@ export default {
         LessonContentsComponent,
         ProgressCardComponent,
         LessonProgressStatsComponent,
+        EncodeUriPipe
       ],
       imports: [
         MatButtonModule,
