@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router, Event } from '@angular/router';
-import { Observable, of } from 'rxjs';
+import { Observable, of, Subject } from 'rxjs';
 import { filter, map, switchMap } from 'rxjs/operators';
 
 @Injectable({
@@ -16,6 +16,12 @@ export class AppService {
         : of(null)
     )
   );
+
+  scrollTrigger$ = new Subject();
+  getTrigger() {
+    return this.scrollTrigger$.asObservable();
+  }
+
 
   constructor(private router: Router, private route: ActivatedRoute) {}
 }

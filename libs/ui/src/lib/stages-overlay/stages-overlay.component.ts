@@ -4,7 +4,6 @@ import {
   Input,
   OnChanges,
   Output,
-  SimpleChanges,
   ViewChild,
   ViewChildren,
 } from '@angular/core';
@@ -34,6 +33,7 @@ export class StagesOverlayComponent {
 
   @Output() navigateToLesson = new EventEmitter<any>();
   @Output() closeSideNav = new EventEmitter();
+  @Output() scrollToTop = new EventEmitter();
 
   get completeCheck() {
     return 'courses/images/svg/complete_check.svg';
@@ -46,6 +46,12 @@ export class StagesOverlayComponent {
   get notStarted() {
     return 'courses/images/svg/not-started.svg';
   }
+
+
+  ngOnChanges(): void {
+    this.scrollToTop.emit()
+  }
+
 
   navigate(lesson: IStageLesson) {
     this.lessonId = lesson.id;

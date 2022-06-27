@@ -3,7 +3,7 @@ import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSidenav } from '@angular/material/sidenav';
 import { ActivatedRoute, Router } from '@angular/router';
-import { IContent, ILesson, IWorkBook } from '@cirrus/models';
+import { IContent, ILesson } from '@cirrus/models';
 import {
   CompletionDialogComponent,
   CourseCompletionComponent,
@@ -13,6 +13,7 @@ import { select, Store } from '@ngrx/store';
 
 import { combineLatest, Observable, Subscription } from 'rxjs';
 import { filter, take, tap, withLatestFrom } from 'rxjs/operators';
+import { AppService } from '../../app.service';
 
 import { ContentPlayerDialogService } from '../../content-player/content-player-dialog.service';
 import { findNextLesson } from '../../shared/find-next-lesson';
@@ -47,9 +48,11 @@ export class LessonComponent implements OnInit, OnDestroy {
   isScreenSmall$: Observable<boolean> = this.store.select(selectIsScreenSmall);
   sideNavOpen$: Observable<boolean> = this.store.select(selectSideNavOpen);
   lessonSubscription = new Subscription();
+
   workbook$ = this.store
     .select(selectWorkbook)
     .pipe(filter(workbook => workbook.id !== 0));
+
   coursId!: number;
   lessonId!: number;
   @ViewChild('snav') sidenav!: MatSidenav;
@@ -64,7 +67,8 @@ export class LessonComponent implements OnInit, OnDestroy {
     private router: Router,
     private taskService: TaskService,
     private courseService: CoursesService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private appService: AppService,
   ) {}
 
   ngOnInit() {
@@ -220,5 +224,8 @@ export class LessonComponent implements OnInit, OnDestroy {
     this.store.dispatch(setSideNavOpen({ sideNavOpen: false }));
     const { course, lesson } = payload;
     this.router.navigate([`/courses/${course.id}/lessons/${lesson.id}`]);
+  }
+  scrollToTop() {
+    this.appService.scrollTrigger$.next(true)
   }
 }

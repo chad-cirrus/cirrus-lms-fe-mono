@@ -11,6 +11,7 @@
       <ng-container *ngIf="workbook$ | async as workbook">
         <ng-container *ngIf="lesson$ | async as lesson">
           <cirrus-stages-overlay
+            (scrollToTop)="scrollToTop()"
             [workbook]="workbook"
             (closeSideNav)="close()"
             (navigateToLesson)="navigate($event)"

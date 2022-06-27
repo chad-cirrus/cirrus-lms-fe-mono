@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import {  Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { delay, distinctUntilChanged, map, share, tap } from 'rxjs/operators';
 import { AppService } from './app.service';
@@ -15,7 +15,7 @@ import {
   selectCirrusUser,
   selectRole,
 } from './store/selectors/cirrus-user.selector';
-import { fromEvent, merge, Observable, of } from 'rxjs';
+import { merge, Observable, of, Subscription } from 'rxjs';
 import { FormControl } from '@angular/forms';
 import {
   selectSideNavOpen,
@@ -25,7 +25,7 @@ import {
 import { MatSidenav } from '@angular/material/sidenav';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { CoursesService } from './course/course.service';
-import { ActivatedRoute, NavigationEnd } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { selectWorkbookRoutesBusy } from './store/selectors/workbook-routes.selector';
 
@@ -34,7 +34,7 @@ import { selectWorkbookRoutesBusy } from './store/selectors/workbook-routes.sele
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
   student = 'John Doe';
   viewToggle = new FormControl(false);
   toggle$ = this.viewToggle.valueChanges;
@@ -48,11 +48,7 @@ export class AppComponent implements OnInit {
   cirrusUser$ = this.store.select(selectCirrusUser);
   cirrusImpersonateReturnUser$!: Observable<ICirrusUser>;
   courseId$ = this.appService.courseId$.pipe(distinctUntilChanged(), share());
-  scrolledPast$ = fromEvent(window, 'scroll').pipe(
-    map(event => event.target && event.target['documentElement'].scrollTop),
-    map(top => top > 160),
-    distinctUntilChanged()
-  );
+
   notificationCount$: Observable<any> = this.courseService.notificationsCount$;
   sideNavOpen$: Observable<boolean> = this.store.select(selectSideNavOpen);
   @ViewChild(MatSidenav) sideNav!: MatSidenav;
@@ -62,10 +58,15 @@ export class AppComponent implements OnInit {
   isScreenTablet$: Observable<boolean> =
     this.store.select(selectIsScreenTablet);
 
+
   loadingIndicator$ = merge(this.lessonStateBusy$, this.workbookStateBusy$);
+
 
   collapse!: boolean;
   showHamburgerMenu = false;
+  @ViewChild('outletContainer') outletContainer!: ElementRef;
+
+  triggerSubscription!: Subscription;
 
   constructor(
     private store: Store<AppState>,
@@ -73,10 +74,16 @@ export class AppComponent implements OnInit {
     private breakpointObserver: BreakpointObserver,
     private courseService: CoursesService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+
   ) {}
 
   ngOnInit() {
+
+    this.triggerSubscription = this.appService.getTrigger().subscribe(() => {
+      this.outletContainer.nativeElement.scrollTop = 0
+    })
+
     this.breakpointObserver
       .observe('(max-width: 950px)')
       .pipe(
@@ -119,6 +126,10 @@ export class AppComponent implements OnInit {
     this.viewToggle.valueChanges.subscribe(instructorView =>
       this.store.dispatch(appActions.setInstructorView({ instructorView }))
     );
+  }
+
+  ngOnDestroy(): void {
+      this.triggerSubscription.unsubscribe();
   }
 
   openHamburgerMenu() {
