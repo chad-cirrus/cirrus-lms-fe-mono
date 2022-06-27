@@ -101,7 +101,7 @@ export class LessonComponent implements OnInit, OnDestroy {
             .open(component, {
               data,
               panelClass: 'fullscreen-dialog',
-              height: '100vh',
+              height: '100%',
               width: '100%',
             })
             .afterClosed()

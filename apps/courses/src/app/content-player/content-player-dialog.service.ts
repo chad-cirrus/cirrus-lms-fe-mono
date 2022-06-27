@@ -25,7 +25,7 @@ export class ContentPlayerDialogService {
         overview,
       },
       panelClass: 'fullscreen-dialog',
-      height: '100vh',
+      height: '100%',
       width: '100%',
     });
   }

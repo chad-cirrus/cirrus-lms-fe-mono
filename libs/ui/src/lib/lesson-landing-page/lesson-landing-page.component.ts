@@ -212,7 +212,7 @@ export class LessonLandingPageComponent {
     const dialogRef = this.dialog.open(StagesOverlayComponent, {
       data: this.workbook,
       maxWidth: '100vw',
-      maxHeight: '100vh',
+      maxHeight: '100%',
       height: '100%',
       width: '100%',
     });

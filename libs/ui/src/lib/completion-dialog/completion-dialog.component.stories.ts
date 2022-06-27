@@ -23,7 +23,7 @@ class LaunchDialogComponent {
         lesson: this.lesson,
       },
       panelClass: 'fullscreen-dialog',
-      height: '100vh',
+      height: '100%',
       width: '100%',
     });
   }
