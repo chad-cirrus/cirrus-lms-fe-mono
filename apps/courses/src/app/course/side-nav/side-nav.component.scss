@@ -51,6 +51,12 @@
   flex-direction: column;
   align-items: start;
   margin: 0 auto;
+}
+
+.menu-items-collapsed {
+  div {
+    width: auto;
+  }
   span {
     color: rgba(255, 255, 255, 0.6)
   };

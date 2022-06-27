@@ -28,7 +28,7 @@ class LaunchDialogComponent {
         student: this.student,
       },
       panelClass: 'fullscreen-dialog',
-      height: '100vh',
+      height: '100%',
       width: '100%',
     });
   }

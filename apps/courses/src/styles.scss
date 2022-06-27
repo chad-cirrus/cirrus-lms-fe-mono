@@ -14,12 +14,12 @@
 @include app-component.cirrus-app-component($theme);
 
 html,
-body {
+body, .main-container {
   height: 100%;
 }
 
 main {
-  height: calc(100vh - 60px);
+  height: calc(100% - 60px);
   overflow: hidden;
 }
 

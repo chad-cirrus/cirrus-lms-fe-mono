@@ -2,7 +2,7 @@
 
 .overlay-container {
   background: rgba(31, 31, 31, 1);
-  height: 100vh;
+  height: 100%;
   font-family: $primary_font;
   padding: 0rem 0.313rem 0.4rem 0.313rem;
   .title-text {
@@ -81,7 +81,7 @@
 
 @media (min-width: 600px) {
   .overlay-container {
-    height: calc(100vh - 115px);
+    height: calc(100% - 115px);
   }
 }
 
