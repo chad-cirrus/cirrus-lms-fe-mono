@@ -28,6 +28,7 @@ export class LessonLandingPageComponent {
   private _lesson!: ILesson;
   private _buttonText!: string;
   private _progress!: ICourseProgress[];
+  private _isScreenSmall!: boolean;
 
   get progress() {
     return this._progress;
@@ -37,9 +38,21 @@ export class LessonLandingPageComponent {
     this._progress = progress;
   }
 
+
+  @Input()
+  set isScreenSmall(value) {
+   this.bgImage = this.setBackgroundImage(value)
+  }
+
+  get isScreenSmall() {
+    return this._isScreenSmall;
+  }
+
+
   @Input()
   set lesson(value: ILesson) {
     this._lesson = value;
+    this.bgImage = this.setBackgroundImage(this.isScreenSmall)
     const dictionary: { [key: string]: string } = {
       ['not_started']: 'Get Started',
       ['in_progress']: 'Resume Lesson',
@@ -58,11 +71,12 @@ export class LessonLandingPageComponent {
     return this._buttonText;
   }
 
+
   @ViewChild('drawer') drawer: any;
   showFiller = false;
 
   @Input() lessonId!: number;
-  @Input() isScreenSmall!: boolean;
+
   @Input() checkoutOffsRequired!: boolean | null;
   @Input() instructorView!: boolean;
   @Input() sideNavOpen!: boolean;
@@ -71,6 +85,11 @@ export class LessonLandingPageComponent {
   @Input() courseComplete: boolean = false;
   profileImageUrl = 'course/images/profile.png';
   bgImage:any;
+
+  defaultMobile = "https://cirrusapproachherokuprod.blob.core.windows.net/cirruslmsherokudevcontainer/content-items/images/default-lesson-hero-mobile.jpg";
+  defaultDesktop = "https://cirrusapproachherokuprod.blob.core.windows.net/cirruslmsherokudevcontainer/content-items/images/default-lesson-hero-desktop.jpg"
+
+
   libraryImageUrl = 'courses/images/library.png';
   bookOpenImageUrl = 'courses/images/book-open.png';
   @Output() fetchMediaOutput = new EventEmitter<IContent>();
@@ -167,6 +186,16 @@ export class LessonLandingPageComponent {
 
   get playListButtonFilledIn() {
     return 'courses/images/svg/play_button_filled_in.svg';
+  }
+
+
+  setBackgroundImage(value: boolean): string {
+    const { mobile_hero_image_url, desktop_hero_image_url } = this.lesson;
+    if(value) {
+     return mobile_hero_image_url ? mobile_hero_image_url : this.defaultMobile;
+    } else {
+     return desktop_hero_image_url ? desktop_hero_image_url : this.defaultDesktop;
+    }
   }
 
 
