@@ -74,7 +74,9 @@
   background-color: $border-grey;
 }
 
-.lesson-content-container:hover {
-  background-color: $border-grey;
-  cursor: pointer;
+@media (hover: hover) {
+  .lesson-content-container:hover {
+    background-color: $border-grey;
+    cursor: pointer;
+  }
 }
