@@ -22,7 +22,6 @@
     <div
       class="content-container"
       [fxFlex]="100"
-      [ngClass]="{ 'stop-scrolling': sideNavOpen$ | async }"
     >
     <div fxLayout="row" class="breadcrumb-container" (click)="navigateToCourse()" fxLayoutGap="15px" fxLayoutAlign="none center">
       <span fxLayout="row" fxLayoutGap="15px"  class="chev-left">
@@ -32,7 +31,11 @@
       <div class="bullet">&#8226;</div>
       <div class="lesson-title">{{(lesson$ | async)?.title}}</div>
     </div>
-    <div class="outlet-container" #outletContainer>
+    <div 
+      class="outlet-container"
+      [ngClass]="{ 'stop-scrolling': sideNavOpen$ | async }"
+      #outletContainer
+    >
       <div *ngIf="loadingIndicator$ | async" class="spinner-container"><mat-spinner color="accent"></mat-spinner></div>
       <router-outlet></router-outlet>
     </div>
