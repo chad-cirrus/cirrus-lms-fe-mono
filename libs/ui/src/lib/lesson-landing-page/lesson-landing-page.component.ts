@@ -42,6 +42,7 @@ export class LessonLandingPageComponent {
 
   @Input()
   set isScreenSmall(value) {
+    this._isScreenSmall = value
     if(this.lesson){
       this.bgImage = this.setBackgroundImage(value)
     }
