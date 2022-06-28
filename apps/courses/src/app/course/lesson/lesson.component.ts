@@ -30,6 +30,7 @@ import { selectWorkbook } from '../../store/selectors/workbook-routes.selector';
 import { TaskService } from '../../task.service';
 import { CoursesService } from '../course.service';
 import { environment } from '../../../environments/environment';
+import { DownloadService } from '../../download.service';
 
 @Component({
   selector: 'cirrus-lesson',
@@ -69,6 +70,7 @@ export class LessonComponent implements OnInit, OnDestroy {
     private courseService: CoursesService,
     private dialog: MatDialog,
     private appService: AppService,
+    private downloadService: DownloadService
   ) {}
 
   ngOnInit() {
@@ -124,7 +126,9 @@ export class LessonComponent implements OnInit, OnDestroy {
               } else if (
                 response === LESSON_COMPLETION_CTA.downloadCertificate
               ) {
-                console.log('we will download certificate');
+                this.downloadService.downloadCertificate(this._lesson.course_id).subscribe((data: Blob) => {
+                  this.downloadPdf(data)
+                })
               } else if (
                 response === LESSON_COMPLETION_CTA.downloadTranscript
               ) {
@@ -135,6 +139,18 @@ export class LessonComponent implements OnInit, OnDestroy {
             });
         })
     );
+  }
+
+  downloadPdf(pdf: Blob) {
+    const file = new Blob([pdf], { type: 'application/pdf' })
+    const fileURL = URL.createObjectURL(file);
+    window.open(fileURL);
+    const a = document.createElement('a');
+    a.href = fileURL;
+    a.target = '_blank';
+    a.download = 'cirrus-certificate.pdf';
+    document.body.appendChild(a);
+    a.click();
   }
 
   ngOnDestroy(): void {
