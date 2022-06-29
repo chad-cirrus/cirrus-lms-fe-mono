@@ -36,6 +36,7 @@ import {
   selectIsScreenTablet,
 } from '../../store/selectors/view.selector';
 import { TaskService } from '../../task.service';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'cirrus-content-player',
@@ -162,7 +163,7 @@ export class ContentPlayerComponent
         } else {
           const firstNonCompleteContentIndex =
             this.findFirstNonCompleteContentIndex();
-            this.playContent(this.menuItems[firstNonCompleteContentIndex].id);
+          this.playContent(this.menuItems[firstNonCompleteContentIndex].id);
         }
       } else {
         this.dialogRef.close();
@@ -191,6 +192,15 @@ export class ContentPlayerComponent
     } else {
       this.createComponent(id, content, tasks, logbook);
     }
+
+    this.store
+      .select(selectIsScreenTablet)
+      .pipe(take(1))
+      .subscribe(isScreenTabletOrSmaller => {
+        if (isScreenTabletOrSmaller) {
+          this.handleCloseMenu();
+        }
+      });
   }
 
   private findFirstNonCompleteContentIndex(): number {

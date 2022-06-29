@@ -1,4 +1,10 @@
-import {  Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { Store } from '@ngrx/store';
 import { delay, distinctUntilChanged, map, share, tap } from 'rxjs/operators';
 import { AppService } from './app.service';
@@ -58,9 +64,7 @@ export class AppComponent implements OnInit, OnDestroy {
   isScreenTablet$: Observable<boolean> =
     this.store.select(selectIsScreenTablet);
 
-
   loadingIndicator$ = merge(this.lessonStateBusy$, this.workbookStateBusy$);
-
 
   collapse!: boolean;
   showHamburgerMenu = false;
@@ -74,18 +78,16 @@ export class AppComponent implements OnInit, OnDestroy {
     private breakpointObserver: BreakpointObserver,
     private courseService: CoursesService,
     private router: Router,
-    private route: ActivatedRoute,
-
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit() {
-
     this.triggerSubscription = this.appService.getTrigger().subscribe(() => {
-      this.outletContainer.nativeElement.scrollTop = 0
-    })
+      this.outletContainer.nativeElement.scrollTop = 0;
+    });
 
     this.breakpointObserver
-      .observe('(max-width: 950px)')
+      .observe('(max-width: 960px)')
       .pipe(
         map(({ matches }) => {
           return matches;
@@ -129,7 +131,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-      this.triggerSubscription.unsubscribe();
+    this.triggerSubscription.unsubscribe();
   }
 
   openHamburgerMenu() {
