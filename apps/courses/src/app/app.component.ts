@@ -87,7 +87,7 @@ export class AppComponent implements OnInit, OnDestroy {
     });
 
     this.breakpointObserver
-      .observe('(max-width: 960px)')
+      .observe('(max-width: 959px)')
       .pipe(
         map(({ matches }) => {
           return matches;
