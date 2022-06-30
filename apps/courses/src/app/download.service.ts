@@ -19,10 +19,9 @@ export class DownloadService {
 
   constructor(private http: HttpClient, private store: Store<AppState>) {}
 
-  downloadCertificate(course_id: number) {
+  downloadCertificate(course_attempt_id: number) {
     const url = `${environment.baseUrl}/api/v4/pdf/certificate`;
-    const user_id = this.user_id;
-    const queryParams = { course_id, user_id }
+    const queryParams = { course_attempt_id }
     return this.http
       .get(url, {params:queryParams, responseType: 'blob'})
       .pipe();

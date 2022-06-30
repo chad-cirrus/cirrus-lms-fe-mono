@@ -126,7 +126,7 @@ export class LessonComponent implements OnInit, OnDestroy {
               } else if (
                 response === LESSON_COMPLETION_CTA.downloadCertificate
               ) {
-                this.downloadService.downloadCertificate(this._lesson.course_id).subscribe((data: Blob) => {
+                this.downloadService.downloadCertificate(this._lesson.course_attempt_id).subscribe((data: Blob) => {
                   this.downloadPdf(data)
                 })
               } else if (

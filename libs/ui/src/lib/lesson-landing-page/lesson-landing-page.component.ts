@@ -199,9 +199,9 @@ export class LessonLandingPageComponent {
   setBackgroundImage(value: boolean): string {
     const { mobile_hero_image_url, desktop_hero_image_url } = this.lesson;
     if(value) {
-     return mobile_hero_image_url ? mobile_hero_image_url : this.defaultMobile;
+     return mobile_hero_image_url && desktop_hero_image_url ? mobile_hero_image_url : this.defaultMobile;
     } else {
-     return desktop_hero_image_url ? desktop_hero_image_url : this.defaultDesktop;
+     return desktop_hero_image_url && mobile_hero_image_url ? desktop_hero_image_url : this.defaultDesktop;
     }
   }
 
