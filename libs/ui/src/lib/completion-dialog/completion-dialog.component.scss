@@ -1,6 +1,9 @@
 .container {
   padding: 32px;
-  min-height: 100%
+  min-height: 100%;
+  .close {
+    z-index: 1;
+  }
 }
 
 .main {
