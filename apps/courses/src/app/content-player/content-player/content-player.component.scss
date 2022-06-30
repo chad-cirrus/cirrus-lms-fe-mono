@@ -221,6 +221,7 @@
 
       .content-player-body {
         display: inline-flex;
+        overflow-y: auto;
       }
 
       .content-player-header, .content-player-body, .content-player-footer {
@@ -229,7 +230,7 @@
         }
       }
     }
-    
+
     .content-player-footer {
       .mobile-content-menu {
         display: none !important;
@@ -240,9 +241,9 @@
 
 //mobile landscape only
 /* Landscape */
-@media only screen 
-  and (min-device-width: 320px) 
-  and (max-device-width: 950px) 
+@media only screen
+  and (min-device-width: 320px)
+  and (max-device-width: 950px)
   and (-webkit-min-device-pixel-ratio: 2)
   and (orientation: landscape) {
     .lcp-container {
@@ -283,4 +284,3 @@
       }
     }
   }
-  

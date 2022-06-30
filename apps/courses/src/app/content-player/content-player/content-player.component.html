@@ -11,25 +11,21 @@
     ></cirrus-lesson-content-player-menu>
   </div>
   <div class="content-player" fxLayout="row">
-
-    <div 
+    <div
       fxFlex="0 0 120px"
       class="content-player-sidenav-button-container"
       *ngIf="(menuOpen$ | async) === false"
       fxHide.lt-md
     >
-      <img
-      [src]="menuIcon"
-      (click)="this.toggleMenu()"
-    />
+      <img [src]="menuIcon" (click)="this.toggleMenu()" />
     </div>
 
-    <div 
+    <div
       [fxFlex]="100"
-      class="content-player-main" 
-      fxLayout="column" 
+      class="content-player-main"
+      fxLayout="column"
       fxLayoutAlign="center stretch"
-      >
+    >
       <div
         class="content-player-header"
         fxLayout="row"
@@ -44,11 +40,11 @@
           fxLayoutGap="20px"
         >
           <span> {{ lesson_title }} </span>
-          <div 
-          class="sub-header"
-          fxLayout="row"
-          fxLayoutAlign="start center"
-          fxLayoutGap="16px"
+          <div
+            class="sub-header"
+            fxLayout="row"
+            fxLayoutAlign="start center"
+            fxLayoutGap="16px"
           >
             <span>{{ title }}</span>
             <div
@@ -62,11 +58,12 @@
                   class="sign-offs-icon"
                   src="courses/images/svg/yellow-warning-icon.svg"
                 />
-                <span class="sign-offs-required">Instructor sign off required</span>
+                <span class="sign-offs-required"
+                  >Instructor sign off required</span
+                >
               </div>
             </div>
           </div>
-
         </div>
         <img class="close-icon" [src]="closeIcon" mat-dialog-close />
       </div>
@@ -98,19 +95,11 @@
             (click)="previousContent()"
           >
             <span class="previous" fxHide.lt-sm>Previous</span>
-            <img 
-              class="left-chevron" 
-              [src]="leftChevron" 
-              alt="l" 
-            />
+            <img class="left-chevron" [src]="leftChevron" alt="l" />
           </button>
           <button class="next-button" mat-raised-button (click)="nextContent()">
             <span class="next" fxHide.lt-sm>Next</span>
-            <img
-              class="right-chevron"
-              [src]="rightChevron"
-              alt="r"
-            />
+            <img class="right-chevron" [src]="rightChevron" alt="r" />
           </button>
         </div>
       </div>
