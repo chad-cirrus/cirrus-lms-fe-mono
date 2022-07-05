@@ -79,26 +79,6 @@
       height: 100%;
       width: 100%;
       overflow-y: hidden;
-      &:before {
-        content: " ";
-        display: block;
-        position: absolute;
-        top: -15px;
-        left: 0;
-        height: 35px;
-        width: 100%;
-        background: linear-gradient(180deg, rgb(31 31 31) -16%, rgba(31, 31, 31, 0) 100%);
-      }
-      &::after {
-        content: " ";
-        display: block;
-        position: absolute;
-        bottom: -15px;
-        left: 0;
-        height: 35px;
-        width: 100%;
-        background: linear-gradient(360deg, #1f1f1f -15%, rgba(31, 31, 31, 0) 100%);
-      }
 
       .body-center {
         width: 100%;
