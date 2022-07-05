@@ -78,11 +78,32 @@
       position: relative;
       height: 100%;
       width: 100%;
-      overflow-y: scroll;
+      overflow-y: hidden;
+      &:before {
+        content: " ";
+        display: block;
+        position: absolute;
+        top: -15px;
+        left: 0;
+        height: 35px;
+        width: 100%;
+        background: linear-gradient(180deg, rgb(31 31 31) -16%, rgba(31, 31, 31, 0) 100%);
+      }
+      &::after {
+        content: " ";
+        display: block;
+        position: absolute;
+        bottom: -15px;
+        left: 0;
+        height: 35px;
+        width: 100%;
+        background: linear-gradient(360deg, #1f1f1f -15%, rgba(31, 31, 31, 0) 100%);
+      }
 
       .body-center {
         width: 100%;
         height: 100%;
+        overflow-y: auto;
       }
     }
 
@@ -113,7 +134,7 @@
 
       .menu-icon {
         width: 26px;
-        height: 14px;
+        height: auto;
       }
 
       .menu-label {
@@ -164,7 +185,7 @@
 
           span {
             // typography
-            font-family: 'Akzidenz-Grotesk BQ';
+            font-family: 'akzidenz-grotesk_bqmedium';
             font-style: normal;
             font-weight: 500;
             font-size: 17px;
@@ -221,7 +242,6 @@
 
       .content-player-body {
         display: inline-flex;
-        overflow-y: auto;
       }
 
       .content-player-header, .content-player-body, .content-player-footer {
