@@ -14,7 +14,6 @@ export class LessonProgressComponent {
   private _flightAssessment = false;
   private _assessmentProgressIcon = '';
 
-
   private _lesson: ILesson = {
     id: 0,
     system_desc: '',
@@ -41,24 +40,25 @@ export class LessonProgressComponent {
         order: 0,
         quiz: '',
         content_tasks: [],
-        progress: {id: 1, status: 'not_completed'},
+        progress: { id: 1, status: 'not_completed' },
         content_file: '',
-        content_filename: "",
+        content_filename: '',
         content_html: '',
         content_type: 0,
-        created_by: "Cirrus Aircraft",
-        desc: "Perspective & Perspective+ Avionics Course",
+        created_by: 'Cirrus Aircraft',
+        desc: 'Perspective & Perspective+ Avionics Course',
         id: 401,
         jet_scoring: false,
         meta_tags: [],
-        placeholder_image: "https://cirrusapproachherokuprod.blob.core.windows.net/cirruslmsherokuprodcontainer/content-items/content-files/5c480eb38443724475091bf0d91ba12.2.png",
+        placeholder_image:
+          'https://cirrusapproachherokuprod.blob.core.windows.net/cirruslmsherokuprodcontainer/content-items/content-files/5c480eb38443724475091bf0d91ba12.2.png',
         score: 0,
         show_comments: true,
         starter_file: '',
-        subtitle: "Hello Cockpit [2.1]",
-        title: "Hello Cockpit [2.1]",
+        subtitle: 'Hello Cockpit [2.1]',
+        title: 'Hello Cockpit [2.1]',
         upload_image: '',
-        url: "309005652",
+        url: '309005652',
       },
 
       content_id: 401,
@@ -67,16 +67,16 @@ export class LessonProgressComponent {
       id: 1,
       title: '',
       updated_at: '',
-      created_at: ''
+      created_at: '',
     },
     instructor_intro_video: {
       content_id: 401,
-      created_at: "2022-05-18T15:55:59.249Z",
+      created_at: '2022-05-18T15:55:59.249Z',
       hidden: false,
       id: 69,
       required: false,
-      title: "hello",
-      updated_at: "2022-05-18T15:55:59.249Z"
+      title: 'hello',
+      updated_at: '2022-05-18T15:55:59.249Z',
     },
     instructor_overview: '',
     instructor_contents: [],
@@ -90,34 +90,40 @@ export class LessonProgressComponent {
     lesson_stats: {
       content_completed: 0,
       content_total: 0,
-      ground_hours_completed :0,
+      ground_hours_completed: 0,
       flight_hours_completed: 0,
       landings_completed: 0,
       assessment_tasks_total: 0,
-      assessment_tasks_completed: 0
-    }
+      assessment_tasks_completed: 0,
+    },
   };
-
 
   @Input() sideNavOpen!: boolean;
   @Input() checkoutOffsRequired!: boolean | null;
   @Input()
   set lesson(value: ILesson) {
     this._lesson = value;
-    this._selfStudy = value.contents.map(c => c.content_type).filter(ct => ct !== 9 && ct !== 10).length > 0;
-    this._flightAssessment = value.contents.map(c => c.content_type).filter(ct => ct === 9).length > 0;
-    this._groundAssessment = value.contents.map(c => c.content_type).filter(ct => ct === 10).length > 0;
-
+    this._selfStudy =
+      value.contents
+        .map(c => c.content_type)
+        .filter(ct => ct !== 9 && ct !== 10).length > 0;
+    this._flightAssessment =
+      value.contents.map(c => c.content_type).filter(ct => ct === 9).length > 0;
+    this._groundAssessment =
+      value.contents.map(c => c.content_type).filter(ct => ct === 10).length >
+      0;
 
     if (this._selfStudy) {
       this._selfStudyIconSrc = progressIconMapper(this.lesson.progress.status);
     }
     if (this._flightAssessment || this._groundAssessment) {
-      const status = this.getStatus(value);
+      const assessments = value.contents.filter(
+        content => content.content_type === 9 || content.content_type === 10
+      );
+      const status = assessments[0].progress.status;
       this._assessmentProgressIcon = progressIconMapper(status);
     }
   }
-
 
   get lesson() {
     return this._lesson;
@@ -145,9 +151,5 @@ export class LessonProgressComponent {
 
   get assessmentProgressIcon() {
     return this._assessmentProgressIcon;
-  }
-
-  private getStatus(lesson: ILesson): string {
-    return lesson.contents[0].progress.status;
   }
 }
