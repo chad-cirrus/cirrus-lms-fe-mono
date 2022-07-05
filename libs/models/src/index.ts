@@ -26,10 +26,6 @@ export * from './lib/ILessonFlightLog';
 export * from './lib/PROGRESS_TYPE';
 export * from './lib/PROGRESS_STATUS';
 
-export * from './lib/classes/ContentTask';
-export * from './lib/classes/Task';
-export * from './lib/classes/TaskCategory';
-
 export * from './testing/testData';
 export * from './testing/crashTestDummy';
 export * from './testing/testData853b';
