@@ -43,14 +43,12 @@
 
       span {
         // typography
-        font-family: 'Akzidenz-Grotesk BQ';
+        font-family: 'akzidenz-grotesk_bqmedium';
         font-style: normal;
         font-weight: 500;
-        font-size: 17px;
-        line-height: 23px;
-        /* or 135% */
+        font-size: 1.0625rem;
+        line-height: 1;
         letter-spacing: -0.005em;
-
         color: #FFFFFF;
       }
     }
@@ -68,17 +66,6 @@
   .new-tab-message {
     font-size: 1.125rem;
   }
-
-
-    a {
-      span {
-        // typography
-        font-size: 17px;
-        line-height: 23px;
-        /* or 135% */
-        letter-spacing: -0.005em;
-      }
-    }
 }
 
 
