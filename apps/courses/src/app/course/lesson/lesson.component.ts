@@ -20,7 +20,10 @@ import { findNextLesson } from '../../shared/find-next-lesson';
 import { fetchLessons, setSideNavOpen } from '../../store/actions';
 import { LessonState } from '../../store/reducers/lesson.reducer';
 import { selectCirrusUser } from '../../store/selectors/cirrus-user.selector';
-import { selectCheckOffRequired, selectLessonWithContentEntities } from '../../store/selectors/lessons.selector';
+import {
+  selectCheckOffRequired,
+  selectLessonWithContentEntities,
+} from '../../store/selectors/lessons.selector';
 import {
   selectInstructorView,
   selectIsScreenSmall,
@@ -126,9 +129,11 @@ export class LessonComponent implements OnInit, OnDestroy {
               } else if (
                 response === LESSON_COMPLETION_CTA.downloadCertificate
               ) {
-                this.downloadService.downloadCertificate(this._lesson.course_attempt_id).subscribe((data: Blob) => {
-                  this.downloadPdf(data)
-                })
+                this.downloadService
+                  .downloadCertificate(this._lesson.course_attempt_id)
+                  .subscribe((data: Blob) => {
+                    this.downloadPdf(data);
+                  });
               } else if (
                 response === LESSON_COMPLETION_CTA.downloadTranscript
               ) {
@@ -142,9 +147,8 @@ export class LessonComponent implements OnInit, OnDestroy {
   }
 
   downloadPdf(pdf: Blob) {
-    const file = new Blob([pdf], { type: 'application/pdf' })
+    const file = new Blob([pdf], { type: 'application/pdf' });
     const fileURL = URL.createObjectURL(file);
-    window.open(fileURL);
     const a = document.createElement('a');
     a.href = fileURL;
     a.target = '_blank';
@@ -217,11 +221,9 @@ export class LessonComponent implements OnInit, OnDestroy {
     });
   }
 
-  playNextLessonContent($event:any) {
-   const nextLesson = findNextLesson($event)
-   this.router.navigate([
-    `/courses/${this.coursId}/lessons/${nextLesson}`
-  ]);
+  playNextLessonContent($event: any) {
+    const nextLesson = findNextLesson($event);
+    this.router.navigate([`/courses/${this.coursId}/lessons/${nextLesson}`]);
   }
 
   openSideNav() {
@@ -242,6 +244,6 @@ export class LessonComponent implements OnInit, OnDestroy {
     this.router.navigate([`/courses/${course.id}/lessons/${lesson.id}`]);
   }
   scrollToTop() {
-    this.appService.scrollTrigger$.next(true)
+    this.appService.scrollTrigger$.next(true);
   }
 }
