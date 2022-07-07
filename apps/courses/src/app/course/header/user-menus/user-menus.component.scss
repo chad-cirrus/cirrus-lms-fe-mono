@@ -28,6 +28,13 @@
   color: $secondary-font-color-grey;
   background-color: $gray5;
   cursor: pointer;
+  a {
+    display: flex;
+    align-items: center;
+  }
+  svg {
+    margin-left: 10px;
+  }
 }
 
 .menu-item:hover {
@@ -35,6 +42,9 @@
   color: white;;
   a {
     color: white;
+    svg path {
+      stroke: white;
+    }
   }
 }
 
