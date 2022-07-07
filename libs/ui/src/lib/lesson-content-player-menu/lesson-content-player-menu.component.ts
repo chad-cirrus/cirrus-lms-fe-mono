@@ -12,7 +12,7 @@ export class LessonContentPlayerMenuComponent {
 
   leftChevron = 'courses/images/svg/desktop-sn-l-chevron.svg';
   downChevron = 'courses/images/svg/down-chevron.svg';
-  menuIcon = 'courses/images/svg/LcpMenuIcon.svg';
+  menuIcon = 'courses/images/svg/lesson-icon-heavy.svg';
   @Output() closeMenu = new EventEmitter<void>();
   @Output() playContent = new EventEmitter<number>();
 
