@@ -242,46 +242,63 @@
 
 //mobile landscape only
 /* Landscape */
-@media only screen
-  and (max-device-width: 950px)
-  and (max-device-height: 480px)
-  and (-webkit-min-device-pixel-ratio: 2)
-  and (orientation: landscape) {
-    .lcp-container {
-      .content-player {
-        .content-player-header {
-          margin: 0px 0 16px;
-          .title-block {
+@media (min-width: 320px)
+and (max-width: 950px)
+and (max-height: 480px)
+and (orientation: landscape) {
+  .lcp-container {
+    .content-player {
+      .content-player-header {
+        margin: 10px 0 16px 91px;
+        .title-block {
+          font-size: 1rem;
+          .sub-header {
             font-size: 1rem;
-            .sub-header {
-              font-size: 1rem;
-            }
           }
         }
-        .content-player-body {
-          padding: 0 54px;
+        .close-icon {
+          align-self: start;
         }
-        .content-player-footer {
-          width: 100%;
-          position: absolute;
-          left: 50%;
-          top: 50%;
-          transform: translate(-50%, -50%);
-          padding: 0 16px;
-          button {
-            width: 38px;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            .next, .previous {
-              display: none;
-            }
-            .right-chevron, .left-chevron {
-              display: block;
-            }
+      }
+      .mobile-content-menu {
+        position: absolute;
+        top: 10px;
+        left: 0;
+        width: auto;
+        margin-left: 0;
+        border-top: 0;
+        padding: 16px;
+        .menu-label {
+          display: none;
+        }
+        img.up-chevron {
+          display: none;
+        }
+      }
+      .content-player-body {
+        padding: 0 54px;
+      }
+      .content-player-footer {
+        width: 100%;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        padding: 0 16px;
+        button {
+          width: 38px;
+          padding: 0;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          .next, .previous {
+            display: none;
+          }
+          .right-chevron, .left-chevron {
+            display: block;
           }
         }
       }
     }
   }
+}
