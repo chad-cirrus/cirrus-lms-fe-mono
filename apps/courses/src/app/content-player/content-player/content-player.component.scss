@@ -39,6 +39,7 @@
       height: 100px;
       width: 100%;
       background: linear-gradient(360deg, #1f1f1f 35%, rgba(31, 31, 31, 0) 100%);
+      pointer-events: none;
     }
   }
 
@@ -58,6 +59,9 @@
         line-height: 1.1;
         letter-spacing: -0.045em;
         margin-right: 15px;
+        span {
+          margin-bottom: 10px;
+        }
 
         .sub-header {
           font-family: 'Akzidenz-Grotesk BQ';
@@ -250,9 +254,12 @@ and (orientation: landscape) {
   .lcp-container {
     .content-player {
       .content-player-header {
-        margin: 10px 0 16px 91px;
+        margin: 0 0 16px 54px;
         .title-block {
           font-size: 1rem;
+          span {
+            margin-bottom: 5px;
+          }
           .sub-header {
             font-size: 1rem;
           }
@@ -260,7 +267,7 @@ and (orientation: landscape) {
       }
       .mobile-content-menu {
         position: absolute;
-        top: 10px;
+        top: 0;
         left: 0;
         width: auto;
         margin-left: 0;
