@@ -69,6 +69,7 @@
       }
 
       .close-icon {
+        align-self: start;
         width: 22px;
         height: auto;
       }
@@ -255,9 +256,6 @@ and (orientation: landscape) {
           .sub-header {
             font-size: 1rem;
           }
-        }
-        .close-icon {
-          align-self: start;
         }
       }
       .mobile-content-menu {
