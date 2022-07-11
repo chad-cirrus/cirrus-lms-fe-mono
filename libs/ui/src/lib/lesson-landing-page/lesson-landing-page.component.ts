@@ -10,8 +10,6 @@ import { MatDialog } from '@angular/material/dialog';
 import {
   IContent,
   ILesson,
-  ICourseProgress,
-  ProgressType,
   LessonStatus,
 } from '@cirrus/models';
 import { StagesOverlayComponent } from '../stages-overlay/stages-overlay.component';
@@ -25,16 +23,8 @@ import { DomSanitizer } from '@angular/platform-browser';
 export class LessonLandingPageComponent {
   private _lesson!: ILesson;
   private _buttonText!: string;
-  private _progress!: ICourseProgress[];
   private _isScreenSmall!: boolean;
 
-  get progress() {
-    return this._progress;
-  }
-
-  set progress(progress: ICourseProgress[]) {
-    this._progress = progress;
-  }
 
   @Input()
   set isScreenSmall(value) {
@@ -59,7 +49,6 @@ export class LessonLandingPageComponent {
       ['failed']: '',
     };
     this._buttonText = dictionary[this.lesson.progress.status];
-    this._progress = this.setProgressForCard(); // todo null check
   }
 
   get lesson() {
@@ -99,83 +88,6 @@ export class LessonLandingPageComponent {
   @Output() playNextLessonContent = new EventEmitter();
 
   constructor(private dialog: MatDialog, private sanitizer: DomSanitizer) {}
-
-  setProgressForCard() {
-    let progress: ICourseProgress[] = [];
-
-    const { lesson_type, lesson_stats } = this.lesson;
-    const {
-      ground_hours_completed,
-      content_completed,
-      content_total,
-      flight_hours_completed,
-      landings_completed,
-      assessment_tasks_total,
-      assessment_tasks_completed,
-    } = lesson_stats;
-
-    switch (lesson_type) {
-      case 0:
-        progress = [
-          {
-            type: ProgressType.SelfStudy,
-            completedCourses: content_completed,
-            totalCourses: content_total,
-          },
-        ];
-        break;
-      case 1:
-        progress = [
-          {
-            type: ProgressType.SelfStudy,
-            completedCourses: content_completed,
-            totalCourses: content_total,
-          },
-          {
-            type: ProgressType.Ground,
-            completedCourses: ground_hours_completed,
-          },
-          {
-            type: ProgressType.Assessment,
-            completedCourses: assessment_tasks_completed,
-            totalCourses: assessment_tasks_total,
-          },
-        ];
-        break;
-
-      case 2:
-        progress = [
-          {
-            type: ProgressType.SelfStudy,
-            completedCourses: content_completed,
-            totalCourses: content_total,
-          },
-          {
-            type: ProgressType.Flight,
-            completedCourses: flight_hours_completed,
-          },
-          {
-            type: ProgressType.Ground,
-            completedCourses: ground_hours_completed,
-          },
-          {
-            type: ProgressType.Landings,
-            completedCourses: landings_completed,
-          },
-          {
-            type: ProgressType.Assessment,
-            completedCourses: assessment_tasks_completed,
-            totalCourses: assessment_tasks_total,
-          },
-        ];
-        break;
-
-      default:
-        break;
-    }
-
-    return progress;
-  }
 
   get lessonImageFxLayoutAlign() {
     return this.sideNavOpen ? 'center center' : 'center start';

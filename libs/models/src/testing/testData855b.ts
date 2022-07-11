@@ -908,13 +908,5 @@ export const testData855: ILesson = {
   course_id: 0,
   course_attempt_id: 0,
   stage_id: 0,
-  lesson_stats: {
-    content_completed: 0,
-    content_total: 0,
-    ground_hours_completed :0,
-    flight_hours_completed: 0,
-    landings_completed: 0,
-    assessment_tasks_total: 0,
-    assessment_tasks_completed: 0
-  }
+  progress_stats: [],
 };

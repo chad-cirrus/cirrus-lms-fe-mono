@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { ICourseProgress, ProgressType } from '@cirrus/models';
+import { ProgressStat, ProgressType } from '@cirrus/models';
 
 export interface IProgressView {
   text: string;
@@ -14,8 +14,8 @@ export interface IProgressView {
 export class ProgressCardComponent {
   private _text!: string;
   private _imageIcon!: string;
-  private _completedCourses!: number;
-  private _totalCourses!: number | undefined;
+  private _completed!: number;
+  private _total!: number | undefined;
 
   get text() {
     return this._text;
@@ -25,20 +25,20 @@ export class ProgressCardComponent {
     return this._imageIcon;
   }
 
-  get completedCourses() {
-    return this._completedCourses;
+  get completed() {
+    return this._completed;
   }
 
-  get totalCourses() {
-    return this._totalCourses;
+  get total() {
+    return this._total;
   }
 
   @Input()
-  set progress(progress: ICourseProgress) {
-    this._text = this.mapProgressTypeToUrl(progress.type).text;
-    this._imageIcon = this.mapProgressTypeToUrl(progress.type).imageIcon;
-    this._completedCourses = progress.completedCourses;
-    this._totalCourses = progress.totalCourses;
+  set progress({ type, completed, total }: ProgressStat) {
+    this._text = this.mapProgressTypeToUrl(type).text;
+    this._imageIcon = this.mapProgressTypeToUrl(type).imageIcon;
+    this._completed = completed;
+    this._total = total;
 
   }
 

@@ -23,8 +23,8 @@ export const Primary = Template.bind({});
 Primary.args = {
   progress: {
     type: ProgressType.Flight,
-    completedCourses: 1,
-    totalCourses: 2,
+    completed: 1,
+    total: 2,
   },
 };
 
@@ -32,8 +32,8 @@ export const Flight = Template.bind({});
 Flight.args = {
   progress: {
     type: ProgressType.Flight,
-    completedCourses: 1,
-    totalCourses: 2,
+    completed: 1,
+    total: 2,
   },
 };
 
@@ -41,8 +41,8 @@ export const Ground = Template.bind({});
 Ground.args = {
   progress: {
     type: ProgressType.Ground,
-    completedCourses: 1,
-    totalCourses: 2,
+    completed: 1,
+    total: 2,
   },
 };
 
@@ -50,8 +50,8 @@ export const Land = Template.bind({});
 Land.args = {
   progress: {
     type: ProgressType.Landings,
-    completedCourses: 1,
-    totalCourses: 2,
+    completed: 1,
+    total: 2,
   },
 };
 
@@ -59,8 +59,8 @@ export const Simulator = Template.bind({});
 Simulator.args = {
   progress: {
     type: ProgressType.Simulator,
-    completedCourses: 1,
-    totalCourses: 2,
+    completed: 1,
+    total: 2,
   },
 };
 
@@ -68,8 +68,8 @@ export const Assessment = Template.bind({});
 Assessment.args = {
   progress: {
     type: ProgressType.Assessment,
-    completedCourses: 1,
-    totalCourses: 2,
+    completed: 1,
+    total: 2,
   },
 };
 
@@ -77,7 +77,7 @@ export const SelfStudy = Template.bind({});
 SelfStudy.args = {
   progress: {
     type: ProgressType.SelfStudy,
-    completedCourses: 1,
-    totalCourses: 2,
+    completed: 1,
+    total: 2,
   },
 };

@@ -1,5 +1,33 @@
 // eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
-import { ILesson } from '@cirrus/models';
+import { ILesson, ProgressStat, ProgressType } from '@cirrus/models';
+
+const progressStats: ProgressStat[] = [
+  {
+    type: ProgressType.Ground,
+    completed: 5,
+    total: 10,
+  },
+  {
+    type: ProgressType.Flight,
+    completed: 12,
+    total: 20,
+  },
+  {
+    type: ProgressType.Simulator,
+    completed: 10,
+    total: 14,
+  },
+  {
+    type: ProgressType.Landings,
+    completed: 9,
+    total: 12,
+  },
+  {
+    type: ProgressType.Assessment,
+    completed: 12,
+    total: 20,
+  },
+];
 
 export const testData: ILesson = {
   id: 832,
@@ -162,15 +190,7 @@ export const testData: ILesson = {
   course_id: 0,
   course_attempt_id: 0,
   stage_id: 0,
-  lesson_stats: {
-    content_completed: 0,
-    content_total: 0,
-    ground_hours_completed: 0,
-    flight_hours_completed: 0,
-    landings_completed: 0,
-    assessment_tasks_total: 0,
-    assessment_tasks_completed: 0,
-  },
+  progress_stats: progressStats,
 };
 
 export const testData2: ILesson = {
@@ -333,13 +353,5 @@ export const testData2: ILesson = {
   },
   instructor_overview: '',
   instructor_contents: [],
-  lesson_stats: {
-    content_completed: 0,
-    content_total: 0,
-    ground_hours_completed: 0,
-    flight_hours_completed: 0,
-    landings_completed: 0,
-    assessment_tasks_total: 0,
-    assessment_tasks_completed: 0,
-  },
+  progress_stats: progressStats,
 };

@@ -58,13 +58,13 @@
     [ngClass]="instructorView ? 'instructor-view' : 'student-view'"
   >
     <div
-      *ngIf="!instructorView && progress"
+      *ngIf="!instructorView && lesson.progress_stats"
       class="cirrus-progress-row"
       fxLayout="row"
       fxLayoutAlign="space-between"
     >
       <cirrus-lesson-progress-stats
-        [progress]="progress"
+        [progress]="lesson.progress_stats"
       ></cirrus-lesson-progress-stats>
     </div>
     <div

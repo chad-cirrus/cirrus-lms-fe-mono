@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { IContent } from './IContent';
 import { IProgress } from './IProgress';
+import { ProgressType } from './ProgressType';
 
 export interface ILesson {
   id: number;
@@ -30,17 +31,13 @@ export interface ILesson {
   thumbnail_image_url: string;
   mobile_hero_image_url: string;
   desktop_hero_image_url: string;
-  lesson_stats: LessonStats;
+  progress_stats: ProgressStat[];
 }
 
-export interface LessonStats {
-  content_completed: number;
-  content_total: number;
-  ground_hours_completed: number;
-  flight_hours_completed: number;
-  landings_completed: number;
-  assessment_tasks_total: number;
-  assessment_tasks_completed: number;
+export interface ProgressStat {
+  type: ProgressType;
+  completed: number;
+  total: number;
 }
 
 export interface StudentIntroVideo {

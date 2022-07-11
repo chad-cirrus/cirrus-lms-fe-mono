@@ -1,6 +1,16 @@
-div {
+.progress-stats {
+  display: flex;
   cirrus-progress-card:not(:first-child) {
     border-left: 1px solid white;
   }
-}
 
+  @media(min-width: 960px) {
+    display: grid;
+    grid: auto-flow / 1fr 1fr 1fr 1fr;
+    margin: 1rem auto;
+
+    cirrus-progress-card:nth-child(5n) {
+      border-left: none;
+    }
+  }
+}

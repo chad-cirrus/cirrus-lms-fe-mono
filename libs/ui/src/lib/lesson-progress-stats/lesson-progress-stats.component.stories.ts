@@ -26,38 +26,38 @@ Primary.args = {
   progress: [
     {
       type: ProgressType.Flight,
-      completedCourses: 16,
-      totalCourses: 20,
+      completed: 16,
+      total: 20,
     },
     {
       type: ProgressType.Ground,
-      completedCourses: 5,
-      totalCourses: 20,
+      completed: 5,
+      total: 20,
     },
     {
       type: ProgressType.CrossCountry,
-      completedCourses: 12,
-      totalCourses: 20,
+      completed: 12,
+      total: 20,
     },
     {
       type: ProgressType.Simulator,
-      completedCourses: 9,
-      totalCourses: 20,
+      completed: 9,
+      total: 20,
     },
     {
       type: ProgressType.Landings,
-      completedCourses: 4,
-      totalCourses: 20,
+      completed: 4,
+      total: 20,
     },
     {
       type: ProgressType.Assessment,
-      completedCourses: 12,
-      totalCourses: 20,
+      completed: 12,
+      total: 20,
     },
     {
       type: ProgressType.SelfStudy,
-      completedCourses: 12,
-      totalCourses: 20,
+      completed: 12,
+      total: 20,
     },
   ],
 };

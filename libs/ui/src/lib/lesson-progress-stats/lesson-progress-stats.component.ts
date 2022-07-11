@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { ICourseProgress } from '@cirrus/models';
+import { ICourseProgress, ProgressStat } from '@cirrus/models';
 
 @Component({
   selector: 'cirrus-lesson-progress-stats',
@@ -7,5 +7,5 @@ import { ICourseProgress } from '@cirrus/models';
   styleUrls: ['./lesson-progress-stats.component.scss'],
 })
 export class LessonProgressStatsComponent {
-  @Input() progress!: ICourseProgress[];
+  @Input() progress!: ProgressStat[];
 }

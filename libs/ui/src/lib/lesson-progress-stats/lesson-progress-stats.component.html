@@ -1,5 +1,6 @@
-<div fxLayout="row" fxLayoutAlign="start center">
+<div class='progress-stats'>
   <cirrus-progress-card
+    class='progress-stats__card'
     *ngFor="let item of progress"
     [progress]="item"
   ></cirrus-progress-card>
