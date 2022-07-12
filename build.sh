@@ -1,4 +1,5 @@
 #!/bin/bash
+cp apps/courses/src/environments/environment.ts.example apps/courses/src/environments/environment.ts
 yarn run build-projects
 if [[ $CREATE_STORYBOOK == "true" ]];
   then
