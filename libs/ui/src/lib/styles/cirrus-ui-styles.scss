@@ -186,3 +186,9 @@ img {
   padding: 0 !important;
   height: 100%;
 }
+@media (max-width: 960px) {
+  cirrus-content-image {
+      height: 100%;
+      overflow: hidden;
+  }
+}
