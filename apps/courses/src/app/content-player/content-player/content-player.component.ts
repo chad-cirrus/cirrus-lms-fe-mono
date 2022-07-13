@@ -7,36 +7,38 @@ import {
   ViewChild,
 } from '@angular/core';
 
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import {
   IContent,
-  IContentPlayerMenuItem,
   ILessonFlightLog,
   IProgress,
   ITask,
-  ILesson,
   PROGRESS_STATUS,
-  LessonStatus,
 } from '@cirrus/models';
-
-import { LessonContentComponent, mapContentTypeToIcon } from '@cirrus/ui';
-import { select, Store } from '@ngrx/store';
-import { BehaviorSubject, forkJoin, Observable, Subscription } from 'rxjs';
-import { PlaceholderDirective } from '../PlaceHolderDirective';
+import { LessonContentComponent } from '@cirrus/ui';
+import { Store } from '@ngrx/store';
+import { BehaviorSubject, combineLatest, Observable, of, Subject } from 'rxjs';
+import { delay, map, takeUntil, tap, withLatestFrom } from 'rxjs/operators';
+import { startProgress, completeProgress } from '../../store/actions';
 import { AppState } from '../../store/reducers';
 import {
   selectCheckOffRequired,
   selectLessonWithContentEntities,
+  selectMenuItems,
 } from '../../store/selectors/lessons.selector';
-import { componentDictionary } from '../component-dictionary';
-import { completeProgress, startProgress } from '../../store/actions';
-import {
-  selectIsScreenSmall,
-  selectIsScreenTablet,
-} from '../../store/selectors/view.selector';
 import { TaskService } from '../../task.service';
 import { take } from 'rxjs/operators';
+
+import { componentDictionary } from '../component-dictionary';
+import { IContentPlayerData } from '../content-player-dialog.service';
+import { PlaceholderDirective } from '../PlaceHolderDirective';
+import { CONTENT_PLAYER_ICONS } from './content-player-icons';
+import { findNextContent, INextContentResponse } from './findNextContent';
+
+export interface INextContentRequest {
+  type: string;
+  id?: number;
+}
 
 @Component({
   selector: 'cirrus-content-player',
@@ -46,227 +48,95 @@ import { take } from 'rxjs/operators';
 export class ContentPlayerComponent
   implements OnInit, AfterViewInit, OnDestroy
 {
-  private subscription = new Subscription();
-  checkoutOffsRequired$ = this.store.pipe(select(selectCheckOffRequired));
-  menuIcon = 'courses/images/svg/LcpMenuIcon.svg';
-  closeIcon = 'courses/images/svg/content-player-close.svg';
-  upChevron = 'courses/images/svg/up-chevron.svg';
-  private _menuOpen = new BehaviorSubject<boolean>(false);
-  menuOpen$ = this._menuOpen.asObservable();
-  menuItems!: IContentPlayerMenuItem[];
-  contents!: IContent[];
-  lesson!: ILesson;
-  isIntro!: boolean;
-  contentForIntro!: IContent;
-  overview!: string;
-  leftChevron = 'courses/images/svg/mobile-left-chevron.svg';
-  rightChevron = 'courses/images/svg/mobile-right-chevron.svg';
+  destroy$: Subject<boolean> = new Subject<boolean>();
+  menuItems$ = this.store.select(selectMenuItems);
+  lesson$ = this.store
+    .select(selectLessonWithContentEntities)
+    .pipe(tap(lesson => (this.lesson_title = lesson.title)));
 
-  currentContentType!: number;
+  private _nextContentRequest = new Subject<INextContentRequest>();
+  nextContentRequest$ = this._nextContentRequest.asObservable();
 
-  tasks: any;
-  logbook: any;
-  system_name!: string;
+  private _currentId = new BehaviorSubject<number>(0);
+  checkoutOffsRequired$ = this.store.select(selectCheckOffRequired);
 
-  lesson_title!: string;
-
-  title!: string;
-  id!: number;
-  isScreenSmall$: Observable<boolean> = this.store.select(selectIsScreenSmall);
-  isScreenTablet$: Observable<boolean> =
-    this.store.select(selectIsScreenTablet);
-
-  addPadding = false;
+  // mutatable props
   hideBtns = false;
+  addPadding = false;
+  lesson_title = '';
+  title = '';
+  currentContentType = -1;
+  //
+
+  currentContentItem$: Observable<INextContentResponse> =
+    this.nextContentRequest$.pipe(
+      withLatestFrom(
+        this.lesson$,
+        this.menuItems$,
+        this._currentId.asObservable()
+      ),
+      map(([contentRequest, lesson, menuItems, currentId]) => {
+        return findNextContent(contentRequest, lesson, menuItems, currentId);
+      }),
+      tap(response => this._currentId.next(response.content?.id as number))
+    );
+
+  private _menuOpen = new BehaviorSubject<boolean>(true);
+  menuOpen$ = this._menuOpen.asObservable();
+
+  get icons() {
+    return CONTENT_PLAYER_ICONS;
+  }
 
   @ViewChild(PlaceholderDirective) vcref!: PlaceholderDirective;
 
   constructor(
     @Inject(MAT_DIALOG_DATA)
-    public data: {
-      id: number;
-    },
+    public data: IContentPlayerData,
     private store: Store<AppState>,
     private taskService: TaskService,
     private dialogRef: MatDialogRef<ContentPlayerComponent>
   ) {}
 
   ngOnInit(): void {
-    this.tasks = this.data['tasks'];
-    this.logbook = this.data['logbook'];
-    this.contentForIntro = this.data['content'];
-    this.overview = this.data['overview'];
-
-    this.subscription.add(
-      this.store
-        .pipe(select(selectLessonWithContentEntities))
-        .subscribe(lesson => {
-          (this.lesson = lesson),
-            (this.contents = lesson.contents),
-            (this.menuItems = lesson.contents.map(
-              c =>
-                ({
-                  icon: mapContentTypeToIcon(c.content_type),
-                  text: c.title,
-                  id: c.id,
-                  progress: c.progress,
-                } as IContentPlayerMenuItem)
-            )),
-            (this.lesson_title = lesson.title);
-        })
-    );
+    combineLatest([
+      this.currentContentItem$,
+      this.taskService.tasksAndLogBooks$,
+    ])
+      .pipe(delay(0), takeUntil(this.destroy$))
+      .subscribe(([{ content }, [tasks, logbook]]) => {
+        if (content !== undefined) {
+          this.vcref.ViewContainerRef.clear();
+          this.addPadding = [9, 10].indexOf(content.content_type) < 0;
+          this.currentContentType = content.content_type;
+          this.title = content.title;
+          this.createComponent(content, tasks, logbook);
+        } else {
+          this.dialogRef.close();
+        }
+      });
   }
 
   ngAfterViewInit(): void {
-    setTimeout(() => {
-      this.contentRouter();
-    }, 100);
+    if (this.data.overview) {
+      this.playOverview(this.data.overview);
+    } else if (this.data.intro) {
+      this.playIntroContent(this.data.content as IContent);
+    } else {
+      this._nextContentRequest.next({ type: 'initial', id: this.data.id });
+    }
   }
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
-  }
-
-  contentRouter() {
-    if (this.overview) {
-      this.playOverview(this.overview);
-      return;
-    }
-    this.contentForIntro && !!this.contentForIntro.id
-      ? this.playIntroContent()
-      : this.playContent(this.data.id);
-  }
-
-  toggleMenu() {
-    this._menuOpen.next(true);
-  }
-
-  handleCloseMenu() {
-    this._menuOpen.next(false);
-  }
-
-  previousContent() {
-    const previousIndex = this.menuItems.map(i => i.id).indexOf(this.id) - 1;
-    if (previousIndex > -1) {
-      this.playContent(this.menuItems[previousIndex].id);
-    }
-  }
-
-  nextContent(): void {
-    if (this.playFirstContent()) {
-      this.playContent(this.menuItems[0].id);
-    } else {
-      if (this.lesson.progress.status !== 'completed') {
-        const nextIndex = this.menuItems.map(i => i.id).indexOf(this.id) + 1;
-        if (nextIndex !== this.menuItems.length) {
-          this.playContent(this.menuItems[nextIndex].id);
-        } else {
-          const firstNonCompleteContentIndex =
-            this.findFirstNonCompleteContentIndex();
-          this.playContent(this.menuItems[firstNonCompleteContentIndex].id);
-        }
-      } else {
-        this.dialogRef.close();
-      }
-    }
-  }
-
-  playContent(id: number) {
-    this.vcref.ViewContainerRef.clear();
-    let tasks: ITask[] = [];
-    let logbook: ILessonFlightLog[] = [];
-    this.addPadding = false;
-
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    const content = this.contents.find(c => c.id === id)!;
-    this.currentContentType = content.content_type;
-    this.addPadding = [9, 10].indexOf(content.content_type) < 0;
-
-    if (content.content_type === 9 || content.content_type === 10) {
-      const assessment = this.getAssessment(content.id);
-      assessment.subscribe(data => {
-        tasks = data[0];
-        logbook = data[1];
-        this.createComponent(id, content, tasks, logbook);
-      });
-    } else {
-      this.createComponent(id, content, tasks, logbook);
-    }
-
-    this.store
-      .select(selectIsScreenTablet)
-      .pipe(take(1))
-      .subscribe(isScreenTabletOrSmaller => {
-        if (isScreenTabletOrSmaller) {
-          this.handleCloseMenu();
-        }
-      });
-  }
-
-  private findFirstNonCompleteContentIndex(): number {
-    const id = this.menuItems.filter(
-      m => m.progress.status !== PROGRESS_STATUS.completed
-    )[0].id;
-    const index = this.menuItems.map(m => m.id).indexOf(id);
-    return index;
-  }
-
-  playFirstContent(): boolean {
-    const isIntroOrOverview =
-      (!!this.contentForIntro && !!this.contentForIntro.id) || !!this.overview;
-    const progressHasNotStarted =
-      this.lesson.progress.status === LessonStatus.NOT_STARTED;
-    return isIntroOrOverview && progressHasNotStarted;
-  }
-
-  getAssessment(content_id: number) {
-    const { course_attempt_id, stage_id } = this.lesson;
-    const payload = {
-      course_attempt_id,
-      content_id: content_id,
-      lesson_id: this.lesson.id,
-      stage_id,
-    };
-    const tasks$ = this.taskService.getTasks(payload);
-    const logbook$ = this.taskService.getLogbook(payload);
-    return forkJoin([tasks$, logbook$]);
-  }
-
-  playIntroContent() {
-    this.id = this.contentForIntro.id;
-    this.title = this.contentForIntro.title;
-
-    this.addPadding = true;
-
-    const lessonContentComponentRef =
-      this.vcref.ViewContainerRef.createComponent(componentDictionary[0]);
-
-    const component =
-      lessonContentComponentRef.instance as LessonContentComponent;
-    component.content = this.contentForIntro;
-  }
-
-  playOverview(overview: string) {
-    this.title = 'Overview';
-    const lessonContentComponentRef =
-      this.vcref.ViewContainerRef.createComponent(componentDictionary[8]);
-
-    const component =
-      lessonContentComponentRef.instance as LessonContentComponent;
-    component.overview = overview;
+    this.destroy$.next(true);
+    this.destroy$.unsubscribe();
   }
 
   createComponent(
-    id: number,
     content: IContent,
     tasks: ITask[],
     logbook: ILessonFlightLog[]
   ) {
-    this.id = id;
-    this.title = content.title;
-
-    this.addPadding = [9, 10, 6].indexOf(content.content_type) < 0;
-
     const lessonContentComponentRef =
       this.vcref.ViewContainerRef.createComponent(
         componentDictionary[content.content_type]
@@ -283,6 +153,47 @@ export class ContentPlayerComponent
     component.updateProgress.subscribe(progress =>
       this.updateProgress(progress)
     );
+  }
+
+  playOverview(overview: string) {
+    this.title = 'Overview';
+    const lessonContentComponentRef =
+      this.vcref.ViewContainerRef.createComponent(componentDictionary[8]);
+
+    const component =
+      lessonContentComponentRef.instance as LessonContentComponent;
+    component.overview = overview;
+  }
+
+  playIntroContent(content: IContent) {
+    this.addPadding = true;
+
+    const lessonContentComponentRef =
+      this.vcref.ViewContainerRef.createComponent(componentDictionary[0]);
+
+    const component =
+      lessonContentComponentRef.instance as LessonContentComponent;
+    component.content = content;
+  }
+
+  handleSideNavSelect(contentId: number) {
+    this._nextContentRequest.next({ type: 'initial', id: contentId });
+  }
+
+  handleCloseMenu() {
+    this._menuOpen.next(false);
+  }
+
+  toggleMenu() {
+    this._menuOpen.next(true);
+  }
+
+  previousContent() {
+    this._nextContentRequest.next({ type: 'prev' });
+  }
+
+  nextContent() {
+    this._nextContentRequest.next({ type: 'next' });
   }
 
   updateProgress(progress: IProgress) {

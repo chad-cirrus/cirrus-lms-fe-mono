@@ -54,3 +54,17 @@ export const selectCheckOffRequired = createSelector(
       .map(content => content.progress.status)
       .filter(status => status !== 'completed').length > 0
 );
+
+export const selectMenuItems = createSelector(
+  selectLessonWithContentEntities,
+  lesson =>
+    lesson.contents.map(
+      c =>
+        ({
+          icon: mapContentTypeToIcon(c.content_type),
+          text: c.title,
+          id: c.id,
+          progress: c.progress,
+        } as IContentPlayerMenuItem)
+    )
+);

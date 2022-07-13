@@ -6,8 +6,8 @@
   >
     <cirrus-lesson-content-player-menu
       (closeMenu)="handleCloseMenu()"
-      [menuItems]="menuItems"
-      (playContent)="playContent($event)"
+      [menuItems]="(menuItems$ | async)!"
+      (playContent)="handleSideNavSelect($event)"
     ></cirrus-lesson-content-player-menu>
   </div>
   <div class="content-player" fxLayout="row">
@@ -17,7 +17,7 @@
       *ngIf="(menuOpen$ | async) === false"
       fxHide.lt-md
     >
-      <img [src]="menuIcon" (click)="this.toggleMenu()" />
+      <img [src]="icons.menuIcon" (click)="this.toggleMenu()" />
     </div>
 
     <div
@@ -64,7 +64,7 @@
             </div>
           </div>
         </div>
-        <img class="close-icon" [src]="closeIcon" mat-dialog-close />
+        <img class="close-icon" [src]="icons.closeIcon" mat-dialog-close />
       </div>
       <div
         class="content-player-body"
@@ -94,11 +94,11 @@
             (click)="previousContent()"
           >
             <span class="previous" fxHide.lt-sm>Previous</span>
-            <img class="left-chevron" [src]="leftChevron" alt="l" />
+            <img class="left-chevron" [src]="icons.leftChevron" alt="l" />
           </button>
           <button class="next-button" mat-raised-button (click)="nextContent()">
             <span class="next" fxHide.lt-sm>Next</span>
-            <img class="right-chevron" [src]="rightChevron" alt="r" />
+            <img class="right-chevron" [src]="icons.rightChevron" alt="r" />
           </button>
         </div>
       </div>
@@ -119,7 +119,7 @@
         <div class="menu-label" fxFlex="grow">Lesson Contents</div>
         <img
           class="up-chevron"
-          [src]="upChevron"
+          [src]="icons.upChevron"
           alt="up-chevron"
           fxFlex="nogrow"
         />

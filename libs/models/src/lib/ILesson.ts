@@ -30,14 +30,13 @@ export interface ILesson {
   thumbnail_image_url: string;
   mobile_hero_image_url: string;
   desktop_hero_image_url: string;
-  lesson_stats: LessonStats
+  lesson_stats: LessonStats;
 }
-
 
 export interface LessonStats {
   content_completed: number;
   content_total: number;
-  ground_hours_completed :number;
+  ground_hours_completed: number;
   flight_hours_completed: number;
   landings_completed: number;
   assessment_tasks_total: number;

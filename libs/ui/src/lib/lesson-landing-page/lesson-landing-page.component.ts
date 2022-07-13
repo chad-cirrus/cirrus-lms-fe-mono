@@ -12,13 +12,10 @@ import {
   ILesson,
   ICourseProgress,
   ProgressType,
-  LessonStatus
+  LessonStatus,
 } from '@cirrus/models';
 import { StagesOverlayComponent } from '../stages-overlay/stages-overlay.component';
 import { DomSanitizer } from '@angular/platform-browser';
-
-
-
 
 @Component({
   selector: 'cirrus-lesson-landing-page',
@@ -39,27 +36,22 @@ export class LessonLandingPageComponent {
     this._progress = progress;
   }
 
-
   @Input()
   set isScreenSmall(value) {
-    this._isScreenSmall = value
-    if(this.lesson){
-      this.bgImage = this.setBackgroundImage(value)
-    }
+    this.bgImage = this.setBackgroundImage(value);
   }
 
   get isScreenSmall() {
     return this._isScreenSmall;
   }
 
-
   @Input()
   set lesson(value: ILesson) {
-    if(value.id === 0){
+    if (value.id === 0) {
       return;
     }
     this._lesson = value;
-    this.bgImage = this.setBackgroundImage(this.isScreenSmall)
+    this.bgImage = this.setBackgroundImage(this.isScreenSmall);
     const dictionary: { [key: string]: string } = {
       ['not_started']: 'Get Started',
       ['in_progress']: 'Resume Lesson',
@@ -78,7 +70,6 @@ export class LessonLandingPageComponent {
     return this._buttonText;
   }
 
-
   @ViewChild('drawer') drawer: any;
   showFiller = false;
 
@@ -91,24 +82,23 @@ export class LessonLandingPageComponent {
   // eslint-disable-next-line @typescript-eslint/no-inferrable-types
   @Input() courseComplete: boolean = false;
   profileImageUrl = 'course/images/profile.png';
-  bgImage:any;
+  bgImage: any;
 
-  @Input() defaultMobile!: string;
-  @Input() defaultDesktop!: string;
-
+  defaultMobile =
+    'https://cirrusapproachherokuprod.blob.core.windows.net/cirruslmsherokudevcontainer/content-items/images/default-lesson-hero-mobile.jpg';
+  defaultDesktop =
+    'https://cirrusapproachherokuprod.blob.core.windows.net/cirruslmsherokudevcontainer/content-items/images/default-lesson-hero-desktop.jpg';
 
   libraryImageUrl = 'courses/images/library.png';
   bookOpenImageUrl = 'courses/images/book-open.png';
   @Output() fetchMediaOutput = new EventEmitter<IContent>();
   @Output() fetchMediaOutputIntro = new EventEmitter<IContent>();
-  @Output() fetchScorm = new EventEmitter<IContent>();
   @Output() openSideNav = new EventEmitter();
   @Output() navigateToLesson = new EventEmitter<any>();
   @Output() displayOverviewOutput = new EventEmitter<string>();
   @Output() playNextLessonContent = new EventEmitter();
 
-  constructor(private dialog: MatDialog, private sanitizer: DomSanitizer
-    ) {}
+  constructor(private dialog: MatDialog, private sanitizer: DomSanitizer) {}
 
   setProgressForCard() {
     let progress: ICourseProgress[] = [];
@@ -195,16 +185,17 @@ export class LessonLandingPageComponent {
     return 'courses/images/svg/play_button_filled_in.svg';
   }
 
-
   setBackgroundImage(value: boolean): string {
-    const { mobile_hero_image_url, desktop_hero_image_url } = this.lesson;
-    if(value) {
-     return mobile_hero_image_url && desktop_hero_image_url ? mobile_hero_image_url : this.defaultMobile;
+    if (value) {
+      return this.lesson?.mobile_hero_image_url
+        ? this.lesson?.mobile_hero_image_url
+        : this.defaultMobile;
     } else {
-     return desktop_hero_image_url && mobile_hero_image_url ? desktop_hero_image_url : this.defaultDesktop;
+      return this.lesson?.desktop_hero_image_url
+        ? this.lesson?.desktop_hero_image_url
+        : this.defaultDesktop;
     }
   }
-
 
   startLesson() {
     const { student_intro_video, overview } = this.lesson;
@@ -262,19 +253,15 @@ export class LessonLandingPageComponent {
     this.openSideNav.emit();
   }
 
-
-
   playCurrentContent() {
-    const content =
-      this.lesson.contents.find(
-        c => c.progress.status === LessonStatus.NOT_STARTED
-      )
+    const content = this.lesson.contents.find(
+      c => c.progress.status === LessonStatus.NOT_STARTED
+    );
 
-      if(!content) {
-        this.playNextLessonContent.emit(this.workbook);
-        return;
-      }
-
+    if (!content) {
+      this.playNextLessonContent.emit(this.workbook);
+      return;
+    }
 
     setTimeout(() => {
       this.fetchMediaOutput.next(content);

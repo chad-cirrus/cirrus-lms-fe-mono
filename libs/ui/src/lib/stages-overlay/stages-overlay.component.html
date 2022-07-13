@@ -1,6 +1,15 @@
 <div class="overlay-container" fxLayout="column">
   <div fxLayout="row" fxLayoutAlign="space-between center" class="title-text">
-    <div fxlayout="row" fxLayoutAlign="space-between center" class="lesson-nav-title"><img src="courses/images/svg/lesson-icon-heavy.svg" alt="Course lessons icon.">Course Contents</div>
+    <div
+      fxlayout="row"
+      fxLayoutAlign="space-between center"
+      class="lesson-nav-title"
+    >
+      <img
+        src="courses/images/svg/lesson-icon-heavy.svg"
+        alt="Course lessons icon."
+      />Course Contents
+    </div>
     <img
       class="close-icon"
       src="courses/images/svg/nav-close.svg"
@@ -30,8 +39,8 @@
           (click)="accordionItem.toggle()"
         >
           <div class="stage-title" fxLayout="row" fxLayoutAlign="space-between">
-            <div>{{ stage.title }}</div>
-            <img src="courses/images/svg/down-chevron.svg"/>
+            <div>{{ stage.name }}</div>
+            <img src="courses/images/svg/down-chevron.svg" />
           </div>
         </div>
         <div class="items-container">

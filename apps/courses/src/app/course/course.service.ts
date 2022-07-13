@@ -3,16 +3,15 @@ import { Injectable } from '@angular/core';
 import {
   IInitialFile,
   ILesson,
-  IProgress,
   IProgressUpdateResponses,
   IWorkBook,
-  PROGRESS_STATUS,
   PROGRESS_TYPE,
 } from '@cirrus/models';
 import { Observable, Subject } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 import { completeProgressHandler } from '../shared/complete-progress.handler';
+import { ITasksRequest, TaskService } from '../task.service';
 
 @Injectable({
   providedIn: 'root',
@@ -29,12 +28,33 @@ export class CoursesService {
     )
     .pipe(map(notif => notif.length));
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private taskService: TaskService) {}
 
   getLessons(courseId: number, lessonId: number): Observable<ILesson> {
-    return this.http.get<ILesson>(
-      `${environment.baseUrl}/${this.coursesUrl}/${courseId}/lessons/${lessonId}`
-    );
+    return this.http
+      .get<ILesson>(
+        `${environment.baseUrl}/${this.coursesUrl}/${courseId}/lessons/${lessonId}`
+      )
+      .pipe(
+        tap(lesson => {
+          const assessmentContents = lesson.contents.filter(c =>
+            [9, 10].includes(c.content_type)
+          );
+          assessmentContents
+            .map(
+              c =>
+                ({
+                  course_attempt_id: lesson.course_attempt_id,
+                  content_id: c.id,
+                  lesson_id: lesson.id,
+                  stage_id: lesson.stage_id,
+                } as ITasksRequest)
+            )
+            .forEach(request => {
+              this.taskService.getTasksAndLogbook(request);
+            });
+        })
+      );
   }
 
   getWorkbook(courseId: number): Observable<IWorkBook> {

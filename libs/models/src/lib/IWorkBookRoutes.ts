@@ -20,7 +20,7 @@ export interface IWorkBook {
 export interface IStage {
   id: number;
   order: number;
-  title: string;
+  name: string;
   progress: IProgress;
   lessons: IStageLesson[];
 }

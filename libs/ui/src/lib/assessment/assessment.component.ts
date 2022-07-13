@@ -1,5 +1,11 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
-import { Component, ViewEncapsulation, ViewChild, OnInit, Input } from '@angular/core';
+import {
+  Component,
+  ViewEncapsulation,
+  ViewChild,
+  OnInit,
+  Input,
+} from '@angular/core';
 import { MatTabGroup } from '@angular/material/tabs';
 import { Attempt } from '@cirrus/models';
 import { Observable } from 'rxjs';
@@ -33,12 +39,11 @@ export class AssessmentComponent
   }
 
   public set menuOpen(value: boolean) {
-    this._isMenuOpen= value;
+    this._isMenuOpen = value;
   }
 
   ngOnInit(): void {
     super.ngOnInit();
-    console.log('menu', this.menuOpen)
 
     this.tablet$ = this.breakpointObserver.observe('(max-width: 959px)').pipe(
       map(({ matches }) => {
@@ -62,7 +67,7 @@ export class AssessmentComponent
     this.tabGroup.selectedIndex = 2;
     this.hide();
     this.attempt = $event.event;
-    this.attempt_index = $event.index
+    this.attempt_index = $event.index;
   }
 
   hide() {

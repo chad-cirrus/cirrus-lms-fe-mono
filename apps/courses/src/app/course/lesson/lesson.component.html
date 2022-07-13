@@ -26,12 +26,9 @@
     <cirrus-lesson-landing-page
       [checkoutOffsRequired]="checkoutOffsRequired$ | async"
       [lesson]="(lesson$ | async)!"
-      [defaultDesktop]="defaultDesktop"
-      [defaultMobile]="defaultMobile"
       (playNextLessonContent)="playNextLessonContent($event)"
       (fetchMediaOutput)="fetchMedia($event)"
       (fetchMediaOutputIntro)="fetchMediaForIntroVideo($event)"
-      (fetchScorm)="fetchScorm($event)"
       (displayOverviewOutput)="displayOverview($event)"
       [instructorView]="(instructorView$ | async)!"
       [sideNavOpen]="(sideNavOpen$ | async)!"

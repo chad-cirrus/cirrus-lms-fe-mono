@@ -11,7 +11,7 @@ import {
 } from '@cirrus/ui';
 import { select, Store } from '@ngrx/store';
 
-import { combineLatest, Observable, Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { filter, take, tap, withLatestFrom } from 'rxjs/operators';
 import { AppService } from '../../app.service';
 
@@ -46,7 +46,11 @@ export class LessonComponent implements OnInit, OnDestroy {
   checkoutOffsRequired$ = this.store.pipe(select(selectCheckOffRequired));
   lesson$: Observable<ILesson> = this.store
     .select(selectLessonWithContentEntities)
-    .pipe(tap(lesson => (this._lesson = lesson)));
+    .pipe(
+      tap(lesson => {
+        this._lesson = lesson;
+      })
+    );
   instructorView$: Observable<boolean> =
     this.store.select(selectInstructorView);
   isScreenSmall$: Observable<boolean> = this.store.select(selectIsScreenSmall);
@@ -162,63 +166,20 @@ export class LessonComponent implements OnInit, OnDestroy {
   }
 
   displayOverview(overview: string) {
-    this.contentPlayerDialogService.displayContentPlayerComponent(
-      this._lesson,
-      0,
-      undefined,
-      undefined,
-      undefined,
-      overview
-    );
+    this.contentPlayerDialogService.displayContentPlayerBComponent(0, overview);
   }
 
   fetchMediaForIntroVideo(content: IContent) {
-    this.contentPlayerDialogService.displayContentPlayerComponent(
-      this._lesson,
+    this.contentPlayerDialogService.displayContentPlayerBComponent(
       content.id,
-      undefined,
-      undefined,
+      '',
+      true,
       content
     );
   }
 
   fetchMedia(content: IContent) {
-    if (content.content_type === 9 || content.content_type === 10) {
-      const { course_attempt_id, stage_id } = this._lesson;
-      const payload = {
-        course_attempt_id,
-        content_id: content.id,
-        lesson_id: this._lesson.id,
-        stage_id,
-      };
-      const tasks$ = this.taskService.getTasks(payload);
-      const logbook$ = this.taskService.getLogbook(payload);
-
-      combineLatest([this.lesson$, tasks$, logbook$])
-        .pipe(take(1))
-        .subscribe(([lessons, tasks, logbook]) => {
-          this.contentPlayerDialogService.displayContentPlayerComponent(
-            lessons,
-            content.id,
-            tasks,
-            logbook
-          );
-        });
-    } else {
-      this.contentPlayerDialogService.displayContentPlayerComponent(
-        this._lesson,
-        content.id
-      );
-    }
-  }
-
-  fetchScorm(content: IContent) {
-    this.lesson$.pipe(take(1)).subscribe(lesson => {
-      this.contentPlayerDialogService
-        .displayContentPlayerComponent(lesson, content.id)
-        .afterClosed()
-        .subscribe(() => console.log('scorm is closed'));
-    });
+    this.contentPlayerDialogService.displayContentPlayerBComponent(content.id);
   }
 
   playNextLessonContent($event: any) {

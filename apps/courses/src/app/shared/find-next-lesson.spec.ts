@@ -208,11 +208,11 @@ describe('find next lesson helper function when given one stage is completed', (
   it('should find the next lesson when on stage is complete and one stage has a completed lesson', () => {
     const arrangedWorkbook: IWorkBook = {
       id: 215,
+      name: 'name',
       progress: {
         id: 1774631,
         status: 'completed',
       },
-      name: 'Icing Awareness Course',
       stages: [
         {
           id: 125,
@@ -343,5 +343,66 @@ describe('find next lesson helper function returns 0 when all stages and lessons
     const actual = findNextLesson(workbook3);
 
     expect(actual).toBe(0);
+  });
+});
+
+const edgeCaseWorkBook: IWorkBook = {
+  id: 360,
+  progress: {
+    id: 1774800,
+    status: 'in_progress',
+  },
+  name: 'Takeoffs & Landings Flight Syllabus',
+  stages: [
+    {
+      id: 494,
+      order: 0,
+      name: 'none',
+      progress: {
+        id: 1774801,
+        status: 'completed',
+      },
+      lessons: [
+        {
+          id: 955,
+          title: 'Your Cirrus Training',
+          order: 0,
+          progress: {
+            id: 1774802,
+            status: 'completed',
+          },
+          stage_lesson_index: '1.1 Self-Study',
+        },
+      ],
+    },
+    {
+      id: 370,
+      order: 1,
+      name: 'none',
+      progress: {
+        id: 1774806,
+        status: 'in_progress',
+      },
+      lessons: [
+        {
+          id: 855,
+          title: 'Lesson 1',
+          order: 0,
+          progress: {
+            id: 1774807,
+            status: 'in_progress',
+          },
+          stage_lesson_index: '2.1 Flight',
+        },
+      ],
+    },
+  ],
+};
+
+describe('edge case', () => {
+  it('should find the next lesson', () => {
+    const actual = findNextLesson(edgeCaseWorkBook);
+
+    expect(actual).toBe(855);
   });
 });

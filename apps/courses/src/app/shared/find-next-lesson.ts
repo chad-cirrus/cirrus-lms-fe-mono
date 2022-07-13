@@ -8,7 +8,10 @@ export function findNextLesson(workbook: IWorkBook): number {
             .map(l => ({ id: l.id, status: l.progress.status }))
             .reduce((prev, curr) => {
               const lesson =
-                prev === 0 && curr.status === 'not_started' ? curr.id : prev;
+                prev === 0 &&
+                (curr.status === 'not_started' || curr.status === 'in_progress')
+                  ? curr.id
+                  : prev;
               return lesson;
             }, 0)
         : prev;
