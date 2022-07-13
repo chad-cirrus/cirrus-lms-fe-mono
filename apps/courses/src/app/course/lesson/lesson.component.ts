@@ -3,7 +3,7 @@ import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSidenav } from '@angular/material/sidenav';
 import { ActivatedRoute, Router } from '@angular/router';
-import { IContent, ILesson } from '@cirrus/models';
+import { IContent, ILesson, PROGRESS_STATUS } from '@cirrus/models';
 import {
   CompletionDialogComponent,
   CourseCompletionComponent,
@@ -93,9 +93,13 @@ export class LessonComponent implements OnInit, OnDestroy {
     this.lessonSubscription.add(
       this.lessonCompleted$
         .pipe(
-          withLatestFrom(this.workbook$, this.store.select(selectCirrusUser))
+          withLatestFrom(
+            this.workbook$,
+            this.store.select(selectCirrusUser),
+            this.lesson$
+          )
         )
-        .subscribe(([progress_type, workbook, user]) => {
+        .subscribe(([progress_type, workbook, user, lesson]) => {
           const component: ComponentType<
             CompletionDialogComponent | CourseCompletionComponent
           > =
@@ -113,39 +117,46 @@ export class LessonComponent implements OnInit, OnDestroy {
                   student: user.name,
                 };
 
-          this.dialog
-            .open(component, {
-              data,
-              panelClass: 'fullscreen-dialog',
-              height: '100%',
-              width: '100%',
-            })
-            .afterClosed()
-            .pipe(withLatestFrom(this.workbook$))
-            .subscribe(([response, workbook]) => {
-              if (response === LESSON_COMPLETION_CTA.nextLesson) {
-                const nextLesson = findNextLesson(workbook);
-                if (nextLesson > 0) {
-                  this.router.navigate([
-                    `/courses/${this.coursId}/lessons/${nextLesson}`,
-                  ]);
+          const showCompletionDialog =
+            progress_type === 'lesson'
+              ? lesson.progress.status !== PROGRESS_STATUS.completed
+              : workbook.progress.status !== PROGRESS_STATUS.completed;
+
+          if (showCompletionDialog) {
+            this.dialog
+              .open(component, {
+                data,
+                panelClass: 'fullscreen-dialog',
+                height: '100%',
+                width: '100%',
+              })
+              .afterClosed()
+              .pipe(withLatestFrom(this.workbook$))
+              .subscribe(([response, workbook]) => {
+                if (response === LESSON_COMPLETION_CTA.nextLesson) {
+                  const nextLesson = findNextLesson(workbook);
+                  if (nextLesson > 0) {
+                    this.router.navigate([
+                      `/courses/${this.coursId}/lessons/${nextLesson}`,
+                    ]);
+                  }
+                } else if (
+                  response === LESSON_COMPLETION_CTA.downloadCertificate
+                ) {
+                  this.downloadService
+                    .downloadCertificate(this._lesson.course_attempt_id)
+                    .subscribe((data: Blob) => {
+                      this.downloadPdf(data);
+                    });
+                } else if (
+                  response === LESSON_COMPLETION_CTA.downloadTranscript
+                ) {
+                  console.log('we will download transcript');
+                } else {
+                  console.log('none of the above');
                 }
-              } else if (
-                response === LESSON_COMPLETION_CTA.downloadCertificate
-              ) {
-                this.downloadService
-                  .downloadCertificate(this._lesson.course_attempt_id)
-                  .subscribe((data: Blob) => {
-                    this.downloadPdf(data);
-                  });
-              } else if (
-                response === LESSON_COMPLETION_CTA.downloadTranscript
-              ) {
-                console.log('we will download transcript');
-              } else {
-                console.log('none of the above');
-              }
-            });
+              });
+          }
         })
     );
   }
