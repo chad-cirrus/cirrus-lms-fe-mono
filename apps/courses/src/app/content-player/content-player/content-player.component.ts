@@ -18,7 +18,7 @@ import {
 import { LessonContentComponent } from '@cirrus/ui';
 import { Store } from '@ngrx/store';
 import { BehaviorSubject, combineLatest, Observable, of, Subject } from 'rxjs';
-import { delay, map, takeUntil, tap, withLatestFrom } from 'rxjs/operators';
+import { delay, filter, map, takeUntil, tap, withLatestFrom } from 'rxjs/operators';
 import { startProgress, completeProgress } from '../../store/actions';
 import { AppState } from '../../store/reducers';
 import {
@@ -34,6 +34,7 @@ import { IContentPlayerData } from '../content-player-dialog.service';
 import { PlaceholderDirective } from '../PlaceHolderDirective';
 import { CONTENT_PLAYER_ICONS } from './content-player-icons';
 import { findNextContent, INextContentResponse } from './findNextContent';
+import { selectIsScreenTablet } from '../../store/selectors/view.selector';
 
 export interface INextContentRequest {
   type: string;
@@ -111,6 +112,13 @@ export class ContentPlayerComponent
           this.currentContentType = content.content_type;
           this.title = content.title;
           this.createComponent(content, tasks, logbook);
+
+          this.store
+            .select(selectIsScreenTablet)
+            .pipe(take(1), filter(Boolean))
+            .subscribe(() => {
+              this.handleCloseMenu();
+            });
         } else {
           this.dialogRef.close();
         }
