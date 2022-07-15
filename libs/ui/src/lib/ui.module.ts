@@ -54,6 +54,7 @@ import { CourseCompletionComponent } from './course-completion/course-completion
 import { LessonProgressStatsComponent } from './lesson-progress-stats/lesson-progress-stats.component';
 import { PdfComponent } from './pdf/pdf.component';
 import { EncodeUriPipe } from './encode-uri.pipe';
+import { UiDownloadService } from './course-completion/ui-download.service';
 
 @NgModule({
   imports: [
@@ -143,6 +144,7 @@ import { EncodeUriPipe } from './encode-uri.pipe';
     { provide: MAT_DIALOG_DATA, useValue: {} },
     { provide: MatDialogRef, useValue: {} },
     CirrusSanitizerService,
+    UiDownloadService,
   ],
 })
 export class UiModule {}

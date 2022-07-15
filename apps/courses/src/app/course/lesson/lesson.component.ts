@@ -12,7 +12,7 @@ import {
 import { select, Store } from '@ngrx/store';
 
 import { Observable, Subscription } from 'rxjs';
-import { filter, take, tap, withLatestFrom } from 'rxjs/operators';
+import { filter, tap, withLatestFrom } from 'rxjs/operators';
 import { AppService } from '../../app.service';
 
 import { ContentPlayerDialogService } from '../../content-player/content-player-dialog.service';
@@ -30,10 +30,8 @@ import {
   selectSideNavOpen,
 } from '../../store/selectors/view.selector';
 import { selectWorkbook } from '../../store/selectors/workbook-routes.selector';
-import { TaskService } from '../../task.service';
 import { CoursesService } from '../course.service';
 import { environment } from '../../../environments/environment';
-import { DownloadService } from '../../download.service';
 
 @Component({
   selector: 'cirrus-lesson',
@@ -73,11 +71,9 @@ export class LessonComponent implements OnInit, OnDestroy {
     private store: Store<LessonState>,
     private contentPlayerDialogService: ContentPlayerDialogService,
     private router: Router,
-    private taskService: TaskService,
     private courseService: CoursesService,
     private dialog: MatDialog,
-    private appService: AppService,
-    private downloadService: DownloadService
+    private appService: AppService
   ) {}
 
   ngOnInit() {
@@ -115,6 +111,7 @@ export class LessonComponent implements OnInit, OnDestroy {
                   badge: 'courses/images/svg/AvionicsCourse2.svg',
                   course: workbook.name,
                   student: user.name,
+                  course_attempt_id: this._lesson.course_attempt_id,
                 };
 
           const showCompletionDialog =
@@ -140,18 +137,6 @@ export class LessonComponent implements OnInit, OnDestroy {
                       `/courses/${this.coursId}/lessons/${nextLesson}`,
                     ]);
                   }
-                } else if (
-                  response === LESSON_COMPLETION_CTA.downloadCertificate
-                ) {
-                  this.downloadService
-                    .downloadCertificate(this._lesson.course_attempt_id)
-                    .subscribe((data: Blob) => {
-                      this.downloadPdf(data);
-                    });
-                } else if (
-                  response === LESSON_COMPLETION_CTA.downloadTranscript
-                ) {
-                  console.log('we will download transcript');
                 } else {
                   console.log('none of the above');
                 }

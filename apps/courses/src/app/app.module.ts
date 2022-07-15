@@ -34,6 +34,7 @@ import { A11yModule } from '@angular/cdk/a11y';
 import { HamburgerMenuComponent } from './course/header/hamburger-menu/hamburger-menu.component';
 import { ContentPlayerModule } from './content-player/content-player.module';
 import { ProgressEffects } from './store/effects/progress.effects';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -79,6 +80,10 @@ import { ProgressEffects } from './store/effects/progress.effects';
       multi: true,
     },
     MediaServerService,
+    {
+      provide: 'environment',
+      useValue: environment,
+    },
   ],
   bootstrap: [AppComponent],
   exports: [HamburgerMenuComponent],

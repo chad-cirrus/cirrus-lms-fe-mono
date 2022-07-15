@@ -2,42 +2,34 @@
   <img src="courses/images/svg/close.svg" mat-dialog-close="nothing" />
 </div>
 
-<div
-  class="container"
-  fxLayout="column"
-  fxLayoutAlign="center"
->
-  <div
-    class="main"
-    fxLayout="column"
-    fxLayoutAlign="center center"
-  >
+<div class="container" fxLayout="column" fxLayoutAlign="center">
+  <div class="main" fxLayout="column" fxLayoutAlign="center center">
     <div class="badge"><img [src]="data.badge" alt="cirrus badge" /></div>
     <div class="salutation">Congratulations, {{ data.student }}!</div>
     <div class="message">You've completed the {{ data.course }}</div>
 
     <div
-    class="buttons"
-    fxLayout="row"
-    fxLayout.lt-sm="column"
-    fxLayoutAlign="center start"
-    fxLayoutAlign.lt-sm="center center"
-    fxLayoutGap="1.5rem"
-  >
-    <button
-      class="download-certificate"
-      mat-raised-button
-      [mat-dialog-close]="lessonCompletionCta.downloadCertificate"
+      class="buttons"
+      fxLayout="row"
+      fxLayout.lt-sm="column"
+      fxLayoutAlign="center start"
+      fxLayoutAlign.lt-sm="center center"
+      fxLayoutGap="1.5rem"
     >
-      Download Certificate
-    </button>
-    <button
-      class="download-transcript"
-      mat-raised-button
-      [mat-dialog-close]="lessonCompletionCta.downloadTranscript"
-    >
-      Download Transcript
-    </button>
-  </div>
+      <button
+        class="download-certificate"
+        mat-raised-button
+        (click)="downloadCert()"
+      >
+        Download Certificate
+      </button>
+      <button
+        class="download-transcript"
+        mat-raised-button
+        [mat-dialog-close]="lessonCompletionCta.downloadTranscript"
+      >
+        Download Transcript
+      </button>
+    </div>
   </div>
 </div>
