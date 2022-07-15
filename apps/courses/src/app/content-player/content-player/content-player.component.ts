@@ -81,7 +81,7 @@ export class ContentPlayerComponent
       tap(response => this._currentId.next(response.content?.id as number))
     );
 
-  private _menuOpen = new BehaviorSubject<boolean>(true);
+  private _menuOpen = new BehaviorSubject<boolean>(false);
   menuOpen$ = this._menuOpen.asObservable();
 
   get icons() {
