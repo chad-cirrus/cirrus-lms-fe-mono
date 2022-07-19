@@ -1,0 +1,48 @@
+<div
+  class="course-progress-completed"
+  fxLayout="column"
+  fxLayoutAlign="start start"
+  fxLayoutGap="12px"
+>
+  <div
+    class="completed-date"
+    fxLayout="row"
+    fxLayoutAlign="start center"
+    fxLayoutGap="8px"
+  >
+    <img [src]="completeCheckIcon" alt="" />
+    <span>
+      Congrats! You've completed this course as of
+      {{ completeDate | date: 'dd/MM/YY' }}
+    </span>
+  </div>
+  <div
+    fxLayout="column"
+    fxLayoutAlign="start start"
+    fxLayoutGap="12px"
+    fxLayout.gt-xs="row"
+    fxLayoutGap.gt-xs="36px"
+  >
+    <div
+      *ngIf="certificate"
+      class="download-cert"
+      fxLayout="row"
+      fxLayoutAlign="start center"
+      fxLayoutGap="8px"
+      (click)="emitDownloadCert()"
+    >
+      <img [src]="downloadArrowIcon" alt="" />
+      <span> Download Certificate </span>
+    </div>
+    <div
+      class="download-transcript"
+      fxLayout="row"
+      fxLayoutAlign="start center"
+      fxLayoutGap="8px"
+      (click)="emitDownloadTranscript()"
+    >
+      <img [src]="downloadArrowIcon" alt="" />
+      <span> Download Transcript </span>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,41 @@
+.course-progress-completed {
+  font-family: 'Akzidenz-Grotesk BQ';
+  font-style: normal;
+  font-weight: 400;
+  .completed-date {
+    font-size: 14px;
+    line-height: 21px;
+    letter-spacing: 0.02em;
+    color: #D1D1D1;
+    img {
+      height: 18px;
+    }
+  }
+  .download-cert,
+  .download-transcript {
+    font-size: 17px;
+    line-height: 23px;
+    letter-spacing: -0.005em;
+    color: #C4C4C4;
+    img {
+      height: 12px;
+    }
+  }
+  .download-cert:hover {
+    cursor: pointer;
+  }
+  .download-transcript:hover {
+    cursor: pointer;
+  }
+}
+
+// desktop
+@media (min-width: 960px) {
+  .course-progress-completed {
+    .completed-date {
+      font-size: 18px;
+      line-height: 26px;
+
+    }
+  }
+}
