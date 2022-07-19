@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { ICourseProgress, ProgressStat } from '@cirrus/models';
+import { ProgressStat } from '@cirrus/models';
 
 @Component({
   selector: 'cirrus-lesson-progress-stats',

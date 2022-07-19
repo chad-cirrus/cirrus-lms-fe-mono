@@ -6,10 +6,10 @@
 
   @media(min-width: 960px) {
     display: grid;
-    grid: auto-flow / 1fr 1fr 1fr 1fr;
+    grid: auto-flow / 1fr 1fr 1fr 1fr 1fr;
     margin: 1rem auto;
 
-    cirrus-progress-card:nth-child(5n) {
+    cirrus-progress-card:nth-child(6n) {
       border-left: none;
     }
   }
