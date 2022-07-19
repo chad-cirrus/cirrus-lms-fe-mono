@@ -1,0 +1,27 @@
+.course-progress {
+  font-family: 'Akzidenz-Grotesk BQ';
+  font-style: normal;
+  font-weight: 500;
+  .last-completed {
+    min-height: 19px;
+    color: #969696;
+    font-size: 14px;
+    line-height: 21px;
+    letter-spacing: 0.02em;
+  }
+  .header {
+    font-size: 14px;
+    line-height: 19px;
+    letter-spacing: -0.005em;
+  }
+  .mat-progress-bar {
+    height: 12px;
+    border-radius: 200px;
+  }
+  .lessons-completed,
+  .milestones-reached {
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: 0.03em;
+  }
+}

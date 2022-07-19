@@ -55,6 +55,7 @@ import { LessonProgressStatsComponent } from './lesson-progress-stats/lesson-pro
 import { PdfComponent } from './pdf/pdf.component';
 import { EncodeUriPipe } from './encode-uri.pipe';
 import { UiDownloadService } from './course-completion/ui-download.service';
+import { CourseProgressComponent } from './course-progress/course-progress.component';
 
 @NgModule({
   imports: [
@@ -106,6 +107,7 @@ import { UiDownloadService } from './course-completion/ui-download.service';
     LessonProgressStatsComponent,
     PdfComponent,
     EncodeUriPipe,
+    CourseProgressComponent,
   ],
   exports: [
     LessonLandingPageComponent,
@@ -139,6 +141,7 @@ import { UiDownloadService } from './course-completion/ui-download.service';
     LessonProgressStatsComponent,
     PdfComponent,
     EncodeUriPipe,
+    CourseProgressComponent,
   ],
   providers: [
     { provide: MAT_DIALOG_DATA, useValue: {} },

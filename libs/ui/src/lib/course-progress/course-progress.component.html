@@ -1,0 +1,44 @@
+<div
+  class="course-progress"
+  fxLayout="column"
+  fxLayoutAlign="start start"
+  fxLayoutGap="12px"
+>
+  <div class="last-completed">{{ lastCompleted }}</div>
+  <div class="header">COURSE PROGRESS</div>
+  <mat-progress-bar
+    color="accent"
+    mode="determinate"
+    [value]="progressValue"
+  ></mat-progress-bar>
+  <div
+    fxLayout="column"
+    fxLayoutAlign="start start"
+    fxLayoutGap="12px"
+    fxLayout.gt-xs="row"
+    fxLayoutGap.gt-xs="36px"
+  >
+    <div
+      class="lessons-completed"
+      fxLayout="row"
+      fxLayoutAlign="space-between center"
+      fxLayoutGap="8px"
+    >
+      <img [src]="lessonsCompletedIcon" alt="" />
+      <span>
+        {{ lessonsCompleted }} of {{ lessonsTotal }} lessons completed
+      </span>
+    </div>
+    <div
+      class="milestones-reached"
+      fxLayout="row"
+      fxLayoutAlign="space-between center"
+      fxLayoutGap="8px"
+    >
+      <img [src]="milestonesReachedIcon" alt="" />
+      <span>
+        {{ milestonesReached }} of {{ milestonesTotal }} milestones reached
+      </span>
+    </div>
+  </div>
+</div>
