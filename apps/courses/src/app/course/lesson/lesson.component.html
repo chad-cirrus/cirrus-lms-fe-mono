@@ -1,10 +1,11 @@
+<script src='../header/user-menus/user-menus.component.ts'></script>
 <mat-sidenav-container>
   <mat-sidenav
     #snav
     mode="over"
     position="end"
     fixedInViewport="true"
-    [fixedTopGap]="(isScreenSmall$ | async) ? '0' : '115'"
+    [fixedTopGap]="(isScreenSmall$ | async) ? 0 : 115"
     disableClose="true"
   >
     <mat-nav-list>
