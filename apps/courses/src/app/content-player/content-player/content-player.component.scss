@@ -70,7 +70,7 @@
         line-height: 1.1;
         letter-spacing: -0.045em;
         margin-right: 15px;
-        span {
+        .title-header {
           margin-bottom: 10px;
         }
 
@@ -272,7 +272,7 @@ and (orientation: landscape) {
         margin: 0 0 16px 54px;
         .title-block {
           font-size: 1rem;
-          span {
+          .title-header {
             margin-bottom: 5px;
           }
           .sub-header {
