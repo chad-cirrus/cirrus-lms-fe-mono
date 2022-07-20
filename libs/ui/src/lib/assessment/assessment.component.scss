@@ -4,6 +4,13 @@
 
 .tabs-container {
 
+  .mat-tab-body.mat-tab-body-active {
+    overflow: unset;
+  }
+  .mat-tab-body-content {
+    overflow: unset;
+  }
+
   .mat-tab-label-active {
     font-family: $bqmedium-font;
     color: white;
