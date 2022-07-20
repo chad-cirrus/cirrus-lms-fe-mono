@@ -79,7 +79,7 @@ export class CoursesService {
         map(responses =>
           responses
             ? responses
-            : ({ progresses: [] } as IProgressUpdateResponses)
+            : ({ progresses: [], progress_stats: [] } as IProgressUpdateResponses)
         )
       );
   }
@@ -94,7 +94,7 @@ export class CoursesService {
         map(responses =>
           responses
             ? responses
-            : ({ progresses: [] } as IProgressUpdateResponses)
+            : ({ progresses: [], progress_stats: [] } as IProgressUpdateResponses)
         ),
         tap(responses => {
           const { progresses } = responses;

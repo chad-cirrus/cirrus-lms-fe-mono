@@ -1,7 +1,7 @@
 import {
   IProgressUpdateResponses,
   IProgress,
-  IProgressUpdateResponse,
+  IProgressUpdateResponse, ILesson,
 } from '@cirrus/models';
 import {
   LessonContentsState,
@@ -67,29 +67,31 @@ export const handleStartProgressSuccess = (
 export const handleCompleteProgressSuccess = (
   state: LessonState,
   responses: IProgressUpdateResponses
-): LessonState => ({
-  ...state,
-  busy: false,
-  error: null,
-  lesson:
-    responses.progresses.length &&
-    responses.progresses.filter(p => p.progress_type === 'lesson')[0]
-      ? {
-          ...state.lesson,
-          progress: {
-            id: responses.progresses.filter(
-              p => p.progress_type === 'lesson'
-            )[0].id,
-            status: responses.progresses.filter(
-              p => p.progress_type === 'lesson'
-            )[0].status,
-          },
-        }
-      : state.lesson,
-  lessonContents: responses.progresses.length
-    ? handleLessonContentsProgressUpdate(
-        responses.progresses,
-        state.lessonContents
-      )
-    : state.lessonContents,
-});
+): LessonState => {
+  let lessonProgress: IProgressUpdateResponse | undefined;
+  let lesson: ILesson = { ...state.lesson, progress_stats: responses.progress_stats };
+  if(responses.progresses.length) {
+    lessonProgress = responses.progresses.filter(p => p.progress_type === 'lesson').pop();
+
+    lesson = {
+      ...lesson,
+      progress: {
+        id: lessonProgress!.id,
+        status: lessonProgress!.status,
+      },
+    };
+  }
+
+  return {
+    ...state,
+    busy: false,
+    error: null,
+    lesson,
+    lessonContents: responses.progresses.length
+      ? handleLessonContentsProgressUpdate(
+          responses.progresses,
+          state.lessonContents
+        )
+      : state.lessonContents,
+  }
+};

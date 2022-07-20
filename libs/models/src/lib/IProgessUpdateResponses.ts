@@ -1,5 +1,8 @@
+import { ProgressStat } from './ILesson';
+
 export interface IProgressUpdateResponses {
   progresses: IProgressUpdateResponse[];
+  progress_stats: ProgressStat[];
 }
 
 export interface IProgressUpdateResponse {
