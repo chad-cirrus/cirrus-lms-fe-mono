@@ -30,6 +30,18 @@
     height: 100%;
     z-index: 200;
     background-color: #1f1f1f;
+    &:before {
+      content: " ";
+      display: block;
+      position: absolute;
+      top: 71px;
+      left: 0;
+      height: 65px;
+      width: 100%;
+      background: linear-gradient(180deg, #1f1f1f 65%, rgba(31, 31, 31, 0) 100%);
+      pointer-events: none;
+      z-index: 1;
+    }
     &:after {
       content: " ";
       display: block;
