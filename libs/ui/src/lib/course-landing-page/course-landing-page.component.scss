@@ -1,0 +1,31 @@
+@use '../styles/variables' as var;
+
+.lesson-image {
+  height: 20rem;
+  padding: 0 24px;
+}
+
+h3, h1 {
+  font-family: var.$BertholdAkzidenzGroteskBE;
+  font-style: normal;
+  font-weight: 400;
+}
+
+h1 {
+  font-size: 28px;
+  line-height: 36px;
+  /* or 129% */
+
+  letter-spacing: -0.035em;
+}
+
+h4 {
+  font-size: 18px;
+  line-height: 26px;
+}
+
+.mat-divider {
+  border-top-color: rgba(255, 255, 255);
+  width: calc(100vw - 16px);
+}
+

@@ -57,6 +57,7 @@ import { EncodeUriPipe } from './encode-uri.pipe';
 import { UiDownloadService } from './course-completion/ui-download.service';
 import { CourseProgressComponent } from './course-progress/course-progress.component';
 import { CourseProgressCompletedComponent } from './course-progress-completed/course-progress-completed.component';
+import { CourseLandingPageComponent } from './course-landing-page/course-landing-page.component';
 
 @NgModule({
   imports: [
@@ -110,6 +111,7 @@ import { CourseProgressCompletedComponent } from './course-progress-completed/co
     EncodeUriPipe,
     CourseProgressComponent,
     CourseProgressCompletedComponent,
+    CourseLandingPageComponent,
   ],
   exports: [
     LessonLandingPageComponent,
@@ -145,6 +147,7 @@ import { CourseProgressCompletedComponent } from './course-progress-completed/co
     EncodeUriPipe,
     CourseProgressComponent,
     CourseProgressCompletedComponent,
+    CourseLandingPageComponent,
   ],
   providers: [
     { provide: MAT_DIALOG_DATA, useValue: {} },
