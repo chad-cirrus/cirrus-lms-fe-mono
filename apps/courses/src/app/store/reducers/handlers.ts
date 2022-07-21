@@ -68,16 +68,16 @@ export const handleCompleteProgressSuccess = (
   state: LessonState,
   responses: IProgressUpdateResponses
 ): LessonState => {
-  let lessonProgress: IProgressUpdateResponse | undefined;
+  let lessonProgress: IProgressUpdateResponse | IProgress;
   let lesson: ILesson = { ...state.lesson, progress_stats: responses.progress_stats };
   if(responses.progresses.length) {
-    lessonProgress = responses.progresses.filter(p => p.progress_type === 'lesson').pop();
+    lessonProgress = responses.progresses.filter(p => p.progress_type === 'lesson').pop() || state.lesson.progress;
 
     lesson = {
       ...lesson,
       progress: {
-        id: lessonProgress!.id,
-        status: lessonProgress!.status,
+        id: lessonProgress.id,
+        status: lessonProgress.status,
       },
     };
   }
