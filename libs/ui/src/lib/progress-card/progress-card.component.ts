@@ -35,45 +35,42 @@ export class ProgressCardComponent {
 
   @Input()
   set progress({ type, completed, total }: ProgressStat) {
-    this._text = this.mapProgressTypeToUrl(type).text;
-    this._imageIcon = this.mapProgressTypeToUrl(type).imageIcon;
+    const progressType = ProgressCardComponent.progressTypeDictionary[type];
+    this._text = progressType.text;
+    this._imageIcon = progressType.imageIcon;
     this._completed = completed;
     this._total = total;
 
   }
 
-  mapProgressTypeToUrl(type: ProgressType): IProgressView {
-    const dictionary: { [key: string]: IProgressView } = {
-      [ProgressType.Flight]: {
-        text: 'Flight Hrs',
-        imageIcon: 'courses/images/svg/flight-hours-icon.svg',
-      },
-      [ProgressType.Ground]: {
-        text: 'Ground Hrs',
-        imageIcon: 'courses/images/svg/ground-hours-icon.svg',
-      },
-      [ProgressType.CrossCountry]: {
-        text: 'Cross Country Hrs',
-        imageIcon: 'courses/images/svg/cross-country-icon.svg',
-      },
-      [ProgressType.Simulator]: {
-        text: 'Simulator Hrs',
-        imageIcon: 'courses/images/svg/simulator_icon.svg',
-      },
-      [ProgressType.Landings]: {
-        text: 'Landings',
-        imageIcon: 'courses/images/svg/landing_hours_icon.svg',
-      },
-      [ProgressType.Assessment]: {
-        text: 'Assessment Tasks',
-        imageIcon: 'courses/images/svg/assessment_icon.svg',
-      },
-      [ProgressType.SelfStudy]: {
-        text: 'Self Study',
-        imageIcon: 'courses/images/svg/self-study.svg',
-      },
-    };
-
-    return dictionary[type];
-  }
+  private static progressTypeDictionary: { [key: string]: IProgressView } = {
+    [ProgressType.Flight]: {
+      text: 'Flight Hrs',
+      imageIcon: 'courses/images/svg/flight-hours-icon.svg',
+    },
+    [ProgressType.Ground]: {
+      text: 'Ground Hrs',
+      imageIcon: 'courses/images/svg/ground-hours-icon.svg',
+    },
+    [ProgressType.CrossCountry]: {
+      text: 'Cross Country Hrs',
+      imageIcon: 'courses/images/svg/cross-country-icon.svg',
+    },
+    [ProgressType.Simulator]: {
+      text: 'Simulator Hrs',
+      imageIcon: 'courses/images/svg/simulator_icon.svg',
+    },
+    [ProgressType.Landings]: {
+      text: 'Landings',
+      imageIcon: 'courses/images/svg/landing_hours_icon.svg',
+    },
+    [ProgressType.Assessment]: {
+      text: 'Assessment Tasks',
+      imageIcon: 'courses/images/svg/assessment_icon.svg',
+    },
+    [ProgressType.SelfStudy]: {
+      text: 'Self Study',
+      imageIcon: 'courses/images/svg/self-study.svg',
+    },
+  };
 }
