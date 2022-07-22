@@ -6,8 +6,8 @@
 
   @media(min-width: 960px) {
     display: grid;
-    grid: auto-flow / 1fr 1fr 1fr 1fr 1fr;
-    margin: 1rem auto;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 210px));
+    grid-row-gap: 15px;
 
     cirrus-progress-card:nth-child(6n) {
       border-left: none;

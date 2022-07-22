@@ -141,8 +141,9 @@ mat-drawer {
 }
 
 .cirrus-progress-row {
-  margin: 12px auto;
+  margin: 12px 12px 0 -24px;
   overflow-x: scroll;
+  width: 100vw;
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none;  /* IE 10+ */
 
@@ -196,6 +197,9 @@ cirrus-progress-card:last-child {
         height: 40px;
       }
     }
+  }
+  .cirrus-progress-row {
+    width: calc(100vw - 100px);
   }
 }
 
@@ -259,6 +263,7 @@ cirrus-progress-card:last-child {
     padding: 0 64px;
     margin: 0 auto;
     .cirrus-progress-row {
+      width: 100%;
       margin: -45px auto 45px;
       overflow-x: hidden;
       scrollbar-width: hidden; /* Firefox */
