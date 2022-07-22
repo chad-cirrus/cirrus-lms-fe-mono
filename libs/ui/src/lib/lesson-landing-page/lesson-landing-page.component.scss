@@ -141,6 +141,7 @@ mat-drawer {
 }
 
 .cirrus-progress-row {
+  position: relative;
   margin: 12px 12px 0 -24px;
   overflow-x: scroll;
   width: 100vw;
@@ -150,6 +151,18 @@ mat-drawer {
   &::-webkit-scrollbar {
     background: transparent; /* Chrome/Safari/Webkit */
     width: 0px;
+  }
+
+  &:before {
+    content: " ";
+    display: block;
+    position: absolute;
+    bottom: -5px;
+    left: -24px;
+    height: 100%;
+    width: 35px;
+    background: linear-gradient(90deg, #000000 35%, rgba(31, 31, 31, 0) 100%);
+    pointer-events: none;
   }
 
 }
