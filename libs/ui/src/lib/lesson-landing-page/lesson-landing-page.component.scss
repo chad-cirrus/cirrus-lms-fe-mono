@@ -104,6 +104,7 @@ mat-drawer {
 }
 
 .llp-container {
+  position: relative;
   margin: 0 auto;
   padding: 8px 24px;
   .open {
@@ -141,7 +142,6 @@ mat-drawer {
 }
 
 .cirrus-progress-row {
-  position: relative;
   margin: 12px 12px 0 -24px;
   overflow-x: scroll;
   width: 100vw;
@@ -152,17 +152,29 @@ mat-drawer {
     background: transparent; /* Chrome/Safari/Webkit */
     width: 0px;
   }
-
-  &:before {
-    content: " ";
-    display: block;
-    position: absolute;
-    bottom: -5px;
-    left: -24px;
-    height: 100%;
-    width: 35px;
-    background: linear-gradient(90deg, #000000 35%, rgba(31, 31, 31, 0) 100%);
-    pointer-events: none;
+  @media (max-width: 960px) {
+    &:before {
+      content: " ";
+      display: block;
+      position: absolute;
+      top: 12px;
+      left: 0;
+      height: 160px;
+      width: 35px;
+      background: linear-gradient(90deg, #000000 3%, rgba(31, 31, 31, 0) 100%);
+      pointer-events: none;
+    }
+    &:after {
+      content: " ";
+      display: block;
+      position: absolute;
+      top: 12px;
+      right: 0;
+      height: 160px;
+      width: 35px;
+      background: linear-gradient(270deg, #000000 3%, rgba(31, 31, 31, 0) 100%);
+      pointer-events: none;
+    }
   }
 
 }
