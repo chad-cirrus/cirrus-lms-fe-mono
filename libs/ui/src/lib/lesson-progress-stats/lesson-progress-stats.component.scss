@@ -1,5 +1,6 @@
 .progress-stats {
   display: flex;
+  
   cirrus-progress-card:not(:first-child) {
     border-left: 1px solid white;
   }
@@ -8,9 +9,5 @@
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(210px, 210px));
     grid-row-gap: 15px;
-
-    cirrus-progress-card:nth-child(6n) {
-      border-left: none;
-    }
   }
 }
