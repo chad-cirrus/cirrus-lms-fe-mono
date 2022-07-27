@@ -1,4 +1,4 @@
-import { CONTENT_TYPE, IContentPlayerMenuItem, ILesson } from '@cirrus/models';
+import { CONTENT_TYPE, IContentPlayerMenuItem, ILesson, ProgressType } from '@cirrus/models';
 import { mapContentTypeToIcon } from '@cirrus/ui';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import * as fromLesson from '../reducers/lesson.reducer';

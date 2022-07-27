@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { ASSESSMENT_TYPE, ILesson } from '@cirrus/models';
+import { ASSESSMENT_TYPE, ILesson, NullLesson } from '@cirrus/models';
 import { progressIconMapper } from '../helpers/ProgressIconMapper';
 
 @Component({
@@ -14,87 +14,18 @@ export class LessonProgressComponent {
   private _flightAssessment = false;
   private _assessmentProgressIcon = '';
 
-  private _lesson: ILesson = {
-    id: 0,
-    system_desc: '',
-    updated_at: '',
-    system_name: '',
-    subtitle: '',
-    thumbnail_image_url: '',
-    mobile_hero_image_url: '',
-    desktop_hero_image_url: '',
-    lesson_type: 0,
-    title: '',
-    overview: '',
-    is_archived: false,
-    contents_are_linear: false,
-    is_preview: false,
-    major_version: 0,
-    minor_version: 0,
-    contents: [],
-    order: 0,
-    overview_image_url: '',
-    student_intro_video: {
-      content: {
-        blob_directory: '',
-        order: 0,
-        quiz: '',
-        content_tasks: [],
-        progress: { id: 1, status: 'not_completed' },
-        content_file: '',
-        content_filename: '',
-        content_html: '',
-        content_type: 0,
-        created_by: 'Cirrus Aircraft',
-        desc: 'Perspective & Perspective+ Avionics Course',
-        id: 401,
-        jet_scoring: false,
-        meta_tags: [],
-        placeholder_image:
-          'https://cirrusapproachherokuprod.blob.core.windows.net/cirruslmsherokuprodcontainer/content-items/content-files/5c480eb38443724475091bf0d91ba12.2.png',
-        score: 0,
-        show_comments: true,
-        starter_file: '',
-        subtitle: 'Hello Cockpit [2.1]',
-        title: 'Hello Cockpit [2.1]',
-        upload_image: '',
-        url: '309005652',
-      },
-
-      content_id: 401,
-      hidden: false,
-      required: false,
-      id: 1,
-      title: '',
-      updated_at: '',
-      created_at: '',
-    },
-    instructor_intro_video: {
-      content_id: 401,
-      created_at: '2022-05-18T15:55:59.249Z',
-      hidden: false,
-      id: 69,
-      required: false,
-      title: 'hello',
-      updated_at: '2022-05-18T15:55:59.249Z',
-    },
-    instructor_overview: '',
-    instructor_contents: [],
-    progress: {
-      id: 0,
-      status: 'unknown',
-    },
-    course_id: 0,
-    course_attempt_id: 0,
-    stage_id: 0,
-    progress_stats: [],
-  };
+  private _lesson: ILesson = NullLesson;
 
   @Input() sideNavOpen!: boolean;
   @Input() checkoutOffsRequired!: boolean | null;
   @Input()
   set lesson(value: ILesson) {
     this._lesson = value;
+    const selfStudyStats = this.lesson.progress_stats.find(stat => stat.type === 'self_study') || { status: 'not_started' };
+    if (selfStudyStats) {
+      this._selfStudy = true;
+      this._selfStudyIconSrc = progressIconMapper(selfStudyStats.status);
+    }
     this._selfStudy =
       value.contents
         .map(c => c.content_type)
@@ -105,9 +36,6 @@ export class LessonProgressComponent {
       value.contents.map(c => c.content_type).filter(ct => ct === 10).length >
       0;
 
-    if (this._selfStudy) {
-      this._selfStudyIconSrc = progressIconMapper(this.lesson.progress.status);
-    }
     if (this._flightAssessment || this._groundAssessment) {
       const assessments = value.contents.filter(
         content => content.content_type === 9 || content.content_type === 10

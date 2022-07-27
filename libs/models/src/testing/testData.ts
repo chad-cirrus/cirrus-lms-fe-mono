@@ -6,26 +6,31 @@ const progressStats: ProgressStat[] = [
     type: ProgressType.Ground,
     completed: 5,
     total: 10,
+    status: 'in_progress',
   },
   {
     type: ProgressType.Flight,
     completed: 12,
     total: 20,
+    status: 'in_progress',
   },
   {
     type: ProgressType.Simulator,
     completed: 10,
     total: 14,
+    status: 'in_progress',
   },
   {
     type: ProgressType.Landings,
     completed: 9,
     total: 12,
+    status: 'in_progress',
   },
   {
     type: ProgressType.Assessment,
     completed: 12,
     total: 20,
+    status: 'in_progress',
   },
 ];
 
