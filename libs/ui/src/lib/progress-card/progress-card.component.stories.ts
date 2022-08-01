@@ -25,6 +25,7 @@ Primary.args = {
     type: ProgressType.Flight,
     completed: 1,
     total: 2,
+    status: '',
   },
 };
 
@@ -34,6 +35,7 @@ Flight.args = {
     type: ProgressType.Flight,
     completed: 1,
     total: 2,
+    status: '',
   },
 };
 
@@ -43,6 +45,7 @@ Ground.args = {
     type: ProgressType.Ground,
     completed: 1,
     total: 2,
+    status: '',
   },
 };
 
@@ -52,6 +55,7 @@ Land.args = {
     type: ProgressType.Landings,
     completed: 1,
     total: 2,
+    status: '',
   },
 };
 
@@ -61,6 +65,7 @@ Simulator.args = {
     type: ProgressType.Simulator,
     completed: 1,
     total: 2,
+    status: '',
   },
 };
 
@@ -70,6 +75,7 @@ Assessment.args = {
     type: ProgressType.Assessment,
     completed: 1,
     total: 2,
+    status: '',
   },
 };
 
@@ -79,5 +85,6 @@ SelfStudy.args = {
     type: ProgressType.SelfStudy,
     completed: 1,
     total: 2,
+    status: '',
   },
 };

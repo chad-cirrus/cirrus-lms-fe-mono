@@ -28,36 +28,43 @@ Primary.args = {
       type: ProgressType.Flight,
       completed: 16,
       total: 20,
+      status: '',
     },
     {
       type: ProgressType.Ground,
       completed: 5,
       total: 20,
+      status: '',
     },
     {
       type: ProgressType.CrossCountry,
       completed: 12,
       total: 20,
+      status: '',
     },
     {
       type: ProgressType.Simulator,
       completed: 9,
       total: 20,
+      status: '',
     },
     {
       type: ProgressType.Landings,
       completed: 4,
       total: 20,
+      status: '',
     },
     {
       type: ProgressType.Assessment,
       completed: 12,
       total: 20,
+      status: '',
     },
     {
       type: ProgressType.SelfStudy,
       completed: 12,
       total: 20,
+      status: '',
     },
   ],
 };

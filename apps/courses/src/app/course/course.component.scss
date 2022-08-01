@@ -1,0 +1,30 @@
+.mat-icon {
+  margin-right: 6px;
+}
+
+.mat-icon[svgIcon="milestone"] {
+  width: 37px;
+}
+.mat-icon[svgIcon="eye"] {
+  width: 16px;
+}
+.mat-icon[svgIcon="open_lessons"] {
+  width: 18px;
+}
+.mat-icon[svgIcon="enrollment_history"] {
+  width: 15.3px;
+}
+
+span.cirrus-tab-label {
+  font-family: 'Akzidenz-Grotesk BQ';
+  font-size: 17px;
+  line-height: 22px;
+  letter-spacing: 0.02em;
+  text-align: left;
+}
+
+@media (max-width: 960px) {
+  span.cirrus-tab-label {
+    font-family: 'akzidenz-grotesk_bqlight';
+  }
+}

@@ -1,1 +1,31 @@
-<div>courses page</div>
+<cirrus-course-landing-page [course]="course"></cirrus-course-landing-page>
+<mat-tab-group>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon svgIcon="eye"></mat-icon>
+      <span class="cirrus-tab-label"> Overview </span>
+    </ng-template>
+    Overview goes here
+  </mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon svgIcon="open_lessons"></mat-icon>
+      <span class="cirrus-tab-label"> Lessons </span>
+    </ng-template>
+    Lessons go here
+  </mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon svgIcon="milestone"></mat-icon>
+      <span class="cirrus-tab-label"> Milestones </span>
+    </ng-template>
+    Milestones
+  </mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon svgIcon="enrollment_history"></mat-icon>
+      <span class="cirrus-tab-label"> Enrollment History </span>
+    </ng-template>
+    Enrollment History
+  </mat-tab>
+</mat-tab-group>

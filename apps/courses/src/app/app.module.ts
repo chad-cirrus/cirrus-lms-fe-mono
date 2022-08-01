@@ -2,7 +2,11 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
-import { CirrusMaterialModule, UiModule } from '@cirrus/ui';
+import {
+  CirrusMaterialModule,
+  MatIconRegistryModule,
+  UiModule,
+} from '@cirrus/ui';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -72,6 +76,7 @@ import { environment } from '../environments/environment';
     OverlayModule,
     A11yModule,
     ContentPlayerModule,
+    MatIconRegistryModule,
   ],
   providers: [
     {

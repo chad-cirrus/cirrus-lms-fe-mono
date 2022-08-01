@@ -186,6 +186,13 @@ img {
   padding: 0 !important;
   height: 100%;
 }
+
+cirrus-course {
+  .mat-tab-label {
+    width: inherit;
+  }
+}
+
 @media (max-width: 960px) {
   cirrus-content-image {
       height: 100%;
