@@ -1,7 +1,25 @@
 .content-container {
   padding: 0;
+  &.instructor-view {
+    .title-content,
+    .contents-list-container {
+      background-color: #222222;
+      .subtitle {
+        color: #d1d1d1;
+      }
+    }
+  }
+  .overview {
+    color: #D1D1D1;
+  }
+  .media-control {
+    color: #bdbdbd;
+  }
 }
 
+.overview > h2 {
+  color: #ffffff;
+}
 
 .course-complete {
   opacity: 0;

@@ -87,8 +87,8 @@ $theme: material.mat-dark-theme(
 
 @include material.angular-material-theme($theme);
 // @include cirrus-ui.cirrus-lesson-landing-page-theme($theme);
-@include cirrus-ui.cirrus-lesson-content-item-theme($theme);
-@include cirrus-ui.cirrus-lesson-contents-theme($theme);
+// @include cirrus-ui.cirrus-lesson-content-item-theme($theme);
+// @include cirrus-ui.cirrus-lesson-contents-theme($theme);
 // @include app-component.cirrus-app-component($theme);
 
 html,
@@ -105,10 +105,14 @@ html {
 
 body {
   font-family: $primary_font;
-  font-size: 1rem;
+  font-size: 1.0625rem;
   font-weight: 400;
   line-height: 1.5;
   color: $primary-font-color;
+  @media (min-width: 600px) {
+    font-size: 1.125rem;
+    line-height: 1.4;
+  }
 }
 
 h1 {

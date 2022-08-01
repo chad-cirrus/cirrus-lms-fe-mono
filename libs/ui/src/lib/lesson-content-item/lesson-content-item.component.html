@@ -13,7 +13,7 @@
     fxLayoutGap="16px"
   >
     <img [src]="this.content_type_icon" />
-    <div class="title">{{ content?.title }}</div>
+    <p>{{ content?.title }}</p>
   </div>
   <div
     class="progress-column"
@@ -23,6 +23,6 @@
     fxLayoutGap="12px"
   >
     <img [src]="imageSrc" />
-    <span>{{ progressText }}</span>
+    <p>{{ progressText }}</p>
   </div>
 </div>
