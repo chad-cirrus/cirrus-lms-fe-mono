@@ -4,14 +4,6 @@
 @mixin cirrus-lesson-landing-page-typography($typography-config) {
   cirrus-lesson-landing-page {
     .lesson-image {
-      h1 {
-        font-family: var.$BertholdAkzidenzGroteskBE;
-        font-style: normal;
-        font-weight: normal;
-        font-size: 1.75rem;
-        line-height: 1.2;
-        letter-spacing: -0.03em;
-      }
       h4 {
         font-family: var.$AkzidenzGroteskBQ;
         font-style: normal;
@@ -21,40 +13,13 @@
         letter-spacing: 0.02em;
       }
     }
-    .content {
-      button.snav-open-button {
-        font-style: normal;
-        font-weight: 500;
-        font-size: 12px;
-        line-height: 24px;
-        text-transform: capitalize;
-      }
-      button.start-lesson {
-        font-family: "akzidenz-grotesk_bqmedium";
-        font-style: normal;
-        font-weight: 500;
-        font-size: 1.063rem;
-        line-height: 1;
-        letter-spacing: -0.005em;
-      }
-    }
   }
 
   @media (min-width: 600px) {
     cirrus-lesson-landing-page {
       .lesson-image {
-        h1 {
-          font-size: 2.5rem;
-          line-height: 1.1;
-        }
         h4 {
           font-size: 1.375rem;
-        }
-      }
-      .content {
-        button.snav-open-button {
-          font-size: 16px;
-          line-height: 16px;
         }
       }
     }
@@ -63,17 +28,8 @@
   @media (min-width: 960px) {
     cirrus-lesson-landing-page {
       .lesson-image {
-        h1 {
-          font-size: 3.688rem;
-        }
         h4 {
           font-size: 1.75rem;
-        }
-      }
-      .content {
-        button.snav-open-button {
-          font-size: 16px;
-          line-height: 16px;
         }
       }
     }
@@ -95,11 +51,6 @@
     }
     .student-intro-video {
       color: var.$secondary-font-color-light-grey;
-    }
-    .content {
-      button.snav-open-button {
-        color: #ffffff;
-      }
     }
   }
 
