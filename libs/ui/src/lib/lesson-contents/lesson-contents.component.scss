@@ -1,9 +1,11 @@
+@use '../styles/variables' as var;
+
 .content-container {
   padding: 0;
   &.instructor-view {
     .title-content,
     .contents-list-container {
-      background-color: #222222;
+      background-color: var.$instructor-view-background;
       .subtitle {
         color: #d1d1d1;
       }
