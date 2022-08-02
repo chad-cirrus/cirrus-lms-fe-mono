@@ -87,7 +87,7 @@ $theme: material.mat-dark-theme(
 
 @include material.angular-material-theme($theme);
 // @include cirrus-ui.cirrus-lesson-landing-page-theme($theme);
-@include cirrus-ui.cirrus-lesson-content-item-theme($theme);
+// @include cirrus-ui.cirrus-lesson-content-item-theme($theme);
 // @include cirrus-ui.cirrus-lesson-contents-theme($theme);
 // @include app-component.cirrus-app-component($theme);
 
@@ -225,46 +225,40 @@ div {
   box-sizing: border-box;
 }
 
+img {
+  max-width: 100%;
+}
+
 .mat-drawer-backdrop.mat-drawer-shown {
   background-color: rgba(0, 0, 0, 0.69);
 }
 
 .mat-dialog-container {
   padding: 0 !important;
-.cirrus-media-player {
-  .mat-dialog-container {
-    border-radius: 0;
-    padding: 0;
+  .cirrus-media-player {
+    .mat-dialog-container {
+      border-radius: 0;
+      padding: 0;
+    }
   }
-}
 
-.mat-drawer-container {
-  overflow: initial !important;
-}
-
-.mat-drawer-content {
-  overflow: initial !important;
-}
-
-img {
-  max-width: 100%;
-}
-
-.overview img {
-  max-width: 90%;
-}
-
-.tabs-container {
-  .mat-card {
-    background-color: rgba(0, 0, 0, 0.32);
+  .mat-drawer-container {
+    overflow: initial !important;
   }
-}
 
+  .mat-drawer-content {
+    overflow: initial !important;
+  }
 
+  .tabs-container {
+    .mat-card {
+      background-color: rgba(0, 0, 0, 0.32);
+    }
+  }
 
-.mat-drawer.mat-drawer-end {
-  background: transparent;
-}
+  .mat-drawer.mat-drawer-end {
+    background: transparent;
+  }
 }
 
 .tabs-container {
@@ -315,5 +309,12 @@ cirrus-course {
   cirrus-content-image {
       height: 100%;
       overflow: hidden;
+  }
+}
+
+
+cirrus-lesson-contents .overview {
+  h2, h3, h4 {
+    color: #ffffff;
   }
 }

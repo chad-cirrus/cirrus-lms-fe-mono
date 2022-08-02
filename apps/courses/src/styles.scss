@@ -31,13 +31,6 @@ main {
   overflow: hidden !important; 
 }
 
-//max-width for wysiwyg content images
-.overview {
-  img {
-    max-width: 100%;
-  }
-}
-
 //cursor for images set to button
 img[type="button"] {
   cursor: pointer;
