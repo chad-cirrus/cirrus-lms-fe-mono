@@ -53,26 +53,6 @@ $custom-palette: (
 $primary: material.mat-define-palette($custom-palette);
 $accent: material.mat-define-palette($custom-palette, A200, A100, A400);
 
-$cirrus-typography: material.mat-typography-config(
-  $font-family: $primary_font,
-  $display-4:
-    material.mat-typography-level(90px, 90px, 300, $letter-spacing: -0.05em),
-  $display-3:
-    material.mat-typography-level(54px, 54px, 400, $letter-spacing: -0.02em),
-  $display-2:
-    material.mat-typography-level(34px, 40px, 400, $letter-spacing: -0.005em),
-  $display-1: material.mat-typography-level(32px, 38px, 400),
-  $headline: material.mat-typography-level(24px, 28px, 400),
-  $title: material.mat-typography-level(20px, 32px, 500),
-  $subheading-2: material.mat-typography-level(18px, 22px, 400),
-  $body-2: material.mat-typography-level(20px, 24px, 400),
-  $body-1: material.mat-typography-level(18px, 21px, 400),
-  $caption: material.mat-typography-level(12px, 20px, 400),
-  $button: material.mat-typography-level(14px, 14px, 500),
-  // Line-height must be unit-less fraction of the font-size.
-  $input: material.mat-typography-level(inherit, 1.125, 400),
-);
-
 @include material.mat-core();
 
 $theme: material.mat-dark-theme(
@@ -80,16 +60,11 @@ $theme: material.mat-dark-theme(
     color: (
       primary: $primary,
       accent: $accent,
-    ),
-    typography: $cirrus-typography,
+    )
   )
 );
 
 @include material.angular-material-theme($theme);
-// @include cirrus-ui.cirrus-lesson-landing-page-theme($theme);
-// @include cirrus-ui.cirrus-lesson-content-item-theme($theme);
-// @include cirrus-ui.cirrus-lesson-contents-theme($theme);
-// @include app-component.cirrus-app-component($theme);
 
 html,
 body {
@@ -172,7 +147,7 @@ h5 {
   font-family: $BertholdAkzidenzGroteskBE;
   font-style: normal;
   font-weight: normal;
-  font-size: 15px;
+  font-size: 0.9375rem;
   line-height: 1.35;
   letter-spacing: 0.03em;
 }
@@ -186,14 +161,6 @@ h6 {
 }
 
 p {
-  font-family: $primary_font;
-  font-size: 1.0625rem;
-  font-weight: 400;
-  line-height: 1.5;
-  @media (min-width: 600px) {
-    font-size: 1.125rem;
-    line-height: 1.4;
-  }
   &.large {
     font-size: 1.125rem;
     line-height: 1.5;
