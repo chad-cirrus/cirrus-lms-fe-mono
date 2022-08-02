@@ -1,1 +1,70 @@
+@use '~@angular/material/theming' as material;
+@use '../styles/variables' as var;
 
+@mixin cirrus-lesson-landing-page-typography($typography-config) {
+  cirrus-lesson-landing-page {
+    .lesson-image {
+      h4 {
+        font-family: var.$AkzidenzGroteskBQ;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 1rem;
+        line-height: 1.4;
+      }
+    }
+  }
+
+  @media (min-width: 600px) {
+    cirrus-lesson-landing-page {
+      .lesson-image {
+        h4 {
+          font-size: 1.375rem;
+        }
+      }
+    }
+  }
+
+  @media (min-width: 960px) {
+    cirrus-lesson-landing-page {
+      .lesson-image {
+        h4 {
+          font-size: 1.75rem;
+        }
+      }
+    }
+  }
+}
+
+@mixin cirrus-lesson-landing-page-theme($theme) {
+  $theme-colors: material.mat-get-color-config($theme);
+  $typography: material.mat-get-typography-config($theme);
+  $backgrounds: map-get($theme-colors, background);
+
+  @if $typography != null {
+    @include cirrus-lesson-landing-page-typography($typography);
+  }
+
+  cirrus-lesson-landing-page {
+    .llp-container.instructor-view {
+      background-color: #222222;
+    }
+    .student-intro-video {
+      color: var.$secondary-font-color-light-grey;
+    }
+  }
+
+  cirrus-lesson-landing-page {
+    .instructor-intro-video {
+      color: var.$secondary-font-color-light-grey;
+      background-color: var.$instructor-view-background;
+    }
+  }
+
+  @media (min-width: 992px) {
+    cirrus-lesson-landing-page {
+      .llp-container.instructor-view {
+        background-color: inherit;
+      }
+    }
+  }
+}

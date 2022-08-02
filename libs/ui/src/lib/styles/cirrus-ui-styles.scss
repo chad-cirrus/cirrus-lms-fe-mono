@@ -160,32 +160,31 @@ h6 {
   line-height: 1.4;
 }
 
-p {
-  &.large {
-    font-size: 1.125rem;
-    line-height: 1.5;
-    @media (min-width: 600px) {
-      font-size: 1.25rem;
-      line-height: 1.4;
-    }
-    @media (min-width: 960px) {
-      font-size: 1.5rem;
-    }
+//additional body styling classes from figma ui library
+.large {
+  font-size: 1.125rem;
+  line-height: 1.5;
+  @media (min-width: 600px) {
+    font-size: 1.25rem;
+    line-height: 1.4;
   }
-  &.small {
-    font-size: 0.9375rem;
-    line-height: 1.5;
-    letter-spacing: .03em;
-    @media (min-width: 600px) {
-      font-size: 1rem;
-      line-height: 1.4;
-    }
+  @media (min-width: 960px) {
+    font-size: 1.5rem;
   }
-  &.xsmall {
-    font-size: 0.875rem;
-    line-height: 1.35;
-    letter-spacing: .03em;
+}
+.small {
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  letter-spacing: .03em;
+  @media (min-width: 600px) {
+    font-size: 1rem;
+    line-height: 1.4;
   }
+}
+.xsmall {
+  font-size: 0.875rem;
+  line-height: 1.35;
+  letter-spacing: .03em;
 }
 
 div {
