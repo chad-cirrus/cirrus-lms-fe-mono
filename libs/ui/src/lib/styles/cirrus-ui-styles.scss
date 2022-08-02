@@ -87,7 +87,7 @@ $theme: material.mat-dark-theme(
 
 @include material.angular-material-theme($theme);
 // @include cirrus-ui.cirrus-lesson-landing-page-theme($theme);
-// @include cirrus-ui.cirrus-lesson-content-item-theme($theme);
+@include cirrus-ui.cirrus-lesson-content-item-theme($theme);
 // @include cirrus-ui.cirrus-lesson-contents-theme($theme);
 // @include app-component.cirrus-app-component($theme);
 
