@@ -25,14 +25,14 @@
             *ngIf="showDashboard"
             fxLayout="row"
             fxLayoutAlign="space-between"
-            class="menu-item"
+            class="menu-item small"
             (click)="isLeftVisible = false"
           >
             <div>Dashboard</div>
             <div><mat-icon>keyboard_arrow_right</mat-icon></div>
           </div>
 
-          <div class="menu-item">
+          <div class="menu-item small">
             <a
               [href]="
                 'https://cirfullsb-cirrusaircraftvpo.cs9.force.com/approachsso/s/profile/' +
@@ -44,10 +44,10 @@
             </a>
           </div>
 
-          <div class="menu-item-with-border" routerLink="purchase-history">
+          <div class="menu-item-with-border small" routerLink="purchase-history">
             Purchase History
           </div>
-          <div class="menu-item">
+          <div class="menu-item small">
             <a href="https://www.cirrusapproach.com/learn-to-fly/" target="_blank">
               Learn to Fly
               <svg width="14" height="14" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -56,7 +56,7 @@
               </svg>
             </a>
           </div>
-          <div class="menu-item menu-item-with-border">
+          <div class="menu-item menu-item-with-border small">
             <a href="https://www.cirrusapproach.com/flight-fix/" target="_blank">
               Flight Fix
               <svg width="14" height="14" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -67,7 +67,7 @@
           </div>
           <div
             *ngIf="!cirrusImpersonationReturnUser?.id"
-            class="menu-item"
+            class="menu-item small"
             (click)="logout()"
           >
             Logout
