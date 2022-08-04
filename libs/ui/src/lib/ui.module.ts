@@ -58,6 +58,8 @@ import { UiDownloadService } from './course-completion/ui-download.service';
 import { CourseProgressComponent } from './course-progress/course-progress.component';
 import { CourseProgressCompletedComponent } from './course-progress-completed/course-progress-completed.component';
 import { CourseLandingPageComponent } from './course-landing-page/course-landing-page.component';
+import { CoursePlayerComponent } from './course-player/course-player.component';
+import { CtaButtonComponent } from './cta-button/cta-button.component';
 
 @NgModule({
   imports: [
@@ -112,6 +114,8 @@ import { CourseLandingPageComponent } from './course-landing-page/course-landing
     CourseProgressComponent,
     CourseProgressCompletedComponent,
     CourseLandingPageComponent,
+    CoursePlayerComponent,
+    CtaButtonComponent,
   ],
   exports: [
     LessonLandingPageComponent,
@@ -148,6 +152,8 @@ import { CourseLandingPageComponent } from './course-landing-page/course-landing
     CourseProgressComponent,
     CourseProgressCompletedComponent,
     CourseLandingPageComponent,
+    CoursePlayerComponent,
+    CtaButtonComponent,
   ],
   providers: [
     { provide: MAT_DIALOG_DATA, useValue: {} },

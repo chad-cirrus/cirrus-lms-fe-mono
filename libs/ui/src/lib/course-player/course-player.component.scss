@@ -1,0 +1,41 @@
+@use '../styles/variables' as var;
+
+.container {
+  background-color: var.$gray1;
+  border-radius: 6px;
+  padding: 15px;
+  width: 100%;
+  max-width: 653px;
+}
+
+cirrus-cta-button {
+  width: 100%;
+}
+
+.header {
+  color: var.$gray5;
+  font-family: var.$akzidenz-grotesk_bqLtEx400;
+  font-size: 11px;
+  line-height: 22px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.chapter,
+.description {
+  font-family: var.$AkzidenzGroteskBQ;
+  font-size: 17px;
+  line-height: 23px;
+  letter-spacing: -0.005em;
+}
+
+.chapter {
+  color: var.$gray4;
+  margin-right: 8px;
+}
+
+@media (min-width: 960px) {
+  cirrus-cta-button {
+    width: auto;
+  }
+}

@@ -7,7 +7,6 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class CtaButtonComponent {
   @Input() text = '';
-  @Input() width = '160px';
   @Input() icon = '';
 
   @Output() btnClick = new EventEmitter();

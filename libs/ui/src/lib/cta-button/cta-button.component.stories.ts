@@ -30,13 +30,11 @@ Get_Started.args = {
 export const Get_Started_Wide = Template.bind({});
 Get_Started_Wide.args = {
   text: 'Get Started',
-  width: '300px',
 };
 
 export const re_enroll_wide = Template.bind({});
 re_enroll_wide.args = {
   text: 'Re-Enroll',
-  width: '300px',
   icon: 'courses/images/svg/re-enroll.svg',
 };
 

@@ -9,9 +9,17 @@ button {
   text-align: center;
   letter-spacing: -0.005em;
   height: 40px;
+  width: 100%;
 }
 
 img {
   margin-right: 12px;
   height: 22px;
 }
+
+@media (min-width: 960px) {
+  button {
+    width: unset;
+  }
+}
+

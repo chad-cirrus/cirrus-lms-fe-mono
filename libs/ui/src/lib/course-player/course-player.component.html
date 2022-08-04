@@ -1,0 +1,28 @@
+<div
+  class="container"
+  fxLayout="column"
+  fxLayoutAlign="space-between center"
+  fxLayoutGap="17px"
+  fxLayout.gt-sm="row"
+  fxLayoutAlign.gt-sm="start center"
+>
+  <div
+    class="lesson-info"
+    fxLayout="row"
+    fxLayoutAlign="space-between start"
+    fxLayoutGap="11px"
+  >
+    <div class="thumbnail-container">
+      <img [src]="thumbnail" alt="" class="thumbnail" />
+    </div>
+    <div class="text-container">
+      <div class="header">START LESSON {{ lessonNumber }}</div>
+
+      <div class="description">
+        <span class="chapter">{{ chapter }}</span
+        >{{ description }}
+      </div>
+    </div>
+  </div>
+  <cirrus-cta-button [text]="buttonText"></cirrus-cta-button>
+</div>
