@@ -69,12 +69,9 @@ mat-drawer {
       max-width: 420px;
       margin: 15px 0 30px;
     }
-    button.start-lesson {
-      box-sizing: border-box;
-      border-radius: 60px;
-      width: 100%;
+    .start-lesson {
+      display: inline-block;
       margin: 30px auto;
-      height: 48px;
     }
     .self-study,
     .assessment {
@@ -210,13 +207,8 @@ cirrus-progress-card:last-child {
       button.snav-open-button {
         height: 39px;
       }
-      button.start-lesson {
+      .start-lesson {
         margin: 35px 0 80px;
-        box-sizing: border-box;
-        border-radius: 300px;
-        width: auto;
-        min-width: 160px;
-        height: 40px;
       }
     }
   }
@@ -236,11 +228,8 @@ cirrus-progress-card:last-child {
       button.snav-open-button {
         margin: 2rem 0 8rem 0;
       }
-      button.start-lesson {
+      .start-lesson {
         margin: 55px 0 150px;
-        box-sizing: border-box;
-        border-radius: 300px;
-        min-width: 151px;
       }
       .open {
         opacity: 0;

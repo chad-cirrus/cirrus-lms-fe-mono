@@ -41,15 +41,12 @@
       <mat-divider></mat-divider>
       <p class="large">{{lesson.subtitle}}</p>
       <cirrus-lesson-progress [lesson]="lesson" [checkoutOffsRequired]="checkoutOffsRequired"></cirrus-lesson-progress>
-      <button
+      <cirrus-cta-button 
         class="start-lesson"
-        mat-raised-button
-        color="accent"
-        (click)="startLesson()"
+        [text]="buttonText"
+        (btnClick)="startLesson()"
         [ngClass]="{ 'course-complete': courseComplete }"
-      >
-        {{ buttonText }}
-      </button>
+      ></cirrus-cta-button>
     </div>
   </div>
 
