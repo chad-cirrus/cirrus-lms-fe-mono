@@ -74,7 +74,7 @@
           </div>
           <div
             *ngIf="cirrusImpersonationReturnUser?.id"
-            class="menu-item"
+            class="menu-item small"
             (click)="impersonationLogout()"
           >
             Impersonation Logout
@@ -84,22 +84,21 @@
         <div rightPane fxLayout="column" fxLayoutAlign="center center">
           <div
             fxLayout="row"
-            class="menu-item"
+            class="menu-item menu-item-with-border small"
             (click)="isLeftVisible = true"
-            class="menu-item-with-border"
           >
             <div><mat-icon>keyboard_arrow_left</mat-icon></div>
             <div>Back</div>
           </div>
           <div
-            class="menu-item"
+            class="menu-item small"
             routerLink="ctc/dashboard"
             *ngIf="showCTCDashboard"
           >
             CTC Dashboard
           </div>
           <div
-            class="menu-item"
+            class="menu-item small"
             routerLink="admin/
             dashboard"
             *ngIf="showLMSDashboard"
