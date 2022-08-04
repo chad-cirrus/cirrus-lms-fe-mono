@@ -72,15 +72,19 @@
         lesson.student_intro_video.content.content_type === 0
       "
     >
-      <div class="intro-video-title">Intro Video</div>
+      <h4 class="intro-video-title">Intro Video</h4>
       <div
-        fxLayout="row"
-        fxLayoutGap="18px"
         class="intro-video-play"
         (click)="playIntroVideo()"
       >
-        <img src="courses/images/svg/video_play.svg" />
-        <div class="intro-video-subtitle">Student Intro</div>
+        <div
+          fxLayout="row"
+          fxLayoutGap="18px"
+        >
+          <img src="courses/images/svg/video_play.svg" />
+          <div *ngIf="!lesson.student_intro_video.title; else customIntroText" class="intro-video-subtitle">Lesson Introduction Video</div>
+          <ng-template #customIntroText><div class="intro-video-subtitle">{{lesson.student_intro_video.title}}</div></ng-template>
+        </div>
       </div>
     </div>
     <br *ngIf="instructorView" />

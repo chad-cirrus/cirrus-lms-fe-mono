@@ -118,16 +118,13 @@ mat-drawer {
   .intro-video {
     padding: 16px 0;
     .intro-video-title {
-      cursor: pointer;
-      font-family: $bqmedium-font;
-      font-size: 1.313rem;
-      color: white;
+      margin: 0;
     }
     .intro-video-play {
+      display: inline-block;
       cursor: pointer;
-      padding: 20px 0px 37px 0px;
+      padding: 20px 0 0;
       .intro-video-subtitle {
-        font-size: 16px;
         color: $gray4;
       }
     }
