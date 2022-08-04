@@ -81,7 +81,7 @@
           fxLayout="row"
           fxLayoutGap="18px"
         >
-          <img src="courses/images/svg/video_play.svg" />
+        <mat-icon svgIcon="play"></mat-icon>
           <div *ngIf="!lesson.student_intro_video.title; else customIntroText" class="intro-video-subtitle">Lesson Introduction Video</div>
           <ng-template #customIntroText><div class="intro-video-subtitle">{{lesson.student_intro_video.title}}</div></ng-template>
         </div>

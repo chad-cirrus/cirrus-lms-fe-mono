@@ -31,6 +31,12 @@ export class MatIconRegistryModule {
         )
       )
       .addSvgIcon(
+        'play',
+        this.domSanitizer.bypassSecurityTrustResourceUrl(
+          'courses/images/svg/video_play.svg'
+        )
+      )
+      .addSvgIcon(
         'enrollment_history',
         this.domSanitizer.bypassSecurityTrustResourceUrl(
           'courses/images/svg/enrollment_history.svg'
