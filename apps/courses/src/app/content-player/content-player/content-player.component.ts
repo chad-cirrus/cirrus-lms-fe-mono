@@ -18,7 +18,14 @@ import {
 import { LessonContentComponent } from '@cirrus/ui';
 import { Store } from '@ngrx/store';
 import { BehaviorSubject, combineLatest, Observable, of, Subject } from 'rxjs';
-import { delay, filter, map, takeUntil, tap, withLatestFrom } from 'rxjs/operators';
+import {
+  delay,
+  filter,
+  map,
+  takeUntil,
+  tap,
+  withLatestFrom,
+} from 'rxjs/operators';
 import { startProgress, completeProgress } from '../../store/actions';
 import { AppState } from '../../store/reducers';
 import {
@@ -205,10 +212,28 @@ export class ContentPlayerComponent
   }
 
   updateProgress(progress: IProgress) {
-    if (progress.status === PROGRESS_STATUS.in_progress) {
-      this.store.dispatch(startProgress({ id: progress.id }));
-    } else {
-      this.store.dispatch(completeProgress({ id: progress.id }));
-    }
+    this.lesson$.pipe(take(1)).subscribe(lesson => {
+      const contentToBeUpdated = lesson.contents.filter(
+        c => c.progress.id === progress.id
+      )[0];
+      if (
+        contentToBeUpdated &&
+        contentToBeUpdated.progress &&
+        contentToBeUpdated.progress.status !== 'completed'
+      ) {
+        if (progress.status === PROGRESS_STATUS.in_progress) {
+          this.store.dispatch(startProgress({ id: progress.id }));
+        } else {
+          this.store.dispatch(completeProgress({ id: progress.id }));
+        }
+      } else {
+        if (
+          progress.status === 'completed' &&
+          lesson.progress.status !== 'completed'
+        ) {
+          this.dialogRef.close();
+        }
+      }
+    });
   }
 }

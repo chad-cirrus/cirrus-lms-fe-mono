@@ -46,6 +46,11 @@ describe('reducer: lesson - real data', () => {
       busy: false,
       error: null,
       lesson: {
+        subtitle: '',
+        thumbnail_image_url: '',
+        mobile_hero_image_url: '',
+        desktop_hero_image_url: '',
+        progress_stats: [],
         id: 757,
         course_id: 215,
         stage_id: 125,
@@ -298,6 +303,7 @@ describe('reducer: lesson - real data', () => {
     };
 
     const responses: IProgressUpdateResponses = {
+      progress_stats: [],
       progresses: [
         {
           id: 1774634,
@@ -395,6 +401,7 @@ describe('reducer: lesson - real data', () => {
     );
 
     const completeResponses: IProgressUpdateResponses = {
+      progress_stats: [],
       progresses: [
         {
           id: 1774634,
@@ -442,6 +449,11 @@ describe('reducer: lesson - real data', () => {
       busy: false,
       error: null,
       lesson: {
+        subtitle: '',
+        thumbnail_image_url: '',
+        mobile_hero_image_url: '',
+        desktop_hero_image_url: '',
+        progress_stats: [],
         id: 757,
         course_id: 215,
         stage_id: 125,
@@ -694,6 +706,7 @@ describe('reducer: lesson - real data', () => {
     };
 
     const completeResponse: IProgressUpdateResponses = {
+      progress_stats: [],
       progresses: [
         {
           id: 1774639,
@@ -858,6 +871,7 @@ describe('reducer: lesson - mock data', () => {
   };
 
   const mockStartResponse: IProgressUpdateResponses = {
+    progress_stats: [],
     progresses: [
       {
         id: 1770001,
@@ -935,6 +949,7 @@ describe('reducer: lesson - mock data', () => {
   };
 
   const mockComplete: IProgressUpdateResponses = {
+    progress_stats: [],
     progresses: [
       {
         id: 1770001,
@@ -969,6 +984,7 @@ describe('reducer: lesson - mock data', () => {
     const prev: LessonState = mockInitital;
 
     const responses: IProgressUpdateResponses = {
+      progress_stats: [],
       progresses: [],
     };
 
@@ -984,6 +1000,7 @@ describe('reducer: lesson - mock data', () => {
     const prev: LessonState = mockInitital;
 
     const stageProgress: IProgressUpdateResponses = {
+      progress_stats: [],
       progresses: [
         {
           id: 1770000,
@@ -1018,6 +1035,7 @@ describe('reducer: lesson - mock data', () => {
     const prev: LessonState = mockInitital;
 
     const courseProgress: IProgressUpdateResponses = {
+      progress_stats: [],
       progresses: [
         {
           id: 1700000,

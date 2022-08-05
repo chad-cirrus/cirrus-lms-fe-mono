@@ -1,22 +1,13 @@
-import { isNgTemplate } from '@angular/compiler';
 import {
   IContentPlayerMenuItem,
   ILesson,
+  ProgressType,
   PROGRESS_STATUS,
 } from '@cirrus/models';
 import { findNextContent } from './findNextContent';
 
 const lesson: ILesson = {
   id: 757,
-  lesson_stats: {
-    content_completed: 3,
-    content_total: 6,
-    ground_hours_completed: 0,
-    flight_hours_completed: 0,
-    landings_completed: 0,
-    assessment_tasks_total: 0,
-    assessment_tasks_completed: 0,
-  },
   course_id: 215,
   stage_id: 125,
   course_attempt_id: 119050,
@@ -273,6 +264,14 @@ const lesson: ILesson = {
   thumbnail_image_url: '',
   mobile_hero_image_url: '',
   desktop_hero_image_url: '',
+  progress_stats: [
+    {
+      type: ProgressType.SelfStudy,
+      completed: 0,
+      total: 3,
+      status: 'not_started',
+    },
+  ],
 };
 
 const menuItems: IContentPlayerMenuItem[] = [
