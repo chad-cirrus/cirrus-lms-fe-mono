@@ -1,0 +1,13 @@
+.counts {
+  color: #808080;
+  font-size: 14px;
+  font-family: 'akzidenz-grotesk_bqlight';
+  line-height: 20px;
+  letter-spacing: 0.03em;
+}
+
+@media (min-width: 960px) {
+  .counts {
+    font-family: 'Akzidenz-Grotesk BQ';
+  }
+}

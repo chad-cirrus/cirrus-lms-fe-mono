@@ -1,0 +1,54 @@
+<div
+  class="container"
+  fxLayout="row"
+  fxLayoutAlign="space-between start"
+  fxLayoutAlign.gt-sm="start start"
+  fxLayoutGap="42px"
+>
+  <img [src]="thumbnail" alt="" class="thumbnail" fxHide.lt-sm />
+  <div
+    class="right"
+    fxLayout="column"
+    fxLayoutAlign="space-between start"
+    fxLayoutGap="12px"
+    fxFlex.lt-sm="grow"
+  >
+    <div
+      class="type-progress"
+      fxLayout="row"
+      fxLayoutAlign="space-between start"
+      fxFlex="grow"
+    >
+      <div class="lesson-type">{{ lessonType }}</div>
+      <div
+        class="progress"
+        fxLayout="row"
+        fxLayoutAlign="space-between center"
+        fxLayoutGap="8px"
+      >
+        <mat-icon [svgIcon]="courseLesson.progress.status"></mat-icon>
+        <div class="progress">{{ progress }}</div>
+      </div>
+    </div>
+    <div
+      fxLayout.lt-sm="row"
+      fxLayoutAlign.lt-sm="space-between start"
+      fxLayoutGap.lt-sm="8px"
+      fxFlex="grow"
+    >
+      <img [src]="thumbnail" alt="" class="thumbnail" fxHide.gt-xs />
+      <div class="title">
+        <span class="chapter">{{
+          courseLesson.stage_lesson_index.split(' ')[0]
+        }}</span
+        >{{ courseLesson.title }}
+      </div>
+    </div>
+    <div class="description">
+      {{ courseLesson.description }}
+    </div>
+    <cirrus-course-lesson-content-count
+      [contentCounts]="courseLesson.content_counts"
+    ></cirrus-course-lesson-content-count>
+  </div>
+</div>

@@ -41,6 +41,24 @@ export class MatIconRegistryModule {
         this.domSanitizer.bypassSecurityTrustResourceUrl(
           'courses/images/svg/enrollment_history.svg'
         )
+      )
+      .addSvgIcon(
+        'not_started',
+        this.domSanitizer.bypassSecurityTrustResourceUrl(
+          'courses/images/svg/not-started.svg'
+        )
+      )
+      .addSvgIcon(
+        'in_progress',
+        this.domSanitizer.bypassSecurityTrustResourceUrl(
+          'courses/images/svg/in_progress.svg'
+        )
+      )
+      .addSvgIcon(
+        'completed',
+        this.domSanitizer.bypassSecurityTrustResourceUrl(
+          'courses/images/svg/complete_check.svg'
+        )
       );
   }
 }

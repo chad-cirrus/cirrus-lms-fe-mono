@@ -1,0 +1,32 @@
+<div
+  fxLayout="column"
+  fxLayoutAlign="space-between start"
+  fxLayoutGap="6px"
+  fxFlex="grow"
+>
+  <div
+    *ngFor="let stage of courseOverviewLessons.stages"
+    class="stage"
+    fxLayout="column"
+    fxLayoutAlign="space-between start"
+    fxLayoutGap="6px"
+    fxFlex="grow"
+  >
+    <div class="stage-header">Stage {{ stage.order + 1 }}</div>
+    <div *ngIf="stage.overview" class="stage-overview">
+      {{ stage?.overview }}
+    </div>
+    <div
+      class="item-container"
+      *ngFor="let courseLesson of stage.lessons"
+      fxFlex
+      fxLayout="column"
+      fxLayoutGap="8px"
+    >
+      <cirrus-course-lesson-item
+        [courseLesson]="courseLesson"
+      ></cirrus-course-lesson-item>
+      <mat-divider></mat-divider>
+    </div>
+  </div>
+</div>

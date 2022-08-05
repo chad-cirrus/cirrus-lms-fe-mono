@@ -2,16 +2,10 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { IContent } from '@cirrus/models';
 import { mapContentTypeToIcon } from '../helpers/ContentTypeToIconMapper';
 import { progressIconMapper } from '../helpers/ProgressIconMapper';
+import { progressTextMapperDictionary } from '../helpers/progressTextMapper';
 
 const progressTextMapper = (progress: string): string => {
-  const dictionary: { [key: string]: string } = {
-    ['not_started']: 'Not Started',
-    ['in_progress']: 'In Progress',
-    ['completed']: 'Completed',
-    ['failed']: 'Failed',
-  };
-
-  return dictionary[progress];
+  return progressTextMapperDictionary[progress];
 };
 
 @Component({

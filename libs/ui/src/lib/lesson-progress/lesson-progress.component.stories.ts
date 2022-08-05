@@ -2,7 +2,6 @@
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
-import { LessonProgress, ASSESSMENT_TYPE } from '@cirrus/models';
 import { moduleMetadata, Story, Meta } from '@storybook/angular';
 import { testData } from 'libs/models/src/testing/testData';
 import { testDataReccurent853 } from 'libs/models/src/testing/testData853';

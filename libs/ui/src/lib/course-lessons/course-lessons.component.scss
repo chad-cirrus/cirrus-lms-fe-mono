@@ -1,0 +1,40 @@
+@use '../styles/variables' as var;
+.stage {
+  width: 100%;
+}
+
+.right {
+  width: 100%;
+}
+
+.stage-header {
+  font-family: var.$AkzidenzGroteskBqLight;
+  font-size: 22px;
+  line-height: 42px;
+}
+.stage-overview {
+  //styleName: Mobile/P Medium;
+  font-family: var.$AkzidenzGroteskBqLight;
+  font-size: 17px;
+  line-height: 26px;
+  padding-bottom: 40px;
+}
+.item-container {
+  width: 100%;
+  padding: 16px 0;
+}
+.mat-divider {
+  border-top-color: #3a3a3a;
+  width: 100%;
+}
+
+@media (min-width: 960px) {
+  .stage-header {
+    font-size: 30px;
+    line-height: 38px;
+  }
+  .stage-overview {
+    font-size: 18px;
+    line-height: 28px;
+  }
+}
