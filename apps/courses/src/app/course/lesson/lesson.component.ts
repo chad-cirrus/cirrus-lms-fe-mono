@@ -140,6 +140,7 @@ export class LessonComponent implements OnInit, OnDestroy {
                 } else {
                   console.log('none of the above');
                 }
+                this.dialog.closeAll();
               });
           }
         })
