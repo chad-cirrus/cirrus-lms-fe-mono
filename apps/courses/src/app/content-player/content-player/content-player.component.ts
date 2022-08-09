@@ -226,13 +226,6 @@ export class ContentPlayerComponent
         } else {
           this.store.dispatch(completeProgress({ id: progress.id }));
         }
-      } else {
-        if (
-          progress.status === 'completed' &&
-          lesson.progress.status !== 'completed'
-        ) {
-          this.dialogRef.close();
-        }
       }
     });
   }
