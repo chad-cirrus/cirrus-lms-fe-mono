@@ -1,15 +1,22 @@
+@use '../styles/variables' as *;
+
 button {
-  background: #0077C8;
+  background: $cirrus-blue;
   border-radius: 60px;
-  font-family: 'Akzidenz-Grotesk BQ';
+  font-family: 'akzidenz-grotesk_bqmedium';
   font-style: normal;
   font-weight: 500;
-  font-size: 17px;
-  line-height: 23px;
+  font-size: 1.0625rem;
+  line-height: .8;
   text-align: center;
   letter-spacing: -0.005em;
-  height: 40px;
   width: 100%;
+  padding: 14px 32px;
+  @media (hover: hover) {
+    &:hover {
+      background: $cirrus-blue-hover;
+    }
+  }
 }
 
 img {
@@ -19,7 +26,7 @@ img {
 
 @media (min-width: 960px) {
   button {
-    width: unset;
+    width: auto;
   }
 }
 
