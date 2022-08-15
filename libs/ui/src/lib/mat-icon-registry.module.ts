@@ -59,6 +59,36 @@ export class MatIconRegistryModule {
         this.domSanitizer.bypassSecurityTrustResourceUrl(
           'courses/images/svg/complete_check.svg'
         )
+      )
+      .addSvgIcon(
+        'assessments_icon_circle',
+        this.domSanitizer.bypassSecurityTrustResourceUrl(
+          'courses/images/svg/assessments_icon_circle.svg'
+        )
+      )
+      .addSvgIcon(
+        'documents_icon_circle',
+        this.domSanitizer.bypassSecurityTrustResourceUrl(
+          'courses/images/svg/documents_icon_circle.svg'
+        )
+      )
+      .addSvgIcon(
+        'lessons_icon_circle',
+        this.domSanitizer.bypassSecurityTrustResourceUrl(
+          'courses/images/svg/lessons_icon_circle.svg'
+        )
+      )
+      .addSvgIcon(
+        'quizzes_icon_circle',
+        this.domSanitizer.bypassSecurityTrustResourceUrl(
+          'courses/images/svg/quizzes_icon_circle.svg'
+        )
+      )
+      .addSvgIcon(
+        'videos_icon_circle',
+        this.domSanitizer.bypassSecurityTrustResourceUrl(
+          'courses/images/svg/videos_icon_circle.svg'
+        )
       );
   }
 }

@@ -63,6 +63,8 @@ import { CtaButtonComponent } from './cta-button/cta-button.component';
 import { CourseLessonsComponent } from './course-lessons/course-lessons.component';
 import { CourseLessonItemComponent } from './course-lesson-item/course-lesson-item.component';
 import { CourseLessonContentCountComponent } from './course-lesson-content-count/course-lesson-content-count.component';
+import { CourseOverviewComponent } from './course-overview/course-overview.component';
+import { CourseSummaryCountsComponent } from './course-summary-counts/course-summary-counts.component';
 
 @NgModule({
   imports: [
@@ -122,6 +124,8 @@ import { CourseLessonContentCountComponent } from './course-lesson-content-count
     CourseLessonsComponent,
     CourseLessonItemComponent,
     CourseLessonContentCountComponent,
+    CourseOverviewComponent,
+    CourseSummaryCountsComponent,
   ],
   exports: [
     LessonLandingPageComponent,
@@ -163,6 +167,8 @@ import { CourseLessonContentCountComponent } from './course-lesson-content-count
     CourseLessonsComponent,
     CourseLessonItemComponent,
     CourseLessonContentCountComponent,
+    CourseOverviewComponent,
+    CourseSummaryCountsComponent,
   ],
   providers: [
     { provide: MAT_DIALOG_DATA, useValue: {} },

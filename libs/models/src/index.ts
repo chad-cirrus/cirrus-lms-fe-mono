@@ -27,6 +27,7 @@ export * from './lib/PROGRESS_TYPE';
 export * from './lib/PROGRESS_STATUS';
 export * from './lib/ICourse';
 export * from './lib/ICourseOverviewLessons';
+export * from './lib/ICourseOverviewInfo';
 
 export * from './testing/testData';
 export * from './testing/crashTestDummy';
