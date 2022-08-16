@@ -1,0 +1,32 @@
+@use '../styles/variables' as var;
+
+.mat-icon {
+  width: 18px;
+}
+
+.title {
+  font-family: var.$AkzidenzGroteskBqLight;
+  font-size: 18px;
+  line-height: 26px;
+  letter-spacing: 0.02em;
+}
+.ratio {
+  font-family: var.$akzidenz-grotesk_bqLtEx400;
+  font-size: 22px;
+  line-height: 22px;
+  letter-spacing: -0.045em;
+  .numerator {
+    color: white;
+  }
+  .denominator {
+    color: #969696;
+  }
+}
+
+@media (min-width: 960px) {
+  .ratio {
+    font-size: 28px;
+    line-height: 28px;
+  }
+}
+
