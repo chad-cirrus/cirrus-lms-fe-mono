@@ -1,0 +1,58 @@
+@use '../styles/variables' as var;
+
+.circular-chart {
+  display: block;
+  max-height: 100px;
+}
+
+.circle {
+  stroke: #00FFFF;
+  ;
+  fill: none;
+  stroke-width: 2.8;
+  stroke-linecap: round;
+  animation: progress 1s ease-out forwards;
+}
+
+.circle-bg {
+  fill: none;
+  stroke: rgba(0, 255, 255, 0.25);
+  stroke-width: 2.8;
+}
+
+@keyframes progress {
+  0% {
+    stroke-dasharray: 0 100;
+  }
+}
+
+.info {
+  .label {
+    font-family: var.$akzidenz-grotesk_bqLtEx400;
+    font-size: 16px;
+    line-height: 26px;
+    letter-spacing: 0.02em;
+  }
+  .completed {
+    font-family: var.$akzidenz-grotesk_bqLtEx400;
+    font-size: 32px;
+    line-height: 32px;
+    letter-spacing: 0.02em;
+    margin-right: 4px;
+  }
+  .total {
+    font-family: var.$akzidenz-grotesk_bqLtEx400;
+    font-size: 23px;
+    line-height: 23px;
+    letter-spacing: 0.02em;
+    color: #969696;
+  }
+}
+
+@media (min-width: 960px) {
+  .info {
+    .label {
+      font-size: 18px;
+    }
+  }
+}

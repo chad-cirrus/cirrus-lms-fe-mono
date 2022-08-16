@@ -66,6 +66,7 @@ import { CourseLessonContentCountComponent } from './course-lesson-content-count
 import { CourseOverviewLessonProgressBarComponent } from './course-overview-lesson-progress-bar/course-overview-lesson-progress-bar.component';
 import { CourseOverviewComponent } from './course-overview/course-overview.component';
 import { CourseSummaryCountsComponent } from './course-summary-counts/course-summary-counts.component';
+import { CourseContentProgressCircleComponent } from './course-content-progress-circle/course-content-progress-circle.component';
 
 @NgModule({
   imports: [
@@ -127,6 +128,7 @@ import { CourseSummaryCountsComponent } from './course-summary-counts/course-sum
     CourseLessonContentCountComponent,
     CourseOverviewComponent,
     CourseSummaryCountsComponent,
+    CourseContentProgressCircleComponent,
     CourseOverviewLessonProgressBarComponent,
   ],
   exports: [
@@ -171,6 +173,7 @@ import { CourseSummaryCountsComponent } from './course-summary-counts/course-sum
     CourseLessonContentCountComponent,
     CourseOverviewComponent,
     CourseSummaryCountsComponent,
+    CourseContentProgressCircleComponent,
     CourseOverviewLessonProgressBarComponent,
   ],
   providers: [

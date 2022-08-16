@@ -1,0 +1,46 @@
+<div
+  class="container"
+  fxLayout="row"
+  fxLayoutAlign="start center"
+  fxLayoutGap="12px"
+>
+  <svg
+    width="5em"
+    height="5em"
+    viewBox="0 0 36 36"
+    xmlns="http://www.w3.org/2000/svg"
+    class="circular-chart"
+  >
+    <path
+      class="circle-bg"
+      d="M18 2.0845
+      a 15.9155 15.9155 0 0 1 0 31.831
+      a 15.9155 15.9155 0 0 1 0 -31.831"
+    />
+    <path
+      class="circle"
+      d="M18 2.0845
+        a 15.9155 15.9155 0 0 1 0 31.831
+        a 15.9155 15.9155 0 0 1 0 -31.831"
+      fill="none"
+      stroke="red"
+      stroke-width="1"
+      [attr.stroke-dasharray]="dash"
+    />
+    <image
+      class="icon"
+      x="10"
+      y="10"
+      width="16"
+      height="16"
+      [attr.href]="iconUrl"
+    />
+  </svg>
+  <div class="info">
+    <p class="label">{{ label }}</p>
+    <p>
+      <span class="completed">{{ progress.completed }}</span
+      ><span class="total">/{{ progress.total }}</span>
+    </p>
+  </div>
+</div>
