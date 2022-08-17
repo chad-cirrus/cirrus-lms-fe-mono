@@ -1,0 +1,92 @@
+@use '../styles/variables' as *;
+
+.enrollment-history-container {
+  padding: 0px 62px 0px 62px;
+
+  .cert-message {
+    padding: 0px 0px 35px 2px;
+  }
+
+  .headers-container {
+    padding-bottom: 4px;
+  }
+
+  .table-alignment {
+    flex: 1 1 0;
+    width: 0;
+  }
+
+  .header-text {
+    font-size: 0.938rem;
+    font-family: $bqmedium-font;
+  }
+
+  .value-text {
+    font-size: 1rem;
+    color: $gray5;
+  }
+
+  .download-text {
+    font-size: 1rem;
+    font-family: $bqmedium-font;
+    color: $gray5;
+  }
+
+  .header {
+    @extend .header-text;
+    @extend .table-alignment;
+  }
+
+  .row-item {
+    @extend .table-alignment;
+    padding: 14px 0px 19px 0px;
+  }
+
+  .header-last {
+    @extend .header-text;
+    flex: 0.45 1 0;
+  }
+
+  .row-item-last {
+    flex: 0.45 1 0;
+    padding: 14px 0px 19px 0px;
+  }
+
+  .row-item-center {
+    align-self: flex-end;
+  }
+
+  .row-section {
+    border-bottom: 1px solid $border-grey;
+  }
+
+  .column-section {
+    padding-top: 15px;
+    border-bottom: 1px solid $border-grey;
+  }
+
+  .column-item {
+    padding: 26px 0px 0px 9px;
+  }
+
+  .column-item-last {
+    padding: 26px 0px 49px 9px;
+  }
+
+  @media (max-width: 600px) {
+    padding: 0px 19px 0px 19px;
+    .header-text {
+      font-size: 0.875rem;
+    }
+    .value-text {
+      font-size: 0.939rem;
+    }
+  }
+
+  @media (max-width: 960) {
+    padding: 0px 43px 0px 46px;
+    .value-text {
+      font-size: 0.875rem;
+    }
+  }
+}

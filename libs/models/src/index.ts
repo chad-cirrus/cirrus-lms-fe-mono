@@ -26,10 +26,10 @@ export * from './lib/PROGRESS_TYPE';
 export * from './lib/PROGRESS_STATUS';
 export * from './lib/ICourse';
 export * from './lib/ICourseOverviewLessons';
+export * from './lib/IEnrollmentHistory';
 export * from './lib/ICourseOverviewInfo';
 export * from './lib/ICourseOverview';
 export * from './lib/ICoursePlayerConfig';
-
 export * from './testing/testData';
 export * from './testing/crashTestDummy';
 export * from './testing/testData853b';

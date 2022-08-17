@@ -63,6 +63,7 @@ import { CtaButtonComponent } from './cta-button/cta-button.component';
 import { CourseLessonsComponent } from './course-lessons/course-lessons.component';
 import { CourseLessonItemComponent } from './course-lesson-item/course-lesson-item.component';
 import { CourseLessonContentCountComponent } from './course-lesson-content-count/course-lesson-content-count.component';
+import { CoursesTabEnrollmentHistoryComponent } from './courses-tab-enrollment-history/courses-tab-enrollment-history.component';
 import { CourseOverviewLessonProgressBarComponent } from './course-overview-lesson-progress-bar/course-overview-lesson-progress-bar.component';
 import { CourseOverviewComponent } from './course-overview/course-overview.component';
 import { CourseSummaryCountsComponent } from './course-summary-counts/course-summary-counts.component';
@@ -126,6 +127,7 @@ import { CourseContentProgressCircleComponent } from './course-content-progress-
     CourseLessonsComponent,
     CourseLessonItemComponent,
     CourseLessonContentCountComponent,
+    CoursesTabEnrollmentHistoryComponent,
     CourseOverviewComponent,
     CourseSummaryCountsComponent,
     CourseContentProgressCircleComponent,
@@ -171,10 +173,12 @@ import { CourseContentProgressCircleComponent } from './course-content-progress-
     CourseLessonsComponent,
     CourseLessonItemComponent,
     CourseLessonContentCountComponent,
+    CoursesTabEnrollmentHistoryComponent,
     CourseOverviewComponent,
     CourseSummaryCountsComponent,
     CourseContentProgressCircleComponent,
     CourseOverviewLessonProgressBarComponent,
+
   ],
   providers: [
     { provide: MAT_DIALOG_DATA, useValue: {} },

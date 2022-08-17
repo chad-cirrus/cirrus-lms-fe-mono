@@ -1,0 +1,66 @@
+<div class="enrollment-history-container">
+  <div class="cert-message">
+    <p class="medium">This certificate expires every 365 days</p>
+  </div>
+
+  <div class="headers-container" fxLayout="row" *ngIf="tablet">
+    <div class="header">COURSE DATE</div>
+    <div class="header">VERSION</div>
+    <div class="header">TRANSCRIPT</div>
+    <div class="header-last">CERTIFICATE</div>
+  </div>
+
+  <div
+    *ngFor="let e of enrollments"
+    [ngClass]="tablet ? 'row-section' : 'column-section'"
+    [fxLayout]="tablet ? 'row' : 'column'"
+  >
+    <div [ngClass]="tablet ? 'row-item' : 'column-item'" fxLayout="row">
+      <div *ngIf="!tablet" fxFlex="50" class="header-text">COURSE DATE</div>
+      <div class="value-text">{{ e.enrollment_date }}</div>
+    </div>
+    <div [ngClass]="tablet ? 'row-item' : 'column-item'" fxLayout="row">
+      <div *ngIf="!tablet" fxFlex="50" class="header-text">VERSION</div>
+      <div class="value-text">{{ e.course_version }}</div>
+    </div>
+    <div [ngClass]="tablet ? 'row-item' : 'column-item'" fxLayout="row">
+      <div *ngIf="!tablet" fxFlex="50" class="header-text">TRANSCRIPT</div>
+      <div fxLayout="row" fxLayoutGap="10px">
+        <div *ngIf="e.transcript_available">
+          <img
+            width="15px"
+            height="17.5px"
+            src="courses/images/svg/download-arrow.svg"
+          />
+        </div>
+        <div
+          [ngClass]="e.transcript_available ? 'download-text' : 'value-text'"
+        >
+          {{ e.transcript_available ? 'Download' : 'In Progress' }}
+        </div>
+      </div>
+    </div>
+    <div
+      [ngClass]="tablet ? 'row-item-last' : 'column-item-last'"
+      fxLayout="row"
+    >
+      <div *ngIf="!tablet" fxFlex="50" class="header-text">CERTIFICATE</div>
+      <div fxLayout="row" fxLayoutGap="10px">
+        <div *ngIf="e.progress.status === 'completed'">
+          <img
+            width="15px"
+            height="17.5px"
+            src="courses/images/svg/download-arrow.svg"
+          />
+        </div>
+        <div
+          [ngClass]="
+            e.progress.status === 'in_progress' ? 'value-text' : 'download-text'
+          "
+        >
+          {{ e.progress.status === 'in_progress' ? 'In Progress' : 'Download' }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
