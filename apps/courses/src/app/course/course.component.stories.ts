@@ -2,8 +2,12 @@ import { CourseComponent } from './course.component';
 import { Meta, moduleMetadata, Story } from '@storybook/angular';
 import {
   CourseLandingPageComponent,
+  CourseLessonContentCountComponent,
+  CourseLessonItemComponent,
+  CourseLessonsComponent,
   CoursePlayerComponent,
   CourseProgressComponent,
+  CtaButtonComponent,
   MatIconRegistryModule,
 } from '@cirrus/ui';
 import { MatDividerModule } from '@angular/material/divider';
@@ -18,6 +22,17 @@ import { ICourseOveview, ProgressType } from '@cirrus/models';
 import { of } from 'rxjs';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+
+const mockEnvironment = {
+  production: false,
+  baseUrl: 'http://cirrusapproach.local:3000',
+  profile:
+    'https://cirfullsb-cirrusaircraftvpo.cs41.force.com/approachsso/s/profile/',
+  defaultMobile:
+    'https://cirrusapproachherokuprod.blob.core.windows.net/cirruslmsherokudevcontainer/content-items/images/default-lesson-hero-mobile.jpg',
+  defaultDesktop:
+    'https://cirrusapproachherokuprod.blob.core.windows.net/cirruslmsherokudevcontainer/content-items/images/default-lesson-hero-desktop.jpg',
+};
 
 const course: ICourseOveview = {
   id: 351,
@@ -298,8 +313,18 @@ export default {
         CourseLandingPageComponent,
         CourseProgressComponent,
         CoursePlayerComponent,
+        CourseLessonsComponent,
+        CtaButtonComponent,
+        CourseLessonItemComponent,
+        CourseLessonContentCountComponent,
       ],
-      providers: [{ provide: APP_BASE_HREF, useValue: '/' }],
+      providers: [
+        { provide: APP_BASE_HREF, useValue: '/' },
+        {
+          provide: 'environment',
+          useValue: mockEnvironment,
+        },
+      ],
     }),
   ],
 } as Meta<CourseComponent>;

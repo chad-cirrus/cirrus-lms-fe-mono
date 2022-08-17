@@ -19,6 +19,10 @@ export * from './lib/course-landing-page/course-landing-page.component';
 export * from './lib/helpers/progressTextMapper';
 export * from './lib/course-progress/course-progress.component';
 export * from './lib/course-player/course-player.component';
+export * from './lib/course-lessons/course-lessons.component';
+export * from './lib/cta-button/cta-button.component';
+export * from './lib/course-lesson-item/course-lesson-item.component';
+export * from './lib/course-lesson-content-count/course-lesson-content-count.component';
 
 // export * from '../../models/src/testing/testData';
 export * from '../../models/src/testing/testDataIcingLesson';
