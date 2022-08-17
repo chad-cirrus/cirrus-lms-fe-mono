@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { IContent, ILesson } from '@cirrus/models';
-import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
+import { ILesson } from '@cirrus/models';
 import { createReducer, on } from '@ngrx/store';
 import {
   completeProgress,
@@ -15,27 +14,11 @@ import {
   fetchLessonsSuccess,
   fetchLessonsFailure,
 } from '../actions/lessons.actions';
-import {
-  handleStartProgressSuccess,
-  handleCompleteProgressSuccess,
-} from './handlers';
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
-export interface LessonContentsState extends EntityState<IContent> {}
-
-export function sortByOrder(a: IContent, b: IContent): number {
-  return a.order - b.order;
-}
-
-export const lessonContentsEntityAdapter: EntityAdapter<IContent> =
-  createEntityAdapter<IContent>({ sortComparer: sortByOrder });
-
-export const initialContents = lessonContentsEntityAdapter.getInitialState();
 export interface LessonState {
   busy: boolean;
   error: any;
   lesson: ILesson;
-  lessonContents: LessonContentsState;
 }
 
 export interface LessonPartialState {
@@ -119,7 +102,6 @@ export const initialLessonState: LessonState = {
     stage_id: 0,
     progress_stats: [],
   },
-  lessonContents: lessonContentsEntityAdapter.getInitialState(),
 };
 
 export const reducer = createReducer(
@@ -129,14 +111,7 @@ export const reducer = createReducer(
     ...state,
     busy: false,
     error: null,
-    lesson: {
-      ...lesson,
-      contents: [],
-    },
-    lessonContents: lessonContentsEntityAdapter.setAll(
-      lesson.contents,
-      state.lessonContents
-    ),
+    lesson,
   })),
   on(fetchLessonsFailure, (state, { error }) => ({
     ...state,
@@ -144,29 +119,24 @@ export const reducer = createReducer(
     error,
   })),
   on(startProgress, state => ({ ...state, busy: true, error: null })),
-  on(startProgressSuccess, (state, { responses }) =>
-    handleStartProgressSuccess(state, responses)
-  ),
+  on(startProgressSuccess, state => ({
+    ...state,
+    busy: true,
+    error: null,
+  })),
   on(startProgressFailure, (state, { error }) => ({
     ...state,
     busy: false,
     error,
   })),
   on(completeProgress, state => ({ ...state, busy: true, error: null })),
-  on(completeProgressSuccess, (state, { responses }) =>
-    handleCompleteProgressSuccess(state, responses)
-  ),
+  on(completeProgressSuccess, state => ({
+    ...state,
+    busy: false,
+  })),
   on(completeProgressFailure, (state, { error }) => ({
     ...state,
     busy: false,
     error,
   }))
 );
-
-const { selectIds, selectEntities, selectAll, selectTotal } =
-  lessonContentsEntityAdapter.getSelectors();
-
-export const selectLessonContentIds = selectIds;
-export const selectLessonContentEntities = selectEntities;
-export const selectAllLessonContents = selectAll;
-export const selectTotalLessonContents = selectTotal;

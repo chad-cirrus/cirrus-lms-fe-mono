@@ -1,13 +1,32 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { fetchCourseOverview } from '../store/actions/course.actions';
+import { CourseState } from '../store/reducers/course.reducer';
+import { selectCourseOverview } from '../store/selectors/course.selector';
 
 @Component({
   selector: 'cirrus-course',
   templateUrl: './course.component.html',
   styleUrls: ['./course.component.scss'],
 })
-export class CourseComponent {
-  course = {
-    title: 'Private Pilot License Course',
-    subTitle: 'An Introductory subhead to the Private Pilot License course',
-  };
+export class CourseComponent implements OnInit {
+  courseOverview$ = this.store.select(selectCourseOverview);
+
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private store: Store<CourseState>
+  ) {}
+
+  ngOnInit(): void {
+    this.route.params.subscribe(({ courseId }) => {
+      console.log(courseId);
+      this.store.dispatch(fetchCourseOverview({ courseId }));
+    });
+  }
+
+  navigateToLesson(lessonId: number) {
+    this.router.navigate(['lessons', lessonId], { relativeTo: this.route });
+  }
 }

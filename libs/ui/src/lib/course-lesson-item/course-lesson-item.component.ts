@@ -1,5 +1,5 @@
-import { Component, Inject, Input, OnInit } from '@angular/core';
-import { CourseOverviewLesson, LESSON_TYPE } from '@cirrus/models';
+import { Component, EventEmitter, Inject, Input, Output } from '@angular/core';
+import { ICourseOverviewLesson, LESSON_TYPE } from '@cirrus/models';
 import { progressTextMapperDictionary } from '../helpers/progressTextMapper';
 
 @Component({
@@ -9,7 +9,8 @@ import { progressTextMapperDictionary } from '../helpers/progressTextMapper';
 })
 export class CourseLessonItemComponent {
   private environment: Record<string, unknown>;
-  @Input() courseLesson!: CourseOverviewLesson;
+  @Input() courseLesson!: ICourseOverviewLesson;
+  @Output() navigate = new EventEmitter<number>();
 
   get lessonType(): string {
     const lessonDict: { [lessonType: number]: string } = {
@@ -34,5 +35,9 @@ export class CourseLessonItemComponent {
 
   constructor(@Inject('environment') environment: Record<string, unknown>) {
     this.environment = environment;
+  }
+
+  emitNavigation() {
+    this.navigate.emit(this.courseLesson.id);
   }
 }

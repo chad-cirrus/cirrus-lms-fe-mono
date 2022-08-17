@@ -1,4 +1,4 @@
-<script src='../header/user-menus/user-menus.component.ts'></script>
+<script src="../header/user-menus/user-menus.component.ts"></script>
 <mat-sidenav-container>
   <mat-sidenav
     #snav
@@ -9,11 +9,11 @@
     disableClose="true"
   >
     <mat-nav-list>
-      <ng-container *ngIf="workbook$ | async as workbook">
+      <ng-container *ngIf="courseOverview$ | async as courseOverview">
         <ng-container *ngIf="lesson$ | async as lesson">
           <cirrus-stages-overlay
             (scrollToTop)="scrollToTop()"
-            [workbook]="workbook"
+            [courseOverview]="courseOverview"
             (closeSideNav)="close()"
             (navigateToLesson)="navigate($event)"
             [lessonId]="lesson.id"
@@ -34,7 +34,7 @@
       [instructorView]="(instructorView$ | async)!"
       [sideNavOpen]="(sideNavOpen$ | async)!"
       (openSideNav)="openSideNav()"
-      [workbook]="(workbook$ | async)!"
+      [courseOverview]="(courseOverview$ | async)!"
       (navigateToLesson)="navigate($event)"
       [isScreenSmall]="(isScreenSmall$ | async)!"
       [lessonId]="lessonId"

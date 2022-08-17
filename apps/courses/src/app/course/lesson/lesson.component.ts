@@ -12,7 +12,7 @@ import {
 import { select, Store } from '@ngrx/store';
 
 import { Observable, Subscription } from 'rxjs';
-import { filter, tap, withLatestFrom } from 'rxjs/operators';
+import { map, tap, withLatestFrom } from 'rxjs/operators';
 import { AppService } from '../../app.service';
 
 import { ContentPlayerDialogService } from '../../content-player/content-player-dialog.service';
@@ -22,16 +22,17 @@ import { LessonState } from '../../store/reducers/lesson.reducer';
 import { selectCirrusUser } from '../../store/selectors/cirrus-user.selector';
 import {
   selectCheckOffRequired,
-  selectLessonWithContentEntities,
+  selectLesson,
 } from '../../store/selectors/lessons.selector';
 import {
   selectInstructorView,
   selectIsScreenSmall,
   selectSideNavOpen,
 } from '../../store/selectors/view.selector';
-import { selectWorkbook } from '../../store/selectors/workbook-routes.selector';
 import { CoursesService } from '../course.service';
 import { environment } from '../../../environments/environment';
+import { fetchCourseOverview } from '../../store/actions/course.actions';
+import { selectCourseOverview } from '../../store/selectors/course.selector';
 
 @Component({
   selector: 'cirrus-lesson',
@@ -42,22 +43,19 @@ export class LessonComponent implements OnInit, OnDestroy {
   private _lesson!: ILesson;
   stage_id!: number;
   checkoutOffsRequired$ = this.store.pipe(select(selectCheckOffRequired));
-  lesson$: Observable<ILesson> = this.store
-    .select(selectLessonWithContentEntities)
-    .pipe(
-      tap(lesson => {
-        this._lesson = lesson;
-      })
-    );
+  lesson$: Observable<ILesson> = this.store.select(selectLesson).pipe(
+    tap(lesson => {
+      this._lesson = lesson;
+    })
+  );
   instructorView$: Observable<boolean> =
     this.store.select(selectInstructorView);
   isScreenSmall$: Observable<boolean> = this.store.select(selectIsScreenSmall);
   sideNavOpen$: Observable<boolean> = this.store.select(selectSideNavOpen);
   lessonSubscription = new Subscription();
 
-  workbook$ = this.store
-    .select(selectWorkbook)
-    .pipe(filter(workbook => workbook.id !== 0));
+  courseOverview$ = this.store.select(selectCourseOverview);
+  stages$ = this.courseOverview$.pipe(map(overview => overview.stages));
 
   coursId!: number;
   lessonId!: number;
@@ -82,20 +80,22 @@ export class LessonComponent implements OnInit, OnDestroy {
         this.coursId = parseInt(courseId);
         this.lessonId = parseInt(lessonId);
         this.store.dispatch(fetchLessons({ courseId, lessonId }));
+        this.store.dispatch(fetchCourseOverview({ courseId }));
       })
     );
 
     this.lessonCompleted$ = this.courseService.lessonComplete$;
+
     this.lessonSubscription.add(
       this.lessonCompleted$
         .pipe(
           withLatestFrom(
-            this.workbook$,
+            this.courseOverview$,
             this.store.select(selectCirrusUser),
             this.lesson$
           )
         )
-        .subscribe(([progress_type, workbook, user, lesson]) => {
+        .subscribe(([progress_type, courseOverview, user, lesson]) => {
           const component: ComponentType<
             CompletionDialogComponent | CourseCompletionComponent
           > =
@@ -109,7 +109,7 @@ export class LessonComponent implements OnInit, OnDestroy {
                 }
               : {
                   badge: 'courses/images/svg/AvionicsCourse2.svg',
-                  course: workbook.name,
+                  course: courseOverview.name,
                   student: user.name,
                   course_attempt_id: this._lesson.course_attempt_id,
                 };
@@ -117,7 +117,7 @@ export class LessonComponent implements OnInit, OnDestroy {
           const showCompletionDialog =
             progress_type === 'lesson'
               ? lesson.progress.status !== PROGRESS_STATUS.completed
-              : workbook.progress.status !== PROGRESS_STATUS.completed;
+              : courseOverview.progress.status !== PROGRESS_STATUS.completed;
 
           if (showCompletionDialog) {
             this.dialog
@@ -128,10 +128,10 @@ export class LessonComponent implements OnInit, OnDestroy {
                 width: '100%',
               })
               .afterClosed()
-              .pipe(withLatestFrom(this.workbook$))
-              .subscribe(([response, workbook]) => {
+              .pipe(withLatestFrom(this.stages$))
+              .subscribe(([response, stages]) => {
                 if (response === LESSON_COMPLETION_CTA.nextLesson) {
-                  const nextLesson = findNextLesson(workbook);
+                  const nextLesson = findNextLesson(stages);
                   if (nextLesson > 0) {
                     this.router.navigate([
                       `/courses/${this.coursId}/lessons/${nextLesson}`,

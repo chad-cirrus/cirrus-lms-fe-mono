@@ -7,7 +7,6 @@ export * from './lib/ICourseProgress';
 export * from './lib/IContent';
 export * from './lib/ILesson';
 export * from './lib/IPlayListItem';
-export * from './lib/IWorkBookRoutes';
 export * from './lib/IPlayListItem';
 export * from './lib/IVideoMediaItem';
 export * from './lib/ContentType';
@@ -28,6 +27,8 @@ export * from './lib/PROGRESS_STATUS';
 export * from './lib/ICourse';
 export * from './lib/ICourseOverviewLessons';
 export * from './lib/ICourseOverviewInfo';
+export * from './lib/ICourseOverview';
+export * from './lib/ICoursePlayerConfig';
 
 export * from './testing/testData';
 export * from './testing/crashTestDummy';

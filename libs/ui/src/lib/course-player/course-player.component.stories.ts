@@ -20,24 +20,33 @@ const Template: Story<CoursePlayerComponent> = (
 
 export const Primary = Template.bind({});
 Primary.args = {
-  lessonNumber: 1,
-  chapter: 1.1,
-  description: 'This is a title with exactly 60 characters which is the maxx',
-  buttonText: 'Get Started',
+  config: {
+    index: '2.3',
+    header: 'JUMP BACK IN',
+    title: 'Another title - for comparison contains lengthier keywords',
+    buttonText: 'Resume',
+    thumbnail: 'courses/images/lesson-thumbnail.png',
+  },
 };
 
 export const Desktop = Template.bind({});
 Desktop.args = {
-  lessonNumber: 1,
-  chapter: 1.1,
-  description: 'This is a title with exactly 60 characters which is the maxx',
-  buttonText: 'Get Started',
+  config: {
+    index: '2.3',
+    header: 'JUMP BACK IN',
+    title: 'Another title - for comparison contains lengthier keywords',
+    buttonText: 'Resume',
+    thumbnail: 'courses/images/lesson-thumbnail.png',
+  },
 };
 
 export const Mobile = Template.bind({});
 Mobile.args = {
-  lessonNumber: 1,
-  chapter: 1.1,
-  description: 'Please display this in mobile mode in dev tools. Mobile view',
-  buttonText: 'Get Started',
+  config: {
+    index: '2.3',
+    header: 'JUMP BACK IN',
+    title: 'Another title - for comparison contains lengthier keywords',
+    buttonText: 'Resume',
+    thumbnail: 'courses/images/lesson-thumbnail.png',
+  },
 };

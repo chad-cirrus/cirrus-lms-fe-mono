@@ -23,8 +23,19 @@ span.cirrus-tab-label {
   text-align: left;
 }
 
+.test-stages {
+  margin-bottom: 16px;
+}
+
+.test-lesson {
+  padding: 1rem;
+}
+
+
 @media (max-width: 960px) {
   span.cirrus-tab-label {
     font-family: 'akzidenz-grotesk_bqlight';
   }
 }
+
+

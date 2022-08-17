@@ -1,5 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { ICourse } from '@cirrus/models';
+import { Component, Input } from '@angular/core';
+import { ICourseOveview, ICoursePlayerConfig } from '@cirrus/models';
+import { produceConfig } from './produce-config';
 
 @Component({
   selector: 'cirrus-course-landing-page',
@@ -7,7 +8,26 @@ import { ICourse } from '@cirrus/models';
   styleUrls: ['./course-landing-page.component.scss'],
 })
 export class CourseLandingPageComponent {
-  @Input() course!: ICourse;
+  coursePlayerConfig: ICoursePlayerConfig = {
+    index: '',
+    header: '',
+    title: '',
+    buttonText: 'Get Started',
+    thumbnail: 'courses/images/lesson-thumbnail.png',
+  };
+
+  private _course!: ICourseOveview;
+
+  @Input()
+  set course(value: ICourseOveview) {
+    this._course = value;
+    this.coursePlayerConfig = produceConfig(value.stages);
+  }
+
+  get course() {
+    return this._course;
+  }
+
   @Input() size = 'desktop';
   defaultMobile =
     'https://cirrusapproachherokuprod.blob.core.windows.net/cirruslmsherokudevcontainer/content-items/images/default-lesson-hero-mobile.jpg';

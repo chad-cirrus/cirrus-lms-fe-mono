@@ -9,6 +9,8 @@ module.exports = {
     ...rootMain.stories,
     '../src/app/**/*.stories.mdx',
     '../src/app/**/*.stories.@(js|jsx|ts|tsx)',
+    '../../../libs/ui/src/lib/**/*.stories.mdx',
+    '../../../libs/ui/src/lib/**/*.stories.@(js|jsx|ts|tsx)',
   ],
   addons: [...rootMain.addons, '@storybook/preset-scss'],
   staticDirs: [{from:'../../../libs/ui/src/assets', to: '/courses'}],

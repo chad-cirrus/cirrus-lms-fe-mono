@@ -18,9 +18,8 @@ const Template: Story<CourseProgressComponent> = (
 
 export const Primary = Template.bind({});
 Primary.args = {
-  lastCompletedDate: '05/06/22',
-  lessonsCompleted: 0,
-  lessonsTotal: 50,
-  milestonesReached: 0,
-  milestonesTotal: 8,
+  lessonStats: {
+    completed: 10,
+    total: 50,
+  },
 };

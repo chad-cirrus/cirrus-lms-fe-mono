@@ -1,31 +1,54 @@
-<cirrus-course-landing-page [course]="course"></cirrus-course-landing-page>
-<mat-tab-group>
-  <mat-tab>
-    <ng-template mat-tab-label>
-      <mat-icon svgIcon="eye"></mat-icon>
-      <span class="cirrus-tab-label"> Overview </span>
-    </ng-template>
-    Overview goes here
-  </mat-tab>
-  <mat-tab>
-    <ng-template mat-tab-label>
-      <mat-icon svgIcon="open_lessons"></mat-icon>
-      <span class="cirrus-tab-label"> Lessons </span>
-    </ng-template>
-    Lessons go here
-  </mat-tab>
-  <mat-tab>
-    <ng-template mat-tab-label>
-      <mat-icon svgIcon="milestone"></mat-icon>
-      <span class="cirrus-tab-label"> Milestones </span>
-    </ng-template>
-    Milestones
-  </mat-tab>
-  <mat-tab>
-    <ng-template mat-tab-label>
-      <mat-icon svgIcon="enrollment_history"></mat-icon>
-      <span class="cirrus-tab-label"> Enrollment History </span>
-    </ng-template>
-    Enrollment History
-  </mat-tab>
-</mat-tab-group>
+<div fxLayout="column" fxLayoutGap="48px">
+  <cirrus-course-landing-page
+    [course]="(courseOverview$ | async)!"
+  ></cirrus-course-landing-page>
+  <div *ngIf="courseOverview$ | async as overview">
+    <mat-tab-group>
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <mat-icon svgIcon="eye"></mat-icon>
+          <span class="cirrus-tab-label"> Overview </span>
+        </ng-template>
+        Overview goes here
+      </mat-tab>
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <mat-icon svgIcon="open_lessons"></mat-icon>
+          <span class="cirrus-tab-label"> Lessons </span>
+        </ng-template>
+        <cirrus-course-lessons
+          [stages]="overview.stages"
+          (navigate)="navigateToLesson($event)"
+        ></cirrus-course-lessons>
+      </mat-tab>
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <mat-icon svgIcon="milestone"></mat-icon>
+          <span class="cirrus-tab-label"> Milestones </span>
+        </ng-template>
+        Milestones
+      </mat-tab>
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <mat-icon svgIcon="enrollment_history"></mat-icon>
+          <span class="cirrus-tab-label"> Enrollment History </span>
+        </ng-template>
+        Enrollment History
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</div>
+
+<!-- <h4>Test Only</h4>
+<div>
+  Stages:
+  <div class="test-stages" *ngFor="let stage of overview.stages">
+    Stage: {{ stage.title }}
+    <div class="test-lesson" *ngFor="let lesson of stage.lessons">
+      <span routerLink="/courses/{{ overview.id }}/lessons/{{ lesson.id }}"
+        >Lesson: {{ lesson.title }}</span
+      >
+    </div>
+  </div>
+</div>
+</div> -->

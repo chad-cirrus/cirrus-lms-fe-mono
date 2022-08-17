@@ -1,4 +1,4 @@
-import { CONTENT_TYPE, IContentPlayerMenuItem, ILesson, ProgressType } from '@cirrus/models';
+import { CONTENT_TYPE, IContentPlayerMenuItem } from '@cirrus/models';
 import { mapContentTypeToIcon } from '@cirrus/ui';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import * as fromLesson from '../reducers/lesson.reducer';
@@ -17,33 +17,13 @@ export const selectContent = (contentId: number) =>
     lesson => lesson.contents.filter(c => c.id === contentId)[0]
   );
 
-export const selectLessonContents = createSelector(
-  selectLessonFeature,
-  state => state.lessonContents
-);
-
-export const selectAllLessonContents = createSelector(
-  selectLessonContents,
-  fromLesson.selectAllLessonContents
-);
-
-export const selectLessonWithContentEntities = createSelector(
-  selectLesson,
-  selectAllLessonContents,
-  (lesson, contents) =>
-    ({
-      ...lesson,
-      contents,
-    } as ILesson)
-);
-
 export const selectLessonStateBusy = createSelector(
   selectLessonFeature,
   state => state.busy
 );
 
 export const selectCheckOffRequired = createSelector(
-  selectLessonWithContentEntities,
+  selectLesson,
   state =>
     state.contents
       .filter(
@@ -55,16 +35,14 @@ export const selectCheckOffRequired = createSelector(
       .filter(status => status !== 'completed').length > 0
 );
 
-export const selectMenuItems = createSelector(
-  selectLessonWithContentEntities,
-  lesson =>
-    lesson.contents.map(
-      c =>
-        ({
-          icon: mapContentTypeToIcon(c.content_type),
-          text: c.title,
-          id: c.id,
-          progress: c.progress,
-        } as IContentPlayerMenuItem)
-    )
+export const selectMenuItems = createSelector(selectLesson, lesson =>
+  lesson.contents.map(
+    c =>
+      ({
+        icon: mapContentTypeToIcon(c.content_type),
+        text: c.title,
+        id: c.id,
+        progress: c.progress,
+      } as IContentPlayerMenuItem)
+  )
 );

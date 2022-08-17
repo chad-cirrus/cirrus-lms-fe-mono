@@ -2,7 +2,6 @@
   class="container"
   fxLayout="column"
   fxLayoutAlign="space-between center"
-  fxLayoutGap="17px"
   fxLayout.gt-sm="row"
   fxLayoutAlign.gt-sm="start center"
 >
@@ -10,19 +9,19 @@
     class="lesson-info"
     fxLayout="row"
     fxLayoutAlign="space-between start"
-    fxLayoutGap="11px"
+    fxLayoutGap="20px"
   >
     <div class="thumbnail-container">
-      <img [src]="thumbnail" alt="" class="thumbnail" />
+      <img [src]="config.thumbnail" alt="" class="thumbnail" />
     </div>
     <div class="text-container">
-      <div class="header">START LESSON {{ lessonNumber }}</div>
+      <div class="header">{{ config.header }}</div>
 
       <div class="description">
-        <span class="chapter">{{ chapter }}</span
-        >{{ description }}
+        <span class="chapter">{{ config.index }}</span
+        >{{ config.title }}
       </div>
     </div>
   </div>
-  <cirrus-cta-button [text]="buttonText"></cirrus-cta-button>
+  <cirrus-cta-button [text]="config.buttonText"></cirrus-cta-button>
 </div>

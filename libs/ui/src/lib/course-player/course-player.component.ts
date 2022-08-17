@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { ICoursePlayerConfig } from '@cirrus/models';
 
 @Component({
   selector: 'cirrus-course-player',
@@ -6,9 +7,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./course-player.component.scss'],
 })
 export class CoursePlayerComponent {
-  lessonNumber = 0;
-  chapter = 0;
-  description = '';
-  buttonText = '';
-  thumbnail = 'courses/images/lesson-thumbnail.png';
+  @Input() config!: ICoursePlayerConfig;
 }

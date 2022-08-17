@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { ILessonsstats } from '@cirrus/models';
 
 @Component({
   selector: 'cirrus-course-progress',
@@ -6,26 +7,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./course-progress.component.scss'],
 })
 export class CourseProgressComponent {
-  lastCompletedDate = '';
-  lessonsCompleted = 0;
-  lessonsTotal = 0;
-  milestonesReached = 0;
-  milestonesTotal = 0;
-
   lessonsCompletedIcon =
     'courses/images/svg/course-progress-lessons-completed.svg';
-  milestonesReachedIcon =
-    'courses/images/svg/course-progress-milestones-reached.svg';
 
   get progressValue() {
-    return this.lessonsTotal > 0
-      ? (this.lessonsCompleted / this.lessonsTotal) * 100
+    return this.lessonStats.total > 0
+      ? (this.lessonStats.completed / this.lessonStats.total) * 100
       : 0;
   }
 
-  get lastCompleted() {
-    return this.lastCompletedDate.length > 0
-      ? `Last Completed: ${this.lastCompletedDate}`
-      : '';
-  }
+  @Input() lessonStats: ILessonsstats = { total: 0, completed: 0 };
 }

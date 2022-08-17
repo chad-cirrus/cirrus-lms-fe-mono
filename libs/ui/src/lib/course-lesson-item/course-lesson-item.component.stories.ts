@@ -40,69 +40,44 @@ const Template: Story<CourseLessonItemComponent> = (
 export const Primary = Template.bind({});
 Primary.args = {
   courseLesson: {
-    id: 622,
-    title: 'This is a Title with Exactly 60 Characters which is the maxx',
+    id: 692,
+    title: 'Welcome To Your Cirrus Training',
     order: 0,
-    progress: {
-      id: 1683034,
-      status: 'not_started',
-    },
-    stage_lesson_index: '2.1 Self-Study',
+    index: '1.1',
     thumbnail_image_url: '',
     lesson_type: 0,
-    completion_time: undefined,
-    content_counts: {
-      videos: 5,
-    },
-    description:
-      "Arguably the most fun you'll have in your Cirrus, not to mention a great way to develop a feel for your Cirrus at more normal flying airspeeds.",
+    completion_time: new Date(),
+    content_counts: { documents: 3 },
+    progress: { id: 1775463, status: 'completed' },
   },
 };
 
 export const Ground = Template.bind({});
 Ground.args = {
   courseLesson: {
-    id: 622,
-    title: 'Ground Lesson 1',
+    id: 692,
+    title: 'Welcome To Your Cirrus Training',
     order: 0,
-    progress: {
-      id: 1683034,
-      status: 'in_progress',
-    },
-    stage_lesson_index: '1.1 Self-Study',
+    index: '1.1',
     thumbnail_image_url: '',
     lesson_type: 0,
-    completion_time: undefined,
-    content_counts: {
-      videos: 4,
-      documents: 3,
-      quizzes: 1,
-    },
-    description:
-      "Arguably the most fun you'll have in your Cirrus, not to mention a great way to develop a feel for your Cirrus at more normal flying airspeeds.",
+    completion_time: new Date(),
+    content_counts: { documents: 3 },
+    progress: { id: 1775463, status: 'completed' },
   },
 };
 
 export const Simulator = Template.bind({});
 Simulator.args = {
   courseLesson: {
-    id: 622,
-    title: 'Simulator Lesson 1',
+    id: 692,
+    title: 'Welcome To Your Cirrus Training',
     order: 0,
-    progress: {
-      id: 1683034,
-      status: 'completed',
-    },
-    stage_lesson_index: '1.2 Self-Study',
+    index: '1.1',
     thumbnail_image_url: '',
     lesson_type: 0,
-    completion_time: undefined,
-    content_counts: {
-      videos: 4,
-      documents: 3,
-      quizzes: 1,
-    },
-    description:
-      "Arguably the most fun you'll have in your Cirrus, not to mention a great way to develop a feel for your Cirrus at more normal flying airspeeds.",
+    completion_time: new Date(),
+    content_counts: { documents: 3 },
+    progress: { id: 1775463, status: 'completed' },
   },
 };

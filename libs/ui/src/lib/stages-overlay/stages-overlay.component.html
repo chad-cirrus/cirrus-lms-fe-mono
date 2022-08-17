@@ -23,7 +23,7 @@
       multi="true"
     >
       <cdk-accordion-item
-        *ngFor="let stage of workbook?.stages; let index = index"
+        *ngFor="let stage of courseOverview.stages; let index = index"
         class="stage-container"
         #accordionItem="cdkAccordionItem"
         class="stages-overlay-accordion-item"
@@ -72,7 +72,7 @@
                   <img [src]="inProgress" height="22px" width="22px" />
                 </div>
                 <div fxLayout="column" fxLayoutAlign="space-between">
-                  <div class="stage-index">{{ l.stage_lesson_index }}</div>
+                  <div class="stage-index">{{ l.id }}</div>
                   <div class="lesson-title-text">{{ l.title }}</div>
                 </div>
               </div>

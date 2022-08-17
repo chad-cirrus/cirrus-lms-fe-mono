@@ -1,10 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {
+  ICourseOveview,
   IInitialFile,
   ILesson,
   IProgressUpdateResponses,
-  IWorkBook,
   PROGRESS_TYPE,
 } from '@cirrus/models';
 import { Observable, Subject } from 'rxjs';
@@ -57,12 +57,6 @@ export class CoursesService {
       );
   }
 
-  getWorkbook(courseId: number): Observable<IWorkBook> {
-    return this.http.get<IWorkBook>(
-      `${environment.baseUrl}/${this.coursesUrl}/${courseId}/workbook`
-    );
-  }
-
   getScorm(blob_directory: string): Observable<IInitialFile> {
     return this.http.get<IInitialFile>(
       `${environment.baseUrl}/${this.scormUrl}/${blob_directory}`
@@ -79,7 +73,10 @@ export class CoursesService {
         map(responses =>
           responses
             ? responses
-            : ({ progresses: [], progress_stats: [] } as IProgressUpdateResponses)
+            : ({
+                progresses: [],
+                progress_stats: [],
+              } as IProgressUpdateResponses)
         )
       );
   }
@@ -94,7 +91,10 @@ export class CoursesService {
         map(responses =>
           responses
             ? responses
-            : ({ progresses: [], progress_stats: [] } as IProgressUpdateResponses)
+            : ({
+                progresses: [],
+                progress_stats: [],
+              } as IProgressUpdateResponses)
         ),
         tap(responses => {
           const { progresses } = responses;
@@ -110,5 +110,11 @@ export class CoursesService {
           }
         })
       );
+  }
+
+  getCourseOverview(courseId: number) {
+    return this.http.get<ICourseOveview>(
+      `${environment.baseUrl}/api/v4/courses/${courseId}`
+    );
   }
 }

@@ -1,7 +1,7 @@
-import { IWorkBook } from '@cirrus/models';
+import { ICourseOverviewStage } from '@cirrus/models';
 
-export function findNextLesson(workbook: IWorkBook): number {
-  const nextLesson = workbook.stages.reduce((prev, curr) => {
+export function findNextLesson(stages: ICourseOverviewStage[]): number {
+  const nextLesson = stages.reduce((prev, curr) => {
     const nextLesson =
       prev === 0 && curr.progress.status !== 'completed'
         ? curr.lessons

@@ -7,13 +7,13 @@ import {
   ViewChild,
 } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import {
-  IContent,
-  ILesson,
-  LessonStatus,
-} from '@cirrus/models';
+import { IContent, ICourseOveview, ILesson } from '@cirrus/models';
 import { StagesOverlayComponent } from '../stages-overlay/stages-overlay.component';
 import { DomSanitizer } from '@angular/platform-browser';
+
+enum LessonStatus {
+  NOT_STARTED = 'not_started',
+}
 
 @Component({
   selector: 'cirrus-lesson-landing-page',
@@ -24,7 +24,6 @@ export class LessonLandingPageComponent {
   private _lesson!: ILesson;
   private _buttonText!: string;
   private _isScreenSmall!: boolean;
-
 
   @Input()
   set isScreenSmall(value) {
@@ -67,7 +66,8 @@ export class LessonLandingPageComponent {
   @Input() checkoutOffsRequired!: boolean | null;
   @Input() instructorView!: boolean;
   @Input() sideNavOpen!: boolean;
-  @Input() workbook: any;
+  @Input() courseOverview!: ICourseOveview;
+
   // eslint-disable-next-line @typescript-eslint/no-inferrable-types
   @Input() courseComplete: boolean = false;
   profileImageUrl = 'course/images/profile.png';
@@ -149,14 +149,14 @@ export class LessonLandingPageComponent {
 
   openModal() {
     const dialogRef = this.dialog.open(StagesOverlayComponent, {
-      data: this.workbook,
+      data: this.courseOverview,
       maxWidth: '100vw',
       maxHeight: '100%',
       height: '100%',
       width: '100%',
     });
     dialogRef.afterClosed().subscribe(result => {
-      const payload = { lesson: result, course: this.workbook };
+      const payload = { lesson: result, course: this.courseOverview };
       this.navigate(payload);
     });
   }
@@ -171,7 +171,7 @@ export class LessonLandingPageComponent {
     );
 
     if (!content) {
-      this.playNextLessonContent.emit(this.workbook);
+      this.playNextLessonContent.emit(this.courseOverview);
       return;
     }
 

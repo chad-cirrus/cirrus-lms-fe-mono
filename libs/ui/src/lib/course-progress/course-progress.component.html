@@ -4,7 +4,6 @@
   fxLayoutAlign="start start"
   fxLayoutGap="12px"
 >
-  <div class="last-completed">{{ lastCompleted }}</div>
   <div class="header">COURSE PROGRESS</div>
   <mat-progress-bar
     color="accent"
@@ -26,18 +25,7 @@
     >
       <img [src]="lessonsCompletedIcon" alt="" />
       <span>
-        {{ lessonsCompleted }} of {{ lessonsTotal }} lessons completed
-      </span>
-    </div>
-    <div
-      class="milestones-reached"
-      fxLayout="row"
-      fxLayoutAlign="space-between center"
-      fxLayoutGap="8px"
-    >
-      <img [src]="milestonesReachedIcon" alt="" />
-      <span>
-        {{ milestonesReached }} of {{ milestonesTotal }} milestones reached
+        {{ lessonStats.completed }} of {{ lessonStats.total }} lessons completed
       </span>
     </div>
   </div>

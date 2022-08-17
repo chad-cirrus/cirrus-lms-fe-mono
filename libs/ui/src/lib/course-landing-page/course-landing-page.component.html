@@ -9,6 +9,10 @@
   </div>
   <mat-divider></mat-divider>
   <div class="course-sub-title">
-    <h4>{{ course.subTitle }}</h4>
+    <h3>{{ course.subtitle }}</h3>
   </div>
+  <cirrus-course-progress
+    [lessonStats]="course.lessons_stats"
+  ></cirrus-course-progress>
+  <cirrus-course-player [config]="coursePlayerConfig"></cirrus-course-player>
 </div>

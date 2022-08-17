@@ -5,7 +5,7 @@
   fxFlex="grow"
 >
   <div
-    *ngFor="let stage of courseOverviewLessons.stages"
+    *ngFor="let stage of stages"
     class="stage"
     fxLayout="column"
     fxLayoutAlign="space-between start"
@@ -13,8 +13,10 @@
     fxFlex="grow"
   >
     <div class="stage-header">Stage {{ stage.order + 1 }}</div>
-    <div *ngIf="stage.overview" class="stage-overview">
-      {{ stage?.overview }}
+    <div class="stage-overview">
+      {{
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit fugiat nulla pariatur.'
+      }}
     </div>
     <div
       class="item-container"
@@ -25,6 +27,7 @@
     >
       <cirrus-course-lesson-item
         [courseLesson]="courseLesson"
+        (navigate)="emitNavigation($event)"
       ></cirrus-course-lesson-item>
       <mat-divider></mat-divider>
     </div>

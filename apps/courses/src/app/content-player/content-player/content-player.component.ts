@@ -30,7 +30,7 @@ import { startProgress, completeProgress } from '../../store/actions';
 import { AppState } from '../../store/reducers';
 import {
   selectCheckOffRequired,
-  selectLessonWithContentEntities,
+  selectLesson,
   selectMenuItems,
 } from '../../store/selectors/lessons.selector';
 import { TaskService } from '../../task.service';
@@ -59,7 +59,7 @@ export class ContentPlayerComponent
   destroy$: Subject<boolean> = new Subject<boolean>();
   menuItems$ = this.store.select(selectMenuItems);
   lesson$ = this.store
-    .select(selectLessonWithContentEntities)
+    .select(selectLesson)
     .pipe(tap(lesson => (this.lesson_title = lesson.title)));
 
   private _nextContentRequest = new Subject<INextContentRequest>();
@@ -222,9 +222,21 @@ export class ContentPlayerComponent
         contentToBeUpdated.progress.status !== 'completed'
       ) {
         if (progress.status === PROGRESS_STATUS.in_progress) {
-          this.store.dispatch(startProgress({ id: progress.id }));
+          this.store.dispatch(
+            startProgress({
+              id: progress.id,
+              courseId: lesson.course_id,
+              lessonId: lesson.id,
+            })
+          );
         } else {
-          this.store.dispatch(completeProgress({ id: progress.id }));
+          this.store.dispatch(
+            completeProgress({
+              id: progress.id,
+              courseId: lesson.course_id,
+              lessonId: lesson.id,
+            })
+          );
         }
       }
     });

@@ -2,12 +2,16 @@ import {
   Component,
   EventEmitter,
   Input,
-  OnChanges,
   Output,
   ViewChild,
   ViewChildren,
 } from '@angular/core';
-import { IStage, IStageLesson, IWorkBook, ILesson } from '@cirrus/models';
+import {
+  ILesson,
+  ICourseOverviewStage,
+  ICourseOverviewLesson,
+  ICourseOveview,
+} from '@cirrus/models';
 import { CdkAccordion, CdkAccordionItem } from '@angular/cdk/accordion';
 
 @Component({
@@ -18,7 +22,7 @@ import { CdkAccordion, CdkAccordionItem } from '@angular/cdk/accordion';
 export class StagesOverlayComponent {
   @ViewChild('accordion') accordion!: CdkAccordion;
   @ViewChildren('accordionItem') accordionItems!: CdkAccordionItem[];
-  @Input() workbook!: IWorkBook;
+  @Input() courseOverview!: ICourseOveview;
 
   private _lessonId = 0;
 
@@ -47,15 +51,13 @@ export class StagesOverlayComponent {
     return 'courses/images/svg/not-started.svg';
   }
 
-
   ngOnChanges(): void {
-    this.scrollToTop.emit()
+    this.scrollToTop.emit();
   }
 
-
-  navigate(lesson: IStageLesson) {
+  navigate(lesson: ICourseOverviewLesson) {
     this.lessonId = lesson.id;
-    const payload = { lesson, course: this.workbook };
+    const payload = { lesson, course: this.courseOverview };
     this.navigateToLesson.emit(payload);
   }
 
@@ -65,7 +67,7 @@ export class StagesOverlayComponent {
 
   findAccordianIndex() {
     let index = 0;
-    this.workbook.stages.map((s: any, i: number) => {
+    this.courseOverview.stages.map((s: any, i: number) => {
       s.lessons.filter((l: ILesson) => {
         if (l.id === this.lessonId) {
           index = i;
@@ -75,7 +77,7 @@ export class StagesOverlayComponent {
     return index;
   }
 
-  expanded(stage: IStage): boolean {
+  expanded(stage: ICourseOverviewStage): boolean {
     return stage.lessons.map(l => l.id).indexOf(this.lessonId) > -1;
   }
 }

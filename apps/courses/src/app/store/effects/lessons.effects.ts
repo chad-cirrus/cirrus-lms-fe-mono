@@ -9,6 +9,11 @@ import {
   fetchLessonsFailure,
   fetchLessonsSuccess,
 } from '../actions';
+import {
+  fetchCourseOverview,
+  fetchCourseOverviewFailure,
+  fetchCourseOverviewSuccess,
+} from '../actions/course.actions';
 
 @Injectable()
 export class LessonsEffects {
@@ -19,6 +24,18 @@ export class LessonsEffects {
         this.coursesService.getLessons(courseId, lessonId).pipe(
           map((lesson: ILesson) => fetchLessonsSuccess({ lesson })),
           catchError(error => of(fetchLessonsFailure({ error })))
+        )
+      )
+    )
+  );
+
+  fetchCourseOverview$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(fetchCourseOverview),
+      mergeMap(({ courseId }) =>
+        this.coursesService.getCourseOverview(courseId).pipe(
+          map(courseOverview => fetchCourseOverviewSuccess({ courseOverview })),
+          catchError(error => of(fetchCourseOverviewFailure({ error })))
         )
       )
     )

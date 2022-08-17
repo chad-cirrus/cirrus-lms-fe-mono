@@ -1,5 +1,5 @@
-import { Component, Input } from '@angular/core';
-import { CourseOverviewLesson, ICourseOverviewLessons } from '@cirrus/models';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ICourseOverviewStage } from '@cirrus/models';
 
 @Component({
   selector: 'cirrus-course-lessons',
@@ -7,7 +7,10 @@ import { CourseOverviewLesson, ICourseOverviewLessons } from '@cirrus/models';
   styleUrls: ['./course-lessons.component.scss'],
 })
 export class CourseLessonsComponent {
-  private _lessons: CourseOverviewLesson[] = [];
+  @Input() stages!: ICourseOverviewStage[];
+  @Output() navigate = new EventEmitter<number>();
 
-  @Input() courseOverviewLessons!: ICourseOverviewLessons;
+  emitNavigation(lessonId: number) {
+    this.navigate.next(lessonId);
+  }
 }

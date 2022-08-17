@@ -4,6 +4,7 @@
   fxLayoutAlign="space-between start"
   fxLayoutAlign.gt-sm="start start"
   fxLayoutGap="42px"
+  (click)="emitNavigation()"
 >
   <img [src]="thumbnail" alt="" class="thumbnail" fxHide.lt-sm />
   <div
@@ -11,7 +12,7 @@
     fxLayout="column"
     fxLayoutAlign="space-between start"
     fxLayoutGap="12px"
-    fxFlex.lt-sm="grow"
+    fxFlex="grow"
   >
     <div
       class="type-progress"
@@ -38,14 +39,12 @@
     >
       <img [src]="thumbnail" alt="" class="thumbnail" fxHide.gt-xs />
       <div class="title">
-        <span class="chapter">{{
-          courseLesson.stage_lesson_index.split(' ')[0]
-        }}</span
+        <span class="chapter">{{ courseLesson.index }}</span
         >{{ courseLesson.title }}
       </div>
     </div>
     <div class="description">
-      {{ courseLesson.description }}
+      {{ courseLesson.title }}
     </div>
     <cirrus-course-lesson-content-count
       [contentCounts]="courseLesson.content_counts"

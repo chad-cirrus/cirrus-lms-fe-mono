@@ -4,8 +4,7 @@
   background-color: var.$gray1;
   border-radius: 6px;
   padding: 15px;
-  width: 100%;
-  max-width: 653px;
+  width: auto;
 }
 
 cirrus-cta-button {
@@ -37,5 +36,11 @@ cirrus-cta-button {
 @media (min-width: 960px) {
   cirrus-cta-button {
     width: auto;
+  }
+  .container {
+    padding: 17px 110px 17px 12px;
+    .lesson-info {
+      margin-right: 15px;
+    }
   }
 }

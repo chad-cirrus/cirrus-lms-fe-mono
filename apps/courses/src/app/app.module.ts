@@ -20,7 +20,6 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthHttpInterceptor } from './interceptors/AuthHttpInterceptor';
 import { LessonsEffects } from './store/effects/lessons.effects';
-import { WorkbookRoutesEffects } from './store/effects/workbook-routes.effects';
 import { LessonComponent } from './course/lesson/lesson.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { TopNavbarComponent } from './top-navbar/top-navbar.component';
@@ -60,11 +59,7 @@ import { environment } from '../environments/environment';
     UiModule,
     StoreModule.forRoot(coursesReducers),
     extModules,
-    EffectsModule.forRoot([
-      LessonsEffects,
-      WorkbookRoutesEffects,
-      ProgressEffects,
-    ]),
+    EffectsModule.forRoot([LessonsEffects, ProgressEffects]),
     AppRoutingModule,
     FlexLayoutModule,
     MatSidenavModule,

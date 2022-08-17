@@ -25,3 +25,9 @@
     letter-spacing: 0.03em;
   }
 }
+
+@media (min-width: 960px) {
+  .course-progress {
+    width: 653px;
+  }
+}

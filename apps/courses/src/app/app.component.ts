@@ -9,7 +9,6 @@ import { Store } from '@ngrx/store';
 import { delay, distinctUntilChanged, map, share, tap } from 'rxjs/operators';
 import { AppService } from './app.service';
 import * as appActions from './store/actions';
-import { fetchWorkbook } from './store/actions/workbook-routes.actions';
 import { AppState } from './store/reducers';
 import {
   selectLesson,
@@ -33,7 +32,6 @@ import { BreakpointObserver } from '@angular/cdk/layout';
 import { CoursesService } from './course/course.service';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
-import { selectWorkbookRoutesBusy } from './store/selectors/workbook-routes.selector';
 
 @Component({
   selector: 'cirrus-root',
@@ -45,9 +43,6 @@ export class AppComponent implements OnInit, OnDestroy {
   viewToggle = new FormControl(false);
   toggle$ = this.viewToggle.valueChanges;
   lessonStateBusy$ = this.store.select(selectLessonStateBusy).pipe(delay(1));
-  workbookStateBusy$ = this.store
-    .select(selectWorkbookRoutesBusy)
-    .pipe(delay(1));
 
   role$ = this.store.select(selectRole);
   lesson$: Observable<ILesson> = this.store.select(selectLesson);
@@ -64,7 +59,7 @@ export class AppComponent implements OnInit, OnDestroy {
   isScreenTablet$: Observable<boolean> =
     this.store.select(selectIsScreenTablet);
 
-  loadingIndicator$ = merge(this.lessonStateBusy$, this.workbookStateBusy$);
+  loadingIndicator$ = merge(this.lessonStateBusy$);
 
   collapse!: boolean;
   showHamburgerMenu = false;
@@ -107,12 +102,6 @@ export class AppComponent implements OnInit, OnDestroy {
       .subscribe(isScreenSmall => {
         this.store.dispatch(appActions.setIsScreenSmall({ isScreenSmall }));
       });
-
-    this.courseId$.subscribe(id => {
-      if (id) {
-        this.store.dispatch(fetchWorkbook({ courseId: +id }));
-      }
-    });
 
     this.cirrusImpersonateReturnUser$ = of(
       JSON.parse(
