@@ -68,6 +68,7 @@ import { CourseOverviewLessonProgressBarComponent } from './course-overview-less
 import { CourseOverviewComponent } from './course-overview/course-overview.component';
 import { CourseSummaryCountsComponent } from './course-summary-counts/course-summary-counts.component';
 import { CourseContentProgressCircleComponent } from './course-content-progress-circle/course-content-progress-circle.component';
+import { LessonTypePipe } from './helpers/LessonTypePipe';
 
 @NgModule({
   imports: [
@@ -132,6 +133,7 @@ import { CourseContentProgressCircleComponent } from './course-content-progress-
     CourseSummaryCountsComponent,
     CourseContentProgressCircleComponent,
     CourseOverviewLessonProgressBarComponent,
+    LessonTypePipe,
   ],
   exports: [
     LessonLandingPageComponent,
@@ -178,7 +180,7 @@ import { CourseContentProgressCircleComponent } from './course-content-progress-
     CourseSummaryCountsComponent,
     CourseContentProgressCircleComponent,
     CourseOverviewLessonProgressBarComponent,
-
+    LessonTypePipe,
   ],
   providers: [
     { provide: MAT_DIALOG_DATA, useValue: {} },

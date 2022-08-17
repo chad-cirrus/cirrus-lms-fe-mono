@@ -72,7 +72,9 @@
                   <img [src]="inProgress" height="22px" width="22px" />
                 </div>
                 <div fxLayout="column" fxLayoutAlign="space-between">
-                  <div class="stage-index">{{ l.id }}</div>
+                  <div class="stage-index">
+                    {{ l.index }} {{ l.lesson_type | lessonTypePipe }}
+                  </div>
                   <div class="lesson-title-text">{{ l.title }}</div>
                 </div>
               </div>
