@@ -19,7 +19,6 @@ const Template: Story<CoursesTabEnrollmentHistoryComponent> = (
 
 export const Primary = Template.bind({});
 Primary.args = {
-  tablet: false,
   enrollments: [
     {
       id: 119066,

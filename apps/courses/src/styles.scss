@@ -9,12 +9,13 @@
 // @use 'cirrus-ui-module' as cirrus-ui;
 
 @import 'cirrus-ui-styles';
-@import "~@angular/cdk/overlay-prebuilt.css";
+@import '~@angular/cdk/overlay-prebuilt.css';
 
 @include app-component.cirrus-app-component($theme);
 
 html,
-body, .main-container {
+body,
+.main-container {
   height: 100%;
 }
 
@@ -27,11 +28,11 @@ main {
   max-height: initial;
 }
 
-.mat-drawer-inner-container { 
-  overflow: hidden !important; 
+.mat-drawer-inner-container {
+  overflow: hidden !important;
 }
 
 //cursor for images set to button
-img[type="button"] {
+img[type='button'] {
   cursor: pointer;
 }

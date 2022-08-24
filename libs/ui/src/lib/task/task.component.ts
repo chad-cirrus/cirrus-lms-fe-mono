@@ -1,6 +1,11 @@
-
 import { CdkAccordionItem } from '@angular/cdk/accordion';
-import { Component, EventEmitter, Input, Output, ViewChildren } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  ViewChildren,
+} from '@angular/core';
 import { Attempt, IContent, ITask } from '@cirrus/models';
 
 @Component({
@@ -8,7 +13,6 @@ import { Attempt, IContent, ITask } from '@cirrus/models';
   templateUrl: './task.component.html',
   styleUrls: ['./task.component.scss'],
 })
-
 export class TaskComponent {
   @ViewChildren('accordionItem') accordionItems!: CdkAccordionItem[];
   @Input() tasks!: ITask[];
@@ -16,25 +20,22 @@ export class TaskComponent {
   @Input() tablet!: boolean | null;
   @Input() mobile!: boolean | null;
   @Output() emitRow = new EventEmitter();
-  currentlyOpenedIndexes: number[] = []
-
-
+  currentlyOpenedIndexes: number[] = [];
 
   handleEmitRow($event: any) {
-    this.emitRow.emit($event)
+    this.emitRow.emit($event);
   }
 
-  toggled(accordionItem: CdkAccordionItem ) {
-    const { id } = accordionItem
+  toggled(accordionItem: CdkAccordionItem) {
+    const { id } = accordionItem;
     const formatAccordionId = parseInt(id.slice(id.length - 1));
-    const indexOfAccordionId = this.currentlyOpenedIndexes.indexOf(formatAccordionId)
-    console.log('index of', indexOfAccordionId)
+    const indexOfAccordionId =
+      this.currentlyOpenedIndexes.indexOf(formatAccordionId);
 
-    indexOfAccordionId === -1 ?
-      this.currentlyOpenedIndexes.push(formatAccordionId)
-      :
-      this.currentlyOpenedIndexes = this.currentlyOpenedIndexes.filter(i => i !== indexOfAccordionId)
-      console.log('current', this.currentlyOpenedIndexes)
+    indexOfAccordionId === -1
+      ? this.currentlyOpenedIndexes.push(formatAccordionId)
+      : (this.currentlyOpenedIndexes = this.currentlyOpenedIndexes.filter(
+          i => i !== indexOfAccordionId
+        ));
   }
-
 }

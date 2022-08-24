@@ -33,6 +33,43 @@ export class AssessmentComponent
     super();
   }
 
+  displayedColumns = [
+    'name',
+    'task_type',
+    'required_successful_attempts',
+    'passed_count',
+    'missed_count',
+    'status',
+  ];
+
+  columns = [
+    {
+      name: 'TASK',
+      mat_col_name: 'name',
+    },
+    {
+      name: 'TYPE',
+      mat_col_name: 'task_type',
+    },
+
+    {
+      name: 'REQUIRED',
+      mat_col_name: 'required_successful_attempts',
+    },
+    {
+      name: 'PASSED',
+      mat_col_name: 'passed_count',
+    },
+    {
+      name: 'MISSED',
+      mat_col_name: 'missed_count',
+    },
+    {
+      name: 'STATUS',
+      mat_col_name: 'status',
+    },
+  ];
+
   @Input()
   public get menuOpen(): boolean {
     return this._isMenuOpen;

@@ -1,9 +1,6 @@
 <div class="tabs-container">
   <div [ngClass]="menuOpen ? 'tabs-container-open' : 'tabs-container-closed'">
-    <mat-tab-group
-      color="transparent"
-      #tabs
-    >
+    <mat-tab-group color="transparent" #tabs>
       <mat-tab>
         <ng-template mat-tab-label>
           <img src="courses/images/svg/assessment3.svg" class="image" />
@@ -20,17 +17,24 @@
       <mat-tab>
         <ng-template mat-tab-label>
           <img src="courses/images/svg/logbook.svg" class="image" />
-          <span class="title">Logbook {{(tablet$ | async) === false && (mobile$ | async) === false ? 'Entry' : ''}}</span>
+          <span class="title"
+            >Logbook
+            {{
+              (tablet$ | async) === false && (mobile$ | async) === false
+                ? 'Entry'
+                : ''
+            }}</span
+          >
         </ng-template>
         <cirrus-logbook [logbook]="logbook"></cirrus-logbook>
       </mat-tab>
       <mat-tab disabled="true">
         <ng-template matTabContent>
           <cirrus-attempt-feedback
-          [attempt]="attempt"
-          [attempt_index]="attempt_index"
-          (emitBack)="handleBack()"
-        ></cirrus-attempt-feedback>
+            [attempt]="attempt"
+            [attempt_index]="attempt_index"
+            (emitBack)="handleBack()"
+          ></cirrus-attempt-feedback>
         </ng-template>
       </mat-tab>
     </mat-tab-group>

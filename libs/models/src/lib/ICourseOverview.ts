@@ -14,6 +14,7 @@ export interface ICourseOveview {
   minimum_flight_hours: number;
   desktop_hero_image_url: string;
   mobile_hero_image_url: string;
+  enrollments?: [];
   can_reenroll: boolean;
   lessons_stats: ILessonsstats;
   progress_stats: ProgressStat[];

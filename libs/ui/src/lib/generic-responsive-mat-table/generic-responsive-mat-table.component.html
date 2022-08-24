@@ -1,0 +1,34 @@
+<div class="gen-table mat-elevation-z8">
+  <mat-table [dataSource]="dataSource" matSort>
+    <div *ngFor="let column of columns">
+      <ng-container matColumnDef="{{ column.mat_col_name }}">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>
+          {{ column.name }}
+        </mat-header-cell>
+        <mat-cell
+          *matCellDef="let row"
+          [attr.data-label]="column.name"
+          (click)="rowSelect(row)"
+        >
+          <div
+            class="value"
+            (click)="valueSelect($event, row[column.mat_col_name], column)"
+          >
+            <img
+              *ngIf="
+                (row[column.mat_col_name] | tableFormat: column:row) ===
+                'Download'
+              "
+              [src]="column.icon"
+              class="icon-container"
+            />
+            {{ row[column.mat_col_name] | tableFormat: column:row }}
+          </div>
+        </mat-cell>
+      </ng-container>
+    </div>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns"> </mat-row>
+  </mat-table>
+</div>

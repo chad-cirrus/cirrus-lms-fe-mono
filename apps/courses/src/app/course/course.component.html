@@ -33,7 +33,12 @@
           <mat-icon svgIcon="enrollment_history"></mat-icon>
           <span class="cirrus-tab-label"> Enrollment History </span>
         </ng-template>
-        Enrollment History
+        <div>
+          <cirrus-courses-tab-enrollment-history
+            [enrollments]="(courseOverview$ | async)?.enrollments"
+          >
+          </cirrus-courses-tab-enrollment-history>
+        </div>
       </mat-tab>
     </mat-tab-group>
   </div>
