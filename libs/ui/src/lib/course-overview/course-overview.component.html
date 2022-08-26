@@ -5,9 +5,9 @@
     fxLayout="row"
     fxLayoutAlign="space-between start"
   >
-    <div class="left-side" fxFlex="3 0 0">
+    <div class="left-side" fxFlex="3 0 0" *ngIf='courseOverview.overview'>
       <h2>About this course</h2>
-      <div [innerHTML]="courseOverview.overview ?? ''"></div>
+      <div [innerHTML]="courseOverview.overview"></div>
     </div>
     <div
       class="right-side"
