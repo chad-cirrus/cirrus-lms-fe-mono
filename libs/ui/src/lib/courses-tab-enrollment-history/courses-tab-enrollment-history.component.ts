@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { IEnrollmentHistory } from '@cirrus/models';
+import { ICertificate, IEnrollmentHistory } from '@cirrus/models';
 import { UiDownloadService } from '../course-completion/ui-download.service';
 import { Column } from '../generic-responsive-mat-table/generic-responsive-mat-table.component';
 import { downloadPdf } from '../helpers/DownloadPdf';
@@ -12,6 +12,7 @@ import { formatCertificate, formatTranscript } from '../helpers/TableFormat';
 })
 export class CoursesTabEnrollmentHistoryComponent {
   @Input() enrollments!: IEnrollmentHistory[] | undefined;
+  @Input() certificate!: ICertificate | undefined;
 
   displayedColumns: string[] = [
     'enrollment_date',
@@ -52,9 +53,10 @@ export class CoursesTabEnrollmentHistoryComponent {
 
   valueSelected(obj: any) {
     const { type, value } = obj;
+    if (value === null) return;
     if (type.mat_col_name === 'user_certificate') {
       this.uiDownloadService
-        .downloadCertificate(value.id)
+        .downloadCertificate(value.course_attempt_id)
         .subscribe((data: Blob) => {
           downloadPdf(data);
         });

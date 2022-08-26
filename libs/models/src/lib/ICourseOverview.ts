@@ -9,6 +9,7 @@ export interface ICourseOveview {
   title: string;
   subtitle: string;
   has_agreement: boolean;
+  certificate: ICertificate;
   agreement_body: string;
   completion_time?: Date;
   minimum_flight_hours: number;
@@ -30,6 +31,10 @@ export interface ICourseOverviewStage {
   lessons_are_linear: boolean;
   lessons: ICourseOverviewLesson[];
   progress: IProgress;
+}
+
+export interface ICertificate {
+  expiration: string | null;
 }
 
 export interface ICourseOverviewLesson {

@@ -26,6 +26,7 @@ export const initialCourseState: CourseState = {
     agreement_body: '',
     completion_time: undefined,
     minimum_flight_hours: 0,
+    certificate: { expiration: null },
     desktop_hero_image_url: '',
     mobile_hero_image_url: '',
     can_reenroll: false,
