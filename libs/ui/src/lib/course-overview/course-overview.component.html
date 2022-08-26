@@ -1,33 +1,62 @@
-<div class="row1" fxLayout="row" fxLayoutAlign="space-between start">
-  <div class="left-side" fxFlex="3 0 0">
-    <h2>About this course</h2>
-    <div [innerHTML]="courseOverview.overview"></div>
-  </div>
+<div class="overview-container">
   <div
-    class="right-side"
-    fxFlex="2 0 0"
-    fxLayout="column"
+    class="row1"
+    fxLayout.lt-sm="column"
+    fxLayout="row"
     fxLayoutAlign="space-between start"
-    fxLayoutGap="22px"
   >
-    <div fxLayout="row" fxLayoutAlign="start start">
-      <div class="mcf">
-        {{ courseOverview.minimum_flight_hours }}
-      </div>
-      <span class="mcf-label">Minimum Course Flight Hours</span>
+    <div class="left-side" fxFlex="3 0 0">
+      <h2>About this course</h2>
+      <div [innerHTML]="courseOverview.overview ?? ''"></div>
     </div>
-    <div fxLayout="row" fxLayoutAlign="start start">
-      <div class="ect">
-        <span>{{ courseOverview.completion_time }}</span>
+    <div
+      class="right-side"
+      fxFlex="2 0 0"
+      fxLayout="column"
+      fxLayoutAlign="space-between start"
+      fxLayoutGap="22px"
+    >
+      <div fxLayout="row" fxLayoutAlign="start start">
+        <div class="mcf">
+          {{ courseOverview.minimum_flight_hours || 0 }}
+        </div>
+        <span class="mcf-label">Minimum Course Flight Hours</span>
       </div>
-      <span class="ect-label">Estimated Course Time</span>
+      <div fxLayout="row" fxLayoutAlign="start start">
+        <div class="ect">
+          <span>{{ courseOverview.completion_time || '0h 0m' }}</span>
+        </div>
+        <span class="ect-label">Estimated Course Time</span>
+      </div>
+      <cirrus-course-summary-counts
+        [courseSummaryCounts]="courseOverview.summary_counts"
+      ></cirrus-course-summary-counts>
     </div>
-    <cirrus-course-summary-counts
-      [courseSummaryCounts]="courseOverview.course_summary_counts!"
-    ></cirrus-course-summary-counts>
   </div>
-</div>
-<div class="row-terms-conditions">
-  <h2>Terms & Conditions</h2>
-  <div class="agreement-body" [innerHTML]="courseOverview.agreement_body"></div>
+  <div class="row-progress">
+    <h2>Course Progress</h2>
+    <mat-divider></mat-divider>
+    <p class="started-date">
+      Started: <span>{{ '03/14/2022' }}</span>
+    </p>
+    <cirrus-course-overview-lesson-progress-bar
+      [lessonProgress]="lessonProgress"
+    ></cirrus-course-overview-lesson-progress-bar>
+    <div class="progress-circles">
+      <div class="stats">
+        <p>Course Content</p>
+        <cirrus-course-content-progress-circle
+          *ngFor="let config of progressStatsConfig"
+          [progress]="config"
+        ></cirrus-course-content-progress-circle>
+      </div>
+    </div>
+  </div>
+  <div class="row-terms-conditions">
+    <h2>Terms & Conditions</h2>
+    <div
+      class="agreement-body"
+      [innerHTML]="courseOverview.agreement_body"
+    ></div>
+  </div>
 </div>

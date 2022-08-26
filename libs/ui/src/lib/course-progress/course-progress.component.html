@@ -4,9 +4,12 @@
   fxLayoutAlign="start start"
   fxLayoutGap="12px"
 >
+  <div class="last-completed">
+    Last Completed: {{ lastCompleted || '05/06/22' }}
+  </div>
   <div class="header">COURSE PROGRESS</div>
   <mat-progress-bar
-    color="accent"
+    color="white"
     mode="determinate"
     [value]="progressValue"
   ></mat-progress-bar>
@@ -25,7 +28,8 @@
     >
       <img [src]="lessonsCompletedIcon" alt="" />
       <span>
-        {{ lessonStats.completed }} of {{ lessonStats.total }} lessons completed
+        <span class="lessons-completed-bold">{{ lessonStats.completed }}</span>
+        of {{ lessonStats.total }} lessons completed
       </span>
     </div>
   </div>

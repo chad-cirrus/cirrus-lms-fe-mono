@@ -9,7 +9,9 @@
           <mat-icon svgIcon="eye"></mat-icon>
           <span class="cirrus-tab-label"> Overview </span>
         </ng-template>
-        Overview goes here
+        <cirrus-course-overview
+          [courseOverview]="overview"
+        ></cirrus-course-overview>
       </mat-tab>
       <mat-tab>
         <ng-template mat-tab-label>

@@ -26,25 +26,37 @@ const Template: Story<CourseContentProgressCircleComponent> = (
 
 export const Primary = Template.bind({});
 Primary.args = {
-  iconUrl: 'courses/images/svg/self-study-progress-icon.svg',
-  label: 'Self Study',
-  progress: { completed: 87, total: 100 },
+  progress: {
+    completed: 87,
+    total: 100,
+    label: 'Self Study',
+    iconUrl: 'courses/images/svg/self-study-progress-icon.svg',
+  },
 };
 export const SelfStudy = Template.bind({});
 SelfStudy.args = {
-  iconUrl: 'courses/images/svg/self-study-progress-icon.svg',
-  label: 'Self Study',
-  progress: { completed: 87, total: 100 },
+  progress: {
+    completed: 87,
+    total: 100,
+    label: 'Self Study',
+    iconUrl: 'courses/images/svg/self-study-progress-icon.svg',
+  },
 };
 export const FlightAssessment = Template.bind({});
 FlightAssessment.args = {
-  iconUrl: 'courses/images/svg/flight-assessment-progress-icon.svg',
-  label: 'Self Study',
-  progress: { completed: 12, total: 40 },
+  progress: {
+    completed: 12,
+    total: 40,
+    label: 'Self Study',
+    iconUrl: 'courses/images/svg/flight-assessment-progress-icon.svg',
+  },
 };
 export const Ground = Template.bind({});
 Ground.args = {
-  iconUrl: 'courses/images/svg/ground-assessment-progress-icon.svg',
-  label: 'Self Study',
-  progress: { completed: 8, total: 14 },
+  progress: {
+    completed: 8,
+    total: 14,
+    label: 'Self Study',
+    iconUrl: 'courses/images/svg/ground-assessment-progress-icon.svg',
+  },
 };

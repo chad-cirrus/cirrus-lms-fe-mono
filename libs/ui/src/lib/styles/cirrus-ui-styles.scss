@@ -311,3 +311,9 @@ cirrus-course-overview-lesson-progress-bar  .lesson-progress-bar {
 .mat-tab-body {
   padding-top: 24px;
 }
+
+cirrus-course-progress {
+  mat-progress-bar .mat-progress-bar-fill::after {
+    background: #ffffff;
+  }
+}

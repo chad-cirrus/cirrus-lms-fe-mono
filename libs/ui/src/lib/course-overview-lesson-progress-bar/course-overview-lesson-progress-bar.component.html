@@ -1,19 +1,17 @@
-<div fxLayout="column" fxLayoutGap="4px">
+<div fxLayout="column" fxLayoutGap="12px">
   <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="8px">
     <div fxLayout="row" fxLayoutGap="8px">
       <mat-icon svgIcon="open_lessons"></mat-icon>
       <span class="title">Lessons</span>
     </div>
     <div class="ratio">
-      <span class="numerator">{{ lessonProgress.total }}</span>
-      <span class="denominator">/{{ lessonProgress.completed }}</span>
+      <span class="numerator">{{ lessonProgress.completed }}</span>
+      <span class="denominator">/{{ lessonProgress.total }}</span>
     </div>
   </div>
-  <div>
-    <mat-progress-bar
-      class="lesson-progress-bar"
-      mode="determinate"
-      [value]="value"
-    ></mat-progress-bar>
-  </div>
+  <mat-progress-bar
+    class="lesson-progress-bar"
+    mode="determinate"
+    [value]="value"
+  ></mat-progress-bar>
 </div>

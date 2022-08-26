@@ -1,21 +1,19 @@
-import { ICourseOverviewStage, ICoursePlayerConfig } from '@cirrus/models';
+import { ICourseOverviewLesson, ICoursePlayerConfig } from '@cirrus/models';
 
 export const produceConfig = (
-  stages: ICourseOverviewStage[]
+  lesson: Partial<ICourseOverviewLesson>
 ): ICoursePlayerConfig => {
-  const lesson = stages
-    .find(stage => stage.progress.status !== 'completed')
-    ?.lessons.find(lesson => lesson.progress.status !== 'completed');
-
   return {
-    index: lesson?.index ?? '',
+    index: lesson.index ?? '',
     header:
-      lesson?.progress.status === 'not_started'
+      lesson.progress && lesson.progress.status === 'not_started'
         ? 'START LESSON'
         : 'JUMP BACK IN',
-    title: lesson?.title ?? '',
+    title: lesson.title ?? '',
     buttonText:
-      lesson?.progress.status === 'not_started' ? 'Get Started' : 'Resume',
+      lesson.progress && lesson.progress.status === 'not_started'
+        ? 'Get Started'
+        : 'Resume',
     thumbnail:
       lesson?.thumbnail_image_url && lesson.thumbnail_image_url.length > 5
         ? lesson.thumbnail_image_url

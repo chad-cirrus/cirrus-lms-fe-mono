@@ -1,7 +1,12 @@
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatIconModule } from '@angular/material/icon';
-import { ICourseOverviewInfo } from '@cirrus/models';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { ICourseOveview } from '@cirrus/models';
 import { Meta, moduleMetadata, Story } from '@storybook/angular';
+import { CourseContentProgressCircleComponent } from '../course-content-progress-circle/course-content-progress-circle.component';
+import { CourseOverviewLessonProgressBarComponent } from '../course-overview-lesson-progress-bar/course-overview-lesson-progress-bar.component';
+import { CourseProgressComponent } from '../course-progress/course-progress.component';
+import { CourseSummaryCountsComponent } from '../course-summary-counts/course-summary-counts.component';
 import { MatIconRegistryModule } from '../mat-icon-registry.module';
 import { CourseOverviewComponent } from './course-overview.component';
 
@@ -10,8 +15,19 @@ export default {
   component: CourseOverviewComponent,
   decorators: [
     moduleMetadata({
-      imports: [FlexLayoutModule, MatIconModule, MatIconRegistryModule],
-      declarations: [CourseOverviewComponent],
+      imports: [
+        FlexLayoutModule,
+        MatIconModule,
+        MatIconRegistryModule,
+        MatProgressBarModule,
+      ],
+      declarations: [
+        CourseOverviewComponent,
+        CourseSummaryCountsComponent,
+        CourseProgressComponent,
+        CourseOverviewLessonProgressBarComponent,
+        CourseContentProgressCircleComponent,
+      ],
     }),
   ],
 } as Meta<CourseOverviewComponent>;
@@ -20,117 +36,410 @@ const Template: Story<CourseOverviewComponent> = (
   args: CourseOverviewComponent
 ) => ({ props: args });
 
-const overview: ICourseOverviewInfo = {
-  id: 355,
-  name: 'SR22T Airframe and Powerplant Differences',
-  major_version: 5,
-  minor_version: 9,
-  completion_time: '20h 15m',
-  minimum_flight_hours: '035',
-  course_summary_counts: {
-    lessons: 5,
-    videos: 10,
-    documents: 7,
-    assessments: 2,
-    quizzes: 0,
-  },
+const course: ICourseOveview = {
+  id: 351,
+  name: 'SR20 Avidyne Entegra Advanced Transition ',
+  major_version: 4,
+  minor_version: 11,
+  title: 'SR20 Avidyne Entegra Advanced Transition ',
+  subtitle: '',
+  has_agreement: true,
   agreement_body:
-    '<div class="OutlineElement Ltr SCXW193394030" style="margin: 0px; padding: 0px; user-select: text; -webkit-user-drag: none; -webkit-tap-highlight-color: transparent; overflow: visible; cursor: text; clear: both; position: relative; direction: ltr;"><p class="Paragraph SCXW193394030" xml:lang="EN-US" lang="EN-US" paraid="727678916" paraeid="{1341523e-8628-436e-909e-4c0b3737ae42}{22}" style="padding: 0px; user-select: text; -webkit-user-drag: none; -webkit-tap-highlight-color: transparent; overflow-wrap: break-word; vertical-align: baseline;">This training is limited to aircraft familiarization training and is not inclusive of all the knowledge and skill required for safe flight. I must comply with the regulations, exercise sound judgment, and maintain a high level of flying proficiency to minimize the risks associated with flight.</p><p class="Paragraph SCXW193394030" xml:lang="EN-US" lang="EN-US" paraid="727678916" paraeid="{1341523e-8628-436e-909e-4c0b3737ae42}{22}" style="padding: 0px; user-select: text; -webkit-user-drag: none; -webkit-tap-highlight-color: transparent; overflow-wrap: break-word; vertical-align: baseline;"><br></p><p class="Paragraph SCXW193394030" xml:lang="EN-US" lang="EN-US" paraid="727678916" paraeid="{1341523e-8628-436e-909e-4c0b3737ae42}{22}" style="padding: 0px; user-select: text; -webkit-user-drag: none; -webkit-tap-highlight-color: transparent; overflow-wrap: break-word; vertical-align: baseline;">The objectives of this course are limited to visual flight rules (VFR) only. Additional instrument training and completion of an instrument proficiency check in aircraft type is required to be capable of safely flying in instrument conditions.&nbsp;</p><p class="Paragraph SCXW193394030" xml:lang="EN-US" lang="EN-US" paraid="727678916" paraeid="{1341523e-8628-436e-909e-4c0b3737ae42}{22}" style="padding: 0px; user-select: text; -webkit-user-drag: none; -webkit-tap-highlight-color: transparent; overflow-wrap: break-word; vertical-align: baseline;"><br></p><p class="Paragraph SCXW193394030" xml:lang="EN-US" lang="EN-US" paraid="727678916" paraeid="{1341523e-8628-436e-909e-4c0b3737ae42}{22}" style="padding: 0px; user-select: text; -webkit-user-drag: none; -webkit-tap-highlight-color: transparent; overflow-wrap: break-word; vertical-align: baseline;">I acknowledge that for my continued proficiency and safety, Cirrus Aircraft strongly recommends that all pilots conduct recurrent training from an approved Cirrus Standardized Instructor Pilot (CSIP) or Cirrus Training Center (CTC).&nbsp;</p><p class="Paragraph SCXW193394030" xml:lang="EN-US" lang="EN-US" paraid="727678916" paraeid="{1341523e-8628-436e-909e-4c0b3737ae42}{22}" style="padding: 0px; user-select: text; -webkit-user-drag: none; -webkit-tap-highlight-color: transparent; overflow-wrap: break-word; vertical-align: baseline;"><br></p><p class="Paragraph SCXW193394030" xml:lang="EN-US" lang="EN-US" paraid="727678916" paraeid="{1341523e-8628-436e-909e-4c0b3737ae42}{22}" style="padding: 0px; user-select: text; -webkit-user-drag: none; -webkit-tap-highlight-color: transparent; overflow-wrap: break-word; vertical-align: baseline;">I acknowledge that my instructor will only observe my flight proficiency during this training for the tasks marked as satisfactory or unsatisfactory and that the tasks required by this training course may not be inclusive of all the knowledge and skill that is required to safely fly under visual or instrument flight rules.</p></div>',
-  overview:
-    '<span class="TextRun SCXW15190085" xml:lang="EN-US" style="animation: none 0s ease 0s 1 normal none running; background: none 0% 0% / auto repeat scroll padding-box border-box rgba(0, 0, 0, 0); background-blend-mode: normal; border: 0px none rgb(0, 0, 0); border-radius: 0px; border-collapse: separate; bottom: auto; box-shadow: none; box-sizing: content-box; break-after: auto; break-before: auto; break-inside: auto; caption-side: top; clear: none; clip: auto; color: rgb(0, 0, 0); content: normal; cursor: text; direction: ltr; display: inline; empty-cells: show; float: none; font-family: Calibri, Calibri_MSFontService, sans-serif; font-kerning: auto; font-size: 14.6667px; font-stretch: 100%; font-variant-ligatures: no-common-ligatures no-discretionary-ligatures no-historical-ligatures no-contextual; font-variant-numeric: normal; font-variant-east-asian: normal; height: auto; image-rendering: auto; isolation: auto; place-items: normal; place-self: auto; left: auto; line-height: 18px; list-style: disc outside none; margin: 0px; max-height: none; max-width: none; min-height: 0px; min-width: 0px; mix-blend-mode: normal; object-fit: fill; object-position: 50% 50%; offset: none 0px auto 0deg; opacity: 1; outline: rgb(0, 0, 0) none 0px; outline-offset: 0px; overflow-anchor: auto; overflow-wrap: break-word; overflow: visible; padding: 0px; pointer-events: auto; position: static; resize: none; right: auto; scroll-behavior: auto; speak: normal; table-layout: auto; tab-size: 8; text-align-last: auto; text-decoration-style: solid; text-decoration-color: rgb(0, 0, 0); text-decoration-skip-ink: auto; text-underline-position: auto; text-rendering: auto; text-shadow: none; text-size-adjust: auto; text-overflow: clip; top: auto; touch-action: auto; transition: all 0s ease 0s; unicode-bidi: normal; vertical-align: baseline; visibility: visible; width: auto; will-change: auto; word-break: normal; z-index: auto; zoom: 1; -webkit-appearance: none; backface-visibility: visible; border-spacing: 0px; -webkit-border-image: none; -webkit-box-align: stretch; -webkit-box-decoration-break: slice; -webkit-box-direction: normal; -webkit-box-flex: 0; -webkit-box-ordinal-group: 1; -webkit-box-orient: horizontal; -webkit-box-pack: start; columns: auto auto; gap: normal normal; column-rule: 0px none rgb(0, 0, 0); column-span: none; place-content: normal; flex: 0 1 auto; flex-flow: row nowrap; -webkit-font-smoothing: auto; grid-auto-columns: auto; grid-auto-flow: row; grid-auto-rows: auto; grid-area: auto / auto / auto / auto; grid-template-areas: none; grid-template-columns: none; grid-template-rows: none; -webkit-highlight: none; hyphens: manual; -webkit-hyphenate-character: auto; -webkit-line-break: after-white-space; -webkit-locale: &quot;en-US&quot;; -webkit-margin-collapse: collapse collapse; -webkit-mask-box-image-outset: 0px; -webkit-mask-box-image-repeat: stretch; -webkit-mask-box-image-slice: 0 fill; -webkit-mask-box-image-source: none; -webkit-mask-box-image-width: auto; -webkit-mask: none 0% 0% / auto repeat border-box border-box; -webkit-mask-composite: source-over; order: 0; perspective: none; perspective-origin: 0px 0px; -webkit-print-color-adjust: economy; -webkit-rtl-ordering: logical; shape-outside: none; shape-image-threshold: 0; shape-margin: 0px; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); -webkit-text-combine: none; -webkit-text-emphasis: none rgb(0, 0, 0); -webkit-text-emphasis-position: over right; -webkit-text-fill-color: rgb(0, 0, 0); -webkit-text-orientation: vertical-right; -webkit-text-security: none; -webkit-text-stroke-color: rgb(0, 0, 0); transform: none; transform-origin: 0px 0px 0px; transform-style: flat; -webkit-user-drag: none; -webkit-user-modify: read-write; user-select: text; -webkit-writing-mode: horizontal-tb; -webkit-app-region: none; buffered-rendering: auto; clip-path: none; clip-rule: nonzero; mask: none; filter: none; flood-color: rgb(0, 0, 0); flood-opacity: 1; lighting-color: rgb(255, 255, 255); stop-color: rgb(0, 0, 0); stop-opacity: 1; color-interpolation: sRGB; color-interpolation-filters: linearRGB; color-rendering: auto; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; marker: none; mask-type: luminance; shape-rendering: auto; stroke: none; stroke-dasharray: none; stroke-dashoffset: 0px; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 4; stroke-opacity: 1; stroke-width: 1px; alignment-baseline: auto; baseline-shift: 0px; dominant-baseline: auto; text-anchor: start; writing-mode: horizontal-tb; vector-effect: none; paint-order: fill; d: none; cx: 0px; cy: 0px; x: 0px; y: 0px; r: 0px; rx: auto; ry: auto; caret-color: rgb(0, 0, 0);" lang="EN-US"><span class="NormalTextRun SCXW15190085" style="background-color: inherit;">This add-on course is designed to transition an experienced Cirrus pilot to a different airframe/powerplant. The course focuses on the operational differences unique to the SR22T.</span></span><div><b style="background-color: inherit; color: rgb(0, 0, 0); font-family: Calibri, Calibri_MSFontService, sans-serif; font-size: 14.6667px; font-variant-ligatures: no-common-ligatures no-discretionary-ligatures no-historical-ligatures no-contextual; -webkit-text-fill-color: rgb(0, 0, 0); -webkit-text-stroke-color: rgb(0, 0, 0); caret-color: rgb(0, 0, 0);"><br></b></div><div><b style="background-color: inherit; color: rgb(0, 0, 0); font-family: Calibri, Calibri_MSFontService, sans-serif; font-size: 14.6667px; font-variant-ligatures: no-common-ligatures no-discretionary-ligatures no-historical-ligatures no-contextual; -webkit-text-fill-color: rgb(0, 0, 0); -webkit-text-stroke-color: rgb(0, 0, 0); caret-color: rgb(0, 0, 0);">Flight Time:</b><span style="background-color: inherit; color: rgb(0, 0, 0); font-family: Calibri, Calibri_MSFontService, sans-serif; font-size: 14.6667px; font-variant-ligatures: no-common-ligatures no-discretionary-ligatures no-historical-ligatures no-contextual; -webkit-text-fill-color: rgb(0, 0, 0); -webkit-text-stroke-color: rgb(0, 0, 0); caret-color: rgb(0, 0, 0);"> 3 Hours (estimate)</span></div><div><span style="background-color: inherit; color: rgb(0, 0, 0); font-family: Calibri, Calibri_MSFontService, sans-serif; font-size: 14.6667px; font-variant-ligatures: no-common-ligatures no-discretionary-ligatures no-historical-ligatures no-contextual; -webkit-text-fill-color: rgb(0, 0, 0); -webkit-text-stroke-color: rgb(0, 0, 0); caret-color: rgb(0, 0, 0);"><br></span></div><div><span style="background-color: inherit; color: rgb(0, 0, 0); font-family: Calibri, Calibri_MSFontService, sans-serif; font-size: 14.6667px; font-variant-ligatures: no-common-ligatures no-discretionary-ligatures no-historical-ligatures no-contextual; -webkit-text-fill-color: rgb(0, 0, 0); -webkit-text-stroke-color: rgb(0, 0, 0); caret-color: rgb(0, 0, 0);"><b>Bundled Courses:</b>&nbsp;</span><span style="background-color: transparent; font-size: 14.6667px; font-variant-ligatures: none; -webkit-text-fill-color: rgb(0, 0, 0); -webkit-text-stroke-color: rgb(0, 0, 0); caret-color: rgb(0, 0, 0);"><font color="#000000" face="Calibri, Calibri_MSFontService, sans-serif">Takeoffs &amp; Landings Course and&nbsp;</font></span><span style="background-color: inherit; color: rgb(0, 0, 0); font-family: Calibri, Calibri_MSFontService, sans-serif; font-size: 14.6667px; font-variant-ligatures: no-common-ligatures no-discretionary-ligatures no-historical-ligatures no-contextual; -webkit-text-fill-color: rgb(0, 0, 0); -webkit-text-stroke-color: rgb(0, 0, 0); caret-color: rgb(0, 0, 0);">Engine Management Course</span></div>',
-  course_progress_stats: {
-    self_study: [
-      {
-        type: 'self_study',
-        completed: 1,
-        total: 1,
-        status: 'not_started',
-      },
-      {
-        type: 'self_study',
-        completed: 11,
-        total: 11,
-        status: 'not_started',
-      },
-      {
-        type: 'self_study',
-        completed: 5,
-        total: 5,
-        status: 'not_started',
-      },
-      {
-        type: 'self_study',
-        completed: 5,
-        total: 5,
+    '\u003cp class="MsoNormal"\u003eThis training is limited to aircraft familiarization training and is not inclusive of all the knowledge and skill required for safe flight. I must comply with the regulations, exercise sound judgment, and maintain a high level of flying proficiency to minimize the risks associated with flight.\u0026nbsp;\u003c/p\u003e\u003cp class="MsoNormal"\u003e\u003cbr\u003e\u003c/p\u003e\u003cp class="MsoNormal"\u003eSafely flying under Instrument Flight Rules (IFR) requires peak levels of skill, sound decision making, and good risk management skills. Many IFR skills degrade over periods of inactivity and each pilot must assess risks for individual flights considering their proficiency levels required to handle forecasted weather, airspace, and other challenges that may arise. Pilots who desire to fly IFR are strongly encouraged to complete an Instrument Proficiency Check in 6-month intervals, regardless of IFR currency requirements.\u0026nbsp;\u0026nbsp;\u003c/p\u003e\u003cp class="MsoNormal"\u003e\u003cbr\u003e\u003c/p\u003e\u003cp class="MsoNormal"\u003eI acknowledge that for my continued proficiency and safety, Cirrus Aircraft strongly recommends that all pilots conduct recurrent training from an approved Cirrus Standardized Instructor Pilot (CSIP) or Cirrus Training Center (CTC).\u003c/p\u003e\u003cp class="MsoNormal"\u003e\u003cbr\u003e\u003c/p\u003e\u003cp class="MsoNormal"\u003eI acknowledge that my instructor will only observe my flight proficiency during this training for the task prescribed in this course. These tasks may not be inclusive of all the knowledge and skill required to safely fly under visual or instrument flight rules.\u003c/p\u003e',
+  completion_time: '',
+  minimum_flight_hours: 0,
+  desktop_hero_image_url: '',
+  mobile_hero_image_url: '',
+  can_reenroll: true,
+  lessons_stats: {
+    completed: 2,
+    total: 15,
+  },
+  progress_stats: [
+    {
+      type: 'self_study',
+      completed: 13,
+      total: 73,
+      status: 'in_progress',
+    },
+    {
+      type: 'ground',
+      completed: 1.0,
+      total: 0,
+      status: 'in_progress',
+    },
+    {
+      type: 'assessment',
+      completed: 25,
+      total: 179,
+      status: 'in_progress',
+    },
+    {
+      type: 'flight',
+      completed: 19.0,
+      total: 0,
+      status: 'in_progress',
+    },
+    {
+      type: 'landings',
+      completed: 0,
+      total: 0,
+      status: 'completed',
+    },
+  ],
+  summary_counts: {
+    lessons: 15,
+    videos: 65,
+    documents: 7,
+    assessments: 10,
+  },
+  stages: [
+    {
+      id: 243,
+      title: 'Course Intro',
+      desc: '',
+      overview: '',
+      order: 0,
+      lessons_are_linear: false,
+      lessons: [
+        {
+          id: 692,
+          title: 'Welcome To Your Cirrus Training',
+          subtitle: '',
+          order: 0,
+          index: '1.1',
+          thumbnail_image_url: '',
+          lesson_type: 0,
+          completion_time: '',
+          content_counts: {
+            documents: 3,
+          },
+          progress: {
+            id: 1775463,
+            status: 'completed',
+          },
+        },
+      ],
+      progress: {
+        id: 1775462,
         status: 'completed',
       },
-      {
-        type: 'self_study',
-        completed: 1,
-        total: 1,
+    },
+    {
+      id: 244,
+      title: 'Self Study',
+      desc: '',
+      overview: '',
+      order: 1,
+      lessons_are_linear: false,
+      lessons: [
+        {
+          id: 857,
+          title: 'CAPS',
+          subtitle: '',
+          order: 0,
+          index: '2.1',
+          thumbnail_image_url: '',
+          lesson_type: 0,
+          completion_time: '',
+          content_counts: {
+            videos: 10,
+          },
+          progress: {
+            id: 1775468,
+            status: 'completed',
+          },
+        },
+        {
+          id: 318,
+          title: 'Takeoffs and Landings',
+          subtitle: '',
+          order: 1,
+          index: '2.2',
+          thumbnail_image_url: '',
+          lesson_type: 0,
+          completion_time: '',
+          content_counts: {
+            videos: 49,
+          },
+          progress: {
+            id: 1775479,
+            status: 'not_started',
+          },
+        },
+        {
+          id: 317,
+          title: 'Engine Management',
+          subtitle: '',
+          order: 2,
+          index: '2.3',
+          thumbnail_image_url: '',
+          lesson_type: 0,
+          completion_time: '',
+          content_counts: {
+            videos: 6,
+          },
+          progress: {
+            id: 1775529,
+            status: 'not_started',
+          },
+        },
+        {
+          id: 595,
+          title: 'Workbook',
+          subtitle: '',
+          order: 3,
+          index: '2.4',
+          thumbnail_image_url: '',
+          lesson_type: 0,
+          completion_time: '',
+          content_counts: {
+            documents: 3,
+          },
+          progress: {
+            id: 1775536,
+            status: 'not_started',
+          },
+        },
+      ],
+      progress: {
+        id: 1775467,
+        status: 'in_progress',
+      },
+    },
+    {
+      id: 245,
+      title: 'Transition',
+      desc: '',
+      overview: '',
+      order: 2,
+      lessons_are_linear: false,
+      lessons: [
+        {
+          id: 834,
+          title: 'Lesson 1',
+          subtitle: '',
+          order: 0,
+          index: '3.1',
+          thumbnail_image_url: '',
+          lesson_type: 1,
+          completion_time: '',
+          content_counts: {
+            documents: 1,
+            assessments: 1,
+          },
+          progress: {
+            id: 1775541,
+            status: 'not_started',
+          },
+        },
+        {
+          id: 835,
+          title: 'Lesson 2',
+          subtitle: '',
+          order: 1,
+          index: '3.2',
+          thumbnail_image_url: '',
+          lesson_type: 2,
+          completion_time: '',
+          content_counts: {
+            assessments: 1,
+          },
+          progress: {
+            id: 1775545,
+            status: 'not_started',
+          },
+        },
+        {
+          id: 836,
+          title: 'Lesson 3',
+          subtitle: '',
+          order: 2,
+          index: '3.3',
+          thumbnail_image_url: '',
+          lesson_type: 2,
+          completion_time: '',
+          content_counts: {
+            assessments: 1,
+          },
+          progress: {
+            id: 1775547,
+            status: 'not_started',
+          },
+        },
+        {
+          id: 837,
+          title: 'Lesson 4',
+          subtitle: '',
+          order: 3,
+          index: '3.4',
+          thumbnail_image_url: '',
+          lesson_type: 2,
+          completion_time: '',
+          content_counts: {
+            assessments: 1,
+          },
+          progress: {
+            id: 1775549,
+            status: 'not_started',
+          },
+        },
+        {
+          id: 838,
+          title: 'Lesson 5',
+          subtitle: '',
+          order: 4,
+          index: '3.5',
+          thumbnail_image_url: '',
+          lesson_type: 2,
+          completion_time: '',
+          content_counts: {
+            assessments: 1,
+          },
+          progress: {
+            id: 1775551,
+            status: 'not_started',
+          },
+        },
+        {
+          id: 839,
+          title: 'Lesson 6',
+          subtitle: '',
+          order: 5,
+          index: '3.6',
+          thumbnail_image_url: '',
+          lesson_type: 2,
+          completion_time: '',
+          content_counts: {
+            assessments: 1,
+          },
+          progress: {
+            id: 1775553,
+            status: 'not_started',
+          },
+        },
+      ],
+      progress: {
+        id: 1775540,
         status: 'not_started',
       },
-    ],
-    flight: [
-      {
-        type: 'flight',
-        completed: 0.0,
-        total: '5.0',
-        status: 'completed',
-      },
-      {
-        type: 'flight',
-        completed: 0.0,
-        total: 0,
+    },
+    {
+      id: 246,
+      title: 'Advanced',
+      desc: '',
+      overview: '',
+      order: 3,
+      lessons_are_linear: false,
+      lessons: [
+        {
+          id: 840,
+          title: 'Lesson 7',
+          subtitle: '',
+          order: 0,
+          index: '4.1',
+          thumbnail_image_url: '',
+          lesson_type: 2,
+          completion_time: '',
+          content_counts: {
+            assessments: 1,
+          },
+          progress: {
+            id: 1775556,
+            status: 'not_started',
+          },
+        },
+        {
+          id: 841,
+          title: 'Lesson 8',
+          subtitle: '',
+          order: 1,
+          index: '4.2',
+          thumbnail_image_url: '',
+          lesson_type: 2,
+          completion_time: '',
+          content_counts: {
+            assessments: 1,
+          },
+          progress: {
+            id: 1775558,
+            status: 'not_started',
+          },
+        },
+        {
+          id: 842,
+          title: 'Lesson 9',
+          subtitle: '',
+          order: 2,
+          index: '4.3',
+          thumbnail_image_url: '',
+          lesson_type: 2,
+          completion_time: '',
+          content_counts: {
+            assessments: 1,
+          },
+          progress: {
+            id: 1775560,
+            status: 'not_started',
+          },
+        },
+        {
+          id: 843,
+          title: 'Lesson 10',
+          subtitle: '',
+          order: 3,
+          index: '4.4',
+          thumbnail_image_url: '',
+          lesson_type: 2,
+          completion_time: '',
+          content_counts: {
+            assessments: 1,
+          },
+          progress: {
+            id: 1775562,
+            status: 'not_started',
+          },
+        },
+      ],
+      progress: {
+        id: 1775555,
         status: 'not_started',
       },
-    ],
-    ground: [
-      {
-        type: 'ground',
-        completed: 0.0,
-        total: '5.0',
-        status: 'completed',
+    },
+  ],
+  progress: {
+    id: 1775461,
+    status: 'in_progress',
+  },
+  enrollments: [
+    {
+      id: 119061,
+      course_version: '1.14',
+      enrollment_date: '06/10/22 - present',
+      transcript_available: false,
+      progress: {
+        id: 1775461,
+        status: 'in_progress',
       },
-      {
-        type: 'ground',
-        completed: 0.0,
-        total: 0,
-        status: 'not_started',
-      },
-    ],
-    landings: [
-      {
-        type: 'landings',
-        completed: 0,
-        total: 3,
-        status: 'completed',
-      },
-      {
-        type: 'landings',
-        completed: 0,
-        total: 0,
-        status: 'not_started',
-      },
-    ],
-    assessment: [
-      {
-        type: 'assessment',
-        completed: 33,
-        total: 34,
-        status: 'completed',
-      },
-      {
-        type: 'assessment',
-        completed: 0,
-        total: 20,
-        status: 'not_started',
-      },
-    ],
+      user_certificate: false,
+    },
+  ],
+  next_lesson: {
+    id: 692,
+    title: 'Welcome To Your Cirrus Training',
+    subtitle: '',
+    order: 0,
+    index: '1.1',
+    thumbnail_image_url: '',
+    lesson_type: 0,
+    completion_time: '',
+    content_counts: {
+      documents: 3,
+    },
   },
 };
 
 export const Primary = Template.bind({});
 Primary.args = {
-  courseOverview: overview,
+  courseOverview: course,
 };

@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { CourseSummaryCounts } from '@cirrus/models';
+import { Component, Input } from '@angular/core';
+import { ContentCounts } from '@cirrus/models';
 
 @Component({
   selector: 'cirrus-course-summary-counts',
@@ -7,5 +7,5 @@ import { CourseSummaryCounts } from '@cirrus/models';
   styleUrls: ['./course-summary-counts.component.scss'],
 })
 export class CourseSummaryCountsComponent {
-  @Input() courseSummaryCounts!: CourseSummaryCounts;
+  @Input() courseSummaryCounts: ContentCounts = {};
 }

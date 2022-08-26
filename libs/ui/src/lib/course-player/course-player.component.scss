@@ -51,6 +51,26 @@ cirrus-cta-button {
     padding: 17px 110px 17px 12px;
     .lesson-info {
       margin-right: 15px;
+      .thumbnail-container {
+        img {
+          height: 80px;
+        }
+      }
+      .text-container {
+        .header {
+          color: var.$gray5;
+          font-family: var.$akzidenz-grotesk_bqLtEx400;
+          font-size: 12px;
+          line-height: 22px;
+          letter-spacing: 0.02em;
+          text-transform: uppercase;
+        }
+        .description {
+          font-family: var.$AkzidenzGroteskBQ;
+          font-size: 20px;
+          line-height: 24px;
+        }
+      }
     }
   }
 }

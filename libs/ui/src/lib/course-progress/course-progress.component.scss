@@ -1,8 +1,11 @@
+@use '../styles/variables' as var;
+
 .course-progress {
   font-family: 'Akzidenz-Grotesk BQ';
   font-style: normal;
   font-weight: 500;
   .last-completed {
+    font-family: var.$AkzidenzGroteskBqLight;
     min-height: 19px;
     color: #969696;
     font-size: 14px;
@@ -13,13 +16,13 @@
     font-size: 14px;
     line-height: 19px;
     letter-spacing: -0.005em;
+    color: #d1d1d1
   }
   .mat-progress-bar {
     height: 12px;
     border-radius: 200px;
   }
-  .lessons-completed,
-  .milestones-reached {
+  .lessons-completed{
     font-size: 14px;
     line-height: 20px;
     letter-spacing: 0.03em;
@@ -29,5 +32,24 @@
 @media (min-width: 960px) {
   .course-progress {
     width: 653px;
+    .last-completed {
+      line-height: 20px;
+      letter-spacing: 0.03em;
+    }
+    .header {
+      font-size: 14px;
+      line-height: 19px;
+      letter-spacing: -0.005em;
+      color: #d1d1d1
+    }
+    .lessons-completed{
+      font-size: 18px;
+      line-height: 25px;
+      letter-spacing: 0.02em;
+      color: #ffffff;
+      .lessons-completed-bold {
+        font-family: var.$AkzidenzGroteskBQBold;
+      }
+    }
   }
 }

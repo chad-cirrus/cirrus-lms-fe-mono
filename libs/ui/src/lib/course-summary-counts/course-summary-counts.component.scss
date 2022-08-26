@@ -1,3 +1,12 @@
+@use '../styles/variables' as var;
+
 p {
   color:  #C4C4C4;
+  span {
+    font-family: var.$AkzidenzGroteskBqLight;
+    font-size: 18px;
+    line-height: 20px;
+    letter-spacing: 0.03em;
+    text-align: left;
+  }
 }

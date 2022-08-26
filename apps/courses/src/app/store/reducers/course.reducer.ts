@@ -39,7 +39,10 @@ export const initialCourseState: CourseState = {
       status: '',
     },
     progress_stats: [],
+    summary_counts: {},
     stages: [],
+    enrollments: [],
+    next_lesson: {},
   },
 };
 

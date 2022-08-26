@@ -23,6 +23,10 @@ export * from './lib/course-lessons/course-lessons.component';
 export * from './lib/cta-button/cta-button.component';
 export * from './lib/course-lesson-item/course-lesson-item.component';
 export * from './lib/course-lesson-content-count/course-lesson-content-count.component';
+export * from './lib/course-content-progress-circle/course-content-progress-circle.component';
+export * from './lib/course-overview-lesson-progress-bar/course-overview-lesson-progress-bar.component';
+export * from './lib/course-overview/course-overview.component';
+export * from './lib/course-summary-counts/course-summary-counts.component';
 
 // export * from '../../models/src/testing/testData';
 export * from '../../models/src/testing/testDataIcingLesson';

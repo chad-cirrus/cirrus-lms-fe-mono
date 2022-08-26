@@ -2,7 +2,7 @@
   fxLayout="row"
   fxLayoutAlign="start center"
   fxLayoutGap="12px"
-  *ngIf="courseSummaryCounts.lessons > 0"
+  *ngIf="courseSummaryCounts.lessons && courseSummaryCounts.lessons > 0"
 >
   <mat-icon svgIcon="lessons_icon_circle"></mat-icon>
   <span>{{ courseSummaryCounts.lessons }} Lessons</span>
@@ -11,7 +11,7 @@
   fxLayout="row"
   fxLayoutAlign="start center"
   fxLayoutGap="12px"
-  *ngIf="courseSummaryCounts.assessments > 0"
+  *ngIf="courseSummaryCounts.assessments && courseSummaryCounts.assessments > 0"
 >
   <mat-icon svgIcon="assessments_icon_circle"></mat-icon>
   <span>{{ courseSummaryCounts.assessments }} Assessments</span>
@@ -20,7 +20,7 @@
   fxLayout="row"
   fxLayoutAlign="start center"
   fxLayoutGap="12px"
-  *ngIf="courseSummaryCounts.videos > 0"
+  *ngIf="courseSummaryCounts.videos && courseSummaryCounts.videos > 0"
 >
   <mat-icon svgIcon="videos_icon_circle"></mat-icon>
   <span>{{ courseSummaryCounts.videos }} Videos</span>
@@ -29,7 +29,7 @@
   fxLayout="row"
   fxLayoutAlign="start center"
   fxLayoutGap="12px"
-  *ngIf="courseSummaryCounts.quizzes > 0"
+  *ngIf="courseSummaryCounts.quizzes && courseSummaryCounts.quizzes > 0"
 >
   <mat-icon svgIcon="quizzes_icon_circle"></mat-icon>
   <span>{{ courseSummaryCounts.quizzes }} Quizzes</span>
@@ -38,7 +38,7 @@
   fxLayout="row"
   fxLayoutAlign="start center"
   fxLayoutGap="12px"
-  *ngIf="courseSummaryCounts.documents > 0"
+  *ngIf="courseSummaryCounts.documents && courseSummaryCounts.documents > 0"
 >
   <mat-icon svgIcon="documents_icon_circle"></mat-icon>
   <span>{{ courseSummaryCounts.documents }} Documents</span>

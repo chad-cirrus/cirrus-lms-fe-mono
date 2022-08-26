@@ -25,7 +25,6 @@ export * from './lib/ILessonFlightLog';
 export * from './lib/PROGRESS_TYPE';
 export * from './lib/PROGRESS_STATUS';
 export * from './lib/ICourse';
-export * from './lib/ICourseOverviewLessons';
 export * from './lib/IEnrollmentHistory';
 export * from './lib/ICourseOverviewInfo';
 export * from './lib/ICourseOverview';

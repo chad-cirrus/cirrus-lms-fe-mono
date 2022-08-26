@@ -16,5 +16,6 @@ export class CourseProgressComponent {
       : 0;
   }
 
+  @Input() lastCompleted = '';
   @Input() lessonStats: ILessonsstats = { total: 0, completed: 0 };
 }

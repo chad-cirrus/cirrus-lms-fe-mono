@@ -24,8 +24,8 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatCardModule } from '@angular/material/card';
 
 import {
-  MatDialogModule,
   MAT_DIALOG_DATA,
+  MatDialogModule,
   MatDialogRef,
 } from '@angular/material/dialog';
 
@@ -68,10 +68,10 @@ import { CourseOverviewLessonProgressBarComponent } from './course-overview-less
 import { CourseOverviewComponent } from './course-overview/course-overview.component';
 import { CourseSummaryCountsComponent } from './course-summary-counts/course-summary-counts.component';
 import { CourseContentProgressCircleComponent } from './course-content-progress-circle/course-content-progress-circle.component';
+import { HoursAndLandingsComponent } from './hours-and-landings/hours-and-landings.component';
 import { GenericResponsiveMatTableComponent } from './generic-responsive-mat-table/generic-responsive-mat-table.component';
 import { TableFormatPipe } from './table-format.pipe';
 import { LessonTypePipe } from './helpers/LessonTypePipe';
-
 
 @NgModule({
   imports: [
@@ -136,6 +136,7 @@ import { LessonTypePipe } from './helpers/LessonTypePipe';
     CourseSummaryCountsComponent,
     CourseContentProgressCircleComponent,
     CourseOverviewLessonProgressBarComponent,
+    HoursAndLandingsComponent,
     GenericResponsiveMatTableComponent,
     TableFormatPipe,
     LessonTypePipe,

@@ -11,7 +11,8 @@ export interface ICourseOveview {
   has_agreement: boolean;
   certificate: ICertificate;
   agreement_body: string;
-  completion_time?: Date;
+  overview?: string;
+  completion_time?: string;
   minimum_flight_hours: number;
   desktop_hero_image_url: string;
   mobile_hero_image_url: string;
@@ -19,13 +20,17 @@ export interface ICourseOveview {
   can_reenroll: boolean;
   lessons_stats: ILessonsstats;
   progress_stats: ProgressStat[];
+  summary_counts: ContentCounts;
   stages: ICourseOverviewStage[];
   progress: IProgress;
+  // enrollments: IEnrollment[];
+  next_lesson: Partial<ICourseOverviewLesson>;
 }
 
 export interface ICourseOverviewStage {
   id: number;
   title: string;
+  desc?: string;
   overview: string;
   order: number;
   lessons_are_linear: boolean;
@@ -40,22 +45,34 @@ export interface ICertificate {
 export interface ICourseOverviewLesson {
   id: number;
   title: string;
+  subtitle?: string;
   order: number;
   index: string;
   thumbnail_image_url: string;
   lesson_type: number;
-  completion_time?: Date;
-  content_counts: Contentcounts;
+  completion_time?: string;
+  content_counts: ContentCounts;
   progress: IProgress;
 }
 
-interface Contentcounts {
-  documents?: number;
-  videos?: number;
+export interface ContentCounts {
+  lessons?: number;
   assessments?: number;
+  videos?: number;
+  quizzes?: number;
+  documents?: number;
 }
 
 export interface ILessonsstats {
   completed: number;
   total: number;
+}
+
+export interface IEnrollment {
+  id: number;
+  course_version: string;
+  enrollment_date: string;
+  transcript_available: boolean;
+  progress: IProgress;
+  user_certificate?: boolean;
 }

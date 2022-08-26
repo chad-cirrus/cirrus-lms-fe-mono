@@ -35,7 +35,7 @@ export interface ILesson {
 }
 
 export interface ProgressStat {
-  type: ProgressType;
+  type: ProgressType | string;
   completed: number;
   total: number;
   status: string;

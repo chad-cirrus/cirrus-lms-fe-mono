@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { ProgressStatConfig } from '../helpers/produceProgressStatsConfig';
 
 @Component({
   selector: 'cirrus-course-content-progress-circle',
@@ -11,20 +12,18 @@ export class CourseContentProgressCircleComponent {
     return this._dash;
   }
 
-  @Input() iconUrl = '';
-  @Input() label = '';
-
-  private _progress = {
+  private _progress: ProgressStatConfig = {
+    iconUrl: '',
+    label: '',
     completed: 0,
     total: 0,
   };
 
   @Input()
-  set progress(value: { completed: number; total: number }) {
+  set progress(value: ProgressStatConfig) {
     this._progress = value;
-    const dave = ((value.completed / value.total) * 100) | 0;
-    console.log(dave);
-    this._dash = `${dave}, 100`;
+    const dash = ((value.completed / value.total) * 100) | 0;
+    this._dash = `${dash}, 100`;
   }
 
   get progress() {

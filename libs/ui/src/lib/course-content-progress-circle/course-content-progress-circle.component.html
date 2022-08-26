@@ -3,6 +3,7 @@
   fxLayout="row"
   fxLayoutAlign="start center"
   fxLayoutGap="12px"
+  *ngIf="progress.total > 0"
 >
   <svg
     width="5em"
@@ -33,11 +34,11 @@
       y="10"
       width="16"
       height="16"
-      [attr.href]="iconUrl"
+      [attr.href]="progress.iconUrl"
     />
   </svg>
   <div class="info">
-    <p class="label">{{ label }}</p>
+    <p class="label">{{ progress.label }}</p>
     <p>
       <span class="completed">{{ progress.completed }}</span
       ><span class="total">/{{ progress.total }}</span>

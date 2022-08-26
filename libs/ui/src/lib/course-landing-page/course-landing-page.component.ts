@@ -21,7 +21,7 @@ export class CourseLandingPageComponent {
   @Input()
   set course(value: ICourseOveview) {
     this._course = value;
-    this.coursePlayerConfig = produceConfig(value.stages);
+    this.coursePlayerConfig = produceConfig(value.next_lesson);
   }
 
   get course() {

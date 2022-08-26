@@ -20,7 +20,7 @@ export class CourseOverviewLessonProgressBarComponent {
   @Input()
   set lessonProgress(value: { total: number; completed: number }) {
     this._lessonProgress = value;
-    this._value = ((value.total / value.completed) * 100) | 0;
+    this._value = ((value.completed / value.total) * 100) | 0;
   }
 
   get lessonProgress() {

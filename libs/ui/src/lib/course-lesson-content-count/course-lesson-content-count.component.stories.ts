@@ -25,3 +25,10 @@ Primary.args = {
     assessments: 1,
   },
 };
+
+export const VideosOnly = Template.bind({});
+VideosOnly.args = {
+  contentCounts: {
+    videos: 10,
+  },
+};
