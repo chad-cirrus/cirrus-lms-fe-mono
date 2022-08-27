@@ -12,11 +12,8 @@
     fxLayoutGap="8px"
     fxFlex="grow"
   >
-    <div class="stage-header">Stage {{ stage.order + 1 }}</div>
-    <div class="stage-overview">
-      {{
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit fugiat nulla pariatur.'
-      }}
+    <div class="stage-header">{{ stage.title }}</div>
+    <div class="stage-overview" *ngIf='stage.desc'>{{ stage.desc }}
     </div>
     <div
       class="item-container"
