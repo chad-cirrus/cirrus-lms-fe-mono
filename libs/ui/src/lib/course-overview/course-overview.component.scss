@@ -8,6 +8,16 @@
   padding: 32px 10px;
 }
 
+.about {
+  &--version {
+    font-family: var.$AkzidenzGroteskBQ;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 22px;
+    color: #969696;
+  }
+}
+
 .started-date {
   font-family: var.$BertholdAkzidenzGroteskBE;
   font-size: 15px;
@@ -98,4 +108,3 @@
     }
   }
 }
-
