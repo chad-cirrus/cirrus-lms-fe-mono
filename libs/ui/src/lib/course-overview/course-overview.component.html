@@ -17,15 +17,15 @@
       fxLayoutAlign="space-between start"
       fxLayoutGap="22px"
     >
-      <div fxLayout="row" fxLayoutAlign="start start">
+      <div fxLayout="row" fxLayoutAlign="start start" *ngIf='courseOverview.minimum_flight_hours'>
         <div class="mcf">
-          {{ courseOverview.minimum_flight_hours || 0 }}
+          {{ courseOverview.minimum_flight_hours }}
         </div>
         <span class="mcf-label">Minimum Course Flight Hours</span>
       </div>
-      <div fxLayout="row" fxLayoutAlign="start start">
+      <div fxLayout="row" fxLayoutAlign="start start" *ngIf='courseOverview.completion_time'>
         <div class="ect">
-          <span>{{ courseOverview.completion_time || '0h 0m' }}</span>
+          <span>{{ courseOverview.completion_time }}</span>
         </div>
         <span class="ect-label">Estimated Course Time</span>
       </div>
