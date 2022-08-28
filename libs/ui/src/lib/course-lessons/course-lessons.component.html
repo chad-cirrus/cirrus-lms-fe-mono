@@ -12,9 +12,8 @@
     fxLayoutGap="8px"
     fxFlex="grow"
   >
-    <div class="stage-header">{{ stage.title }}</div>
-    <div class="stage-overview" *ngIf='stage.desc'>{{ stage.desc }}
-    </div>
+    <h2 class="stage-header">{{ stage.title }}</h2>
+    <p class="stage-overview" *ngIf='stage.desc'>{{ stage.desc }}</p>
     <div
       class="item-container"
       *ngFor="let courseLesson of stage.lessons"
