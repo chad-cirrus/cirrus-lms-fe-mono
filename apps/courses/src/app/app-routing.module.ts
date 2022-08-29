@@ -55,7 +55,7 @@ const routes: Routes = [
     component: CourseComponent,
     children: [],
   },
-  { path: 'courses/:courseId/lessons/:lessonId', component: LessonComponent },
+  { path: 'courses/:courseId/stages/:stageId/lessons/:lessonId', component: LessonComponent },
 ];
 
 @NgModule({

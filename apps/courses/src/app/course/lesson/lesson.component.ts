@@ -16,7 +16,6 @@ import { map, tap, withLatestFrom } from 'rxjs/operators';
 import { AppService } from '../../app.service';
 
 import { ContentPlayerDialogService } from '../../content-player/content-player-dialog.service';
-import { findNextLesson } from '../../shared/find-next-lesson';
 import { fetchLessons, setSideNavOpen } from '../../store/actions';
 import { LessonState } from '../../store/reducers/lesson.reducer';
 import { selectCirrusUser } from '../../store/selectors/cirrus-user.selector';
@@ -32,7 +31,7 @@ import {
 import { CoursesService } from '../course.service';
 import { environment } from '../../../environments/environment';
 import { fetchCourseOverview } from '../../store/actions/course.actions';
-import { selectCourseOverview } from '../../store/selectors/course.selector';
+import { selectCourseOverview, selectNextLessonPath } from '../../store/selectors/course.selector';
 
 @Component({
   selector: 'cirrus-lesson',
@@ -64,6 +63,8 @@ export class LessonComponent implements OnInit, OnDestroy {
   defaultMobile = environment.defaultMobile;
   defaultDesktop = environment.defaultDesktop;
 
+  nextLesson$ = this.store.select(selectNextLessonPath);
+
   constructor(
     private route: ActivatedRoute,
     private store: Store<LessonState>,
@@ -75,11 +76,15 @@ export class LessonComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
+    this.nextLesson$.subscribe((path) => {
+      console.log('Next lesson path', path);
+    });
+
     this.lessonSubscription.add(
-      this.route.params.subscribe(({ courseId, lessonId }) => {
+      this.route.params.subscribe(({ courseId, lessonId, stageId }) => {
         this.coursId = parseInt(courseId);
         this.lessonId = parseInt(lessonId);
-        this.store.dispatch(fetchLessons({ courseId, lessonId }));
+        this.store.dispatch(fetchLessons({ courseId, stageId, lessonId }));
         this.store.dispatch(fetchCourseOverview({ courseId }));
       })
     );
@@ -128,15 +133,10 @@ export class LessonComponent implements OnInit, OnDestroy {
                 width: '100%',
               })
               .afterClosed()
-              .pipe(withLatestFrom(this.stages$))
-              .subscribe(([response, stages]) => {
+              .pipe(withLatestFrom(this.nextLesson$))
+              .subscribe(([response, nextLesson]) => {
                 if (response === LESSON_COMPLETION_CTA.nextLesson) {
-                  const nextLesson = findNextLesson(stages);
-                  if (nextLesson > 0) {
-                    this.router.navigate([
-                      `/courses/${this.coursId}/lessons/${nextLesson}`,
-                    ]);
-                  }
+                  this.router.navigate([nextLesson]);
                 } else {
                   console.log('none of the above');
                 }
@@ -179,9 +179,8 @@ export class LessonComponent implements OnInit, OnDestroy {
     this.contentPlayerDialogService.displayContentPlayerBComponent(content.id);
   }
 
-  playNextLessonContent($event: any) {
-    const nextLesson = findNextLesson($event);
-    this.router.navigate([`/courses/${this.coursId}/lessons/${nextLesson}`]);
+  playNextLessonContent() {
+    this.nextLesson$.subscribe(nextLesson => this.router.navigate([nextLesson]));
   }
 
   openSideNav() {

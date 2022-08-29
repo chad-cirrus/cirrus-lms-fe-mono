@@ -30,10 +30,10 @@ export class CoursesService {
 
   constructor(private http: HttpClient, private taskService: TaskService) {}
 
-  getLessons(courseId: number, lessonId: number): Observable<ILesson> {
+  getLessons(courseId: number, stageId :number, lessonId: number): Observable<ILesson> {
     return this.http
       .get<ILesson>(
-        `${environment.baseUrl}/${this.coursesUrl}/${courseId}/lessons/${lessonId}`
+        `${environment.baseUrl}/${this.coursesUrl}/${courseId}/stages/${stageId}/lessons/${lessonId}`
       )
       .pipe(
         tap(lesson => {

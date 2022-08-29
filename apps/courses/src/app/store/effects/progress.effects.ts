@@ -19,11 +19,11 @@ export class ProgressEffects {
   startProgress$ = createEffect(() =>
     this.actions$.pipe(
       ofType(startProgress),
-      mergeMap(({ id, courseId, lessonId }) =>
+      mergeMap(({ id, courseId, stageId, lessonId }) =>
         this.coursesService.startProgress(id).pipe(
           switchMap(() => [
             fetchCourseOverview({ courseId }),
-            fetchLessons({ courseId, lessonId }),
+            fetchLessons({ courseId, stageId, lessonId }),
           ]),
           catchError(error => of(startProgressFailure({ error })))
         )
@@ -34,11 +34,11 @@ export class ProgressEffects {
   completeProgress$ = createEffect(() =>
     this.actions$.pipe(
       ofType(completeProgress),
-      mergeMap(({ id, courseId, lessonId }) =>
+      mergeMap(({ id, courseId, stageId, lessonId }) =>
         this.coursesService.completeProgress(id).pipe(
           switchMap(() => [
             fetchCourseOverview({ courseId }),
-            fetchLessons({ courseId, lessonId }),
+            fetchLessons({ courseId, stageId, lessonId }),
           ]),
           catchError(error => of(completeProgressFailure({ error })))
         )

@@ -230,6 +230,7 @@ export class ContentPlayerComponent
             startProgress({
               id: progress.id,
               courseId: lesson.course_id,
+              stageId: lesson.stage_id,
               lessonId: lesson.id,
             })
           );
@@ -238,6 +239,7 @@ export class ContentPlayerComponent
             completeProgress({
               id: progress.id,
               courseId: lesson.course_id,
+              stageId: lesson.stage_id,
               lessonId: lesson.id,
             })
           );

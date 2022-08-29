@@ -10,6 +10,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { IContent, ICourseOveview, ILesson } from '@cirrus/models';
 import { StagesOverlayComponent } from '../stages-overlay/stages-overlay.component';
 import { DomSanitizer } from '@angular/platform-browser';
+import { selectNextLessonPath } from '../../../../../apps/courses/src/app/store/selectors/course.selector';
 
 enum LessonStatus {
   NOT_STARTED = 'not_started',

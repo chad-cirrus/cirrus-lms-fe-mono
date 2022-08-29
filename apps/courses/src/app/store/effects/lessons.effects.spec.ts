@@ -47,7 +47,7 @@ describe('lessons effects', () => {
 
   describe('dispatching mergeMap effect', () => {
     it('should get the lesson', () => {
-      const action = fetchLessons({ lessonId: 1, courseId: 1 });
+      const action = fetchLessons({ lessonId: 1, courseId: 1, stageId: 1 });
       const lesson: ILesson = testData;
 
       jest.spyOn(service, 'getLessons').mockReturnValue(of(lesson));
