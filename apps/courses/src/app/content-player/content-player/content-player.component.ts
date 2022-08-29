@@ -217,7 +217,7 @@ export class ContentPlayerComponent
         c => c.progress.id === progress.id
       )[0];
       const { content_type } = contentToBeUpdated;
-      if (content_type === 8 || content_type === 9 || content_type === 10) {
+      if ([9, 10].includes(content_type)) {
         return;
       }
       if (
