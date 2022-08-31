@@ -25,6 +25,7 @@
           routerLink="courses/recent-activity"
           class="image-container"
           routerLinkActive="active"
+          (click)="dismissHamburgerMenu()"
         >
           <img
             src="courses/images/svg/recent-activity.svg"
@@ -36,9 +37,7 @@
         <div
           fxLayout="row"
           fxLayoutGap="10px"
-          *ngIf="
-            cirrusUser.role !== 'pilot'
-          "
+          *ngIf="cirrusUser.role !== 'pilot'"
           routerLink="my-students"
           class="image-container"
           routerLinkActive="active"
@@ -90,7 +89,9 @@
             height="23px"
             width="23px"
           />
-          <span *ngIf="!collapse || type === 'hamburger'">Training Partners</span>
+          <span *ngIf="!collapse || type === 'hamburger'"
+            >Training Partners</span
+          >
         </div>
         <div
           fxLayout="row"
@@ -112,9 +113,7 @@
   </div>
 
   <div [ngClass]="type === 'hamburger' ? '' : 'options-container'">
-
     <div *ngIf="type !== 'hamburger'" class="border"></div>
-
 
     <div
       *ngIf="!collapse; else collapsed"

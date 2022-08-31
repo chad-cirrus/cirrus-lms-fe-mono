@@ -15,15 +15,13 @@ export class SideNavComponent implements OnInit {
   @Input() notificationCount!: number;
   collapse!: boolean;
   @Output() emitCollapse = new EventEmitter<boolean>();
+  @Output() emitDismissHamburgerMenu = new EventEmitter<boolean>();
+
   isScreenTablet$!: any;
   disableToggle!: boolean;
   currentUrl = '';
 
-
-
-  constructor(
-    private breakpointObserver: BreakpointObserver
-  ) {}
+  constructor(private breakpointObserver: BreakpointObserver) {}
 
   ngOnInit(): void {
     this.isScreenTablet$ = this.breakpointObserver
@@ -39,11 +37,14 @@ export class SideNavComponent implements OnInit {
       });
   }
 
+  dismissHamburgerMenu() {
+    this.emitDismissHamburgerMenu.emit();
+  }
+
   toggleCollapse(isTablet?: boolean) {
     isTablet === undefined
       ? (this.collapse = !this.collapse)
       : (this.collapse = isTablet);
     this.emitCollapse.emit(this.collapse);
   }
-
 }
