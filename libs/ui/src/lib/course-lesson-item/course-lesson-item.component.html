@@ -43,8 +43,8 @@
         >{{ courseLesson.title }}
       </div>
     </div>
-    <div class="description">
-      {{ courseLesson.title }}
+    <div class="description" *ngIf="courseLesson.subtitle !== null">
+      {{ courseLesson.subtitle }}
     </div>
     <cirrus-course-lesson-content-count
       [contentCountsCompletionTime]="contentCountsCompletionTime"

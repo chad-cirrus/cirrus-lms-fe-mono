@@ -42,6 +42,7 @@ Primary.args = {
   courseLesson: {
     id: 692,
     title: 'Welcome To Your Cirrus Training',
+    subtitle: 'subtitle',
     order: 0,
     index: '1.1',
     thumbnail_image_url: '',
