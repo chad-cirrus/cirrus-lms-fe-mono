@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Inject, Input, Output } from '@angular/core';
 import { ICourseOverviewLesson, LESSON_TYPE } from '@cirrus/models';
 import { progressTextMapperDictionary } from '../helpers/progressTextMapper';
+import { IContentCountAndCompletionTime } from '../course-lesson-content-count/course-lesson-content-count.component';
 
 @Component({
   selector: 'cirrus-course-lesson-item',
@@ -31,6 +32,13 @@ export class CourseLessonItemComponent {
       this.courseLesson.thumbnail_image_url.length > 0
       ? this.courseLesson.thumbnail_image_url
       : this.environment.defaultDesktop + '';
+  }
+
+  get contentCountsCompletionTime(): IContentCountAndCompletionTime {
+    return {
+      content_counts: this.courseLesson.content_counts,
+      completion_time: this.courseLesson.completion_time,
+    };
   }
 
   constructor(@Inject('environment') environment: Record<string, unknown>) {

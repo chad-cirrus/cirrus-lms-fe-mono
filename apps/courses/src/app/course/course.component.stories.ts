@@ -22,7 +22,7 @@ import { RouterModule } from '@angular/router';
 import { APP_BASE_HREF } from '@angular/common';
 import { StoreModule } from '@ngrx/store';
 import { coursesReducers } from '../store/reducers';
-import { ICourseOveview, ProgressType } from '@cirrus/models';
+import { ICourseOveview, PROGRESS_STATUS } from '@cirrus/models';
 import { of } from 'rxjs';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
@@ -424,11 +424,9 @@ const course: ICourseOveview = {
       transcript_available: false,
       progress: {
         id: 1775461,
-        status: 'in_progress',
+        status: PROGRESS_STATUS.in_progress,
       },
-
       user_certificate: null,
-
     },
   ],
   next_lesson: {

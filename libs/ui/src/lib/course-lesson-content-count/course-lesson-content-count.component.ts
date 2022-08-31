@@ -1,6 +1,11 @@
 import { Component, Input } from '@angular/core';
 import { ContentCounts } from '@cirrus/models';
 
+export interface IContentCountAndCompletionTime {
+  content_counts: ContentCounts;
+  completion_time?: string;
+}
+
 @Component({
   selector: 'cirrus-course-lesson-content-count',
   templateUrl: './course-lesson-content-count.component.html',
@@ -14,11 +19,15 @@ export class CourseLessonContentCountComponent {
   }
 
   @Input()
-  set contentCounts(value: ContentCounts) {
+  set contentCountsCompletionTime(value: IContentCountAndCompletionTime) {
     this._countString = this.createString(value);
   }
 
-  private createString(contentCounts: ContentCounts) {
+  @Input() completion_time!: string;
+
+  private createString(
+    contentCountAndCompletionTime: IContentCountAndCompletionTime
+  ) {
     const dict: { [key: string]: string } = {
       ['videos']: 'Videos',
       ['documents']: 'Documents',
@@ -26,8 +35,11 @@ export class CourseLessonContentCountComponent {
       ['assessments']: 'Assessments',
     };
 
-    const countArray = Object.entries(contentCounts);
-    return countArray.reduce((prev, curr, index) => {
+    const countArray = Object.entries(
+      contentCountAndCompletionTime.content_counts
+    );
+
+    const contentCountString = countArray.reduce((prev, curr, index) => {
       return (
         prev +
         dict[curr[0]] +
@@ -40,5 +52,15 @@ export class CourseLessonContentCountComponent {
         }`
       );
     }, '');
+
+    const completionTimeString =
+      contentCountAndCompletionTime.completion_time !== null
+        ? ' ' +
+          String.fromCharCode(8226) +
+          ' Estimated Time: ' +
+          contentCountAndCompletionTime.completion_time
+        : '';
+
+    return contentCountString + completionTimeString;
   }
 }

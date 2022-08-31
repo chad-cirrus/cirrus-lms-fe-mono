@@ -1,7 +1,7 @@
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { ICourseOveview } from '@cirrus/models';
+import { ICourseOveview, PROGRESS_STATUS } from '@cirrus/models';
 import { Meta, moduleMetadata, Story } from '@storybook/angular';
 import { CourseContentProgressCircleComponent } from '../course-content-progress-circle/course-content-progress-circle.component';
 import { CourseOverviewLessonProgressBarComponent } from '../course-overview-lesson-progress-bar/course-overview-lesson-progress-bar.component';
@@ -39,14 +39,14 @@ const Template: Story<CourseOverviewComponent> = (
 const course: ICourseOveview = {
   id: 351,
   name: 'SR20 Avidyne Entegra Advanced Transition ',
-
-  certificate: { expiration: 'There is no expiration date' },
-
   major_version: 4,
   minor_version: 11,
   title: 'SR20 Avidyne Entegra Advanced Transition ',
   subtitle: '',
   has_agreement: true,
+  certificate: {
+    expiration: 'There is no expiration date',
+  },
   agreement_body:
     '\u003cp class="MsoNormal"\u003eThis training is limited to aircraft familiarization training and is not inclusive of all the knowledge and skill required for safe flight. I must comply with the regulations, exercise sound judgment, and maintain a high level of flying proficiency to minimize the risks associated with flight.\u0026nbsp;\u003c/p\u003e\u003cp class="MsoNormal"\u003e\u003cbr\u003e\u003c/p\u003e\u003cp class="MsoNormal"\u003eSafely flying under Instrument Flight Rules (IFR) requires peak levels of skill, sound decision making, and good risk management skills. Many IFR skills degrade over periods of inactivity and each pilot must assess risks for individual flights considering their proficiency levels required to handle forecasted weather, airspace, and other challenges that may arise. Pilots who desire to fly IFR are strongly encouraged to complete an Instrument Proficiency Check in 6-month intervals, regardless of IFR currency requirements.\u0026nbsp;\u0026nbsp;\u003c/p\u003e\u003cp class="MsoNormal"\u003e\u003cbr\u003e\u003c/p\u003e\u003cp class="MsoNormal"\u003eI acknowledge that for my continued proficiency and safety, Cirrus Aircraft strongly recommends that all pilots conduct recurrent training from an approved Cirrus Standardized Instructor Pilot (CSIP) or Cirrus Training Center (CTC).\u003c/p\u003e\u003cp class="MsoNormal"\u003e\u003cbr\u003e\u003c/p\u003e\u003cp class="MsoNormal"\u003eI acknowledge that my instructor will only observe my flight proficiency during this training for the task prescribed in this course. These tasks may not be inclusive of all the knowledge and skill required to safely fly under visual or instrument flight rules.\u003c/p\u003e',
   completion_time: '',
@@ -126,7 +126,6 @@ const course: ICourseOveview = {
       progress: {
         id: 1775462,
         status: 'completed',
-
       },
     },
     {
@@ -423,14 +422,9 @@ const course: ICourseOveview = {
       transcript_available: false,
       progress: {
         id: 1775461,
-        status: 'in_progress',
-
+        status: PROGRESS_STATUS.in_progress,
       },
-      user_certificate: {
-        expires_on: '9/12/24',
-        id: 763,
-      },
-
+      user_certificate: null,
     },
   ],
   next_lesson: {

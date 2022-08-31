@@ -1,5 +1,6 @@
 import { ProgressStat } from './ILesson';
 import { IProgress } from './IProgress';
+import { IEnrollmentHistory } from './IEnrollmentHistory';
 
 export interface ICourseOveview {
   id: number;
@@ -16,14 +17,13 @@ export interface ICourseOveview {
   minimum_flight_hours: number;
   desktop_hero_image_url: string;
   mobile_hero_image_url: string;
-  enrollments: IEnrollment[];
   can_reenroll: boolean;
   lessons_stats: ILessonsstats;
   progress_stats: ProgressStat[];
   summary_counts: ContentCounts;
   stages: ICourseOverviewStage[];
   progress: IProgress;
-  // enrollments: IEnrollment[];
+  enrollments: IEnrollmentHistory[];
   next_lesson: Partial<ICourseOverviewLesson>;
 }
 
@@ -80,5 +80,4 @@ export interface IEnrollment {
 export interface UserCertificate {
   id: number;
   expires_on: string;
-
 }

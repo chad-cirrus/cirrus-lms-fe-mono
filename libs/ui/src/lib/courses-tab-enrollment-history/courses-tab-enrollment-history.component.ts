@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-import { ICertificate, IEnrollment } from '@cirrus/models';
+import { ICertificate, IEnrollmentHistory } from '@cirrus/models';
 
 import { UiDownloadService } from '../course-completion/ui-download.service';
 import { Column } from '../generic-responsive-mat-table/generic-responsive-mat-table.component';
@@ -13,8 +13,7 @@ import { formatCertificate, formatTranscript } from '../helpers/TableFormat';
   styleUrls: ['./courses-tab-enrollment-history.component.scss'],
 })
 export class CoursesTabEnrollmentHistoryComponent {
-
-  @Input() enrollments!: IEnrollment[] | undefined;
+  @Input() enrollments!: IEnrollmentHistory[] | undefined;
 
   @Input() certificate!: ICertificate | undefined;
 

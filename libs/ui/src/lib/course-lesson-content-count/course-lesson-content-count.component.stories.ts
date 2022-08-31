@@ -18,17 +18,23 @@ const Template: Story<CourseLessonContentCountComponent> = (
 
 export const Primary = Template.bind({});
 Primary.args = {
-  contentCounts: {
-    videos: 4,
-    documents: 3,
-    quizzes: 1,
-    assessments: 1,
+  contentCountsCompletionTime: {
+    content_counts: {
+      videos: 4,
+      documents: 3,
+      quizzes: 1,
+      assessments: 1,
+    },
+    completion_time: '1h 10m',
   },
 };
 
 export const VideosOnly = Template.bind({});
 VideosOnly.args = {
-  contentCounts: {
-    videos: 10,
+  contentCountsCompletionTime: {
+    content_counts: {
+      videos: 4,
+    },
+    completion_time: '1h 10m',
   },
 };
