@@ -47,8 +47,10 @@ export class CourseOverviewComponent {
     return this._courseOverview;
   }
 
+
   get version() {
     return `${this.courseOverview.major_version}.${this.courseOverview.minor_version}`;
   }
+
 
 }

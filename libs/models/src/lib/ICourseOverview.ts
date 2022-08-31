@@ -16,7 +16,7 @@ export interface ICourseOveview {
   minimum_flight_hours: number;
   desktop_hero_image_url: string;
   mobile_hero_image_url: string;
-  enrollments?: [];
+  enrollments: IEnrollment[];
   can_reenroll: boolean;
   lessons_stats: ILessonsstats;
   progress_stats: ProgressStat[];
@@ -74,5 +74,11 @@ export interface IEnrollment {
   enrollment_date: string;
   transcript_available: boolean;
   progress: IProgress;
-  user_certificate?: boolean;
+  user_certificate?: UserCertificate | null;
+}
+
+export interface UserCertificate {
+  id: number;
+  expires_on: string;
+
 }

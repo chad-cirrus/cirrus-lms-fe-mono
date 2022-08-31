@@ -1,6 +1,9 @@
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
+
+import { MatMenuModule } from '@angular/material/menu';
+
 import { ICourseOverviewStage } from '@cirrus/models';
 import { Meta, moduleMetadata, Story } from '@storybook/angular';
 import { CourseLessonContentCountComponent } from '../course-lesson-content-count/course-lesson-content-count.component';
@@ -237,6 +240,7 @@ export default {
         MatIconModule,
         MatIconRegistryModule,
         MatDividerModule,
+        MatMenuModule,
       ],
       declarations: [
         CourseLessonItemComponent,

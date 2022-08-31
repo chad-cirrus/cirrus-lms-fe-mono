@@ -43,6 +43,7 @@ Primary.args = {
   course: {
     id: 351,
     name: 'SR20 Avidyne Entegra Advanced Transition ',
+    certificate: { expiration: 'This certificate does not expire' },
     major_version: 4,
     minor_version: 11,
     title: 'SR20 Avidyne Entegra Advanced Transition ',
@@ -425,7 +426,12 @@ Primary.args = {
           id: 1775461,
           status: 'in_progress',
         },
-        user_certificate: false,
+
+        user_certificate: {
+          expires_on: '9/23/23',
+          id: 23,
+        },
+
       },
     ],
     next_lesson: {

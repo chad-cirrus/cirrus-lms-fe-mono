@@ -29,7 +29,10 @@ Primary.args = {
         id: 1768442,
         status: PROGRESS_STATUS.in_progress,
       },
-      user_certificate: null,
+      user_certificate: {
+        id: 20440,
+        expires_on: '4/30/2022',
+      },
     },
     {
       id: 119061,
@@ -42,7 +45,7 @@ Primary.args = {
       },
       user_certificate: {
         id: 20440,
-        expires_on: null,
+        expires_on: '4/30/2022',
       },
     },
   ],

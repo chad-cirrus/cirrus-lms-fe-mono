@@ -8,7 +8,26 @@
   <div class="filter-container" [formGroup]="filterForm">
     <div fxLayout.gt-sm="row-reverse" fxLayoutGap.gt-sm="24px">
       <div fxFlex="grow" class="search-input">
-        <input placeholder="Search Lessons" formControlName="filterText" />
+        <input
+          [ngClass]="filterText?.value ? 'input-active' : 'input'"
+          placeholder="Search Lessons"
+          formControlName="filterText"
+        />
+        <div class="text-filter-container">
+          <div
+            *ngFor="let lesson of filteredLessons$ | async"
+            class="text-filter-section"
+            (click)="emitNavigation(lesson.id)"
+          >
+            <div class="title">
+              {{ lesson.title }}
+            </div>
+            <div class="status">
+              {{ lesson.progress.status | formatFilter | titlecase }}
+            </div>
+          </div>
+        </div>
+
       </div>
       <button class="filter-button" [matMenuTriggerFor]="menu">
         Filter Lessons
@@ -30,7 +49,9 @@
         <div (click)="removeTag(tag.value)">
           <img src="courses/images/svg/close.svg" />
         </div>
-        <div>{{ tag.value }}</div>
+        
+        <div>{{ tag.value | formatFilter | titlecase }}</div>
+
       </div>
     </div>
   </div>

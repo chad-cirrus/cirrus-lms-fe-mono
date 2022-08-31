@@ -41,6 +41,9 @@ const mockEnvironment = {
 const course: ICourseOveview = {
   id: 351,
   name: 'SR20 Avidyne Entegra Advanced Transition ',
+
+  certificate: { expiration: 'This certificate does not expire' },
+
   major_version: 4,
   minor_version: 11,
   title: 'SR20 Avidyne Entegra Advanced Transition ',
@@ -423,7 +426,9 @@ const course: ICourseOveview = {
         id: 1775461,
         status: 'in_progress',
       },
-      user_certificate: false,
+
+      user_certificate: null,
+
     },
   ],
   next_lesson: {

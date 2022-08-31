@@ -3,7 +3,3 @@ export interface FilterMenuSection {
   items: string[];
 }
 
-export interface Filter {
-  filterText: string;
-  filterCheckbox: string[];
-}

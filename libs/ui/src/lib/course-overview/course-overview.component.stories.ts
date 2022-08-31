@@ -39,6 +39,9 @@ const Template: Story<CourseOverviewComponent> = (
 const course: ICourseOveview = {
   id: 351,
   name: 'SR20 Avidyne Entegra Advanced Transition ',
+
+  certificate: { expiration: 'There is no expiration date' },
+
   major_version: 4,
   minor_version: 11,
   title: 'SR20 Avidyne Entegra Advanced Transition ',
@@ -123,6 +126,7 @@ const course: ICourseOveview = {
       progress: {
         id: 1775462,
         status: 'completed',
+
       },
     },
     {
@@ -420,8 +424,13 @@ const course: ICourseOveview = {
       progress: {
         id: 1775461,
         status: 'in_progress',
+
       },
-      user_certificate: false,
+      user_certificate: {
+        expires_on: '9/12/24',
+        id: 763,
+      },
+
     },
   ],
   next_lesson: {
