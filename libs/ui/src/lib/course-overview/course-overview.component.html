@@ -5,10 +5,11 @@
     fxLayout="row"
     fxLayoutAlign="space-between start"
   >
+
     <div class="left-side" fxFlex="3 0 0" *ngIf='courseOverview.overview'>
       <h2>About this course</h2>
       <div [innerHTML]="courseOverview.overview"></div>
-      <span><p class='about--version'>Version: {{ version }}</p></span>
+      <span><p class='about--version'>Version: {{ version }}</p></span
     </div>
     <div
       class="right-side"
@@ -17,6 +18,7 @@
       fxLayoutAlign="space-between start"
       fxLayoutGap="22px"
     >
+
       <div fxLayout="row" fxLayoutAlign="start start" *ngIf='courseOverview.minimum_flight_hours'>
         <div class="mcf">
           {{ courseOverview.minimum_flight_hours }}
@@ -26,6 +28,7 @@
       <div fxLayout="row" fxLayoutAlign="start start" *ngIf='courseOverview.completion_time'>
         <div class="ect">
           <span>{{ courseOverview.completion_time }}</span>
+
         </div>
         <span class="ect-label">Estimated Course Time</span>
       </div>
@@ -53,7 +56,9 @@
       </div>
     </div>
   </div>
+
   <div class="row-terms-conditions" *ngIf='courseOverview.agreement_body'>
+
     <h2>Terms & Conditions</h2>
     <div
       class="agreement-body"

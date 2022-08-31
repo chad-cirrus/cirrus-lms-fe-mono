@@ -72,6 +72,9 @@ import { HoursAndLandingsComponent } from './hours-and-landings/hours-and-landin
 import { GenericResponsiveMatTableComponent } from './generic-responsive-mat-table/generic-responsive-mat-table.component';
 import { TableFormatPipe } from './table-format.pipe';
 import { LessonTypePipe } from './helpers/LessonTypePipe';
+import { FilterComponent } from './filter/filter.component';
+import { FormatFilterPipe } from './format-filter.pipe';
+
 
 @NgModule({
   imports: [
@@ -140,6 +143,8 @@ import { LessonTypePipe } from './helpers/LessonTypePipe';
     GenericResponsiveMatTableComponent,
     TableFormatPipe,
     LessonTypePipe,
+    FilterComponent,
+    FormatFilterPipe,
   ],
   exports: [
     LessonLandingPageComponent,
@@ -189,6 +194,8 @@ import { LessonTypePipe } from './helpers/LessonTypePipe';
     GenericResponsiveMatTableComponent,
     TableFormatPipe,
     LessonTypePipe,
+    FilterComponent,
+    FormatFilterPipe,
   ],
   providers: [
     { provide: MAT_DIALOG_DATA, useValue: {} },

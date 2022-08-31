@@ -1,0 +1,17 @@
+@use '../styles/variables' as *;
+
+.container {
+  padding: 16px 0px 16px 13px;
+  width: 242px;
+  background-color: $lesson-content-item-hover;
+
+  .section {
+    padding-left: 35px;
+  }
+  .header {
+    padding: 11px 0px 12px 0px;
+  }
+  .item {
+    padding-bottom: 22px;
+  }
+}

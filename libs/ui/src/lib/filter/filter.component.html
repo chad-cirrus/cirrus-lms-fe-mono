@@ -1,0 +1,20 @@
+<div class="container" (click)="stopProp($event)">
+  <div>
+    <mat-checkbox></mat-checkbox>
+    All
+  </div>
+  <div class="section">
+    <div *ngFor="let section of sections; let i = index">
+      <div class="header">{{ section.title }}</div>
+      <div *ngFor="let item of section.items">
+        <div class="item">
+          <mat-checkbox
+            (change)="onChange(item)"
+            [checked]="checkboxArray.value.includes(item)"
+          ></mat-checkbox>
+          {{ item | formatFilter | titlecase }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -29,6 +29,8 @@ export * from './lib/IEnrollmentHistory';
 export * from './lib/ICourseOverviewInfo';
 export * from './lib/ICourseOverview';
 export * from './lib/ICoursePlayerConfig';
+export * from './lib/FilterMenuSection';
+
 export * from './testing/testData';
 export * from './testing/crashTestDummy';
 export * from './testing/testData853b';

@@ -3,9 +3,40 @@
   fxLayoutAlign="space-between start"
   fxLayoutGap="6px"
   fxFlex="grow"
+  class="container"
 >
+  <div class="filter-container" [formGroup]="filterForm">
+    <div fxLayout.gt-sm="row-reverse" fxLayoutGap.gt-sm="24px">
+      <div fxFlex="grow" class="search-input">
+        <input placeholder="Search Lessons" formControlName="filterText" />
+      </div>
+      <button class="filter-button" [matMenuTriggerFor]="menu">
+        Filter Lessons
+      </button>
+    </div>
+    <mat-menu #menu="matMenu">
+      <cirrus-filter
+        [checkboxArray]="checkboxArray"
+        [sections]="filterMenuSections"
+      ></cirrus-filter>
+    </mat-menu>
+
+    <div class="filter-message">
+      Showing {{ lessonsDisplayedCount }} / {{ lessonsOverallCount }} Lesson
+    </div>
+
+    <div class="tag-row" fxLayout="row wrap" fxLayoutGap="10px">
+      <div *ngFor="let tag of checkboxArray.controls" class="tag">
+        <div (click)="removeTag(tag.value)">
+          <img src="courses/images/svg/close.svg" />
+        </div>
+        <div>{{ tag.value }}</div>
+      </div>
+    </div>
+  </div>
+
   <div
-    *ngFor="let stage of stages"
+    *ngFor="let stage of filteredStages$ | async"
     class="stage"
     fxLayout="column"
     fxLayoutAlign="space-between start"
