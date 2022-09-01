@@ -41,6 +41,7 @@
           routerLink="my-students"
           class="image-container"
           routerLinkActive="active"
+          (click)="dismissHamburgerMenu()"
         >
           <img
             src="courses/images/svg/my-student.svg"
@@ -153,7 +154,11 @@
         type === 'hamburger' ? 'menu-items-expanded' : 'menu-items-collapsed'
       "
     >
-      <div fxLayout="row" fxLayoutGap="10px">
+      <div 
+        fxLayout="row" 
+        fxLayoutGap="10px"
+        (click)="dismissHamburgerMenu()"
+      >
         <span
           matBadge="{{ notificationCount > 0 ? notificationCount : '' }}"
           matBadgeColor="warn"
