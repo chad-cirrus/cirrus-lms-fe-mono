@@ -1,3 +1,49 @@
+@use '../styles/variables' as var;
+
 :host {
   display: block;
+}
+
+.container {
+  max-width: 630px;
+}
+
+.mat-icon {
+  width: 35px;
+  height: 30px;
+}
+
+.progress-card {
+  min-width: 210px;
+  margin-bottom: 36px;
+  padding-left: 18px;
+}
+
+.progress-card:not(:nth-child(3n + 1)) {
+  border-left: 1px solid white;
+}
+
+.progress-type {
+  font-family: var.$akzidenz-grotesk_bqLtEx400;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 0.9375rem;
+  line-height: 1;
+  letter-spacing: -0.045em;
+  color: #e5e5e5;
+  margin: 16px 0 14px;
+}
+
+.courses-completed {
+  font-family: var.$akzidenz-grotesk_bqLtEx400;
+  font-style: normal;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 2.5rem;
+  line-height: 100%;
+  /* or 37px */
+
+  letter-spacing: -0.045em;
+
+  color: #e5e5e5;
 }

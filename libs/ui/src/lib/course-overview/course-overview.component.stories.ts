@@ -1,7 +1,11 @@
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { ICourseOveview, PROGRESS_STATUS } from '@cirrus/models';
+import {
+  HoursAndLandingStatType,
+  ICourseOveview,
+  PROGRESS_STATUS,
+} from '@cirrus/models';
 import { Meta, moduleMetadata, Story } from '@storybook/angular';
 import { CourseContentProgressCircleComponent } from '../course-content-progress-circle/course-content-progress-circle.component';
 import { CourseOverviewLessonProgressBarComponent } from '../course-overview-lesson-progress-bar/course-overview-lesson-progress-bar.component';
@@ -9,6 +13,10 @@ import { CourseProgressComponent } from '../course-progress/course-progress.comp
 import { CourseSummaryCountsComponent } from '../course-summary-counts/course-summary-counts.component';
 import { MatIconRegistryModule } from '../mat-icon-registry.module';
 import { CourseOverviewComponent } from './course-overview.component';
+import { MatDividerModule } from '@angular/material/divider';
+import { HoursAndLandingsComponent } from '../hours-and-landings/hours-and-landings.component';
+import { HoursLandingTypeToIconPipe } from '../helpers/HoursLandingTypeToIcon.pipe';
+import { HoursLandingTypeToTextPipe } from '../helpers/HoursLandingTypeToText.pipe';
 
 export default {
   title: 'Course Component Overview Tab Content',
@@ -20,6 +28,7 @@ export default {
         MatIconModule,
         MatIconRegistryModule,
         MatProgressBarModule,
+        MatDividerModule,
       ],
       declarations: [
         CourseOverviewComponent,
@@ -27,6 +36,9 @@ export default {
         CourseProgressComponent,
         CourseOverviewLessonProgressBarComponent,
         CourseContentProgressCircleComponent,
+        HoursAndLandingsComponent,
+        HoursLandingTypeToIconPipe,
+        HoursLandingTypeToTextPipe,
       ],
     }),
   ],
@@ -44,9 +56,39 @@ const course: ICourseOveview = {
   title: 'SR20 Avidyne Entegra Advanced Transition ',
   subtitle: '',
   has_agreement: true,
+  hours_and_landings_stats: [
+    { type: HoursAndLandingStatType.completed_total_hours, completed: 1 },
+    {
+      type: HoursAndLandingStatType.completed_ground_instruction_hours,
+      completed: 1,
+    },
+    { type: HoursAndLandingStatType.completed_sim_hours, completed: 1 },
+    {
+      type: HoursAndLandingStatType.completed_cross_country_hours,
+      completed: 0,
+    },
+    { type: HoursAndLandingStatType.completed_total_landings, completed: 1 },
+  ],
   certificate: {
     expiration: 'There is no expiration date',
   },
+  course_content_stats: [
+    {
+      type: 'self_study',
+      completed: 13,
+      total: 73,
+    },
+    {
+      type: 'flight_assessment',
+      completed: 1,
+      total: 9,
+    },
+    {
+      type: 'ground_assessment',
+      completed: 1,
+      total: 1,
+    },
+  ],
   agreement_body:
     '\u003cp class="MsoNormal"\u003eThis training is limited to aircraft familiarization training and is not inclusive of all the knowledge and skill required for safe flight. I must comply with the regulations, exercise sound judgment, and maintain a high level of flying proficiency to minimize the risks associated with flight.\u0026nbsp;\u003c/p\u003e\u003cp class="MsoNormal"\u003e\u003cbr\u003e\u003c/p\u003e\u003cp class="MsoNormal"\u003eSafely flying under Instrument Flight Rules (IFR) requires peak levels of skill, sound decision making, and good risk management skills. Many IFR skills degrade over periods of inactivity and each pilot must assess risks for individual flights considering their proficiency levels required to handle forecasted weather, airspace, and other challenges that may arise. Pilots who desire to fly IFR are strongly encouraged to complete an Instrument Proficiency Check in 6-month intervals, regardless of IFR currency requirements.\u0026nbsp;\u0026nbsp;\u003c/p\u003e\u003cp class="MsoNormal"\u003e\u003cbr\u003e\u003c/p\u003e\u003cp class="MsoNormal"\u003eI acknowledge that for my continued proficiency and safety, Cirrus Aircraft strongly recommends that all pilots conduct recurrent training from an approved Cirrus Standardized Instructor Pilot (CSIP) or Cirrus Training Center (CTC).\u003c/p\u003e\u003cp class="MsoNormal"\u003e\u003cbr\u003e\u003c/p\u003e\u003cp class="MsoNormal"\u003eI acknowledge that my instructor will only observe my flight proficiency during this training for the task prescribed in this course. These tasks may not be inclusive of all the knowledge and skill required to safely fly under visual or instrument flight rules.\u003c/p\u003e',
   completion_time: '',
@@ -58,38 +100,6 @@ const course: ICourseOveview = {
     completed: 2,
     total: 15,
   },
-  progress_stats: [
-    {
-      type: 'self_study',
-      completed: 13,
-      total: 73,
-      status: 'in_progress',
-    },
-    {
-      type: 'ground',
-      completed: 1.0,
-      total: 0,
-      status: 'in_progress',
-    },
-    {
-      type: 'assessment',
-      completed: 25,
-      total: 179,
-      status: 'in_progress',
-    },
-    {
-      type: 'flight',
-      completed: 19.0,
-      total: 0,
-      status: 'in_progress',
-    },
-    {
-      type: 'landings',
-      completed: 0,
-      total: 0,
-      status: 'completed',
-    },
-  ],
   summary_counts: {
     lessons: 15,
     videos: 65,
@@ -424,7 +434,7 @@ const course: ICourseOveview = {
         id: 1775461,
         status: PROGRESS_STATUS.in_progress,
       },
-      user_certificate: null,
+      user_certificate: { id: 0, expires_on: '' },
     },
   ],
   next_lesson: {
@@ -445,4 +455,24 @@ const course: ICourseOveview = {
 export const Primary = Template.bind({});
 Primary.args = {
   courseOverview: course,
+};
+
+export const Primary2 = Template.bind({});
+Primary2.args = {
+  courseOverview: {
+    ...course,
+    hours_and_landings_stats: [
+      { type: HoursAndLandingStatType.completed_total_hours, completed: 10 },
+      {
+        type: HoursAndLandingStatType.completed_ground_instruction_hours,
+        completed: 10,
+      },
+      { type: HoursAndLandingStatType.completed_sim_hours, completed: 10 },
+      {
+        type: HoursAndLandingStatType.completed_cross_country_hours,
+        completed: 10,
+      },
+      { type: HoursAndLandingStatType.completed_total_landings, completed: 10 },
+    ],
+  },
 };

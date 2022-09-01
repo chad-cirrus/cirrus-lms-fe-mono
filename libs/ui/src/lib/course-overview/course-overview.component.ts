@@ -31,15 +31,9 @@ export class CourseOverviewComponent {
   @Input()
   set courseOverview(value: ICourseOveview) {
     this._courseOverview = value;
-    this._lessonProgress = value.progress_stats.reduce(
-      (prev, curr) => ({
-        total: prev.total + curr.total,
-        completed: prev.completed + curr.completed,
-      }),
-      { total: 0, completed: 0 }
-    );
+    this._lessonProgress = value.lessons_stats;
     this._progressStatsConfigs = produceProgressStatsConfig(
-      value.progress_stats
+      value.course_content_stats
     );
   }
 

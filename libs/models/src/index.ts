@@ -35,3 +35,4 @@ export * from './testing/testData';
 export * from './testing/crashTestDummy';
 export * from './testing/testData853b';
 export * from './testing/testData855b';
+export * from './lib/IHoursAndLandingsStats';

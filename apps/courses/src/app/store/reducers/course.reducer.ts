@@ -8,7 +8,7 @@ import {
 
 export interface CourseState {
   busy: boolean;
-  error: any;
+  error: unknown;
   courseOverview: ICourseOveview;
 }
 
@@ -23,8 +23,10 @@ export const initialCourseState: CourseState = {
     title: '',
     subtitle: '',
     has_agreement: false,
+    hours_and_landings_stats: [],
     agreement_body: '',
     completion_time: undefined,
+    course_content_stats: [],
     minimum_flight_hours: 0,
     certificate: { expiration: null },
     desktop_hero_image_url: '',
@@ -38,7 +40,6 @@ export const initialCourseState: CourseState = {
       id: 0,
       status: '',
     },
-    progress_stats: [],
     summary_counts: {},
     stages: [],
     enrollments: [],

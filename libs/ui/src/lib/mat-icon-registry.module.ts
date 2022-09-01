@@ -89,6 +89,36 @@ export class MatIconRegistryModule {
         this.domSanitizer.bypassSecurityTrustResourceUrl(
           'courses/images/svg/videos_icon_circle.svg'
         )
+      )
+      .addSvgIcon(
+        'cross_country_hrs',
+        this.domSanitizer.bypassSecurityTrustResourceUrl(
+          'courses/images/svg/cross-country-icon.svg'
+        )
+      )
+      .addSvgIcon(
+        'flight_hrs',
+        this.domSanitizer.bypassSecurityTrustResourceUrl(
+          'courses/images/svg/flight-hours-icon.svg'
+        )
+      )
+      .addSvgIcon(
+        'ground_hrs',
+        this.domSanitizer.bypassSecurityTrustResourceUrl(
+          'courses/images/svg/ground-hours-icon.svg'
+        )
+      )
+      .addSvgIcon(
+        'sim_hrs',
+        this.domSanitizer.bypassSecurityTrustResourceUrl(
+          'courses/images/svg/simulator_icon.svg'
+        )
+      )
+      .addSvgIcon(
+        'landings',
+        this.domSanitizer.bypassSecurityTrustResourceUrl(
+          'courses/images/svg/landing_hours_icon.svg'
+        )
       );
   }
 }

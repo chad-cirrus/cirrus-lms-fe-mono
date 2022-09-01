@@ -1,9 +1,10 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  OnInit,
+  Input,
   ViewEncapsulation,
 } from '@angular/core';
+import { IHoursAndLandingsStat } from '@cirrus/models';
 
 @Component({
   selector: 'cirrus-hours-and-landings',
@@ -12,8 +13,6 @@ import {
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HoursAndLandingsComponent implements OnInit {
-  constructor() {}
-
-  ngOnInit(): void {}
+export class HoursAndLandingsComponent {
+  @Input() stats!: IHoursAndLandingsStat[];
 }

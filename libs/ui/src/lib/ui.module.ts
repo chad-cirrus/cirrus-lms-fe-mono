@@ -75,6 +75,8 @@ import { LessonTypePipe } from './helpers/LessonTypePipe';
 import { FilterComponent } from './filter/filter.component';
 import { FormatFilterPipe } from './format-filter.pipe';
 
+import { HoursLandingTypeToTextPipe } from './helpers/HoursLandingTypeToText.pipe';
+import { HoursLandingTypeToIconPipe } from './helpers/HoursLandingTypeToIcon.pipe';
 
 @NgModule({
   imports: [
@@ -143,6 +145,8 @@ import { FormatFilterPipe } from './format-filter.pipe';
     GenericResponsiveMatTableComponent,
     TableFormatPipe,
     LessonTypePipe,
+    HoursLandingTypeToTextPipe,
+    HoursLandingTypeToIconPipe,
     FilterComponent,
     FormatFilterPipe,
   ],
@@ -194,6 +198,8 @@ import { FormatFilterPipe } from './format-filter.pipe';
     GenericResponsiveMatTableComponent,
     TableFormatPipe,
     LessonTypePipe,
+    HoursLandingTypeToTextPipe,
+    HoursLandingTypeToIconPipe,
     FilterComponent,
     FormatFilterPipe,
   ],

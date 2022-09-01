@@ -12,7 +12,6 @@
         ><p class="about--version">Version: {{ version }}</p></span
       >
     </div>
-
     <div
       class="right-side"
       fxFlex="2 0 0"
@@ -54,17 +53,23 @@
     <cirrus-course-overview-lesson-progress-bar
       [lessonProgress]="lessonProgress"
     ></cirrus-course-overview-lesson-progress-bar>
-    <div class="progress-circles">
-      <div class="stats">
+    <div class="stats" fxLayout="column" fxLayout.gt-sm="row">
+      <div class="progress-circles">
         <p>Course Content</p>
         <cirrus-course-content-progress-circle
           *ngFor="let config of progressStatsConfig"
           [progress]="config"
         ></cirrus-course-content-progress-circle>
       </div>
+      <mat-divider [vertical]="true"></mat-divider>
+      <div class="hours-and-landings">
+        <p>Logged Hours & Landings</p>
+        <cirrus-hours-and-landings
+          [stats]="courseOverview.hours_and_landings_stats"
+        ></cirrus-hours-and-landings>
+      </div>
     </div>
   </div>
-
   <div class="row-terms-conditions" *ngIf="courseOverview.agreement_body">
     <h2>Terms & Conditions</h2>
     <div

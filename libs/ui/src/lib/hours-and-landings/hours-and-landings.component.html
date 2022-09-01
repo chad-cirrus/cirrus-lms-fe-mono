@@ -1,1 +1,19 @@
-<p>hours-and-landings works!</p>
+<div class="container" fxLayout="row wrap">
+  <div
+    class="progress-card"
+    fxLayout="column"
+    fxLayoutAlign="start start"
+    fxFlex="33"
+    *ngFor="let stat of stats"
+  >
+    <mat-icon [svgIcon]="stat.type | hoursLandingTypeToIcon"></mat-icon>
+    <div class="progress-type">
+      {{ stat.type | hoursLandingTypeToText }}
+    </div>
+    <div>
+      <span class="courses-completed">{{
+        stat.completed | number: '1.0-1'
+      }}</span>
+    </div>
+  </div>
+</div>
