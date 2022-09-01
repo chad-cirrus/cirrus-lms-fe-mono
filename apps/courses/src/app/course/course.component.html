@@ -3,7 +3,11 @@
     [course]="(courseOverview$ | async)!"
   ></cirrus-course-landing-page>
   <div *ngIf="courseOverview$ | async as overview">
-    <mat-tab-group>
+    <mat-tab-group
+      [selectedIndex]="
+        (courseOverview$ | async)?.progress?.status !== 'not_started' ? 1 : 0
+      "
+    >
       <mat-tab>
         <ng-template mat-tab-label>
           <mat-icon svgIcon="eye"></mat-icon>

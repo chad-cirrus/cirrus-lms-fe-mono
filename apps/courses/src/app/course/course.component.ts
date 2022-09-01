@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 import { fetchCourseOverview } from '../store/actions/course.actions';
 import { CourseState } from '../store/reducers/course.reducer';
 import { selectCourseOverview } from '../store/selectors/course.selector';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'cirrus-course',
@@ -11,7 +12,13 @@ import { selectCourseOverview } from '../store/selectors/course.selector';
   styleUrls: ['./course.component.scss'],
 })
 export class CourseComponent implements OnInit {
-  courseOverview$ = this.store.select(selectCourseOverview);
+  courseOverview$ = this.store.select(selectCourseOverview).pipe(
+    tap(course => {
+      if (course && course.progress.id > 0) {
+        console.log(course.progress.status);
+      }
+    })
+  );
 
   constructor(
     private route: ActivatedRoute,
