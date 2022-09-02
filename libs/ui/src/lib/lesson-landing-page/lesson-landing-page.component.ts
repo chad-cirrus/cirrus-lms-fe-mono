@@ -10,7 +10,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { IContent, ICourseOveview, ILesson } from '@cirrus/models';
 import { StagesOverlayComponent } from '../stages-overlay/stages-overlay.component';
 import { DomSanitizer } from '@angular/platform-browser';
-import { selectNextLessonPath } from '../../../../../apps/courses/src/app/store/selectors/course.selector';
+import { Router } from '@angular/router';
+
+
 
 enum LessonStatus {
   NOT_STARTED = 'not_started',
@@ -88,7 +90,11 @@ export class LessonLandingPageComponent {
   @Output() displayOverviewOutput = new EventEmitter<string>();
   @Output() playNextLessonContent = new EventEmitter();
 
-  constructor(private dialog: MatDialog, private sanitizer: DomSanitizer) {}
+  constructor(
+    private dialog: MatDialog,
+    private sanitizer: DomSanitizer,
+    private router: Router
+  ) {}
 
   get lessonImageFxLayoutAlign() {
     return this.sideNavOpen ? 'center center' : 'center start';
@@ -146,6 +152,10 @@ export class LessonLandingPageComponent {
   navigate(payload: any) {
     this.drawer.close();
     this.navigateToLesson.emit(payload);
+  }
+
+  navigateToCourse() {
+    this.router.navigate([`/courses/${this.courseOverview.id}}`]);
   }
 
   openModal() {

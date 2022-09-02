@@ -1,4 +1,17 @@
 <div
+  fxLayout="row"
+  class="breadcrumb-container"
+  (click)="navigateToCourses()"
+  fxLayoutGap="15px"
+  fxLayoutAlign="none center"
+>
+  <span fxLayout="row" fxLayoutGap="15px" class="chev-left">
+    <img src="courses/images/svg/chevron-left-white.svg" />
+  </span>
+  <div class="bullet">&#8226;</div>
+  <div class="title">My Courses</div>
+</div>
+<div
   class="lesson-image"
   [ngStyle]="background"
   fxLayout="column"

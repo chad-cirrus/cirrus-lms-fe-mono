@@ -2,23 +2,38 @@
   *ngIf="lesson"
   [ngStyle]="{ 'overflow-anchor': sideNavOpen ? 'none' : 'inherit' }"
 >
+  <div
+    fxLayout="row"
+    class="breadcrumb-container"
+    (click)="navigateToCourse()"
+    fxLayoutGap="15px"
+    fxLayoutAlign="none center"
+  >
+    <span fxLayout="row" fxLayoutGap="15px" class="chev-left">
+      <img src="courses/images/svg/chevron-left-white.svg" />
+    </span>
+    <div class="bullet">&#8226;</div>
+    <div class="title">{{ courseOverview.title }}</div>
+  </div>
 
-  <div class="lesson-image"
-  fxLayout="column" fxLayoutAlign="center start"
-  [ngStyle]="
-  {
-    'background': 'linear-gradient(90deg, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0.33) 44.11%, rgba(0, 0, 0, 0) 61.94%),
+  <div
+    class="lesson-image"
+    fxLayout="column"
+    fxLayoutAlign="center start"
+    [ngStyle]="{
+      background:
+        'linear-gradient(90deg, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0.33) 44.11%, rgba(0, 0, 0, 0) 61.94%),
     linear-gradient(360deg,#000000 1.79%,rgba(0,0,0,.24) 19.37%,rgba(0,0,0,0) 25%),
 
-    url('+ (bgImage | encodeUri) +') no-repeat center',
-    'background-size': 'cover',
-   '-webkit-background-size': 'cover',
-   '-moz-background-size': 'cover',
-   '-o-background-size': 'cover'
-
-  }
-  "
-    >
+    url(' +
+        (bgImage | encodeUri) +
+        ') no-repeat center',
+      'background-size': 'cover',
+      '-webkit-background-size': 'cover',
+      '-moz-background-size': 'cover',
+      '-o-background-size': 'cover'
+    }"
+  >
     <div class="btn-container">
       <div class="example-sidenav-content">
         <button
@@ -27,10 +42,7 @@
           [ngClass]="isScreenSmall ? 'snav-mobile' : 'snav-desktop'"
           (click)="emitOpenSideNav()"
         >
-          <div
-            fxLayout="row"
-            fxLayoutAlign="center center"
-          >
+          <div fxLayout="row" fxLayoutAlign="center center">
             <img src="courses/images/svg/menu_lessons.svg" />
           </div>
         </button>
@@ -39,9 +51,12 @@
     <div class="content">
       <h1>{{ lesson.title }}</h1>
       <mat-divider></mat-divider>
-      <p class="large">{{lesson.subtitle}}</p>
-      <cirrus-lesson-progress [lesson]="lesson" [checkoutOffsRequired]="checkoutOffsRequired"></cirrus-lesson-progress>
-      <cirrus-cta-button 
+      <p class="large">{{ lesson.subtitle }}</p>
+      <cirrus-lesson-progress
+        [lesson]="lesson"
+        [checkoutOffsRequired]="checkoutOffsRequired"
+      ></cirrus-lesson-progress>
+      <cirrus-cta-button
         class="start-lesson"
         [text]="buttonText"
         (btnClick)="startLesson()"
@@ -70,32 +85,33 @@
       "
     >
       <h4 class="intro-video-title">Intro Video</h4>
-      <div
-        class="intro-video-play"
-        (click)="playIntroVideo()"
-      >
-        <div
-          fxLayout="row"
-          fxLayoutGap="18px"
-        >
-        <mat-icon svgIcon="play"></mat-icon>
-          <div *ngIf="!lesson.student_intro_video.title; else customIntroText" class="intro-video-subtitle">Lesson Introduction Video</div>
-          <ng-template #customIntroText><div class="intro-video-subtitle">{{lesson.student_intro_video.title}}</div></ng-template>
+      <div class="intro-video-play" (click)="playIntroVideo()">
+        <div fxLayout="row" fxLayoutGap="18px">
+          <mat-icon svgIcon="play"></mat-icon>
+          <div
+            *ngIf="!lesson.student_intro_video.title; else customIntroText"
+            class="intro-video-subtitle"
+          >
+            Lesson Introduction Video
+          </div>
+          <ng-template #customIntroText
+            ><div class="intro-video-subtitle">
+              {{ lesson.student_intro_video.title }}
+            </div></ng-template
+          >
         </div>
       </div>
     </div>
     <br *ngIf="instructorView" />
 
-    <div #contentList >
+    <div #contentList>
       <cirrus-lesson-contents
-      id="cirrus-lesson-contents"
-      [instructorView]="instructorView"
-      [lesson]="lesson"
-      (fetchMedia)="fetchMedia($event)"
-
-    >
-    </cirrus-lesson-contents>
+        id="cirrus-lesson-contents"
+        [instructorView]="instructorView"
+        [lesson]="lesson"
+        (fetchMedia)="fetchMedia($event)"
+      >
+      </cirrus-lesson-contents>
     </div>
-
   </div>
 </div>

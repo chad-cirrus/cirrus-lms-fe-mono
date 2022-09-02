@@ -47,9 +47,9 @@ mat-drawer {
 }
 
 .lesson-image {
-  -webkit-background-size: cover !important;;
-  -moz-background-size: cover !important;;
-  -o-background-size: cover !important;;
+  -webkit-background-size: cover !important;
+  -moz-background-size: cover !important;
+  -o-background-size: cover !important;
   background-size: cover !important;
   .content {
     width: 100%;
@@ -94,7 +94,7 @@ mat-drawer {
         line-height: 24px;
         /* identical to box height, or 171% */
 
-        color: #FFFF00;
+        color: #ffff00;
       }
     }
   }
@@ -140,7 +140,7 @@ mat-drawer {
   overflow-x: scroll;
   width: 100vw;
   scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none;  /* IE 10+ */
+  -ms-overflow-style: none; /* IE 10+ */
 
   &::-webkit-scrollbar {
     background: transparent; /* Chrome/Safari/Webkit */
@@ -148,7 +148,7 @@ mat-drawer {
   }
   @media (max-width: 960px) {
     &:before {
-      content: " ";
+      content: ' ';
       display: block;
       position: absolute;
       top: 12px;
@@ -159,7 +159,7 @@ mat-drawer {
       pointer-events: none;
     }
     &:after {
-      content: " ";
+      content: ' ';
       display: block;
       position: absolute;
       top: 12px;
@@ -170,7 +170,6 @@ mat-drawer {
       pointer-events: none;
     }
   }
-
 }
 
 cirrus-progress-card {
@@ -263,7 +262,7 @@ cirrus-progress-card:last-child {
           line-height: 24px;
           /* identical to box height, or 171% */
 
-          color: #FFFF00;
+          color: #ffff00;
         }
       }
     }
@@ -278,7 +277,7 @@ cirrus-progress-card:last-child {
       margin: -45px auto 20px;
       overflow-x: hidden;
       scrollbar-width: hidden; /* Firefox */
-      -ms-overflow-style: hidden;  /* IE 10+ */
+      -ms-overflow-style: hidden; /* IE 10+ */
 
       &::-webkit-scrollbar {
         background: hidden; /* Chrome/Safari/Webkit */

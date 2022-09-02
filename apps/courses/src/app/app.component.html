@@ -19,26 +19,17 @@
         [notificationCount]="notificationCount$ | async"
       ></cirrus-side-nav>
     </div>
-    <div
-      class="content-container"
-      [fxFlex]="100"
-    >
-    <div fxLayout="row" class="breadcrumb-container" (click)="navigateToCourse()" fxLayoutGap="15px" fxLayoutAlign="none center">
-      <span fxLayout="row" fxLayoutGap="15px"  class="chev-left">
-        <img src="courses/images/svg/chevron-left-white.svg"/>
-        <div class="course-name">Course name</div>
-      </span>
-      <div class="bullet">&#8226;</div>
-      <div class="lesson-title">{{(lesson$ | async)?.title}}</div>
-    </div>
-    <div 
-      class="outlet-container"
-      [ngClass]="{ 'stop-scrolling': sideNavOpen$ | async }"
-      #outletContainer
-    >
-      <div *ngIf="loadingIndicator$ | async" class="spinner-container"><mat-spinner color="accent"></mat-spinner></div>
-      <router-outlet></router-outlet>
-    </div>
+    <div class="content-container" [fxFlex]="100">
+      <div
+        class="outlet-container"
+        [ngClass]="{ 'stop-scrolling': sideNavOpen$ | async }"
+        #outletContainer
+      >
+        <div *ngIf="loadingIndicator$ | async" class="spinner-container">
+          <mat-spinner color="accent"></mat-spinner>
+        </div>
+        <router-outlet></router-outlet>
+      </div>
     </div>
   </main>
 </div>

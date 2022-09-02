@@ -15,7 +15,7 @@ import {
   selectLessonStateBusy,
 } from './store/selectors/lessons.selector';
 import { setCirrusUser } from './store/actions';
-import { ICirrusUser, ILesson } from '@cirrus/models';
+import { ICirrusUser, ICourseOveview, ILesson } from '@cirrus/models';
 import {
   selectCirrusUser,
   selectRole,
@@ -30,8 +30,7 @@ import {
 import { MatSidenav } from '@angular/material/sidenav';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { CoursesService } from './course/course.service';
-import { ActivatedRoute } from '@angular/router';
-import { Router } from '@angular/router';
+import { selectCourseOverview } from './store/selectors/course.selector';
 
 @Component({
   selector: 'cirrus-root',
@@ -46,6 +45,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   role$ = this.store.select(selectRole);
   lesson$: Observable<ILesson> = this.store.select(selectLesson);
+  course$: Observable<ICourseOveview> = this.store.select(selectCourseOverview);
   cirrusUser$ = this.store.select(selectCirrusUser);
   cirrusImpersonateReturnUser$!: Observable<ICirrusUser>;
   courseId$ = this.appService.courseId$.pipe(distinctUntilChanged(), share());
@@ -71,9 +71,7 @@ export class AppComponent implements OnInit, OnDestroy {
     private store: Store<AppState>,
     private appService: AppService,
     private breakpointObserver: BreakpointObserver,
-    private courseService: CoursesService,
-    private router: Router,
-    private route: ActivatedRoute
+    private courseService: CoursesService
   ) {}
 
   ngOnInit() {
@@ -133,9 +131,5 @@ export class AppComponent implements OnInit, OnDestroy {
 
   handleOpenChanged(sideNavOpen: boolean) {
     this.store.dispatch(appActions.setSideNavOpen({ sideNavOpen }));
-  }
-
-  navigateToCourse() {
-    this.router.navigate([`/courses}`]);
   }
 }

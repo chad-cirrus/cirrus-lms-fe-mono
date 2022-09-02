@@ -1,6 +1,5 @@
 @use '../styles/variables' as *;
 
-
 .content-container {
   height: 100%;
   width: 320px;
@@ -10,37 +9,8 @@
   border-bottom: 1px solid black;
 }
 
-
 .bullet {
   color: $secondary-font-color-grey;
-}
-
-.chev-left:hover {
-  .course-name {
-    border-bottom: 1px solid white;
-  }
-  cursor: pointer;
-}
-
-.lesson-title {
-  color: $secondary-font-color-grey;
-}
-
-.breadcrumb-container {
-  padding: 10px 16px;
-  font-size: 0.75rem;
-  @media (min-width: 600px) {
-    padding: 15px 24px;
-    .course-name {
-      font-size: 1rem;
-    }
-    .lesson-title {
-      font-size: 0.875rem;
-    }
-  }
-  @media (min-width: 960px) {
-    padding-left: 65px;
-  }
 }
 
 .sidenav-menu {
@@ -97,8 +67,6 @@ ul.student-name {
   z-index: 0;
 }
 
-
-
 .outlet-container {
   position: relative;
   overflow-y: scroll;
@@ -116,15 +84,10 @@ ul.student-name {
     font-size: 17px;
     color: $secondary-font-color-grey;
   }
-
 }
 .sidenav {
   border-right: 1px solid $border-grey;
 }
-
-
-
-
 
 .spinner-container {
   z-index: 9999;
@@ -137,7 +100,3 @@ ul.student-name {
     stroke: $cirrus-blue !important;
   }
 }
-
-
-
-

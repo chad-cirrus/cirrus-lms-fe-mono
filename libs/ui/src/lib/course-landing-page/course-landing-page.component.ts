@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
 import { ICourseOveview, ICoursePlayerConfig } from '@cirrus/models';
 import { produceConfig } from './produce-config';
 
@@ -43,4 +44,10 @@ export class CourseLandingPageComponent {
     ['-moz-background-size']: 'cover',
     ['-o-background-size']: 'cover',
   };
+
+  constructor(private router: Router) {}
+
+  navigateToCourses() {
+    this.router.navigate([`/my-courses`]);
+  }
 }
