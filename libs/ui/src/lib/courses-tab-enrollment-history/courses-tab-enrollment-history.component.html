@@ -1,4 +1,4 @@
-<p class="enrollment-history-container">
+<p class="enrollment-history-container" *ngIf="certificate?.expiration">
   {{ certificate?.expiration }}
 </p>
 
