@@ -17,7 +17,6 @@
           <div
             *ngFor="let lesson of filteredLessons$ | async"
             class="text-filter-section"
-            (click)="emitNavigation(lesson.id)"
           >
             <div class="title">
               {{ lesson.title }}
@@ -49,7 +48,7 @@
         <div (click)="removeTag(tag.value)">
           <img src="courses/images/svg/close.svg" />
         </div>
-        
+
         <div>{{ tag.value | formatFilter | titlecase }}</div>
 
       </div>
@@ -75,6 +74,7 @@
     >
       <cirrus-course-lesson-item
         [courseLesson]="courseLesson"
+        [stage]='stage'
         (navigate)="emitNavigation($event)"
       ></cirrus-course-lesson-item>
       <mat-divider></mat-divider>

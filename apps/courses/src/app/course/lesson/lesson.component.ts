@@ -81,7 +81,7 @@ export class LessonComponent implements OnInit, OnDestroy {
     });
 
     this.lessonSubscription.add(
-      this.route.params.subscribe(({ courseId, lessonId, stageId }) => {
+      this.route.params.subscribe(({ courseId, stageId, lessonId }) => {
         this.coursId = parseInt(courseId);
         this.lessonId = parseInt(lessonId);
         this.store.dispatch(fetchLessons({ courseId, stageId, lessonId }));

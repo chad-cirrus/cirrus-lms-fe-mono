@@ -19,7 +19,7 @@ export const startProgressFailure = createAction(
 
 export const completeProgress = createAction(
   '[lesson component] complete progress',
-  props<{ id: number; courseId: number; stageId: number; lessonId: number }>()
+  props<{ id: number; courseId: number; stageId: number, lessonId: number }>()
 );
 
 export const completeProgressSuccess = createAction(

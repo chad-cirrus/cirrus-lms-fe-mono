@@ -38,6 +38,7 @@ import { HamburgerMenuComponent } from './course/header/hamburger-menu/hamburger
 import { ContentPlayerModule } from './content-player/content-player.module';
 import { ProgressEffects } from './store/effects/progress.effects';
 import { environment } from '../environments/environment';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [

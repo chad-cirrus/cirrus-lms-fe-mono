@@ -20,7 +20,7 @@ export class LessonsEffects {
   fetchLessons$ = createEffect(() =>
     this.actions$.pipe(
       ofType(fetchLessons),
-      mergeMap(({ courseId, lessonId, stageId }) =>
+      mergeMap(({ courseId, stageId, lessonId }) =>
         this.coursesService.getLessons(courseId, stageId, lessonId).pipe(
           map((lesson: ILesson) => fetchLessonsSuccess({ lesson })),
           catchError(error => of(fetchLessonsFailure({ error })))

@@ -7,6 +7,7 @@ import {
 } from '@cirrus/models';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { filter, map, startWith, tap } from 'rxjs/operators';
+import { StageLessonNavigationEvent } from '../StageLessonNavigationEvent';
 
 @Component({
   selector: 'cirrus-course-lessons',
@@ -37,7 +38,7 @@ export class CourseLessonsComponent implements OnInit {
   lessonsDisplayedCount!: number;
   lessonsOverallCount!: number;
 
-  @Output() navigate = new EventEmitter<number>();
+  @Output() navigate = new EventEmitter<StageLessonNavigationEvent>();
 
   filterForm = new FormGroup({
     filterText: new FormControl(null),
@@ -145,7 +146,7 @@ export class CourseLessonsComponent implements OnInit {
     this.checkboxArray.removeAt(index);
   }
 
-  emitNavigation(lessonId: number) {
-    this.navigate.next(lessonId);
+  emitNavigation({ stageId, lessonId }: StageLessonNavigationEvent) {
+    this.navigate.next({ stageId, lessonId });
   }
 }
