@@ -3,7 +3,13 @@ import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSidenav } from '@angular/material/sidenav';
 import { ActivatedRoute, Router } from '@angular/router';
-import { IContent, ILesson, PROGRESS_STATUS } from '@cirrus/models';
+import {
+  IContent,
+  ICourseOverviewLesson,
+  ICourseOveview,
+  ILesson,
+  PROGRESS_STATUS,
+} from '@cirrus/models';
 import {
   CompletionDialogComponent,
   CourseCompletionComponent,
@@ -31,7 +37,10 @@ import {
 import { CoursesService } from '../course.service';
 import { environment } from '../../../environments/environment';
 import { fetchCourseOverview } from '../../store/actions/course.actions';
-import { selectCourseOverview, selectNextLessonPath } from '../../store/selectors/course.selector';
+import {
+  selectCourseOverview,
+  selectNextLessonPath,
+} from '../../store/selectors/course.selector';
 
 @Component({
   selector: 'cirrus-lesson',
@@ -76,7 +85,7 @@ export class LessonComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.nextLesson$.subscribe((path) => {
+    this.nextLesson$.subscribe(path => {
       console.log('Next lesson path', path);
     });
 
@@ -180,7 +189,9 @@ export class LessonComponent implements OnInit, OnDestroy {
   }
 
   playNextLessonContent() {
-    this.nextLesson$.subscribe(nextLesson => this.router.navigate([nextLesson]));
+    this.nextLesson$.subscribe(nextLesson =>
+      this.router.navigate([nextLesson])
+    );
   }
 
   openSideNav() {
@@ -194,11 +205,13 @@ export class LessonComponent implements OnInit, OnDestroy {
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  navigate(payload: any) {
+  navigate(payload: { lesson: ICourseOverviewLesson; course: ICourseOveview }) {
     this.sidenav.close();
     this.store.dispatch(setSideNavOpen({ sideNavOpen: false }));
     const { course, lesson } = payload;
-    this.router.navigate([`/courses/${course.id}/lessons/${lesson.id}`]);
+    this.router.navigate([
+      `/courses/${course.id}/stages/${lesson.stage_id}/lessons/${lesson.id}`,
+    ]);
   }
   scrollToTop() {
     this.appService.scrollTrigger$.next(true);

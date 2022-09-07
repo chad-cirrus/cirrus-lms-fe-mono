@@ -54,6 +54,7 @@ export interface ICourseOverviewLesson {
   completion_time?: string;
   content_counts: ContentCounts;
   progress: IProgress;
+  stage_id: number;
 }
 
 export interface ContentCounts {
