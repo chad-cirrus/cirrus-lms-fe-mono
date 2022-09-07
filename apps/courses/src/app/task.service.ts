@@ -38,8 +38,10 @@ export class TaskService {
   }
 
   getTasksAndLogbook(payload: ITasksRequest): void {
-    forkJoin([this.getTasks(payload), this.getLogbook(payload)]).subscribe(
-      response => this._tasksAndLogBooks.next(response)
-    );
+    if (this._tasksAndLogBooks.value[0].length === 0) {
+      forkJoin([this.getTasks(payload), this.getLogbook(payload)]).subscribe(
+        response => this._tasksAndLogBooks.next(response)
+      );
+    }
   }
 }
