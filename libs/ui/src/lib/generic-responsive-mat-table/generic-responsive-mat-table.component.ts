@@ -9,6 +9,8 @@ import {
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+import { Observable } from 'rxjs';
+import { UiDownloadService } from '../course-completion/ui-download.service';
 
 @Component({
   selector: 'cirrus-generic-responsive-mat-table',
@@ -22,9 +24,9 @@ export class GenericResponsiveMatTableComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @Input() displayedColumns!: string[];
   @Input() columns!: Column[];
-
   @Output() emitValue = new EventEmitter();
   @Output() emitRow = new EventEmitter();
+  loading$ = this.uiDownloadService.loading$;
 
   @Input()
   set data(value: any) {
@@ -34,6 +36,10 @@ export class GenericResponsiveMatTableComponent implements AfterViewInit {
   get data() {
     return this._data;
   }
+
+  selectedId!: number;
+
+  constructor(private uiDownloadService: UiDownloadService) {}
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
@@ -45,6 +51,9 @@ export class GenericResponsiveMatTableComponent implements AfterViewInit {
   }
 
   valueSelect($event: MouseEvent, value: any, type: Column) {
+    if (value.id) {
+      this.selectedId = value.id;
+    }
     const obj = { value, type };
     $event.stopPropagation();
     this.emitValue.emit(obj);
@@ -57,6 +66,7 @@ export interface Column {
   alias?: string;
   icon?: string;
   method?: formatFn;
+  isLoading?: boolean;
 }
 
 interface formatFn {

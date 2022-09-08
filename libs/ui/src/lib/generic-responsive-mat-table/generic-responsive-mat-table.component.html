@@ -14,15 +14,28 @@
             class="value"
             (click)="valueSelect($event, row[column.mat_col_name], column)"
           >
-            <img
+            <div
               *ngIf="
-                (row[column.mat_col_name] | tableFormat: column:row) ===
-                'Download'
+                (loading$ | async) &&
+                  row[column.mat_col_name]?.id === selectedId;
+                else value
               "
-              [src]="column.icon"
-              class="icon-container"
-            />
-            {{ row[column.mat_col_name] | tableFormat: column:row }}
+            >
+              <mat-spinner color="accent" [diameter]="35"></mat-spinner>
+            </div>
+            <ng-template #value>
+              <img
+                *ngIf="
+                  (row[column.mat_col_name] | tableFormat: column:row) ===
+                  'Download'
+                "
+                [src]="column.icon"
+                class="icon-container"
+              />
+              <div>
+                {{ row[column.mat_col_name] | tableFormat: column:row }}
+              </div>
+            </ng-template>
           </div>
         </mat-cell>
       </ng-container>
