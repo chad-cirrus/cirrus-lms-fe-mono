@@ -13,20 +13,25 @@
           placeholder="Search Lessons"
           formControlName="filterText"
         />
-        <div class="text-filter-container">
+        <div
+          [ngClass]="showDropdown ? 'text-filter-container' : ''"
+          cirrusClickOutside
+          (clickOutside)="clickOutside()"
+        >
           <div
             *ngFor="let lesson of filteredLessons$ | async"
             class="text-filter-section"
           >
-            <div class="title">
-              {{ lesson.title }}
-            </div>
-            <div class="status">
-              {{ lesson.progress.status | formatFilter | titlecase }}
+            <div *ngIf="filterText?.value && showDropdown">
+              <div class="title">
+                {{ lesson.title }}
+              </div>
+              <div class="status">
+                {{ lesson.progress.status | formatFilter | titlecase }}
+              </div>
             </div>
           </div>
         </div>
-
       </div>
       <button class="filter-button" [matMenuTriggerFor]="menu">
         Filter Lessons
@@ -50,7 +55,6 @@
         </div>
 
         <div>{{ tag.value | formatFilter | titlecase }}</div>
-
       </div>
     </div>
   </div>
@@ -64,7 +68,7 @@
     fxFlex="grow"
   >
     <h2 class="stage-header">{{ stage.title }}</h2>
-    <p class="stage-overview" *ngIf='stage.desc'>{{ stage.desc }}</p>
+    <p class="stage-overview" *ngIf="stage.desc">{{ stage.desc }}</p>
     <div
       class="item-container"
       *ngFor="let courseLesson of stage.lessons"

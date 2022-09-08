@@ -6,8 +6,10 @@ import {
   ICourseOverviewStage,
 } from '@cirrus/models';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
-import { filter, map, startWith, tap } from 'rxjs/operators';
+
+import { debounceTime, map, startWith, tap } from 'rxjs/operators';
 import { StageLessonNavigationEvent } from '../StageLessonNavigationEvent';
+
 
 @Component({
   selector: 'cirrus-course-lessons',
@@ -37,6 +39,7 @@ export class CourseLessonsComponent implements OnInit {
 
   lessonsDisplayedCount!: number;
   lessonsOverallCount!: number;
+  showDropdown = true;
 
   @Output() navigate = new EventEmitter<StageLessonNavigationEvent>();
 
@@ -85,10 +88,17 @@ export class CourseLessonsComponent implements OnInit {
     );
 
     this.filteredLessons$ = combineLatest([
-      this.filterForm.valueChanges.pipe(startWith({ filterText: null })),
+      this.filterForm.valueChanges.pipe(
+        startWith({ filterText: this.filterText?.value })
+      ),
       this.lessonsSubject,
     ]).pipe(
+      debounceTime(200),
       map(([changes, lessons]) => {
+        this.showDropdown = true;
+        if (this.filterText?.value) {
+          this.showDropdown = true;
+        }
         return !changes.filterText
           ? []
           : lessons.filter(l => {
@@ -146,7 +156,12 @@ export class CourseLessonsComponent implements OnInit {
     this.checkboxArray.removeAt(index);
   }
 
+  clickOutside() {
+    this.showDropdown = false;
+  }
+
   emitNavigation({ stageId, lessonId }: StageLessonNavigationEvent) {
     this.navigate.next({ stageId, lessonId });
+
   }
 }
