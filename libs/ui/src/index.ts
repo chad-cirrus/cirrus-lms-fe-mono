@@ -32,6 +32,8 @@ export * from './lib/course-completion/ui-download.service';
 export * from './lib/generic-responsive-mat-table/generic-responsive-mat-table.component';
 export * from './lib/table-format.pipe';
 
+export * from './lib/StageLessonNavigationEvent';
+
 // export * from '../../models/src/testing/testData';
 export * from '../../models/src/testing/testDataIcingLesson';
 export * from '../../models/src/testing/testData853';

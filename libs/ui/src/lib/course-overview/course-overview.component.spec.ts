@@ -1,10 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ICourseOveview, ProgressType } from '@cirrus/models';
+import { ICourseOverview, ProgressType } from '@cirrus/models';
 import { CourseSummaryCountsComponent } from '../course-summary-counts/course-summary-counts.component';
 
 import { CourseOverviewComponent } from './course-overview.component';
 
-const course: ICourseOveview = {
+const course: ICourseOverview = {
   id: 351,
   name: 'Private Pilot License Course ',
   major_version: 4,

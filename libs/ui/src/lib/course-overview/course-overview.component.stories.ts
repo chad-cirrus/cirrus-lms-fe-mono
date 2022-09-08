@@ -3,7 +3,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import {
   HoursAndLandingStatType,
-  ICourseOveview,
+  ICourseOverview,
   PROGRESS_STATUS,
 } from '@cirrus/models';
 import { Meta, moduleMetadata, Story } from '@storybook/angular';
@@ -48,7 +48,7 @@ const Template: Story<CourseOverviewComponent> = (
   args: CourseOverviewComponent
 ) => ({ props: args });
 
-const course: ICourseOveview = {
+const course: ICourseOverview = {
   id: 351,
   name: 'SR20 Avidyne Entegra Advanced Transition ',
   major_version: 4,
@@ -131,6 +131,7 @@ const course: ICourseOveview = {
             id: 1775463,
             status: 'completed',
           },
+          stage_id: 243,
         },
       ],
       progress: {
@@ -162,6 +163,7 @@ const course: ICourseOveview = {
             id: 1775468,
             status: 'completed',
           },
+          stage_id: 244,
         },
         {
           id: 318,
@@ -179,6 +181,7 @@ const course: ICourseOveview = {
             id: 1775479,
             status: 'not_started',
           },
+          stage_id: 244,
         },
         {
           id: 317,
@@ -196,6 +199,7 @@ const course: ICourseOveview = {
             id: 1775529,
             status: 'not_started',
           },
+          stage_id: 244,
         },
         {
           id: 595,
@@ -213,6 +217,7 @@ const course: ICourseOveview = {
             id: 1775536,
             status: 'not_started',
           },
+          stage_id: 244,
         },
       ],
       progress: {
@@ -245,6 +250,7 @@ const course: ICourseOveview = {
             id: 1775541,
             status: 'not_started',
           },
+          stage_id: 245,
         },
         {
           id: 835,
@@ -262,6 +268,7 @@ const course: ICourseOveview = {
             id: 1775545,
             status: 'not_started',
           },
+          stage_id: 245,
         },
         {
           id: 836,
@@ -279,6 +286,7 @@ const course: ICourseOveview = {
             id: 1775547,
             status: 'not_started',
           },
+          stage_id: 245,
         },
         {
           id: 837,
@@ -296,6 +304,7 @@ const course: ICourseOveview = {
             id: 1775549,
             status: 'not_started',
           },
+          stage_id: 245,
         },
         {
           id: 838,
@@ -313,6 +322,7 @@ const course: ICourseOveview = {
             id: 1775551,
             status: 'not_started',
           },
+          stage_id: 245,
         },
         {
           id: 839,
@@ -330,6 +340,7 @@ const course: ICourseOveview = {
             id: 1775553,
             status: 'not_started',
           },
+          stage_id: 245,
         },
       ],
       progress: {
@@ -361,6 +372,7 @@ const course: ICourseOveview = {
             id: 1775556,
             status: 'not_started',
           },
+          stage_id: 246,
         },
         {
           id: 841,
@@ -378,6 +390,7 @@ const course: ICourseOveview = {
             id: 1775558,
             status: 'not_started',
           },
+          stage_id: 246,
         },
         {
           id: 842,
@@ -395,6 +408,7 @@ const course: ICourseOveview = {
             id: 1775560,
             status: 'not_started',
           },
+          stage_id: 246,
         },
         {
           id: 843,
@@ -412,6 +426,7 @@ const course: ICourseOveview = {
             id: 1775562,
             status: 'not_started',
           },
+          stage_id: 246,
         },
       ],
       progress: {

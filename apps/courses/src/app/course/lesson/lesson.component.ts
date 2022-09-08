@@ -5,8 +5,8 @@ import { MatSidenav } from '@angular/material/sidenav';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
   IContent,
+  ICourseOverview,
   ICourseOverviewLesson,
-  ICourseOveview,
   ILesson,
   PROGRESS_STATUS,
 } from '@cirrus/models';
@@ -205,7 +205,10 @@ export class LessonComponent implements OnInit, OnDestroy {
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  navigate(payload: { lesson: ICourseOverviewLesson; course: ICourseOveview }) {
+  navigate(payload: {
+    lesson: ICourseOverviewLesson;
+    course: ICourseOverview;
+  }) {
     this.sidenav.close();
     this.store.dispatch(setSideNavOpen({ sideNavOpen: false }));
     const { course, lesson } = payload;

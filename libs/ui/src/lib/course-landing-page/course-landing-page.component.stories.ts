@@ -124,6 +124,7 @@ Primary.args = {
               id: 1775463,
               status: 'completed',
             },
+            stage_id: 243,
           },
         ],
         progress: {
@@ -155,6 +156,7 @@ Primary.args = {
               id: 1775468,
               status: 'completed',
             },
+            stage_id: 244,
           },
           {
             id: 318,
@@ -172,6 +174,7 @@ Primary.args = {
               id: 1775479,
               status: 'not_started',
             },
+            stage_id: 244,
           },
           {
             id: 317,
@@ -189,6 +192,7 @@ Primary.args = {
               id: 1775529,
               status: 'not_started',
             },
+            stage_id: 244,
           },
           {
             id: 595,
@@ -206,6 +210,7 @@ Primary.args = {
               id: 1775536,
               status: 'not_started',
             },
+            stage_id: 244,
           },
         ],
         progress: {
@@ -238,6 +243,7 @@ Primary.args = {
               id: 1775541,
               status: 'not_started',
             },
+            stage_id: 245,
           },
           {
             id: 835,
@@ -255,6 +261,7 @@ Primary.args = {
               id: 1775545,
               status: 'not_started',
             },
+            stage_id: 245,
           },
           {
             id: 836,
@@ -272,6 +279,7 @@ Primary.args = {
               id: 1775547,
               status: 'not_started',
             },
+            stage_id: 245,
           },
           {
             id: 837,
@@ -289,6 +297,7 @@ Primary.args = {
               id: 1775549,
               status: 'not_started',
             },
+            stage_id: 245,
           },
           {
             id: 838,
@@ -306,6 +315,7 @@ Primary.args = {
               id: 1775551,
               status: 'not_started',
             },
+            stage_id: 245,
           },
           {
             id: 839,
@@ -323,6 +333,7 @@ Primary.args = {
               id: 1775553,
               status: 'not_started',
             },
+            stage_id: 245,
           },
         ],
         progress: {
@@ -354,6 +365,7 @@ Primary.args = {
               id: 1775556,
               status: 'not_started',
             },
+            stage_id: 246,
           },
           {
             id: 841,
@@ -371,6 +383,7 @@ Primary.args = {
               id: 1775558,
               status: 'not_started',
             },
+            stage_id: 246,
           },
           {
             id: 842,
@@ -388,6 +401,7 @@ Primary.args = {
               id: 1775560,
               status: 'not_started',
             },
+            stage_id: 246,
           },
           {
             id: 843,
@@ -405,6 +419,7 @@ Primary.args = {
               id: 1775562,
               status: 'not_started',
             },
+            stage_id: 246,
           },
         ],
         progress: {

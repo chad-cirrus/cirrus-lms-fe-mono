@@ -50,6 +50,7 @@ Primary.args = {
     completion_time: '1h 1m',
     content_counts: { documents: 3 },
     progress: { id: 1775463, status: 'completed' },
+    stage_id: 0,
   },
 };
 
@@ -65,6 +66,7 @@ Ground.args = {
     completion_time: '1h 1m',
     content_counts: { documents: 3 },
     progress: { id: 1775463, status: 'completed' },
+    stage_id: 0,
   },
 };
 
@@ -80,5 +82,6 @@ Simulator.args = {
     completion_time: '1h 1m',
     content_counts: { documents: 3 },
     progress: { id: 1775463, status: 'completed' },
+    stage_id: 0,
   },
 };

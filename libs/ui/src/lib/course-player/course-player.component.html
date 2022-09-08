@@ -23,5 +23,8 @@
       </div>
     </div>
   </div>
-  <cirrus-cta-button [text]="config.buttonText"></cirrus-cta-button>
+  <cirrus-cta-button
+    [text]="config.buttonText"
+    (btnClick)="emitNavigate()"
+  ></cirrus-cta-button>
 </div>

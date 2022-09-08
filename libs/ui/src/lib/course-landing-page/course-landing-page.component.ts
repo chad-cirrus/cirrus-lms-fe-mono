@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { ICourseOveview, ICoursePlayerConfig } from '@cirrus/models';
+import { ICourseOverview, ICoursePlayerConfig } from '@cirrus/models';
 import { produceConfig } from './produce-config';
 
 @Component({
@@ -17,10 +17,10 @@ export class CourseLandingPageComponent {
     thumbnail: 'courses/images/lesson-thumbnail.png',
   };
 
-  private _course!: ICourseOveview;
+  private _course!: ICourseOverview;
 
   @Input()
-  set course(value: ICourseOveview) {
+  set course(value: ICourseOverview) {
     this._course = value;
     this.coursePlayerConfig = produceConfig(value.next_lesson);
   }
@@ -49,5 +49,11 @@ export class CourseLandingPageComponent {
 
   navigateToCourses() {
     this.router.navigate([`/my-courses`]);
+  }
+
+  navigateToNextLesson() {
+    this.router.navigate([
+      `/courses/${this._course.id}/stages/${this._course.next_lesson.stage_id}/lessons/${this._course.next_lesson.id}`,
+    ]);
   }
 }

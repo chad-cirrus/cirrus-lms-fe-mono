@@ -6,16 +6,16 @@ import {
   ViewChild,
 } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { delay, distinctUntilChanged, map, share, tap } from 'rxjs/operators';
+import { delay, distinctUntilChanged, map, share } from 'rxjs/operators';
 import { AppService } from './app.service';
 import * as appActions from './store/actions';
+import { setCirrusUser } from './store/actions';
 import { AppState } from './store/reducers';
 import {
   selectLesson,
   selectLessonStateBusy,
 } from './store/selectors/lessons.selector';
-import { setCirrusUser } from './store/actions';
-import { ICirrusUser, ICourseOveview, ILesson } from '@cirrus/models';
+import { ICirrusUser, ICourseOverview, ILesson } from '@cirrus/models';
 import {
   selectCirrusUser,
   selectRole,
@@ -23,9 +23,9 @@ import {
 import { merge, Observable, of, Subscription } from 'rxjs';
 import { FormControl } from '@angular/forms';
 import {
-  selectSideNavOpen,
   selectIsScreenSmall,
   selectIsScreenTablet,
+  selectSideNavOpen,
 } from './store/selectors/view.selector';
 import { MatSidenav } from '@angular/material/sidenav';
 import { BreakpointObserver } from '@angular/cdk/layout';
@@ -45,7 +45,8 @@ export class AppComponent implements OnInit, OnDestroy {
 
   role$ = this.store.select(selectRole);
   lesson$: Observable<ILesson> = this.store.select(selectLesson);
-  course$: Observable<ICourseOveview> = this.store.select(selectCourseOverview);
+  course$: Observable<ICourseOverview> =
+    this.store.select(selectCourseOverview);
   cirrusUser$ = this.store.select(selectCirrusUser);
   cirrusImpersonateReturnUser$!: Observable<ICirrusUser>;
   courseId$ = this.appService.courseId$.pipe(distinctUntilChanged(), share());

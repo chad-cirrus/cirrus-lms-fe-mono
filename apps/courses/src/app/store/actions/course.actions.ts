@@ -1,4 +1,4 @@
-import { ICourseOveview } from '@cirrus/models';
+import { ICourseOverview } from '@cirrus/models';
 import { createAction, props } from '@ngrx/store';
 
 export const fetchCourseOverview = createAction(
@@ -8,7 +8,7 @@ export const fetchCourseOverview = createAction(
 
 export const fetchCourseOverviewSuccess = createAction(
   '[courses effects] fetch courseOverview success',
-  props<{ courseOverview: ICourseOveview }>()
+  props<{ courseOverview: ICourseOverview }>()
 );
 
 export const fetchCourseOverviewFailure = createAction(

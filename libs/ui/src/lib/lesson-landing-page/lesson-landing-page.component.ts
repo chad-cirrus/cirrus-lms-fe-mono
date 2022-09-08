@@ -1,18 +1,10 @@
 /* eslint-disable @nrwl/nx/enforce-module-boundaries */
-import {
-  Component,
-  EventEmitter,
-  Input,
-  Output,
-  ViewChild,
-} from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { IContent, ICourseOveview, ILesson } from '@cirrus/models';
+import { IContent, ICourseOverview, ILesson } from '@cirrus/models';
 import { StagesOverlayComponent } from '../stages-overlay/stages-overlay.component';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-
-
 
 enum LessonStatus {
   NOT_STARTED = 'not_started',
@@ -69,7 +61,7 @@ export class LessonLandingPageComponent {
   @Input() checkoutOffsRequired!: boolean | null;
   @Input() instructorView!: boolean;
   @Input() sideNavOpen!: boolean;
-  @Input() courseOverview!: ICourseOveview;
+  @Input() courseOverview!: ICourseOverview;
 
   // eslint-disable-next-line @typescript-eslint/no-inferrable-types
   @Input() courseComplete: boolean = false;

@@ -2,7 +2,7 @@ import { IProgress } from './IProgress';
 import { IEnrollmentHistory } from './IEnrollmentHistory';
 import { IHoursAndLandingsStat } from './IHoursAndLandingsStats';
 
-export interface ICourseOveview {
+export interface ICourseOverview {
   id: number;
   name: string;
   major_version: number;

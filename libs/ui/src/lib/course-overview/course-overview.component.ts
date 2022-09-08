@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { ICourseOveview } from '@cirrus/models';
+import { ICourseOverview } from '@cirrus/models';
 import {
   produceProgressStatsConfig,
   ProgressStatConfig,
@@ -26,10 +26,10 @@ export class CourseOverviewComponent {
     return this._progressStatsConfigs;
   }
 
-  private _courseOverview!: ICourseOveview;
+  private _courseOverview!: ICourseOverview;
 
   @Input()
-  set courseOverview(value: ICourseOveview) {
+  set courseOverview(value: ICourseOverview) {
     this._courseOverview = value;
     this._lessonProgress = value.lessons_stats;
     this._progressStatsConfigs = produceProgressStatsConfig(
@@ -41,10 +41,7 @@ export class CourseOverviewComponent {
     return this._courseOverview;
   }
 
-
   get version() {
     return `${this.courseOverview.major_version}.${this.courseOverview.minor_version}`;
   }
-
-
 }

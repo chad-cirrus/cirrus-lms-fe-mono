@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {
-  ICourseOveview,
+  ICourseOverview,
   IInitialFile,
   ILesson,
   IProgressUpdateResponses,
@@ -30,7 +30,11 @@ export class CoursesService {
 
   constructor(private http: HttpClient, private taskService: TaskService) {}
 
-  getLessons(courseId: number, stageId :number, lessonId: number): Observable<ILesson> {
+  getLessons(
+    courseId: number,
+    stageId: number,
+    lessonId: number
+  ): Observable<ILesson> {
     return this.http
       .get<ILesson>(
         `${environment.baseUrl}/${this.coursesUrl}/${courseId}/stages/${stageId}/lessons/${lessonId}`
@@ -113,7 +117,7 @@ export class CoursesService {
   }
 
   getCourseOverview(courseId: number) {
-    return this.http.get<ICourseOveview>(
+    return this.http.get<ICourseOverview>(
       `${environment.baseUrl}/api/v4/courses/${courseId}`
     );
   }

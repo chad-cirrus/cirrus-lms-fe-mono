@@ -7,10 +7,10 @@ import {
   ViewChildren,
 } from '@angular/core';
 import {
-  ILesson,
-  ICourseOverviewStage,
+  ICourseOverview,
   ICourseOverviewLesson,
-  ICourseOveview,
+  ICourseOverviewStage,
+  ILesson,
 } from '@cirrus/models';
 import { CdkAccordion, CdkAccordionItem } from '@angular/cdk/accordion';
 
@@ -22,7 +22,7 @@ import { CdkAccordion, CdkAccordionItem } from '@angular/cdk/accordion';
 export class StagesOverlayComponent {
   @ViewChild('accordion') accordion!: CdkAccordion;
   @ViewChildren('accordionItem') accordionItems!: CdkAccordionItem[];
-  @Input() courseOverview!: ICourseOveview;
+  @Input() courseOverview!: ICourseOverview;
 
   private _lessonId = 0;
 

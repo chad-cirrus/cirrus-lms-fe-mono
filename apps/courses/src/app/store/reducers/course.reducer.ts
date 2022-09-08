@@ -1,4 +1,4 @@
-import { ICourseOveview } from '@cirrus/models';
+import { ICourseOverview } from '@cirrus/models';
 import { createReducer, on } from '@ngrx/store';
 import {
   fetchCourseOverview,
@@ -9,7 +9,7 @@ import {
 export interface CourseState {
   busy: boolean;
   error: unknown;
-  courseOverview: ICourseOveview;
+  courseOverview: ICourseOverview;
 }
 
 export const initialCourseState: CourseState = {

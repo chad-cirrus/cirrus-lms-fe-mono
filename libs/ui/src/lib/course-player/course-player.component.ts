@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ICoursePlayerConfig } from '@cirrus/models';
 
 @Component({
@@ -8,4 +8,9 @@ import { ICoursePlayerConfig } from '@cirrus/models';
 })
 export class CoursePlayerComponent {
   @Input() config!: ICoursePlayerConfig;
+  @Output() navigateToNextLesson = new EventEmitter();
+
+  emitNavigate() {
+    this.navigateToNextLesson.emit();
+  }
 }

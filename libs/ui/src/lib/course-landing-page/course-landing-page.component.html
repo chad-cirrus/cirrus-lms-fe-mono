@@ -27,5 +27,8 @@
   <cirrus-course-progress
     [lessonStats]="course.lessons_stats"
   ></cirrus-course-progress>
-  <cirrus-course-player [config]="coursePlayerConfig"></cirrus-course-player>
+  <cirrus-course-player
+    [config]="coursePlayerConfig"
+    (navigateToNextLesson)="navigateToNextLesson()"
+  ></cirrus-course-player>
 </div>

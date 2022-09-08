@@ -5,7 +5,7 @@ import { fetchCourseOverview } from '../store/actions/course.actions';
 import { CourseState } from '../store/reducers/course.reducer';
 import { selectCourseOverview } from '../store/selectors/course.selector';
 import { tap } from 'rxjs/operators';
-import { StageLessonNavigationEvent } from '../../../../../libs/ui/src/lib/StageLessonNavigationEvent';
+import { StageLessonNavigationEvent } from '@cirrus/ui';
 
 @Component({
   selector: 'cirrus-course',
@@ -35,6 +35,8 @@ export class CourseComponent implements OnInit {
   }
 
   navigateToLesson({ stageId, lessonId }: StageLessonNavigationEvent) {
-    this.router.navigate(['stages', stageId, 'lessons', lessonId], { relativeTo: this.route });
+    this.router.navigate(['stages', stageId, 'lessons', lessonId], {
+      relativeTo: this.route,
+    });
   }
 }
