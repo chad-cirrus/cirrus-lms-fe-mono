@@ -21,6 +21,9 @@
           <div
             *ngFor="let lesson of filteredLessons$ | async"
             class="text-filter-section"
+            (click)="
+              emitNavigation({ stageId: lesson.stage_id, lessonId: lesson.id })
+            "
           >
             <div *ngIf="filterText?.value && showDropdown">
               <div class="title">
@@ -78,7 +81,7 @@
     >
       <cirrus-course-lesson-item
         [courseLesson]="courseLesson"
-        [stage]='stage'
+        [stage]="stage"
         (navigate)="emitNavigation($event)"
       ></cirrus-course-lesson-item>
       <mat-divider></mat-divider>
