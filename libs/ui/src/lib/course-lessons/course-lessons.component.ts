@@ -7,9 +7,8 @@ import {
 } from '@cirrus/models';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 
-import { debounceTime, map, startWith, tap } from 'rxjs/operators';
+import { debounceTime, filter, map, startWith, tap } from 'rxjs/operators';
 import { StageLessonNavigationEvent } from '../StageLessonNavigationEvent';
-
 
 @Component({
   selector: 'cirrus-course-lessons',
@@ -31,11 +30,17 @@ export class CourseLessonsComponent implements OnInit {
     this.lessonsOverallCount = combine.length;
     this.stagesSubject.next(value);
     this.lessonsSubject.next(combine);
+    this.filterMenuSections = [
+      { title: 'Status', items: ['completed', 'in_progress', 'not_started'] },
+      { title: 'Stages', items: this.getStageTitles(this._stages) },
+    ];
   }
 
   get stages() {
     return this._stages;
   }
+
+  filterMenuSections!: FilterMenuSection[];
 
   lessonsDisplayedCount!: number;
   lessonsOverallCount!: number;
@@ -49,11 +54,6 @@ export class CourseLessonsComponent implements OnInit {
   });
 
   changes!: string[];
-
-  filterMenuSections: FilterMenuSection[] = [
-    { title: 'Status', items: ['completed', 'in_progress', 'not_started'] },
-    { title: 'Stages', items: ['Stage 1', 'Stage 2', 'Stage 3', 'Stage 4'] },
-  ];
 
   get array() {
     return this.filterForm.get('filterCheckbox');
@@ -76,11 +76,21 @@ export class CourseLessonsComponent implements OnInit {
         this.changes = changes;
         return stages.filter(stage => this.filteredStages(changes, stage));
       }),
-      map(stage =>
-        stage.filter(stage => this.filteredBoxes(this.changes, stage))
-      ),
-      tap(stage => {
-        const combineDisplayedLessons = stage.map(s => s.lessons);
+      map(stage => {
+        return stage.map(stage => ({
+          ...stage,
+          lessons: stage.lessons.filter(l => {
+            return this.isProgressFiltered(this.changes)
+              ? this.changes.includes(l.progress.status)
+              : l;
+          }),
+        }));
+      }),
+      map(stage => {
+        return stage.filter(s => s.lessons.length);
+      }),
+      tap(stages => {
+        const combineDisplayedLessons = stages.map(s => s.lessons);
         this.lessonsDisplayedCount = this.combineLessons(
           combineDisplayedLessons
         ).length;
@@ -114,18 +124,24 @@ export class CourseLessonsComponent implements OnInit {
     );
   }
 
+  getStageTitles(stages: ICourseOverviewStage[]) {
+    return stages.map(stage => {
+      return stage.title;
+    });
+  }
+
   combineLessons(lessons: any) {
     return [].concat(...Object.keys(lessons).map(k => lessons[k]));
   }
 
   filteredStages(changes: any, stage: ICourseOverviewStage) {
-    const stageStringMatch =
-      changes.filter((item: string) => item.includes('Stage')) > -1;
-
-    if (!changes.length || stageStringMatch) {
+    const includesAStage = changes.filter((c: any) =>
+      this.getStageTitles(this._stages).includes(c)
+    );
+    if (!changes.length || !includesAStage.length) {
       return true;
     }
-    if (changes.includes(`Stage ${stage.order + 1}`)) {
+    if (changes.includes(stage.title)) {
       return true;
     } else {
       return false;
@@ -136,6 +152,7 @@ export class CourseLessonsComponent implements OnInit {
     if (!changes.length) {
       return true;
     }
+
     if (this.isProgressFiltered(changes)) {
       return changes.includes(stage.progress.status);
     } else {
@@ -162,6 +179,5 @@ export class CourseLessonsComponent implements OnInit {
 
   emitNavigation({ stageId, lessonId }: StageLessonNavigationEvent) {
     this.navigate.next({ stageId, lessonId });
-
   }
 }
