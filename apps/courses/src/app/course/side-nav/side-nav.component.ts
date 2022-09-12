@@ -1,15 +1,23 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { ICirrusUser } from '@cirrus/models';
-import { map, filter } from 'rxjs/operators';
+import { map, takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'cirrus-side-nav',
   templateUrl: './side-nav.component.html',
   styleUrls: ['./side-nav.component.scss'],
 })
-export class SideNavComponent implements OnInit {
+export class SideNavComponent implements OnInit, OnDestroy {
+  destroyed = new Subject<void>();
   @Input() cirrusUser!: ICirrusUser;
   @Input() type?: string;
   @Input() notificationCount!: number;
@@ -17,16 +25,16 @@ export class SideNavComponent implements OnInit {
   @Output() emitCollapse = new EventEmitter<boolean>();
   @Output() emitDismissHamburgerMenu = new EventEmitter<boolean>();
 
-  isScreenTablet$!: any;
   disableToggle!: boolean;
   currentUrl = '';
 
   constructor(private breakpointObserver: BreakpointObserver) {}
 
   ngOnInit(): void {
-    this.isScreenTablet$ = this.breakpointObserver
+    this.breakpointObserver
       .observe('(max-width: 950px)')
       .pipe(
+        takeUntil(this.destroyed),
         map(({ matches }) => {
           return matches;
         })
@@ -35,6 +43,11 @@ export class SideNavComponent implements OnInit {
         this.disableToggle = isTablet;
         this.toggleCollapse(isTablet);
       });
+  }
+
+  ngOnDestroy() {
+    this.destroyed.next();
+    this.destroyed.complete();
   }
 
   dismissHamburgerMenu() {

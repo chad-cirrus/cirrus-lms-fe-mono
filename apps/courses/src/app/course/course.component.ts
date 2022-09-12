@@ -4,8 +4,8 @@ import { Store } from '@ngrx/store';
 import { fetchCourseOverview } from '../store/actions/course.actions';
 import { CourseState } from '../store/reducers/course.reducer';
 import { selectCourseOverview } from '../store/selectors/course.selector';
-import { tap } from 'rxjs/operators';
 import { StageLessonNavigationEvent } from '@cirrus/ui';
+import { selectScreenSize } from '../store/selectors/view.selector';
 
 @Component({
   selector: 'cirrus-course',
@@ -13,13 +13,8 @@ import { StageLessonNavigationEvent } from '@cirrus/ui';
   styleUrls: ['./course.component.scss'],
 })
 export class CourseComponent implements OnInit {
-  courseOverview$ = this.store.select(selectCourseOverview).pipe(
-    tap(course => {
-      if (course && course.progress.id > 0) {
-        console.log(course.progress.status);
-      }
-    })
-  );
+  courseOverview$ = this.store.select(selectCourseOverview);
+  screenSize$ = this.store.select(selectScreenSize);
 
   constructor(
     private route: ActivatedRoute,

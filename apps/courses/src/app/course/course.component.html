@@ -1,6 +1,7 @@
 <div fxLayout="column" fxLayoutGap="48px">
   <cirrus-course-landing-page
     [course]="(courseOverview$ | async)!"
+    [size]="(screenSize$ | async)!"
   ></cirrus-course-landing-page>
   <div *ngIf="courseOverview$ | async as overview">
     <mat-tab-group

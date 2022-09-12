@@ -6,21 +6,27 @@ import {
   ViewChild,
 } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { delay, distinctUntilChanged, map, share } from 'rxjs/operators';
+import {
+  delay,
+  distinctUntilChanged,
+  map,
+  share,
+  takeUntil,
+} from 'rxjs/operators';
 import { AppService } from './app.service';
 import * as appActions from './store/actions';
-import { setCirrusUser } from './store/actions';
+import { setCirrusUser, setScreenSize } from './store/actions';
 import { AppState } from './store/reducers';
 import {
   selectLesson,
   selectLessonStateBusy,
 } from './store/selectors/lessons.selector';
-import { ICirrusUser, ICourseOverview, ILesson } from '@cirrus/models';
+import { ICirrusUser, ILesson } from '@cirrus/models';
 import {
   selectCirrusUser,
   selectRole,
 } from './store/selectors/cirrus-user.selector';
-import { merge, Observable, of, Subscription } from 'rxjs';
+import { merge, Observable, of, Subject, Subscription } from 'rxjs';
 import { FormControl } from '@angular/forms';
 import {
   selectIsScreenSmall,
@@ -28,9 +34,12 @@ import {
   selectSideNavOpen,
 } from './store/selectors/view.selector';
 import { MatSidenav } from '@angular/material/sidenav';
-import { BreakpointObserver } from '@angular/cdk/layout';
+import {
+  BreakpointObserver,
+  Breakpoints,
+  BreakpointState,
+} from '@angular/cdk/layout';
 import { CoursesService } from './course/course.service';
-import { selectCourseOverview } from './store/selectors/course.selector';
 
 @Component({
   selector: 'cirrus-root',
@@ -38,6 +47,7 @@ import { selectCourseOverview } from './store/selectors/course.selector';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit, OnDestroy {
+  destroyed = new Subject<void>();
   student = 'John Doe';
   viewToggle = new FormControl(false);
   toggle$ = this.viewToggle.valueChanges;
@@ -45,8 +55,13 @@ export class AppComponent implements OnInit, OnDestroy {
 
   role$ = this.store.select(selectRole);
   lesson$: Observable<ILesson> = this.store.select(selectLesson);
-  course$: Observable<ICourseOverview> =
-    this.store.select(selectCourseOverview);
+  breakPoint$ = this.breakpointObserver.observe([
+    Breakpoints.XSmall,
+    Breakpoints.Small,
+    Breakpoints.Medium,
+    Breakpoints.Large,
+    Breakpoints.XLarge,
+  ]);
   cirrusUser$ = this.store.select(selectCirrusUser);
   cirrusImpersonateReturnUser$!: Observable<ICirrusUser>;
   courseId$ = this.appService.courseId$.pipe(distinctUntilChanged(), share());
@@ -80,27 +95,11 @@ export class AppComponent implements OnInit, OnDestroy {
       this.outletContainer.nativeElement.scrollTop = 0;
     });
 
-    this.breakpointObserver
-      .observe('(max-width: 959px)')
-      .pipe(
-        map(({ matches }) => {
-          return matches;
-        })
-      )
-      .subscribe(isScreenTablet => {
-        this.store.dispatch(appActions.setIsScreenTablet({ isScreenTablet }));
-      });
-
-    this.breakpointObserver
-      .observe('(max-width: 600px)')
-      .pipe(
-        map(({ matches }) => {
-          return matches;
-        })
-      )
-      .subscribe(isScreenSmall => {
-        this.store.dispatch(appActions.setIsScreenSmall({ isScreenSmall }));
-      });
+    this.breakPoint$
+      .pipe(takeUntil(this.destroyed), map(this.getBreakpoint))
+      .subscribe(screenSize =>
+        this.store.dispatch(setScreenSize({ screenSize }))
+      );
 
     this.cirrusImpersonateReturnUser$ = of(
       JSON.parse(
@@ -120,6 +119,8 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.triggerSubscription.unsubscribe();
+    this.destroyed.next();
+    this.destroyed.complete();
   }
 
   openHamburgerMenu() {
@@ -132,5 +133,13 @@ export class AppComponent implements OnInit, OnDestroy {
 
   handleOpenChanged(sideNavOpen: boolean) {
     this.store.dispatch(appActions.setSideNavOpen({ sideNavOpen }));
+  }
+
+  private getBreakpoint(state: BreakpointState) {
+    const [breakpoint] = Object.entries(state).find(b => b[1] === true) as [
+      breakpoint: string,
+      match: boolean
+    ];
+    return breakpoint;
   }
 }

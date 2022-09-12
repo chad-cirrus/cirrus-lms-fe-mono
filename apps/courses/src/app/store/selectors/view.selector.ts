@@ -1,5 +1,6 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { ViewState } from '../reducers/view.reducer';
+import { Breakpoints } from '@angular/cdk/layout';
 
 export const selectViewFeature = createFeatureSelector<ViewState>('view');
 
@@ -15,11 +16,15 @@ export const selectSideNavOpen = createSelector(
 
 export const selectIsScreenSmall = createSelector(
   selectViewFeature,
-  state => state.isScreenSmall
+  state => state.screenSize === Breakpoints.XSmall
 );
 
 export const selectIsScreenTablet = createSelector(
   selectViewFeature,
-  state => state.isScreenTablet
+  state => state.screenSize === Breakpoints.Small
 );
 
+export const selectScreenSize = createSelector(
+  selectViewFeature,
+  state => state.screenSize
+);

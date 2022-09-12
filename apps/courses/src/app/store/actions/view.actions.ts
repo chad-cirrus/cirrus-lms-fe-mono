@@ -13,9 +13,14 @@ export const setSideNavOpen = createAction(
 export const setIsScreenSmall = createAction(
   '[app component] set is screen small',
   props<{ isScreenSmall: boolean }>()
-)
+);
 
 export const setIsScreenTablet = createAction(
   '[app component] set is screen tablet',
   props<{ isScreenTablet: boolean }>()
-)
+);
+
+export const setScreenSize = createAction(
+  '[app component] set screen size',
+  props<{ screenSize: string }>()
+);
