@@ -135,11 +135,10 @@ export class AppComponent implements OnInit, OnDestroy {
     this.store.dispatch(appActions.setSideNavOpen({ sideNavOpen }));
   }
 
-  private getBreakpoint(state: BreakpointState) {
-    const [breakpoint] = Object.entries(state).find(b => b[1] === true) as [
-      breakpoint: string,
-      match: boolean
-    ];
+  private getBreakpoint({ breakpoints }: BreakpointState) {
+    const [breakpoint] = Object.entries(breakpoints).find(
+      ([_breakpoint, match]) => match === true
+    ) as [breakpoint: string, matches: boolean];
     return breakpoint;
   }
 }
