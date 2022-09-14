@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { ICourseOverview, ICoursePlayerConfig } from '@cirrus/models';
 import { produceConfig } from './produce-config';
@@ -11,7 +11,6 @@ import { BehaviorSubject } from 'rxjs';
   selector: 'cirrus-course-landing-page',
   templateUrl: './course-landing-page.component.html',
   styleUrls: ['./course-landing-page.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CourseLandingPageComponent {
   coursePlayerConfig: ICoursePlayerConfig = {
