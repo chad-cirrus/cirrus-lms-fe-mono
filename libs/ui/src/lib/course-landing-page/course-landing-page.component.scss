@@ -1,11 +1,12 @@
-@use '../styles/variables' as var;
+@use '../styles/variables'as var;
 
 .lesson-image {
   padding: 0 12px;
   width: 100%;
 }
 
-h3, h1 {
+h3,
+h1 {
   font-family: var.$akzidenz-grotesk_bqLtEx400;
   font-style: normal;
   font-weight: 400;
@@ -38,19 +39,53 @@ cirrus-course-progress {
   .lesson-image {
     padding: 0 24px;
   }
+
   h1 {
     font-size: 59px;
     line-height: 67px;
     letter-spacing: -0.035em;
     max-width: 670px;
   }
+
   h3 {
     font-size: 24px;
     line-height: 34px;
     max-width: 439px;
   }
+
   cirrus-course-progress {
     margin-bottom: 12px;
   }
 }
 
+.breadcrumb-container {
+  padding: 16px 22px;
+
+  @media (min-width: 600px) {
+    padding: 25px 40px;
+  }
+
+  @media (min-width: 960px) {
+    padding: 25px 65px;
+  }
+}
+
+.breadcrumb-item-container {
+  border-bottom: 1px solid transparent;
+  display: flex;
+  max-width: max-content;
+
+  &:hover {
+    border-bottom: 1px solid #fff;
+  }
+
+  .title {
+    color: #FFFFFF;
+    cursor: pointer;
+    font-family: 'Akzidenz-Grotesk BQ';
+    font-size: 16px;
+    line-height: 130%;
+    letter-spacing: 0.02em;
+    margin-left: 15px;
+  }
+}

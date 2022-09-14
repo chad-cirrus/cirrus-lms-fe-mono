@@ -1,4 +1,4 @@
-@use '../styles/variables' as *;
+@use '../styles/variables'as *;
 
 .mat-dialog-container {
   padding: 0 !important;
@@ -10,6 +10,7 @@ button.snav-open-button {
   margin: 1rem 0;
   border-top-left-radius: 78.96px;
   border-bottom-left-radius: 78.96px;
+
   img {
     height: 15px;
     width: 27px;
@@ -51,28 +52,34 @@ mat-drawer {
   -moz-background-size: cover !important;
   -o-background-size: cover !important;
   background-size: cover !important;
+
   .content {
     width: 100%;
     margin-left: 0px;
     padding: 64px 16px 0;
+
     .mat-divider {
       border-top-color: rgba(255, 255, 255);
       width: calc(100vw - 16px);
     }
+
     h1 {
       max-width: 18ch;
       margin-bottom: 20px;
       padding-right: 30px;
     }
+
     p {
       width: 75%;
       max-width: 420px;
       margin: 15px 0 30px;
     }
+
     .start-lesson {
       display: inline-block;
       margin: 30px auto;
     }
+
     .self-study,
     .assessment {
       font-family: $primary_font;
@@ -83,8 +90,10 @@ mat-drawer {
       letter-spacing: 0.03em;
       color: #ffffff;
     }
+
     .sign-offs-warning-container {
       text-align: right;
+
       .sign-offs-required {
         margin-left: 8px;
         font-family: $primary_font;
@@ -104,28 +113,35 @@ mat-drawer {
   position: relative;
   margin: 0 auto;
   padding: 8px 24px;
+
   .open {
     opacity: 0;
     pointer-events: none;
   }
+
   .closed {
     opacity: 1;
     pointer-events: all;
   }
+
   .intro-video {
     padding: 16px 0;
+
     .intro-video-title {
       margin: 0;
     }
+
     .intro-video-play {
       display: inline-block;
       cursor: pointer;
       padding: 20px 0 0;
+
       .intro-video-subtitle {
         color: $gray4;
       }
     }
   }
+
   .cirrus-progress-row {
     mat-card {
       .progress-type-icon {
@@ -139,13 +155,17 @@ mat-drawer {
   margin: 12px 12px 0 -24px;
   overflow-x: scroll;
   width: 100vw;
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE 10+ */
+  scrollbar-width: none;
+  /* Firefox */
+  -ms-overflow-style: none;
+  /* IE 10+ */
 
   &::-webkit-scrollbar {
-    background: transparent; /* Chrome/Safari/Webkit */
+    background: transparent;
+    /* Chrome/Safari/Webkit */
     width: 0px;
   }
+
   @media (max-width: 960px) {
     &:before {
       content: ' ';
@@ -158,6 +178,7 @@ mat-drawer {
       background: linear-gradient(90deg, #000000 3%, rgba(31, 31, 31, 0) 100%);
       pointer-events: none;
     }
+
     &:after {
       content: ' ';
       display: block;
@@ -197,20 +218,25 @@ cirrus-progress-card:last-child {
   .lesson-image {
     .content {
       padding: 48px 24px 0 24px;
+
       h1 {
         margin: 0 0 30px;
       }
+
       p {
         margin: 25px 0 30px;
       }
+
       button.snav-open-button {
         height: 39px;
       }
+
       .start-lesson {
         margin: 35px 0 80px;
       }
     }
   }
+
   .cirrus-progress-row {
     width: calc(100vw - 100px);
   }
@@ -221,23 +247,29 @@ cirrus-progress-card:last-child {
     .content {
       margin-left: 40px;
       padding: 96px 40px 0 40px;
+
       p {
         margin: 25px 0 50px;
       }
+
       button.snav-open-button {
         margin: 2rem 0 8rem 0;
       }
+
       .start-lesson {
         margin: 55px 0 150px;
       }
+
       .open {
         opacity: 0;
         pointer-events: none;
       }
+
       .closed {
         opacity: 1;
         pointer-events: all;
       }
+
       .self-study,
       .assessment {
         font-family: $primary_font;
@@ -251,8 +283,10 @@ cirrus-progress-card:last-child {
 
         color: #ffffff;
       }
+
       .sign-offs-warning-container {
         text-align: right;
+
         .sign-offs-required {
           margin-left: 8px;
           font-family: $primary_font;
@@ -272,20 +306,45 @@ cirrus-progress-card:last-child {
     max-width: 1300px;
     padding: 0 64px;
     margin: 0 auto;
+
     .cirrus-progress-row {
       width: 100%;
       margin: -45px auto 20px;
       overflow-x: hidden;
-      scrollbar-width: hidden; /* Firefox */
-      -ms-overflow-style: hidden; /* IE 10+ */
+      scrollbar-width: hidden;
+      /* Firefox */
+      -ms-overflow-style: hidden;
+      /* IE 10+ */
 
       &::-webkit-scrollbar {
-        background: hidden; /* Chrome/Safari/Webkit */
+        background: hidden;
+        /* Chrome/Safari/Webkit */
         width: hidden;
       }
     }
+
     .intro-video {
       padding: 16px;
+    }
+  }
+
+  .breadcrumb-item-container {
+    border-bottom: 1px solid transparent;
+    display: flex;
+    max-width: max-content;
+
+    &:hover {
+      border-bottom: 1px solid #fff;
+    }
+
+    .title {
+      color: #FFFFFF;
+      cursor: pointer;
+      font-family: 'Akzidenz-Grotesk BQ';
+      font-size: 16px;
+      line-height: 130%;
+      letter-spacing: 0.02em;
+      margin-left: 15px;
     }
   }
 }

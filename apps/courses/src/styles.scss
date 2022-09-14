@@ -1,10 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
-@use '~@angular/material/theming' as material;
-@use 'variables' as *;
+@use '~@angular/material/theming'as material;
+@use 'variables'as *;
 @use 'fonts';
 @use 'palette';
 
-@use './app/app.component.scss-theme.scss' as app-component;
+@use './app/app.component.scss-theme.scss'as app-component;
 
 // @use 'cirrus-ui-module' as cirrus-ui;
 
@@ -45,6 +45,7 @@ img[type='button'] {
   height: 40px;
   width: 143px;
 }
+
 .search-input {
   .input {
     width: 100%;
@@ -69,14 +70,17 @@ img[type='button'] {
     position: absolute;
     width: 100%;
     background-color: $lesson-content-item-hover;
+
     .text-filter-section {
       cursor: pointer;
       padding: 24px 0px 20px 27px;
     }
+
     .title {
       font-size: 1rem;
       font-family: $bqmedium-font;
     }
+
     .status {
       padding-top: 2px;
       font-size: 0.875rem;
@@ -100,36 +104,4 @@ img[type='button'] {
 .mat-tab-label-active {
   color: $primary-font-color !important;
   opacity: 1 !important;
-}
-
-.breadcrumb-container {
-  height: 60px;
-  padding: 10px 16px;
-  font-size: 0.75rem;
-
-  .title:hover {
-    border-bottom: 1px solid white;
-  }
-
-  .chev-left:hover {
-    cursor: pointer;
-  }
-
-  .title {
-    cursor: pointer;
-    color: $secondary-font-color-grey;
-  }
-
-  @media (min-width: 600px) {
-    padding: 15px 24px;
-    .course-name {
-      font-size: 1rem;
-    }
-    .lesson-title {
-      font-size: 0.875rem;
-    }
-  }
-  @media (min-width: 960px) {
-    padding-left: 65px;
-  }
 }

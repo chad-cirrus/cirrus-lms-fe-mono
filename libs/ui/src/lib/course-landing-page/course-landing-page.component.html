@@ -1,22 +1,12 @@
-<div
-  fxLayout="row"
-  class="breadcrumb-container"
-  (click)="navigateToCourses()"
-  fxLayoutGap="15px"
-  fxLayoutAlign="none center"
->
-  <span fxLayout="row" fxLayoutGap="15px" class="chev-left">
+<div class="breadcrumb-container">
+  <div class="breadcrumb-item-container" (click)="navigateToCourses()">
     <img src="courses/images/svg/chevron-left-white.svg" />
-  </span>
-  <div class="bullet">&#8226;</div>
-  <div class="title">My Courses</div>
+    <div class="title">My Courses</div>
+  </div>
 </div>
-<div
-  class="lesson-image"
-  [ngStyle]="background.value"
-  fxLayout="column"
-  fxLayoutAlign="center start"
->
+
+<div class="lesson-image" [ngStyle]="background" fxLayout="column" fxLayoutAlign="center start">
+
   <div class="course-title">
     <h1>{{ course.title }}</h1>
   </div>
@@ -24,11 +14,7 @@
   <div class="course-sub-title">
     <h3>{{ course.subtitle }}</h3>
   </div>
-  <cirrus-course-progress
-    [lessonStats]="course.lessons_stats"
-  ></cirrus-course-progress>
-  <cirrus-course-player
-    [config]="coursePlayerConfig"
-    (navigateToNextLesson)="navigateToNextLesson()"
-  ></cirrus-course-player>
+  <cirrus-course-progress [lessonStats]="course.lessons_stats"></cirrus-course-progress>
+  <cirrus-course-player [config]="coursePlayerConfig" (navigateToNextLesson)="navigateToNextLesson()">
+  </cirrus-course-player>
 </div>
