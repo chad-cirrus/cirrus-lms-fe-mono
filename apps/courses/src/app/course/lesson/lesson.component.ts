@@ -69,8 +69,8 @@ export class LessonComponent implements OnInit, OnDestroy {
   lessonId!: number;
   @ViewChild('snav') sidenav!: MatSidenav;
   lessonCompleted$!: Observable<string>;
-  defaultMobile = environment.defaultMobile;
-  defaultDesktop = environment.defaultDesktop;
+  defaultMobile = environment.defaultMobileLesson;
+  defaultDesktop = environment.defaultDesktopLesson;
 
   nextLesson$ = this.store.select(selectNextLessonPath);
 

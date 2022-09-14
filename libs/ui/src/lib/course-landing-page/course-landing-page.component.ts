@@ -38,9 +38,9 @@ export class CourseLandingPageComponent {
   set size(value: string) {
     const uri =
       value === Breakpoints.XSmall
-        ? this.course.mobile_hero_image_url || environment.defaultMobile
-        : this.course.desktop_hero_image_url || environment.defaultDesktop;
-    console.log(uri);
+        ? this.course.mobile_hero_image_url || environment.defaultMobileCourse
+        : this.course.desktop_hero_image_url ||
+          environment.defaultDesktopCourse;
     this.background.next({
       ['background']: `linear-gradient(90deg, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0.33) 44.11%, rgba(0, 0, 0, 0) 61.94%),
                   linear-gradient(360deg,#000000 1.79%,rgba(0,0,0,.24) 19.37%,rgba(0,0,0,0) 25%),

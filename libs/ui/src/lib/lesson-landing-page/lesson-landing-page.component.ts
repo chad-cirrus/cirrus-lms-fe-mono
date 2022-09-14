@@ -1,5 +1,11 @@
 /* eslint-disable @nrwl/nx/enforce-module-boundaries */
-import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { IContent, ICourseOverview, ILesson } from '@cirrus/models';
 import { StagesOverlayComponent } from '../stages-overlay/stages-overlay.component';
@@ -68,9 +74,9 @@ export class LessonLandingPageComponent {
   profileImageUrl = 'course/images/profile.png';
   bgImage: any;
 
-  defaultMobile =
+  defaultMobileLesson =
     'https://cirrusapproachherokuprod.blob.core.windows.net/cirruslmsherokudevcontainer/content-items/images/default-lesson-hero-mobile.jpg';
-  defaultDesktop =
+  defaultDesktopLesson =
     'https://cirrusapproachherokuprod.blob.core.windows.net/cirruslmsherokudevcontainer/content-items/images/default-lesson-hero-desktop.jpg';
 
   libraryImageUrl = 'courses/images/library.png';
@@ -100,11 +106,11 @@ export class LessonLandingPageComponent {
     if (value) {
       return this.lesson?.mobile_hero_image_url
         ? this.lesson?.mobile_hero_image_url
-        : this.defaultMobile;
+        : this.defaultMobileLesson;
     } else {
       return this.lesson?.desktop_hero_image_url
         ? this.lesson?.desktop_hero_image_url
-        : this.defaultDesktop;
+        : this.defaultDesktopLesson;
     }
   }
 

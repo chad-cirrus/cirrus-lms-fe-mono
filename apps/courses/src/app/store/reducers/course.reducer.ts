@@ -31,6 +31,7 @@ export const initialCourseState: CourseState = {
     certificate: { expiration: null },
     desktop_hero_image_url: '',
     mobile_hero_image_url: '',
+    thumbnail_image_url: '',
     can_reenroll: false,
     lessons_stats: {
       completed: 0,

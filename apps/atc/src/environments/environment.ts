@@ -7,10 +7,14 @@ export const environment = {
   baseUrl: 'http://cirrusapproach.local:3000',
   profile:
     'https://cirfullsb-cirrusaircraftvpo.cs41.force.com/approachsso/s/profile/',
-  defaultMobile:
+  defaultMobileLesson:
     'https://cirrusapproachherokuprod.blob.core.windows.net/cirruslmsherokudevcontainer/content-items/images/default-lesson-hero-mobile.jpg',
-  defaultDesktop:
+  defaultDesktopLesson:
     'https://cirrusapproachherokuprod.blob.core.windows.net/cirruslmsherokudevcontainer/content-items/images/default-lesson-hero-desktop.jpg',
+  defaultMobileCourse:
+    'https://cirrusapproachherokuprod.blob.core.windows.net/cirruslmsherokudevcontainer/content-items/images/default-course-hero-sm.jpg',
+  defaultDesktopCourse:
+    'https://cirrusapproachherokuprod.blob.core.windows.net/cirruslmsherokudevcontainer/content-items/images/default-course-hero-lg.jpg',
 };
 
 /*

@@ -18,6 +18,7 @@ export interface ICourseOverview {
   minimum_flight_hours: number;
   desktop_hero_image_url: string;
   mobile_hero_image_url: string;
+  thumbnail_image_url: string;
   can_reenroll: boolean;
   hours_and_landings_stats: IHoursAndLandingsStat[];
   lessons_stats: ILessonsstats;
