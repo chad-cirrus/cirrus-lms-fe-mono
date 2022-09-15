@@ -49,6 +49,7 @@ Primary.args = {
     title: 'SR20 Avidyne Entegra Advanced Transition ',
     subtitle: '',
     has_agreement: true,
+    thumbnail_image_url: '',
     hours_and_landings_stats: [
       { type: HoursAndLandingStatType.completed_total_hours, completed: 0 },
       {

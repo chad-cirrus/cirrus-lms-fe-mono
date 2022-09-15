@@ -16,6 +16,8 @@ export class CourseOverviewComponent {
     completed: 0,
   };
 
+  showHoursAndLandings = false;
+
   get lessonProgress() {
     return this._lessonProgress;
   }
@@ -35,6 +37,14 @@ export class CourseOverviewComponent {
     this._progressStatsConfigs = produceProgressStatsConfig(
       value.course_content_stats
     );
+
+    const totalAssessmentContent = value.course_content_stats
+      .filter(stat => stat.type !== 'self_study')
+      .map(stat => stat.total)
+      .reduce((sum, current) => sum + current, 0);
+    console.log(totalAssessmentContent);
+
+    this.showHoursAndLandings = totalAssessmentContent > 0;
   }
 
   get courseOverview() {

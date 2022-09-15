@@ -17,6 +17,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { HoursAndLandingsComponent } from '../hours-and-landings/hours-and-landings.component';
 import { HoursLandingTypeToIconPipe } from '../helpers/HoursLandingTypeToIcon.pipe';
 import { HoursLandingTypeToTextPipe } from '../helpers/HoursLandingTypeToText.pipe';
+import { course466 } from '../mock-data/mock-courses.data';
 
 export default {
   title: 'Course Component Overview Tab Content',
@@ -56,6 +57,7 @@ const course: ICourseOverview = {
   title: 'SR20 Avidyne Entegra Advanced Transition ',
   subtitle: '',
   has_agreement: true,
+  thumbnail_image_url: '',
   hours_and_landings_stats: [
     { type: HoursAndLandingStatType.completed_total_hours, completed: 1 },
     {
@@ -488,6 +490,35 @@ Primary2.args = {
         completed: 10,
       },
       { type: HoursAndLandingStatType.completed_total_landings, completed: 10 },
+    ],
+  },
+};
+
+export const SelfStudy = Template.bind({});
+SelfStudy.args = {
+  courseOverview: course466,
+};
+
+export const FlightAssessment = Template.bind({});
+FlightAssessment.args = {
+  courseOverview: {
+    ...course466,
+    course_content_stats: [
+      { type: 'self_study', completed: 0, total: 51 },
+      { type: 'flight_assessment', completed: 0, total: 10 },
+      { type: 'ground_assessment', completed: 0, total: 0 },
+    ],
+  },
+};
+
+export const GroundAssessment = Template.bind({});
+GroundAssessment.args = {
+  courseOverview: {
+    ...course466,
+    course_content_stats: [
+      { type: 'self_study', completed: 0, total: 51 },
+      { type: 'flight_assessment', completed: 0, total: 0 },
+      { type: 'ground_assessment', completed: 0, total: 10 },
     ],
   },
 };

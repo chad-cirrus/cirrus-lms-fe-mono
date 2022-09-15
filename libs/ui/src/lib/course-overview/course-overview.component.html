@@ -61,8 +61,8 @@
           [progress]="config"
         ></cirrus-course-content-progress-circle>
       </div>
-      <mat-divider [vertical]="true"></mat-divider>
-      <div class="hours-and-landings">
+      <mat-divider [vertical]="true" *ngIf="showHoursAndLandings"></mat-divider>
+      <div class="hours-and-landings" *ngIf="showHoursAndLandings">
         <p>Logged Hours & Landings</p>
         <cirrus-hours-and-landings
           [stats]="courseOverview.hours_and_landings_stats"
