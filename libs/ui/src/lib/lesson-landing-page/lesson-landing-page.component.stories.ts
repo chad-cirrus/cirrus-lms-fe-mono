@@ -3,8 +3,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule } from '@angular/material/dialog';
-import { ctdContents, ctdLesson, ProgressStat, ProgressType } from '@cirrus/models';
-import { moduleMetadata, Story, Meta } from '@storybook/angular';
+import { ctdContents, ctdLesson } from '@cirrus/models';
+import { Meta, moduleMetadata, Story } from '@storybook/angular';
 import { testData } from 'libs/models/src/testing/testData';
 import { testData855 } from 'libs/models/src/testing/testData855';
 import { testDataIcingAwarenessCourse } from 'libs/models/src/testing/testDataIcingLesson';
@@ -17,6 +17,26 @@ import { LessonLandingPageComponent } from './lesson-landing-page.component';
 import { MatDividerModule } from '@angular/material/divider';
 import { LessonProgressStatsComponent } from '../lesson-progress-stats/lesson-progress-stats.component';
 import { EncodeUriPipe } from '../encode-uri.pipe';
+import { RouterModule } from '@angular/router';
+import { APP_BASE_HREF } from '@angular/common';
+import { MatIconModule } from '@angular/material/icon';
+import { MatIconRegistryModule } from '../mat-icon-registry.module';
+import { CtaButtonComponent } from '../cta-button/cta-button.component';
+
+const mockEnvironment = {
+  production: false,
+  baseUrl: 'http://cirrusapproach.local:3000',
+  profile:
+    'https://cirfullsb-cirrusaircraftvpo.cs41.force.com/approachsso/s/profile/',
+  defaultMobileLesson:
+    'https://cirrusapproachherokuprod.blob.core.windows.net/cirruslmsherokudevcontainer/content-items/images/default-lesson-hero-mobile.jpg',
+  defaultDesktopLesson:
+    'https://cirrusapproachherokuprod.blob.core.windows.net/cirruslmsherokudevcontainer/content-items/images/default-lesson-hero-desktop.jpg',
+  defaultMobileCourse:
+    'https://cirrusapproachherokuprod.blob.core.windows.net/cirruslmsherokudevcontainer/content-items/images/default-course-hero-sm.jpg',
+  defaultDesktopCourse:
+    'https://cirrusapproachherokuprod.blob.core.windows.net/cirruslmsherokudevcontainer/content-items/images/default-course-hero-lg.jpg',
+};
 
 export default {
   title: 'LessonLandingPageComponent',
@@ -29,7 +49,8 @@ export default {
         LessonContentsComponent,
         ProgressCardComponent,
         LessonProgressStatsComponent,
-        EncodeUriPipe
+        EncodeUriPipe,
+        CtaButtonComponent,
       ],
       imports: [
         MatButtonModule,
@@ -37,6 +58,16 @@ export default {
         MatCardModule,
         MatDialogModule,
         MatDividerModule,
+        RouterModule.forRoot([], { useHash: true }),
+        MatIconModule,
+        MatIconRegistryModule,
+      ],
+      providers: [
+        { provide: APP_BASE_HREF, useValue: '/' },
+        {
+          provide: 'environment',
+          useValue: mockEnvironment,
+        },
       ],
     }),
   ],

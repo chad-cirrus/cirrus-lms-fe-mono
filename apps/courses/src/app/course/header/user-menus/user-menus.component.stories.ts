@@ -1,12 +1,28 @@
-import { moduleMetadata, Story, Meta } from '@storybook/angular';
+import { Meta, moduleMetadata, Story } from '@storybook/angular';
 import { UserMenusComponent } from './user-menus.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { HttpClientModule } from '@angular/common/http';
+import { UserService } from '../../../user/user.service';
+import { RouterModule } from '@angular/router';
+import { StoreModule } from '@ngrx/store';
+import { OverlayModule } from '@angular/cdk/overlay';
+import { HeaderDropdownComponent } from '../../../../../../../libs/ui/src';
+import { coursesReducers } from '../../../store/reducers';
 
 export default {
   title: 'UserMenusComponent',
   component: UserMenusComponent,
   decorators: [
     moduleMetadata({
-      imports: [],
+      imports: [
+        MatDialogModule,
+        HttpClientModule,
+        RouterModule.forRoot([], { useHash: true }),
+        StoreModule.forRoot(coursesReducers),
+        OverlayModule,
+      ],
+      declarations: [HeaderDropdownComponent],
+      providers: [UserService],
     }),
   ],
 } as Meta<UserMenusComponent>;

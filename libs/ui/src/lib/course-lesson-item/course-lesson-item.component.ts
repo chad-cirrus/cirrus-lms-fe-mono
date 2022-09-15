@@ -35,10 +35,13 @@ export class CourseLessonItemComponent {
   }
 
   get thumbnail(): string | unknown {
-    return this.courseLesson.thumbnail_image_url &&
+    const thumbnail =
+      this.courseLesson.thumbnail_image_url &&
       this.courseLesson.thumbnail_image_url.length > 0
-      ? this.courseLesson.thumbnail_image_url
-      : this.environment.defaultDesktop + '';
+        ? this.courseLesson.thumbnail_image_url
+        : this.environment.defaultMobileLesson + '';
+
+    return thumbnail;
   }
 
   get contentCountsCompletionTime(): IContentCountAndCompletionTime {

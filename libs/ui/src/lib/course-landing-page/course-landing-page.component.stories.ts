@@ -12,13 +12,19 @@ import { CourseSummaryCountsComponent } from '../course-summary-counts/course-su
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { CtaButtonComponent } from '../cta-button/cta-button.component';
 import { HoursAndLandingStatType, PROGRESS_STATUS } from '@cirrus/models';
+import { RouterModule } from '@angular/router';
 
 export default {
   title: 'Course Landing Page',
   component: CourseLandingPageComponent,
   decorators: [
     moduleMetadata({
-      imports: [FlexLayoutModule, MatDividerModule, MatProgressBarModule],
+      imports: [
+        FlexLayoutModule,
+        MatDividerModule,
+        MatProgressBarModule,
+        RouterModule.forRoot([], { useHash: true }),
+      ],
       declarations: [
         EncodeUriPipe,
         CourseProgressComponent,

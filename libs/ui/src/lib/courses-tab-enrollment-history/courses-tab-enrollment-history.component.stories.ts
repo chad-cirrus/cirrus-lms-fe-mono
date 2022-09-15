@@ -2,13 +2,47 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { PROGRESS_STATUS } from '@cirrus/models';
 import { Meta, moduleMetadata, Story } from '@storybook/angular';
 import { CoursesTabEnrollmentHistoryComponent } from './courses-tab-enrollment-history.component';
+import { UiDownloadService } from '../course-completion/ui-download.service';
+import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { GenericResponsiveMatTableComponent } from '../generic-responsive-mat-table/generic-responsive-mat-table.component';
+import { MatTableModule } from '@angular/material/table';
+import { TableFormatPipe } from '../table-format.pipe';
+
+const mockEnvironment = {
+  production: false,
+  baseUrl: 'http://cirrusapproach.local:3000',
+  profile:
+    'https://cirfullsb-cirrusaircraftvpo.cs41.force.com/approachsso/s/profile/',
+  defaultMobileLesson:
+    'https://cirrusapproachherokuprod.blob.core.windows.net/cirruslmsherokudevcontainer/content-items/images/default-lesson-hero-mobile.jpg',
+  defaultDesktopLesson:
+    'https://cirrusapproachherokuprod.blob.core.windows.net/cirruslmsherokudevcontainer/content-items/images/default-lesson-hero-desktop.jpg',
+  defaultMobileCourse:
+    'https://cirrusapproachherokuprod.blob.core.windows.net/cirruslmsherokudevcontainer/content-items/images/default-course-hero-sm.jpg',
+  defaultDesktopCourse:
+    'https://cirrusapproachherokuprod.blob.core.windows.net/cirruslmsherokudevcontainer/content-items/images/default-course-hero-lg.jpg',
+};
 
 export default {
   title: 'Course Tab Enrollment History',
   component: CoursesTabEnrollmentHistoryComponent,
   decorators: [
     moduleMetadata({
-      imports: [FlexLayoutModule],
+      imports: [
+        FlexLayoutModule,
+        HttpClientModule,
+        BrowserAnimationsModule,
+        MatTableModule,
+      ],
+      declarations: [GenericResponsiveMatTableComponent, TableFormatPipe],
+      providers: [
+        UiDownloadService,
+        {
+          provide: 'environment',
+          useValue: mockEnvironment,
+        },
+      ],
     }),
   ],
 } as Meta<CoursesTabEnrollmentHistoryComponent>;

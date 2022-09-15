@@ -2,13 +2,14 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Meta, moduleMetadata, Story } from '@storybook/angular';
 import { SideNavComponent } from './side-nav.component';
+import { MatBadgeModule } from '@angular/material/badge';
 
 export default {
   title: 'SideNavComponent',
   component: SideNavComponent,
   decorators: [
     moduleMetadata({
-      imports: [FlexLayoutModule, BrowserAnimationsModule],
+      imports: [FlexLayoutModule, BrowserAnimationsModule, MatBadgeModule],
     }),
   ],
 } as Meta<SideNavComponent>;

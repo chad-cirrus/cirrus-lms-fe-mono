@@ -35,12 +35,24 @@ import { of } from 'rxjs';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTableModule } from '@angular/material/table';
+import { MatMenuModule } from '@angular/material/menu';
+import { HoursAndLandingsComponent } from '../../../../../libs/ui/src/lib/hours-and-landings/hours-and-landings.component';
+import { HoursLandingTypeToIconPipe } from '../../../../../libs/ui/src/lib/helpers/HoursLandingTypeToIcon.pipe';
+import { FilterComponent } from '../../../../../libs/ui/src/lib/filter/filter.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { FormatFilterPipe } from '../../../../../libs/ui/src/lib/format-filter.pipe';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { HoursLandingTypeToTextPipe } from '../../../../../libs/ui/src/lib/helpers/HoursLandingTypeToText.pipe';
 
 const mockEnvironment = {
   production: false,
   baseUrl: 'http://cirrusapproach.local:3000',
   profile:
     'https://cirfullsb-cirrusaircraftvpo.cs41.force.com/approachsso/s/profile/',
+  defaultMobileLesson:
+    'https://cirrusapproachherokuprod.blob.core.windows.net/cirruslmsherokudevcontainer/content-items/images/default-lesson-hero-mobile.jpg',
+  defaultDesktopLesson:
+    'https://cirrusapproachherokuprod.blob.core.windows.net/cirruslmsherokudevcontainer/content-items/images/default-lesson-hero-desktop.jpg',
   defaultMobileCourse:
     'https://cirrusapproachherokuprod.blob.core.windows.net/cirruslmsherokudevcontainer/content-items/images/default-course-hero-sm.jpg',
   defaultDesktopCourse:
@@ -476,11 +488,14 @@ export default {
         BrowserAnimationsModule,
         MatIconModule,
         MatIconRegistryModule,
-        RouterModule.forRoot([]),
+        RouterModule.forRoot([], { useHash: true }),
         StoreModule.forRoot(coursesReducers),
         FlexLayoutModule,
         MatProgressBarModule,
         MatTableModule,
+        MatMenuModule,
+        ReactiveFormsModule,
+        MatCheckboxModule,
       ],
       declarations: [
         CourseLandingPageComponent,
@@ -498,6 +513,11 @@ export default {
         CoursesTabEnrollmentHistoryComponent,
         GenericResponsiveMatTableComponent,
         TableFormatPipe,
+        HoursAndLandingsComponent,
+        HoursLandingTypeToIconPipe,
+        HoursLandingTypeToTextPipe,
+        FilterComponent,
+        FormatFilterPipe,
       ],
       providers: [
         { provide: APP_BASE_HREF, useValue: '/' },

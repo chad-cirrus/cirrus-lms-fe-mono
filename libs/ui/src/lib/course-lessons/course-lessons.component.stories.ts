@@ -10,6 +10,10 @@ import { CourseLessonContentCountComponent } from '../course-lesson-content-coun
 import { CourseLessonItemComponent } from '../course-lesson-item/course-lesson-item.component';
 import { MatIconRegistryModule } from '../mat-icon-registry.module';
 import { CourseLessonsComponent } from './course-lessons.component';
+import { FilterComponent } from '../filter/filter.component';
+import { FormatFilterPipe } from '../format-filter.pipe';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { ReactiveFormsModule } from '@angular/forms';
 
 const mockEnvironment = {
   production: false,
@@ -256,10 +260,14 @@ export default {
         MatIconRegistryModule,
         MatDividerModule,
         MatMenuModule,
+        MatCheckboxModule,
+        ReactiveFormsModule,
       ],
       declarations: [
         CourseLessonItemComponent,
         CourseLessonContentCountComponent,
+        FilterComponent,
+        FormatFilterPipe,
       ],
       providers: [
         {

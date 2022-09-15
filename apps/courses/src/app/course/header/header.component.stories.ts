@@ -4,6 +4,13 @@ import { CirrusMaterialModule, HeaderDropdownComponent } from '@cirrus/ui';
 
 import { Meta, moduleMetadata, Story } from '@storybook/angular';
 import { HeaderComponent } from './header.component';
+import { StoreModule } from '@ngrx/store';
+
+import { coursesReducers } from '../../store/reducers';
+import { UserMenusComponent } from './user-menus/user-menus.component';
+import { HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
+import { OverlayModule } from '@angular/cdk/overlay';
 
 export default {
   title: 'HeaderComponent',
@@ -14,8 +21,12 @@ export default {
         FlexLayoutModule,
         CirrusMaterialModule,
         BrowserAnimationsModule,
+        StoreModule.forRoot(coursesReducers),
+        HttpClientModule,
+        RouterModule.forRoot([], { useHash: true }),
+        OverlayModule,
       ],
-      declarations: [HeaderDropdownComponent],
+      declarations: [HeaderDropdownComponent, UserMenusComponent],
     }),
   ],
 } as Meta<HeaderComponent>;
