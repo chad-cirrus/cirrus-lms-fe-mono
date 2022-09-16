@@ -10,6 +10,8 @@ const mockEnvironment = {
   baseUrl: 'http://cirrusapproach.local:3000',
   profile:
     'https://cirfullsb-cirrusaircraftvpo.cs41.force.com/approachsso/s/profile/',
+  defaultLessonThumbnail:
+    'https://cirrusapproachherokuprod.blob.core.windows.net/cirruslmsherokudevcontainer/content-items/images/default-lesson-thumbnail.jpg',
   defaultMobileLesson:
     'https://cirrusapproachherokuprod.blob.core.windows.net/cirruslmsherokudevcontainer/content-items/images/default-lesson-hero-mobile.jpg',
   defaultDesktopLesson:
@@ -77,15 +79,34 @@ Ground.args = {
 export const Simulator = Template.bind({});
 Simulator.args = {
   courseLesson: {
-    id: 692,
-    title: 'Welcome To Your Cirrus Training',
-    order: 0,
+    completion_time: '2',
+    content_counts: {},
+    id: 1058,
     index: '1.1',
+    lesson_type: 3,
+    order: 0,
+    progress: { id: 0, status: 'completed' },
+    stage_id: 501,
+    subtitle: 'The Quick Brown Fox Jumped',
+    thumbnail_image_url:
+      'https://cirrusapproachherokuprod.blob.core.windows.net/cirruslmsherokudevcontainer/content-items/images/90c0a0c7068f836dd6e8d210f57f6cGoofy_football_pose.webp',
+    title: 'Dave Harms Simulator Lesson Edited Friday 16, 2022',
+  },
+};
+
+export const SimulatorDefaultThumbnail = Template.bind({});
+SimulatorDefaultThumbnail.args = {
+  courseLesson: {
+    completion_time: '2',
+    content_counts: {},
+    id: 1058,
+    index: '1.1',
+    lesson_type: 3,
+    order: 0,
+    progress: { id: 0, status: 'completed' },
+    stage_id: 501,
+    subtitle: 'The Quick Brown Fox Jumped',
     thumbnail_image_url: '',
-    lesson_type: 0,
-    completion_time: '1h 1m',
-    content_counts: { documents: 3 },
-    progress: { id: 1775463, status: 'completed' },
-    stage_id: 0,
+    title: 'Dave Harms Simulator Lesson Edited Friday 16, 2022',
   },
 };

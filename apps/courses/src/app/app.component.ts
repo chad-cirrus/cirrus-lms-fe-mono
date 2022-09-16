@@ -77,7 +77,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   loadingIndicator$ = merge(this.lessonStateBusy$);
 
-  collapse!: boolean;
+  collapse = false;
   showHamburgerMenu = false;
   @ViewChild('outletContainer') outletContainer!: ElementRef;
 

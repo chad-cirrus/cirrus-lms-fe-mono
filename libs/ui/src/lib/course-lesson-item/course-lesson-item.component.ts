@@ -25,6 +25,7 @@ export class CourseLessonItemComponent {
       [LESSON_TYPE.self_study]: 'Self Study',
       [LESSON_TYPE.ground]: 'Ground Assessment',
       [LESSON_TYPE.flight]: 'Flight Assessment',
+      [LESSON_TYPE.simulator]: 'Simulator',
     };
 
     return lessonDict[this.courseLesson.lesson_type];
@@ -39,7 +40,7 @@ export class CourseLessonItemComponent {
       this.courseLesson.thumbnail_image_url &&
       this.courseLesson.thumbnail_image_url.length > 0
         ? this.courseLesson.thumbnail_image_url
-        : this.environment.defaultMobileLesson + '';
+        : this.environment.defaultLessonThumbnail + '';
 
     return thumbnail;
   }

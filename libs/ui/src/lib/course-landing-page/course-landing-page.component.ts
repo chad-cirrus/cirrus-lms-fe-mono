@@ -4,7 +4,6 @@ import { ICourseOverview, ICoursePlayerConfig } from '@cirrus/models';
 import { produceConfig } from './produce-config';
 import { Breakpoints } from '@angular/cdk/layout';
 // eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
-import { environment } from '../../../../../apps/courses/src/environments/environment';
 import { BehaviorSubject } from 'rxjs';
 
 @Component({
@@ -21,13 +20,21 @@ export class CourseLandingPageComponent {
     thumbnail: 'courses/images/lesson-thumbnail.png',
   };
   background = new BehaviorSubject({});
+  background$ = this.background.asObservable();
 
   private _course!: ICourseOverview;
+  private _size = Breakpoints.Large;
 
   @Input()
   set course(value: ICourseOverview) {
     this._course = value;
-    this.coursePlayerConfig = produceConfig(value.next_lesson);
+    if (
+      value.next_lesson !== null &&
+      Object.keys(value.next_lesson).length > 0
+    ) {
+      this.coursePlayerConfig = produceConfig(value.next_lesson);
+    }
+    this.setBackground();
   }
 
   get course() {
@@ -36,20 +43,8 @@ export class CourseLandingPageComponent {
 
   @Input()
   set size(value: string) {
-    const uri =
-      value === Breakpoints.XSmall
-        ? this.course.mobile_hero_image_url || environment.defaultMobileCourse
-        : this.course.desktop_hero_image_url ||
-          environment.defaultDesktopCourse;
-    this.background.next({
-      ['background']: `linear-gradient(90deg, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0.33) 44.11%, rgba(0, 0, 0, 0) 61.94%),
-                  linear-gradient(360deg,#000000 1.79%,rgba(0,0,0,.24) 19.37%,rgba(0,0,0,0) 25%),
-                  url(${encodeURI(uri)}) no-repeat center`,
-      ['background-size']: 'cover',
-      ['-webkit-background-size']: 'cover',
-      ['-moz-background-size']: 'cover',
-      ['-o-background-size']: 'cover',
-    });
+    this._size = value;
+    this.setBackground();
   }
 
   constructor(private router: Router) {}
@@ -62,5 +57,21 @@ export class CourseLandingPageComponent {
     this.router.navigate([
       `/courses/${this._course.id}/stages/${this._course.next_lesson.stage_id}/lessons/${this._course.next_lesson.id}`,
     ]);
+  }
+
+  private setBackground() {
+    const uri =
+      this._size === Breakpoints.XSmall
+        ? this.course.mobile_hero_image_url
+        : this.course.desktop_hero_image_url;
+    this.background.next({
+      ['background']: `linear-gradient(90deg, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0.33) 44.11%, rgba(0, 0, 0, 0) 61.94%),
+                  linear-gradient(360deg,#000000 1.79%,rgba(0,0,0,.24) 19.37%,rgba(0,0,0,0) 25%),
+                  url(${encodeURI(uri)}) no-repeat center`,
+      ['background-size']: 'cover',
+      ['-webkit-background-size']: 'cover',
+      ['-moz-background-size']: 'cover',
+      ['-o-background-size']: 'cover',
+    });
   }
 }

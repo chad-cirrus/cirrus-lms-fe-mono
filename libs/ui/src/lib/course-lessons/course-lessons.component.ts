@@ -7,7 +7,7 @@ import {
 } from '@cirrus/models';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 
-import { debounceTime, filter, map, startWith, tap } from 'rxjs/operators';
+import { debounceTime, map, startWith, tap } from 'rxjs/operators';
 import { StageLessonNavigationEvent } from '../StageLessonNavigationEvent';
 
 @Component({
@@ -42,8 +42,8 @@ export class CourseLessonsComponent implements OnInit {
 
   filterMenuSections!: FilterMenuSection[];
 
-  lessonsDisplayedCount!: number;
-  lessonsOverallCount!: number;
+  lessonsDisplayedCount = 0;
+  lessonsOverallCount = 0;
   showDropdown = true;
 
   @Output() navigate = new EventEmitter<StageLessonNavigationEvent>();

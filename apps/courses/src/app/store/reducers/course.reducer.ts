@@ -5,6 +5,7 @@ import {
   fetchCourseOverviewFailure,
   fetchCourseOverviewSuccess,
 } from '../actions/course.actions';
+import { environment } from '../../../environments/environment';
 
 export interface CourseState {
   busy: boolean;
@@ -48,13 +49,29 @@ export const initialCourseState: CourseState = {
   },
 };
 
+export const setCourseImages = (
+  courseOverview: ICourseOverview
+): ICourseOverview => ({
+  ...courseOverview,
+  desktop_hero_image_url:
+    courseOverview.desktop_hero_image_url !== null &&
+    courseOverview.desktop_hero_image_url.length > 0
+      ? courseOverview.desktop_hero_image_url
+      : environment.defaultDesktopCourse,
+  mobile_hero_image_url:
+    courseOverview.mobile_hero_image_url !== null &&
+    courseOverview.mobile_hero_image_url.length > 0
+      ? courseOverview.mobile_hero_image_url
+      : environment.defaultMobileCourse,
+});
+
 export const reducer = createReducer(
   initialCourseState,
   on(fetchCourseOverview, state => ({ ...state, busy: true, error: null })),
   on(fetchCourseOverviewSuccess, (state, { courseOverview }) => ({
     busy: false,
     error: null,
-    courseOverview,
+    courseOverview: setCourseImages(courseOverview),
   })),
   on(fetchCourseOverviewFailure, (state, { error }) => ({
     ...state,
