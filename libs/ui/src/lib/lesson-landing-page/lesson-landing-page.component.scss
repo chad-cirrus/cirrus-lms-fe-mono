@@ -63,6 +63,14 @@ mat-drawer {
       width: calc(100vw - 16px);
     }
 
+    .lesson-label {
+      display: inline-block;
+      background: #2E2E2E;
+      border-radius: 50px;
+      line-height: .8;
+      padding: 9px 17px;
+    }
+
     h1 {
       max-width: 18ch;
       margin-bottom: 20px;
@@ -218,6 +226,10 @@ cirrus-progress-card:last-child {
   .lesson-image {
     .content {
       padding: 48px 24px 0 24px;
+
+      .lesson-label {
+        margin-bottom: 10px;
+      }
 
       h1 {
         margin: 0 0 30px;

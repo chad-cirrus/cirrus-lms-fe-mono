@@ -40,6 +40,12 @@
       </div>
     </div>
     <div class="content">
+      <span 
+        class="xsmall lesson-label"
+        *ngIf="lesson.lesson_type === 3"
+      >
+        Simulator Lesson
+      </span>
       <h1>{{ lesson?.title }}</h1>
       <mat-divider></mat-divider>
       <p class="large">{{ lesson.subtitle }}</p>
