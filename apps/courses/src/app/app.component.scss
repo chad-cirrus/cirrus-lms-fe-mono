@@ -70,6 +70,7 @@ ul.student-name {
 .outlet-container {
   position: relative;
   overflow-y: scroll;
+  overflow-x: hidden;
   height: calc(100% - 55px);
   padding-bottom: 60px;
   &.stop-scrolling {
