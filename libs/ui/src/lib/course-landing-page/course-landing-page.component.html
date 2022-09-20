@@ -4,13 +4,7 @@
     <div class="title">My Courses</div>
   </div>
 </div>
-
-<div
-  class="lesson-image"
-  [ngStyle]="background$ | async"
-  fxLayout="column"
-  fxLayoutAlign="center start"
->
+<div class="lesson-image" [ngStyle]="background" fxLayout="column" fxLayoutAlign="center start">
   <div class="course-title">
     <h1>{{ course.title }}</h1>
   </div>
@@ -18,12 +12,7 @@
   <div class="course-sub-title">
     <h3>{{ course.subtitle }}</h3>
   </div>
-  <cirrus-course-progress
-    [lessonStats]="course.lessons_stats"
-  ></cirrus-course-progress>
-  <cirrus-course-player
-    [config]="coursePlayerConfig"
-    (navigateToNextLesson)="navigateToNextLesson()"
-  >
+  <cirrus-course-progress [lessonStats]="course.lessons_stats"></cirrus-course-progress>
+  <cirrus-course-player [config]="coursePlayerConfig" (navigateToNextLesson)="navigateToNextLesson()">
   </cirrus-course-player>
 </div>
