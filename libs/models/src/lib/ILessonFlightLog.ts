@@ -1,5 +1,3 @@
-
-
 export interface ILessonFlightLog {
   aircraft_make: string;
   aircraft_model: string;
@@ -8,8 +6,8 @@ export interface ILessonFlightLog {
   completed_actual_instrument_hours: number;
   completed_cross_country_hours: number;
   completed_cross_country_legs: number;
-  completed_day_landings: number
-  completed_day_takeoffs: number
+  completed_day_landings: number;
+  completed_day_takeoffs: number;
   completed_dual_received_hours: string;
   completed_ground_instruction_hours: string;
   completed_holding_patterns: number;
@@ -22,7 +20,7 @@ export interface ILessonFlightLog {
   completed_solo_hours: number;
   completed_total_hours: string;
   completed_track_nav_aid_hours: number;
-  flight_log_type: string;
+  flight_log_type: FlightLogType;
   from_airport: string;
   hobbs_in: string;
   hobbs_out: string;
@@ -31,9 +29,15 @@ export interface ILessonFlightLog {
   lesson_flight_log_date: string;
   route_path: string;
   to_airport: string;
-
+  displayTypeHours?: string | number;
 }
 
+export enum FlightLogType {
+  SelfStudy = 'self_study',
+  Ground = 'ground',
+  Flight = 'flight',
+  Simulator = 'simulator',
+}
 
 export interface Approaches {
   type: string;

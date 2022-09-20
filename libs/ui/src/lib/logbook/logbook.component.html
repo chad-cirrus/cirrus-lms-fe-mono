@@ -1,47 +1,53 @@
-
-
 <div class="container">
   <div *ngFor="let l of logbook; let i = index" class="logbook-item-container">
-    <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign.gt-xs="none center"  fxLayoutGap.xs="20px" >
-        <div class="date" fxFlex="27">
-          {{ l.lesson_flight_log_date | date: 'longDate' }}
-        </div>
-        <div class="log-type" fxFlex="17">{{ l.flight_log_type | titlecase }}</div>
-        <div fxLayout="row" fxLayoutGap="14px" fxFlex="40">
-          <div class="airport">{{ l.from_airport }}</div>
-          <img src="courses/images/svg/right-arrow.svg" height="20px" width="50px"/>
-          <div class="airport">{{ l.to_airport }}</div>
-        </div>
-        <div class="hours" fxFlex="13">{{ l.completed_total_hours }} hrs</div>
-        <div fxLayout="row" fxLayoutAlign.lt-md="center" class="caret-container">
-          <cdk-accordion class="example-accordion">
-            <cdk-accordion-item
-              #accordionItem="cdkAccordionItem"
-              class="example-accordion-item"
-              role="button"
-              tabindex="0"
-              [attr.id]="'accordion-header-' + l"
-              [attr.aria-expanded]="accordionItem.expanded"
-              [attr.aria-controls]="'accordion-body-' + l"
-            >
-              <div
-              class="caret"
-                (click)="accordionItem.toggle()"
-              >
-                <span>
-                  <img
-                    width="20.17px"
-                    [src]="
-                      accordionItem.expanded
-                        ? 'courses/images/svg/up-chevron.svg'
-                        : 'courses/images/svg/down-chevron.svg'
-                    "
-                  />
-                </span>
-              </div>
-            </cdk-accordion-item>
-          </cdk-accordion>
-        </div>
+    <div
+      fxLayout="row"
+      fxLayout.xs="column"
+      fxLayoutAlign.gt-xs="none center"
+      fxLayoutGap.xs="20px"
+    >
+      <div class="date" fxFlex="27">
+        {{ l.lesson_flight_log_date | date: 'longDate' }}
+      </div>
+      <div class="log-type" fxFlex="17">
+        {{ l.flight_log_type | titlecase }}
+      </div>
+      <div fxLayout="row" fxLayoutGap="14px" fxFlex="40">
+        <div class="airport">{{ l.from_airport }}</div>
+        <img
+          src="courses/images/svg/right-arrow.svg"
+          height="20px"
+          width="50px"
+        />
+        <div class="airport">{{ l.to_airport }}</div>
+      </div>
+      <div class="hours" fxFlex="13">{{ l.displayTypeHours }} hrs</div>
+      <div fxLayout="row" fxLayoutAlign.lt-md="center" class="caret-container">
+        <cdk-accordion class="example-accordion">
+          <cdk-accordion-item
+            #accordionItem="cdkAccordionItem"
+            class="example-accordion-item"
+            role="button"
+            tabindex="0"
+            [attr.id]="'accordion-header-' + l"
+            [attr.aria-expanded]="accordionItem.expanded"
+            [attr.aria-controls]="'accordion-body-' + l"
+          >
+            <div class="caret" (click)="accordionItem.toggle()">
+              <span>
+                <img
+                  width="20.17px"
+                  [src]="
+                    accordionItem.expanded
+                      ? 'courses/images/svg/up-chevron.svg'
+                      : 'courses/images/svg/down-chevron.svg'
+                  "
+                />
+              </span>
+            </div>
+          </cdk-accordion-item>
+        </cdk-accordion>
+      </div>
     </div>
 
     <div

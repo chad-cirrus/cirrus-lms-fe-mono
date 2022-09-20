@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ILessonFlightLog, ITask } from '@cirrus/models';
+import { FlightLogType, ILessonFlightLog, ITask } from '@cirrus/models';
 import { environment } from '../environments/environment';
 import { BehaviorSubject, forkJoin, Observable } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
 
 export interface ITasksRequest {
   course_attempt_id: number;
@@ -23,6 +24,20 @@ export class TaskService {
   tasksAndLogBooks$: Observable<[ITask[], ILessonFlightLog[]]> =
     this._tasksAndLogBooks.asObservable();
 
+  createDisplayTypeProperty(logbook: ILessonFlightLog) {
+    const { flight_log_type } = logbook;
+    if (flight_log_type === FlightLogType.Simulator) {
+      return logbook.completed_sim_hours;
+    }
+    if (flight_log_type === FlightLogType.Ground) {
+      return logbook.completed_ground_instruction_hours;
+    }
+    if (flight_log_type === FlightLogType.Flight) {
+      return logbook.completed_total_hours;
+    }
+    return '';
+  }
+
   getTasks(payload: ITasksRequest) {
     const { course_attempt_id, content_id, lesson_id, stage_id } = payload;
     return this.http.get<ITask[]>(
@@ -32,9 +47,20 @@ export class TaskService {
 
   getLogbook(payload: ITasksRequest) {
     const { course_attempt_id, content_id, lesson_id, stage_id } = payload;
-    return this.http.get<ILessonFlightLog[]>(
-      `${environment.baseUrl}/api/v4/flight_logs?course_attempt_id=${course_attempt_id}&content_id=${content_id}&lesson_id=${lesson_id}&stage_id=${stage_id}`
-    );
+    return this.http
+      .get<ILessonFlightLog[]>(
+        `${environment.baseUrl}/api/v4/flight_logs?course_attempt_id=${course_attempt_id}&content_id=${content_id}&lesson_id=${lesson_id}&stage_id=${stage_id}`
+      )
+      .pipe(
+        map(l => {
+          return l.map(logbook => {
+            return {
+              ...logbook,
+              displayTypeHours: this.createDisplayTypeProperty(logbook),
+            };
+          });
+        })
+      );
   }
 
   getTasksAndLogbook(payload: ITasksRequest): void {
