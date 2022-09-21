@@ -6,6 +6,7 @@ import { CourseState } from '../store/reducers/course.reducer';
 import { selectCourseOverview } from '../store/selectors/course.selector';
 import { StageLessonNavigationEvent } from '@cirrus/ui';
 import { selectScreenSize } from '../store/selectors/view.selector';
+import { selectCirrusUser } from '../store/selectors/cirrus-user.selector';
 
 @Component({
   selector: 'cirrus-course',
@@ -15,6 +16,7 @@ import { selectScreenSize } from '../store/selectors/view.selector';
 export class CourseComponent implements OnInit {
   courseOverview$ = this.store.select(selectCourseOverview);
   screenSize$ = this.store.select(selectScreenSize);
+  cirrusUser$ = this.store.select(selectCirrusUser);
 
   constructor(
     private route: ActivatedRoute,
@@ -24,9 +26,12 @@ export class CourseComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe(({ courseId }) => {
-      console.log(courseId);
-      this.store.dispatch(fetchCourseOverview({ courseId }));
+      this.setCourse(courseId);
     });
+  }
+
+  setCourse(courseId: number) {
+    this.store.dispatch(fetchCourseOverview({ courseId }));
   }
 
   navigateToLesson({ stageId, lessonId }: StageLessonNavigationEvent) {

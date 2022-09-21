@@ -20,11 +20,69 @@
   </div>
 
   <cirrus-course-progress
+    *ngIf="
+      course.progress.status !== PROGRESS_STATUS.completed;
+      else completedCourse
+    "
     [lessonStats]="course.lessons_stats"
   ></cirrus-course-progress>
   <cirrus-course-player
+    *ngIf="
+      course.progress.status !== PROGRESS_STATUS.completed;
+      else downloadDocument
+    "
     [config]="coursePlayerConfig"
     (navigateToNextLesson)="navigateToNextLesson()"
   >
   </cirrus-course-player>
 </div>
+
+<ng-template #completedCourse>
+  <div class="completed-course-announcement">
+    <p fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
+      <mat-icon svgIcon="completed"></mat-icon>
+      <span
+        *ngIf="course?.completed_at && course.completed_at.length > 0"
+        class="congrats-text"
+      >
+        Congrats! You've completed this course as of
+        {{ course.completed_at | date: 'MM/dd/yy' }}
+      </span>
+    </p>
+  </div>
+</ng-template>
+
+<ng-template #downloadDocument>
+  <div class="download-document">
+    <div *ngIf="loading$ | async; else value">
+      <mat-spinner color="accent" [diameter]="35"></mat-spinner>
+    </div>
+    <ng-template #value>
+      <div fxLayout="row" fxLayoutAlign="start center" (click)="downloadCert()">
+        <mat-icon class="download_arrow" svgIcon="download_arrow"></mat-icon
+        ><span class="download">Download Certificate</span>
+      </div>
+    </ng-template>
+
+    <div
+      fxLayout="row"
+      fxLayoutAlign="start center"
+      (click)="downloadTranscript()"
+    >
+      <mat-icon class="download_arrow" svgIcon="download_arrow"></mat-icon
+      ><span class="download">Download Transcript</span>
+    </div>
+  </div>
+  <div class="re-enroll" *ngIf="course.can_reenroll">
+    <cirrus-cta-button
+      (click)="reEnroll()"
+      class="cta-btn"
+      [text]="'Re-Enroll'"
+      [icon]="reEnrollIconUrl"
+    ></cirrus-cta-button>
+    <div class="expires-title">
+      Certificate Expires:
+      <span class="expires-value">{{ '12/12/23' }}</span>
+    </div>
+  </div>
+</ng-template>

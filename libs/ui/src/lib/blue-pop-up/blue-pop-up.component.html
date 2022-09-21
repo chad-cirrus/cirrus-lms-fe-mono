@@ -1,0 +1,14 @@
+<div class="pop-up-container">
+  <div class="title">{{ data.title }}</div>
+  <div class="subTitle">{{ data.subTitle }}</div>
+
+  <div class="body" [innerHTML]="html"></div>
+
+  <div class="action-btn-container">
+    <div>
+      <div *ngFor="let btn of data.buttons; let i = index">
+        <button (click)="close(btn)" [ngClass]="'btn' + i">{{ btn }}</button>
+      </div>
+    </div>
+  </div>
+</div>

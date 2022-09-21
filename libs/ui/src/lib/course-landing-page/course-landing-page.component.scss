@@ -1,8 +1,46 @@
-@use '../styles/variables'as var;
+@use '../styles/variables' as var;
 
 .lesson-image {
   padding: 0 12px;
   width: 100%;
+}
+
+.download-document {
+  display: flex;
+  gap: 16px;
+}
+
+.congrats-text {
+  font-size: 1.125rem;
+  color: var.$secondary-font-color-light-grey;
+}
+
+.download {
+  color: var.$secondary-font-color-light-grey;
+}
+
+.re-enroll {
+  display: flex;
+  margin-top: 21px;
+  align-items: center;
+}
+
+.expires-title {
+  font-size: 1.063rem;
+  font-family: var.$bqmedium-font;
+  color: var.$secondary-font-color-light-grey;
+}
+
+.expires-value {
+  font-size: 1rem;
+}
+
+.cta-btn {
+  margin-right: 21px;
+}
+
+.download_arrow {
+  margin-right: 8.38px;
 }
 
 h3,
@@ -35,6 +73,16 @@ cirrus-course-progress {
   margin-bottom: 12px;
 }
 
+.completed-course-announcement {
+  p {
+    line-height: 26px;
+    letter-spacing: 0.02em;
+    .mat-icon {
+      height: 18px;
+    }
+  }
+}
+
 @media (min-width: 960px) {
   .lesson-image {
     padding: 0 24px;
@@ -58,34 +106,23 @@ cirrus-course-progress {
   }
 }
 
-.breadcrumb-container {
-  padding: 16px 22px;
-
-  @media (min-width: 600px) {
-    padding: 25px 40px;
+@media (max-width: 600px) {
+  .congrats-text {
+    font-size: 0.875rem;
   }
 
-  @media (min-width: 960px) {
-    padding: 25px 65px;
-  }
-}
-
-.breadcrumb-item-container {
-  border-bottom: 1px solid transparent;
-  display: flex;
-  max-width: max-content;
-
-  &:hover {
-    border-bottom: 1px solid #fff;
+  .download-document {
+    flex-direction: column;
+    gap: 27px;
   }
 
-  .title {
-    color: #FFFFFF;
-    cursor: pointer;
-    font-family: 'Akzidenz-Grotesk BQ';
-    font-size: 16px;
-    line-height: 130%;
-    letter-spacing: 0.02em;
-    margin-left: 15px;
+  .re-enroll {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 28px;
+  }
+  .expires-title {
+    font-size: 0.875rem;
   }
 }

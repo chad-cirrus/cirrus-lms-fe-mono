@@ -115,6 +115,12 @@ export class MatIconRegistryModule {
         )
       )
       .addSvgIcon(
+        'download_arrow',
+        this.domSanitizer.bypassSecurityTrustResourceUrl(
+          'courses/images/svg/download-arrow.svg'
+        )
+      )
+      .addSvgIcon(
         'landings',
         this.domSanitizer.bypassSecurityTrustResourceUrl(
           'courses/images/svg/landing_hours_icon.svg'

@@ -1,10 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
-@use '~@angular/material/theming'as material;
-@use 'variables'as *;
+@use '~@angular/material/theming' as material;
+@use 'variables' as *;
 @use 'fonts';
 @use 'palette';
 
-@use './app/app.component.scss-theme.scss'as app-component;
+@use './app/app.component.scss-theme.scss' as app-component;
 
 // @use 'cirrus-ui-module' as cirrus-ui;
 
@@ -104,4 +104,9 @@ img[type='button'] {
 .mat-tab-label-active {
   color: $primary-font-color !important;
   opacity: 1 !important;
+}
+
+.blue-popup {
+  background-color: $cirrus-blue;
+  color: $primary-font-color;
 }

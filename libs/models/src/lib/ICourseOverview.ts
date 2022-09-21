@@ -11,10 +11,12 @@ export interface ICourseOverview {
   subtitle: string;
   has_agreement: boolean;
   certificate: ICertificate;
+  completed_at: string;
   course_content_stats: ICourseContentStat[];
   agreement_body: string;
   overview?: string;
   completion_time?: string;
+  course_attempt: { id: number };
   minimum_flight_hours: number;
   desktop_hero_image_url: string;
   mobile_hero_image_url: string;
@@ -41,6 +43,7 @@ export interface ICourseOverviewStage {
 }
 
 export interface ICertificate {
+  id?: number;
   expiration: string | null;
 }
 

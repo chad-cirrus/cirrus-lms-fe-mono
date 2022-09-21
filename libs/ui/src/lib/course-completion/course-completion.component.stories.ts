@@ -35,7 +35,7 @@ class LaunchDialogComponent {
 }
 
 export default {
-  title: 'CourseCompletion',
+  title: 'Course Completion Dialog (from lesson view)',
   component: LaunchDialogComponent,
   decorators: [
     moduleMetadata({

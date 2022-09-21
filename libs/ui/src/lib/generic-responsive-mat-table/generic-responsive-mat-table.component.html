@@ -17,7 +17,8 @@
             <div
               *ngIf="
                 (loading$ | async) &&
-                  row[column.mat_col_name]?.id === selectedId;
+                  row[column.mat_col_name]?.id ===
+                    (selectedCourseAttemptId$ | async);
                 else value
               "
             >

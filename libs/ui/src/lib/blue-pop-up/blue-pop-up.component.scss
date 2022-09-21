@@ -1,0 +1,50 @@
+@use '../styles/variables' as *;
+
+.pop-up-container {
+  padding: 40px 45px 53px 45px;
+  background-color: $cirrus-blue;
+}
+
+.title {
+  font-size: 1.875rem;
+  display: flex;
+  justify-content: center;
+}
+
+.subTitle {
+  padding-top: 17px;
+  font-size: 1rem;
+  text-align: center;
+}
+
+.body {
+  padding-top: 34px;
+  font-size: 0.875rem;
+}
+
+.action-btn-container {
+  padding-top: 34px;
+  display: flex;
+  justify-content: center;
+
+  button {
+    height: 40px;
+    width: 160px;
+    border-radius: 60px;
+    border: none;
+    font-family: $bqmedium-font;
+    font-size: 1.063rem;
+  }
+
+  .btn0 {
+    background-color: $modal-btn;
+    color: $black;
+  }
+
+  .btn1 {
+    background-color: $cirrus-blue;
+    color: $primary-font-color;
+    border: 1px solid $primary-font-color;
+    margin-top: 27px;
+  }
+}

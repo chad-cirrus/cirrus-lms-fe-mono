@@ -1,5 +1,6 @@
 import { CourseComponent } from './course.component';
 import { Meta, moduleMetadata, Story } from '@storybook/angular';
+// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
 import {
   CourseContentProgressCircleComponent,
   CourseLandingPageComponent,
@@ -26,15 +27,13 @@ import { RouterModule } from '@angular/router';
 import { APP_BASE_HREF } from '@angular/common';
 import { StoreModule } from '@ngrx/store';
 import { coursesReducers } from '../store/reducers';
-import {
-  HoursAndLandingStatType,
-  ICourseOverview,
-  PROGRESS_STATUS,
-} from '@cirrus/models';
 import { of } from 'rxjs';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTableModule } from '@angular/material/table';
+// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+import { course351 } from '../../../../../libs/ui/src/lib/mock-data/mock-courses.data';
+
 import { MatMenuModule } from '@angular/material/menu';
 import { HoursAndLandingsComponent } from '../../../../../libs/ui/src/lib/hours-and-landings/hours-and-landings.component';
 import { HoursLandingTypeToIconPipe } from '../../../../../libs/ui/src/lib/helpers/HoursLandingTypeToIcon.pipe';
@@ -58,6 +57,7 @@ const mockEnvironment = {
   defaultDesktopCourse:
     'https://cirrusapproachherokuprod.blob.core.windows.net/cirruslmsherokudevcontainer/content-items/images/default-course-hero-lg.jpg',
 };
+
 
 const course: ICourseOverview = {
   id: 351,
@@ -537,7 +537,7 @@ const Template: Story<CourseComponent> = (args: CourseComponent) => ({
 
 export const Primary = Template.bind({});
 Primary.args = {
-  courseOverview$: of(course),
+  courseOverview$: of(course351),
 };
 
 export const Desktop = Template.bind({});

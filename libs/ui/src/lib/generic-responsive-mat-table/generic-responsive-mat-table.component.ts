@@ -37,7 +37,7 @@ export class GenericResponsiveMatTableComponent implements AfterViewInit {
     return this._data;
   }
 
-  selectedId!: number;
+  selectedCourseAttemptId$ = this.uiDownloadService.selectedCourseAttemptId$;
 
   constructor(private uiDownloadService: UiDownloadService) {}
 
@@ -51,8 +51,9 @@ export class GenericResponsiveMatTableComponent implements AfterViewInit {
   }
 
   valueSelect($event: MouseEvent, value: any, type: Column) {
+    console.log('vai;e', value);
     if (value.id) {
-      this.selectedId = value.id;
+      this.uiDownloadService.setSelectedId(value.id);
     }
     const obj = { value, type };
     $event.stopPropagation();

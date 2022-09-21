@@ -10,11 +10,18 @@ export class UiDownloadService {
   private loadingSubject = new BehaviorSubject(false);
   loading$ = this.loadingSubject.asObservable();
 
+  private selectedIdSubject = new BehaviorSubject(0);
+  selectedCourseAttemptId$ = this.selectedIdSubject.asObservable();
+
   constructor(
     private http: HttpClient,
     @Inject('environment') environment: Record<string, unknown>
   ) {
     this.environment = environment;
+  }
+
+  setSelectedId(value: number) {
+    this.selectedIdSubject.next(value);
   }
 
   downloadCertificate(course_attempt_id: number) {
@@ -28,4 +35,30 @@ export class UiDownloadService {
       finalize(() => this.loadingSubject.next(false))
     );
   }
+
+  downloadTranscript(course_attempt_id: number) {
+    // Todo: implement get transcript when api is ready
+    // const url = `${this.environment['baseUrl']}/api/v4/pdf/transcript`;
+    // const queryParams = { course_attempt_id };
+    // return of(null).pipe(
+    //   tap(() => this.loadingSubject.next(true)),
+    //   concatMap(() =>
+    //     this.http.get(url, { params: queryParams, responseType: 'blob' })
+    //   ),
+    //   finalize(() => this.loadingSubject.next(false))
+    // );
+  }
+
+  courseReEnroll(payload: ReEnrollPayload) {
+    const { course_id, user_id } = payload;
+    return this.http.post(
+      `${this.environment.baseUrl}/api/v3/courses/reenroll/${course_id}/${user_id}`,
+      {}
+    );
+  }
+}
+
+interface ReEnrollPayload {
+  course_id: number;
+  user_id: number;
 }

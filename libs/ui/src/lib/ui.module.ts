@@ -78,6 +78,7 @@ import { FormatFilterPipe } from './format-filter.pipe';
 import { HoursLandingTypeToTextPipe } from './helpers/HoursLandingTypeToText.pipe';
 import { HoursLandingTypeToIconPipe } from './helpers/HoursLandingTypeToIcon.pipe';
 import { ClickOutsideDirective } from './clickoutside.directive';
+import { BluePopUpComponent } from './blue-pop-up/blue-pop-up.component';
 
 @NgModule({
   imports: [
@@ -151,6 +152,7 @@ import { ClickOutsideDirective } from './clickoutside.directive';
     FilterComponent,
     FormatFilterPipe,
     ClickOutsideDirective,
+    BluePopUpComponent,
   ],
   exports: [
     LessonLandingPageComponent,
@@ -205,6 +207,7 @@ import { ClickOutsideDirective } from './clickoutside.directive';
     FilterComponent,
     FormatFilterPipe,
     ClickOutsideDirective,
+    BluePopUpComponent,
   ],
   providers: [
     { provide: MAT_DIALOG_DATA, useValue: {} },
