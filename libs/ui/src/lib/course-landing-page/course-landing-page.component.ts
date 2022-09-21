@@ -32,7 +32,10 @@ export class CourseLandingPageComponent {
       value.next_lesson !== null &&
       Object.keys(value.next_lesson).length > 0
     ) {
-      this.coursePlayerConfig = produceConfig(value.next_lesson);
+      this.coursePlayerConfig = produceConfig(
+        value.next_lesson,
+        value.progress
+      );
     }
     this.setBackground();
   }

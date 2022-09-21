@@ -237,3 +237,35 @@ export const course466: ICourseOverview = {
     progress: { id: -1, status: 'not_started' },
   },
 };
+
+export const blankCourse: ICourseOverview = {
+  id: 0,
+  name: 'name',
+  major_version: 0,
+  minor_version: 0,
+  title: 'title',
+  subtitle: 'subtitle',
+  has_agreement: true,
+  certificate: {
+    expiration: null,
+  },
+  course_content_stats: [],
+  agreement_body: '',
+  overview: '',
+  completion_time: '',
+  minimum_flight_hours: 0,
+  desktop_hero_image_url: '',
+  mobile_hero_image_url: '',
+  thumbnail_image_url: '',
+  can_reenroll: false,
+  hours_and_landings_stats: [],
+  lessons_stats: {
+    completed: 0,
+    total: 0,
+  },
+  summary_counts: {},
+  stages: [],
+  progress: { id: 0, status: PROGRESS_STATUS.not_started },
+  enrollments: [],
+  next_lesson: {},
+};
