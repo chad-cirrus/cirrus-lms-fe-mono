@@ -1,0 +1,169 @@
+<div
+  [ngClass]="
+    type === 'hamburger' ? 'sidenav-container-hamburger' : 'sidenav-container'
+  "
+  fxLayout="column"
+  fxLayoutAlign="space-between"
+>
+  <div
+    fxLayout="column"
+    [fxLayoutAlign]="
+      type !== 'hamburger' ? 'space-between center' : 'space-between'
+    "
+  >
+    <div>
+      <div
+        [ngClass]="
+          collapse && type !== 'hamburger'
+            ? 'menu-items-collapsed'
+            : 'menu-items-expanded'
+        "
+      >
+        <div
+          fxLayout="row"
+          fxLayoutGap="10px"
+          routerLink="courses/recent-activity"
+          class="image-container"
+          routerLinkActive="active"
+          (click)="dismissHamburgerMenu()"
+        >
+          <img
+            src="images/svg/recent-activity.svg"
+            height="23px"
+            width="23px"
+          />
+          <span *ngIf="!collapse || type === 'hamburger'">Recent Activity</span>
+        </div>
+        <div
+          fxLayout="row"
+          fxLayoutGap="10px"
+          *ngIf="cirrusUser.role !== 'pilot'"
+          routerLink="my-students"
+          class="image-container"
+          routerLinkActive="active"
+          (click)="dismissHamburgerMenu()"
+        >
+          <img src="images/svg/my-student.svg" height="23px" width="23px" />
+          <span *ngIf="!collapse || type === 'hamburger'">My Students</span>
+        </div>
+        <div
+          fxLayout="row"
+          fxLayoutGap="10px"
+          routerLink="my-courses"
+          class="image-container"
+          routerLinkActive="active"
+        >
+          <img src="images/svg/my-courses.svg" height="23px" width="23px" />
+          <span *ngIf="!collapse || type === 'hamburger'">My Courses</span>
+        </div>
+        <div
+          fxLayout="row"
+          fxLayoutGap="10px"
+          routerLink="course-catalog"
+          class="image-container"
+          routerLinkActive="active"
+        >
+          <img src="images/svg/catalog.svg" height="23px" width="23px" />
+          <span *ngIf="!collapse || type === 'hamburger'">Course Catalog</span>
+        </div>
+        <div
+          fxLayout="row"
+          fxLayoutGap="10px"
+          routerLink="training-partners"
+          class="image-container"
+          routerLinkActive="active"
+        >
+          <img src="images/svg/instructor.svg" height="23px" width="23px" />
+          <span *ngIf="!collapse || type === 'hamburger'"
+            >Training Partners</span
+          >
+        </div>
+        <div
+          fxLayout="row"
+          fxLayoutGap="10px"
+          class="image-container"
+          routerLinkActive="active"
+          routerLink="library"
+        >
+          <img
+            src="images/svg/library.svg"
+            height="23px"
+            width="23px"
+            routerLink="courses/library"
+          />
+          <span *ngIf="!collapse || type === 'hamburger'">Library</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div [ngClass]="type === 'hamburger' ? '' : 'options-container'">
+    <div *ngIf="type !== 'hamburger'" class="border"></div>
+
+    <div
+      *ngIf="!collapse; else collapsed"
+      class="options"
+      fxLayout="row"
+      fxLayoutAlign="space-between center"
+      class="image-container"
+    >
+      <div fxLayout="row" fxLayoutGap="25px" class="image-container">
+        <span
+          class="alarm-badge"
+          matBadge="{{ notificationCount > 0 ? notificationCount : '' }}"
+          matBadgeColor="warn"
+          matBadgeOverlap="false"
+          ><img src="images/svg/alarm.svg"
+        /></span>
+        <img src="images/svg/clarity_help-line.svg" routerLink="help-center" />
+      </div>
+      <div class="image-container toggle-container">
+        <img
+          [src]="
+            collapse
+              ? 'images/svg/fluent_panel-right-expand-28-regular.svg'
+              : 'images/svg/fluent_panel-left-expand-28-regular.svg'
+          "
+          (click)="toggleCollapse()"
+        />
+      </div>
+    </div>
+  </div>
+  <ng-template #collapsed>
+    <div
+      [ngClass]="
+        type === 'hamburger' ? 'menu-items-expanded' : 'menu-items-collapsed'
+      "
+    >
+      <div fxLayout="row" fxLayoutGap="10px" (click)="dismissHamburgerMenu()">
+        <span
+          matBadge="{{ notificationCount > 0 ? notificationCount : '' }}"
+          matBadgeColor="warn"
+          [matBadgeOverlap]="type === 'hamburger'"
+          ><img src="images/svg/alarm.svg"
+        /></span>
+        <span *ngIf="type === 'hamburger'">Notifications</span>
+      </div>
+      <div fxLayout="row" fxLayoutGap="10px" routerLink="help-center">
+        <img
+          src="images/svg/clarity_help-line.svg"
+          height="23px"
+          width="23px"
+        />
+        <span *ngIf="type === 'hamburger'">Help Center</span>
+      </div>
+      <div *ngIf="!disableToggle">
+        <img
+          height="23px"
+          width="23px"
+          [src]="
+            collapse
+              ? 'images/svg/fluent_panel-right-expand-28-regular.svg'
+              : 'images/svg/fluent_panel-left-expand-28-regular.svg'
+          "
+          (click)="toggleCollapse()"
+        />
+      </div>
+    </div>
+  </ng-template>
+</div>

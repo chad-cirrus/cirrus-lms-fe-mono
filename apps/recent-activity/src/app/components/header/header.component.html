@@ -1,0 +1,37 @@
+<div
+  class="header-container"
+  fxLayout="row"
+  fxLayoutAlign="space-between center"
+>
+  <img src="images/svg/Group 1333.svg" />
+  <div
+    fxLayout="row"
+    fxLayoutGap="5px"
+    fxLayoutAlign="space-between center"
+    class="dropdown-hamburger-container"
+  >
+    <div
+      [ngClass]="
+        isDisplayingDropdown
+          ? 'hamburger-menu-container-active'
+          : 'hamburger-menu-container'
+      "
+    >
+      <cirrus-user-menus
+        [cirrusUser]="cirrusUser"
+        [cirrusImpersonationReturnUser]="cirrusImpersonationReturnUser"
+        (displayPanel)="toggleDropdownDisplay($event)"
+      ></cirrus-user-menus>
+    </div>
+    <div
+      *ngIf="isScreenSmall$ | async"
+      [ngClass]="isDisplayingHamburger ? 'dropdown-active' : 'dropdown'"
+    >
+      <cirrus-hamburger-menu
+        [cirrusUser]="cirrusUser"
+        [notificationCount]="notificationCount"
+        (displayHamburger)="toggleHamburgerDisplay($event)"
+      ></cirrus-hamburger-menu>
+    </div>
+  </div>
+</div>

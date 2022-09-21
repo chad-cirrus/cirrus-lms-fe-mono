@@ -4,6 +4,7 @@
     <div class="title">My Courses</div>
   </div>
 </div>
+
 <div
   class="lesson-image"
   [ngStyle]="background$ | async"
@@ -17,6 +18,7 @@
   <div class="course-sub-title">
     <h3>{{ course.subtitle }}</h3>
   </div>
+
   <cirrus-course-progress
     [lessonStats]="course.lessons_stats"
   ></cirrus-course-progress>

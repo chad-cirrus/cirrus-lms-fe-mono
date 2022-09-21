@@ -1,0 +1,15 @@
+<mat-tab-group>
+  <mat-tab label="Logbook">
+    <cirrus-logbook
+      [logbookStats]="overallProgress?.logbook_stats!"
+    ></cirrus-logbook>
+  </mat-tab>
+  <mat-tab label="Coursework">
+    <cirrus-coursework
+      [courseWorkStats]="overallProgress?.course_work_stats!"
+    ></cirrus-coursework>
+  </mat-tab>
+  <mat-tab label="IACRA">
+    <cirrus-iacra [iacraStats]="overallProgress?.iacra_stats!"></cirrus-iacra>
+  </mat-tab>
+</mat-tab-group>

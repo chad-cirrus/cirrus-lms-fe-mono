@@ -1,0 +1,48 @@
+<div
+  cdkOverlayOrigin
+  #originOverlay="cdkOverlayOrigin"
+  (click)="toggleMenu()"
+  class="hamburger-menu-icon-container"
+>
+  <div
+    [ngClass]="
+      (showPanel$ | async)! ? 'active-close' : 'hamburger-menu-icon-container'
+    "
+  >
+    <img
+      [src]="
+        (showPanel$ | async)!
+          ? 'images/svg/close.svg'
+          : 'images/hamburger-menu.png'
+      "
+      fxLayoutGap="16px"
+      height="12.67px"
+      width="18.67"
+    />
+  </div>
+</div>
+<ng-template
+  cdkConnectedOverlay
+  cdkConnectedOverlayHasBackdrop
+  cdkConnectedOverlayBackdropClass="cdk-overlay-transparent-backdrop"
+  [cdkConnectedOverlayOrigin]="originOverlay"
+  [cdkConnectedOverlayOpen]="(showPanel$ | async)!"
+>
+  <section>
+    <div class="dropdown-container">
+      <cirrus-menu-slider
+        [type]="'hamburger'"
+        [activePane]="isLeftVisible ? 'left' : 'right'"
+      >
+        <div leftPane>
+          <cirrus-side-nav
+            [type]="'hamburger'"
+            (emitDismissHamburgerMenu)="toggleMenu()"
+            [notificationCount]="notificationCount"
+            [cirrusUser]="cirrusUser"
+          ></cirrus-side-nav>
+        </div>
+      </cirrus-menu-slider>
+    </div>
+  </section>
+</ng-template>

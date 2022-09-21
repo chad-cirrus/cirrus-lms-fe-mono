@@ -1,0 +1,38 @@
+:host {
+  display: block;
+  overflow: hidden;
+}
+
+.dropdown-container {
+  padding-top: 10px;
+  width: 100%;
+  min-height: 25rem;
+  box-sizing: border-box;
+}
+
+.dropdown-hamburger-container {
+  height: 100%;
+}
+
+.hamburger-menu-icon-container {
+  height: 100%;
+}
+
+.menu-item {
+  width: 234px;
+  height: 53px;
+  padding-top: 1rem;
+  padding-left: 1rem;
+  padding-right: 0.5rem;
+  color: white;
+  background-color: black;
+  cursor: pointer;
+}
+
+.menu-item:hover {
+  background-color: black;
+}
+
+.active-close {
+  background-color: black;
+}

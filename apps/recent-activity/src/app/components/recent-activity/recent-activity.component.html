@@ -1,0 +1,36 @@
+<div class="container">
+  <ng-container
+    *ngIf="
+      recentActivityNotifications$ | async as recentActivityNotifications;
+      else noRa
+    "
+  >
+    <div>
+      <div>Welcome Back, Andrew</div>
+      <div>Cirrus flight hours</div>
+    </div>
+
+    <cirrus-courses-in-progress></cirrus-courses-in-progress>
+
+    <cirrus-notifications
+      [notifications]="recentActivityNotifications[1]"
+    ></cirrus-notifications>
+
+    <cirrus-achievements
+      [achievments]="recentActivityNotifications[0]?.achievements!"
+    ></cirrus-achievements>
+
+    <cirrus-overall-progress
+      [overallProgress]="recentActivityNotifications[0]?.overall_progress!"
+    ></cirrus-overall-progress>
+
+    <cirrus-flight-hours-chart></cirrus-flight-hours-chart>
+  </ng-container>
+</div>
+
+<ng-template #noRa>
+  <div>
+    <div>Welcome Back, Andrew</div>
+    <div>Cirrus flight hours</div>
+  </div>
+</ng-template>

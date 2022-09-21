@@ -9,9 +9,10 @@
     "serve": "nx serve",
     "serve:storybook:ui": "nx storybook ui --projectBuildConfig=ui:build-storybook",
     "serve:storybook:courses": "nx storybook courses --projectBuildConfig=courses:build-storybook --port 4401",
+    "serve:storybook:recent-activity": "nx storybook recent-activity --projectBuildConfig=recent-activity:build-storybook --port 4402",
     "start": "nx serve:production",
     "build": "bash ./build.sh",
-    "build-projects": "nx run-many --target=build --projects=courses,atc",
+    "build-projects": "nx run-many --target=build --projects=courses,atc,recent-activity",
     "build-storybook": "ng build-storybook ui --projectBuildConfig=ui:build-storybook",
     "test": "nx test"
   },

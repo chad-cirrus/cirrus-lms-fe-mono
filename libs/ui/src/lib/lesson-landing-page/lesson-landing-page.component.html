@@ -1,4 +1,5 @@
 <div *ngIf="lesson" [ngStyle]="{ 'overflow-anchor': sideNavOpen ? 'none' : 'inherit' }">
+
   <div class="breadcrumb-container">
     <div class="breadcrumb-item-container" (click)="navigateToCourse()">
       <img src="courses/images/svg/chevron-left-white.svg" />
@@ -58,6 +59,7 @@
       <div class="intro-video-play" (click)="playIntroVideo()">
         <div fxLayout="row" fxLayoutGap="18px">
           <mat-icon svgIcon="play"></mat-icon>
+
           <div
             *ngIf="!lesson.student_intro_video?.title; else customIntroText"
             class="intro-video-subtitle"
@@ -66,6 +68,7 @@
           </div>
           <ng-template #customIntroText>
             <div class="intro-video-subtitle">
+
               {{ lesson.student_intro_video?.title }}
             </div>
           </ng-template>
