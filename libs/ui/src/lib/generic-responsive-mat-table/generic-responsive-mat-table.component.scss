@@ -1,102 +1,85 @@
-@use '../styles/variables' as *;
+@use '../styles/variables'as *;
 
 .gen-table {
-  padding: 0px 62px 0px 62px;
 
-  .mat-row,
-  .mat-footer-row {
-    border-bottom: 1px solid $border-grey;
+  // removes padding set in other style sheets we want to set it on the parent .mat-table 
+  // instead. Note that we're using a element selector intandem with a class nested within
+  // the main component parent class. This scopes these styles to only here and 
+  mat-cell.mat-cell,
+  mat-header-cell.mat-header-cell {
+    padding: 0;
   }
 
-  .mat-row::after {
-    display: none;
+  // sets the max width of the last column in the table to 100px.
+  // this moves these elements closer to the edge of table b/c they 
+  // are using the flex property justify content, so they  spread out 
+  // in a row to the width of their parent
+  @media (min-width: 600px) {
+
+    .mat-cell:last-child,
+    .mat-header-cell:last-child {
+      max-width: 100px;
+    }
+  }
+}
+
+mat-header-cell.mat-header-cell {
+  color: $primary-font-color;
+  font-family: 'Akzidenz-Grotesk BQ';
+  font-size: 14px;
+  line-height: 19px;
+  letter-spacing: -0.005em;
+  text-transform: uppercase;
+}
+
+mat-cell.mat-cell {
+  color: #c4c4c4;
+  font-family: 'Akzidenz-Grotesk BQ';
+  font-size: 16px;
+  line-height: 22px;
+  letter-spacing: 0.03em;
+}
+
+mat-table.mat-table {
+  background: transparent;
+  margin: 0 28px;
+
+  @media (min-width: 600px) {
+    margin: 0 47px;
+    padding: 0 24px;
   }
 
-  .mat-header-cell:last-of-type {
-    padding-right: 0px;
+  @media (min-width: 960px) {
+    margin: 0 65px;
+    padding: 0 24px;
   }
+}
 
-  .mat-cell:last-of-type {
-    padding-right: 0px;
-  }
-
-  .mat-header-cell {
-    background: $primary-background-color;
-    font-size: 0.938rem;
-    font-family: $bqmedium-font;
-    color: $primary-font-color;
+//styling for mobile layout only. Usually we'd do mobile first but skiping that for simplicity here
+@media (max-width: 599px) {
+  .mat-cell {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
   }
 
   .mat-header-row {
-    border: none;
+    display: none;
   }
 
-  .mat-cell {
-    height: 54px;
-    background: $primary-background-color;
-    font-size: 1rem;
-    color: $gray5;
+  .mat-row {
+    align-items: start;
+    border-bottom: 1px solid #c4c4c4;
+    flex-direction: column;
+    margin-top: 50px;
   }
 
-  @media screen and (max-width: 600px) {
-    padding: 0px 19px 0px 19px;
-
-    .mat-cell:first-of-type {
-      padding-left: 0px;
-    }
-
-    .value {
-      display: flex;
-      align-content: center;
-      margin-left: 114px;
-    }
-
-    .mat-header-row {
-      background: $primary-background-color;
-    }
-
-    .mat-header-cell {
-      display: none;
-      font-size: 0.875rem;
-    }
-
-    .mat-table {
-      vertical-align: middle;
-    }
-
-    .icon-container {
-      padding-right: 10px;
-    }
-
-    .mat-table .mat-row {
-      font-size: 0.939rem;
-      display: block;
-    }
-
-    .mat-table .mat-cell {
-      display: block;
-    }
-    .mat-table .mat-cell:before {
-      font-size: 0.938rem;
-      font-family: $bqmedium-font;
-      color: $primary-font-color;
-      content: attr(data-label);
-      float: left;
-    }
-
-    .mat-table .mat-cell:first-child {
-      padding-top: 57px;
-    }
-
-    .mat-cell:last-child {
-      padding-bottom: 51px;
-    }
-  }
-
-  @media (max-width: 960) {
-    padding: 0px 43px 0px 46px;
-    .mat-cell {
-      font-size: 0.875rem;
-    }
+  .mat-cell:before {
+    color: $primary-font-color;
+    content: attr(data-label);
+    font-family: $bqmedium-font;
+    text-transform: uppercase;
+    min-width: 100px;
+    width: 30%;
   }
 }
