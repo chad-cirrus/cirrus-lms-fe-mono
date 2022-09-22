@@ -99,11 +99,23 @@ export class CourseLandingPageComponent {
   }
 
   openTermsAndConditionsModal() {
+    const payload: ModalPayload = {
+      course_id: this.course.id,
+      user_id: this.user.id,
+    };
+
+    if (!this.course.has_agreement) {
+      this.downloadService.courseReEnroll(payload).subscribe(() => {
+        this.refreshCourse.emit(payload.course_id);
+      });
+      return;
+    }
+
     const data = {
       title: 'Terms And Conditions',
       subTitle:
         'Please read the following before re-enrolling then click Agree to continue',
-      body: '<div>Testing updating agreement:</div><div><br></div><div>This training is limited to aircraft familiarization training and is not inclusive of all the knowledge and skill required for safe flight. I must comply with the regulations, exercise sound judgment, and maintain a high level of flying proficiency to minimize the risks associated with flight.&nbsp;</div><div><br></div><div>Safely flying under Instrument Flight Rules (IFR) requires peak levels of skill, sound decision making, and good risk management skills. Many IFR skills degrade over periods of inactivity and each pilot must assess risks for individual flights considering their proficiency levels required to handle forecasted weather, airspace, and other challenges that may arise. Pilots who desire to fly IFR are strongly encouraged to complete an Instrument Proficiency Check in 6-month intervals, regardless of IFR currency requirements.&nbsp;&nbsp;</div><div><br></div><div>I acknowledge that for my continued proficiency and safety, Cirrus Aircraft strongly rec ommends that all pilots conduct recurrent training from an approved Cirrus Standardized Instructor Pilot (CSIP) or Cirrus Training Center (CTC).</div><div><br></div><div>I acknowledge that my instructor will only observe my flight proficiency during this training for the task prescribed in this course. These tasks maynot be inclusive of all the knowledge and skill required to safely fly under visual or instrument flight rules.</div>',
+      body: this.course.agreement_body,
       buttons: ['Agree', 'Disagree'],
     };
 
@@ -114,12 +126,12 @@ export class CourseLandingPageComponent {
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result.data === 'Agree') {
-        this.openConfirmationModal();
+        this.openConfirmationModal(payload);
       }
     });
   }
 
-  openConfirmationModal() {
+  openConfirmationModal(payload: ModalPayload) {
     const data = {
       title: 'Terms And Conditions',
       body: 'You may take the course again without losing or resetting your previous course enrollment records and certificate. You can find your certificates/transcripts in the Enrollment History Tab.',
@@ -130,7 +142,6 @@ export class CourseLandingPageComponent {
       width: '40%',
     });
     dialogRef.afterClosed().subscribe(result => {
-      const payload = { course_id: this.course.id, user_id: this.user.id };
       if (result.data === 'Confirm') {
         this.downloadService.courseReEnroll(payload).subscribe(() => {
           this.refreshCourse.emit(payload.course_id);
@@ -161,5 +172,9 @@ export class CourseLandingPageComponent {
       ['-o-background-size']: 'cover',
     });
   }
+}
 
+interface ModalPayload {
+  course_id: number;
+  user_id: number;
 }
