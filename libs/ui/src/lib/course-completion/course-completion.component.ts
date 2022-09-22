@@ -23,6 +23,8 @@ export class CourseCompletionComponent {
     private uiDownloadService: UiDownloadService
   ) {}
 
+  loading$ = this.uiDownloadService.loading$;
+
   get lessonCompletionCta() {
     return LESSON_COMPLETION_CTA;
   }
