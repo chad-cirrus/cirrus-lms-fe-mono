@@ -105,9 +105,7 @@ export class CourseLandingPageComponent {
     };
 
     if (!this.course.has_agreement) {
-      this.downloadService.courseReEnroll(payload).subscribe(() => {
-        this.refreshCourse.emit(payload.course_id);
-      });
+      this.openConfirmationModal(payload);
       return;
     }
 
