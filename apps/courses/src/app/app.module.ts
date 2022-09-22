@@ -39,6 +39,10 @@ import { ContentPlayerModule } from './content-player/content-player.module';
 import { ProgressEffects } from './store/effects/progress.effects';
 import { environment } from '../environments/environment';
 import { RouterModule } from '@angular/router';
+import { CourseOverviewRouteComponent } from './course/course-overview-route/course-overview-route.component';
+import { CourseLessonsRouteComponent } from './course/course-lessons-route/course-lessons-route.component';
+import { MatTabsModule } from '@angular/material/tabs';
+import { CourseEnrollmentsRouteComponent } from './course/course-enrollments-route/course-enrollments-route.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +56,9 @@ import { RouterModule } from '@angular/router';
     NoopComponent,
     UserMenusComponent,
     HamburgerMenuComponent,
+    CourseOverviewRouteComponent,
+    CourseLessonsRouteComponent,
+    CourseEnrollmentsRouteComponent,
   ],
   imports: [
     BrowserModule,
@@ -73,6 +80,7 @@ import { RouterModule } from '@angular/router';
     A11yModule,
     ContentPlayerModule,
     MatIconRegistryModule,
+    MatTabsModule,
   ],
   providers: [
     {

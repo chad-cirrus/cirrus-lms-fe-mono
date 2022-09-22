@@ -6,50 +6,20 @@
     (refreshCourse)="setCourse($event)"
   ></cirrus-course-landing-page>
   <div *ngIf="courseOverview$ | async as overview">
-    <mat-tab-group
-      [selectedIndex]="
-        (courseOverview$ | async)?.progress?.status !== 'not_started' ? 1 : 0
-      "
-    >
-      <mat-tab>
-        <ng-template mat-tab-label>
-          <mat-icon svgIcon="eye"></mat-icon>
-          <span class="cirrus-tab-label"> Overview </span>
-        </ng-template>
-        <cirrus-course-overview
-          [courseOverview]="overview"
-        ></cirrus-course-overview>
-      </mat-tab>
-      <mat-tab>
-        <ng-template mat-tab-label>
-          <mat-icon svgIcon="open_lessons"></mat-icon>
-          <span class="cirrus-tab-label"> Lessons </span>
-        </ng-template>
-        <cirrus-course-lessons
-          [stages]="overview.stages"
-          (navigate)="navigateToLesson($event)"
-        ></cirrus-course-lessons>
-      </mat-tab>
-      <mat-tab>
-        <ng-template mat-tab-label>
-          <mat-icon svgIcon="milestone"></mat-icon>
-          <span class="cirrus-tab-label"> Milestones </span>
-        </ng-template>
-        Milestones
-      </mat-tab>
-      <mat-tab>
-        <ng-template mat-tab-label>
-          <mat-icon svgIcon="enrollment_history"></mat-icon>
-          <span class="cirrus-tab-label"> Enrollment History </span>
-        </ng-template>
-        <div>
-          <cirrus-courses-tab-enrollment-history
-            [enrollments]="(courseOverview$ | async)?.enrollments"
-            [certificate]="(courseOverview$ | async)?.certificate"
-          >
-          </cirrus-courses-tab-enrollment-history>
-        </div>
-      </mat-tab>
-    </mat-tab-group>
+    <nav mat-tab-nav-bar>
+      <a mat-tab-link [routerLink]='["/", "courses", overview.id, "overview"]'>
+        <mat-icon svgIcon="eye"></mat-icon>
+        <span class="cirrus-tab-label"> Overview </span>
+      </a>
+      <a mat-tab-link [routerLink]='["/", "courses", overview.id, "lessons"]'>
+        <mat-icon svgIcon="open_lessons"></mat-icon>
+        <span class="cirrus-tab-label"> Lessons </span>
+      </a>
+      <a mat-tab-link [routerLink]='["/", "courses", overview.id, "enrollments"]'>
+        <mat-icon svgIcon="enrollment_history"></mat-icon>
+        <span class="cirrus-tab-label"> Enrollment History </span>
+      </a>
+    </nav>
+    <router-outlet></router-outlet>
   </div>
 </div>

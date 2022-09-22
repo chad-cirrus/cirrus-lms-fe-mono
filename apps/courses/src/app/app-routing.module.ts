@@ -5,6 +5,9 @@ import { ActivatedRouteSnapshot, RouterModule, Routes } from '@angular/router';
 import { CourseComponent } from './course/course.component';
 import { LessonComponent } from './course/lesson/lesson.component';
 import { NoopComponent } from './shared/noop/noop.component';
+import { CourseOverviewRouteComponent } from './course/course-overview-route/course-overview-route.component';
+import { CourseLessonsRouteComponent } from './course/course-lessons-route/course-lessons-route.component';
+import { CourseEnrollmentsRouteComponent } from './course/course-enrollments-route/course-enrollments-route.component';
 
 const getResolvedUrl = (route: ActivatedRouteSnapshot): string => {
   const params = Object.keys(route.params)
@@ -53,7 +56,11 @@ const routes: Routes = [
   {
     path: 'courses/:courseId',
     component: CourseComponent,
-    children: [],
+    children: [
+      { path: 'overview', component: CourseOverviewRouteComponent },
+      { path: 'lessons', component: CourseLessonsRouteComponent },
+      { path: 'enrollments', component: CourseEnrollmentsRouteComponent },
+    ],
   },
   {
     path: 'courses/:courseId/stages/:stageId/lessons/:lessonId',
