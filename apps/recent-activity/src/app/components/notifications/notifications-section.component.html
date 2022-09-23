@@ -1,0 +1,21 @@
+<div>
+  Notifications
+  <span *ngIf="notifications.length">{{ notifications.length }}</span>
+</div>
+<div class="lists" *ngIf="notifications.length; else noNotifications">
+  <div *ngFor="let notification of notifications">
+    <div>{{ notification.created_at | date: 'shortDate' }}</div>
+    <div>
+      <span class="sender">{{ notification.sender.contact.name }}</span>
+      <span class="body">
+        {{ notification.body }}
+      </span>
+    </div>
+  </div>
+  <button (click)="emitViewAllNotifications()">View All Notifications</button>
+</div>
+
+<ng-template #noNotifications>
+  <img [src]="bellUrl" alt="notifications" />
+  <div>You haven't recieved any notifications.</div>
+</ng-template>

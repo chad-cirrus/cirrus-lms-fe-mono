@@ -17,7 +17,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LogbookComponent } from './components/overall-progress/logbook/logbook.component';
 import { CourseworkComponent } from './components/overall-progress/coursework/coursework.component';
 import { IACRAComponent } from './components/overall-progress/iacra/iacra.component';
-import { NotificationsComponent } from './components/notifications/notifications.component';
+import { NotificationsSectionComponent } from './components/notifications/notifications-section.component';
 import { SideNavComponent } from './components/side-nav/side-nav.component';
 import { MatBadgeModule } from '@angular/material/badge';
 import { StoreModule } from '@ngrx/store';
@@ -48,7 +48,7 @@ import { A11yModule } from '@angular/cdk/a11y';
     LogbookComponent,
     CourseworkComponent,
     IACRAComponent,
-    NotificationsComponent,
+    NotificationsSectionComponent,
     SideNavComponent,
     HeaderComponent,
     UserMenusComponent,
@@ -91,7 +91,7 @@ import { A11yModule } from '@angular/cdk/a11y';
     LogbookComponent,
     CourseworkComponent,
     IACRAComponent,
-    NotificationsComponent,
+    NotificationsSectionComponent,
   ],
 })
 export class AppModule {}

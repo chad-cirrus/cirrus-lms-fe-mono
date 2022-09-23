@@ -5,23 +5,26 @@
       else noRa
     "
   >
-    <div>
-      <div>Welcome Back, Andrew</div>
+    <div class="welcome">
+      <div>Welcome Back, {{ (user$ | async)?.name }}</div>
       <div>Cirrus flight hours</div>
     </div>
 
     <cirrus-courses-in-progress></cirrus-courses-in-progress>
 
-    <cirrus-notifications
-      [notifications]="recentActivityNotifications[1]"
-    ></cirrus-notifications>
+    <cirrus-notifications-section
+      [notifications]="recentActivityNotifications.notifications"
+      (viewAllNotifications)="viewAllNotifications()"
+    ></cirrus-notifications-section>
 
     <cirrus-achievements
-      [achievments]="recentActivityNotifications[0]?.achievements!"
+      [achievments]="recentActivityNotifications?.recentActivity?.achievements!"
     ></cirrus-achievements>
 
     <cirrus-overall-progress
-      [overallProgress]="recentActivityNotifications[0]?.overall_progress!"
+      [overallProgress]="
+        recentActivityNotifications?.recentActivity?.overall_progress!
+      "
     ></cirrus-overall-progress>
 
     <div>

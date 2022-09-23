@@ -7,14 +7,18 @@ import {
   IRecentActivity,
 } from '../models/IRecentActivity';
 import { INotification } from '../models/Notification';
+import { map } from 'rxjs/operators';
+import { IRecentActivityNotifications } from '../models/IRecentActivityNotifications';
 
 @Injectable({
   providedIn: 'root',
 })
 export class RecentActivityService {
-  private _recentActivityNotifications = new BehaviorSubject<
-    [IRecentActivity, INotification[]]
-  >([initialRecentyActivity, []]);
+  private _recentActivityNotifications =
+    new BehaviorSubject<IRecentActivityNotifications>({
+      recentActivity: initialRecentyActivity,
+      notifications: [],
+    });
   recentActivityNotifcations$ =
     this._recentActivityNotifications.asObservable();
   constructor(private http: HttpClient) {}
@@ -28,9 +32,14 @@ export class RecentActivityService {
     return this.http.get<INotification[]>(url);
   }
 
-  getRecentActivityAndNotifications() {
-    forkJoin([this.getRecentActivity(), this.getNotifications()]).subscribe(
-      response => this._recentActivityNotifications.next(response)
-    );
+  getRecentActivityAndNotifications(): void {
+    forkJoin([this.getRecentActivity(), this.getNotifications()])
+      .pipe(
+        map(([recentActivity, notifications]) => ({
+          recentActivity,
+          notifications,
+        }))
+      )
+      .subscribe(response => this._recentActivityNotifications.next(response));
   }
 }

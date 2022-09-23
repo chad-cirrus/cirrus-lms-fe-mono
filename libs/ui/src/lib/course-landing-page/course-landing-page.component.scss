@@ -126,3 +126,35 @@ cirrus-course-progress {
     font-size: 0.875rem;
   }
 }
+
+.breadcrumb-container {
+  padding: 16px 22px;
+
+  @media (min-width: 600px) {
+    padding: 25px 40px;
+  }
+
+  @media (min-width: 960px) {
+    padding: 25px 65px;
+  }
+}
+
+.breadcrumb-item-container {
+  border-bottom: 1px solid transparent;
+  display: flex;
+  max-width: max-content;
+
+  &:hover {
+    border-bottom: 1px solid #fff;
+  }
+
+  .title {
+    color: #ffffff;
+    cursor: pointer;
+    font-family: 'Akzidenz-Grotesk BQ';
+    font-size: 16px;
+    line-height: 130%;
+    letter-spacing: 0.02em;
+    margin-left: 15px;
+  }
+}

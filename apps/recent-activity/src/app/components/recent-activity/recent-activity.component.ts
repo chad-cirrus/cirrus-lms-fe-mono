@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { tap } from 'rxjs/operators';
 import { RecentActivityService } from '../../services/recent-activity.service';
+import { selectCirrusUser } from '../../store/selectors/cirrus-user.selector';
+import { AppState } from '../../store/reducers';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'cirrus-recent-activity',
@@ -13,11 +16,18 @@ export class RecentActivityComponent implements OnInit {
       tap(a => console.log('a', a))
     );
 
-  constructor(private recentActivityService: RecentActivityService) {}
+  user$ = this.store.select(selectCirrusUser);
+
+  constructor(
+    private recentActivityService: RecentActivityService,
+    private store: Store<AppState>
+  ) {}
 
   ngOnInit() {
-    this.recentActivityService.getNotifications().subscribe(console.log);
-
     this.recentActivityService.getRecentActivityAndNotifications();
+  }
+
+  viewAllNotifications() {
+    console.log('recent activity view all notifications');
   }
 }
