@@ -1,0 +1,48 @@
+@mixin breakpoint($class) {
+    @if $class == mobile {
+        @media screen and (min-width: 600px) {
+            @content;
+        }
+    }    @else if $class == tablet {
+        @media screen and (min-width: 960px) {
+            @content;
+        }
+    } @else if $class == desktop {
+        @media screen and (min-width: 1200px) {
+            @content;
+        }
+    }  @else if $class == widescreen {
+        @media screen and (min-width: 1440px) {
+            @content;
+        }
+    }
+}
+
+//usage example --> @include breakpoint(tablet){background: tomato};
+
+
+@mixin keyframes($animation-name) {
+    @-webkit-keyframes #{$animation-name} {
+      @content;
+    }
+    @keyframes #{$animation-name} {
+      @content;
+    }
+  }
+  
+  @mixin animation($str) {
+    -webkit-animation: #{$str};
+    animation: #{$str};
+  }
+
+//   usage example 
+
+//   @include keyframes(fade) {
+//     0% { opacity: 1;}
+//     50% {opacity: 0;}
+//   }
+
+//   h1 {
+//     background: tomato;
+//     @include animation('fade 5s infinite');
+//   }

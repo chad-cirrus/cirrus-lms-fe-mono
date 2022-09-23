@@ -1,0 +1,35 @@
+$cirrus-blue: #0077c8;
+$cirrus-blue-hover: #14a0ff;
+$black: #000000;
+$gray1: #1f1f1f;
+$gray2: #2e2e2e;
+$gray3: #3a3a3a;
+$gray4: #969696;
+$gray5: #c4c4c4;
+$gray6: #d1d1d1;
+$white: #fefefe;
+
+$neon-red:#FF0000;
+$neon-yellow: #FFFF00;
+$neon-orange: #FF8000;
+$neon-green: #00FF00;
+$neon-blue: #00FFFF;
+
+$red: #FF3939;
+$yellow: #FFD600;
+$deep-red: #400E0E;
+$deep-blue: #004040;
+$deep-green: #004000;
+
+$fabulous-gradient: linear-gradient(180deg, $neon-orange 0%, $neon-yellow 19.27%, $neon-green 50.52%, $neon-blue 92.19%);
+$sugar-plum-gradient: linear-gradient(180deg, #7E128F 0%, #6F44CA 53.65%, #62C6FF 100%);
+
+.fabulous {
+    background: $fabulous-gradient;
+    transform: rotate(-90deg);
+}
+
+.sugar-plum {
+    background: $sugar-plum-gradient;
+    transform: matrix(0, 1, 1, 0, 0, 0);
+}

@@ -1,0 +1,60 @@
+.primary-btn,
+%btn {
+    background: $cirrus-blue;
+    border: 1px solid $cirrus-blue;
+    border-radius: 60px;
+    color: $white;
+    font-size: 1.0625rem;
+    padding: 13px 100px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all .3s ease;
+    
+    &:hover {
+        background: $cirrus-blue-hover;
+        border: 1px solid $cirrus-blue-hover;
+    }
+
+    @include breakpoint(tablet){
+        padding: 13px 35px;
+    }
+
+    &.-icon-btn {
+        padding: 9px 100px;
+        
+        @include breakpoint(tablet){
+            padding: 8px 35px;
+        }
+    }
+}
+
+.secondary-btn-gray {
+    @extend %btn;
+    background: $gray3;
+    border: 1px solid $gray3;
+    &:hover {
+        background: $gray2;
+        border: 1px solid $gray2;
+    }
+}
+
+.secondary-btn-black {
+    @extend %btn;
+    background: $black;
+    border: 1px solid $white;
+    &:hover {
+        background: $white;
+        color: $black;
+    }
+}
+
+.secondary-btn-white {
+    @extend %btn;
+    background: $white;
+    border: 1px solid $white;
+    color: $black;
+    &:hover {
+        background: $gray5;
+        border: 1px solid $gray5;
+    }
+}

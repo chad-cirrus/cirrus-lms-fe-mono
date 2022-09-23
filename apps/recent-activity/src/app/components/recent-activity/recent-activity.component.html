@@ -1,4 +1,4 @@
-<div class="container">
+<div class="recent-activity-outer-wrapper">
   <ng-container
     *ngIf="
       recentActivityNotifications$ | async as recentActivityNotifications;
@@ -23,6 +23,11 @@
     <cirrus-overall-progress
       [overallProgress]="recentActivityNotifications[0]?.overall_progress!"
     ></cirrus-overall-progress>
+
+    <div>
+      <button class="primary-btn -icon-btn">wow</button>
+      <a href="#" class="primary-btn -icon-btn">wow</a>
+    </div>
 
     <cirrus-flight-hours-chart></cirrus-flight-hours-chart>
   </ng-container>

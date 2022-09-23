@@ -2,8 +2,6 @@
   [ngClass]="
     type === 'hamburger' ? 'sidenav-container-hamburger' : 'sidenav-container'
   "
-  fxLayout="column"
-  fxLayoutAlign="space-between"
 >
   <div
     fxLayout="column"
@@ -20,8 +18,6 @@
         "
       >
         <div
-          fxLayout="row"
-          fxLayoutGap="10px"
           routerLink="courses/recent-activity"
           class="image-container"
           routerLinkActive="active"
@@ -35,8 +31,6 @@
           <span *ngIf="!collapse || type === 'hamburger'">Recent Activity</span>
         </div>
         <div
-          fxLayout="row"
-          fxLayoutGap="10px"
           *ngIf="cirrusUser.role !== 'pilot'"
           routerLink="my-students"
           class="image-container"
@@ -47,8 +41,6 @@
           <span *ngIf="!collapse || type === 'hamburger'">My Students</span>
         </div>
         <div
-          fxLayout="row"
-          fxLayoutGap="10px"
           routerLink="my-courses"
           class="image-container"
           routerLinkActive="active"
@@ -79,8 +71,6 @@
           >
         </div>
         <div
-          fxLayout="row"
-          fxLayoutGap="10px"
           class="image-container"
           routerLinkActive="active"
           routerLink="library"
@@ -103,11 +93,9 @@
     <div
       *ngIf="!collapse; else collapsed"
       class="options"
-      fxLayout="row"
-      fxLayoutAlign="space-between center"
-      class="image-container"
+      class="side-nav-bottom-wrapper"
     >
-      <div fxLayout="row" fxLayoutGap="25px" class="image-container">
+      <div class="side-nav-bottom-icons-group">
         <span
           class="alarm-badge"
           matBadge="{{ notificationCount > 0 ? notificationCount : '' }}"
@@ -135,7 +123,7 @@
         type === 'hamburger' ? 'menu-items-expanded' : 'menu-items-collapsed'
       "
     >
-      <div fxLayout="row" fxLayoutGap="10px" (click)="dismissHamburgerMenu()">
+      <div (click)="dismissHamburgerMenu()">
         <span
           matBadge="{{ notificationCount > 0 ? notificationCount : '' }}"
           matBadgeColor="warn"
@@ -144,7 +132,7 @@
         /></span>
         <span *ngIf="type === 'hamburger'">Notifications</span>
       </div>
-      <div fxLayout="row" fxLayoutGap="10px" routerLink="help-center">
+      <div routerLink="help-center">
         <img
           src="images/svg/clarity_help-line.svg"
           height="23px"
