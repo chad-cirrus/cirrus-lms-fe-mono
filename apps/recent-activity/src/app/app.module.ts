@@ -34,6 +34,7 @@ import { CdkAccordionModule } from '@angular/cdk/accordion';
 import { CommonModule } from '@angular/common';
 import { MatTabsModule } from '@angular/material/tabs';
 import { A11yModule } from '@angular/cdk/a11y';
+import { TotalFlightHoursComponent } from './components/total-flight-hours/total-flight-hours.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { A11yModule } from '@angular/cdk/a11y';
     MenuSliderComponent,
     HeaderDropdownComponent,
     HamburgerMenuComponent,
+    TotalFlightHoursComponent,
   ],
   imports: [
     CommonModule,

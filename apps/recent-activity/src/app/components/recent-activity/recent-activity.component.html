@@ -10,6 +10,10 @@
       <div>Cirrus flight hours</div>
     </div>
 
+    <cirrus-total-flight-hours
+      [hours]="(flightHoursString$ | async) || '0000'"
+    ></cirrus-total-flight-hours>
+
     <cirrus-courses-in-progress></cirrus-courses-in-progress>
 
     <cirrus-notifications-section

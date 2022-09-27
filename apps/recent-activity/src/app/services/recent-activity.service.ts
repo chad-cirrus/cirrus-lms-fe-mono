@@ -23,7 +23,7 @@ export class RecentActivityService {
     this._recentActivityNotifications.asObservable();
   constructor(private http: HttpClient) {}
   getRecentActivity(): Observable<IRecentActivity> {
-    const url = `${environment.baseUrl}/api/v4/courses/recent_activity`;
+    const url = `${environment.baseUrl}/api/v4/recent_activity`;
     return this.http.get<IRecentActivity>(url);
   }
 

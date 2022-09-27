@@ -1,0 +1,17 @@
+.container {
+  padding: 1rem;
+  background: linear-gradient(
+    90.3deg,
+    #818181 7.48%,
+    #d2d2d2 29.15%,
+    #797878 46.69%,
+    #d0d0d0 77.79%,
+    #616060 99.94%
+  );
+  border-radius: 3px;
+
+  .hours {
+    background-color: black;
+    color: white;
+  }
+}
