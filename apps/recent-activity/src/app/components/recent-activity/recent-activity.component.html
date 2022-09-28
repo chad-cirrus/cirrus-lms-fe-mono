@@ -5,36 +5,37 @@
       else noRa
     "
   >
-    <div class="welcome">
-      <div>Welcome Back, {{ (user$ | async)?.name }}</div>
-      <div>Cirrus flight hours</div>
+    <div class="recent-activity-welcome-heading">
+      <h1 class="heading-3">Welcome Back, {{ (user$ | async)?.name }}</h1>
+      <cirrus-total-flight-hours
+        [hours]="(flightHoursString$ | async) || '0000'"
+      ></cirrus-total-flight-hours>
     </div>
 
-    <cirrus-total-flight-hours
-      [hours]="(flightHoursString$ | async) || '0000'"
-    ></cirrus-total-flight-hours>
-
     <cirrus-courses-in-progress></cirrus-courses-in-progress>
+    <div class="notifications-achievements-wrapper">
+      <cirrus-notifications-section
+      class="notifications-wrapper"
+        [notifications]="recentActivityNotifications.notifications"
+        (viewAllNotifications)="viewAllNotifications()"
+      ></cirrus-notifications-section>
 
-    <cirrus-notifications-section
-      [notifications]="recentActivityNotifications.notifications"
-      (viewAllNotifications)="viewAllNotifications()"
-    ></cirrus-notifications-section>
-
-    <cirrus-achievements
-      [achievments]="recentActivityNotifications?.recentActivity?.achievements!"
-    ></cirrus-achievements>
+      <cirrus-achievements
+      class="achievements-wrapper"
+        [achievments]="
+          recentActivityNotifications?.recentActivity?.achievements!
+        "
+      ></cirrus-achievements>
+    </div>
 
     <cirrus-overall-progress
+    class="overall-progress-wrapper"
       [overallProgress]="
         recentActivityNotifications?.recentActivity?.overall_progress!
       "
     ></cirrus-overall-progress>
 
-    <div>
-      <button class="primary-btn -icon-btn">wow</button>
-      <a href="#" class="primary-btn -icon-btn">wow</a>
-    </div>
+    <cirrus-flight-hours-chart></cirrus-flight-hours-chart>
   </ng-container>
 </div>
 

@@ -1,5 +1,53 @@
-.container {
-  width: 500px;
-  height: 500px;
-  background-color: red;
+@import '~/../../apps/recent-activity/src/base-scss/import';
+
+.recent-activity-welcome-heading {
+  display: flex;
+  flex-direction: column;
+
+  @include breakpoint('mobile') {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.notifications-achievements-wrapper {
+  display: flex;
+  flex-direction: column;
+  margin-top: 90px;
+  width: 100%;
+
+  @include breakpoint(mobile) {
+    margin-top: 110px;
+  }
+
+  @include breakpoint(tablet) {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+.notifications-wrapper,
+.achievements-wrapper {
+  width: 100%;
+  @include breakpoint(tablet) {
+    width: 49%;
+  }
+}
+
+.achievements-wrapper {
+  margin-top: 90px;
+
+  @include breakpoint(tablet) {
+    margin-top: 0;
+  }
+}
+
+.overall-progress-wrapper {
+  margin-top: 90px;
+  width: 100%;
+
+  @include breakpoint(mobile) {
+    margin-top: 110px;
+  }
 }

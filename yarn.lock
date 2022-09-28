@@ -12463,7 +12463,7 @@ nested-error-stacks@^2.0.0, nested-error-stacks@^2.1.0:
 
 ng-apexcharts@^1.7.1:
   version "1.7.1"
-  resolved "https://registry.npmjs.org/ng-apexcharts/-/ng-apexcharts-1.7.1.tgz#37f85fd2e4cd74b50220927940255461b77d3ba6"
+  resolved "https://registry.yarnpkg.com/ng-apexcharts/-/ng-apexcharts-1.7.1.tgz#37f85fd2e4cd74b50220927940255461b77d3ba6"
   integrity sha512-GTRhF70G0leGVGjx4cbLKGusZxF7FogFgJ59q3Ntk0MIEvJqfpSYywmocselh3cGR0S/Zt/d7JEgt/f2HOzpTA==
   dependencies:
     tslib "^2.0.0"

@@ -1,5 +1,7 @@
-.container {
-  padding: 1rem;
+@import '~/../../apps/recent-activity/src/base-scss/import';
+
+.flight-hours-wrapper {
+  padding: 9px;
   background: linear-gradient(
     90.3deg,
     #818181 7.48%,
@@ -9,9 +11,43 @@
     #616060 99.94%
   );
   border-radius: 3px;
-
-  .hours {
-    background-color: black;
-    color: white;
+    width: 100%;
+  @include breakpoint(mobile) {
+    width: 205px;
   }
+
+  @include breakpoint(desktop) {
+   width: 220px;
+  } 
+}
+
+.flight-hours-inner-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.flight-hours-label {
+  color: $gray1;
+  font-size: 13px;
+  line-height: 20px;
+  letter-spacing: 0.03em;
+}
+
+.hours-wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.hours-text-wrapper {
+  background: $gray1;
+  border-radius: 5px;
+  max-width: 150px;
+  text-align: center;
+}
+
+.hours {
+  color: $white;
+  font-size: 30px;
+  letter-spacing: 0.02em;
 }

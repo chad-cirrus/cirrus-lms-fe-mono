@@ -1,3 +1,7 @@
+<div class="overall-progress-inner-wrapper">
+  <h2 class="heading-3">
+    Overall Progress
+  </h2>
 <mat-tab-group (selectedTabChange)="tabChanged($event)">
   <mat-tab label="Logbook">
     <cirrus-logbook
@@ -15,3 +19,4 @@
 </mat-tab-group>
 
 <cirrus-chart [data]="chartDataObservable$ | async"></cirrus-chart>
+</div>
