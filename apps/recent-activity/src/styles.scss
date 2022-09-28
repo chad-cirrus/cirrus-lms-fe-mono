@@ -3,7 +3,8 @@
 // @import 'cirrus-ui-styles';
 // @import '~@angular/cdk/overlay-prebuilt.css';
 
-@import 'apps/recent-activity/src/base-scss/import.scss';
+@import 'apps/recent-activity/src/base-scss/import';
+@import 'typography';
 
 body {
   background-color: $black;
