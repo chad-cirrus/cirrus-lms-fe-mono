@@ -1,4 +1,4 @@
-<mat-tab-group>
+<mat-tab-group (selectedTabChange)="tabChanged($event)">
   <mat-tab label="Logbook">
     <cirrus-logbook
       [logbookStats]="overallProgress?.logbook_stats!"
@@ -13,3 +13,5 @@
     <cirrus-iacra [iacraStats]="overallProgress?.iacra_stats!"></cirrus-iacra>
   </mat-tab>
 </mat-tab-group>
+
+<cirrus-chart [data]="chartDataObservable$ | async"></cirrus-chart>

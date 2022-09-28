@@ -18,6 +18,7 @@ import { CdkAccordionModule } from '@angular/cdk/accordion';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { MenuSliderComponent } from './menu-slider/menu-slider.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgApexchartsModule } from 'ng-apexcharts';
 
 import { StagesOverlayComponent } from './stages-overlay/stages-overlay.component';
 import { MatSidenavModule } from '@angular/material/sidenav';

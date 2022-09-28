@@ -35,7 +35,12 @@ import { CommonModule } from '@angular/common';
 import { MatTabsModule } from '@angular/material/tabs';
 import { A11yModule } from '@angular/cdk/a11y';
 import { TotalFlightHoursComponent } from './components/total-flight-hours/total-flight-hours.component';
+
+import { NgApexchartsModule } from 'ng-apexcharts';
+import { CirrusChartComponent } from './components/chart/chart.component';
+
 import { NoopComponent } from './components/noop/noop.component';
+
 
 @NgModule({
   declarations: [
@@ -58,7 +63,9 @@ import { NoopComponent } from './components/noop/noop.component';
     HeaderDropdownComponent,
     HamburgerMenuComponent,
     TotalFlightHoursComponent,
+    CirrusChartComponent,
     NoopComponent,
+
   ],
   imports: [
     CommonModule,
@@ -75,6 +82,7 @@ import { NoopComponent } from './components/noop/noop.component';
     CdkAccordionModule,
     MatTabsModule,
     A11yModule,
+    NgApexchartsModule,
   ],
   providers: [
     {

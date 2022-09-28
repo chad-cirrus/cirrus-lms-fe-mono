@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, forkJoin, Observable } from 'rxjs';
+import { BehaviorSubject, forkJoin, Observable, Subject } from 'rxjs';
 import { environment } from '../../environments/environment';
 import {
   initialRecentyActivity,
@@ -9,6 +9,11 @@ import {
 import { INotification } from '../models/Notification';
 import { map } from 'rxjs/operators';
 import { IRecentActivityNotifications } from '../models/IRecentActivityNotifications';
+
+export interface IRecentActivityTotal {
+  notifications: INotification[];
+  recent_activity: IRecentActivity;
+}
 
 @Injectable({
   providedIn: 'root',

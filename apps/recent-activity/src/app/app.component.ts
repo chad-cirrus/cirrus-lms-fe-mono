@@ -54,13 +54,11 @@ export class AppComponent implements OnInit, OnDestroy {
       <string>localStorage.getItem('cirrus-user')
     ) as ICirrusUser;
     this.store.dispatch(setCirrusUser({ cirrusUser }));
-
     this.cirrusImpersonateReturnUser$ = of(
       JSON.parse(
         <string>localStorage.getItem('cirrus-impersonation-return-user')
       ) as ICirrusUser
     );
-
     this.breakPoint$
       .pipe(takeUntil(this.destroyed), map(this.getBreakpoint))
       .subscribe(screenSize =>

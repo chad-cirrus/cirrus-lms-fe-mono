@@ -1,0 +1,17 @@
+<div id="chart" *ngIf="data">
+  <div>
+    {{ data.title }}
+  </div>
+  <apx-chart
+    [series]="chartOptions?.series!"
+    [chart]="chartOptions?.chart!"
+    [dataLabels]="chartOptions?.dataLabels!"
+    [plotOptions]="chartOptions?.plotOptions!"
+    [yaxis]="chartOptions?.yaxis!"
+    [xaxis]="chartOptions?.xaxis!"
+    [legend]="chartOptions?.legend!"
+    [colors]="data.chartColors.gradientFromColors"
+    [grid]="chartOptions?.grid!"
+    [fill]="chartOptions?.fill!"
+  ></apx-chart>
+</div>
