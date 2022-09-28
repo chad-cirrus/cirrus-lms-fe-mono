@@ -131,7 +131,7 @@ export class CourseLandingPageComponent {
 
   openConfirmationModal(payload: ModalPayload) {
     const data = {
-      title: 'Terms And Conditions',
+      title: 'Confirm Re-Enrollment',
       body: 'You may take the course again without losing or resetting your previous course enrollment records and certificate. You can find your certificates/transcripts in the Enrollment History Tab.',
       buttons: ['Confirm', 'Cancel'],
     };

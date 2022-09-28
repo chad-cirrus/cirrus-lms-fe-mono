@@ -4,8 +4,8 @@
   fxLayoutAlign="start start"
   fxLayoutGap="12px"
 >
-  <div class="last-completed">
-    Last Completed: {{ lastCompleted || '05/06/22' }}
+  <div class="last-completed" *ngIf="completed_at">
+    Last Completed: {{ completed_at }}
   </div>
   <div class="header">COURSE PROGRESS</div>
   <mat-progress-bar

@@ -24,6 +24,7 @@
       course.progress.status !== PROGRESS_STATUS.completed;
       else completedCourse
     "
+    [completed_at]="course.completed_at"
     [lessonStats]="course.lessons_stats"
   ></cirrus-course-progress>
   <cirrus-course-player
