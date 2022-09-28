@@ -35,6 +35,7 @@ import { CommonModule } from '@angular/common';
 import { MatTabsModule } from '@angular/material/tabs';
 import { A11yModule } from '@angular/cdk/a11y';
 import { TotalFlightHoursComponent } from './components/total-flight-hours/total-flight-hours.component';
+import { NoopComponent } from './components/noop/noop.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +58,7 @@ import { TotalFlightHoursComponent } from './components/total-flight-hours/total
     HeaderDropdownComponent,
     HamburgerMenuComponent,
     TotalFlightHoursComponent,
+    NoopComponent,
   ],
   imports: [
     CommonModule,

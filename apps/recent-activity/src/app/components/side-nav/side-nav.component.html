@@ -24,7 +24,7 @@
           (click)="dismissHamburgerMenu()"
         >
           <img
-            src="images/svg/recent-activity.svg"
+            src="recent-activity/images/svg/recent-activity.svg"
             height="23px"
             width="23px"
           />
@@ -32,12 +32,16 @@
         </div>
         <div
           *ngIf="cirrusUser.role !== 'pilot'"
-          routerLink="my-students"
+          routerLink="instructor/dashboard"
           class="image-container"
           routerLinkActive="active"
           (click)="dismissHamburgerMenu()"
         >
-          <img src="images/svg/my-student.svg" height="23px" width="23px" />
+          <img
+            src="recent-activity/images/svg/my-student.svg"
+            height="23px"
+            width="23px"
+          />
           <span *ngIf="!collapse || type === 'hamburger'">My Students</span>
         </div>
         <div
@@ -45,7 +49,11 @@
           class="image-container"
           routerLinkActive="active"
         >
-          <img src="images/svg/my-courses.svg" height="23px" width="23px" />
+          <img
+            src="recent-activity/images/svg/my-courses.svg"
+            height="23px"
+            width="23px"
+          />
           <span *ngIf="!collapse || type === 'hamburger'">My Courses</span>
         </div>
         <div
@@ -55,7 +63,11 @@
           class="image-container"
           routerLinkActive="active"
         >
-          <img src="images/svg/catalog.svg" height="23px" width="23px" />
+          <img
+            src="recent-activity/images/svg/catalog.svg"
+            height="23px"
+            width="23px"
+          />
           <span *ngIf="!collapse || type === 'hamburger'">Course Catalog</span>
         </div>
         <div
@@ -65,7 +77,11 @@
           class="image-container"
           routerLinkActive="active"
         >
-          <img src="images/svg/instructor.svg" height="23px" width="23px" />
+          <img
+            src="recent-activity/images/svg/instructor.svg"
+            height="23px"
+            width="23px"
+          />
           <span *ngIf="!collapse || type === 'hamburger'"
             >Training Partners</span
           >
@@ -76,7 +92,7 @@
           routerLink="library"
         >
           <img
-            src="images/svg/library.svg"
+            src="recent-activity/images/svg/library.svg"
             height="23px"
             width="23px"
             routerLink="courses/library"
@@ -101,16 +117,19 @@
           matBadge="{{ notificationCount > 0 ? notificationCount : '' }}"
           matBadgeColor="warn"
           matBadgeOverlap="false"
-          ><img src="images/svg/alarm.svg"
+          ><img src="recent-activity/images/svg/alarm.svg"
         /></span>
-        <img src="images/svg/clarity_help-line.svg" routerLink="help-center" />
+        <img
+          src="recent-activity/images/svg/clarity_help-line.svg"
+          routerLink="help-center"
+        />
       </div>
       <div class="image-container toggle-container">
         <img
           [src]="
             collapse
-              ? 'images/svg/fluent_panel-right-expand-28-regular.svg'
-              : 'images/svg/fluent_panel-left-expand-28-regular.svg'
+              ? 'recent-activity/images/svg/fluent_panel-right-expand-28-regular.svg'
+              : 'recent-activity/images/svg/fluent_panel-left-expand-28-regular.svg'
           "
           (click)="toggleCollapse()"
         />
@@ -128,13 +147,13 @@
           matBadge="{{ notificationCount > 0 ? notificationCount : '' }}"
           matBadgeColor="warn"
           [matBadgeOverlap]="type === 'hamburger'"
-          ><img src="images/svg/alarm.svg"
+          ><img src="recent-activity/images/svg/alarm.svg"
         /></span>
         <span *ngIf="type === 'hamburger'">Notifications</span>
       </div>
       <div routerLink="help-center">
         <img
-          src="images/svg/clarity_help-line.svg"
+          src="recent-activity/images/svg/clarity_help-line.svg"
           height="23px"
           width="23px"
         />
@@ -146,8 +165,8 @@
           width="23px"
           [src]="
             collapse
-              ? 'images/svg/fluent_panel-right-expand-28-regular.svg'
-              : 'images/svg/fluent_panel-left-expand-28-regular.svg'
+              ? 'recent-activity/images/svg/fluent_panel-right-expand-28-regular.svg'
+              : 'recent-activity/images/svg/fluent_panel-left-expand-28-regular.svg'
           "
           (click)="toggleCollapse()"
         />

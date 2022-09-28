@@ -7,7 +7,7 @@ import { INotification } from '../../models/Notification';
   styleUrls: ['./notifications-section.component.scss'],
 })
 export class NotificationsSectionComponent implements OnInit {
-  bellUrl = 'images/svg/Bell.svg';
+  bellUrl = 'recent-activity/images/svg/Bell.svg';
   @Input() notifications: INotification[] = [];
   @Output() viewAllNotifications = new EventEmitter();
 

@@ -2,7 +2,6 @@ import { InjectionToken, NgModule } from '@angular/core';
 import { ActivatedRouteSnapshot, RouterModule, Routes } from '@angular/router';
 
 // eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
-import { RecentActivityComponent } from '../../../../libs/ui/src/lib/recent-activity/recent-activity.component';
 import { CourseComponent } from './course/course.component';
 import { LessonComponent } from './course/lesson/lesson.component';
 import { NoopComponent } from './shared/noop/noop.component';
@@ -26,6 +25,7 @@ const routes: Routes = [
         [
           'my-courses',
           'instructors',
+          'instructor',
           'my-students',
           'course-catalog',
           'library',
@@ -36,7 +36,8 @@ const routes: Routes = [
           'admin',
           'student-dashboard',
           'training-partners',
-          'edit-profile'
+          'edit-profile',
+          'recent-activity',
         ].includes(url[0].path)
       ) {
         return { consumed: url };
@@ -49,13 +50,15 @@ const routes: Routes = [
     },
     component: NoopComponent,
   },
-  { path: 'courses/recent-activity', component: RecentActivityComponent },
   {
     path: 'courses/:courseId',
     component: CourseComponent,
     children: [],
   },
-  { path: 'courses/:courseId/stages/:stageId/lessons/:lessonId', component: LessonComponent },
+  {
+    path: 'courses/:courseId/stages/:stageId/lessons/:lessonId',
+    component: LessonComponent,
+  },
 ];
 
 @NgModule({

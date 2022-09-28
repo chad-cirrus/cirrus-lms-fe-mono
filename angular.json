@@ -267,6 +267,7 @@
           "builder": "@angular-devkit/build-angular:browser",
           "outputs": ["{options.outputPath}"],
           "options": {
+            "deployUrl": "/recent-activity/",
             "outputPath": "dist/apps/recent-activity",
             "index": "apps/recent-activity/src/index.html",
             "main": "apps/recent-activity/src/main.ts",

@@ -18,6 +18,10 @@ app.get('/courses/?*', (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'courses', 'index.html'));
 });
 
+app.get('/recent-activity/?*', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'recent-activity', 'index.html'));
+});
+
 const port = process.env.PORT || 3333;
 const server = app.listen(port, () => {
   console.log(`Listening at http://localhost:${port}/`);
