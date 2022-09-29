@@ -14,8 +14,10 @@ if (process.env.CREATE_STORYBOOK) {
   });
 }
 
-app.get('/courses/?*', (req, res) => {
-  res.sendFile(path.join(__dirname, '..', 'courses', 'index.html'));
+app.get('/:app//?*', (req, res) => {
+  console.log(req.params);
+  const { params: { app } } = req;
+  res.sendFile(path.join(__dirname, '..', app, 'index.html'));
 });
 
 app.get('/recent-activity/?*', (req, res) => {
