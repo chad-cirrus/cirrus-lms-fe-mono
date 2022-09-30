@@ -1,12 +1,43 @@
-@import '~/../../apps/recent-activity/src/base-scss/import';
+@import 'apps/recent-activity/src/base-scss/import';
+
+//@import '~/../../apps/recent-activity/src/base-scss/import';
+
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+
+@import '~swiper/swiper.min.css';
+@import '~swiper/modules/navigation/navigation.min.css';
+@import '~swiper/modules/pagination/pagination.min.css';
+
+.my-swiper {
+  height: 200px;
+}
+
+.swiper-slide-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  background: transparent;
+  height: 200px;
+  margin: auto;
+}
+
+.course {
+  background-repeat: no-repeat;
+  width: 400px;
+}
+
+.mat-progress-bar {
+  height: 12px;
+  border-radius: 200px;
+}
 
 .courses-in-progress-inner-wrapper {
-    background: $gray1;
-    border-radius: 5px;
-    padding: 35px;
-    text-align: center;;
+  background: $gray1;
+  border-radius: 5px;
+  padding: 35px;
+  text-align: center;
 }
 
 .courses-counter {
-    color: $gray4;
+  color: $gray4;
 }

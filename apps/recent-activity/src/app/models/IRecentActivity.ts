@@ -40,6 +40,15 @@ export interface Achievements {
 export interface IRecentActivity {
   overall_progress: OverallProgress;
   achievements: Achievements;
+  in_progress_courses: InProgressCourses[];
+}
+
+export interface InProgressCourses {
+  id: number;
+  lessons_completed: number;
+  lessons_total: number;
+  name: string;
+  thumbnail_image_url: string;
 }
 
 export const initialRecentyActivity: IRecentActivity = {
@@ -48,6 +57,7 @@ export const initialRecentyActivity: IRecentActivity = {
     course_work_stats: [],
     iacra_stats: [],
   },
+  in_progress_courses: [],
   achievements: {
     certificates: [],
     badges: [],

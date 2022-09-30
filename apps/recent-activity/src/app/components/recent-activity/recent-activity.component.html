@@ -12,7 +12,9 @@
       ></cirrus-total-flight-hours>
     </div>
 
-    <cirrus-courses-in-progress></cirrus-courses-in-progress>
+    <cirrus-courses-in-progress
+      [inProgressCourses]='recentActivityNotifications.recentActivity.in_progress_courses'
+    ></cirrus-courses-in-progress>
     <div class="notifications-achievements-wrapper">
       <cirrus-notifications-section
       class="notifications-wrapper"

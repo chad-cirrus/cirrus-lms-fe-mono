@@ -7,7 +7,7 @@
       "projectType": "application",
       "architect": {
         "build": {
-          "builder": "@nrwl/node:build",
+          "builder": "@nrwl/node:webpack",
           "outputs": ["{options.outputPath}"],
           "options": {
             "outputPath": "dist/apps/atc",
@@ -30,7 +30,7 @@
           }
         },
         "serve": {
-          "builder": "@nrwl/node:execute",
+          "builder": "@nrwl/node:node",
           "options": {
             "buildTarget": "atc:build"
           }
@@ -385,7 +385,7 @@
             "config": {
               "configFolder": "apps/recent-activity/.storybook"
             },
-            "styles": ["apps/recent-activity/src/styles.scss"]
+            "styles": ["./apps/recent-activity/src/styles.scss"]
           },
           "configurations": {
             "ci": {
@@ -406,7 +406,6 @@
           "options": {
             "cypressConfig": "apps/recent-activity-e2e/cypress.json",
             "devServerTarget": "recent-activity:serve:development"
-
           },
           "configurations": {
             "production": {

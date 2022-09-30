@@ -40,7 +40,8 @@ import { NgApexchartsModule } from 'ng-apexcharts';
 import { CirrusChartComponent } from './components/chart/chart.component';
 
 import { NoopComponent } from './components/noop/noop.component';
-
+import { CourseInProgressValuePipe } from './components/courses-in-progress/course-in-progress-value.pipe';
+import { SwiperModule } from 'swiper/angular';
 
 @NgModule({
   declarations: [
@@ -65,15 +66,15 @@ import { NoopComponent } from './components/noop/noop.component';
     TotalFlightHoursComponent,
     CirrusChartComponent,
     NoopComponent,
-
+    CourseInProgressValuePipe,
   ],
   imports: [
     CommonModule,
     BrowserModule,
+    BrowserAnimationsModule,
     HttpClientModule,
     CirrusMaterialModule,
     FlexLayoutModule,
-    BrowserAnimationsModule,
     MatBadgeModule,
     StoreModule.forRoot(recentActivityReducers),
     StoreDevtoolsModule.instrument({ maxAge: 25 }),
@@ -83,6 +84,7 @@ import { NoopComponent } from './components/noop/noop.component';
     MatTabsModule,
     A11yModule,
     NgApexchartsModule,
+    SwiperModule,
   ],
   providers: [
     {

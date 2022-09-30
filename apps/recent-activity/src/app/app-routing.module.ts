@@ -21,6 +21,7 @@ const routes: Routes = [
       if (
         [
           'my-courses',
+          'courses',
           'instructors',
           'instructor',
           'my-students',

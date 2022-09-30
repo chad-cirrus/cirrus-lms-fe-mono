@@ -1,7 +1,43 @@
-<div class="courses-in-progress-outer-wrapper">
-    <h2 class="heading-3">Courses In Progress <span class="courses-counter">(0)</span></h2>
-    <div class="courses-in-progress-inner-wrapper">
-        <p class="body-copy-medium">You have no courses in progress at this time. View the course catalog to get started.</p>
-        <a href="#" class="primary-btn">Browse Course Catalog</a>
-    </div>
+<h2 class='heading-3'>Courses In Progress <span class='courses-counter'>({{ inProgressCourses?.length || 0}})</span>
+</h2>
+<div *ngIf='inProgressCourses.length; else noCourses' class='courses-in-progress-outer-wrapper'>
+
+  <swiper
+    [loopFillGroupWithBlank]='true'
+    [loop]='true'
+    [navigation]='true'
+    [pagination]='{
+        clickable: true
+      }'
+    [slidesPerGroup]='3'
+    [slidesPerView]='3'
+    [spaceBetween]='5'
+    class='my-swiper'
+  >
+    <ng-template swiperSlide *ngFor='let course of inProgressCourses; index as i'>
+
+      <div class='swiper-slide-container course' [ngStyle]="{'background-image': 'url(' + course.thumbnail_image_url + ')'}">
+        <div class='name'>{{ course.name }}</div>
+        <mat-progress-bar
+          [value]='course | courseInProgressValue'
+          mode='determinate'
+        ></mat-progress-bar>
+        <div class='completed'><span>{{ course.lessons_completed }}</span>/<span>{{ course.lessons_total }}</span>Lessons
+          Complete
+        </div>
+        <button [routerLink]="['/courses', course.id]" class='primary-btn'>Resume</button>
+      </div>
+    </ng-template>
+
+  </swiper>
+
+
 </div>
+
+<ng-template #noCourses>
+  <div class='courses-in-progress-inner-wrapper'>
+    <p class='body-copy-medium'>You have no courses in progress at this time. View the course catalog to get
+      started.</p>
+    <a class='primary-btn' href='#'>Browse Course Catalog</a>
+  </div>
+</ng-template>

@@ -1,4 +1,4 @@
-@import '~/../../apps/recent-activity/src/base-scss/import';
+@import 'apps/recent-activity/src/base-scss/import';
 
 .flight-hours-wrapper {
   padding: 9px;
@@ -11,14 +11,14 @@
     #616060 99.94%
   );
   border-radius: 3px;
-    width: 100%;
+  width: 100%;
   @include breakpoint(mobile) {
     width: 205px;
   }
 
   @include breakpoint(desktop) {
-   width: 220px;
-  } 
+    width: 220px;
+  }
 }
 
 .flight-hours-inner-wrapper {
