@@ -1,21 +1,33 @@
-<div>
-  <h2 class="heading-3">Notifications</h2>
-  <span *ngIf="notifications.length">{{ notifications.length }}</span>
-</div>
-<div class="lists" *ngIf="notifications.length; else noNotifications">
-  <div *ngFor="let notification of notifications">
-    <div>{{ notification.created_at | date: 'shortDate' }}</div>
-    <div>
-      <span class="sender">{{ notification.sender.contact.name }}</span>
-      <span class="body">
-        {{ notification.body }}
-      </span>
+<div class="notification-container">
+  <div class="notification-title">
+    <h2 class="heading-3">Notifications</h2>
+    <span *ngIf="notifications.length" class="notification-number">{{
+      notifications.length
+    }}</span>
+  </div>
+  <div class="lists" *ngIf="notifications.length; else noNotifications">
+    <div
+      *ngFor="let notification of notifications; let i = index"
+      [ngClass]="i + 1 === notifications.length ? '' : 'notification-item'"
+    >
+      <p class="extra-small">
+        {{ notification.created_at | date: 'shortDate' }}
+      </p>
+      <div>
+        <p class="body">
+          {{ notification.body }}
+        </p>
+      </div>
+    </div>
+    <div class="btn-container">
+      <button class="secondary-btn-black" (click)="emitViewAllNotifications()">
+        View All Notifications
+      </button>
     </div>
   </div>
-  <button (click)="emitViewAllNotifications()">View All Notifications</button>
-</div>
 
-<ng-template #noNotifications>
-  <img [src]="bellUrl" alt="notifications" />
-  <div>You haven't recieved any notifications.</div>
-</ng-template>
+  <ng-template #noNotifications>
+    <img [src]="bellUrl" alt="notifications" />
+    <div>You haven't recieved any notifications.</div>
+  </ng-template>
+</div>
