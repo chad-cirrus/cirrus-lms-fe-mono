@@ -1,45 +1,8 @@
 @import 'apps/recent-activity/src/base-scss/import';
 
-//@import '~/../../apps/recent-activity/src/base-scss/import';
 @import '~swiper/swiper.min.css';
 @import '~swiper/modules/navigation/navigation.min.css';
 @import '~swiper/modules/pagination/pagination.min.css';
-
-.mat-progress-bar-background {
-  fill: #cbd0e9;
-}
-
-.mat-progress-bar-buffer {
-  background-color: #cbd0e9;
-}
-
-.mat-progress-bar-fill::after {
-  background-color: #3f51b5;
-}
-
-.mat-progress-bar.mat-accent .mat-progress-bar-background {
-  fill: #fbccdc;
-}
-
-.mat-progress-bar.mat-accent .mat-progress-bar-buffer {
-  background-color: #fbccdc;
-}
-
-.mat-progress-bar.mat-accent .mat-progress-bar-fill::after {
-  background-color: #ff4081;
-}
-
-.mat-progress-bar.mat-warn .mat-progress-bar-background {
-  fill: #f9ccc9;
-}
-
-.mat-progress-bar.mat-warn .mat-progress-bar-buffer {
-  background-color: #f9ccc9;
-}
-
-.mat-progress-bar.mat-warn .mat-progress-bar-fill::after {
-  background-color: #f44336;
-}
 
 .my-swiper {
   height: 200px;
@@ -73,4 +36,19 @@
 
 .courses-counter {
   color: $gray4;
+}
+
+.search-bar-form {
+  background-color: grey;
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+input {
+  color: $white;
+}
+
+.search-bar-full-width {
+  width: 100%;
 }

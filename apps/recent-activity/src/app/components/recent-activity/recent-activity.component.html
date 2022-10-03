@@ -14,6 +14,7 @@
 
     <cirrus-courses-in-progress
       [inProgressCourses]='recentActivityNotifications.recentActivity.in_progress_courses'
+      (navigateToCourse)='navigateToCourse($event)'
     ></cirrus-courses-in-progress>
     <div class="notifications-achievements-wrapper">
       <cirrus-notifications-section

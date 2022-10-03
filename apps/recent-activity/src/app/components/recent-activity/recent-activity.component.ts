@@ -6,6 +6,7 @@ import { AppState } from '../../store/reducers';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { totalFlightHoursString } from '../../helpers/totalFlightHoursString';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'cirrus-recent-activity',
@@ -31,7 +32,8 @@ export class RecentActivityComponent implements OnInit {
 
   constructor(
     private recentActivityService: RecentActivityService,
-    private store: Store<AppState>
+    private store: Store<AppState>,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -40,5 +42,9 @@ export class RecentActivityComponent implements OnInit {
 
   viewAllNotifications() {
     console.log('recent activity view all notifications');
+  }
+
+  navigateToCourse(course: number) {
+    this.router.navigate(['/courses', course]);
   }
 }

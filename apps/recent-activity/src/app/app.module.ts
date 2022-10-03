@@ -42,6 +42,7 @@ import { CirrusChartComponent } from './components/chart/chart.component';
 import { NoopComponent } from './components/noop/noop.component';
 import { CourseInProgressValuePipe } from './components/courses-in-progress/course-in-progress-value.pipe';
 import { SwiperModule } from 'swiper/angular';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -85,6 +86,7 @@ import { SwiperModule } from 'swiper/angular';
     A11yModule,
     NgApexchartsModule,
     SwiperModule,
+    ReactiveFormsModule,
   ],
   providers: [
     {
