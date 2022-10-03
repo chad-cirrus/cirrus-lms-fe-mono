@@ -1,1 +1,11 @@
-<div *ngFor="let certificate of certificates"></div>
+<div *ngIf="certificates.length > 0; else noCertificates">
+  <div *ngFor="let certificate of certificates"></div>
+</div>
+
+<ng-template #noCertificates>
+  <img src="recent-activity/images/svg/certificates.svg" alt="certificates" />
+  <div>You haven't earned any Certificates yet. Keep going!</div>
+  <button class="view" mat-stroked-button color="primary">
+    View All Achievements
+  </button>
+</ng-template>

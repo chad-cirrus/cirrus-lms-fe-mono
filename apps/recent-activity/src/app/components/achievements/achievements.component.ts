@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Achievements } from '../../models/IRecentActivity';
 
 @Component({
@@ -7,5 +7,12 @@ import { Achievements } from '../../models/IRecentActivity';
   styleUrls: ['./achievements.component.scss'],
 })
 export class AchievementsComponent {
-  @Input() achievments!: Achievements;
+  @Input() achievements: Achievements = {
+    certificates: [],
+    badges: [],
+  };
+
+  view() {
+    console.log('veiw');
+  }
 }

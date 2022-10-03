@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, forkJoin, Observable, Subject } from 'rxjs';
+import { BehaviorSubject, forkJoin, Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import {
-  initialRecentyActivity,
+  initialRecentActivity,
   IRecentActivity,
 } from '../models/IRecentActivity';
 import { INotification } from '../models/Notification';
@@ -21,7 +21,7 @@ export interface IRecentActivityTotal {
 export class RecentActivityService {
   private _recentActivityNotifications =
     new BehaviorSubject<IRecentActivityNotifications>({
-      recentActivity: initialRecentyActivity,
+      recentActivity: initialRecentActivity,
       notifications: [],
     });
   recentActivityNotifcations$ =

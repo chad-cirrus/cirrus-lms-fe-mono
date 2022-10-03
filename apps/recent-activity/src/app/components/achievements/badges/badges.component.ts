@@ -7,5 +7,5 @@ import { Badge } from '../../../models/IRecentActivity';
   styleUrls: ['./badges.component.scss'],
 })
 export class BadgesComponent {
-  @Input() badges!: Badge[];
+  @Input() badges: Badge[] = [];
 }

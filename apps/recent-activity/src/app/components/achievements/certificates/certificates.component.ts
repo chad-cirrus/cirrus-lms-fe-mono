@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Certificate } from '../../../models/IRecentActivity';
 
 @Component({
@@ -7,5 +7,9 @@ import { Certificate } from '../../../models/IRecentActivity';
   styleUrls: ['./certificates.component.scss'],
 })
 export class CertificatesComponent {
-  @Input() certificates!: Certificate[];
+  @Input() certificates: Certificate[] = [];
+
+  view() {
+    console.log('view');
+  }
 }

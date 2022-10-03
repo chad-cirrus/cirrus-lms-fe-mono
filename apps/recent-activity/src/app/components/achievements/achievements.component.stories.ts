@@ -4,13 +4,14 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { BadgesComponent } from './badges/badges.component';
 import { CertificatesComponent } from './certificates/certificates.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatButtonModule } from '@angular/material/button';
 
 export default {
   title: 'Achievements',
   component: AchievementsComponent,
   decorators: [
     moduleMetadata({
-      imports: [MatTabsModule, BrowserAnimationsModule],
+      imports: [MatTabsModule, BrowserAnimationsModule, MatButtonModule],
       declarations: [BadgesComponent, CertificatesComponent],
     }),
   ],

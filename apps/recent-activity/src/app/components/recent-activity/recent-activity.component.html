@@ -13,26 +13,28 @@
     </div>
 
     <cirrus-courses-in-progress
-      [inProgressCourses]='recentActivityNotifications.recentActivity.in_progress_courses'
-      (navigateToCourse)='navigateToCourse($event)'
+      [inProgressCourses]="
+        recentActivityNotifications.recentActivity.in_progress_courses
+      "
+      (navigateToCourse)="navigateToCourse($event)"
     ></cirrus-courses-in-progress>
     <div class="notifications-achievements-wrapper">
       <cirrus-notifications-section
-      class="notifications-wrapper"
+        class="notifications-wrapper"
         [notifications]="recentActivityNotifications.notifications"
         (viewAllNotifications)="viewAllNotifications()"
       ></cirrus-notifications-section>
 
       <cirrus-achievements
-      class="achievements-wrapper"
-        [achievments]="
+        class="achievements-wrapper"
+        [achievements]="
           recentActivityNotifications?.recentActivity?.achievements!
         "
       ></cirrus-achievements>
     </div>
 
     <cirrus-overall-progress
-    class="overall-progress-wrapper"
+      class="overall-progress-wrapper"
       [overallProgress]="
         recentActivityNotifications?.recentActivity?.overall_progress!
       "

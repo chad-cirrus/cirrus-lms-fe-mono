@@ -51,7 +51,7 @@ export interface InProgressCourses {
   thumbnail_image_url: string;
 }
 
-export const initialRecentyActivity: IRecentActivity = {
+export const initialRecentActivity: IRecentActivity = {
   overall_progress: {
     logbook_stats: [],
     course_work_stats: [],
