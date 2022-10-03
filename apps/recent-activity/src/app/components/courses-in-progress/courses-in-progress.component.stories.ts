@@ -6,6 +6,11 @@ import { SwiperModule } from 'swiper/angular';
 import { CourseInProgressValuePipe } from './course-in-progress-value.pipe';
 import { RouterModule } from '@angular/router';
 import { APP_BASE_HREF } from '@angular/common';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 export default {
   title: 'Courses In Progress',
@@ -16,6 +21,11 @@ export default {
         MatProgressBarModule,
         SwiperModule,
         RouterModule.forRoot([], { useHash: true }),
+        MatFormFieldModule,
+        MatAutocompleteModule,
+        ReactiveFormsModule,
+        MatInputModule,
+        BrowserAnimationsModule,
       ],
       declarations: [CourseInProgressValuePipe],
       providers: [{ provide: APP_BASE_HREF, useValue: '/' }],

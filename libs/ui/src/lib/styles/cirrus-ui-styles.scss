@@ -29,7 +29,7 @@ $custom-palette: (
   800: #1b1b1b,
   900: #212121,
   A100: #ffffff,
-  A200: #0077C8,
+  A200: #0077c8,
   A400: #bdbdbd,
   A700: #616161,
   contrast: (
@@ -60,7 +60,7 @@ $theme: material.mat-dark-theme(
     color: (
       primary: $primary,
       accent: $accent,
-    )
+    ),
   )
 );
 
@@ -175,7 +175,7 @@ h6 {
 .small {
   font-size: 0.9375rem;
   line-height: 1.5;
-  letter-spacing: .03em;
+  letter-spacing: 0.03em;
   @media (min-width: 600px) {
     font-size: 1rem;
     line-height: 1.4;
@@ -184,7 +184,7 @@ h6 {
 .xsmall {
   font-size: 0.875rem;
   line-height: 1.35;
-  letter-spacing: .03em;
+  letter-spacing: 0.03em;
 }
 
 div {
@@ -233,7 +233,6 @@ img {
   }
 }
 
-
 .mat-tab-label {
   width: 50%;
 }
@@ -260,7 +259,16 @@ img {
   overflow-x: hidden !important;
 }
 
-.mat-dialog-container > cirrus-content-player > div > div > div.content-player-main > div.content-player-body > div > cirrus-video-player > div > div {
+.mat-dialog-container
+  > cirrus-content-player
+  > div
+  > div
+  > div.content-player-main
+  > div.content-player-body
+  > div
+  > cirrus-video-player
+  > div
+  > div {
   padding: 0 !important;
   height: 100%;
 }
@@ -273,19 +281,20 @@ cirrus-course {
 
 @media (max-width: 960px) {
   cirrus-content-image {
-      height: 100%;
-      overflow: hidden;
+    height: 100%;
+    overflow: hidden;
   }
 }
 
-
 cirrus-lesson-contents .overview {
-  h2, h3, h4 {
+  h2,
+  h3,
+  h4 {
     color: #ffffff;
   }
 }
 
-cirrus-course-overview-lesson-progress-bar  .lesson-progress-bar {
+cirrus-course-overview-lesson-progress-bar .lesson-progress-bar {
   &.mat-progress-bar {
     height: 12px;
     border-radius: 10px;
@@ -295,7 +304,7 @@ cirrus-course-overview-lesson-progress-bar  .lesson-progress-bar {
   }
 
   .mat-progress-bar-fill::after {
-    background-color: #00FFFF;
+    background-color: #00ffff;
   }
 
   .mat-progress-bar-buffer {
