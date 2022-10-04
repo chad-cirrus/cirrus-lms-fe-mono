@@ -15,8 +15,7 @@ export class AuthHttpInterceptor implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    const token = localStorage.getItem('access-token');
-
+    const token = localStorage.getItem('cirrus-token');
     req = req.clone({
       setHeaders: { Authorization: `Bearer ${token}` },
     });
