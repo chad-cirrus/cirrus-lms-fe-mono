@@ -51,10 +51,6 @@ export class RecentActivityComponent implements OnInit {
     this.drawer.open();
   }
 
-  navigateToCourse(course: number) {
-    this.router.navigate(['/courses', course]);
-  }
-
   dismissNotificationsMenu() {
     this.drawer.close();
   }

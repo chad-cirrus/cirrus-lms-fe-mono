@@ -3,7 +3,11 @@
     <div class="title-container">
       <div class="title-notifications">
         <h1 class="heading-3">Notifications</h1>
-        <span>{{ notifications.length }}</span>
+        <span
+          matBadge="{{ notifications.length }}"
+          matBadgeColor="warn"
+          matBadgeOverlap="false"
+        ></span>
       </div>
       <img src="recent-activity/images/svg/close.svg" (click)="dismiss()" />
     </div>
