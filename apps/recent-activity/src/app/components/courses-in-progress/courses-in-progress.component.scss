@@ -4,51 +4,118 @@
 @import '~swiper/modules/navigation/navigation.min.css';
 @import '~swiper/modules/pagination/pagination.min.css';
 
-.my-swiper {
-  height: 200px;
+.courses-slider-container {
+  margin-top: 30px;
+  @include breakpoint(mobile) {
+    margin-top: 35px;
+  }
+}
+
+.courses-in-progress-outer-wrapper {
+  width: 110%;
+  &:before {
+    background: transparent; 
+    box-shadow: inset -119px 0px 194px 44px rgba(0,0,0,0.91);
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    pointer-events: none;
+  }
+}
+
+.swiper-button-next,.swiper-button-prev {
+  color: $white;
+  z-index: 3;
+}
+
+.swiper-button-next {
+  right: 30%;
+}
+
+.swiper-slide {
+  border-radius: 5px;
+  height: 300px;
+  margin-right: 15px;
+  width: 377px;
+  @include breakpoint(mobile) {
+    height: 192px;
+    width: 598px;
+  }
+  @include breakpoint(tablet) {
+    width: 422px;
+  }
 }
 
 .swiper-slide-container {
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 5px;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  background: transparent;
-  height: 200px;
-  margin: auto;
+  justify-content: space-between;
+  height: 300px;
+  padding: 14px;
+  width: 377px;
+  @include breakpoint(mobile) {
+    height: 192px;
+    width: 598px;
+  }
+  @include breakpoint(tablet) {
+    width: 422px;
+  }
 }
 
-.course {
-  background-repeat: no-repeat;
-  width: 400px;
+//custom styling for progress bar within slider card
+.swiper-slide-container {
+  .mat-progress-bar {
+    width: 250px;
+  }
+
+  .mat-progress-bar-element,
+  .mat-progress-bar,
+  .mat-progress-bar-fill::after {
+    border-radius: 10px;
+    height: 13px;
+  }
 }
 
-.mat-progress-bar {
-  height: 12px;
-  border-radius: 200px;
+.swiper-slide-content {
+  display: flex;
+  flex-direction: column;
+
+  .primary-btn {
+    margin-top: 20px;
+  }
+
+  @include breakpoint(mobile) {
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+
+    .primary-btn {
+      margin-top: 0;
+    }
+  }
+
 }
 
-.courses-in-progress-inner-wrapper {
-  background: $gray1;
-  border-radius: 5px;
-  padding: 35px;
-  text-align: center;
+.course-slide-lessons-complete {
+  margin-top: 1rem;
 }
 
 .courses-counter {
   color: $gray4;
 }
 
-.search-bar-form {
-  background-color: grey;
-  min-width: 150px;
-  max-width: 500px;
-  width: 100%;
+.courses-search-bar {
+  margin-top: 30px;
 }
 
-input {
-  color: $white;
-}
-
-.search-bar-full-width {
-  width: 100%;
-}
+// .search-bar-form {
+//   .search-bar-full-width {
+//     border: 1px solid $white;
+//     border-radius: 60px;
+//   }
+// }

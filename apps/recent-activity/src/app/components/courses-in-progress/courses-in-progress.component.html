@@ -1,60 +1,67 @@
 <h2 class='heading-3'>Courses In Progress <span class='courses-counter'>({{ inProgressCourses?.length || 0}})</span>
 </h2>
-<div *ngIf='inProgressCourses.length; else noCourses' class='courses-in-progress-outer-wrapper'>
 
-  <swiper
-    [loopFillGroupWithBlank]='true'
-    [loop]='true'
-    [navigation]='true'
-    [pagination]='{
-        clickable: true
-      }'
-    [slidesPerGroup]='3'
-    [slidesPerView]='3'
-    [spaceBetween]='5'
-    class='my-swiper'
-  >
-    <ng-template swiperSlide *ngFor='let course of inProgressCourses; index as i'>
+<div class="courses-slider-container">
+  <div *ngIf='inProgressCourses.length; else noCourses' class='courses-in-progress-outer-wrapper'>
 
-      <div class='swiper-slide-container course' [ngStyle]="{'background-image': 'url(' + course.thumbnail_image_url + ')'}">
-        <div class='name'>{{ course.name }}</div>
-        <mat-progress-bar
-          [value]='course | courseInProgressValue'
-          mode='determinate'
-        ></mat-progress-bar>
-        <div class='completed'><span>{{ course.lessons_completed }}</span>/<span>{{ course.lessons_total }}</span>Lessons
-          Complete
+    <swiper
+      [loopFillGroupWithBlank]='true'
+      [loop]='true'
+      [navigation]='true'
+      [slidesPerView]="'auto'"
+      [spaceBetween]='5'
+      class='my-swiper'
+    >
+      <ng-template swiperSlide *ngFor='let course of inProgressCourses; index as i'>
+  
+        <div class='swiper-slide-container course' [ngStyle]="{'background-image': 'url(' + course.thumbnail_image_url + ')'}">
+          
+            <h3 class='name heading-4'>{{ course.name }}</h3>
+          <div class="swiper-slide-content">
+            <div class="course-slide-progress-wrapper"> 
+              <mat-progress-bar
+              [value]='course | courseInProgressValue'
+              mode='determinate'
+            ></mat-progress-bar>
+            <span class='completed body-copy-small'><span>{{ course.lessons_completed }}</span>/<span>{{ course.lessons_total }}</span>Lessons
+              Complete
+            </span>
+            </div>
+            <button [routerLink]="['/courses', course.id]" class='primary-btn'>Resume</button>
+          </div>           
         </div>
-        <button [routerLink]="['/courses', course.id]" class='primary-btn'>Resume</button>
-      </div>
-    </ng-template>
-
-  </swiper>
-
-  <form class='search-bar-form'>
-    <mat-form-field class='search-bar-full-width'  appearance='fill'>
-      <mat-label>Search My Courses</mat-label>
-      <input
-        type='text'
-        placeholder='Search My Courses'
-        aria-label='Search My Courses'
-        matInput
-        [formControl]='searchParameter'
-        [matAutocomplete]='auto' />
-      <mat-autocomplete #auto='matAutocomplete' [displayWith]='displayFn' (optionSelected)='navigateTo($event)'>
-        <mat-option *ngFor='let option of filteredCourses$ | async' [value]='option'>
-          {{ option.name }}
-        </mat-option>
-      </mat-autocomplete>
-    </mat-form-field>
-  </form>
-
-</div>
-
-<ng-template #noCourses>
-  <div class='courses-in-progress-inner-wrapper'>
-    <p class='body-copy-medium'>You have no courses in progress at this time. View the course catalog to get
-      started.</p>
-    <a class='primary-btn' href='#'>Browse Course Catalog</a>
+      </ng-template>
+  
+    </swiper>
+  
   </div>
-</ng-template>
+
+  <div class="courses-search-bar"> 
+    <form class='search-bar-form'>
+      <mat-form-field class='search-bar-full-width'  appearance='fill'>
+        <mat-label>Search My Courses</mat-label>
+        <input
+          type='text'
+          placeholder='Search My Courses'
+          aria-label='Search My Courses'
+          matInput
+          [formControl]='searchParameter'
+          [matAutocomplete]='auto' />
+        <mat-autocomplete #auto='matAutocomplete' [displayWith]='displayFn' (optionSelected)='navigateTo($event)'>
+          <mat-option *ngFor='let option of filteredCourses$ | async' [value]='option'>
+            {{ option.name }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    </form>
+  </div>
+  
+  <ng-template #noCourses>
+    <div class='courses-in-progress-inner-wrapper'>
+      <p class='body-copy-medium'>You have no courses in progress at this time. View the course catalog to get
+        started.</p>
+      <a class='primary-btn' href='#'>Browse Course Catalog</a>
+    </div>
+  </ng-template>
+  
+</div>
