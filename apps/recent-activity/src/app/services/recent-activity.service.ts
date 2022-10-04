@@ -6,9 +6,9 @@ import {
   initialRecentActivity,
   IRecentActivity,
 } from '../models/IRecentActivity';
-import { INotification } from '../models/Notification';
 import { map } from 'rxjs/operators';
 import { IRecentActivityNotifications } from '../models/IRecentActivityNotifications';
+import { INotification } from '@cirrus/models';
 
 export interface IRecentActivityTotal {
   notifications: INotification[];

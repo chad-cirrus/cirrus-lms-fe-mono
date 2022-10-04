@@ -4,6 +4,7 @@ import {
   ICourseOverview,
   IInitialFile,
   ILesson,
+  INotification,
   IProgressUpdateResponses,
   PROGRESS_TYPE,
 } from '@cirrus/models';
@@ -23,7 +24,7 @@ export class CoursesService {
   private coursesUrl = 'api/v4/courses';
   private scormUrl = 'scorm';
   notificationsCount$ = this.http
-    .get<Notification[]>(
+    .get<INotification[]>(
       `${environment.baseUrl}/api/v3/notifications/my-notifications`
     )
     .pipe(map(notif => notif.length));

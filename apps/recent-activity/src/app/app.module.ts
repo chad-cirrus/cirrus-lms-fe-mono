@@ -5,7 +5,7 @@ import { AppComponent } from './app.component';
 import { RecentActivityComponent } from './components/recent-activity/recent-activity.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthHttpInterceptor } from './interceptors/AuthHttpInterceptor';
-import { CirrusMaterialModule } from '@cirrus/ui';
+import { CirrusMaterialModule, NotificationsMenuModule } from '@cirrus/ui';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { CoursesInProgressComponent } from './components/courses-in-progress/courses-in-progress.component';
 import { AchievementsComponent } from './components/achievements/achievements.component';
@@ -38,6 +38,7 @@ import { TotalFlightHoursComponent } from './components/total-flight-hours/total
 
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { CirrusChartComponent } from './components/chart/chart.component';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 import { NoopComponent } from './components/noop/noop.component';
 import { CourseInProgressValuePipe } from './components/courses-in-progress/course-in-progress-value.pipe';
@@ -85,8 +86,15 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatTabsModule,
     A11yModule,
     NgApexchartsModule,
+
+    MatSidenavModule,
     SwiperModule,
     ReactiveFormsModule,
+    NotificationsMenuModule,
+    SwiperModule,
+    ReactiveFormsModule,
+
+
   ],
   providers: [
     {

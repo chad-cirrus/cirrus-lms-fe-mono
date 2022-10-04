@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { INotification } from '../../models/Notification';
+import { INotification } from '@cirrus/models';
 
 @Component({
   selector: 'cirrus-notifications-section',

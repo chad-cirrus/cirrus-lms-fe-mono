@@ -1,0 +1,40 @@
+<div class="notifications-container">
+  <div class="title-container-wrapper">
+    <div class="title-container">
+      <div class="title-notifications">
+        <h1 class="heading-3">Notifications</h1>
+        <span>{{ notifications.length }}</span>
+      </div>
+      <img src="recent-activity/images/svg/close.svg" (click)="dismiss()" />
+    </div>
+  </div>
+
+  <div class="notifications-body-container">
+    <div class="clear-all">
+      <p class="clear-all-text">Clear All</p>
+    </div>
+    <div *ngIf="notifications?.length">
+      <div *ngFor="let notification of notifications" class="notification-item">
+        <div class="date-trash-container">
+          <span class="body-copy-xsmall">{{
+            notification.created_at | date: 'shortDate'
+          }}</span>
+          <img src="recent-activity/images/svg/Trash_Icon.svg" />
+        </div>
+        <div class="heading-6 akzidenz-medium">
+          {{ notification.notific_type | notificationTitleType: notification }}
+        </div>
+        <div class="notification-item-body">
+          <p class="small">{{ notification.body }}</p>
+        </div>
+        <div
+          *ngIf="notification.notific_type.includes('invite')"
+          class="action-container"
+        >
+          <button class="primary-btn">Accept</button>
+          <a class="link">Decline</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

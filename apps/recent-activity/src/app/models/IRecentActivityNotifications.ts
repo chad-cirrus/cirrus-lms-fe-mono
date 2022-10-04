@@ -1,5 +1,5 @@
+import { INotification } from '@cirrus/models';
 import { IRecentActivity } from './IRecentActivity';
-import { INotification } from './Notification';
 
 export interface IRecentActivityNotifications {
   recentActivity: IRecentActivity;

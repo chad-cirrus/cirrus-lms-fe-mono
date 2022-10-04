@@ -1,11 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { map } from 'rxjs/operators';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { map, tap } from 'rxjs/operators';
 import { RecentActivityService } from '../../services/recent-activity.service';
 import { selectCirrusUser } from '../../store/selectors/cirrus-user.selector';
 import { AppState } from '../../store/reducers';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { totalFlightHoursString } from '../../helpers/totalFlightHoursString';
+
+import { MatSidenav } from '@angular/material/sidenav';
+
 import { Router } from '@angular/router';
 
 @Component({
@@ -14,9 +17,12 @@ import { Router } from '@angular/router';
   styleUrls: ['./recent-activity.component.scss'],
 })
 export class RecentActivityComponent implements OnInit {
+  @ViewChild('drawer') drawer!: MatSidenav;
+
+  events: string[] = [];
+  opened!: boolean;
   recentActivityNotifications$ =
     this.recentActivityService.recentActivityNotifcations$;
-
   user$ = this.store.select(selectCirrusUser);
   flightHoursString$: Observable<string> =
     this.recentActivityNotifications$.pipe(
@@ -42,6 +48,15 @@ export class RecentActivityComponent implements OnInit {
 
   viewAllNotifications() {
     console.log('recent activity view all notifications');
+    this.drawer.open();
+  }
+
+  navigateToCourse(course: number) {
+    this.router.navigate(['/courses', course]);
+  }
+
+  dismissNotificationsMenu() {
+    this.drawer.close();
   }
 
   navigateToCourse(course: number) {

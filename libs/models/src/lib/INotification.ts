@@ -1,9 +1,9 @@
-import { ICirrusUser } from '@cirrus/models';
+import { ICirrusUser } from './ICirrusUser';
 
 export interface INotification {
   id: number;
   body: string;
-  notific_type: string;
+  notific_type: NotificationType;
   created_at: string;
   certificate_id?: number;
   badge_id?: number;
@@ -37,4 +37,13 @@ export interface IContact {
 export interface INotifiable {
   type: string;
   connection?: any;
+}
+
+export enum NotificationType {
+  message = 'message',
+  student_invite = 'student_invite',
+  instructor_invite = 'instructor_invite',
+  badge = 'badge',
+  certificate = 'certificate',
+  training_center_invite = 'training_center_invite',
 }

@@ -1,9 +1,14 @@
 <div class="notification-container">
   <div class="notification-title">
     <h2 class="heading-3">Notifications</h2>
-    <span *ngIf="notifications.length" class="notification-number">{{
-      notifications.length
-    }}</span>
+
+    <span
+      *ngIf="notifications?.length"
+      matBadge="{{ notifications.length }}"
+      matBadgeColor="warn"
+      matBadgeOverlap="false"
+    ></span>
+
   </div>
   <div class="lists" *ngIf="notifications.length; else noNotifications">
     <div
@@ -27,7 +32,13 @@
   </div>
 
   <ng-template #noNotifications>
-    <img [src]="bellUrl" alt="notifications" />
-    <div>You haven't recieved any notifications.</div>
+    <div class="no-notifications-container">
+      <div>
+        <div class="img-container">
+          <img [src]="bellUrl" alt="notifications" />
+        </div>
+        <p class="extra-small">You haven't recieved any notifications.</p>
+      </div>
+    </div>
   </ng-template>
 </div>

@@ -1,0 +1,58 @@
+@use '../styles/variables' as *;
+
+.notifications-container {
+  background-color: $gray1;
+}
+
+.title-container-wrapper {
+  border-bottom: 1px solid $gray3;
+}
+
+.title-container {
+  padding: 0px 19px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title-notifications {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.clear-all {
+  border-bottom: 1px solid $gray3;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.clear-all-text {
+  padding-right: 13px;
+}
+
+.notifications-body-container {
+  padding: 27px 19px;
+}
+
+.notification-item {
+  padding: 17px 21px;
+  border-bottom: 1px solid $gray3;
+}
+
+.date-trash-container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+  .body-copy-xsmall {
+    color: $gray4;
+  }
+}
+
+.small {
+  color: $gray6;
+}
+
+.primary-btn {
+  margin-right: 47px;
+}
