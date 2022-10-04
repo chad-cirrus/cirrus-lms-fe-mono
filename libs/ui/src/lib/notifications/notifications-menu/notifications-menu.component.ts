@@ -1,7 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { INotification, NotificationType } from '@cirrus/models';
-import { BehaviorSubject } from 'rxjs';
-import { NotificationTitleTypePipe } from '../../notification-title-type.pipe';
+import { INotification } from '@cirrus/models';
 
 @Component({
   selector: 'cirrus-notifications-menu',
