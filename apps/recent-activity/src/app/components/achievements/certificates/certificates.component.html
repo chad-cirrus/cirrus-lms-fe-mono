@@ -1,5 +1,8 @@
 <div *ngIf="certificates.length > 0; else noCertificates">
-  <div *ngFor="let certificate of certificates"></div>
+  <div class="certificate" *ngFor="let certificate of certificates.slice(0, 5)">
+    <div class="enrollment-date">{{ certificate.enrollment_date }}</div>
+    <div class="course-name">{{ certificate.course_name }}</div>
+  </div>
 </div>
 
 <ng-template #noCertificates>

@@ -1,3 +1,13 @@
+.badge {
+  display: flex;
+  flex-direction: row;
+}
+
+img {
+  height: 5rem;
+  color: black;
+}
+
 .view.mat-stroked-button {
   border: 1px solid white;
   border-radius: 60px;

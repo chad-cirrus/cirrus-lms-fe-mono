@@ -26,10 +26,9 @@ export interface Certificate {
 }
 
 export interface Badge {
-  id: number;
   course_name: string;
   badge_image: string;
-  achieved_on: string;
+  achieved_on: string | null;
 }
 
 export interface Achievements {
