@@ -28,6 +28,12 @@
         <div *ngIf="loadingIndicator$ | async" class="spinner-container">
           <mat-spinner color="accent"></mat-spinner>
         </div>
+        <div *ngIf="error$ | async" class="error-container">
+          <cirrus-error-notification
+            (emitClose)="dismissErrorMessage()"
+          ></cirrus-error-notification>
+        </div>
+
         <router-outlet></router-outlet>
       </div>
     </div>

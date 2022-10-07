@@ -39,10 +39,14 @@ import { ContentPlayerModule } from './content-player/content-player.module';
 import { ProgressEffects } from './store/effects/progress.effects';
 import { environment } from '../environments/environment';
 import { RouterModule } from '@angular/router';
+
+import { HttpErrorInterceptor } from './interceptors/httperror.interceptor';
+
 import { CourseOverviewRouteComponent } from './course/course-overview-route/course-overview-route.component';
 import { CourseLessonsRouteComponent } from './course/course-lessons-route/course-lessons-route.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { CourseEnrollmentsRouteComponent } from './course/course-enrollments-route/course-enrollments-route.component';
+
 
 @NgModule({
   declarations: [
@@ -86,6 +90,11 @@ import { CourseEnrollmentsRouteComponent } from './course/course-enrollments-rou
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthHttpInterceptor,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpErrorInterceptor,
       multi: true,
     },
     MediaServerService,

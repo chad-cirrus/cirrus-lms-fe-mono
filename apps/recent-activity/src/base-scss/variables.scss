@@ -9,27 +9,38 @@ $gray5: #c4c4c4;
 $gray6: #d1d1d1;
 $white: #fefefe;
 
-$neon-red:#FF0000;
-$neon-yellow: #FFFF00;
-$neon-orange: #FF8000;
-$neon-green: #00FF00;
-$neon-blue: #00FFFF;
+$neon-red: #ff0000;
+$neon-yellow: #ffff00;
+$neon-orange: #ff8000;
+$neon-green: #00ff00;
+$neon-blue: #00ffff;
 
-$red: #FF3939;
-$yellow: #FFD600;
-$deep-red: #400E0E;
+$red: #ff3939;
+$yellow: #ffd600;
+$deep-red: #400e0e;
 $deep-blue: #004040;
 $deep-green: #004000;
 
-$fabulous-gradient: linear-gradient(180deg, $neon-orange 0%, $neon-yellow 19.27%, $neon-green 50.52%, $neon-blue 92.19%);
-$sugar-plum-gradient: linear-gradient(180deg, #7E128F 0%, #6F44CA 53.65%, #62C6FF 100%);
+$fabulous-gradient: linear-gradient(
+  180deg,
+  $neon-orange 0%,
+  $neon-yellow 19.27%,
+  $neon-green 50.52%,
+  $neon-blue 92.19%
+);
+$sugar-plum-gradient: linear-gradient(
+  180deg,
+  #7e128f 0%,
+  #6f44ca 53.65%,
+  #62c6ff 100%
+);
 
 .fabulous {
-    background: $fabulous-gradient;
-    transform: rotate(-90deg);
+  background: $fabulous-gradient;
+  transform: rotate(-90deg);
 }
 
 .sugar-plum {
-    background: $sugar-plum-gradient;
-    transform: matrix(0, 1, 1, 0, 0, 0);
+  background: $sugar-plum-gradient;
+  transform: matrix(0, 1, 1, 0, 0, 0);
 }

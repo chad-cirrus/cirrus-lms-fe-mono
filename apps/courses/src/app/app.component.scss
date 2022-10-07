@@ -5,6 +5,13 @@
   width: 320px;
 }
 
+.error-container {
+  z-index: 9999;
+  position: absolute;
+  top: 91%;
+  right: 2%;
+}
+
 .course-name {
   border-bottom: 1px solid black;
 }

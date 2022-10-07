@@ -40,6 +40,7 @@ import {
   BreakpointState,
 } from '@angular/cdk/layout';
 import { CoursesService } from './course/course.service';
+import { ErrorNotificationService } from './error-notification.service';
 
 @Component({
   selector: 'cirrus-root',
@@ -66,6 +67,8 @@ export class AppComponent implements OnInit, OnDestroy {
   cirrusImpersonateReturnUser$!: Observable<ICirrusUser>;
   courseId$ = this.appService.courseId$.pipe(distinctUntilChanged(), share());
 
+  error$ = this.errorService.error$;
+
   notificationCount$: Observable<any> = this.courseService.notificationsCount$;
   sideNavOpen$: Observable<boolean> = this.store.select(selectSideNavOpen);
   @ViewChild(MatSidenav) sideNav!: MatSidenav;
@@ -87,7 +90,8 @@ export class AppComponent implements OnInit, OnDestroy {
     private store: Store<AppState>,
     private appService: AppService,
     private breakpointObserver: BreakpointObserver,
-    private courseService: CoursesService
+    private courseService: CoursesService,
+    private errorService: ErrorNotificationService
   ) {}
 
   ngOnInit() {
@@ -129,6 +133,10 @@ export class AppComponent implements OnInit, OnDestroy {
 
   toggleCollapse(collapse: boolean) {
     this.collapse = collapse;
+  }
+
+  dismissErrorMessage() {
+    this.errorService.errorSubject.next('');
   }
 
   handleOpenChanged(sideNavOpen: boolean) {

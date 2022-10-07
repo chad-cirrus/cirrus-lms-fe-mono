@@ -1,0 +1,27 @@
+@use '../styles/variables' as *;
+
+.error-container {
+  padding: 0 2rem;
+  color: $primary-font-color;
+  display: flex;
+  align-items: center;
+}
+
+.error-text {
+  margin: 0;
+}
+
+.image-text-wrapper {
+  border-radius: 4px 4px 0 0;
+  background: darken($neon-red, 15%);
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.close-container {
+  border-radius: 0 0 4px 4px;
+  background: darken($neon-red, 25%);
+  padding: 1rem;
+}
