@@ -1,1 +1,12 @@
-<p>coursework works!</p>
+<div class="title">Lifetime Cirrus Approach Coursework Stats</div>
+
+<div *ngFor="let stats of courseWorkStats">
+  <!-- Look up Angular pipes to format type -->
+  <div>{{ stats.type }}</div>
+  <div *ngIf="!stats; else completedArr">0</div>
+  <ng-template #completedArr>
+    <!--    <div *ngFor="let completed of logbook.completed">-->
+    <!--      &lt;!&ndash;????? &ndash;&gt;-->
+    <!--    </div>-->
+  </ng-template>
+</div>

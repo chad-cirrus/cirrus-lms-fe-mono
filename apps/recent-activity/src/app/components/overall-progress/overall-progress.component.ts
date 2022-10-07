@@ -62,7 +62,7 @@ export class OverallProgressComponent {
         : {
             hours: this.overallProgress.course_work_stats[5].completed,
             chartColors: CourseWorkChartColors,
-            title: 'Flight Hours in the Last 12 Months',
+            title: 'Lessons Completed in the Last 12 Months',
           };
     this.chartDataSubject.next(data);
   }
