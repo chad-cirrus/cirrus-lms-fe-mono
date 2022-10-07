@@ -11,16 +11,21 @@
   </div>
   <div class="lists" *ngIf="notifications.length; else noNotifications">
     <div
-      *ngFor="let notification of notifications; let i = index"
-      [ngClass]="i + 1 === notifications.length ? '' : 'notification-item'"
+      *ngFor="
+        let notification of notifications.slice(0, 6);
+        let i = index;
+        let count = count
+      "
     >
-      <p class="extra-small">
-        {{ notification.created_at | date: 'shortDate' }}
-      </p>
-      <div>
-        <p class="body">
-          {{ notification.body }}
+      <div [ngClass]="{ 'notification-item': i + 1 !== count }">
+        <p class="extra-small date">
+          {{ notification.created_at | date: 'shortDate' }}
         </p>
+        <div>
+          <p class="body">
+            {{ notification.body }}
+          </p>
+        </div>
       </div>
     </div>
     <div class="btn-container">

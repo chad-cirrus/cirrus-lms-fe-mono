@@ -10,10 +10,15 @@
   .notification-title {
     display: flex;
     align-items: center;
+    padding-bottom: 10px;
   }
 
   .notification-number {
     margin-left: 18px;
+  }
+
+  .date {
+    margin-top: 13px;
   }
 
   .extra-small {
@@ -21,6 +26,7 @@
   }
 
   .body {
+    margin: 6px 0px 17px 0px;
     color: $gray5;
   }
 
