@@ -11,13 +11,15 @@
         [hours]="(flightHoursString$ | async) || '0000'"
       ></cirrus-total-flight-hours>
     </div>
-
-    <cirrus-courses-in-progress
+    <div class="cirrus-courses-in-progress-wrapper">
+      <cirrus-courses-in-progress
       [inProgressCourses]="
         recentActivityNotifications.recentActivity.in_progress_courses
       "
       (navigateToCourse)="navigateToCourse($event)"
     ></cirrus-courses-in-progress>
+    </div>
+   
     <div class="notifications-achievements-wrapper">
       <cirrus-notifications-section
         class="notifications-wrapper"

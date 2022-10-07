@@ -14,7 +14,7 @@
     >
       <ng-template swiperSlide *ngFor='let course of inProgressCourses; index as i'>
   
-        <div class='swiper-slide-container course' [ngStyle]="{'background-image': 'url(' + course.thumbnail_image_url + ')'}">
+        <div class='swiper-slide-container course' [ngStyle]="{'background-image': 'radial-gradient(circle, rgba(255,255,255,0) 0%, rgba(0,0,0,0.6012780112044818) 100%), url(' + course.thumbnail_image_url + ')'}">
           
             <h3 class='name heading-4'>{{ course.name }}</h3>
           <div class="swiper-slide-content">
