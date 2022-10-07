@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 import { INotification } from '@cirrus/models';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',

@@ -33,6 +33,8 @@ export * from './lib/course-completion/ui-download.service';
 export * from './lib/generic-responsive-mat-table/generic-responsive-mat-table.component';
 export * from './lib/table-format.pipe';
 
+export * from './lib/lib-services/connections/connections.service';
+
 export * from './lib/StageLessonNavigationEvent';
 
 // export * from '../../models/src/testing/testData';

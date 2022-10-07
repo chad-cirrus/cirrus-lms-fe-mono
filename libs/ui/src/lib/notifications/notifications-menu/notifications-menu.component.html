@@ -17,7 +17,7 @@
 
   <div class="notifications-body-container">
     <div class="clear-all">
-      <p class="clear-all-text">Clear All</p>
+      <p class="clear-all-text" (click)="clearNotifications()">Clear All</p>
     </div>
     <div *ngIf="notifications?.length">
       <div *ngFor="let notification of notifications" class="notification-item">
@@ -25,7 +25,10 @@
           <span class="body-copy-xsmall">{{
             notification.created_at | date: 'shortDate'
           }}</span>
-          <img src="recent-activity/images/svg/Trash_Icon.svg" />
+          <img
+            src="recent-activity/images/svg/Trash_Icon.svg"
+            (click)="deleteNotification(notification.id)"
+          />
         </div>
         <div class="heading-6 akzidenz-medium">
           {{ notification.notific_type | notificationTitleType: notification }}
@@ -37,8 +40,10 @@
           *ngIf="notification.notific_type.includes('invite'); else message"
           class="action-container"
         >
-          <button class="primary-btn">Accept</button>
-          <a class="link">Decline</a>
+          <button class="primary-btn" (click)="acceptInvitation(notification)">
+            Accept
+          </button>
+          <a class="link" (click)="declineInvitation(notification)">Decline</a>
         </div>
         <ng-template #message>
           <p class="small message">

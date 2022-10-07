@@ -10,6 +10,8 @@ import { totalFlightHoursString } from '../../helpers/totalFlightHoursString';
 import { MatSidenav } from '@angular/material/sidenav';
 
 import { Router } from '@angular/router';
+import { INotification } from '@cirrus/models';
+import { RecentActivityFacade } from '../../facade.service';
 
 @Component({
   selector: 'cirrus-recent-activity',
@@ -39,7 +41,8 @@ export class RecentActivityComponent implements OnInit {
   constructor(
     private recentActivityService: RecentActivityService,
     private store: Store<AppState>,
-    private router: Router
+    private router: Router,
+    private facade: RecentActivityFacade
   ) {}
 
   ngOnInit() {
@@ -53,6 +56,22 @@ export class RecentActivityComponent implements OnInit {
 
   dismissNotificationsMenu() {
     this.drawer.close();
+  }
+
+  clearNotifications() {
+    console.log('');
+  }
+
+  deleteNotification(id: number) {
+    console.log('');
+  }
+
+  acceptInvite(notification: INotification) {
+    this.facade.acceptInvite(notification).subscribe();
+  }
+
+  declineInvite(notification: INotification) {
+    this.facade.declineInvite(notification).subscribe();
   }
 
   navigateToCourse(course: number) {

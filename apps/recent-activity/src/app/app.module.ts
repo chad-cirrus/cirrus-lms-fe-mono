@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { environment } from '../environments/environment';
 
 import { AppComponent } from './app.component';
 import { RecentActivityComponent } from './components/recent-activity/recent-activity.component';
@@ -93,14 +94,16 @@ import { ReactiveFormsModule } from '@angular/forms';
     NotificationsMenuModule,
     SwiperModule,
     ReactiveFormsModule,
-
-
   ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthHttpInterceptor,
       multi: true,
+    },
+    {
+      provide: 'environment',
+      useValue: environment,
     },
   ],
   bootstrap: [AppComponent],
