@@ -3,6 +3,12 @@
     <div class="title-container">
       <div class="title-notifications">
         <h1 class="heading-3">Notifications</h1>
+        <span
+          class="alarm-badge"
+          matBadge="{{ notifications.length }}"
+          matBadgeColor="warn"
+          matBadgeOverlap="false"
+        ></span>
         <div>{{ notifications.length }}</div>
       </div>
       <img src="recent-activity/images/svg/close.svg" (click)="dismiss()" />
@@ -28,12 +34,18 @@
           <p class="small">{{ notification.body }}</p>
         </div>
         <div
-          *ngIf="notification.notific_type.includes('invite')"
+          *ngIf="notification.notific_type.includes('invite'); else message"
           class="action-container"
         >
           <button class="primary-btn">Accept</button>
           <a class="link">Decline</a>
         </div>
+        <ng-template #message>
+          <p class="small message">
+            From:
+            <span class="email-text">{{ notification?.sender?.email }}</span>
+          </p>
+        </ng-template>
       </div>
     </div>
   </div>

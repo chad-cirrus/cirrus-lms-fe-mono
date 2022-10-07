@@ -8,6 +8,6 @@ export class NotificationTitleTypePipe implements PipeTransform {
     if (value.includes('invite')) {
       return `Pending Connection: ${args[0].sender.contact.name}`;
     }
-    return 'Title Here';
+    return '';
   }
 }

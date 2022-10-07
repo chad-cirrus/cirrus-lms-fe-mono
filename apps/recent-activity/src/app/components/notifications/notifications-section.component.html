@@ -4,11 +4,10 @@
 
     <span
       *ngIf="notifications?.length"
-      matBadge="{{ notifications.length }}"
+      matBadge="{{ notifications.length > 99 ? '99+' : notifications.length }}"
       matBadgeColor="warn"
       matBadgeOverlap="false"
     ></span>
-
   </div>
   <div class="lists" *ngIf="notifications.length; else noNotifications">
     <div
