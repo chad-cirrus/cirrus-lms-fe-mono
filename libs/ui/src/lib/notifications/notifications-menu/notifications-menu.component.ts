@@ -36,4 +36,11 @@ export class NotificationsMenuComponent {
   deleteNotification(id: number) {
     this.deleteNotificationEmit.emit(id);
   }
+
+  get formatBadge() {
+    if (this.notifications.length) {
+      return this.notifications.length > 99 ? '99+' : this.notifications.length;
+    }
+    return '';
+  }
 }

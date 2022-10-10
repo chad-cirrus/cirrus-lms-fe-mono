@@ -1,12 +1,13 @@
 import { Meta, moduleMetadata, Story } from '@storybook/angular';
 import { HamburgerMenuComponent } from './hamburger-menu.component';
+import { OverlayModule } from '@angular/cdk/overlay';
 
 export default {
   title: 'HamburgerMenuComponent',
   component: HamburgerMenuComponent,
   decorators: [
     moduleMetadata({
-      imports: [],
+      imports: [OverlayModule],
     }),
   ],
 } as Meta<HamburgerMenuComponent>;

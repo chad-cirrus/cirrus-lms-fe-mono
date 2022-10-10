@@ -20,7 +20,7 @@ export class SideNavComponent implements OnInit, OnDestroy {
   destroyed = new Subject<void>();
   @Input() cirrusUser!: ICirrusUser;
   @Input() type = '';
-  @Input() notificationCount = 0;
+  @Input() notificationCount!: number;
   collapse!: boolean;
   @Output() emitCollapse = new EventEmitter<boolean>();
   @Output() emitDismissHamburgerMenu = new EventEmitter<boolean>();
@@ -48,6 +48,13 @@ export class SideNavComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.destroyed.next();
     this.destroyed.complete();
+  }
+
+  get formatBadge() {
+    if (this.notificationCount) {
+      return this.notificationCount > 99 ? '99+' : this.notificationCount;
+    }
+    return '';
   }
 
   dismissHamburgerMenu() {

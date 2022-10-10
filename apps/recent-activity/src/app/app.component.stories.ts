@@ -1,3 +1,4 @@
+import { HttpClientModule } from '@angular/common/http';
 import { Meta, moduleMetadata, Story } from '@storybook/angular';
 import { AppComponent } from './app.component';
 
@@ -6,7 +7,7 @@ export default {
   component: AppComponent,
   decorators: [
     moduleMetadata({
-      imports: [],
+      imports: [HttpClientModule],
     }),
   ],
 } as Meta<AppComponent>;

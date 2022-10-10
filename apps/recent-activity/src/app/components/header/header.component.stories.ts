@@ -1,7 +1,8 @@
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CirrusMaterialModule, HeaderDropdownComponent } from '@cirrus/ui';
-
+import { StoreModule } from '@ngrx/store';
+import { recentActivityReducers } from '../../store/reducers';
 import { Meta, moduleMetadata, Story } from '@storybook/angular';
 import { HeaderComponent } from './header.component';
 
@@ -14,6 +15,7 @@ export default {
         FlexLayoutModule,
         CirrusMaterialModule,
         BrowserAnimationsModule,
+        StoreModule.forRoot(recentActivityReducers),
       ],
       declarations: [HeaderDropdownComponent],
     }),

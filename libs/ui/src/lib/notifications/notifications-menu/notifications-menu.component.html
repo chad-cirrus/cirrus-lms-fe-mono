@@ -5,11 +5,10 @@
         <h1 class="heading-3">Notifications</h1>
         <span
           class="alarm-badge"
-          matBadge="{{ notifications.length }}"
+          matBadge="{{ formatBadge }}"
           matBadgeColor="warn"
           matBadgeOverlap="false"
         ></span>
-        <div>{{ notifications.length }}</div>
       </div>
       <img src="recent-activity/images/svg/close.svg" (click)="dismiss()" />
     </div>

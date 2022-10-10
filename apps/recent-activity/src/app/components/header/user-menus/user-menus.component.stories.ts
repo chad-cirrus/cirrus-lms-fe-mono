@@ -1,12 +1,24 @@
+import { HttpClientModule } from '@angular/common/http';
+import { MatDialogModule } from '@angular/material/dialog';
+import { RouterModule } from '@angular/router';
+import { StoreModule } from '@ngrx/store';
 import { Meta, moduleMetadata, Story } from '@storybook/angular';
 import { UserMenusComponent } from './user-menus.component';
+import { recentActivityReducers } from '../../../store/reducers';
+import { OverlayModule } from '@angular/cdk/overlay';
 
 export default {
   title: 'UserMenusComponent',
   component: UserMenusComponent,
   decorators: [
     moduleMetadata({
-      imports: [],
+      imports: [
+        MatDialogModule,
+        OverlayModule,
+        HttpClientModule,
+        RouterModule.forRoot([], { useHash: true }),
+        StoreModule.forRoot(recentActivityReducers),
+      ],
     }),
   ],
 } as Meta<UserMenusComponent>;
