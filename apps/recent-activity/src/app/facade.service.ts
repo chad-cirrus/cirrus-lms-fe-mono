@@ -1,16 +1,26 @@
 import { Injectable } from '@angular/core';
 import { INotification } from '@cirrus/models';
-import { ConnectionsService } from '@cirrus/ui';
-import { tap } from 'rxjs/operators';
+import { ConnectionsService, UiDownloadService } from '@cirrus/ui';
+import { map, tap } from 'rxjs/operators';
 import { RecentActivityService } from './services/recent-activity.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class RecentActivityFacade {
+  achievements$ = this.recentActivityService.recentActivityNotifications$.pipe(
+    map(
+      recentActivityNotifications =>
+        recentActivityNotifications.recentActivity.achievements
+    )
+  );
+
+  downloadLoading$ = this.downloadService.loading$;
+
   constructor(
     private recentActivityService: RecentActivityService,
-    private connectionService: ConnectionsService
+    private connectionService: ConnectionsService,
+    private downloadService: UiDownloadService
   ) {}
 
   getRecentActivityPayload() {
@@ -27,5 +37,9 @@ export class RecentActivityFacade {
     return this.connectionService
       .declineInvite(notification)
       .pipe(tap(() => this.getRecentActivityPayload()));
+  }
+
+  downloadCertificate(course_attempt_id: number) {
+    return this.downloadService.downloadCertificate(course_attempt_id);
   }
 }

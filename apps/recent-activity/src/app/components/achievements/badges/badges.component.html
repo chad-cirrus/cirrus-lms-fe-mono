@@ -8,12 +8,25 @@
       <div>{{ badge.course_name }}</div>
     </div>
   </div>
+  <button
+    class="view"
+    mat-stroked-button
+    color="primary"
+    [routerLink]="['achievements']"
+  >
+    View All Achievements
+  </button>
 </div>
 
 <ng-template #noBadges>
-  <img src="recent-activity/images/svg/badge-course.svg" alt="certificates" />
+  <img src="recent-activity/images/svg/Frame.svg" alt="certificates" />
   <div>You haven't earned any Badges yet. Keep going!</div>
-  <button class="view" mat-stroked-button color="primary">
+  <button
+    class="view"
+    mat-stroked-button
+    color="primary"
+    [routerLink]="['achievements']"
+  >
     View All Achievements
   </button>
 </ng-template>

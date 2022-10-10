@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ErrorNotificationComponent } from './error-notification.component';
+import { BadgesFullComponent } from './badges-full.component';
 
-describe('ErrorNotificationComponent', () => {
-  let component: ErrorNotificationComponent;
-  let fixture: ComponentFixture<ErrorNotificationComponent>;
+describe('BadgesFullComponent', () => {
+  let component: BadgesFullComponent;
+  let fixture: ComponentFixture<BadgesFullComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ErrorNotificationComponent],
+      declarations: [BadgesFullComponent],
     }).compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ErrorNotificationComponent);
+    fixture = TestBed.createComponent(BadgesFullComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

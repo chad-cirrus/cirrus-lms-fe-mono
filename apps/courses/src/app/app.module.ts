@@ -17,7 +17,7 @@ import { CourseComponent } from './course/course.component';
 import { AppRoutingModule } from './app-routing.module';
 import { coursesReducers } from './store/reducers';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthHttpInterceptor } from './interceptors/AuthHttpInterceptor';
 import { LessonsEffects } from './store/effects/lessons.effects';
 import { LessonComponent } from './course/lesson/lesson.component';
@@ -38,7 +38,6 @@ import { HamburgerMenuComponent } from './course/header/hamburger-menu/hamburger
 import { ContentPlayerModule } from './content-player/content-player.module';
 import { ProgressEffects } from './store/effects/progress.effects';
 import { environment } from '../environments/environment';
-import { RouterModule } from '@angular/router';
 
 import { HttpErrorInterceptor } from './interceptors/httperror.interceptor';
 
@@ -46,7 +45,6 @@ import { CourseOverviewRouteComponent } from './course/course-overview-route/cou
 import { CourseLessonsRouteComponent } from './course/course-lessons-route/course-lessons-route.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { CourseEnrollmentsRouteComponent } from './course/course-enrollments-route/course-enrollments-route.component';
-
 
 @NgModule({
   declarations: [

@@ -1,5 +1,6 @@
 import { Meta, moduleMetadata, Story } from '@storybook/angular';
 import { NotificationsSectionComponent } from './notifications-section.component';
+import { NotificationType } from '@cirrus/models';
 
 export default {
   title: 'Page Header Notifications Section',
@@ -23,7 +24,7 @@ WithNotifications.args = {
     {
       id: 24394,
       body: 'test test test',
-      notific_type: 'message',
+      notific_type: NotificationType.message,
       created_at: '2022-09-21T14:46:06.318Z',
       certificate_id: undefined,
       badge_id: undefined,
@@ -52,7 +53,7 @@ WithNotifications.args = {
     {
       id: 24395,
       body: 'yo yo yo yo',
-      notific_type: 'message',
+      notific_type: NotificationType.message,
       created_at: '2022-09-21T14:46:20.167Z',
       certificate_id: undefined,
       badge_id: undefined,
@@ -81,7 +82,7 @@ WithNotifications.args = {
     {
       id: 24396,
       body: 'boom boom boom hey hey hey',
-      notific_type: 'message',
+      notific_type: NotificationType.message,
       created_at: '2022-09-21T14:46:37.180Z',
       certificate_id: undefined,
       badge_id: undefined,

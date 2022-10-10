@@ -41,3 +41,5 @@ export * from './lib/StageLessonNavigationEvent';
 export * from '../../models/src/testing/testDataIcingLesson';
 export * from '../../models/src/testing/testData853';
 export * from '../../models/src/testing/testData855';
+
+export * from './lib/helpers/DownloadPdf';

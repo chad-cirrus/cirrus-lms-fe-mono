@@ -4,7 +4,6 @@ import { Store } from '@ngrx/store';
 import { fetchCourseOverview } from '../store/actions/course.actions';
 import { CourseState } from '../store/reducers/course.reducer';
 import { selectCourseOverview } from '../store/selectors/course.selector';
-import { StageLessonNavigationEvent } from '@cirrus/ui';
 import { selectScreenSize } from '../store/selectors/view.selector';
 import { selectCirrusUser } from '../store/selectors/cirrus-user.selector';
 import { filter, take } from 'rxjs/operators';
@@ -27,9 +26,13 @@ export class CourseComponent implements OnInit {
 
   ngOnInit(): void {
     this.courseOverview$
-      .pipe(filter(overview => overview.id !== 0), take(1))
-      .subscribe((overview) => {
-        const defaultTab = overview?.progress?.status === 'not_started' ? 'overview' : 'lessons';
+      .pipe(
+        filter(overview => overview.id !== 0),
+        take(1)
+      )
+      .subscribe(overview => {
+        const defaultTab =
+          overview?.progress?.status === 'not_started' ? 'overview' : 'lessons';
         this.router.navigate(['/', 'courses', overview.id, defaultTab]);
       });
 

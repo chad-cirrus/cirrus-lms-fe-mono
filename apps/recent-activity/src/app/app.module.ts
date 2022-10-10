@@ -6,7 +6,11 @@ import { AppComponent } from './app.component';
 import { RecentActivityComponent } from './components/recent-activity/recent-activity.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthHttpInterceptor } from './interceptors/AuthHttpInterceptor';
-import { CirrusMaterialModule, NotificationsMenuModule } from '@cirrus/ui';
+import {
+  CirrusMaterialModule,
+  NotificationsMenuModule,
+  UiDownloadService,
+} from '@cirrus/ui';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { CoursesInProgressComponent } from './components/courses-in-progress/courses-in-progress.component';
 import { AchievementsComponent } from './components/achievements/achievements.component';
@@ -45,6 +49,9 @@ import { NoopComponent } from './components/noop/noop.component';
 import { CourseInProgressValuePipe } from './components/courses-in-progress/course-in-progress-value.pipe';
 import { SwiperModule } from 'swiper/angular';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AchievementsPageComponent } from './components/achievements-page/achievements-page.component';
+import { CertificatesFullComponent } from './components/achievements-page/certificates-full/certificates-full.component';
+import { BadgesFullComponent } from './components/achievements-page/badges-full/badges-full.component';
 
 @NgModule({
   declarations: [
@@ -70,6 +77,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     CirrusChartComponent,
     NoopComponent,
     CourseInProgressValuePipe,
+    AchievementsPageComponent,
+    CertificatesFullComponent,
+    BadgesFullComponent,
   ],
   imports: [
     CommonModule,
@@ -105,6 +115,7 @@ import { ReactiveFormsModule } from '@angular/forms';
       provide: 'environment',
       useValue: environment,
     },
+    UiDownloadService,
   ],
   bootstrap: [AppComponent],
   exports: [

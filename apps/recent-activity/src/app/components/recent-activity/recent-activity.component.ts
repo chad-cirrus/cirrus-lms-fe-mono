@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { map, tap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { RecentActivityService } from '../../services/recent-activity.service';
 import { selectCirrusUser } from '../../store/selectors/cirrus-user.selector';
 import { AppState } from '../../store/reducers';
@@ -24,7 +24,7 @@ export class RecentActivityComponent implements OnInit {
   events: string[] = [];
   opened!: boolean;
   recentActivityNotifications$ =
-    this.recentActivityService.recentActivityNotifcations$;
+    this.recentActivityService.recentActivityNotifications$;
   user$ = this.store.select(selectCirrusUser);
   flightHoursString$: Observable<string> =
     this.recentActivityNotifications$.pipe(

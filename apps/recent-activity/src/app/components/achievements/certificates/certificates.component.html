@@ -3,12 +3,25 @@
     <div class="enrollment-date">{{ certificate.enrollment_date }}</div>
     <div class="course-name">{{ certificate.course_name }}</div>
   </div>
+  <button
+    class="view"
+    mat-stroked-button
+    color="primary"
+    [routerLink]="['achievements']"
+  >
+    View All Achievements
+  </button>
 </div>
 
 <ng-template #noCertificates>
   <img src="recent-activity/images/svg/certificates.svg" alt="certificates" />
   <div>You haven't earned any Certificates yet. Keep going!</div>
-  <button class="view" mat-stroked-button color="primary">
+  <button
+    class="view"
+    mat-stroked-button
+    color="primary"
+    [routerLink]="['achievements']"
+  >
     View All Achievements
   </button>
 </ng-template>

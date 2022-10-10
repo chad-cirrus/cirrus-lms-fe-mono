@@ -1,0 +1,21 @@
+<div class="breadcrumb-container">
+  <div class="breadcrumb-item-container" routerLink="/recent-activity">
+    <img src="recent-activity/images/svg/chevron-left-white.svg" />
+    <span class="link-label heading-6">Recent Activity</span>
+  </div>
+</div>
+
+<h2 class="heading-2">Achievements</h2>
+
+<mat-tab-group>
+  <mat-tab label="Certificates">
+    <cirrus-certificates-full
+      [certificates]="(achievements$ | async)!.certificates"
+    ></cirrus-certificates-full>
+  </mat-tab>
+  <mat-tab label="Badges">
+    <cirrus-badges-full
+      [badges]="(achievements$ | async)!.badges"
+    ></cirrus-badges-full>
+  </mat-tab>
+</mat-tab-group>

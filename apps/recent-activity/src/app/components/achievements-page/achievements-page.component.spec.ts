@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ErrorNotificationComponent } from './error-notification.component';
+import { AchievementsPageComponent } from './achievements-page.component';
 
-describe('ErrorNotificationComponent', () => {
-  let component: ErrorNotificationComponent;
-  let fixture: ComponentFixture<ErrorNotificationComponent>;
+describe('AchievementsPageComponent', () => {
+  let component: AchievementsPageComponent;
+  let fixture: ComponentFixture<AchievementsPageComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ErrorNotificationComponent],
+      declarations: [AchievementsPageComponent],
     }).compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ErrorNotificationComponent);
+    fixture = TestBed.createComponent(AchievementsPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -2,6 +2,7 @@ import { InjectionToken, NgModule } from '@angular/core';
 import { ActivatedRouteSnapshot, RouterModule, Routes } from '@angular/router';
 import { RecentActivityComponent } from './components/recent-activity/recent-activity.component';
 import { NoopComponent } from './components/noop/noop.component';
+import { AchievementsPageComponent } from './components/achievements-page/achievements-page.component';
 
 const getResolvedUrl = (route: ActivatedRouteSnapshot): string => {
   const params = Object.keys(route.params)
@@ -48,6 +49,10 @@ const routes: Routes = [
     component: NoopComponent,
   },
   { path: 'recent-activity', component: RecentActivityComponent },
+  {
+    path: 'recent-activity/achievements',
+    component: AchievementsPageComponent,
+  },
   { path: '', redirectTo: 'recent', pathMatch: 'full' },
 ];
 
