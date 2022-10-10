@@ -40,14 +40,19 @@
 }
 
 .hours-text-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background: $gray1;
   border-radius: 5px;
-  max-width: 150px;
+  padding: 0 5px;
+  padding-left: 10px;
   text-align: center;
 }
 
 .hours {
   color: $white;
   font-size: 30px;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.34em;
 }
+

@@ -33,14 +33,12 @@
           <div class="swiper-slide-content">
             <div class="course-slide-progress-wrapper">
               <mat-progress-bar
-                [value]="course | courseInProgressValue"
-                mode="determinate"
-              ></mat-progress-bar>
-              <span class="completed body-copy-small"
-                ><span>{{ course.lessons_completed }}</span
-                >/<span>{{ course.lessons_total }}</span
-                >Lessons Complete
-              </span>
+              [value]='course | courseInProgressValue'
+              mode='determinate'
+            ></mat-progress-bar>
+            <span class='progress-bar-text body-copy-small'><span>{{ course.lessons_completed }}</span>/<span>{{ course.lessons_total }}</span>Lessons
+              Complete
+            </span>
             </div>
             <button
               [routerLink]="[

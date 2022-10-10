@@ -4,24 +4,15 @@
 @import '~swiper/modules/navigation/navigation.min.css';
 @import '~swiper/modules/pagination/pagination.min.css';
 
+cirrus-courses-in-progress .heading-3 {
+  margin-top: 40px;
+}
+
 .courses-slider-container {
   margin-top: 30px;
   @include breakpoint(mobile) {
     margin-top: 35px;
-  }
-}
 
-.courses-in-progress-outer-wrapper {
-
-  &:before {
-    // background: transparent; 
-    // box-shadow: inset -119px 0px 194px 44px rgba(0,0,0,0.91);
-    // content: '';
-    // position: absolute;
-    // width: 100%;
-    // height: 100%;
-    // z-index: 2;
-    // pointer-events: none;
   }
 }
 
@@ -29,13 +20,8 @@
   display: none;
   @include breakpoint(mobile) {
   color: $white;
+  display: block;
   z-index: 3;
-}
-}
-
-.swiper-button-next {
-  @include breakpoint(mobile) {
-    right: 25px;
   }
 }
 
@@ -43,12 +29,9 @@
   border-radius: 5px;
   height: 300px;
   margin-right: 15px;
-  width: 377px;
+  width: 281px;
   @include breakpoint(mobile) {
     height: 192px;
-    width: 598px;
-  }
-  @include breakpoint(tablet) {
     width: 422px;
   }
 }
@@ -62,13 +45,10 @@
   height: 300px;
   justify-content: space-between;
   background-image: radial-gradient(circle, rgba(255,255,255,0.5) 36%, rgba(0,0,0,0.5) 100%);
-  padding: 14px;
-  width: 377px;
+  padding: 17px;
+  width: 281px;
   @include breakpoint(mobile) {
     height: 192px;
-    width: 598px;
-  }
-  @include breakpoint(tablet) {
     width: 422px;
   }
 }
@@ -76,7 +56,10 @@
 //custom styling for progress bar within slider card
 .swiper-slide-container {
   .mat-progress-bar {
-    width: 250px;
+    width: 100%;
+    @include breakpoint(mobile) {
+      width: 220px;
+    }
   }
 
   .mat-progress-bar-element,
@@ -108,7 +91,10 @@
       margin-top: 0;
     }
   }
+}
 
+.progress-bar-text {
+  margin-top: 1rem;
 }
 
 .course-slide-lessons-complete {
