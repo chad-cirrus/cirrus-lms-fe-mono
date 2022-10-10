@@ -5,13 +5,27 @@
     completed. These can act as important proof for both insurance and recurrent
     training needs.
   </p>
+
+  <mat-form-field appearance="outline">
+    <input
+      matInput
+      type="text"
+      placeholder="Search My Certificates"
+      [formControl]="searchParam"
+    />
+    <img src="recent-activity/images/svg/search-icon.svg" matSuffix />
+  </mat-form-field>
+
   <div class="certificates-list" *ngIf="certificates.length; else noCerts">
     <div class="header-row">
       <span class="course-header">COURSE</span>
       <span class="dates-header">DATES</span>
       <span class="download-header">CERTIFICATE</span>
     </div>
-    <div class="certificate-item" *ngFor="let cert of certificates">
+    <div
+      class="certificate-item"
+      *ngFor="let cert of filteredCertList$ | async"
+    >
       <span class="course">{{ cert.course_name }}</span>
       <span class="dates">{{ cert.enrollment_date }}</span>
       <span class="download">

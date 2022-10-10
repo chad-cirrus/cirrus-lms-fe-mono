@@ -2,6 +2,9 @@ import { Component, Input, ViewEncapsulation } from '@angular/core';
 import { Certificate } from '../../../models/IRecentActivity';
 import { RecentActivityFacade } from '../../../facade.service';
 import { downloadPdf } from '@cirrus/ui';
+import { FormControl } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
 
 @Component({
   selector: 'cirrus-certificates-full',
@@ -13,6 +16,21 @@ export class CertificatesFullComponent {
   loading$ = this.facade.downloadLoading$;
   course_attempt_id = 0;
   @Input() certificates: Certificate[] = [];
+
+  searchParam = new FormControl('');
+  filteredCertList$: Observable<Certificate[]> =
+    this.searchParam.valueChanges.pipe(
+      startWith(''),
+      map((searchParam: string) =>
+        this.certificates.filter(cert =>
+          searchParam === ''
+            ? this.certificates
+            : cert.course_name
+                .toLocaleLowerCase()
+                .includes(searchParam.toLocaleLowerCase())
+        )
+      )
+    );
 
   constructor(private facade: RecentActivityFacade) {}
 
