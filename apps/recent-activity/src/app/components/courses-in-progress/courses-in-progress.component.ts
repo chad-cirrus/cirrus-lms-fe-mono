@@ -7,6 +7,7 @@ import { FormControl } from '@angular/forms';
 import { Observable, of } from 'rxjs';
 import { startWith, switchMap } from 'rxjs/operators';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
+import { environment } from '../../../environments/environment';
 
 // install Swiper modules
 SwiperCore.use([Navigation, Pagination]);
@@ -18,7 +19,22 @@ SwiperCore.use([Navigation, Pagination]);
   encapsulation: ViewEncapsulation.None,
 })
 export class CoursesInProgressComponent implements OnInit {
-  @Input() inProgressCourses: InProgressCourses[] = [];
+  private _inProgressCourses: InProgressCourses[] = [];
+
+  @Input()
+  set inProgressCourses(value: InProgressCourses[]) {
+    this._inProgressCourses = value.map(course => ({
+      ...course,
+      thumbnail_image_url: course.thumbnail_image_url
+        ? course.thumbnail_image_url
+        : environment.defaultLessonThumbnail,
+    }));
+  }
+
+  get inProgressCourses() {
+    return this._inProgressCourses;
+  }
+
   @Output() navigateToCourse = new EventEmitter<number>();
   searchParameter = new FormControl();
   filteredCourses$: Observable<InProgressCourses[]> = of([]);

@@ -28,7 +28,7 @@
     >
       <span class="course">{{ cert.course_name }}</span>
       <span class="dates">{{ cert.enrollment_date }}</span>
-      <span class="download">
+      <span class="download" (click)="download(cert)">
         <span class="icon">
           <span
             *ngIf="
@@ -44,7 +44,6 @@
               class="download-icon"
               src="recent-activity/images/svg/download-arrow.svg"
               alt=""
-              (click)="download(cert)"
             />
           </ng-template>
         </span>
