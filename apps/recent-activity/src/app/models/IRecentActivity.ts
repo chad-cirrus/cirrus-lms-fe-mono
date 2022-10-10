@@ -47,7 +47,11 @@ export interface InProgressCourses {
   lessons_completed: number;
   lessons_total: number;
   name: string;
-  thumbnail_image_url: string;
+  thumbnail_image_url: string | null;
+  next_lesson: {
+    stage_id: number;
+    lesson_id: number;
+  };
 }
 
 export const initialRecentActivity: IRecentActivity = {
