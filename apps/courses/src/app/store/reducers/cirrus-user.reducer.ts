@@ -3,8 +3,7 @@ import { ICirrusUser } from '@cirrus/models';
 import { createReducer, on } from '@ngrx/store';
 import * as fromCirrusUser from '../actions/cirrus-user.actions';
 
-export interface UserState extends ICirrusUser {
-}
+export interface UserState extends ICirrusUser {}
 
 export const intitialUserState: UserState = {
   id: 0,
@@ -17,10 +16,14 @@ export const intitialUserState: UserState = {
   sf_lms_role: '',
   full_sfid: '',
   ctc_admin: false,
-  name: 'Mike Yokey'
+  name: '',
+  firstname: '',
+  lastname: '',
 };
 
 export const reducer = createReducer(
   intitialUserState,
-  on(fromCirrusUser.setCirrusUser, (state, { cirrusUser}) => ({...cirrusUser}))
+  on(fromCirrusUser.setCirrusUser, (state, { cirrusUser }) => ({
+    ...cirrusUser,
+  }))
 );

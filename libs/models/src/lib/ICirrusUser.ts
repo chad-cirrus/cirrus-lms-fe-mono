@@ -16,4 +16,6 @@ export interface ICirrusUser {
   full_sfid: string;
   authentication_token_created_at?: Date | string;
   ctc_admin: boolean;
+  firstname: string;
+  lastname: string;
 }

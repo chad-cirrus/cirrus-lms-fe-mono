@@ -5,7 +5,7 @@ import * as fromCirrusUser from '../actions/cirrus-user.actions';
 
 export interface UserState extends ICirrusUser {}
 
-export const intitialUserState: UserState = {
+export const initialUserState: UserState = {
   id: 0,
   email: '',
   authentication_token: '',
@@ -16,11 +16,13 @@ export const intitialUserState: UserState = {
   sf_lms_role: '',
   full_sfid: '',
   ctc_admin: false,
-  name: 'Mike Yokey',
+  name: '',
+  firstname: '',
+  lastname: '',
 };
 
 export const reducer = createReducer(
-  intitialUserState,
+  initialUserState,
   on(fromCirrusUser.setCirrusUser, (state, { cirrusUser }) => ({
     ...cirrusUser,
   }))

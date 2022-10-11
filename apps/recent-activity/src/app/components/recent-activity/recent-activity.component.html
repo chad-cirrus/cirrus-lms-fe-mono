@@ -6,20 +6,20 @@
     "
   >
     <div class="recent-activity-welcome-heading">
-      <h1 class="heading-3">Welcome Back, {{ (user$ | async)?.name }}</h1>
+      <h1 class="heading-3">Welcome Back, {{ (user$ | async)?.firstname }}</h1>
       <cirrus-total-flight-hours
         [hours]="(flightHoursString$ | async) || '0000'"
       ></cirrus-total-flight-hours>
     </div>
     <div class="cirrus-courses-in-progress-wrapper">
       <cirrus-courses-in-progress
-      [inProgressCourses]="
-        recentActivityNotifications.recentActivity.in_progress_courses
-      "
-      (navigateToCourse)="navigateToCourse($event)"
-    ></cirrus-courses-in-progress>
+        [inProgressCourses]="
+          recentActivityNotifications.recentActivity.in_progress_courses
+        "
+        (navigateToCourse)="navigateToCourse($event)"
+      ></cirrus-courses-in-progress>
     </div>
-   
+
     <div class="notifications-achievements-wrapper">
       <cirrus-notifications-section
         class="notifications-wrapper"
