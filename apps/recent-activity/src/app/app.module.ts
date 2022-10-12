@@ -52,6 +52,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AchievementsPageComponent } from './components/achievements-page/achievements-page.component';
 import { CertificatesFullComponent } from './components/achievements-page/certificates-full/certificates-full.component';
 import { BadgesFullComponent } from './components/achievements-page/badges-full/badges-full.component';
+import { FormatLogbookTypePipe } from './components/overall-progress/logbook/format-logbook-type.pipe';
+import { FormatCourseworkTypePipe } from './components/overall-progress/coursework/format-coursework-type.pipe';
+import { FormatIacraTypePipe } from './components/overall-progress/iacra/format-iacra-type.pipe';
 
 @NgModule({
   declarations: [
@@ -80,6 +83,9 @@ import { BadgesFullComponent } from './components/achievements-page/badges-full/
     AchievementsPageComponent,
     CertificatesFullComponent,
     BadgesFullComponent,
+    FormatLogbookTypePipe,
+    FormatCourseworkTypePipe,
+    FormatIacraTypePipe,
   ],
   imports: [
     CommonModule,
@@ -130,6 +136,9 @@ import { BadgesFullComponent } from './components/achievements-page/badges-full/
     CourseworkComponent,
     IACRAComponent,
     NotificationsSectionComponent,
+    FormatLogbookTypePipe,
+    FormatCourseworkTypePipe,
+    FormatIacraTypePipe,
   ],
 })
 export class AppModule {}

@@ -1,5 +1,4 @@
 <div *ngFor="let iacra of iacraStats">
-  <!-- Look up Angular pipes to format type -->
-  <div>{{ iacra.type }}</div>
+  <div>{{ iacra.type | formatIacraType }}</div>
   <div>{{ iacra.completed }}</div>
 </div>

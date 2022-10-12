@@ -1,12 +1,9 @@
 <div class="title">Lifetime Cirrus Approach Training Stats</div>
 
-<div *ngFor="let logbook of logbookStats">
-  <!-- Look up Angular pipes to format type -->
-  <div>{{ logbook.type }}</div>
-  <div *ngIf="!logbook.completed; else completedArr">0</div>
-  <ng-template #completedArr>
-    <!--    <div *ngFor="let completed of logbook.completed">-->
-    <!--      &lt;!&ndash;????? &ndash;&gt;-->
-    <!--    </div>-->
-  </ng-template>
+<div class="logbook-wrapper">
+  <div *ngFor="let logbook of logbookStats.slice(0, 5)" class="logbook-item">
+    <div>{{ logbook.type | formatLogbookType }}</div>
+    <div *ngIf="!logbook.completed; else completedArr">0</div>
+    <ng-template #completedArr> </ng-template>
+  </div>
 </div>
