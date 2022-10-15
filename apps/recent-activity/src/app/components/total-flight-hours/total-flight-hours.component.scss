@@ -1,7 +1,7 @@
 @import 'apps/recent-activity/src/base-scss/import';
 
 .flight-hours-wrapper {
-  padding: 9px;
+  padding: 10px 13px;
   background: linear-gradient(
     90.3deg,
     #818181 7.48%,
@@ -12,47 +12,66 @@
   );
   border-radius: 3px;
   width: 100%;
+  max-width: 335px;
+  margin-top: 35px;
+
+  .flight-hours-inner-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .flight-hours-label {
+    color: $gray1;
+    font-size: 0.8125rem;
+    line-height: 1.4;
+    letter-spacing: 0.03em;
+    margin: 0 16px 0 11px;
+  }
+
+  .hours-wrapper {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .hours-text-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: $gray1;
+    border-radius: 5px;
+    padding: 0 5px;
+    padding-left: 10px;
+    text-align: center;
+  }
+
+  .hours {
+    color: $white;
+    font-size: 1.875rem;
+    letter-spacing: 0.34em;
+  }
+
   @include breakpoint(mobile) {
-    width: 205px;
-  }
-
-  @include breakpoint(desktop) {
     width: 220px;
+    margin: 0 0 0 30px;
+    padding: 8px;
+    .flight-hours-inner-wrapper {
+      flex-wrap: wrap;
+    }
+    .flight-hours-label {
+      order: 1;
+      width: 100%;
+      text-align: center;
+      margin-bottom: 8px;
+    }
+    .hours-text-wrapper {
+      width: 80%;
+      order: 2
+    }
+    img {
+      order: 3;
+      width: calc(20% - 5px);
+      margin-left: 5px;
+    }
   }
 }
-
-.flight-hours-inner-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.flight-hours-label {
-  color: $gray1;
-  font-size: 13px;
-  line-height: 20px;
-  letter-spacing: 0.03em;
-}
-
-.hours-wrapper {
-  display: flex;
-  justify-content: space-between;
-}
-
-.hours-text-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: $gray1;
-  border-radius: 5px;
-  padding: 0 5px;
-  padding-left: 10px;
-  text-align: center;
-}
-
-.hours {
-  color: $white;
-  font-size: 30px;
-  letter-spacing: 0.34em;
-}
-
