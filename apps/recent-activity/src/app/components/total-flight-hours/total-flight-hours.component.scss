@@ -35,13 +35,10 @@
   }
 
   .hours-text-wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    min-width: 145px;
     background: $gray1;
     border-radius: 5px;
     padding: 0 5px;
-    padding-left: 10px;
     text-align: center;
   }
 
@@ -49,10 +46,13 @@
     color: $white;
     font-size: 1.875rem;
     letter-spacing: 0.34em;
+    margin-left: 0.34em;
+    text-align: center;
+    font-size: clamp(1.25rem, 7vw, 1.875rem);
   }
 
   @include breakpoint(mobile) {
-    width: 220px;
+    width: 245px;
     margin: 0 0 0 30px;
     padding: 8px;
     .flight-hours-inner-wrapper {
