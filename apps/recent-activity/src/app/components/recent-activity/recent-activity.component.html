@@ -6,7 +6,7 @@
     "
   >
     <div class="recent-activity-welcome-heading">
-      <h1 class="heading-3">Welcome Back, {{ (user$ | async)?.firstname }}</h1>
+      <h1 class="heading-3">Welcome back, {{ (user$ | async)?.firstname }}</h1>
       <cirrus-total-flight-hours
         [hours]="(flightHoursString$ | async) || '0000'"
       ></cirrus-total-flight-hours>
@@ -45,9 +45,8 @@
 </div>
 
 <ng-template #noRa>
-  <div>
-    <div>Welcome Back, Andrew</div>
-    <div>Cirrus flight hours</div>
+  <div class="recent-activity-welcome-heading">
+    <h1 class="heading-3">Welcome back, {{ (user$ | async)?.firstname }}</h1>
   </div>
 </ng-template>
 
