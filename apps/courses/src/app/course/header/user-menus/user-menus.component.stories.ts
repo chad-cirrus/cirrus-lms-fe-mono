@@ -6,8 +6,8 @@ import { UserService } from '../../../user/user.service';
 import { RouterModule } from '@angular/router';
 import { StoreModule } from '@ngrx/store';
 import { OverlayModule } from '@angular/cdk/overlay';
-import { HeaderDropdownComponent } from '../../../../../../../libs/ui/src';
 import { coursesReducers } from '../../../store/reducers';
+import { HeaderDropdownComponent } from '../../../../../../../libs/ui/src';
 
 export default {
   title: 'UserMenusComponent',
@@ -52,5 +52,7 @@ Primary.args = {
     sf_lms_role: '1',
     token_expires: '2022-04-24T19:47:57.511Z',
     updated_at: '2022-03-25T19:47:57.511Z',
+    firstname: 'me',
+    lastname: 'me',
   },
 };

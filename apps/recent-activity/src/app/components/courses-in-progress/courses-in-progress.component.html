@@ -33,12 +33,14 @@
           <div class="swiper-slide-content">
             <div class="course-slide-progress-wrapper">
               <mat-progress-bar
-              [value]='course | courseInProgressValue'
-              mode='determinate'
-            ></mat-progress-bar>
-            <span class='progress-bar-text body-copy-small'><span>{{ course.lessons_completed }}</span>/<span>{{ course.lessons_total }}</span>Lessons
-              Complete
-            </span>
+                [value]="course | courseInProgressValue"
+                mode="determinate"
+              ></mat-progress-bar>
+              <span class="progress-bar-text body-copy-small"
+                ><span>{{ course.lessons_completed }}</span
+                >/<span>{{ course.lessons_total }}</span
+                >Lessons Complete
+              </span>
             </div>
             <button
               [routerLink]="[
@@ -59,7 +61,7 @@
     </swiper>
   </div>
 
-  <div class="courses-search-bar">
+  <div class="courses-search-bar" *ngIf="inProgressCourses.length > 0">
     <form class="search-bar-form">
       <mat-form-field class="search-bar-full-width" appearance="fill">
         <mat-label>Search My Courses</mat-label>

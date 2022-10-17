@@ -38,6 +38,8 @@ Primary.args = {
     sf_lms_role: '1',
     token_expires: '2022-04-24T19:47:57.511Z',
     updated_at: '2022-03-25T19:47:57.511Z',
+    firstname: 'me',
+    lastname: 'me',
   },
 };
 
@@ -61,6 +63,8 @@ Student.args = {
     sf_lms_role: '1',
     token_expires: '2022-04-24T19:47:57.511Z',
     updated_at: '2022-03-25T19:47:57.511Z',
+    firstname: 'me',
+    lastname: 'me',
   },
 };
 
@@ -84,6 +88,8 @@ Instructor.args = {
     sf_lms_role: '1',
     token_expires: '2022-04-24T19:47:57.511Z',
     updated_at: '2022-03-25T19:47:57.511Z',
+    firstname: 'me',
+    lastname: 'me',
   },
 };
 
@@ -107,6 +113,8 @@ CTC.args = {
     sf_lms_role: '1',
     token_expires: '2022-04-24T19:47:57.511Z',
     updated_at: '2022-03-25T19:47:57.511Z',
+    firstname: 'me',
+    lastname: 'me',
   },
 };
 
@@ -130,5 +138,7 @@ LMS.args = {
     sf_lms_role: '1',
     token_expires: '2022-04-24T19:47:57.511Z',
     updated_at: '2022-03-25T19:47:57.511Z',
+    firstname: 'me',
+    lastname: 'me',
   },
 };
