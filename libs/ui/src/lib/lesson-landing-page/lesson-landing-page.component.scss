@@ -118,36 +118,30 @@ mat-drawer {
   }
 }
 
-.llp-container {
-  position: relative;
-  margin: 0 auto;
-  padding: 8px 24px;
+.open {
+  opacity: 0;
+  pointer-events: none;
+}
 
-  .open {
-    opacity: 0;
-    pointer-events: none;
+.closed {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.intro-video {
+  padding: 16px 0;
+
+  .intro-video-title {
+    margin: 0;
   }
 
-  .closed {
-    opacity: 1;
-    pointer-events: all;
-  }
+  .intro-video-play {
+    display: inline-block;
+    cursor: pointer;
+    padding: 20px 0 0;
 
-  .intro-video {
-    padding: 16px 0;
-
-    .intro-video-title {
-      margin: 0;
-    }
-
-    .intro-video-play {
-      display: inline-block;
-      cursor: pointer;
-      padding: 20px 0 0;
-
-      .intro-video-subtitle {
-        color: $gray4;
-      }
+    .intro-video-subtitle {
+      color: $gray4;
     }
   }
 }
@@ -309,32 +303,26 @@ cirrus-progress-card:last-child {
     }
   }
 
-  .llp-container {
-    max-width: 1300px;
-    padding: 0 64px;
-    margin: 0 auto;
 
-    .cirrus-progress-row {
-      width: 100%;
-      margin: -45px auto 20px;
-      overflow-x: hidden;
-      scrollbar-width: hidden;
-      /* Firefox */
-      -ms-overflow-style: hidden;
-      /* IE 10+ */
+  .cirrus-progress-row {
+    width: 100%;
+    margin: -45px auto 20px;
+    overflow-x: hidden;
+    scrollbar-width: hidden;
+    /* Firefox */
+    -ms-overflow-style: hidden;
+    /* IE 10+ */
 
-      &::-webkit-scrollbar {
-        background: hidden;
-        /* Chrome/Safari/Webkit */
-        width: hidden;
-      }
-    }
-
-    .intro-video {
-      padding: 16px;
+    &::-webkit-scrollbar {
+      background: hidden;
+      /* Chrome/Safari/Webkit */
+      width: hidden;
     }
   }
 
+  .intro-video {
+    padding: 16px;
+  }
 }
 
 .breadcrumb-container {
