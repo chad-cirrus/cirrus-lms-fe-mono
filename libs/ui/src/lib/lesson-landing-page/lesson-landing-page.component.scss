@@ -173,9 +173,9 @@ mat-drawer {
       content: ' ';
       display: block;
       position: absolute;
-      top: 12px;
+      top: 0;
       left: 0;
-      height: 160px;
+      height: 100%;
       width: 35px;
       background: linear-gradient(90deg, #000000 3%, rgba(31, 31, 31, 0) 100%);
       pointer-events: none;
@@ -185,9 +185,9 @@ mat-drawer {
       content: ' ';
       display: block;
       position: absolute;
-      top: 12px;
+      top: 0;
       right: 0;
-      height: 160px;
+      height: 100%;
       width: 35px;
       background: linear-gradient(270deg, #000000 3%, rgba(31, 31, 31, 0) 100%);
       pointer-events: none;
