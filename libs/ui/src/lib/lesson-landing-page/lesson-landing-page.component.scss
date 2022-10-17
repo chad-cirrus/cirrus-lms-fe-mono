@@ -150,17 +150,10 @@ mat-drawer {
       }
     }
   }
-
-  .cirrus-progress-row {
-    mat-card {
-      .progress-type-icon {
-        height: 32px;
-      }
-    }
-  }
 }
 
 .cirrus-progress-row {
+  position: relative;
   margin: 12px 12px 0 -24px;
   overflow-x: scroll;
   width: 100vw;

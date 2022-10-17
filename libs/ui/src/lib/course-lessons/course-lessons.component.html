@@ -1,9 +1,7 @@
 <div
   fxLayout="column"
   fxLayoutAlign="space-between start"
-  fxLayoutGap="6px"
-  fxFlex="grow"
-  class="container"
+  class="main-content-wrapper"
 >
   <div class="filter-container" [formGroup]="filterForm">
     <div fxLayout.gt-sm="row-reverse" fxLayoutGap.gt-sm="24px">
@@ -70,7 +68,7 @@
     fxLayoutGap="8px"
     fxFlex="grow"
   >
-    <h2 class="stage-header">{{ stage.title }}</h2>
+    <h2>{{ stage.title }}</h2>
     <p class="stage-overview" *ngIf="stage.desc">{{ stage.desc }}</p>
     <div
       class="item-container"

@@ -195,6 +195,20 @@ img {
   max-width: 100%;
 }
 
+.main-content-wrapper {
+  padding: 30px 20px;
+  max-width: 1300px;
+  margin: 0 auto;
+
+  @media (min-width: 600px) {
+    padding: 30px 25px;
+  }
+
+  @media (min-width: 960px) {
+    padding: 45px 50px;
+  }
+}
+
 .mat-drawer-backdrop.mat-drawer-shown {
   background-color: rgba(0, 0, 0, 0.69);
 }

@@ -43,26 +43,6 @@
   margin-right: 8.38px;
 }
 
-h3,
-h1 {
-  font-family: var.$akzidenz-grotesk_bqLtEx400;
-  font-style: normal;
-  font-weight: 400;
-}
-
-h1 {
-  font-size: 28px;
-  line-height: 36px;
-  /* or 129% */
-
-  letter-spacing: -0.035em;
-}
-
-h3 {
-  font-size: 18px;
-  line-height: 26px;
-}
-
 .mat-divider {
   border-top-color: rgba(255, 255, 255);
   width: calc(100vw - 16px);
@@ -86,19 +66,6 @@ cirrus-course-progress {
 @media (min-width: 960px) {
   .lesson-image {
     padding: 0 24px;
-  }
-
-  h1 {
-    font-size: 59px;
-    line-height: 67px;
-    letter-spacing: -0.035em;
-    max-width: 670px;
-  }
-
-  h3 {
-    font-size: 24px;
-    line-height: 34px;
-    max-width: 439px;
   }
 
   cirrus-course-progress {

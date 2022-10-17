@@ -19,11 +19,6 @@
   width: 100%;
 }
 
-.stage-header {
-  font-family: var.$AkzidenzGroteskBqLight;
-  font-size: 22px;
-  line-height: 42px;
-}
 .stage-overview {
   //styleName: Mobile/P Medium;
   font-family: var.$AkzidenzGroteskBqLight;
@@ -40,13 +35,6 @@
 }
 
 @media (min-width: 960px) {
-  .container {
-    padding: 30px;
-  }
-  .stage-header {
-    font-size: 30px;
-    line-height: 38px;
-  }
   .stage-overview {
     font-size: 18px;
     line-height: 28px;
