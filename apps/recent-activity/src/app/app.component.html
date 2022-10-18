@@ -17,6 +17,13 @@
         ></cirrus-side-nav>
       </div>
       <div class="content-container">
+        <div *ngIf="error$ | async" class="error-container">
+          <cirrus-error-notification
+            [calledFromWhatMfe]="project"
+            (emitClose)="dismissErrorMessage()"
+          ></cirrus-error-notification>
+        </div>
+
         <div class="outlet-container" #outletContainer>
           <router-outlet></router-outlet>
         </div>

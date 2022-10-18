@@ -20,6 +20,8 @@ import {
 import { map, takeUntil } from 'rxjs/operators';
 import { setScreenSize } from './store/actions/view.actions';
 import { selectIsScreenSmall } from './store/selectors/view.selector';
+import { ErrorService } from '@cirrus/ui';
+import { environment } from '../environments/environment';
 
 @Component({
   selector: 'cirrus-root',
@@ -40,13 +42,17 @@ export class AppComponent implements OnInit, OnDestroy {
     Breakpoints.XLarge,
   ]);
 
+  error$ = this.errorService.error$;
+  project = environment.project;
+
   collapse = false;
   showHamburgerMenu = false;
   @ViewChild('outletContainer') outletContainer!: ElementRef;
   constructor(
     private notificationService: NotificationService,
     private store: Store<AppState>,
-    private breakpointObserver: BreakpointObserver
+    private breakpointObserver: BreakpointObserver,
+    private errorService: ErrorService
   ) {}
 
   ngOnInit() {
@@ -73,6 +79,10 @@ export class AppComponent implements OnInit, OnDestroy {
 
   openHamburgerMenu() {
     console.log('open hamburger');
+  }
+
+  dismissErrorMessage() {
+    this.errorService.errorSubject.next('');
   }
 
   toggleCollapse(collapse: boolean) {

@@ -6,8 +6,8 @@
 }
 
 .error-container {
-  z-index: 9999;
-  position: absolute;
+  z-index: 100;
+  position: fixed;
   top: 91%;
   right: 2%;
 }

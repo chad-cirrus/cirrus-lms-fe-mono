@@ -4,6 +4,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 
 import {
   CirrusMaterialModule,
+  ErrorNotificationModule,
   MatIconRegistryModule,
   UiModule,
 } from '@cirrus/ui';
@@ -83,6 +84,7 @@ import { CourseEnrollmentsRouteComponent } from './course/course-enrollments-rou
     ContentPlayerModule,
     MatIconRegistryModule,
     MatTabsModule,
+    ErrorNotificationModule,
   ],
   providers: [
     {

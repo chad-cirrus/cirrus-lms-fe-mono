@@ -40,7 +40,8 @@ import {
   BreakpointState,
 } from '@angular/cdk/layout';
 import { CoursesService } from './course/course.service';
-import { ErrorNotificationService } from './error-notification.service';
+import { ErrorService } from '@cirrus/ui';
+import { environment } from '../environments/environment';
 
 @Component({
   selector: 'cirrus-root',
@@ -67,6 +68,8 @@ export class AppComponent implements OnInit, OnDestroy {
   cirrusImpersonateReturnUser$!: Observable<ICirrusUser>;
   courseId$ = this.appService.courseId$.pipe(distinctUntilChanged(), share());
 
+  project = environment.project;
+
   error$ = this.errorService.error$;
 
   notificationCount$: Observable<any> = this.courseService.notificationsCount$;
@@ -91,7 +94,7 @@ export class AppComponent implements OnInit, OnDestroy {
     private appService: AppService,
     private breakpointObserver: BreakpointObserver,
     private courseService: CoursesService,
-    private errorService: ErrorNotificationService
+    private errorService: ErrorService
   ) {}
 
   ngOnInit() {

@@ -1,9 +1,9 @@
 <div class="error-container">
   <div class="image-text-wrapper">
-    <img src="courses/images/svg/exclamation.svg" />
+    <img [src]="calledFromWhatMfe + '/images/svg/exclamation.svg'" />
     <p class="error-text">Sorry, let's try that again</p>
   </div>
   <div class="close-container" (click)="close()">
-    <img src="courses/images/svg/close.svg" />
+    <img [src]="calledFromWhatMfe + '/images/svg/close.svg'" />
   </div>
 </div>

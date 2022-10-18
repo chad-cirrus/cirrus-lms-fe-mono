@@ -30,6 +30,7 @@
         </div>
         <div *ngIf="error$ | async" class="error-container">
           <cirrus-error-notification
+            [calledFromWhatMfe]="project"
             (emitClose)="dismissErrorMessage()"
           ></cirrus-error-notification>
         </div>

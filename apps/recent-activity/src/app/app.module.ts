@@ -8,6 +8,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthHttpInterceptor } from './interceptors/AuthHttpInterceptor';
 import {
   CirrusMaterialModule,
+  ErrorNotificationModule,
   NotificationsMenuModule,
   UiDownloadService,
 } from '@cirrus/ui';
@@ -55,6 +56,7 @@ import { BadgesFullComponent } from './components/achievements-page/badges-full/
 import { FormatLogbookTypePipe } from './components/overall-progress/logbook/format-logbook-type.pipe';
 import { FormatCourseworkTypePipe } from './components/overall-progress/coursework/format-coursework-type.pipe';
 import { FormatIacraTypePipe } from './components/overall-progress/iacra/format-iacra-type.pipe';
+import { HttpErrorInterceptor } from './interceptors/http-error.interceptor';
 
 @NgModule({
   declarations: [
@@ -103,7 +105,7 @@ import { FormatIacraTypePipe } from './components/overall-progress/iacra/format-
     MatTabsModule,
     A11yModule,
     NgApexchartsModule,
-
+    ErrorNotificationModule,
     MatSidenavModule,
     SwiperModule,
     ReactiveFormsModule,
@@ -120,6 +122,11 @@ import { FormatIacraTypePipe } from './components/overall-progress/iacra/format-
     {
       provide: 'environment',
       useValue: environment,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpErrorInterceptor,
+      multi: true,
     },
     UiDownloadService,
   ],

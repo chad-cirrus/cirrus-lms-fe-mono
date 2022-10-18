@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'cirrus-error-notification',
@@ -7,6 +7,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 })
 export class ErrorNotificationComponent {
   @Output() emitClose = new EventEmitter<any>();
+  @Input() calledFromWhatMfe!: string;
 
   close() {
     this.emitClose.emit();

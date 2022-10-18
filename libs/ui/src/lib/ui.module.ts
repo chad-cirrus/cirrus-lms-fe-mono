@@ -79,7 +79,6 @@ import { HoursLandingTypeToTextPipe } from './helpers/HoursLandingTypeToText.pip
 import { HoursLandingTypeToIconPipe } from './helpers/HoursLandingTypeToIcon.pipe';
 import { ClickOutsideDirective } from './clickoutside.directive';
 import { BluePopUpComponent } from './blue-pop-up/blue-pop-up.component';
-import { ErrorNotificationComponent } from './error-notification/error-notification.component';
 
 @NgModule({
   imports: [
@@ -154,7 +153,6 @@ import { ErrorNotificationComponent } from './error-notification/error-notificat
     FormatFilterPipe,
     ClickOutsideDirective,
     BluePopUpComponent,
-    ErrorNotificationComponent,
   ],
   exports: [
     LessonLandingPageComponent,
@@ -210,7 +208,6 @@ import { ErrorNotificationComponent } from './error-notification/error-notificat
     FormatFilterPipe,
     ClickOutsideDirective,
     BluePopUpComponent,
-    ErrorNotificationComponent,
   ],
   providers: [
     { provide: MAT_DIALOG_DATA, useValue: {} },

@@ -4,7 +4,7 @@ import { BehaviorSubject } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class ErrorNotificationService {
+export class ErrorService {
   errorSubject = new BehaviorSubject('');
   error$ = this.errorSubject.asObservable();
 }

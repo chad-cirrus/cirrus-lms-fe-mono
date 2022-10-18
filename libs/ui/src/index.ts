@@ -1,5 +1,6 @@
 /* eslint-disable @nrwl/nx/enforce-module-boundaries */
 export * from './lib/ui.module';
+export * from './lib/error-notification/error-notification.module';
 export * from './lib/notifications/notifications-menu.module';
 export * from './lib/cirrus-material.module';
 export * from './lib/mat-icon-registry.module';
@@ -35,6 +36,7 @@ export * from './lib/table-format.pipe';
 
 export * from './lib/lib-services/connections/connections.service';
 export * from './lib/lib-services/notifications/notification.service';
+export * from './lib/lib-services/error/error.service';
 
 export * from './lib/StageLessonNavigationEvent';
 

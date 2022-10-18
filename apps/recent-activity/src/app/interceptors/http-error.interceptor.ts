@@ -1,15 +1,13 @@
-import {
-  HttpErrorResponse,
-  HttpEvent,
-  HttpHandler,
-  HttpInterceptor,
-  HttpRequest,
-} from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ErrorService } from '@cirrus/ui';
-
+import {
+  HttpRequest,
+  HttpHandler,
+  HttpEvent,
+  HttpInterceptor,
+  HttpErrorResponse,
+} from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-
+import { ErrorService } from '@cirrus/ui';
 import { catchError } from 'rxjs/operators';
 
 @Injectable()

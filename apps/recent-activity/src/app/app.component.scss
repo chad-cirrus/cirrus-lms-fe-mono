@@ -21,6 +21,13 @@
   }
 }
 
+.error-container {
+  z-index: 100;
+  position: fixed;
+  top: 91%;
+  right: 2%;
+}
+
 // .row {
 //   display: flex;
 //   flex-direction: row;
