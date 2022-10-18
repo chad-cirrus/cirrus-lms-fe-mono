@@ -6,7 +6,7 @@ import { concatMap, finalize, tap } from 'rxjs/operators';
 @Injectable()
 export class UiDownloadService {
   // eslint-disable-next-line @typescript-eslint/ban-types
-  private environment: Record<string, unknown>;
+  private readonly environment: Record<string, unknown>;
   private loadingSubject = new BehaviorSubject(false);
   loading$ = this.loadingSubject.asObservable();
 

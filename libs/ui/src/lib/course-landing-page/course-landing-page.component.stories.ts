@@ -30,10 +30,6 @@ const mockEnvironment = {
     'https://cirrusapproachherokuprod.blob.core.windows.net/cirruslmsherokudevcontainer/content-items/images/default-lesson-hero-desktop.jpg',
 };
 
-import { HoursAndLandingStatType, PROGRESS_STATUS } from '@cirrus/models';
-import { RouterModule } from '@angular/router';
-
-
 export default {
   title: 'Course Landing Page',
   component: CourseLandingPageComponent,
@@ -46,7 +42,6 @@ export default {
         RouterModule.forRoot([], { useHash: true }), // fixes no router and no route errors
         MatIconModule,
         MatIconRegistryModule,
-
       ],
       declarations: [
         EncodeUriPipe,

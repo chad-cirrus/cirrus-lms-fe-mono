@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Inject, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import {
   ICirrusUser,
@@ -21,6 +21,7 @@ import { downloadPdf } from '../helpers/DownloadPdf';
   styleUrls: ['./course-landing-page.component.scss'],
 })
 export class CourseLandingPageComponent {
+  private readonly environment: Record<string, unknown>;
   loading$ = this.downloadService.loading$;
   @Input() user!: ICirrusUser;
 
@@ -29,7 +30,7 @@ export class CourseLandingPageComponent {
     header: '',
     title: '',
     buttonText: 'Get Started',
-    thumbnail: 'courses/images/lesson-thumbnail.png',
+    thumbnail: '',
   };
   background = new BehaviorSubject({});
   reEnrollIconUrl = 'courses/images/svg/re-enroll.svg';
@@ -50,7 +51,8 @@ export class CourseLandingPageComponent {
     ) {
       this.coursePlayerConfig = produceConfig(
         value.next_lesson,
-        value.progress
+        value.progress,
+        this.environment.defaultLessonThumbnail as string
       );
     }
     this.setBackground();
@@ -73,8 +75,11 @@ export class CourseLandingPageComponent {
   constructor(
     private router: Router,
     private downloadService: UiDownloadService,
-    private dialog: MatDialog
-  ) {}
+    private dialog: MatDialog,
+    @Inject('environment') environment: Record<string, unknown>
+  ) {
+    this.environment = environment;
+  }
 
   navigateToCourses() {
     this.router.navigate([`/my-courses`]);

@@ -6,7 +6,8 @@ import {
 
 export const produceConfig = (
   lesson: Partial<ICourseOverviewLesson>,
-  courseProgress: IProgress
+  courseProgress: IProgress,
+  defaultLessonThumbnail: string
 ): ICoursePlayerConfig => {
   return {
     index: lesson.index ?? '',
@@ -18,6 +19,6 @@ export const produceConfig = (
     thumbnail:
       lesson?.thumbnail_image_url && lesson.thumbnail_image_url.length > 5
         ? lesson.thumbnail_image_url
-        : 'courses/images/lesson-thumbnail.png',
+        : defaultLessonThumbnail,
   };
 };
