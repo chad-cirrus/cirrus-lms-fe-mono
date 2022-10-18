@@ -34,7 +34,10 @@
   }
 
   .hours-text-wrapper {
-    min-width: 145px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 38px;
     flex-grow: 1;
     background: $gray1;
     border-radius: 5px;
@@ -48,7 +51,7 @@
     letter-spacing: 0.34em;
     margin-left: 0.34em;
     text-align: center;
-    font-size: clamp(1.25rem, 6vw, 1.875rem);
+    font-size: clamp(1.25rem, 7vw, 1.875rem);
   }
 
   @include breakpoint(mobile) {
