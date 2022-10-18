@@ -58,12 +58,12 @@ export class RecentActivityComponent implements OnInit {
     this.drawer.close();
   }
 
-  clearNotifications() {
-    console.log('');
+  clearNotifications(notifications: INotification[]) {
+    this.facade.clearNotifications(notifications).subscribe();
   }
 
   deleteNotification(id: number) {
-    console.log('');
+    this.facade.deleteNotification(id).subscribe();
   }
 
   acceptInvite(notification: INotification) {

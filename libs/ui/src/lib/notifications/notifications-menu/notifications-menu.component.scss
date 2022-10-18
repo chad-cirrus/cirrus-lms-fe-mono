@@ -1,6 +1,7 @@
 @use '../../styles/variables' as *;
 
 .notifications-container {
+  min-width: 564px;
   background-color: $gray1;
 }
 
@@ -29,6 +30,14 @@
 
 .clear-all-text {
   padding-right: 13px;
+}
+
+.clear-all-text:hover {
+  cursor: pointer;
+}
+
+.trash:hover {
+  cursor: pointer;
 }
 
 .notifications-body-container {

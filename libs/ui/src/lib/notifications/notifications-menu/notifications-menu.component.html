@@ -25,6 +25,7 @@
             notification.created_at | date: 'shortDate'
           }}</span>
           <img
+            class="trash"
             src="recent-activity/images/svg/Trash_Icon.svg"
             (click)="deleteNotification(notification.id)"
           />

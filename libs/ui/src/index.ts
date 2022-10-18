@@ -34,6 +34,7 @@ export * from './lib/generic-responsive-mat-table/generic-responsive-mat-table.c
 export * from './lib/table-format.pipe';
 
 export * from './lib/lib-services/connections/connections.service';
+export * from './lib/lib-services/notifications/notification.service';
 
 export * from './lib/StageLessonNavigationEvent';
 

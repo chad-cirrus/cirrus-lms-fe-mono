@@ -1,6 +1,10 @@
 import { Injectable } from '@angular/core';
 import { INotification } from '@cirrus/models';
-import { ConnectionsService, UiDownloadService } from '@cirrus/ui';
+import {
+  ConnectionsService,
+  UiDownloadService,
+  NotificationService,
+} from '@cirrus/ui';
 import { map, tap } from 'rxjs/operators';
 import { RecentActivityService } from './services/recent-activity.service';
 
@@ -20,7 +24,8 @@ export class RecentActivityFacade {
   constructor(
     private recentActivityService: RecentActivityService,
     private connectionService: ConnectionsService,
-    private downloadService: UiDownloadService
+    private downloadService: UiDownloadService,
+    private notificationService: NotificationService
   ) {}
 
   getRecentActivityPayload() {
@@ -36,6 +41,20 @@ export class RecentActivityFacade {
   declineInvite(notification: INotification) {
     return this.connectionService
       .declineInvite(notification)
+      .pipe(tap(() => this.getRecentActivityPayload()));
+  }
+
+  clearNotifications(notifications: INotification[]) {
+    return this.notificationService.clearNotifications(notifications).pipe(
+      tap(() => {
+        this.getRecentActivityPayload();
+      })
+    );
+  }
+
+  deleteNotification(id: number) {
+    return this.notificationService
+      .deleteNotification(id)
       .pipe(tap(() => this.getRecentActivityPayload()));
   }
 

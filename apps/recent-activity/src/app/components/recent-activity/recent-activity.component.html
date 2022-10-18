@@ -55,7 +55,7 @@
     <cirrus-notifications-menu
       (acceptInvitationEmit)="acceptInvite($event)"
       (declineInvitationEmit)="declineInvite($event)"
-      (clearNotficationsEmit)="clearNotifications()"
+      (clearNotficationsEmit)="clearNotifications($event)"
       (deleteNotificationEmit)="deleteNotification($event)"
       (dismissMenu)="dismissNotificationsMenu()"
       [notifications]="(recentActivityNotifications$ | async)?.notifications!"

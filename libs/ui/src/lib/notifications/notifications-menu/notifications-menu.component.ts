@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { INotification } from '@cirrus/models';
-import { ConnectionsService } from '../../lib-services/connections/connections.service';
 
 @Component({
   selector: 'cirrus-notifications-menu',
@@ -14,8 +13,6 @@ export class NotificationsMenuComponent {
   @Output() declineInvitationEmit = new EventEmitter<INotification>();
   @Output() clearNotficationsEmit = new EventEmitter<INotification[]>();
   @Output() deleteNotificationEmit = new EventEmitter<number>();
-
-  constructor(private connectionsService: ConnectionsService) {}
 
   dismiss() {
     this.dismissMenu.emit();
