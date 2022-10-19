@@ -1,29 +1,36 @@
 @use '../styles/variables' as var;
 
+section:not(:last-child) {
+  margin-bottom: 80px;
+  @media (min-width: 600px) {
+    margin-bottom: 116px;
+  }
+}
+
 .right-side {
-  padding: 32px 10px;
+  width: 100%;
+  padding-top: 40px;
+  margin-top: 40px;
+  border-top: 1px solid #3a3a3a;
 }
 
 .about {
   &--version {
-    font-family: var.$AkzidenzGroteskBQ;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 22px;
     color: #969696;
+    margin: 0;
   }
 }
 
 .started-date {
   font-family: var.$BertholdAkzidenzGroteskBE;
-  font-size: 15px;
+  font-size: 0.9375rem;
   line-height: 135%;
   color: #969696;
 }
 
 .mcf,
 .ect {
-  width: 130px;
+  flex: 0 0 130px;
   height: 45px;
   padding: 12px;
   border-radius: 5px;
@@ -40,23 +47,22 @@
 
 .mcf {
   height: 53px;
-  padding: 0;
-  font-size: 30px;
-  line-height: 53px;
-  letter-spacing: 0.5em;
-  text-indent: 0.5em;
+  padding: 12px;
+  font-size: 1.875rem;
+  line-height: 1;
+  letter-spacing: .03em;
+  text-indent: 0.03em;
   text-align: center;
 }
 
 .mcf-label,
 .ect-label {
-  font-family: 'akzidenz-grotesk_bqLtEx';
-  font-size: 16px;
+  font-family: 'akzidenz-grotesk_bqextended';
+  font-size: 1rem;
   font-weight: 400;
-  line-height: 20px;
+  line-height: 1.2;
   letter-spacing: 0.03em;
   text-align: left;
-  width: 160px;
 }
 
 .stats {
@@ -67,16 +73,25 @@
 .hours-and-landings {
   p {
     font-family: var.$BertholdAkzidenzGroteskBE;
-    font-size: 15px;
+    font-size: 0.9375rem;
     line-height: 135%;
     letter-spacing: 0.0003em;
     color: #969696;
   }
 }
 
+@media (min-width: 600px) {
+  .mcf-label, .ect-label {
+    width: 175px;
+  }
+}
+
 @media (min-width: 960px) {
   .right-side {
-    padding: 32px 57px;
+    padding: 32px 0 0 50px;
+    margin-left: 50px;
+    margin-top: 0;
+    border-top: 0;
     border-left: 1px solid #3a3a3a;
   }
 

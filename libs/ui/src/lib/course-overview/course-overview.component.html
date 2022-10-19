@@ -1,50 +1,61 @@
 <div class="main-content-wrapper">
-  <div
+  <section
     class="row1"
-    fxLayout.lt-sm="column"
+    fxLayout.lt-md="column"
     fxLayout="row"
-    fxLayoutAlign="space-between start"
+    fxLayoutAlign="space-between"
   >
-    <div class="left-side" fxFlex="3 0 0" *ngIf="courseOverview.overview">
+    <div class="left-side" fxFlex.gt-sm="1 1 60%" *ngIf="courseOverview.overview">
       <h2>About this course</h2>
       <div [innerHTML]="courseOverview.overview"></div>
-      <span
-        ><p class="about--version">Version: {{ version }}</p></span
-      >
+      <p class="about--version small">Version: {{ version }}</p>
     </div>
     <div
       class="right-side"
-      fxFlex="2 0 0"
+      fxFlex.gt-sm="1 1 40%"
       fxLayout="column"
-      fxLayoutAlign="space-between start"
-      fxLayoutGap="22px"
+      fxLayout.sm="row"
+      fxLayoutGap="35px"
+      fxLayoutAlign.sm="space-between"
     >
       <div
-        fxLayout="row"
-        fxLayoutAlign="start start"
-        *ngIf="courseOverview.minimum_flight_hours"
+        fxLayout="column"
+        fxLayoutGap="24px"
+        fxFlex.xs="1 1 100%"
       >
-        <div class="mcf">
-          {{ courseOverview.minimum_flight_hours }}
+        <div
+          fxLayout="row"
+          fxLayoutAlign=" center"
+          *ngIf="courseOverview.minimum_flight_hours"
+        >
+          <div class="mcf">
+            {{courseOverview.minimum_flight_hours}}
+          </div>
+          <span class="mcf-label">Minimum Course Flight Hours</span>
         </div>
-        <span class="mcf-label">Minimum Course Flight Hours</span>
+
+        <div
+          fxLayout="row"
+          fxLayoutAlign=" center"
+          *ngIf="courseOverview.completion_time"
+        >
+          <div class="ect">
+            <span>{{ courseOverview.completion_time }}</span>
+          </div>
+          <span class="ect-label">Estimated Course Time</span>
+        </div>
       </div>
       <div
-        fxLayout="row"
-        fxLayoutAlign="start start"
-        *ngIf="courseOverview.completion_time"
+        fxFlex.xs="1 1 100%"
+        fxFlex.gt-xs="1 1 35%"
       >
-        <div class="ect">
-          <span>{{ courseOverview.completion_time }}</span>
-        </div>
-        <span class="ect-label">Estimated Course Time</span>
+        <cirrus-course-summary-counts
+          [courseSummaryCounts]="courseOverview.summary_counts"
+        ></cirrus-course-summary-counts>
       </div>
-      <cirrus-course-summary-counts
-        [courseSummaryCounts]="courseOverview.summary_counts"
-      ></cirrus-course-summary-counts>
     </div>
-  </div>
-  <div class="row-progress">
+  </section>
+  <section class="row-progress">
     <h2>Course Progress</h2>
     <mat-divider></mat-divider>
     <p class="started-date">
@@ -69,12 +80,12 @@
         ></cirrus-hours-and-landings>
       </div>
     </div>
-  </div>
-  <div class="row-terms-conditions" *ngIf="courseOverview.agreement_body">
+  </section>
+  <section class="row-terms-conditions" *ngIf="courseOverview.agreement_body">
     <h2>Terms & Conditions</h2>
     <div
       class="agreement-body"
       [innerHTML]="courseOverview.agreement_body"
     ></div>
-  </div>
+  </section>
 </div>
