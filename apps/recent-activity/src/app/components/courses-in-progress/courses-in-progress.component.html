@@ -8,6 +8,7 @@
     *ngIf="inProgressCourses.length; else noCourses"
     class="courses-in-progress-outer-wrapper"
   >
+
     <swiper
       [loopFillGroupWithBlank]="true"
       [loop]="true"
@@ -90,12 +91,14 @@
   </div>
 
   <ng-template #noCourses>
-    <div class="courses-in-progress-inner-wrapper">
-      <p class="body-copy-medium">
-        You have no courses in progress at this time. View the course catalog to
-        get started.
-      </p>
-      <a class="primary-btn" href="#">Browse Course Catalog</a>
+    <div class="courses-in-progress-empty-wrapper">
+      <div class="courses-in-progress-empty-content">
+        <p class="body-copy-medium">
+          You have no courses in progress at this time. View the course catalog to
+          get started.
+        </p>
+        <a class="primary-btn" href="#">Browse Course Catalog</a>
+      </div>
     </div>
   </ng-template>
 </div>

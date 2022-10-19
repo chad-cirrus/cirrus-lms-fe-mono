@@ -12,7 +12,6 @@ cirrus-courses-in-progress .heading-3 {
   margin-top: 30px;
   @include breakpoint(mobile) {
     margin-top: 35px;
-
   }
 }
 
@@ -83,7 +82,7 @@ cirrus-courses-in-progress .heading-3 {
   }
 
   @include breakpoint(mobile) {
-    align-items: center;
+    align-items: start;
     flex-direction: row;
     justify-content: space-between;
 
@@ -111,6 +110,29 @@ span.progress-bar-text {
 
 .course-slide-lessons-complete {
   margin-top: 1rem;
+}
+
+.courses-in-progress-empty-wrapper {
+  background: $gray1;
+  border-radius: 5px;
+  padding: 85px 15px;
+
+  @include breakpoint(mobile) {
+    padding: 35px 5px;
+  }
+}
+
+.courses-in-progress-empty-content {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  max-width: 350px;
+  text-align: center;
+
+  .primary-btn {
+    margin-top: 2rem;
+  }
 }
 
 .courses-counter {
