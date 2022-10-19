@@ -1,8 +1,27 @@
 @import 'apps/recent-activity/src/base-scss/import';
 
 .main-content-wrapper {
-  display: flex;
   width: 100%;
+}
+
+.sidenav-wrapper {
+  background: $black;
+  border-right: 1px solid $gray2;
+  height: 100%;
+  position: fixed;
+  padding: 1rem 20px;
+  top: 5.1rem;
+  z-index: 5;
+}
+
+
+.header-container {
+  background: $black;
+  border-bottom: 1px solid $gray2;
+  padding: 25px 60px;
+  position: fixed;
+  width: 100%;
+  z-index: 5;
 }
 
 .content-container {
@@ -13,7 +32,8 @@
 
   @include breakpoint(mobile) {
     padding: 30px 25px;
-    width: calc(100% - 120px);
+    width: calc(100% - 260px);
+    float: right;
   }
 
   @include breakpoint(tablet) {

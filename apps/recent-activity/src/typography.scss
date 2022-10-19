@@ -35,7 +35,7 @@
   h4,
   h5,
   h6, 
-  p, {
+  p {
     margin: 0;
   }
 
@@ -178,6 +178,7 @@
   }
 
   .secondary-link
+  span.secondary-link
   a.secondary-link {
     color: $gray5;
     font-family:$akzidenz-medium;

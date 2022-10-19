@@ -9,7 +9,7 @@
   </div>
   <main class="">
     <div class="main-content-wrapper">
-      <div class="sidenav" *ngIf="(isScreenSmall$ | async) === false">
+      <div class="sidenav-wrapper" *ngIf="(isScreenSmall$ | async) === false">
         <cirrus-side-nav
           [cirrusUser]="(cirrusUser$ | async)!"
           (emitCollapse)="toggleCollapse($event)"

@@ -1,7 +1,8 @@
 export const environment = {
-  production: true,
+  production: false,
   project: 'recent-activity',
-  baseUrl: 'https://cirrus-lms-ppl-api-stage.herokuapp.com',
+  baseUrl: 'http://cirrusapproach.local:3000',
+  defaultThumbnailCourse: 'https://cirrusapproachherokuprod.blob.core.windows.net/cirruslmsherokudevcontainer/content-items/images/default-course-thumbnail.jpg'
   defaultLessonThumbnail:
     'https://cirrusapproachherokuprod.blob.core.windows.net/cirruslmsherokudevcontainer/content-items/images/default-lesson-thumbnail.jpg',
 };

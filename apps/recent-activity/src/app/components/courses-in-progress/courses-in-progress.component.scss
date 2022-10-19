@@ -58,7 +58,7 @@ cirrus-courses-in-progress .heading-3 {
   .mat-progress-bar {
     width: 100%;
     @include breakpoint(mobile) {
-      width: 220px;
+      width: 265px;
     }
   }
 
@@ -93,7 +93,19 @@ cirrus-courses-in-progress .heading-3 {
   }
 }
 
-.progress-bar-text {
+.primary-btn.slider-card-button {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 19px;
+  letter-spacing: -0.005em;
+
+  @include breakpoint(mobile) {
+    padding: 10px 22px;
+  }
+}
+
+span.progress-bar-text {
+  display: block;
   margin-top: 1rem;
 }
 

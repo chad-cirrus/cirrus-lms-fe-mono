@@ -1,14 +1,5 @@
-<div
-  [ngClass]="
-    type === 'hamburger' ? 'sidenav-container-hamburger' : 'sidenav-container'
-  "
->
-  <div
-    fxLayout="column"
-    [fxLayoutAlign]="
-      type !== 'hamburger' ? 'space-between center' : 'space-between'
-    "
-  >
+<div class="sidenav-container">
+  <div>
     <div>
       <div
         [ngClass]="
@@ -19,112 +10,110 @@
       >
         <div
           routerLink="recent-activity"
-          class="image-container"
+          class="image-container sidenav-link-wrapper"
           routerLinkActive="active"
           (click)="dismissHamburgerMenu()"
         >
           <img
             src="recent-activity/images/svg/recent-activity.svg"
-            height="23px"
-            width="23px"
+            height="26px"
+            width="26px"
           />
-          <span *ngIf="!collapse || type === 'hamburger'">Recent Activity</span>
+          <span class="side-nav-link" *ngIf="!collapse || type === 'hamburger'">Recent Activity</span>
         </div>
         <div
           *ngIf="cirrusUser.role !== 'pilot'"
           routerLink="instructor/dashboard"
-          class="image-container"
+          class="image-container sidenav-link-wrapper"
           routerLinkActive="active"
           (click)="dismissHamburgerMenu()"
         >
           <img
             src="recent-activity/images/svg/my-student.svg"
-            height="23px"
-            width="23px"
+            height="26px"
+            width="26px"
           />
-          <span *ngIf="!collapse || type === 'hamburger'">My Students</span>
+          <span class="side-nav-link"  *ngIf="!collapse || type === 'hamburger'">My Students</span>
         </div>
         <div
           routerLink="my-courses"
-          class="image-container"
+          class="image-container sidenav-link-wrapper"
           routerLinkActive="active"
         >
           <img
             src="recent-activity/images/svg/my-courses.svg"
-            height="23px"
-            width="23px"
+            height="26px"
+            width="26px"
           />
-          <span *ngIf="!collapse || type === 'hamburger'">My Courses</span>
+          <span class="side-nav-link" *ngIf="!collapse || type === 'hamburger'">My Courses</span>
         </div>
         <div
-          fxLayout="row"
-          fxLayoutGap="10px"
           routerLink="course-catalog"
-          class="image-container"
+          class="image-container sidenav-link-wrapper"
           routerLinkActive="active"
         >
           <img
             src="recent-activity/images/svg/catalog.svg"
-            height="23px"
-            width="23px"
+            height="26px"
+            width="26px"
           />
-          <span *ngIf="!collapse || type === 'hamburger'">Course Catalog</span>
+          <span class="side-nav-link" *ngIf="!collapse || type === 'hamburger'">Course Catalog</span>
         </div>
         <div
-          fxLayout="row"
-          fxLayoutGap="10px"
           routerLink="training-partners"
-          class="image-container"
+          class="image-container sidenav-link-wrapper"
           routerLinkActive="active"
         >
           <img
             src="recent-activity/images/svg/instructor.svg"
-            height="23px"
-            width="23px"
+            height="26px"
+            width="26px"
           />
-          <span *ngIf="!collapse || type === 'hamburger'"
+          <span class="side-nav-link" *ngIf="!collapse || type === 'hamburger'"
             >Training Partners</span
           >
         </div>
         <div
-          class="image-container"
+          class="image-container sidenav-link-wrapper"
           routerLinkActive="active"
           routerLink="library"
         >
           <img
             src="recent-activity/images/svg/library.svg"
-            height="23px"
-            width="23px"
+            height="26px"
+            width="26px"
             routerLink="courses/library"
           />
-          <span *ngIf="!collapse || type === 'hamburger'">Library</span>
+          <span class="side-nav-link" *ngIf="!collapse || type === 'hamburger'">Library</span>
         </div>
       </div>
     </div>
   </div>
 
   <div [ngClass]="type === 'hamburger' ? '' : 'options-container'">
-    <div *ngIf="type !== 'hamburger'" class="border"></div>
 
     <div
       *ngIf="!collapse; else collapsed"
-      class="options"
       class="side-nav-bottom-wrapper"
     >
       <div class="side-nav-bottom-icons-group">
         <span
-          class="alarm-badge"
+          class="alarm-badge sidenav-icon-link"
           matBadge="{{ formatBadge }}"
           matBadgeColor="warn"
           matBadgeOverlap="false"
           ><img src="recent-activity/images/svg/alarm.svg"
         /></span>
+      <span class="sidenav-icon-link">
         <img
-          src="recent-activity/images/svg/clarity_help-line.svg"
-          routerLink="help-center"
-        />
+        src="recent-activity/images/svg/clarity_help-line.svg"
+        routerLink="help-center"
+      />
+      </span>
+       
       </div>
-      <div class="image-container toggle-container">
+      <div class="toggle-container">
+        <span class="sidenav-icon-link">
         <img
           [src]="
             collapse
@@ -133,6 +122,7 @@
           "
           (click)="toggleCollapse()"
         />
+      </span>
       </div>
     </div>
   </div>
@@ -154,15 +144,15 @@
       <div routerLink="help-center">
         <img
           src="recent-activity/images/svg/clarity_help-line.svg"
-          height="23px"
-          width="23px"
+          height="26px"
+          width="26px"
         />
         <span *ngIf="type === 'hamburger'">Help Center</span>
       </div>
       <div *ngIf="!disableToggle">
         <img
-          height="23px"
-          width="23px"
+          height="26px"
+          width="26px"
           [src]="
             collapse
               ? 'recent-activity/images/svg/fluent_panel-right-expand-28-regular.svg'
