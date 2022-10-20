@@ -1,7 +1,7 @@
 export const environment = {
   production: false,
   project: 'courses',
-  baseUrl: 'http://cirrusapproach.local:3000',
+  baseUrl: 'https://cirrus-lms-ppl-api-stage.herokuapp.com',
   profile:
     'https://cirfullsb-cirrusaircraftvpo.cs41.force.com/approachsso/s/profile/',
   defaultLessonThumbnail:
