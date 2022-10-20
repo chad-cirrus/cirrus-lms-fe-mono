@@ -68,7 +68,7 @@
     fxFlex="grow"
   >
     <h2>{{ stage.title }}</h2>
-    <p class="stage-overview">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit fugiat nulla pariatur.</p>
+    <p class="stage-overview" *ngIf="stage.desc">{{ stage.desc }}</p>
     <div
       class="item-container"
       *ngFor="let courseLesson of stage.lessons"
