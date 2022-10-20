@@ -31,6 +31,7 @@ export class SideNavComponent implements OnInit, OnDestroy {
   constructor(private breakpointObserver: BreakpointObserver) {}
 
   ngOnInit(): void {
+    console.log('remobve');
     this.breakpointObserver
       .observe('(max-width: 950px)')
       .pipe(
