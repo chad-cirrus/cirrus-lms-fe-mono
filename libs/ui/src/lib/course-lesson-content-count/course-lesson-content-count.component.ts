@@ -29,10 +29,10 @@ export class CourseLessonContentCountComponent {
     contentCountAndCompletionTime: IContentCountAndCompletionTime
   ) {
     const dict: { [key: string]: string } = {
-      ['videos']: 'Videos',
-      ['documents']: 'Documents',
-      ['quizzes']: 'Quizzes',
-      ['assessments']: 'Assessments',
+      ['videos']: 'Videos: ',
+      ['documents']: 'Documents: ',
+      ['quizzes']: 'Quizzes: ',
+      ['assessments']: 'Assessments: ',
     };
 
     const countArray = Object.entries(

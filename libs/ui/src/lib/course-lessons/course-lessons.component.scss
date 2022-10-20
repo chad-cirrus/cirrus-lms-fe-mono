@@ -3,11 +3,11 @@
 .stage {
   width: 100%;
   h2 {
-    margin-bottom: 60px;
+    margin-bottom: 25px;
   }
-  &:not(:first-child) {
+  &:not(:nth-child(2)) {
     h2 {
-      margin-top: 60px;
+      margin-top: 24px;
     }
   }
 }
@@ -27,23 +27,13 @@
 }
 
 .stage-overview {
-  //styleName: Mobile/P Medium;
-  font-family: var.$AkzidenzGroteskBqLight;
-  font-size: 17px;
-  line-height: 26px;
-  // padding-bottom: 40px;
+  margin-top: -10px;
+  margin-bottom: 25px;
 }
 .item-container {
   width: 100%;
   padding: 2px 0;
   &:not(:last-child) {
     border-bottom: 1px solid #3a3a3a;
-  }
-}
-
-@media (min-width: 960px) {
-  .stage-overview {
-    font-size: 18px;
-    line-height: 28px;
   }
 }
