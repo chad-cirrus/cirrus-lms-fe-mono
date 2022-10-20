@@ -31,6 +31,7 @@ export const initialCourseState: CourseState = {
     course_content_stats: [],
     minimum_flight_hours: 0,
     certificate: { expiration: null },
+    started_at: '',
     completed_at: '',
     desktop_hero_image_url: '',
     mobile_hero_image_url: '',

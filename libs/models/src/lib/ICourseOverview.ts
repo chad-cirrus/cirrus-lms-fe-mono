@@ -14,6 +14,7 @@ export interface ICourseOverview {
   completed_at: string;
   course_content_stats: ICourseContentStat[];
   agreement_body: string;
+  started_at: string;
   overview?: string;
   completion_time?: string;
   course_attempt: { id: number };
