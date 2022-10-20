@@ -32,6 +32,10 @@
         [notificationCount]="notificationCount"
         (displayHamburger)="toggleHamburgerDisplay($event)"
       ></cirrus-hamburger-menu>
+      <div
+        *ngIf="notificationCount && !isDisplayingHamburger"
+        class="notifications-dot"
+      ></div>
     </div>
   </div>
 </div>

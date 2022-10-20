@@ -1,12 +1,10 @@
 @use '../styles/variables' as *;
 
-
 .header-container {
-    opacity: 9999;
-    height: 60px;
-    border-bottom: 1px solid $border-grey;
-    padding-left: 28px;
-
+  opacity: 9999;
+  height: 60px;
+  border-bottom: 1px solid $border-grey;
+  padding-left: 28px;
 }
 
 .dropdown {
@@ -37,6 +35,12 @@
   background-color: $border-grey;
 }
 
-
-
-
+.notifications-dot {
+  position: absolute;
+  top: 12px;
+  right: 13px;
+  width: 7.09px;
+  height: 7.09px;
+  border-radius: 90px;
+  background-color: $neon-red;
+}
