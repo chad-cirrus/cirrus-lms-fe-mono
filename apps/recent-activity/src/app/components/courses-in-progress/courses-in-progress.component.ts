@@ -27,7 +27,7 @@ export class CoursesInProgressComponent implements OnInit {
       ...course,
       thumbnail_image_url: course.thumbnail_image_url
         ? course.thumbnail_image_url
-        : environment.defaultLessonThumbnail,
+        : environment.defaultThumbnailCourse,
     }));
   }
 
