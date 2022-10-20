@@ -1,11 +1,26 @@
-<div class="title">Lifetime Cirrus Approach Coursework Stats</div>
+<h5 class="title heading-5">Lifetime Cirrus Approach Coursework Stats</h5>
 
-<div *ngFor="let stats of courseWorkStats">
-  <div>{{ stats.type | formatCourseworkType }}</div>
-  <div *ngIf="!stats; else completedArr">0</div>
-  <ng-template #completedArr>
-    <!--    <div *ngFor="let completed of logbook.completed">-->
-    <!--      &lt;!&ndash;????? &ndash;&gt;-->
-    <!--    </div>-->
-  </ng-template>
+<div class="coursework-wrapper">
+  <div
+    *ngFor="
+      let stats of courseWorkStats.slice(0, 5);
+      let i = index;
+      let count = count
+    "
+    [ngClass]="{
+      'item-no-border': i + 1 === count,
+      'coursework-item': i + 1 !== count
+    }"
+  >
+    <div class="coursework-item-container">
+      <img class="image" [src]="stats.type | imageFormatter" />
+      <h5 class="type heading-5">{{ stats.type | formatCourseworkType }}</h5>
+      <h2 class="total heading-2" *ngIf="!stats.completed; else completedArr">
+        0
+      </h2>
+      <ng-template #completedArr>
+        <h2 class="total heading-2">{{ stats.completed }}</h2>
+      </ng-template>
+    </div>
+  </div>
 </div>

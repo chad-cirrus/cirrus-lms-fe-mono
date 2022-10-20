@@ -1,17 +1,47 @@
 @import 'apps/recent-activity/src/base-scss/import';
 
 .title {
+  color: $gray5;
   display: flex;
   justify-content: center;
 }
 
+.image {
+  width: 35px;
+  height: 30px;
+}
+
 .logbook-wrapper {
   display: flex;
-  margin-top: 32px;
+  margin-top: 39px;
+}
+
+.logbook-item-container {
+  margin-left: 24px;
+  padding-right: 15px;
+}
+
+.type {
+  margin-top: 14.3px;
+}
+
+.total {
+  margin-top: 9.83px;
 }
 
 .logbook-item {
-  min-width: 150px;
+  min-width: 209px;
   width: 20%;
   border-right: 1px solid white;
+}
+
+.item-no-border {
+  @extend .logbook-item;
+  border: none;
+}
+
+@include breakpoint(mobile) {
+  .logbook-wrapper {
+    margin-top: 32px;
+  }
 }

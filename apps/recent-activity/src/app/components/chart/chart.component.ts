@@ -9,7 +9,8 @@ import {
   ApexLegend,
   ApexGrid,
   ApexFill,
-  ApexAnnotations,
+  ApexStates,
+  ApexTooltip,
 } from 'ng-apexcharts';
 
 type ApexXAxis = {
@@ -34,6 +35,7 @@ export type ChartOptions = {
   colors: string[];
   legend: ApexLegend;
   fill: ApexFill;
+  tooltip: ApexTooltip;
 };
 
 @Component({
@@ -44,7 +46,6 @@ export type ChartOptions = {
 export class CirrusChartComponent {
   @ViewChild('chart') chart!: ChartComponent;
   public chartOptions!: Partial<ChartOptions>;
-  // @Input() data!: any;
 
   private _data!: any;
 
@@ -64,17 +65,51 @@ export class CirrusChartComponent {
     this.chartOptions = {
       series: [
         {
-          name: 'distibuted',
+          name: this.data.csvRightColumnTitle,
           data: this.data.hours.map((a: any) => a.total),
         },
       ],
       chart: {
-        height: 350,
+        height: 250,
         type: 'bar',
+        fontFamily: 'akzidenz-extended',
         events: {
           click: function (chart, w, e) {
-            // console.log(chart, w, e)
+            // Leaving this in case we never need to interact
           },
+        },
+        toolbar: {
+          show: true,
+          offsetX: 0,
+          offsetY: 0,
+          tools: {
+            download: true,
+            selection: true,
+            zoom: true,
+            zoomin: true,
+            zoomout: true,
+            pan: true,
+            reset: true,
+            customIcons: [],
+          },
+          export: {
+            csv: {
+              filename: this.data.title,
+              columnDelimiter: ',',
+              headerCategory: 'Months',
+              headerValue: 'Completed',
+              dateFormatter(timestamp: any) {
+                return new Date(timestamp).toDateString();
+              },
+            },
+            svg: {
+              filename: this.data.title,
+            },
+            png: {
+              filename: this.data.title,
+            },
+          },
+          autoSelected: 'zoom',
         },
       },
 
@@ -122,6 +157,7 @@ export class CirrusChartComponent {
           },
         },
       },
+      tooltip: { enabled: false },
     };
   }
 }

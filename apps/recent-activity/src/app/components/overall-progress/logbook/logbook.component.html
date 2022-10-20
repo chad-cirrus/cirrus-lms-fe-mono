@@ -1,9 +1,26 @@
-<div class="title">Lifetime Cirrus Approach Training Stats</div>
+<h5 class="title heading-5">Lifetime Cirrus Approach Training Stats</h5>
 
 <div class="logbook-wrapper">
-  <div *ngFor="let logbook of logbookStats.slice(0, 5)" class="logbook-item">
-    <div>{{ logbook.type | formatLogbookType }}</div>
-    <div *ngIf="!logbook.completed; else completedArr">0</div>
-    <ng-template #completedArr> </ng-template>
+  <div
+    *ngFor="
+      let logbook of logbookStats.slice(0, 5);
+      let i = index;
+      let count = count
+    "
+    [ngClass]="{
+      'item-no-border': i + 1 === count,
+      'logbook-item': i + 1 !== count
+    }"
+  >
+    <div class="logbook-item-container">
+      <img class="image" [src]="logbook.type | imageFormatter" />
+      <h5 class="type heading-5">{{ logbook.type | formatLogbookType }}</h5>
+      <h2 class="total heading-2" *ngIf="!logbook.completed; else completedArr">
+        0
+      </h2>
+      <ng-template #completedArr>
+        <h2 class="total heading-2">{{ logbook.completed }}</h2>
+      </ng-template>
+    </div>
   </div>
 </div>

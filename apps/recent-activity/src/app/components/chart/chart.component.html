@@ -1,17 +1,20 @@
 <div id="chart" *ngIf="data">
-  <h5 class="title">
+  <h5 class="title heading-5">
     {{ data.title }}
   </h5>
-  <apx-chart
-    [series]="chartOptions?.series!"
-    [chart]="chartOptions?.chart!"
-    [dataLabels]="chartOptions?.dataLabels!"
-    [plotOptions]="chartOptions?.plotOptions!"
-    [yaxis]="chartOptions?.yaxis!"
-    [xaxis]="chartOptions?.xaxis!"
-    [legend]="chartOptions?.legend!"
-    [colors]="data.chartColors.gradientFromColors"
-    [grid]="chartOptions?.grid!"
-    [fill]="chartOptions?.fill!"
-  ></apx-chart>
+  <div class="chart-container">
+    <apx-chart
+      [series]="chartOptions?.series!"
+      [chart]="chartOptions?.chart!"
+      [dataLabels]="chartOptions?.dataLabels!"
+      [plotOptions]="chartOptions?.plotOptions!"
+      [yaxis]="chartOptions?.yaxis!"
+      [xaxis]="chartOptions?.xaxis!"
+      [legend]="chartOptions?.legend!"
+      [colors]="data.chartColors.gradientFromColors"
+      [grid]="chartOptions?.grid!"
+      [fill]="chartOptions?.fill!"
+      [tooltip]="chartOptions?.tooltip!"
+    ></apx-chart>
+  </div>
 </div>

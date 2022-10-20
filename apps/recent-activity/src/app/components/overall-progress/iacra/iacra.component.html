@@ -1,4 +1,16 @@
-<div *ngFor="let iacra of iacraStats">
-  <div>{{ iacra.type | formatIacraType }}</div>
-  <div>{{ iacra.completed }}</div>
+<h5 class="title heading-5">Lifetime Cirrus Approach IACRA Totals</h5>
+
+<div class="iacra-wrapper">
+  <div *ngFor="let iacra of iacraStats; let odd = odd" class="iacra-item">
+    <div class="iacra-item-container">
+      <img class="image" [src]="iacra.type | imageFormatter" />
+      <h5 class="type heading-5">{{ iacra.type | formatIacraType }}</h5>
+      <h2 class="total heading-2" *ngIf="!iacra.completed; else completedArr">
+        0
+      </h2>
+      <ng-template #completedArr>
+        <h2 class="total heading-2">{{ iacra.completed }}</h2></ng-template
+      >
+    </div>
+  </div>
 </div>

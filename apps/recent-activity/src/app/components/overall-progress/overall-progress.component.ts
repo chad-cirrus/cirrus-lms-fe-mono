@@ -33,8 +33,9 @@ export class OverallProgressComponent {
   chartColors!: ChartColors;
   private chartDataSubject = new BehaviorSubject<ChartData>({
     hours: [],
-    chartColors: [],
+    chartColors: { gradientFromColors: [], gradientToColors: [] },
     title: '',
+    csvRightColumnTitle: '',
   });
   chartDataObservable$ = this.chartDataSubject.asObservable();
 
@@ -51,17 +52,19 @@ export class OverallProgressComponent {
       return;
     }
 
-    const data =
+    const data: ChartData =
       this.tabIndex === 0
         ? {
             hours: this.overallProgress.logbook_stats[5].completed,
             chartColors: LogBookChartColors,
             title: 'Flight Hours in the Last 12 Months',
+            csvRightColumnTitle: 'Flight Hours',
           }
         : {
             hours: this.overallProgress.course_work_stats[5].completed,
             chartColors: CourseWorkChartColors,
             title: 'Lessons Completed in the Last 12 Months',
+            csvRightColumnTitle: 'Completed',
           };
     this.chartDataSubject.next(data);
   }

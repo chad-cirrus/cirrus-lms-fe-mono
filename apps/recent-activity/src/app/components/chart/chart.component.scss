@@ -1,5 +1,13 @@
 @import 'apps/recent-activity/src/base-scss/import';
 
+#chart {
+  margin-top: 83px;
+}
+
+.chart-container {
+  min-width: 600px;
+}
+
 .title {
   display: flex;
   justify-content: center;

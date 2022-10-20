@@ -56,7 +56,9 @@ import { BadgesFullComponent } from './components/achievements-page/badges-full/
 import { FormatLogbookTypePipe } from './components/overall-progress/logbook/format-logbook-type.pipe';
 import { FormatCourseworkTypePipe } from './components/overall-progress/coursework/format-coursework-type.pipe';
 import { FormatIacraTypePipe } from './components/overall-progress/iacra/format-iacra-type.pipe';
+import { ImageFormatterPipe } from './image-formatter.pipe';
 import { HttpErrorInterceptor } from './interceptors/http-error.interceptor';
+
 
 @NgModule({
   declarations: [
@@ -88,6 +90,7 @@ import { HttpErrorInterceptor } from './interceptors/http-error.interceptor';
     FormatLogbookTypePipe,
     FormatCourseworkTypePipe,
     FormatIacraTypePipe,
+    ImageFormatterPipe,
   ],
   imports: [
     CommonModule,
@@ -146,6 +149,7 @@ import { HttpErrorInterceptor } from './interceptors/http-error.interceptor';
     FormatLogbookTypePipe,
     FormatCourseworkTypePipe,
     FormatIacraTypePipe,
+    ImageFormatterPipe,
   ],
 })
 export class AppModule {}
