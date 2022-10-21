@@ -51,7 +51,7 @@
     letter-spacing: 0.34em;
     margin-left: 0.34em;
     text-align: center;
-    font-size: clamp(1.25rem, 7vw, 1.875rem);
+    font-size: clamp(1.25rem, -3.75rem + 25vw, 1.875rem);
   }
 
   @include breakpoint(mobile) {
