@@ -11,7 +11,7 @@
 
     <swiper
       [loopFillGroupWithBlank]="true"
-      [loop]="true"
+      [loop]="false"
       [navigation]="true"
       [slidesPerView]="'auto'"
       [spaceBetween]="5"
@@ -30,7 +30,7 @@
               ')'
           }"
         >
-          <h3 class="name heading-4">{{ course.name }}</h3>
+          <h3 class="name heading-4">{{ course.title }}</h3>
           <div class="swiper-slide-content">
             <div class="course-slide-progress-wrapper">
               <mat-progress-bar
@@ -44,6 +44,7 @@
               </span>
             </div>
             <button
+              *ngIf="course.next_lesson !== null"
               [routerLink]="[
                 '/courses',
                 course.id,
@@ -60,34 +61,6 @@
         </div>
       </ng-template>
     </swiper>
-  </div>
-
-  <div class="courses-search-bar" *ngIf="inProgressCourses.length > 0">
-    <form class="search-bar-form">
-      <mat-form-field class="search-bar-full-width" appearance="fill">
-        <mat-label>Search My Courses</mat-label>
-        <input
-          type="text"
-          placeholder="Search My Courses"
-          aria-label="Search My Courses"
-          matInput
-          [formControl]="searchParameter"
-          [matAutocomplete]="auto"
-        />
-        <mat-autocomplete
-          #auto="matAutocomplete"
-          [displayWith]="displayFn"
-          (optionSelected)="navigateTo($event)"
-        >
-          <mat-option
-            *ngFor="let option of filteredCourses$ | async"
-            [value]="option"
-          >
-            {{ option.name }}
-          </mat-option>
-        </mat-autocomplete>
-      </mat-form-field>
-    </form>
   </div>
 
   <ng-template #noCourses>
