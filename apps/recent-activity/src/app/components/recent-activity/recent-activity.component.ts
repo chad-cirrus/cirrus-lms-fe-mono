@@ -11,6 +11,7 @@ import { MatSidenav } from '@angular/material/sidenav';
 
 import { INotification } from '@cirrus/models';
 import { RecentActivityFacade } from '../../facade.service';
+import { Router } from 'express';
 
 @Component({
   selector: 'cirrus-recent-activity',
@@ -39,9 +40,7 @@ export class RecentActivityComponent implements OnInit {
 
   constructor(
     private recentActivityService: RecentActivityService,
-    private store: Store<AppState>,
-    private router: Router
-    private facade: RecentActivityFacade
+    private store: Store<AppState>
   ) {}
 
   ngOnInit() {

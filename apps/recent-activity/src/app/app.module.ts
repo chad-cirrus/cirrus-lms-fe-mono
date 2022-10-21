@@ -59,7 +59,6 @@ import { FormatIacraTypePipe } from './components/overall-progress/iacra/format-
 import { ImageFormatterPipe } from './image-formatter.pipe';
 import { HttpErrorInterceptor } from './interceptors/http-error.interceptor';
 
-
 @NgModule({
   declarations: [
     AppComponent,
