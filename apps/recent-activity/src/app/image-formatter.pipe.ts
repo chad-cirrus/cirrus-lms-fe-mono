@@ -4,7 +4,7 @@ import { Pipe, PipeTransform } from '@angular/core';
   name: 'imageFormatter',
 })
 export class ImageFormatterPipe implements PipeTransform {
-  transform(value: string, ...args: unknown[]): unknown {
+  transform(value: string): string | undefined {
     const myMap = new Map<string, string>([
       [
         'completed_total_hours',
@@ -13,7 +13,7 @@ export class ImageFormatterPipe implements PipeTransform {
       ['completed_sim_hours', 'recent-activity/images/svg/simulator_icon.svg'],
       [
         'completed_actual_instrument_hours',
-        'recent-activity/images/svg/instrument-hours.svg',
+        'recent-activity/images/svg/Instrument-hours.svg',
       ],
       [
         'completed_ground_instruction_hours',

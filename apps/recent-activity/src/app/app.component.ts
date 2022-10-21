@@ -5,10 +5,10 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
-import { Observable, of, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { AppState } from './store/reducers';
-import { ICirrusUser } from '@cirrus/models';
+import { ICirrusUser, INotification } from '@cirrus/models';
 import { setCirrusUser } from './store/actions/cirrus-user.actions';
 import { selectCirrusUser } from './store/selectors/cirrus-user.selector';
 import { NotificationService } from './services/notification.service';
@@ -22,6 +22,9 @@ import { setScreenSize } from './store/actions/view.actions';
 import { selectIsScreenSmall } from './store/selectors/view.selector';
 import { ErrorService } from '@cirrus/ui';
 import { environment } from '../environments/environment';
+import { RecentActivityService } from './services/recent-activity.service';
+import { MatSidenav } from '@angular/material/sidenav';
+import { RecentActivityFacade } from './facade.service';
 
 @Component({
   selector: 'cirrus-root',
@@ -45,14 +48,25 @@ export class AppComponent implements OnInit, OnDestroy {
   error$ = this.errorService.error$;
   project = environment.project;
 
+  private _isNotificationsMenuOpenSubject = new BehaviorSubject(false);
+  isNotificationMenuOpen$ = this._isNotificationsMenuOpenSubject.asObservable();
+
+  recentActivityNotifications$ =
+    this.recentActivityService.recentActivityNotifications$;
+
   collapse = false;
   showHamburgerMenu = false;
+  isNotificationsMenuOpen = false;
+  @ViewChild('drawer') drawer!: MatSidenav;
+
   @ViewChild('outletContainer') outletContainer!: ElementRef;
   constructor(
     private notificationService: NotificationService,
     private store: Store<AppState>,
     private breakpointObserver: BreakpointObserver,
-    private errorService: ErrorService
+    private errorService: ErrorService,
+    private recentActivityService: RecentActivityService,
+    private facade: RecentActivityFacade
   ) {}
 
   ngOnInit() {
@@ -70,6 +84,12 @@ export class AppComponent implements OnInit, OnDestroy {
       .subscribe(screenSize =>
         this.store.dispatch(setScreenSize({ screenSize }))
       );
+
+    this.recentActivityService.notificationMenuStateToggle$.subscribe(bool => {
+      if (this.drawer) {
+        bool ? this.drawer.open() : this.drawer.close();
+      }
+    });
   }
 
   ngOnDestroy() {
@@ -87,6 +107,34 @@ export class AppComponent implements OnInit, OnDestroy {
 
   toggleCollapse(collapse: boolean) {
     this.collapse = collapse;
+  }
+
+  dismissNotificationsMenu() {
+    this.recentActivityService.notificationMenuStateToggleSubject.next(false);
+  }
+
+  clearNotifications(notifications: INotification[]) {
+    this.facade.clearNotifications(notifications).subscribe();
+  }
+
+  deleteNotification(id: number) {
+    this.facade.deleteNotification(id).subscribe();
+  }
+
+  acceptInvite(notification: INotification) {
+    this.facade.acceptInvite(notification).subscribe();
+  }
+
+  declineInvite(notification: INotification) {
+    this.facade.declineInvite(notification).subscribe();
+  }
+
+  drawerOpened() {
+    this._isNotificationsMenuOpenSubject.next(true);
+  }
+
+  drawerClosed() {
+    this._isNotificationsMenuOpenSubject.next(false);
   }
 
   private getBreakpoint({ breakpoints }: BreakpointState) {

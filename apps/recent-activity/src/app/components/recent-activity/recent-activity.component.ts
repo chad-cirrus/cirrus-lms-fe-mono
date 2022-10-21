@@ -40,6 +40,7 @@ export class RecentActivityComponent implements OnInit {
   constructor(
     private recentActivityService: RecentActivityService,
     private store: Store<AppState>,
+    private router: Router
     private facade: RecentActivityFacade
   ) {}
 
@@ -48,27 +49,6 @@ export class RecentActivityComponent implements OnInit {
   }
 
   viewAllNotifications() {
-    console.log('recent activity view all notifications');
-    this.drawer.open();
-  }
-
-  dismissNotificationsMenu() {
-    this.drawer.close();
-  }
-
-  clearNotifications(notifications: INotification[]) {
-    this.facade.clearNotifications(notifications).subscribe();
-  }
-
-  deleteNotification(id: number) {
-    this.facade.deleteNotification(id).subscribe();
-  }
-
-  acceptInvite(notification: INotification) {
-    this.facade.acceptInvite(notification).subscribe();
-  }
-
-  declineInvite(notification: INotification) {
-    this.facade.declineInvite(notification).subscribe();
+    this.recentActivityService.notificationMenuStateToggleSubject.next(true);
   }
 }

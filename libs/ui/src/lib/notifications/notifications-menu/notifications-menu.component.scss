@@ -26,6 +26,7 @@
   border-bottom: 1px solid $gray3;
   display: flex;
   justify-content: flex-end;
+  padding-bottom: 11px;
 }
 
 .clear-all-text {
@@ -72,4 +73,8 @@
 
 .email-text {
   text-decoration: underline;
+}
+
+.title-notifications {
+  padding: 17px 0px 19px 19px;
 }

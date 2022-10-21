@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Inject, Input, Output } from '@angular/core';
 import { INotification } from '@cirrus/models';
 
 @Component({
@@ -13,6 +13,7 @@ export class NotificationsMenuComponent {
   @Output() declineInvitationEmit = new EventEmitter<INotification>();
   @Output() clearNotficationsEmit = new EventEmitter<INotification[]>();
   @Output() deleteNotificationEmit = new EventEmitter<number>();
+  @Input() projectName!: string;
 
   dismiss() {
     this.dismissMenu.emit();

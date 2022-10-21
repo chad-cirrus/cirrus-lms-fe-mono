@@ -4,7 +4,7 @@
       [cirrusUser]="(cirrusUser$ | async)!"
       [cirrusImpersonationReturnUser]="(cirrusImpersonateReturnUser$ | async)!"
       (hamburgerMenu)="openHamburgerMenu()"
-      [notificationCount]="notificationCount$ | async"
+      [notificationCount]="(notifications$ | async)?.length!"
     ></cirrus-header>
   </div>
   <main fxLayout="row">
@@ -16,7 +16,7 @@
       <cirrus-side-nav
         [cirrusUser]="(cirrusUser$ | async)!"
         (emitCollapse)="toggleCollapse($event)"
-        [notificationCount]="notificationCount$ | async"
+        [notificationCount]="(notifications$ | async)?.length!"
       ></cirrus-side-nav>
     </div>
     <div class="content-container" [fxFlex]="100">
@@ -48,3 +48,17 @@
     [type]="'hamburger'"
   ></cirrus-side-nav>
 </div>
+
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport="true" mode="push">
+    <cirrus-notifications-menu
+      (acceptInvitationEmit)="acceptInvite($event)"
+      (declineInvitationEmit)="declineInvite($event)"
+      (clearNotficationsEmit)="clearNotifications($event)"
+      (deleteNotificationEmit)="deleteNotification($event)"
+      (dismissMenu)="dismissNotificationsMenu()"
+      [notifications]="(notifications$ | async)!"
+      [projectName]="project"
+    ></cirrus-notifications-menu>
+  </mat-sidenav>
+</mat-sidenav-container>

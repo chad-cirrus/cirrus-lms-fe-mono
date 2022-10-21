@@ -21,7 +21,7 @@ import {
   selectLesson,
   selectLessonStateBusy,
 } from './store/selectors/lessons.selector';
-import { ICirrusUser, ILesson } from '@cirrus/models';
+import { ICirrusUser, ILesson, INotification } from '@cirrus/models';
 import {
   selectCirrusUser,
   selectRole,
@@ -42,6 +42,7 @@ import {
 import { CoursesService } from './course/course.service';
 import { ErrorService } from '@cirrus/ui';
 import { environment } from '../environments/environment';
+import { CoursesFacadeService } from './courses-facade.service';
 
 @Component({
   selector: 'cirrus-root',
@@ -72,7 +73,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   error$ = this.errorService.error$;
 
-  notificationCount$: Observable<any> = this.courseService.notificationsCount$;
+  notifications$: Observable<any> = this.courseService.notifications$;
   sideNavOpen$: Observable<boolean> = this.store.select(selectSideNavOpen);
   @ViewChild(MatSidenav) sideNav!: MatSidenav;
   ftgNotPilot = 160;
@@ -86,6 +87,7 @@ export class AppComponent implements OnInit, OnDestroy {
   collapse = false;
   showHamburgerMenu = false;
   @ViewChild('outletContainer') outletContainer!: ElementRef;
+  @ViewChild('drawer') drawer!: MatSidenav;
 
   triggerSubscription!: Subscription;
 
@@ -94,7 +96,8 @@ export class AppComponent implements OnInit, OnDestroy {
     private appService: AppService,
     private breakpointObserver: BreakpointObserver,
     private courseService: CoursesService,
-    private errorService: ErrorService
+    private errorService: ErrorService,
+    private facade: CoursesFacadeService
   ) {}
 
   ngOnInit() {
@@ -122,6 +125,12 @@ export class AppComponent implements OnInit, OnDestroy {
     this.viewToggle.valueChanges.subscribe(instructorView =>
       this.store.dispatch(appActions.setInstructorView({ instructorView }))
     );
+
+    this.courseService.notificationMenuStateToggle$.subscribe(bool => {
+      if (this.drawer) {
+        bool ? this.drawer.open() : this.drawer.close();
+      }
+    });
   }
 
   ngOnDestroy(): void {
@@ -144,6 +153,26 @@ export class AppComponent implements OnInit, OnDestroy {
 
   handleOpenChanged(sideNavOpen: boolean) {
     this.store.dispatch(appActions.setSideNavOpen({ sideNavOpen }));
+  }
+
+  dismissNotificationsMenu() {
+    this.courseService.notificationMenuStateToggleSubject.next(false);
+  }
+
+  clearNotifications(notifications: INotification[]) {
+    this.facade.clearNotifications(notifications).subscribe();
+  }
+
+  deleteNotification(id: number) {
+    this.facade.deleteNotification(id).subscribe();
+  }
+
+  acceptInvite(notification: INotification) {
+    this.facade.acceptInvite(notification).subscribe();
+  }
+
+  declineInvite(notification: INotification) {
+    this.facade.declineInvite(notification).subscribe();
   }
 
   private getBreakpoint({ breakpoints }: BreakpointState) {

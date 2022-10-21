@@ -6,6 +6,7 @@ import {
   CirrusMaterialModule,
   ErrorNotificationModule,
   MatIconRegistryModule,
+  NotificationsMenuModule,
   UiModule,
 } from '@cirrus/ui';
 
@@ -85,6 +86,7 @@ import { CourseEnrollmentsRouteComponent } from './course/course-enrollments-rou
     MatIconRegistryModule,
     MatTabsModule,
     ErrorNotificationModule,
+    NotificationsMenuModule,
   ],
   providers: [
     {

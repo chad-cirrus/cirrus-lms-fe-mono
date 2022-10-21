@@ -48,16 +48,3 @@
     <h1 class="heading-3">Welcome back, {{ (user$ | async)?.firstname }}</h1>
   </div>
 </ng-template>
-
-<mat-sidenav-container class="sidenav-container">
-  <mat-sidenav #drawer class="sidenav" fixedInViewport="true" mode="push">
-    <cirrus-notifications-menu
-      (acceptInvitationEmit)="acceptInvite($event)"
-      (declineInvitationEmit)="declineInvite($event)"
-      (clearNotficationsEmit)="clearNotifications($event)"
-      (deleteNotificationEmit)="deleteNotification($event)"
-      (dismissMenu)="dismissNotificationsMenu()"
-      [notifications]="(recentActivityNotifications$ | async)?.notifications!"
-    ></cirrus-notifications-menu>
-  </mat-sidenav>
-</mat-sidenav-container>

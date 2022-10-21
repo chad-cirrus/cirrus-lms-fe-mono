@@ -4,6 +4,11 @@
   width: 100%;
 }
 
+.main-content-wrapper-notifications-menu-active {
+  height: 100vh;
+  overflow-y: hidden;
+}
+
 .sidenav-wrapper {
   background: $black;
   border-right: 1px solid $gray2;
@@ -13,7 +18,6 @@
   top: 5.1rem;
   z-index: 5;
 }
-
 
 .header-container {
   background: $black;
@@ -46,4 +50,11 @@
   position: fixed;
   top: 91%;
   right: 2%;
+}
+
+mat-sidenav {
+  background-color: black;
+  color: white;
+  top: 82px !important;
+  left: 245px !important;
 }

@@ -19,7 +19,9 @@
             height="26px"
             width="26px"
           />
-          <span class="side-nav-link" *ngIf="!collapse || type === 'hamburger'">Recent Activity</span>
+          <span class="side-nav-link" *ngIf="!collapse || type === 'hamburger'"
+            >Recent Activity</span
+          >
         </div>
         <div
           *ngIf="cirrusUser.role !== 'pilot'"
@@ -33,7 +35,9 @@
             height="26px"
             width="26px"
           />
-          <span class="side-nav-link"  *ngIf="!collapse || type === 'hamburger'">My Students</span>
+          <span class="side-nav-link" *ngIf="!collapse || type === 'hamburger'"
+            >My Students</span
+          >
         </div>
         <div
           routerLink="my-courses"
@@ -45,7 +49,9 @@
             height="26px"
             width="26px"
           />
-          <span class="side-nav-link" *ngIf="!collapse || type === 'hamburger'">My Courses</span>
+          <span class="side-nav-link" *ngIf="!collapse || type === 'hamburger'"
+            >My Courses</span
+          >
         </div>
         <div
           routerLink="course-catalog"
@@ -57,7 +63,9 @@
             height="26px"
             width="26px"
           />
-          <span class="side-nav-link" *ngIf="!collapse || type === 'hamburger'">Course Catalog</span>
+          <span class="side-nav-link" *ngIf="!collapse || type === 'hamburger'"
+            >Course Catalog</span
+          >
         </div>
         <div
           routerLink="training-partners"
@@ -84,45 +92,43 @@
             width="26px"
             routerLink="courses/library"
           />
-          <span class="side-nav-link" *ngIf="!collapse || type === 'hamburger'">Library</span>
+          <span class="side-nav-link" *ngIf="!collapse || type === 'hamburger'"
+            >Library</span
+          >
         </div>
       </div>
     </div>
   </div>
 
   <div [ngClass]="type === 'hamburger' ? '' : 'options-container'">
-
-    <div
-      *ngIf="!collapse; else collapsed"
-      class="side-nav-bottom-wrapper"
-    >
+    <div *ngIf="!collapse; else collapsed" class="side-nav-bottom-wrapper">
       <div class="side-nav-bottom-icons-group">
         <span
           class="alarm-badge sidenav-icon-link"
+          (click)="openNotificationsMenu()"
           matBadge="{{ formatBadge }}"
           matBadgeColor="warn"
           matBadgeOverlap="false"
           ><img src="recent-activity/images/svg/alarm.svg"
         /></span>
-      <span class="sidenav-icon-link">
-        <img
-        src="recent-activity/images/svg/clarity_help-line.svg"
-        routerLink="help-center"
-      />
-      </span>
-       
+        <span class="sidenav-icon-link">
+          <img
+            src="recent-activity/images/svg/clarity_help-line.svg"
+            routerLink="help-center"
+          />
+        </span>
       </div>
       <div class="toggle-container">
         <span class="sidenav-icon-link">
-        <img
-          [src]="
-            collapse
-              ? 'recent-activity/images/svg/fluent_panel-right-expand-28-regular.svg'
-              : 'recent-activity/images/svg/fluent_panel-left-expand-28-regular.svg'
-          "
-          (click)="toggleCollapse()"
-        />
-      </span>
+          <img
+            [src]="
+              collapse
+                ? 'recent-activity/images/svg/fluent_panel-right-expand-28-regular.svg'
+                : 'recent-activity/images/svg/fluent_panel-left-expand-28-regular.svg'
+            "
+            (click)="toggleCollapse()"
+          />
+        </span>
       </div>
     </div>
   </div>
@@ -136,6 +142,7 @@
         <span
           matBadge="{{ notificationCount > 0 ? notificationCount : '' }}"
           matBadgeColor="warn"
+          (click)="openNotificationsMenu()"
           [matBadgeOverlap]="type === 'hamburger'"
           ><img src="recent-activity/images/svg/alarm.svg"
         /></span>

@@ -8,7 +8,7 @@ import {
   IProgressUpdateResponses,
   PROGRESS_TYPE,
 } from '@cirrus/models';
-import { Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 import { completeProgressHandler } from '../shared/complete-progress.handler';
@@ -21,13 +21,15 @@ export class CoursesService {
   private _lessonCompleted = new Subject<string>();
   lessonComplete$ = this._lessonCompleted.asObservable();
 
+  notificationMenuStateToggleSubject = new BehaviorSubject(false);
+  notificationMenuStateToggle$ =
+    this.notificationMenuStateToggleSubject.asObservable();
+
   private coursesUrl = 'api/v4/courses';
   private scormUrl = 'scorm';
-  notificationsCount$ = this.http
-    .get<INotification[]>(
-      `${environment.baseUrl}/api/v3/notifications/my-notifications`
-    )
-    .pipe(map(notif => notif.length));
+  notifications$ = this.http.get<INotification[]>(
+    `${environment.baseUrl}/api/v3/notifications/my-notifications`
+  );
 
   constructor(private http: HttpClient, private taskService: TaskService) {}
 

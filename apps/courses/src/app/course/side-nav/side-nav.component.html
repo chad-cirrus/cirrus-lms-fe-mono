@@ -128,6 +128,7 @@
           class="alarm-badge"
           matBadge="{{ notificationCount > 0 ? notificationCount : '' }}"
           matBadgeColor="warn"
+          (click)="openNotificationsMenu()"
           matBadgeOverlap="false"
           ><img src="courses/images/svg/alarm.svg"
         /></span>
@@ -158,6 +159,7 @@
         <span
           matBadge="{{ notificationCount > 0 ? notificationCount : '' }}"
           matBadgeColor="warn"
+          (click)="openNotificationsMenu()"
           [matBadgeOverlap]="type === 'hamburger'"
           ><img src="courses/images/svg/alarm.svg"
         /></span>

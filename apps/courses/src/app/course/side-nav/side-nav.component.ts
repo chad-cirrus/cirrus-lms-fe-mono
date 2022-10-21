@@ -10,6 +10,7 @@ import {
 import { ICirrusUser } from '@cirrus/models';
 import { map, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { CoursesService } from '../course.service';
 
 @Component({
   selector: 'cirrus-side-nav',
@@ -28,7 +29,10 @@ export class SideNavComponent implements OnInit, OnDestroy {
   disableToggle!: boolean;
   currentUrl = '';
 
-  constructor(private breakpointObserver: BreakpointObserver) {}
+  constructor(
+    private breakpointObserver: BreakpointObserver,
+    private courseService: CoursesService
+  ) {}
 
   ngOnInit(): void {
     this.breakpointObserver
@@ -52,6 +56,11 @@ export class SideNavComponent implements OnInit, OnDestroy {
 
   dismissHamburgerMenu() {
     this.emitDismissHamburgerMenu.emit();
+  }
+
+  openNotificationsMenu() {
+    console.log('clicked');
+    this.courseService.notificationMenuStateToggleSubject.next(true);
   }
 
   toggleCollapse(isTablet?: boolean) {

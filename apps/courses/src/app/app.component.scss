@@ -5,6 +5,10 @@
   width: 320px;
 }
 
+.content-container-notifications-menu-active {
+  overflow-y: hidden;
+}
+
 .error-container {
   z-index: 100;
   position: fixed;
@@ -108,3 +112,10 @@ ul.student-name {
     stroke: $cirrus-blue !important;
   }
 }
+
+// mat-sidenav {
+//   background-color: black;
+//   color: white;
+//   top: 82px !important;
+//   left: 245px !important;
+// }

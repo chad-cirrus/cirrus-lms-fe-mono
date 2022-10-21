@@ -27,6 +27,10 @@ export class RecentActivityService {
   recentActivityNotifications$ =
     this._recentActivityNotifications.asObservable();
 
+  notificationMenuStateToggleSubject = new BehaviorSubject(false);
+  notificationMenuStateToggle$ =
+    this.notificationMenuStateToggleSubject.asObservable();
+
   constructor(private http: HttpClient) {}
   getRecentActivity(): Observable<IRecentActivity> {
     const url = `${environment.baseUrl}/api/v4/recent_activity`;

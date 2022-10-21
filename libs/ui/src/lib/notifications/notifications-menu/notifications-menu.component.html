@@ -5,7 +5,7 @@
         <h1 class="heading-3">Notifications</h1>
         <span
           class="alarm-badge"
-          matBadge="{{ notifications.length }}"
+          matBadge="{{ notifications?.length }}"
           matBadgeColor="warn"
           matBadgeOverlap="false"
         ></span>
@@ -26,7 +26,7 @@
           }}</span>
           <img
             class="trash"
-            src="recent-activity/images/svg/Trash_Icon.svg"
+            [src]="projectName + '/images/svg/Trash_Icon.svg'"
             (click)="deleteNotification(notification.id)"
           />
         </div>

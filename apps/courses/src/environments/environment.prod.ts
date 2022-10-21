@@ -1,5 +1,5 @@
 export const environment = {
-  production: false,
+  production: true,
   project: 'courses',
   baseUrl: 'https://cirrus-lms-ppl-api-stage.herokuapp.com',
   profile:

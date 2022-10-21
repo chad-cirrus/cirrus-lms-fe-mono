@@ -8,7 +8,13 @@
     ></cirrus-header>
   </div>
   <main class="">
-    <div class="main-content-wrapper">
+    <div
+      [ngClass]="
+        (isNotificationMenuOpen$ | async)
+          ? 'main-content-wrapper-notifications-menu-active'
+          : 'main-content-wrapper'
+      "
+    >
       <div class="sidenav-wrapper" *ngIf="(isScreenSmall$ | async) === false">
         <cirrus-side-nav
           [cirrusUser]="(cirrusUser$ | async)!"
@@ -31,3 +37,24 @@
     </div>
   </main>
 </div>
+
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav
+    #drawer
+    class="sidenav"
+    fixedInViewport="true"
+    mode="push"
+    (closedStart)="drawerClosed()"
+    (openedStart)="drawerOpened()"
+  >
+    <cirrus-notifications-menu
+      (acceptInvitationEmit)="acceptInvite($event)"
+      (declineInvitationEmit)="declineInvite($event)"
+      (clearNotficationsEmit)="clearNotifications($event)"
+      (deleteNotificationEmit)="deleteNotification($event)"
+      (dismissMenu)="dismissNotificationsMenu()"
+      [notifications]="(recentActivityNotifications$ | async)?.notifications!"
+      [projectName]="project"
+    ></cirrus-notifications-menu>
+  </mat-sidenav>
+</mat-sidenav-container>
