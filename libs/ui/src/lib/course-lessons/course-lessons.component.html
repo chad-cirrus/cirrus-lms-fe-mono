@@ -4,8 +4,8 @@
   class="main-content-wrapper"
 >
   <div class="filter-container" [formGroup]="filterForm">
-    <div fxLayout.gt-sm="row-reverse" fxLayoutGap.gt-sm="24px">
-      <div fxFlex="grow" class="search-input">
+    <div class="filter-search">
+      <div class="search-input">
         <input
           [ngClass]="filterText?.value ? 'input-active' : 'input'"
           placeholder="Search Lessons"

@@ -14,7 +14,11 @@
 
 .filter-container {
   width: 100%;
-
+  .filter-search {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+  }
   .filter-message {
     padding: 20px 0px 17px 0px;
     font-size: 0.875rem;
