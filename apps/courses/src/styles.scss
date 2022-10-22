@@ -44,18 +44,38 @@ img[type='button'] {
   border: none;
   height: 40px;
   width: 143px;
+  cursor: pointer;
+  &:hover {
+    background: $gray7;
+  }
+}
+.mat-menu-content:not(:empty) {
+  padding: 0 !important;
+}
+.mat-checkbox-inner-container {
+  width: 24px !important;
+  height: 24px !important;
+  margin-right: 14px !important;
+  .mat-checkbox-frame {
+    border-width: 1px;
+    border-color: $gray5;
+  }
+}
+
+.mat-checkbox-checkmark-path {
+  stroke: $white !important;
 }
 
 .search-input {
   position: relative;
   display: flex;
+  width: 100%;
   .input {
     width: 100%;
-    height: 40px;
     border: 1px solid $gray7;
     border-radius: 74px;
     background-color: $black;
-    padding-left: 22px;
+    padding: 10px 22px;
     color: $gray4;
     font-size: 1rem;
     &:focus-visible {
@@ -76,7 +96,7 @@ img[type='button'] {
 
   .text-filter-container {
     position: absolute;
-    top: 42px;
+    top: 38px;
     width: 100%;
     max-height: 450px;
     overflow-y: auto;
@@ -101,18 +121,27 @@ img[type='button'] {
       color: $gray4;
     }
   }
+  @media (min-width: 960px) {
+    order: 2;
+  }
 }
 
 .tag {
   display: flex;
   justify-content: space-around;
   align-items: center;
+  gap: 10px;
   background-color: $black;
   color: $gray5;
-  width: 145px;
-  padding: 8px;
+  font-size: 1rem;
+  padding: 11px 18px;
+  margin-bottom: 15px;
   border: 1px solid $gray5;
   border-radius: 60px;
+  cursor: pointer;
+  &>div {
+    display: flex;
+  }
 }
 
 .mat-tab-label-active {

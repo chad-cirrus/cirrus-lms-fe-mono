@@ -1,6 +1,6 @@
 <div class="container" (click)="stopProp($event)">
   <div class="section">
-    <div *ngFor="let section of sections; let i = index">
+    <div class="filter-options-set" *ngFor="let section of sections; let i = index">
       <div class="header">{{ section.title }}</div>
       <div *ngFor="let item of section.items">
         <div class="item">

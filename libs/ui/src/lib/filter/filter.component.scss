@@ -1,17 +1,33 @@
 @use '../styles/variables' as *;
 
 .container {
-  padding: 16px 0px 16px 13px;
+  padding: 13px;
   width: 242px;
-  background-color: $lesson-content-item-hover;
+  height: 300px;
+  overflow-y: scroll;
+  background-color: $gray2;
 
-  .section {
-    padding-left: 35px;
+  .filter-options-set {
+    &:not(:first-child) {
+      .header {
+        border-top: 1px solid $gray3;
+        padding: 15px 0px 12px 0px;
+      }
+    }
+    .header {
+      font-family: "akzidenz-grotesk_bqmedium";
+      font-size: 0.875rem;
+      padding: 0 0 12px 0;
+    }
   }
-  .header {
-    padding: 11px 0px 12px 0px;
-  }
+
   .item {
+    font-size: 1rem;
     padding-bottom: 22px;
+    .mat-checkbox-inner-container {
+      width: 24px;
+      height: 24px;
+      margin-right: 14px;
+    }
   }
 }

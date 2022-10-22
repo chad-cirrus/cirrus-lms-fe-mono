@@ -49,14 +49,14 @@
       Showing {{ lessonsDisplayedCount }} / {{ lessonsOverallCount }} Lesson
     </div>
 
-    <div class="tag-row" fxLayout="row wrap" fxLayoutGap="10px">
-      <div *ngFor="let tag of checkboxArray.controls" class="tag">
-        <div (click)="removeTag(tag.value)">
+    <div class="tag-row" fxLayout="row wrap" fxLayoutGap="12px">
+      <button *ngFor="let tag of checkboxArray.controls" class="tag" (click)="removeTag(tag.value)">
+        <div>
           <img src="courses/images/svg/close.svg" />
         </div>
 
         <div>{{ tag.value | formatFilter | titlecase }}</div>
-      </div>
+      </button>
     </div>
   </div>
 

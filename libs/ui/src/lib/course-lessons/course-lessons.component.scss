@@ -1,5 +1,9 @@
 @use '../styles/variables' as var;
 
+.mat-menu-content:not(:empty) {
+  padding: 0;
+}
+
 .stage {
   width: 100%;
   h2 {
@@ -39,5 +43,13 @@
   padding: 2px 0;
   &:not(:last-child) {
     border-bottom: 1px solid #3a3a3a;
+  }
+}
+
+@media (min-width: 960px) {
+  .filter-container {
+    .filter-search {
+      flex-direction: row;
+    }
   }
 }
