@@ -126,3 +126,8 @@ EarnedBadges.args = {
     ...badges.slice(2, badges.length),
   ],
 };
+
+export const NoBadges = Template.bind({});
+NoBadges.args = {
+  badges: [],
+};
