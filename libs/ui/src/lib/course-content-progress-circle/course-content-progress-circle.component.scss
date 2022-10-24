@@ -3,11 +3,11 @@
 .circular-chart {
   display: block;
   max-height: 100px;
+  flex-shrink: 0;
 }
 
 .circle {
   stroke: #00FFFF;
-  ;
   fill: none;
   stroke-width: 2.8;
   stroke-linecap: round;
@@ -28,22 +28,20 @@
 
 .info {
   .label {
-    font-family: var.$akzidenz-grotesk_bqLtEx400;
-    font-size: 16px;
-    line-height: 26px;
+    font-size: 1rem;
     letter-spacing: 0.02em;
   }
   .completed {
     font-family: var.$akzidenz-grotesk_bqLtEx400;
-    font-size: 32px;
-    line-height: 32px;
+    font-size: 2rem;
+    line-height: 1;
     letter-spacing: 0.02em;
     margin-right: 4px;
   }
   .total {
     font-family: var.$akzidenz-grotesk_bqLtEx400;
-    font-size: 23px;
-    line-height: 23px;
+    font-size: 1.4375rem;
+    line-height: 1;
     letter-spacing: 0.02em;
     color: #969696;
   }

@@ -4,8 +4,8 @@
   display: block;
 }
 
-.container {
-  max-width: 630px;
+.hours-container {
+  overflow-x: auto;
 }
 
 .mat-icon {
@@ -14,17 +14,12 @@
 }
 
 .progress-card {
-  min-width: 210px;
-  margin-bottom: 36px;
+  min-width: 135px;
   padding-left: 18px;
 }
 
-.progress-card:not(:nth-child(3n + 1)) {
-  border-left: 1px solid white;
-}
-
 .progress-type {
-  font-family: var.$akzidenz-grotesk_bqLtEx400;
+  font-family: "akzidenz-grotesk_bqextended";
   font-style: normal;
   font-weight: 400;
   font-size: 0.9375rem;
@@ -35,8 +30,7 @@
 }
 
 .courses-completed {
-  font-family: var.$akzidenz-grotesk_bqLtEx400;
-  font-style: normal;
+  font-family: "akzidenz-grotesk_bqextended";
   font-style: normal;
   font-weight: 400;
   font-size: 2.5rem;
@@ -46,4 +40,17 @@
   letter-spacing: -0.045em;
 
   color: #e5e5e5;
+}
+
+@media (min-width: 960px) {
+  .hours-container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .progress-card {
+    margin-bottom: 36px;
+  }
+  .progress-type {
+    font-size: 1rem;
+  }
 }

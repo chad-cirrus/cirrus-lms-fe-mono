@@ -57,20 +57,21 @@
   </section>
   <section class="row-progress">
     <h2>Course Progress</h2>
-    <mat-divider></mat-divider>
-    <p class="started-date" *ngIf="courseOverview.started_at">
+    <h5 class="started-date" *ngIf="courseOverview.started_at">
       Started: <span>{{ courseOverview.started_at }}</span>
-    </p>
+    </h5>
     <cirrus-course-overview-lesson-progress-bar
       [lessonProgress]="lessonProgress"
     ></cirrus-course-overview-lesson-progress-bar>
     <div class="stats" fxLayout="column" fxLayout.gt-sm="row">
       <div class="progress-circles">
         <p>Course Content</p>
-        <cirrus-course-content-progress-circle
-          *ngFor="let config of progressStatsConfig"
-          [progress]="config"
-        ></cirrus-course-content-progress-circle>
+        <div class="progress-circle-container">
+          <cirrus-course-content-progress-circle
+            *ngFor="let config of progressStatsConfig"
+            [progress]="config"
+          ></cirrus-course-content-progress-circle>
+        </div>
       </div>
       <mat-divider [vertical]="true" *ngIf="showHoursAndLandings"></mat-divider>
       <div class="hours-and-landings" *ngIf="showHoursAndLandings">

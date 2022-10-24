@@ -22,10 +22,8 @@ section:not(:last-child) {
 }
 
 .started-date {
-  font-family: var.$BertholdAkzidenzGroteskBE;
-  font-size: 0.9375rem;
-  line-height: 135%;
   color: #969696;
+  margin-bottom: 40px;
 }
 
 .mcf,
@@ -65,8 +63,28 @@ section:not(:last-child) {
   text-align: left;
 }
 
+.row-progress {
+  h2 {
+    border-bottom: 1px solid #fff;
+    padding-bottom: 24px;
+    margin-bottom: 20px;
+  }
+}
+
 .stats {
   margin-top: 16px;
+}
+
+.progress-circle-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-top: -11px;
+  cirrus-course-content-progress-circle {
+    flex-basis: calc(50% - 25px );
+    margin-right: 25px;
+    flex-grow: 1;
+  }
 }
 
 .progress-circles,
@@ -77,12 +95,18 @@ section:not(:last-child) {
     line-height: 135%;
     letter-spacing: 0.0003em;
     color: #969696;
+    margin-bottom: 25px;
   }
 }
 
 @media (min-width: 600px) {
   .mcf-label, .ect-label {
     width: 175px;
+  }
+  .row-progress {
+    h2 {
+      padding-bottom: 30px;
+    }
   }
 }
 
@@ -110,12 +134,9 @@ section:not(:last-child) {
     width: 160px;
   }
 
-  mat-divider {
-    margin: 0 48px;
-    color: white;
-  }
   .mat-divider.mat-divider-vertical {
     border-right: 1px solid #969696;
+    margin: 0 50px;
   }
 
   .stats {
@@ -129,6 +150,17 @@ section:not(:last-child) {
       line-height: 20px;
       letter-spacing: 0.03em;
       color: #969696;
+    }
+  }
+
+  .progress-circles {
+    flex-basis: 35%;
+  }
+
+  .progress-circle-container {
+    cirrus-course-content-progress-circle {
+      flex-basis: 100%;
+      margin-right: 0;
     }
   }
 }
