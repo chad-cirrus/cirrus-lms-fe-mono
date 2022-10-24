@@ -118,7 +118,8 @@
           />
         </span>
       </div>
-      <div class="toggle-container">
+
+      <div class="toggle-container side-nav-toggle-icon">
         <span class="sidenav-icon-link">
           <img
             [src]="
@@ -130,8 +131,10 @@
           />
         </span>
       </div>
+
     </div>
   </div>
+
   <ng-template #collapsed>
     <div
       [ngClass]="
@@ -144,19 +147,23 @@
           matBadgeColor="warn"
           (click)="openNotificationsMenu()"
           [matBadgeOverlap]="type === 'hamburger'"
+          class="sidenav-icon-link"
           ><img src="recent-activity/images/svg/alarm.svg"
         /></span>
         <span *ngIf="type === 'hamburger'">Notifications</span>
       </div>
       <div routerLink="help-center">
+        <span class="sidenav-icon-link">
         <img
           src="recent-activity/images/svg/clarity_help-line.svg"
           height="26px"
           width="26px"
         />
+      </span>
         <span *ngIf="type === 'hamburger'">Help Center</span>
       </div>
-      <div *ngIf="!disableToggle">
+      <div class="side-nav-toggle-icon" >
+        <span class="sidenav-icon-link">
         <img
           height="26px"
           width="26px"
@@ -167,6 +174,7 @@
           "
           (click)="toggleCollapse()"
         />
+        </span>
       </div>
     </div>
   </ng-template>

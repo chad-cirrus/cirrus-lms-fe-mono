@@ -9,13 +9,12 @@
   
   @include breakpoint(mobile) {
     background: $black;
-  }
-
-  @include breakpoint(tablet) {
     height: calc(100% - 5.1rem);
   }
 }
+
 .options-container {
+  text-align: center;
   width: 100%;
 }
 
@@ -70,5 +69,12 @@
   &:hover {
     background: $gray3;
     font-weight: bold;
+  }
+}
+
+.side-nav-toggle-icon {
+  display: none;
+  @include breakpoint(tablet) {
+    display: block;
   }
 }
