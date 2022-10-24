@@ -168,11 +168,7 @@ export class CourseLandingPageComponent {
     this.background.next({
       ['background']: `linear-gradient(90deg, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0.33) 44.11%, rgba(0, 0, 0, 0) 61.94%),
                   linear-gradient(360deg,#000000 1.79%,rgba(0,0,0,.24) 19.37%,rgba(0,0,0,0) 25%),
-                  url(${encodeURI(uri)}) no-repeat center`,
-      ['background-size']: 'cover',
-      ['-webkit-background-size']: 'cover',
-      ['-moz-background-size']: 'cover',
-      ['-o-background-size']: 'cover',
+                  url(${encodeURI(uri)}) no-repeat top / cover`,
     });
   }
 }

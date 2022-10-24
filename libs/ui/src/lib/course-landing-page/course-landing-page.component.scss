@@ -2,7 +2,23 @@
 
 .lesson-image {
   padding: 0 12px;
+  margin-bottom: 50px;
   width: 100%;
+  background-image: cover;
+}
+
+.course-title {
+  margin-top: 95px;
+  h1 {
+    margin-bottom: 25px;
+    max-width: 18ch;
+  }
+}
+
+.course-sub-title {
+  p {
+    margin-bottom: 0;
+  }
 }
 
 .download-document {
@@ -50,7 +66,7 @@
 
 cirrus-course-progress {
   width: 100%;
-  margin-bottom: 12px;
+  margin: 20px 0 40px;
 }
 
 .completed-course-announcement {
@@ -63,13 +79,22 @@ cirrus-course-progress {
   }
 }
 
+@media (min-width: 600px) {
+  .lesson-image {
+    padding: 0 25px;
+  }
+  .course-sub-title {
+    max-width: 440px;
+  }
+}
+
 @media (min-width: 960px) {
   .lesson-image {
-    padding: 0 24px;
+    padding: 0 60px;
   }
 
   cirrus-course-progress {
-    margin-bottom: 12px;
+    margin-bottom: 30px;
   }
 }
 

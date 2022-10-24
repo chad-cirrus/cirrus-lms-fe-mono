@@ -1,54 +1,38 @@
 @use '../styles/variables' as var;
 
 .course-progress {
-  font-family: 'Akzidenz-Grotesk BQ';
-  font-style: normal;
-  font-weight: 500;
   .last-completed {
-    font-family: var.$AkzidenzGroteskBqLight;
-    min-height: 19px;
-    color: #969696;
-    font-size: 14px;
-    line-height: 21px;
-    letter-spacing: 0.02em;
+    color: var.$gray4;
+    line-height: 1;
+    letter-spacing: 0.03em;
   }
   .header {
-    font-size: 14px;
-    line-height: 19px;
-    letter-spacing: -0.005em;
-    color: #d1d1d1
+    font-family: 'akzidenz-grotesk_bqmedium';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 0.875rem;
+    color: var.$gray6;
+    margin: 0 0 20px;
   }
   .mat-progress-bar {
     height: 12px;
     border-radius: 200px;
   }
   .lessons-completed{
-    font-size: 14px;
-    line-height: 20px;
+    font-size: 0.875rem;
+    line-height: 1;
     letter-spacing: 0.03em;
   }
 }
 
 @media (min-width: 960px) {
   .course-progress {
-    width: 653px;
-    .last-completed {
-      line-height: 20px;
-      letter-spacing: 0.03em;
-    }
-    .header {
-      font-size: 14px;
-      line-height: 19px;
-      letter-spacing: -0.005em;
-      color: #d1d1d1
-    }
+    max-width: 653px;
     .lessons-completed{
-      font-size: 18px;
-      line-height: 25px;
-      letter-spacing: 0.02em;
+      font-size: 1.125rem;
       color: #ffffff;
       .lessons-completed-bold {
-        font-family: var.$AkzidenzGroteskBQBold;
+        font-family: 'akzidenz-grotesk_bqmedium';
       }
     }
   }

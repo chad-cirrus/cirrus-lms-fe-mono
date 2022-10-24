@@ -11,14 +11,21 @@
   width: 100%;
 }
 
+.thumbnail {
+  width: 65px;
+  height: 65px;
+  object-fit: cover;
+}
+
 cirrus-cta-button {
   width: 100%;
+  margin-top: 20px;
 }
 
 .header {
   color: var.$gray5;
   font-family: var.$akzidenz-grotesk_bqLtEx400;
-  font-size: 11px;
+  font-size: 0.6875rem;
   line-height: 22px;
   letter-spacing: 0.02em;
   text-transform: uppercase;
@@ -27,7 +34,7 @@ cirrus-cta-button {
 .chapter,
 .description {
   font-family: var.$AkzidenzGroteskBQ;
-  font-size: 17px;
+  font-size: 1.0625rem;
   line-height: 23px;
   letter-spacing: -0.005em;
 }
@@ -38,37 +45,43 @@ cirrus-cta-button {
 }
 
 @media (min-width: 600px) {
-  :host {
-    width: auto;
-  }
   cirrus-cta-button {
     width: auto;
+    margin-top: 0;
+  }
+  .text-container {
+    margin-right: 25px;
   }
 }
 
 @media (min-width: 960px) {
+  :host {
+    width: auto;
+  }
   .container {
-    padding: 17px 110px 17px 12px;
+    padding: 17px 50px 17px 12px;
     .lesson-info {
       margin-right: 15px;
       .thumbnail-container {
         img {
           height: 80px;
+          width: 80px;
         }
       }
       .text-container {
         .header {
           color: var.$gray5;
           font-family: var.$akzidenz-grotesk_bqLtEx400;
-          font-size: 12px;
+          font-size: 0.75rem;
           line-height: 22px;
           letter-spacing: 0.02em;
           text-transform: uppercase;
         }
         .description {
           font-family: var.$AkzidenzGroteskBQ;
-          font-size: 20px;
+          font-size: 1.25rem;
           line-height: 24px;
+          max-width: 334px;
         }
       }
     }

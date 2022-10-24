@@ -15,8 +15,8 @@
     <h1>{{ course.title }}</h1>
   </div>
   <mat-divider></mat-divider>
-  <div class="course-sub-title">
-    <h3>{{ course.subtitle }}</h3>
+  <div class="course-sub-title" *ngIf="course.subtitle">
+    <p class="large">{{ course.subtitle }}</p>
   </div>
 
   <cirrus-course-progress

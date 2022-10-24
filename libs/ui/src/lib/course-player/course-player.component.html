@@ -2,18 +2,18 @@
   class="container"
   fxLayout="column"
   fxLayoutAlign="space-between start"
-  fxLayout.gt-sm="row"
-  fxLayoutAlign.gt-sm="start center"
+  fxLayout.gt-xs="row"
+  fxLayoutAlign.gt-xs="space-between center"
 >
   <div
     class="lesson-info"
     fxLayout="row"
     fxLayoutAlign="start start"
-    fxLayoutGap="20px"
+    fxLayoutGap="12px"
   >
-    <div class="thumbnail-container">
-      <img [src]="config.thumbnail" alt="" class="thumbnail" />
-    </div>
+
+    <img [src]="config.thumbnail" alt="" class="thumbnail" />
+
     <div class="text-container">
       <div class="header">{{ config.header }}</div>
 
