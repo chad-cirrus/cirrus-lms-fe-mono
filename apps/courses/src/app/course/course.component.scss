@@ -35,11 +35,10 @@ span.cirrus-tab-label {
   padding: 1rem;
 }
 
-
-@media (max-width: 960px) {
-  span.cirrus-tab-label {
-    font-family: 'akzidenz-grotesk_bqlight';
+@media (min-width: 960px) {
+  .mat-tab-nav-bar {
+    padding: 0 50px;
+    max-width: 1300px;
+    margin: 0 auto;
   }
 }
-
-

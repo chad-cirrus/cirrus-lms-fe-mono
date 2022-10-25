@@ -1,6 +1,6 @@
 <div class="pop-up-container">
   <div class="title">{{ data.title }}</div>
-  <div class="subTitle">{{ data.subTitle }}</div>
+  <div class="subTitle" *ngIf="data.subTitle">{{ data.subTitle }}</div>
 
   <div class="body" [innerHTML]="html"></div>
 

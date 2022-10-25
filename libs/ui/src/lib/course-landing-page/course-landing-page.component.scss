@@ -28,17 +28,19 @@
 
 .congrats-text {
   font-size: 1.125rem;
-  color: var.$secondary-font-color-light-grey;
+  line-height: 1.3; 
+  color: var.$gray6;
 }
 
 .download {
-  color: var.$secondary-font-color-light-grey;
+  color: var.$gray6;
 }
 
 .re-enroll {
   display: flex;
   margin-top: 21px;
   align-items: center;
+  width: 100%;
 }
 
 .expires-title {
@@ -49,10 +51,6 @@
 
 .expires-value {
   font-size: 1rem;
-}
-
-.cta-btn {
-  margin-right: 21px;
 }
 
 .download_arrow {
@@ -67,6 +65,10 @@
 cirrus-course-progress {
   width: 100%;
   margin: 20px 0 40px;
+}
+
+cirrus-cta-button {
+  width: 100%;
 }
 
 .completed-course-announcement {
@@ -85,6 +87,12 @@ cirrus-course-progress {
   }
   .course-sub-title {
     max-width: 440px;
+  }
+  cirrus-cta-button {
+    width: auto;
+  }
+  .cta-btn {
+    margin-right: 21px;
   }
 }
 

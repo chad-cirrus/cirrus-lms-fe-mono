@@ -125,7 +125,7 @@ export class CourseLandingPageComponent {
     const dialogRef = this.dialog.open(BluePopUpComponent, {
       data: data,
       height: '70%',
-      width: '40%',
+      maxWidth: '515px',
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result.data === 'Agree') {
@@ -142,7 +142,8 @@ export class CourseLandingPageComponent {
     };
     const dialogRef = this.dialog.open(BluePopUpComponent, {
       data: data,
-      width: '40%',
+      width: '85%',
+      maxWidth: '515px',
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result.data === 'Confirm') {

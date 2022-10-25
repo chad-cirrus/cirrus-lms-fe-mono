@@ -205,6 +205,9 @@ img {
 
   @media (min-width: 960px) {
     padding: 45px 50px;
+    &.enrollment-history {
+      min-height: 65vh;
+    }
   }
 }
 

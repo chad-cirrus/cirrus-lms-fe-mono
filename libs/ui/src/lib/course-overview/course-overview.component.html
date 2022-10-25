@@ -22,6 +22,7 @@
         fxLayout="column"
         fxLayoutGap="24px"
         fxFlex.xs="1 1 100%"
+        *ngIf="courseOverview.minimum_flight_hours || courseOverview.completion_time"
       >
         <div
           fxLayout="row"
