@@ -1,55 +1,47 @@
 @import 'apps/recent-activity/src/base-scss/import';
 
-.notification-container {
-  height: 100%;
+.notification-title {
+  display: flex;
+  align-items: center;
+  padding-bottom: 10px;
+  gap: 10px;
+}
 
-  .notification-item {
-    border-bottom: 1px solid $gray3;
-  }
+.notification-item {
+  border-bottom: 1px solid $gray3;
+}
 
-  .notification-title {
-    display: flex;
-    align-items: center;
-    padding-bottom: 10px;
-  }
+.notification-number {
+  margin-left: 18px;
+}
 
-  .notification-number {
-    margin-left: 18px;
-  }
+.body-copy-xsmall.notifications-date {
+  margin-top: 13px;
+  color: $gray4;
+}
 
-  .date {
-    margin-top: 13px;
-  }
+.notification-text {
+  margin: 9px 0px 17px;
+  color: $gray5;
 
-  .extra-small {
-    color: $gray4;
+  @include breakpoint(mobile) {
+    width: 90%;
   }
+}
 
-  .body {
-    margin: 6px 0px 17px 0px;
-    color: $gray5;
-  }
+.notifications-btn-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 34px;
+}
 
-  .btn-container {
-    display: flex;
-    justify-content: center;
-    margin-top: 34px;
-  }
+.no-notifications-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-  .no-notifications-container {
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .heading-3 {
-    margin: 0;
-    margin-right: 10px;
-  }
-
-  .img-container {
-    display: flex;
-    justify-content: center;
-  }
+.notifications-img-container {
+  display: flex;
+  justify-content: center;
 }

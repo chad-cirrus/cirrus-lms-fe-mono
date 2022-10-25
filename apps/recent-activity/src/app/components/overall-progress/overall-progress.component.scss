@@ -1,5 +1,13 @@
 @import 'apps/recent-activity/src/base-scss/import';
 
+.overall-progress-inner-wrapper {
+  margin-top: 90px;
+  
+  @include breakpoint(mobile) {
+    margin-top: 110px;
+  }
+}
+
 .tab-container {
   margin-top: 39px;
 }

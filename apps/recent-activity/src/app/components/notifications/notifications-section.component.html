@@ -18,17 +18,17 @@
       "
     >
       <div [ngClass]="{ 'notification-item': i + 1 !== count }">
-        <p class="extra-small date">
+        <p class="body-copy-xsmall notifications-date">
           {{ notification.created_at | date: 'shortDate' }}
         </p>
         <div>
-          <p class="body">
+          <p class="body-copy-small notification-text">
             {{ notification.body }}
           </p>
         </div>
       </div>
     </div>
-    <div class="btn-container">
+    <div class="notifications-btn-container">
       <button class="secondary-btn-black" (click)="emitViewAllNotifications()">
         View All Notifications
       </button>
@@ -38,7 +38,7 @@
   <ng-template #noNotifications>
     <div class="no-notifications-container">
       <div>
-        <div class="img-container">
+        <div class="notifications-img-container">
           <img [src]="bellUrl" alt="notifications" />
         </div>
         <p class="extra-small">You haven't recieved any notifications.</p>
