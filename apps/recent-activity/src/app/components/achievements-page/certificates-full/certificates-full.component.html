@@ -1,5 +1,5 @@
 <div class="certificates-full-container">
-  <p class="intro body-copy-small">
+  <p class="page-title body-copy-medium">
     Certificates are proof of your hard work and diligence. Every course in
     Cirrus Approach awards an official certificate unique to the user when
     completed. These can act as important proof for both insurance and recurrent
@@ -18,16 +18,16 @@
 
   <div class="certificates-list" *ngIf="certificates.length; else noCerts">
     <div class="header-row">
-      <span class="course-header">COURSE</span>
-      <span class="dates-header">DATES</span>
-      <span class="download-header">CERTIFICATE</span>
+      <span class="course-header akzidenz-medium heading-5">COURSE</span>
+      <span class="dates-header akzidenz-medium heading-5">DATES</span>
+      <span class="download-header akzidenz-medium heading-5">CERTIFICATE</span>
     </div>
     <div
       class="certificate-item"
       *ngFor="let cert of filteredCertList$ | async"
     >
-      <span class="course">{{ cert.course_name }}</span>
-      <span class="dates">{{ cert.enrollment_date }}</span>
+      <span class="course heading-6">{{ cert.course_name }}</span>
+      <span class="dates heading-6">{{ cert.enrollment_date }}</span>
       <span class="download" (click)="download(cert)">
         <span class="icon">
           <span
@@ -47,20 +47,20 @@
             />
           </ng-template>
         </span>
-        <span>Download</span>
+        <span class="download-label">Download</span>
       </span>
     </div>
   </div>
 </div>
 
 <ng-template #noCerts>
-  <div class="no-certs">
+  <div class="no-certs-full">
     <img
       class="certificates-icon"
       src="recent-activity/images/svg/certificates.svg"
       alt="certificates"
     />
-    <p class="heading-6">
+    <p class="body-copy-small">
       You haven’t earned any Certificates yet. Keep going!
     </p>
     <button class="primary-btn" routerLink="/learning-catalog">

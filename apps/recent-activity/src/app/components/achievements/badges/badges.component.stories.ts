@@ -1,6 +1,8 @@
 import { Badge } from '../../../models/IRecentActivity';
 import { BadgesComponent } from './badges.component';
-import { Meta, Story } from '@storybook/angular';
+import { Meta, moduleMetadata, Story } from '@storybook/angular';
+import { RouterModule } from '@angular/router';
+import { APP_BASE_HREF } from '@angular/common';
 
 const badges: Badge[] = [
   {
@@ -38,6 +40,12 @@ const badges: Badge[] = [
 export default {
   title: 'Badges',
   component: BadgesComponent,
+  decorators: [
+    moduleMetadata({
+      imports: [RouterModule.forRoot([], { useHash: true })],
+      providers: [{ provide: APP_BASE_HREF, useValue: '/' }],
+    }),
+  ],
 } as Meta<BadgesComponent>;
 
 const Template: Story<BadgesComponent> = (args: BadgesComponent) => ({

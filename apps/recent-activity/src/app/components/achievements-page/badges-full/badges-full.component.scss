@@ -1,11 +1,16 @@
 @import 'apps/recent-activity/src/base-scss/import';
 
+.badges-full-container {
+  padding: 2rem 0;
+}
+
 .badges-container {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   max-width: 1200px;
   gap: 20px;
+  padding: 48px 0;
 }
 
 .badge {
@@ -39,5 +44,19 @@ img {
 }
 
 p.achieved.heading-6 {
+  margin-top: 8px;
   color: $gray4;
+}
+
+.no-badges-full {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  padding: 48px 0;
+  align-items: center;
+  text-align: center;
+}
+
+.badge-icon {
+  height: 42px;
 }

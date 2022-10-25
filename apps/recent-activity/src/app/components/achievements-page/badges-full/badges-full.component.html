@@ -1,31 +1,41 @@
-<p class="page-title heading-5">
-  Show off all your flight training accolades with Cirrus Approach Badges. Every
-  course has a fun and unique badge that you can earn from completing the
-  course. See how many badges you can earn in your flight career. Earn them all
-  and become a true Cirrus master!
-</p>
-<div class="badges-container" *ngIf="badges.length > 0; else noBadges">
-  <div class="badge" *ngFor="let badge of badges">
-    <div class="badge-image">
-      <img
-        [src]="badge.badge_image"
-        alt=""
-        [ngClass]="{ grey: badge.achieved_on === null }"
-      />
-    </div>
-    <div class="badge-info">
-      <p class="course-name heading-5">{{ badge.course_name }}</p>
-      <p class="achieved heading-6" *ngIf="badge.achieved_on">
-        Achieved {{ badge.achieved_on }}
-      </p>
+<div class="badges-full-container">
+  <p class="page-title body-copy-medium">
+    Show off all your flight training accolades with Cirrus Approach Badges.
+    Every course has a fun and unique badge that you can earn from completing
+    the course. See how many badges you can earn in your flight career. Earn
+    them all and become a true Cirrus master!
+  </p>
+  <div class="badges-container" *ngIf="badges.length > 0; else noBadges">
+    <div class="badge" *ngFor="let badge of badges">
+      <div class="badge-image">
+        <img
+          [src]="badge.badge_image"
+          alt=""
+          [ngClass]="{ grey: badge.achieved_on === null }"
+        />
+      </div>
+      <div class="badge-info">
+        <p class="course-name heading-5">{{ badge.course_name }}</p>
+        <p class="achieved heading-6" *ngIf="badge.achieved_on">
+          Achieved {{ badge.achieved_on }}
+        </p>
+      </div>
     </div>
   </div>
 </div>
 
 <ng-template #noBadges>
-  <img src="recent-activity/images/svg/Frame.svg" alt="certificates" />
-  <p class="heading-6">You haven’t earned any Badges yet. Keep going!</p>
-  <button class="primary-btn" routerLink="/learning-catalog">
-    Browse Course Catalog
-  </button>
+  <div class="no-badges-full">
+    <img
+      src="recent-activity/images/svg/Frame.svg"
+      alt="certificates"
+      class="badge-icon"
+    />
+    <p class="body-copy-small">
+      You haven’t earned any Badges yet. Keep going!
+    </p>
+    <button class="primary-btn" routerLink="/learning-catalog">
+      Browse Course Catalog
+    </button>
+  </div>
 </ng-template>

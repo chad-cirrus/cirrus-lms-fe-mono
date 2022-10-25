@@ -7,3 +7,21 @@
   border-radius: 60px;
   height: 39px;
 }
+
+.certs-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.no-certs-container {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  padding: 48px;
+  align-items: center;
+  align-content: center;
+}
+
+img {
+  height: 37px;
+}

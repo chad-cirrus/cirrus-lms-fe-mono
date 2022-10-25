@@ -1,6 +1,8 @@
 import { Certificate } from '../../../models/IRecentActivity';
-import { Meta, Story } from '@storybook/angular';
+import { Meta, moduleMetadata, Story } from '@storybook/angular';
 import { CertificatesComponent } from './certificates.component';
+import { RouterModule } from '@angular/router';
+import { APP_BASE_HREF } from '@angular/common';
 
 const certificates: Certificate[] = [
   {
@@ -48,6 +50,12 @@ const certificates: Certificate[] = [
 export default {
   title: 'Certificates',
   component: CertificatesComponent,
+  decorators: [
+    moduleMetadata({
+      imports: [RouterModule.forRoot([], { useHash: true })],
+      providers: [{ provide: APP_BASE_HREF, useValue: '/' }],
+    }),
+  ],
 } as Meta<CertificatesComponent>;
 
 const Template: Story<CertificatesComponent> = (

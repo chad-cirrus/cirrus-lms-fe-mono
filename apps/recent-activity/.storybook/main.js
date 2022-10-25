@@ -10,7 +10,11 @@ module.exports = {
     '../src/app/**/*.stories.mdx',
     '../src/app/**/*.stories.@(js|jsx|ts|tsx)',
   ],
-  addons: [...rootMain.addons, '@storybook/preset-scss'],
+  addons: [
+    ...rootMain.addons,
+    '@storybook/preset-scss',
+    'storybook-addon-mock',
+  ],
   staticDirs: [{ from: '../../../libs/ui/src/assets', to: 'recent-activity' }],
   webpackFinal: async (config, { configType }) => {
     // apply any global webpack configs that might have been specified in .storybook/main.js

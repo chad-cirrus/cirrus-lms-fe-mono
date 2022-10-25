@@ -13,3 +13,16 @@ img {
   border-radius: 60px;
   height: 39px;
 }
+
+.no-badges-container {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  padding: 48px;
+  align-content: center;
+  align-items: center;
+}
+
+img {
+  height: 37px;
+}
