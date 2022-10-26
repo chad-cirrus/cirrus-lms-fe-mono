@@ -1,6 +1,7 @@
 @use '../styles/variables' as var;
 
 .lesson-image {
+  min-height: 450px;
   padding: 0 12px;
   margin-bottom: 50px;
   width: 100%;
