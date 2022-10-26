@@ -1,26 +1,29 @@
 <div class="badge-container" *ngIf="badges.length > 0; else noBadges">
   <div class="badge" *ngFor="let badge of badges">
     <div class="image">
-      <img [src]="badge.badge_image" alt="" />
+      <img class="badge-icon" [src]="badge.badge_image" alt="" />
     </div>
     <div class="info">
-      <div *ngIf="badge.achieved_on">Achieved {{ badge.achieved_on }}</div>
-      <div>{{ badge.course_name }}</div>
+      <span class="achieved-date heading-6" *ngIf="badge.achieved_on"
+        >Achieved {{ badge.achieved_on }}</span
+      >
+      <span class="badge-name heading-6">{{ badge.course_name }}</span>
     </div>
   </div>
-  <button
-    class="view"
-    mat-stroked-button
-    color="primary"
-    [routerLink]="['achievements']"
-  >
-    View All Achievements
-  </button>
+  <div class="button-container">
+    <button class="view primary-btn" [routerLink]="['achievements']">
+      View All Achievements
+    </button>
+  </div>
 </div>
 
 <ng-template #noBadges>
   <div class="no-badges-container">
-    <img src="recent-activity/images/svg/Frame.svg" alt="certificates" />
+    <img
+      class="no-badges-icon"
+      src="recent-activity/images/svg/Frame.svg"
+      alt="certificates"
+    />
     <div>You haven't earned any Badges yet. Keep going!</div>
     <button
       class="view primary-btn"

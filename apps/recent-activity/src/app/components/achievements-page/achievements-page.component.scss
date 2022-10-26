@@ -1,3 +1,18 @@
+@import 'apps/recent-activity/src/base-scss/import';
+
+.breadcrumb-container {
+  margin-bottom: 48px;
+  border-bottom: 1px solid $gray3;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 80px;
+}
+
+h2 {
+  margin-bottom: 48px;
+}
+
 .link-label {
   margin-left: 8px;
 }

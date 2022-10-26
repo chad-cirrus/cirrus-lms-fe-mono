@@ -1,16 +1,32 @@
-.certificate {
-  margin-bottom: 1rem;
-}
-
-.view.mat-stroked-button {
-  border: 1px solid white;
-  border-radius: 60px;
-  height: 39px;
-}
+@import 'apps/recent-activity/src/base-scss/import';
 
 .certs-container {
   display: flex;
   flex-direction: column;
+}
+
+.button-container {
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+}
+
+.certificate {
+  padding: 24px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border-bottom: 1px solid $gray3;
+}
+
+.no-border {
+  border-bottom: 0px;
+}
+
+.enrollment-date {
+  color: $gray4;
 }
 
 .no-certs-container {
