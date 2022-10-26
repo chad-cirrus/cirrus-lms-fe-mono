@@ -3,17 +3,17 @@
   *ngIf="certificates.length > 0; else noCertificates"
 >
   <div
-    class="certificate"
+    class="certificate-list-item"
     *ngFor="let certificate of certificates.slice(0, 5); index as i"
     [ngClass]="{ 'no-border': i === certificates.slice(0, 5).length - 1 }"
   >
-    <span class="enrollment-date body-copy-small">{{
+    <p class="enrollment-date body-copy-xsmall">{{
       certificate.enrollment_date
-    }}</span>
-    <span class="course-name heading-6">{{ certificate.course_name }}</span>
+    }}</p>
+    <p class="body-copy-small">{{ certificate.course_name }}</p>
   </div>
   <div class="button-container">
-    <button class="view primary-btn" [routerLink]="['achievements']">
+    <button class="view secondary-btn-black" [routerLink]="['achievements']">
       View All Achievements
     </button>
   </div>
@@ -21,13 +21,12 @@
 
 <ng-template #noCertificates>
   <div class="no-certs-container">
-    <img src="recent-activity/images/svg/certificates.svg" alt="certificates" />
+    <img class="certs-icon" src="recent-activity/images/svg/certificates.svg" alt="certificates" />
     <span class="heading-6"
       >You haven't earned any Certificates yet. Keep going!</span
     >
     <button
-      class="view primary-btn"
-      color="primary"
+      class="view secondary-btn-black"
       [routerLink]="['achievements']"
     >
       View All Achievements

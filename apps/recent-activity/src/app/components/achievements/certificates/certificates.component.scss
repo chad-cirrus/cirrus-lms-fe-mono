@@ -6,19 +6,13 @@
 }
 
 .button-container {
-  padding: 32px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  align-content: center;
+  margin: 0 auto;
+  margin-top: 1rem;
 }
 
-.certificate {
-  padding: 24px 0;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+.certificate-list-item {
   border-bottom: 1px solid $gray3;
+  padding: 20px 0;
 }
 
 .no-border {
@@ -27,6 +21,7 @@
 
 .enrollment-date {
   color: $gray4;
+  margin-bottom: 7px;
 }
 
 .no-certs-container {
@@ -36,8 +31,4 @@
   padding: 48px;
   align-items: center;
   align-content: center;
-}
-
-img {
-  height: 37px;
 }

@@ -10,11 +10,6 @@
     cursor: pointer;
     text-decoration: none;
     transition: all .3s ease;
-    
-    &:hover {
-        background: $cirrus-blue-hover;
-        border: 1px solid $cirrus-blue-hover;
-    }
 
     @include breakpoint(tablet){
         padding: 13px 35px;
@@ -26,6 +21,13 @@
         @include breakpoint(tablet){
             padding: 8px 35px;
         }
+    }
+}
+
+.primary-btn{
+    &:hover {
+    background: $cirrus-blue-hover;
+    border: 1px solid $cirrus-blue-hover;
     }
 }
 

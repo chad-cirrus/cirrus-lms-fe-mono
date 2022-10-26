@@ -36,12 +36,19 @@
 }
 
 .no-notifications-container {
+  color: $gray6;
   display: flex;
   justify-content: center;
   align-items: center;
+  padding-top: 70px;
+
+  @include breakpoint(tablet) {
+    padding-top: 90px;
+  }
 }
 
 .notifications-img-container {
   display: flex;
   justify-content: center;
+  margin-bottom: 20px;
 }

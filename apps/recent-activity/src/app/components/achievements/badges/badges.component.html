@@ -1,17 +1,15 @@
 <div class="badge-container" *ngIf="badges.length > 0; else noBadges">
-  <div class="badge" *ngFor="let badge of badges">
-    <div class="image">
+  <div class="badge-list-item" *ngFor="let badge of badges">
       <img class="badge-icon" [src]="badge.badge_image" alt="" />
-    </div>
-    <div class="info">
-      <span class="achieved-date heading-6" *ngIf="badge.achieved_on"
-        >Achieved {{ badge.achieved_on }}</span
+    <div class="badge-item-text">
+      <p class="achieved-date body-copy-xsmall" *ngIf="badge.achieved_on"
+        >Achieved {{ badge.achieved_on }}</p
       >
-      <span class="badge-name heading-6">{{ badge.course_name }}</span>
+      <p class="badge-name body-copy-small">{{ badge.course_name }}</p>
     </div>
   </div>
   <div class="button-container">
-    <button class="view primary-btn" [routerLink]="['achievements']">
+    <button class="view secondary-btn-black" [routerLink]="['achievements']">
       View All Achievements
     </button>
   </div>
@@ -24,13 +22,11 @@
       src="recent-activity/images/svg/Frame.svg"
       alt="certificates"
     />
-    <div>You haven't earned any Badges yet. Keep going!</div>
-    <button
-      class="view primary-btn"
-      color="primary"
-      [routerLink]="['achievements']"
-    >
-      View All Achievements
-    </button>
+    <p class="body-copy-small no-badges-message">You haven't earned any Badges yet. Keep going!</p>
+    <div class="button-container">
+      <button class="view secondary-btn-black" [routerLink]="['achievements']">
+        View All Achievements
+      </button>
+    </div>
   </div>
 </ng-template>

@@ -3,54 +3,44 @@
 .badge-container {
   display: flex;
   flex-direction: column;
-  gap: 8px;
 }
 
-.button-container {
-  padding: 32px;
-  display: flex;
-  flex-direction: column;
+.badge-list-item {
   align-items: center;
-  align-content: center;
+  display: flex;
+  margin-top: 13px;
 }
 
-.badge {
-  display: flex;
-  flex-direction: row;
-  gap: 16px;
+.badge-item-text {
+  margin: 25px;
 }
 
-.info {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 8px;
+.badge-name {
+  margin-top: 8px
 }
 
 .achieved-date {
   color: $gray4;
 }
 
-img.badge-icon {
-  height: 5rem;
-  color: black;
-}
-
-.view.mat-stroked-button {
-  border: 1px solid white;
-  border-radius: 60px;
-  height: 39px;
+.badge-icon {
+  height: 90px;
+  width: 80px;
 }
 
 .no-badges-container {
+  padding-top: 35px;
+  text-align: center;
   display: flex;
   flex-direction: column;
-  gap: 32px;
-  padding: 48px;
-  align-content: center;
   align-items: center;
 }
 
-img.no-badges-icon {
-  height: 37px;
+.no-badges-message {
+  margin-top: 30px;
+}
+
+.button-container {
+  margin: 0 auto;
+  margin-top: 45px;
 }
