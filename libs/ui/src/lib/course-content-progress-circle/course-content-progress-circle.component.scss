@@ -27,9 +27,13 @@
 }
 
 .info {
+  p {
+    margin: 0;
+  }
   .label {
     font-size: 1rem;
     letter-spacing: 0.02em;
+    margin-bottom: 18px;
   }
   .completed {
     font-family: var.$akzidenz-grotesk_bqLtEx400;
@@ -50,7 +54,7 @@
 @media (min-width: 960px) {
   .info {
     .label {
-      font-size: 18px;
+      font-size: 1.125rem;
     }
   }
 }

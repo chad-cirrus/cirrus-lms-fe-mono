@@ -79,7 +79,7 @@ section:not(:last-child) {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  margin-top: -11px;
+  gap: 40px;
   cirrus-course-content-progress-circle {
     flex-basis: calc(50% - 25px );
     margin-right: 25px;
@@ -95,8 +95,12 @@ section:not(:last-child) {
     line-height: 135%;
     letter-spacing: 0.0003em;
     color: #969696;
-    margin-bottom: 25px;
+    margin-bottom: 30px;
   }
+}
+
+.agreement-body {
+  color: var.$gray5;
 }
 
 @media (min-width: 600px) {
@@ -126,7 +130,7 @@ section:not(:last-child) {
   .mcf-label,
   .ect-label {
     font-family: 'akzidenz-grotesk_bqLtEx';
-    font-size: 16px;
+    font-size: 1rem;
     font-weight: 400;
     line-height: 20px;
     letter-spacing: 0.045em;
@@ -158,6 +162,7 @@ section:not(:last-child) {
   }
 
   .progress-circle-container {
+    gap: 50px;
     cirrus-course-content-progress-circle {
       flex-basis: 100%;
       margin-right: 0;
