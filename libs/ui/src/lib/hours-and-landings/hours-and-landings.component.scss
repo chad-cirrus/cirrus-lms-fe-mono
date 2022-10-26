@@ -6,6 +6,7 @@
 
 .hours-container {
   overflow-x: auto;
+  overflow-y: hidden;
 }
 
 .mat-icon {
@@ -14,15 +15,15 @@
 }
 
 .progress-card {
-  min-width: 135px;
-  padding-left: 18px;
+  min-width: 155px;
+  padding-right: 18px;
 }
 
 .progress-type {
   font-family: "akzidenz-grotesk_bqextended";
   font-style: normal;
   font-weight: 400;
-  font-size: 0.9375rem;
+  font-size: 0.875rem;
   line-height: 1;
   letter-spacing: -0.045em;
   color: #e5e5e5;
@@ -40,6 +41,15 @@
   letter-spacing: -0.045em;
 
   color: #e5e5e5;
+}
+
+@media (min-width: 600px) {
+  .progress-card {
+    min-width: 165px;
+  }
+  .progress-type {
+    font-size: 0.9375rem;
+  }
 }
 
 @media (min-width: 960px) {
