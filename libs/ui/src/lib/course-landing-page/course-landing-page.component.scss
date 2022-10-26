@@ -34,6 +34,7 @@
 }
 
 .download {
+  font-size: 1.0625rem;
   color: var.$gray6;
 }
 
@@ -52,9 +53,17 @@
 
 .expires-value {
   font-size: 1rem;
+  font-family: "Akzidenz-Grotesk BQ"
+}
+
+.download-button {
+  cursor: pointer;
 }
 
 .download_arrow {
+  width: 12px;
+  height: 14px;
+  display: flex;
   margin-right: 8.38px;
 }
 
@@ -76,8 +85,12 @@ cirrus-cta-button {
   p {
     line-height: 26px;
     letter-spacing: 0.02em;
+    margin: 30px 0 20px;
     .mat-icon {
+      display: flex;
+      flex-shrink: 0;
       height: 18px;
+      width: 18px;
     }
   }
 }

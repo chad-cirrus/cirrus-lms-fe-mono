@@ -40,7 +40,7 @@
 
 <ng-template #completedCourse>
   <div class="completed-course-announcement">
-    <p fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
+    <p fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
       <mat-icon svgIcon="completed"></mat-icon>
       <span
         *ngIf="course?.completed_at && course.completed_at.length > 0"
@@ -59,13 +59,14 @@
       <mat-spinner color="accent" [diameter]="35"></mat-spinner>
     </div>
     <ng-template #value>
-      <div fxLayout="row" fxLayoutAlign="start center" (click)="downloadCert()">
+      <div class="download-button" fxLayout="row" fxLayoutAlign="start center" (click)="downloadCert()">
         <mat-icon class="download_arrow" svgIcon="download_arrow"></mat-icon
         ><span class="download">Download Certificate</span>
       </div>
     </ng-template>
 
     <div
+      class="download-button"
       fxLayout="row"
       fxLayoutAlign="start center"
       (click)="downloadTranscript()"
