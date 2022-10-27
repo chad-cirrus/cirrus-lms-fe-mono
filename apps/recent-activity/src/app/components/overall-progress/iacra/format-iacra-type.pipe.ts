@@ -8,7 +8,7 @@ export class FormatIacraTypePipe implements PipeTransform {
     const myMap = new Map<string, string>([
       ['completed_dual_received_hours', 'Dual Received'],
       ['completed_solo_hours', 'Solo'],
-      ['completed_cross_country_hours', 'Cross Country Solo'],
+      ['completed_cross_country_solo_hours', 'Cross Country Solo'],
       ['completed_pic_hours', 'PIC'],
       ['completed_night_takeoffs', 'Night Takeoffs'],
       ['completed_night_landings', 'Night Landings'],

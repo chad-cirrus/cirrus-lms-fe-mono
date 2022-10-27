@@ -1,4 +1,4 @@
-<h5 class="title heading-5">Lifetime Cirrus Approach Training Stats</h5>
+<h3 class="title heading-5">Lifetime Cirrus Approach Training Stats</h3>
 
 <div class="logbook-wrapper">
   <div
@@ -7,19 +7,18 @@
       let i = index;
       let count = count
     "
-    [ngClass]="{
-      'item-no-border': i + 1 === count,
-      'logbook-item': i + 1 !== count
-    }"
+    class="logbook-item"
   >
     <div class="logbook-item-container">
       <img class="image" [src]="logbook.type | imageFormatter" />
       <h5 class="type heading-5">{{ logbook.type | formatLogbookType }}</h5>
-      <h2 class="total heading-2" *ngIf="!logbook.completed; else completedArr">
-        0
-      </h2>
+      <div class="total" *ngIf="!logbook.completed; else completedArr">
+        <span>0</span>
+      </div>
       <ng-template #completedArr>
-        <h2 class="total heading-2">{{ logbook.completed }}</h2>
+        <div class="total">
+          <span>{{ logbook.completed }}</span>
+        </div>
       </ng-template>
     </div>
   </div>

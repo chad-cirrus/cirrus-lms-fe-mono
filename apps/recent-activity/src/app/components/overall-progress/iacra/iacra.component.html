@@ -5,11 +5,13 @@
     <div class="iacra-item-container">
       <img class="image" [src]="iacra.type | imageFormatter" />
       <h5 class="type heading-5">{{ iacra.type | formatIacraType }}</h5>
-      <h2 class="total heading-2" *ngIf="!iacra.completed; else completedArr">
-        0
-      </h2>
+      <div class="total" *ngIf="!iacra.completed; else completedArr">
+        <span>0</span>
+      </div>
       <ng-template #completedArr>
-        <h2 class="total heading-2">{{ iacra.completed }}</h2></ng-template
+        <div class="total">
+          <span>{{ iacra.completed }}</span>
+        </div></ng-template
       >
     </div>
   </div>

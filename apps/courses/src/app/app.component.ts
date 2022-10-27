@@ -26,7 +26,14 @@ import {
   selectCirrusUser,
   selectRole,
 } from './store/selectors/cirrus-user.selector';
-import { merge, Observable, of, Subject, Subscription } from 'rxjs';
+import {
+  BehaviorSubject,
+  merge,
+  Observable,
+  of,
+  Subject,
+  Subscription,
+} from 'rxjs';
 import { FormControl } from '@angular/forms';
 import {
   selectIsScreenSmall,
@@ -81,6 +88,9 @@ export class AppComponent implements OnInit, OnDestroy {
   isScreenSmall$: Observable<boolean> = this.store.select(selectIsScreenSmall);
   isScreenTablet$: Observable<boolean> =
     this.store.select(selectIsScreenTablet);
+
+  private _isNotificationsMenuOpenSubject = new BehaviorSubject(false);
+  isNotificationMenuOpen$ = this._isNotificationsMenuOpenSubject.asObservable();
 
   loadingIndicator$ = merge(this.lessonStateBusy$);
 
@@ -173,6 +183,14 @@ export class AppComponent implements OnInit, OnDestroy {
 
   declineInvite(notification: INotification) {
     this.facade.declineInvite(notification).subscribe();
+  }
+
+  drawerOpened() {
+    this._isNotificationsMenuOpenSubject.next(true);
+  }
+
+  drawerClosed() {
+    this._isNotificationsMenuOpenSubject.next(false);
   }
 
   private getBreakpoint({ breakpoints }: BreakpointState) {

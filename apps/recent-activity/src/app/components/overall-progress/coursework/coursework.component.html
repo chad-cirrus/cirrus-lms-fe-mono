@@ -1,4 +1,4 @@
-<h5 class="title heading-5">Lifetime Cirrus Approach Coursework Stats</h5>
+<h3 class="title heading-5">Lifetime Cirrus Approach Coursework Stats</h3>
 
 <div class="coursework-wrapper">
   <div
@@ -15,11 +15,13 @@
     <div class="coursework-item-container">
       <img class="image" [src]="stats.type | imageFormatter" />
       <h5 class="type heading-5">{{ stats.type | formatCourseworkType }}</h5>
-      <h2 class="total heading-2" *ngIf="!stats.completed; else completedArr">
-        0
-      </h2>
+      <div class="total" *ngIf="!stats.completed; else completedArr">
+        <span>0</span>
+      </div>
       <ng-template #completedArr>
-        <h2 class="total heading-2">{{ stats.completed }}</h2>
+        <div class="total">
+          <span>{{ stats.completed }}</span>
+        </div>
       </ng-template>
     </div>
   </div>

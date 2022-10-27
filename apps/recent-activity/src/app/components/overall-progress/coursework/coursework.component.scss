@@ -12,6 +12,7 @@
 }
 
 .coursework-wrapper {
+  overflow-y: auto;
   display: flex;
   margin-top: 32px;
 }
@@ -26,16 +27,50 @@
 }
 
 .total {
+  font-size: 2.5rem;
   margin-top: 9.83px;
 }
 
 .coursework-item {
   min-width: 209px;
   width: 20%;
-  border-right: 1px solid white;
+  border-right: 1px solid $white;
+}
+
+.coursework-item:nth-child(5) {
+  border-right: none;
 }
 
 .item-no-border {
   @extend .coursework-item;
   border: none;
+}
+
+@include breakpoint(tablet) {
+  .coursework-item:nth-child(4) {
+    border-right: none;
+  }
+  .coursework-item:nth-child(5) {
+    margin-top: 44px;
+  }
+  .coursework-wrapper {
+    min-width: 960px;
+    flex-wrap: wrap;
+  }
+}
+
+@include breakpoint(desktop) {
+  .total {
+    font-size: 2.188rem;
+  }
+}
+
+// Needed change at 1404px-- breakpoint widescreen is 1440
+@media (min-width: 1404px) {
+  .coursework-item:nth-child(4) {
+    border-right: 1px solid $white;
+  }
+  .coursework-item:nth-child(5) {
+    margin-top: 0;
+  }
 }

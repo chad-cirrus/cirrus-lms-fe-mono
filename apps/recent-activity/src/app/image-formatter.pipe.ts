@@ -44,7 +44,7 @@ export class ImageFormatterPipe implements PipeTransform {
       ],
       ['completed_solo_hours', 'recent-activity/images/svg/solo.svg'],
       [
-        'completed_cross_country_hours',
+        'completed_cross_country_solo_hours',
         'recent-activity/images/svg/cross-country-solo.svg',
       ],
       ['completed_pic_hours', 'recent-activity/images/svg/pic.svg'],

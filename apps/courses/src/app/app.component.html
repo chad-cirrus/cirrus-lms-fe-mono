@@ -50,7 +50,14 @@
 </div>
 
 <mat-sidenav-container class="sidenav-container">
-  <mat-sidenav #drawer class="sidenav" fixedInViewport="true" mode="push">
+  <mat-sidenav
+    #drawer
+    class="sidenav"
+    fixedInViewport="true"
+    mode="push"
+    (closedStart)="drawerClosed()"
+    (openedStart)="drawerOpened()"
+  >
     <cirrus-notifications-menu
       (acceptInvitationEmit)="acceptInvite($event)"
       (declineInvitationEmit)="declineInvite($event)"

@@ -1,29 +1,31 @@
 <div class="overall-progress-inner-wrapper">
   <h2 class="heading-3">Overall Progress</h2>
-  <mat-tab-group (selectedTabChange)="tabChanged($event)">
-    <mat-tab label="Logbook">
-      <div class="tab-container">
-        <cirrus-logbook
-          [logbookStats]="overallProgress?.logbook_stats!"
-        ></cirrus-logbook>
-        <cirrus-chart [data]="chartDataObservable$ | async"></cirrus-chart>
-      </div>
-    </mat-tab>
-    <mat-tab label="Coursework">
-      <div class="tab-container">
-        <cirrus-coursework
-          [courseWorkStats]="overallProgress?.course_work_stats!"
-        ></cirrus-coursework>
+  <div class="main-container">
+    <mat-tab-group (selectedTabChange)="tabChanged($event)">
+      <mat-tab label="Logbook">
+        <div class="tab-container">
+          <cirrus-logbook
+            [logbookStats]="overallProgress?.logbook_stats!"
+          ></cirrus-logbook>
+          <cirrus-chart [data]="chartDataObservable$ | async"></cirrus-chart>
+        </div>
+      </mat-tab>
+      <mat-tab label="Coursework">
+        <div class="tab-container">
+          <cirrus-coursework
+            [courseWorkStats]="overallProgress?.course_work_stats!"
+          ></cirrus-coursework>
 
-        <cirrus-chart [data]="chartDataObservable$ | async"></cirrus-chart>
-      </div>
-    </mat-tab>
-    <mat-tab label="IACRA">
-      <div class="tab-container">
-        <cirrus-iacra
-          [iacraStats]="overallProgress?.iacra_stats!"
-        ></cirrus-iacra>
-      </div>
-    </mat-tab>
-  </mat-tab-group>
+          <cirrus-chart [data]="chartDataObservable$ | async"></cirrus-chart>
+        </div>
+      </mat-tab>
+      <mat-tab label="IACRA">
+        <div class="tab-container">
+          <cirrus-iacra
+            [iacraStats]="overallProgress?.iacra_stats!"
+          ></cirrus-iacra>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
 </div>
