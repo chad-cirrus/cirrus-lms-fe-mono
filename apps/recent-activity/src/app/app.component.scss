@@ -22,11 +22,19 @@
 .header-container {
   background: $black;
   border-bottom: 1px solid $gray2;
-  padding: 25px 60px;
+  padding: 14px 17px;
   position: fixed;
   top: 0;
   width: 100%;
   z-index: 5;
+
+  @include breakpoint(mobile) {
+    padding: 25px;
+  }
+
+  @include breakpoint(tablet) {
+    padding: 25px 60px;
+  }
 }
 
 .content-container {

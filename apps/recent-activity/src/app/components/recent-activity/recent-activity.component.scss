@@ -42,6 +42,10 @@
 .achievements-wrapper {
   margin-top: 90px;
 
+  @include breakpoint(mobile) {
+    margin-top: 110px;
+  }
+  
   @include breakpoint(tablet) {
     margin-top: 0;
   }
