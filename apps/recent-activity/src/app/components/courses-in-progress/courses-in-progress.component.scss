@@ -95,13 +95,11 @@ cirrus-courses-in-progress .heading-3 {
 }
 
 .primary-btn.slider-card-button {
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 19px;
   letter-spacing: -0.005em;
 
   @include breakpoint(mobile) {
-    padding: 10px 22px;
+    padding: 13px 22px;
+    font-size: 0.875rem;
   }
 }
 
