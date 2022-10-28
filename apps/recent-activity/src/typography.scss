@@ -163,7 +163,25 @@ span {
     letter-spacing: 0.03em;
     line-height: 1.35;
   }
+
+  &.akzidenz-extended {
+    font-family: $akzidenz-extended;
+  }
+  
+  &.akzidenz-medium {
+    font-family: $akzidenz-medium;
+  }
+  
+  &.akzidenz {
+    font-family: $akzidenz;
+  }
+  
+  &.-bold {
+    font-weight: 500;
+  }
 }
+
+
 a,
 .link {
   color: $white;
@@ -193,18 +211,4 @@ a.secondary-link {
   &:hover {
     color: $white;
   }
-}
-
-//helpers
-
-.akzidenz-extended {
-  font-family: $akzidenz-extended;
-}
-
-.akzidenz-medium {
-  font-family: $akzidenz-medium;
-}
-
-.akzidenz {
-  font-family: $akzidenz;
 }

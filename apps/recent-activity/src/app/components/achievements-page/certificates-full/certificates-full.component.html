@@ -1,54 +1,62 @@
 <div class="certificates-full-container">
-  <p class="page-title body-copy-medium">
+  <p class="body-copy-medium">
     Certificates are proof of your hard work and diligence. Every course in
     Cirrus Approach awards an official certificate unique to the user when
     completed. These can act as important proof for both insurance and recurrent
     training needs.
   </p>
 
-  <mat-form-field appearance="outline" *ngIf="certificates.length">
-    <input
-      matInput
-      type="text"
-      placeholder="Search My Certificates"
-      [formControl]="searchParam"
-    />
-    <img src="recent-activity/images/svg/search-icon.svg" matSuffix />
-  </mat-form-field>
+  <div class="certificates-input-wrapper">
+    <mat-form-field *ngIf="certificates.length" appearance="fill">
+      <input
+        matInput
+        type="text"
+        placeholder="Search My Certificates"
+        [formControl]="searchParam"
+      />
+      <img src="recent-activity/images/svg/search-icon.svg" matSuffix />
+    </mat-form-field>
+  </div>
 
-  <div class="certificates-list" *ngIf="certificates.length; else noCerts">
-    <div class="header-row">
-      <span class="course-header akzidenz-medium heading-5">COURSE</span>
-      <span class="dates-header akzidenz-medium heading-5">DATES</span>
-      <span class="download-header akzidenz-medium heading-5">CERTIFICATE</span>
+  <div class="cert-table-wrapper" *ngIf="certificates.length; else noCerts">
+    
+    <div class="cert-table-header-wrapper">
+      <span class="heading-6">COURSE</span>
+      <div class="cert-header-internal-wrapper">
+        <span class="heading-6">DATES</span>
+        <span class="heading-6">CERTIFICATE</span>
+      </div>
     </div>
+
+
     <div
-      class="certificate-item"
+      class="certificate-item-outer-wrapper"
       *ngFor="let cert of filteredCertList$ | async"
     >
-      <span class="course heading-6">{{ cert.course_name }}</span>
-      <span class="dates heading-6">{{ cert.enrollment_date }}</span>
-      <span class="download" (click)="download(cert)">
-        <span class="icon">
-          <span
-            *ngIf="
-              (loading$ | async) &&
-                cert.course_attempt_id === course_attempt_id;
-              else downloadIcon
-            "
-          >
-            <mat-spinner color="accent" [diameter]="20"></mat-spinner>
-          </span>
-          <ng-template #downloadIcon>
-            <img
-              class="download-icon"
-              src="recent-activity/images/svg/download-arrow.svg"
-              alt=""
-            />
-          </ng-template>
+      <div class="cert-name-wrapper"><h6 class="heading-6">{{ cert.course_name }}</h6></div>
+      <div class="cert-internal-item-wrapper">
+        <div class="cert-date-wrapper"><h6 class="body-copy-small cert-date">{{ cert.enrollment_date }}</h6></div>
+
+        <span class="download download-cert-item" (click)="download(cert)">
+            <span
+              *ngIf="
+                (loading$ | async) &&
+                  cert.course_attempt_id === course_attempt_id;
+                else downloadIcon
+              "
+            >
+              <mat-spinner color="accent" [diameter]="20"></mat-spinner>
+            </span>
+            <ng-template #downloadIcon>
+              <img
+                class="download-icon"
+                src="recent-activity/images/svg/download-arrow.svg"
+                alt=""
+              />
+            </ng-template>
+          <h6 class="body-copy-small">Download</h6>
         </span>
-        <span class="download-label">Download</span>
-      </span>
+      </div>
     </div>
   </div>
 </div>

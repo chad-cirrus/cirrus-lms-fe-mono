@@ -1,108 +1,144 @@
 @import 'apps/recent-activity/src/base-scss/import';
-@import 'apps/recent-activity/src/typography';
 
 .certificates-full-container {
-  padding: 2rem 0;
+  margin-top: 20px;
+
+  @include breakpoint(mobile) {
+    margin-top: 25px;
+  }
 }
 
-.header-row {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  padding-bottom: 1rem;
+.certificates-input-wrapper {
+  margin-top: 50px;
+
+  .mat-form-field {
+    width: 100%;
+    @include breakpoint(mobile){
+      width: 50%;
+    }
+  }
 }
 
-.course-header {
-  height: 30px;
-  width: 60%;
+.certificates-list-wrapper {
+  margin-top: 50px;
 }
 
-.dates-header,
-.download-header {
-  width: 20%;
-}
-
-.download-header {
-  text-align: right;
-}
-
-.course-header.akzidenz-medium,
-.dates-header.akzidenz-medium,
-.download-header.akzidenz-medium {
-  font-family: $akzidenz-medium;
-}
-
-.certificate-item {
-  margin-top: 1rem;
-  height: 30px;
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: flex-start;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid $gray3;
-}
-
-.course {
-  width: 60%;
-}
-
-.download {
-  display: flex;
-  flex-direction: row;
-  justify-content: end;
-  width: 20%;
-}
-
-.dates {
-  width: 20%;
-  text-align: left;
-}
-
-.dates {
-  color: $gray6;
-}
-
-.download-label {
-  color: $gray5;
-}
-
-span.icon {
-  margin-right: 10px;
-  color: $gray5;
-}
-
-.mat-spinner {
-  height: 16px;
-}
-
-.no-certs-full {
+.cert-table-header-wrapper,
+.certificate-item-outer-wrapper,
+.cert-internal-item-wrapper {
   display: flex;
   flex-direction: column;
-  gap: 32px;
-  padding: 48px 0;
-  align-items: center;
-  align-content: center;
+  @include breakpoint(mobile){
+  flex-direction: row;
+  justify-content: space-between;
+  }
 }
 
-.certificates-icon {
-  height: 42px;
+.cert-table-header-wrapper {
+  margin-top: 20px;
+  padding: 35px 20px;
+  width: 100%;
+
+  @include breakpoint(mobile){
+    margin-top: 35px;
+    padding: 1rem;
+    padding-left: 0;
+   }
+
+  @include breakpoint(tablet){
+    margin-top: 30px;
+    padding: 20px 15px;
+    padding-left: 0;
+  }
 }
 
-img.certificates-icon {
-  height: 39px;
+
+.certificate-item-outer-wrapper {
+  border-bottom: 1px solid $gray3;
+  padding: 35px 20px;
+
+  @include breakpoint(mobile){
+    padding: 1rem;
+    padding-left: 0;
+   }
+
+  @include breakpoint(tablet){
+   padding: 20px 15px;
+   padding-left: 0;
+  }
 }
 
-.download:hover {
+.cert-header-internal-wrapper {
+  display: none;
+  @include breakpoint(mobile) {
+    display: flex;
+    justify-content: space-between;
+    width: 60%;
+  }
+
+  @include breakpoint(tablet){
+    width: 45%;
+  }
+
+  @include breakpoint(desktop){
+    width: 35%;
+  }
+}
+
+.cert-internal-item-wrapper {
+  color: $gray6;
+  @include breakpoint(mobile) {
+    display: flex;
+    justify-content: space-between;
+    width: 60%;
+  }
+
+  @include breakpoint(tablet) {
+    width: 45%;
+  }
+
+  @include breakpoint(desktop) {
+    width: 35%;
+  }
+}
+
+.cert-name-wrapper {
+  @include breakpoint(mobile) {
+    width: 30%;
+  }
+
+  @include breakpoint(tablet) {
+    width: auto;
+  }
+}
+
+.cert-date {
+  margin-top: 25px;
+  white-space: nowrap;
+
+  @include breakpoint(mobile) {
+    margin-top: 0;
+  }
+}
+
+.download-cert-item {
   cursor: pointer;
+  display: flex;
+  margin-top: 25px;
+  transition: all .3s ease;
+
+  &:hover{
+    color: $white;
+    font-weight: bold;
+  }
+
+  @include breakpoint(mobile) {
+    margin-top: 0;
+  }
 }
 
-p.heading-6 {
-  margin: 1rem auto;
-}
-
-button {
-  margin: 1rem auto;
+.download-icon {
+  height: 18px;
+  margin-right: 9px;
+  width: 15px;
 }
