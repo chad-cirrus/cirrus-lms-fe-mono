@@ -48,6 +48,9 @@ cirrus-cta-button {
   :host {
     width: auto;
   }
+  .container {
+    padding: 17px 45px 17px 25px;
+  }
   cirrus-cta-button {
     width: auto;
     margin-top: 0;
@@ -59,7 +62,6 @@ cirrus-cta-button {
 
 @media (min-width: 960px) {
   .container {
-    padding: 17px 45px 17px 25px;
     .lesson-info {
       margin-right: 15px;
       .thumbnail-container {
