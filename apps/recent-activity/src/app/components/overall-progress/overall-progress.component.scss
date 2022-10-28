@@ -7,6 +7,13 @@
   }
 }
 
+.mat-tab-body.mat-tab-body-active {
+  overflow: unset;
+}
+.mat-tab-body-content {
+  overflow: unset;
+}
+
 .overall-progress-inner-wrapper {
   margin-top: 90px;
 
