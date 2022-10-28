@@ -10,25 +10,12 @@
     </div>
   </div>
   <div class="button-container">
-    <button class="view secondary-btn-black -wide-btn" [routerLink]="['achievements']">
+    <button
+      class="view secondary-btn-black -wide-btn"
+      [routerLink]="['achievements']"
+    >
       View All Achievements
     </button>
-  </div>
-</div>
-
-<ng-template #noBadges>
-  <div class="no-badges-container">
-    <img
-      class="no-badges-icon"
-      src="recent-activity/images/svg/Frame.svg"
-      alt="certificates"
-    />
-    <p class="body-copy-small no-badges-message">You haven't earned any Badges yet. Keep going!</p>
-    <div class="button-container">
-      <button class="view secondary-btn-black -wide-btn" [routerLink]="['achievements']">
-        View All Achievements
-      </button>
-    </div>
   </div>
 </div>
 
@@ -51,4 +38,25 @@
       </button>
     </div>
   </div>
+
+  <ng-template #noBadges>
+    <div class="no-badges-container">
+      <img
+        class="no-badges-icon"
+        src="recent-activity/images/svg/Frame.svg"
+        alt="certificates"
+      />
+      <p class="body-copy-small no-badges-message">
+        You haven't earned any Badges yet. Keep going!
+      </p>
+      <div class="button-container">
+        <button
+          class="view secondary-btn-black -wide-btn"
+          [routerLink]="['achievements']"
+        >
+          View All Achievements
+        </button>
+      </div>
+    </div>
+  </ng-template>
 </ng-template>

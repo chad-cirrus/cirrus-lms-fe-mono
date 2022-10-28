@@ -4,21 +4,10 @@
     <span class="courses-counter">({{ inProgressCourses?.length || 0 }})</span>
   </h2>
 
-
-<div class="courses-slider-container">
-  <div
-    *ngIf="inProgressCourses.length; else noCourses"
-    class="courses-in-progress-outer-wrapper"
-  >
-
-    <swiper
-      [loopFillGroupWithBlank]="true"
-      [loop]="true"
-      [navigation]="true"
-      [slidesPerView]="'auto'"
-      [centeredSlides]="true"
-      [spaceBetween]="15"
-      class="my-swiper"
+  <div class="courses-slider-container">
+    <div
+      *ngIf="inProgressCourses.length; else noCourses"
+      class="courses-in-progress-outer-wrapper"
     >
       <swiper
         [loopFillGroupWithBlank]="true"
