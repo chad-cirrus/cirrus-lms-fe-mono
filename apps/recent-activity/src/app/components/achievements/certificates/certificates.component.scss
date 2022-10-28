@@ -9,11 +9,22 @@
 .button-container {
   margin: 0 auto;
   margin-top: 45px;
+
+  @include breakpoint(mobile) {
+    margin-top: 34px;
+  }
+
 }
 
 .certificate-list-item {
   border-bottom: 1px solid $gray3;
   padding: 20px 0;
+  @include breakpoint(mobile) {
+    padding: 30px 0;
+  }
+  @include breakpoint(desktop) {
+    padding: 19px 0;
+  }
 }
 
 .no-border {
@@ -23,6 +34,14 @@
 .enrollment-date {
   color: $gray4;
   margin-bottom: 7px;
+
+  @include breakpoint(mobile) {
+    margin-bottom: 1px;
+  }
+  @include breakpoint(desktop) {
+    margin-bottom: 8px;
+  }
+
 }
 
 .no-certs-container {
@@ -33,3 +52,18 @@
   align-items: center;
   align-content: center;
 }
+
+.course-name {
+  font-size: 1.063rem;
+  @include breakpoint(mobile) {
+    font-size: 1rem;
+  }
+}
+
+.secondary-btn-black {
+  padding: 9px 71px;
+  @include breakpoint(mobile) {
+    padding: 9px 50px;
+  }
+}
+

@@ -16,7 +16,6 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { CoursesInProgressComponent } from './components/courses-in-progress/courses-in-progress.component';
 import { AchievementsComponent } from './components/achievements/achievements.component';
 import { OverallProgressComponent } from './components/overall-progress/overall-progress.component';
-import { FlightHoursChartComponent } from './components/flight-hours-chart/flight-hours-chart.component';
 import { CertificatesComponent } from './components/achievements/certificates/certificates.component';
 import { BadgesComponent } from './components/achievements/badges/badges.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -66,7 +65,6 @@ import { HttpErrorInterceptor } from './interceptors/http-error.interceptor';
     CoursesInProgressComponent,
     AchievementsComponent,
     OverallProgressComponent,
-    FlightHoursChartComponent,
     CertificatesComponent,
     BadgesComponent,
     LogbookComponent,
@@ -138,7 +136,6 @@ import { HttpErrorInterceptor } from './interceptors/http-error.interceptor';
     CoursesInProgressComponent,
     AchievementsComponent,
     OverallProgressComponent,
-    FlightHoursChartComponent,
     CertificatesComponent,
     BadgesComponent,
     LogbookComponent,

@@ -17,7 +17,15 @@
 }
 
 .badge-name {
-  margin-top: 8px
+  margin-top: 3px;
+
+  @include breakpoint(mobile) {
+    margin-top: 6px;
+  }
+  @include breakpoint(desktop) {
+    margin-top: 4px;
+  }
+
 }
 
 .achieved-date {

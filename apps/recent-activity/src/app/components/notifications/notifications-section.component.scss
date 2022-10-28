@@ -1,5 +1,14 @@
 @import 'apps/recent-activity/src/base-scss/import';
 
+.notification-container {
+  @include breakpoint(mobile) {
+    padding-left: 5px;
+  }
+  @include breakpoint(desktop) {
+    padding-left: 21px;
+  }
+}
+
 .notification-title {
   display: flex;
   align-items: center;
@@ -21,18 +30,31 @@
 }
 
 .notification-text {
-  margin: 9px 0px 17px;
+  margin: 5px 0px 14px;
   color: $gray5;
 
   @include breakpoint(mobile) {
+    margin: 11px 0px 16px;
     width: 90%;
+  }
+  @include breakpoint(desktop) {
+    margin: 6px 0px 16px;
+    font-size: 0.9375rem;
   }
 }
 
 .notifications-btn-container {
   display: flex;
   justify-content: center;
-  margin-top: 34px;
+
+  margin-top: 39px;
+
+  @include breakpoint(mobile) {
+    margin-top: 48px;
+  }
+  @include breakpoint(desktop) {
+    margin-top: 34px;
+  }
 }
 
 .no-notifications-container {
@@ -52,3 +74,11 @@
   justify-content: center;
   margin-bottom: 20px;
 }
+
+.secondary-btn-black {
+  padding: 9px 71px;
+  @include breakpoint(mobile) {
+    padding: 9px 50px;
+  }
+}
+

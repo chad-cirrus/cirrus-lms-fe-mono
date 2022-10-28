@@ -7,13 +7,18 @@
     *ngFor="let certificate of certificates.slice(0, 5); index as i"
     [ngClass]="{ 'no-border': i === certificates.slice(0, 5).length - 1 }"
   >
-    <p class="enrollment-date body-copy-xsmall">{{
-      certificate.enrollment_date
-    }}</p>
-    <p class="body-copy-small">{{ certificate.course_name }}</p>
+
+    <p class="enrollment-date body-copy-xsmall">
+      {{ certificate.enrollment_date }}
+    </p>
+    <p class="body-copy-small course-name">{{ certificate.course_name }}</p>
   </div>
   <div class="button-container">
-    <button class="view secondary-btn-black -wide-btn" [routerLink]="['achievements']">
+    <button
+      class="view secondary-btn-black -wide-btn"
+      [routerLink]="['achievements']"
+    >
+
       View All Achievements
     </button>
   </div>
@@ -21,7 +26,11 @@
 
 <ng-template #noCertificates>
   <div class="no-certs-container">
-    <img class="certs-icon" src="recent-activity/images/svg/certificates.svg" alt="certificates" />
+    <img
+      class="certs-icon"
+      src="recent-activity/images/svg/certificates.svg"
+      alt="certificates"
+    />
     <span class="heading-6"
       >You haven't earned any Certificates yet. Keep going!</span
     >

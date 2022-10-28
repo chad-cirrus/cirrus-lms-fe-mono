@@ -16,27 +16,56 @@
 .badge {
   background-color: $gray1;
   border-radius: 5px;
-  width: 500px;
-  height: 192px;
+  padding-right: 5px;
+  width: 330px;
+  height: 130px;
   display: flex;
   flex-direction: row;
   align-items: center;
+
+  @include breakpoint(mobile) {
+    width: 300px;
+    height: 125px;
+  }
+
+  @include breakpoint(tablet) {
+    width: 500px;
+    height: 192px;
+  }
 }
 
 .badge-image {
-  margin-left: 30px;
+  margin-left: 14px;
 }
 
 .badge-info {
-  margin-left: 20px;
+  margin-left: 22px;
+  @include breakpoint(mobile) {
+    margin-left: 25px;
+  }
+  @include breakpoint(tablet) {
+    margin-left: 25px;
+  }
 }
 
 img {
-  height: 125px;
+  height: 95px;
+  width: 85px;
+  @include breakpoint(mobile) {
+    height: 75px;
+    width: 67px;
+  }
+  @include breakpoint(tablet) {
+    height: 125px;
+    width: 111px;
+  }
 }
 
 .course-name {
   max-width: 300px;
+  @include breakpoint(tablet) {
+    font-size: 1.25rem;
+  }
 }
 
 .grey {
@@ -46,6 +75,17 @@ img {
 p.achieved.heading-6 {
   margin-top: 8px;
   color: $gray4;
+  font-size: 0.688rem;
+  line-height: 20px;
+  @include breakpoint(mobile) {
+    margin-top: 11px;
+    line-height: 16px;
+  }
+  @include breakpoint(tablet) {
+    font-size: 0.75rem;
+    line-height: 20x;
+    margin-top: 10px;
+  }
 }
 
 .no-badges-full {

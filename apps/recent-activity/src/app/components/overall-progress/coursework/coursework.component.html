@@ -15,12 +15,12 @@
     <div class="coursework-item-container">
       <img class="image" [src]="stats.type | imageFormatter" />
       <h5 class="type heading-5">{{ stats.type | formatCourseworkType }}</h5>
-      <div class="total" *ngIf="!stats.completed; else completedArr">
-        <span>0</span>
+      <div *ngIf="!stats.completed; else completedArr">
+        <span class="heading-2 total">0</span>
       </div>
       <ng-template #completedArr>
-        <div class="total">
-          <span>{{ stats.completed }}</span>
+        <div>
+          <span class="heading-2 total">{{ stats.completed }}</span>
         </div>
       </ng-template>
     </div>

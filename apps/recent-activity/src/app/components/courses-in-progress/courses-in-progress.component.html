@@ -1,7 +1,9 @@
-<h2 class="heading-3">
-  Courses In Progress
-  <span class="courses-counter">({{ inProgressCourses?.length || 0 }})</span>
-</h2>
+<div class="courses-in-progress-container">
+  <h2 class="heading-3">
+    Courses In Progress
+    <span class="courses-counter">({{ inProgressCourses?.length || 0 }})</span>
+  </h2>
+
 
 <div class="courses-slider-container">
   <div
@@ -18,61 +20,71 @@
       [spaceBetween]="15"
       class="my-swiper"
     >
-      <ng-template
-        swiperSlide
-        *ngFor="let course of inProgressCourses; index as i"
+      <swiper
+        [loopFillGroupWithBlank]="true"
+        [loop]="true"
+        [navigation]="true"
+        [slidesPerView]="'auto'"
+        [centeredSlides]="true"
+        [spaceBetween]="15"
+        class="my-swiper"
       >
-        <div
-          class="swiper-slide-container course"
-          [ngStyle]="{
-            'background-image':
-              'radial-gradient(circle, rgba(255,255,255,0) 0%, rgba(0,0,0,0.6012780112044818) 100%), url(' +
-              course.thumbnail_image_url +
-              ')'
-          }"
+        <ng-template
+          swiperSlide
+          *ngFor="let course of inProgressCourses; index as i"
         >
-          <h3 class="name heading-4">{{ course.title }}</h3>
-          <div class="swiper-slide-content">
-            <div class="course-slide-progress-wrapper">
-              <mat-progress-bar
-                [value]="course | courseInProgressValue"
-                mode="determinate"
-              ></mat-progress-bar>
-              <span class="progress-bar-text body-copy-small"
-                ><span>{{ course.lessons_completed }}</span
-                >/<span>{{ course.lessons_total }}</span
-                >Lessons Complete
-              </span>
+          <div
+            class="swiper-slide-container course"
+            [ngStyle]="{
+              'background-image':
+                'radial-gradient(circle, rgba(255,255,255,0) 0%, rgba(0,0,0,0.6012780112044818) 100%), url(' +
+                course.thumbnail_image_url +
+                ')'
+            }"
+          >
+            <h3 class="name heading-4">{{ course.title }}</h3>
+            <div class="swiper-slide-content">
+              <div class="course-slide-progress-wrapper">
+                <mat-progress-bar
+                  [value]="course | courseInProgressValue"
+                  mode="determinate"
+                ></mat-progress-bar>
+                <span class="progress-bar-text body-copy-small"
+                  ><span>{{ course.lessons_completed }}</span
+                  >/<span>{{ course.lessons_total }}</span
+                  >Lessons Complete
+                </span>
+              </div>
+              <button
+                *ngIf="course.next_lesson !== null"
+                [routerLink]="[
+                  '/courses',
+                  course.id,
+                  'stages',
+                  course.next_lesson?.stage_id,
+                  'lessons',
+                  course.next_lesson?.lesson_id
+                ]"
+                class="primary-btn slider-card-button"
+              >
+                Resume
+              </button>
             </div>
-            <button
-              *ngIf="course.next_lesson !== null"
-              [routerLink]="[
-                '/courses',
-                course.id,
-                'stages',
-                course.next_lesson?.stage_id,
-                'lessons',
-                course.next_lesson?.lesson_id
-              ]"
-              class="primary-btn slider-card-button"
-            >
-              Resume
-            </button>
           </div>
-        </div>
-      </ng-template>
-    </swiper>
-  </div>
-
-  <ng-template #noCourses>
-    <div class="courses-in-progress-empty-wrapper">
-      <div class="courses-in-progress-empty-content">
-        <p class="body-copy-medium">
-          You have no courses in progress at this time. View the course catalog to
-          get started.
-        </p>
-        <a class="primary-btn" href="#">Browse Course Catalog</a>
-      </div>
+        </ng-template>
+      </swiper>
     </div>
-  </ng-template>
+
+    <ng-template #noCourses>
+      <div class="courses-in-progress-empty-wrapper">
+        <div class="courses-in-progress-empty-content">
+          <p class="body-copy-medium">
+            You have no courses in progress at this time. View the course
+            catalog to get started.
+          </p>
+          <a class="primary-btn" href="#">Browse Course Catalog</a>
+        </div>
+      </div>
+    </ng-template>
+  </div>
 </div>

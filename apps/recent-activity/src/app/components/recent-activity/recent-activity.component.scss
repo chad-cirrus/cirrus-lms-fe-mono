@@ -4,10 +4,15 @@
   display: flex;
   flex-direction: column;
 
-  @include breakpoint('mobile') {
+  @include breakpoint(mobile) {
+    padding-left: 9px;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+  }
+
+  @include breakpoint(desktop) {
+    padding-left: 20px;
   }
 }
 
@@ -45,7 +50,7 @@
   @include breakpoint(mobile) {
     margin-top: 110px;
   }
-  
+
   @include breakpoint(tablet) {
     margin-top: 0;
   }

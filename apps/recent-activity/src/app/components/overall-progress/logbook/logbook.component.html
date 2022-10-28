@@ -12,12 +12,13 @@
     <div class="logbook-item-container">
       <img class="image" [src]="logbook.type | imageFormatter" />
       <h5 class="type heading-5">{{ logbook.type | formatLogbookType }}</h5>
-      <div class="total" *ngIf="!logbook.completed; else completedArr">
-        <span>0</span>
+      <div *ngIf="!logbook.completed; else completedArr">
+        <span class="heading-2 total">0</span>
       </div>
       <ng-template #completedArr>
-        <div class="total">
-          <span>{{ logbook.completed }}</span>
+        <div>
+          <span class="heading-2 total">{{ logbook.completed }}</span>
+
         </div>
       </ng-template>
     </div>
