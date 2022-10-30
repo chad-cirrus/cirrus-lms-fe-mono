@@ -11,6 +11,7 @@ import {
   ApexFill,
   ApexStates,
   ApexTooltip,
+  ApexTheme,
 } from 'ng-apexcharts';
 
 type ApexXAxis = {
@@ -31,6 +32,7 @@ export type ChartOptions = {
   plotOptions: ApexPlotOptions;
   yaxis: ApexYAxis;
   xaxis: ApexXAxis;
+  theme: ApexTheme;
   grid: ApexGrid;
   colors: string[];
   legend: ApexLegend;
@@ -73,6 +75,7 @@ export class CirrusChartComponent {
         height: 250,
         type: 'bar',
         fontFamily: 'akzidenz-extended',
+        background: '#000',
         events: {
           click: function (chart, w, e) {
             // Leaving this in case we never need to interact
@@ -157,7 +160,13 @@ export class CirrusChartComponent {
           },
         },
       },
-      tooltip: { enabled: false },
+      tooltip: { 
+        enabled: true,
+        theme: 'dark'
+      },
+      theme: {
+        mode: 'dark'
+      }
     };
   }
 }

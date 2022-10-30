@@ -2,9 +2,6 @@
 
 .main-container {
   margin-top: 30px;
-  @include breakpoint(mobile) {
-    margin-top: 35px;
-  }
 }
 
 .mat-tab-body.mat-tab-body-active {
