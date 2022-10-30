@@ -5,14 +5,9 @@
   flex-direction: column;
 
   @include breakpoint(mobile) {
-    padding-left: 9px;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-  }
-
-  @include breakpoint(desktop) {
-    padding-left: 20px;
   }
 }
 

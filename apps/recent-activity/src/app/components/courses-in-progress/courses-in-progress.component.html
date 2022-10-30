@@ -1,10 +1,12 @@
 <div class="courses-in-progress-container">
-  <h2 class="heading-3">
+  <h2 class="heading-3 content-wrapper">
     Courses In Progress
     <span class="courses-counter">({{ inProgressCourses?.length || 0 }})</span>
   </h2>
 
-  <div class="courses-slider-container">
+  <div 
+    [ngClass]="{'content-wrapper' : inProgressCourses.length < 1}"
+  >
     <div
       *ngIf="inProgressCourses.length; else noCourses"
       class="courses-in-progress-outer-wrapper"

@@ -41,19 +41,18 @@
   background: $black;
   color: $white;
   margin-top: 6.9rem;
-  padding: 30px 20px;
+  padding: 30px 0;
   width: 100%;
 
   @include breakpoint(mobile) {
-    padding: 30px 25px;
     float: right;
     margin-top: 5.1rem;
     width: calc(100% - 107px);
   }
 
   @include breakpoint(tablet) {
-    padding: 50px;
-    width: calc(100% - 260px);
+    padding: 50px 0;
+    width: calc(100% - 244px);
   }
 }
 

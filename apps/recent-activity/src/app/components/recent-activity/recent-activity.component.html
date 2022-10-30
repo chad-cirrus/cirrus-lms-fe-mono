@@ -5,7 +5,7 @@
       else noRa
     "
   >
-    <div class="recent-activity-welcome-heading">
+    <div class="recent-activity-welcome-heading content-wrapper">
       <h1 class="heading-3">Welcome back, {{ (user$ | async)?.firstname }}</h1>
       <cirrus-total-flight-hours
         [hours]="(flightHoursString$ | async) || '0000'"
@@ -19,7 +19,7 @@
       ></cirrus-courses-in-progress>
     </div>
 
-    <div class="notifications-achievements-wrapper">
+    <div class="notifications-achievements-wrapper content-wrapper">
       <cirrus-notifications-section
         class="notifications-wrapper"
         [notifications]="recentActivityNotifications.notifications"
@@ -44,7 +44,7 @@
 </div>
 
 <ng-template #noRa>
-  <div class="recent-activity-welcome-heading">
+  <div class="recent-activity-welcome-heading content-wrapper">
     <h1 class="heading-3">Welcome back, {{ (user$ | async)?.firstname }}</h1>
   </div>
 </ng-template>
