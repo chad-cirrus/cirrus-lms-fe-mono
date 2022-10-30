@@ -4,6 +4,35 @@
 @import '~swiper/modules/navigation/navigation.min.css';
 @import '~swiper/modules/pagination/pagination.min.css';
 
+.courses-in-progress-outer-wrapper {
+  position: relative;
+}
+
+.my-swiper {
+  &:before, &:after {
+    z-index: 2;
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 55px;
+  }
+  &:before {
+    left: 0;
+    background: linear-gradient(90deg,#000000 -5%,rgba(31,31,31,0) 100%);
+  }
+  &:after {
+    right: 0;
+    background: linear-gradient(270deg,#000000 -5%,rgba(31,31,31,0) 100%);
+  }
+  @include breakpoint(mobile) {
+    &:before, &:after {
+      width: 70px;
+    }
+  }
+}
+
 cirrus-courses-in-progress .heading-3 {
   margin: 40px 0 30px;
   @include breakpoint(mobile) {
