@@ -1,6 +1,6 @@
 <div
   class="certs-container"
-  *ngIf="certificates.length > 0; else noCertificates"
+  *ngIf="certificates.length < 1; else noCertificates"
 >
   <div
     class="certificate-list-item"
@@ -31,8 +31,8 @@
       src="recent-activity/images/svg/certificates.svg"
       alt="certificates"
     />
-    <span class="heading-6"
-      >You haven't earned any Certificates yet. Keep going!</span
+    <span class="body-copy-small no-cert-message"
+      >You haven't earned any certificates yet. Keep going!</span
     >
     <button
       class="view secondary-btn-black -wide-btn"

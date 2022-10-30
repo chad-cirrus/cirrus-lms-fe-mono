@@ -14,7 +14,7 @@
 .logbook-wrapper {
   overflow-y: auto;
   display: flex;
-  margin-top: 39px;
+  margin-top: 42px;
 }
 
 .logbook-item-container {
@@ -24,6 +24,7 @@
 
 .type {
   margin-top: 14.3px;
+  letter-spacing: -0.03em;
 }
 
 .total {
@@ -34,44 +35,16 @@
 .logbook-item {
   min-width: 209px;
   width: 20%;
-  border-right: 1px solid $white;
-}
-
-.logbook-item:nth-child(5) {
-  border-right: none;
-}
-
-@include breakpoint(mobile) {
-  .logbook-wrapper {
-    margin-top: 32px;
-  }
 }
 
 @include breakpoint(tablet) {
-  .logbook-item:nth-child(4) {
-    border-right: none;
-  }
-  .logbook-item:nth-child(5) {
-    margin-top: 44px;
-  }
-
-  .logbook-wrapper {
-    flex-wrap: wrap;
+  .logbook-item {
+    margin-bottom: 45px;
   }
 }
 
 @include breakpoint(desktop) {
   .total {
     font-size: 2.188rem;
-  }
-}
-
-// Needed change at 1404px-- breakpoint widescreen is 1440
-@media (min-width: 1404px) {
-  .logbook-item:nth-child(4) {
-    border-right: 1px solid $white;
-  }
-  .logbook-item:nth-child(5) {
-    margin-top: 0;
   }
 }

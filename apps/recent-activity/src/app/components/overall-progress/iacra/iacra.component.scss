@@ -22,10 +22,6 @@
   width: 50%;
 }
 
-.iacra-item:nth-child(odd) {
-  border-right: 1px solid $white;
-}
-
 .iacra-item-container {
   margin-left: 24px;
   padding-right: 15px;
@@ -33,6 +29,7 @@
 
 .type {
   margin-top: 14.3px;
+  letter-spacing: -0.03em;
 }
 
 .total {
@@ -45,24 +42,21 @@
     border-right: none;
   }
   .iacra-item {
-    width: 25%;
-    border-right: 1px solid $white;
+    width: 33%;
   }
 }
 
 @include breakpoint(tablet) {
-  .iacra-item:nth-child(5n),
-  .iacra-item:nth-child(12) {
-    border: none !important;
-  }
   .iacra-item {
-    width: 20%;
-    border-right: 1px solid $white !important;
+    width: 25%;
   }
 }
 
 @include breakpoint(desktop) {
   .total {
     font-size: 2.188rem;
+  }
+  .iacra-item {
+    width: 20%;
   }
 }

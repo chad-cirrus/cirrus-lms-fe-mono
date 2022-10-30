@@ -14,7 +14,7 @@
 .coursework-wrapper {
   overflow-y: auto;
   display: flex;
-  margin-top: 32px;
+  margin-top: 42px;
 }
 
 .coursework-item-container {
@@ -24,6 +24,7 @@
 
 .type {
   margin-top: 14.3px;
+  letter-spacing: -0.03em;
 }
 
 .total {
@@ -34,11 +35,6 @@
 .coursework-item {
   min-width: 209px;
   width: 20%;
-  border-right: 1px solid $white;
-}
-
-.coursework-item:nth-child(5) {
-  border-right: none;
 }
 
 .item-no-border {
@@ -47,11 +43,8 @@
 }
 
 @include breakpoint(tablet) {
-  .coursework-item:nth-child(4) {
-    border-right: none;
-  }
-  .coursework-item:nth-child(5) {
-    margin-top: 44px;
+  .coursework-item {
+    margin-bottom: 45px;
   }
   .coursework-wrapper {
     flex-wrap: wrap;
@@ -61,15 +54,5 @@
 @include breakpoint(desktop) {
   .total {
     font-size: 2.188rem;
-  }
-}
-
-// Needed change at 1404px-- breakpoint widescreen is 1440
-@media (min-width: 1404px) {
-  .coursework-item:nth-child(4) {
-    border-right: 1px solid $white;
-  }
-  .coursework-item:nth-child(5) {
-    margin-top: 0;
   }
 }

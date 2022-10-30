@@ -1,19 +1,13 @@
 @import 'apps/recent-activity/src/base-scss/import';
 
-.notification-container {
-  @include breakpoint(mobile) {
-    padding-left: 5px;
-  }
-  @include breakpoint(desktop) {
-    padding-left: 21px;
-  }
-}
-
 .notification-title {
   display: flex;
   align-items: center;
   padding-bottom: 10px;
   gap: 10px;
+  .mat-badge {
+    margin-left: 15px;
+  }
 }
 
 .notification-item {
@@ -65,7 +59,7 @@
   padding-top: 70px;
 
   @include breakpoint(tablet) {
-    padding-top: 90px;
+    padding-top: 113px;
   }
 }
 

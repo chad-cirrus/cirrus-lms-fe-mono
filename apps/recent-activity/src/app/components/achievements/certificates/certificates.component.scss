@@ -47,10 +47,11 @@
 .no-certs-container {
   display: flex;
   flex-direction: column;
-  gap: 32px;
-  padding: 48px;
+  padding-top: 35px;
   align-items: center;
   align-content: center;
+  color: $gray6;
+  text-align: center;
 }
 
 .course-name {
@@ -60,10 +61,12 @@
   }
 }
 
+.no-cert-message {
+  margin-top: 30px;
+  letter-spacing: -0.1px;
+}
+
 .secondary-btn-black {
-  padding: 9px 71px;
-  @include breakpoint(mobile) {
-    padding: 9px 50px;
-  }
+  margin-top: 45px;
 }
 

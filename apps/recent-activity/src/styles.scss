@@ -42,6 +42,15 @@ body {
   }
 }
 
+.mat-badge-medium.mat-badge-after .mat-badge-content {
+  padding: 0 13px;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #FF3939;
+}
+
 .apexcharts-menu {
   background-color: $black !important;
   .apexcharts-menu-item:hover {

@@ -1,4 +1,4 @@
-<div class="badge-container" *ngIf="badges.length > 0; else noBadges">
+<div class="badge-container" *ngIf="badges.length < 1; else noBadges">
   <div class="badge-list-item" *ngFor="let badge of badges">
     <img class="badge-icon" [src]="badge.badge_image" alt="" />
     <div class="badge-item-text">

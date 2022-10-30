@@ -20,17 +20,5 @@
 }
 
 .tab-container {
-  margin-top: 39px;
-}
-
-@include breakpoint(mobile) {
-  .tab-container {
-    margin-top: 43px;
-  }
-}
-
-@include breakpoint(tablet) {
-  .tab-container {
-    margin-top: 28px;
-  }
+  margin-top: 42px;
 }

@@ -2,6 +2,9 @@
 
 #chart {
   margin-top: 60px;
+  @include breakpoint(tablet) {
+    margin-top: 15px;
+  }
 }
 
 .chart-container {
