@@ -134,7 +134,7 @@ cirrus-courses-in-progress .heading-3 {
 span.progress-bar-text {
   display: block;
   margin-top: 1rem;
-  &span:last-child {
+  .total {
     margin: 0 5px 0 2px;
   }
 }
