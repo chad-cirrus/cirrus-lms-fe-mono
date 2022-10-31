@@ -1,6 +1,6 @@
 <div
   class="certs-container"
-  *ngIf="certificates.length < 1; else noCertificates"
+  *ngIf="certificates.length > 0; else noCertificates"
 >
   <div
     class="certificate-list-item"
