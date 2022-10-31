@@ -147,11 +147,9 @@ span.progress-bar-text {
   background: $gray1;
   border-radius: 5px;
   padding: 85px 15px;
-  margin: 0 20px;
 
   @include breakpoint(mobile) {
     padding: 35px 5px;
-    margin: 0;
   }
 }
 
