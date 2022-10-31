@@ -153,3 +153,10 @@ img[type='button'] {
   background-color: $cirrus-blue;
   color: $primary-font-color;
 }
+
+.mat-progress-bar-fill:after {
+  border-top-right-radius: 90px 13px !important;
+  border-bottom-right-radius: 90px 13px !important;
+  border-top-left-radius: 90px 13px !important;
+  border-bottom-left-radius: 90px 13px !important;
+}
