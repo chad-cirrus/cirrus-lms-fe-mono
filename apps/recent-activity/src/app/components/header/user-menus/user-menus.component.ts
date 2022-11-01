@@ -10,12 +10,6 @@ import {
 import { ICirrusUser } from '@cirrus/models';
 import { BehaviorSubject, merge, Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
-import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
-import { Store } from '@ngrx/store';
-import { selectIsScreenSmall } from '../../../store/selectors/view.selector';
-import { AppState } from '../../../store/reducers';
-import { UserService } from '../../../services/user.service';
 
 @Component({
   selector: 'cirrus-user-menus',
@@ -25,14 +19,15 @@ import { UserService } from '../../../services/user.service';
 export class UserMenusComponent implements OnInit {
   @Input() cirrusImpersonationReturnUser!: ICirrusUser;
   @Output() displayPanel = new EventEmitter<any>();
+  @Output() logout = new EventEmitter();
+  @Output() impersonationLogout = new EventEmitter();
+
   isLeftVisible = true;
   showPanel$!: Observable<boolean>;
   private togglePanel = new BehaviorSubject(false);
   togglePanel$ = this.togglePanel.asObservable();
 
-  isScreenSmall$: Observable<boolean> = this.store
-    .select(selectIsScreenSmall)
-    .pipe(tap(value => console.log('is screen small', value)));
+  @Input() isScreenSmall = false;
 
   private _cirrusUser!: ICirrusUser;
   showDashboard = false;
@@ -56,13 +51,6 @@ export class UserMenusComponent implements OnInit {
   ctcAdmin!: boolean;
   admin!: boolean;
 
-  constructor(
-    public dialog: MatDialog,
-    private userService: UserService,
-    private router: Router,
-    private store: Store<AppState>
-  ) {}
-
   @ViewChild(CdkConnectedOverlay, { static: true })
   private connectedOverlay!: CdkConnectedOverlay;
 
@@ -80,30 +68,11 @@ export class UserMenusComponent implements OnInit {
     this.displayPanel.emit(this.showPanel$);
   }
 
-  logout() {
-    this.userService.logout().subscribe(user => {
-      window.location.href = 'https://cirrusapproach.com';
-    });
+  emitLogout() {
+    this.logout.emit();
   }
 
-  impersonationLogout() {
-    localStorage.setItem(
-      'cirrus-token',
-      localStorage.getItem('cirrus-impersonation-return') ?? ''
-    );
-    localStorage.setItem(
-      'cirrus-user',
-      localStorage.getItem('cirrus-impersonation-return-user') ?? ''
-    );
-    localStorage.setItem(
-      'cirrus-role',
-      localStorage.getItem('cirrus-impersonation-return-role') ?? ''
-    );
-
-    localStorage.removeItem('cirrus-impersonation-return-role');
-    localStorage.removeItem('cirrus-impersonation-return');
-    localStorage.removeItem('cirrus-impersonation-return-user');
-
-    this.router.navigate(['admin']);
+  emitImpersonationLogout() {
+    this.impersonationLogout.emit();
   }
 }

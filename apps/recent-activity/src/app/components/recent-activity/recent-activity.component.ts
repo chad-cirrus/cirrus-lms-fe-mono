@@ -9,9 +9,7 @@ import { totalFlightHoursString } from '../../helpers/totalFlightHoursString';
 
 import { MatSidenav } from '@angular/material/sidenav';
 
-import { INotification } from '@cirrus/models';
-import { RecentActivityFacade } from '../../facade.service';
-import { Router } from 'express';
+import { SidenavHeaderService } from '../../services/sidenav-header.service';
 
 @Component({
   selector: 'cirrus-recent-activity',
@@ -40,7 +38,8 @@ export class RecentActivityComponent implements OnInit {
 
   constructor(
     private recentActivityService: RecentActivityService,
-    private store: Store<AppState>
+    private store: Store<AppState>,
+    private sidenavHeaderService: SidenavHeaderService
   ) {}
 
   ngOnInit() {
@@ -48,6 +47,6 @@ export class RecentActivityComponent implements OnInit {
   }
 
   viewAllNotifications() {
-    this.recentActivityService.notificationMenuStateToggleSubject.next(true);
+    this.sidenavHeaderService.setShowNotifications(true);
   }
 }

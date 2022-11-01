@@ -16,6 +16,7 @@
     "baseUrl": ".",
     "paths": {
       "@cirrus/models": ["libs/models/src/index.ts"],
+      "@cirrus/sidenav-header": ["libs/sidenav-header/src/index.ts"],
       "@cirrus/ui": ["libs/ui/src/index.ts"]
     }
   },

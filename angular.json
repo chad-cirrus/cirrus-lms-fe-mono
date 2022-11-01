@@ -424,6 +424,32 @@
       "tags": [],
       "implicitDependencies": ["recent-activity"]
     },
+    "sidenav-header": {
+      "projectType": "library",
+      "root": "libs/sidenav-header",
+      "sourceRoot": "libs/sidenav-header/src",
+      "prefix": "cirrus",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/sidenav-header"],
+          "options": {
+            "jestConfig": "libs/sidenav-header/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/sidenav-header/src/**/*.ts",
+              "libs/sidenav-header/src/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
     "ui": {
       "projectType": "library",
       "root": "libs/ui",

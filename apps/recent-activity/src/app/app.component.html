@@ -1,11 +1,14 @@
 <div class="main-container">
   <div class="header-container">
-    <cirrus-header
+    <cirrus-global-header
       [cirrusUser]="(cirrusUser$ | async)!"
       [cirrusImpersonationReturnUser]="(cirrusImpersonateReturnUser$ | async)!"
       (hamburgerMenu)="openHamburgerMenu()"
       [notificationCount]="(notificationCount$ | async)!"
-    ></cirrus-header>
+      (logout)="logout()"
+      (impersonationLogout)="impersonationLogout()"
+      [isScreenSmall]="(isScreenSmall$ | async)!"
+    ></cirrus-global-header>
   </div>
   <main class="">
     <div
@@ -16,11 +19,14 @@
       "
     >
       <div class="sidenav-wrapper" *ngIf="(isScreenSmall$ | async) === false">
-        <cirrus-side-nav
+        <cirrus-global-side-nav
           [cirrusUser]="(cirrusUser$ | async)!"
           (emitCollapse)="toggleCollapse($event)"
           [notificationCount]="(notificationCount$ | async)!"
-        ></cirrus-side-nav>
+          (toggleNotificationsMenu)="toggleNotificationsMenu()"
+          [deployUrl]="'recent-activity'"
+        ></cirrus-global-side-nav>
+        <!--        <cirrus-global-side-nav></cirrus-global-side-nav>-->
       </div>
       <div class="content-container">
         <div *ngIf="error$ | async" class="error-container">

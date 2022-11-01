@@ -17,7 +17,7 @@ import {
   Breakpoints,
   BreakpointState,
 } from '@angular/cdk/layout';
-import { map, takeUntil } from 'rxjs/operators';
+import { map, takeUntil, tap } from 'rxjs/operators';
 import { setScreenSize } from './store/actions/view.actions';
 import { selectIsScreenSmall } from './store/selectors/view.selector';
 import { ErrorService } from '@cirrus/ui';
@@ -25,6 +25,8 @@ import { environment } from '../environments/environment';
 import { RecentActivityService } from './services/recent-activity.service';
 import { MatSidenav } from '@angular/material/sidenav';
 import { RecentActivityFacade } from './facade.service';
+import { SidenavHeaderService } from './services/sidenav-header.service';
+import { UserService } from './services/user.service';
 
 @Component({
   selector: 'cirrus-root',
@@ -36,7 +38,9 @@ export class AppComponent implements OnInit, OnDestroy {
   cirrusUser$ = this.store.select(selectCirrusUser);
   cirrusImpersonateReturnUser$!: Observable<ICirrusUser>;
   notificationCount$ = this.notificationService.notificationsCount$;
-  isScreenSmall$: Observable<boolean> = this.store.select(selectIsScreenSmall);
+  isScreenSmall$: Observable<boolean> = this.store
+    .select(selectIsScreenSmall)
+    .pipe(tap(small => console.log('small: ', small)));
   breakPoint$ = this.breakpointObserver.observe([
     Breakpoints.XSmall,
     Breakpoints.Small,
@@ -66,7 +70,9 @@ export class AppComponent implements OnInit, OnDestroy {
     private breakpointObserver: BreakpointObserver,
     private errorService: ErrorService,
     private recentActivityService: RecentActivityService,
-    private facade: RecentActivityFacade
+    private facade: RecentActivityFacade,
+    private sidenavHeaderService: SidenavHeaderService,
+    private userService: UserService
   ) {}
 
   ngOnInit() {
@@ -85,7 +91,7 @@ export class AppComponent implements OnInit, OnDestroy {
         this.store.dispatch(setScreenSize({ screenSize }))
       );
 
-    this.recentActivityService.notificationMenuStateToggle$.subscribe(bool => {
+    this.sidenavHeaderService.showNotifications$.subscribe(bool => {
       if (this.drawer) {
         bool ? this.drawer.open() : this.drawer.close();
       }
@@ -110,7 +116,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   dismissNotificationsMenu() {
-    this.recentActivityService.notificationMenuStateToggleSubject.next(false);
+    this.sidenavHeaderService.setShowNotifications(false);
   }
 
   clearNotifications(notifications: INotification[]) {
@@ -135,6 +141,20 @@ export class AppComponent implements OnInit, OnDestroy {
 
   drawerClosed() {
     this._isNotificationsMenuOpenSubject.next(false);
+  }
+
+  toggleNotificationsMenu() {
+    this.sidenavHeaderService.toggleShowNotifications();
+  }
+
+  logout() {
+    this.userService.logout().subscribe(user => {
+      window.location.href = 'https://cirrusapproach.com';
+    });
+  }
+
+  impersonationLogout() {
+    this.userService.impersonationLogout();
   }
 
   private getBreakpoint({ breakpoints }: BreakpointState) {

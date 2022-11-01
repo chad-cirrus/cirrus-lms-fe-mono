@@ -1,9 +1,8 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ICirrusUser } from '@cirrus/models';
-import { select, Store } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { AppState } from '../../store/reducers';
-import { selectIsScreenSmall } from '../../store/selectors/view.selector';
 
 @Component({
   selector: 'cirrus-header',
@@ -17,7 +16,11 @@ export class HeaderComponent {
   isDisplayingDropdown!: boolean;
   @Input() notificationCount!: number;
   isDisplayingHamburger!: boolean;
-  isScreenSmall$ = this.store.pipe(select(selectIsScreenSmall));
+
+  @Input() isScreenSmall = false;
+
+  @Output() logout = new EventEmitter();
+  @Output() impersonationLogout = new EventEmitter();
 
   constructor(private store: Store<AppState>) {}
 
@@ -31,5 +34,13 @@ export class HeaderComponent {
 
   openHamburgerMenu() {
     this.hamburgerMenu.emit('dksjfkajsf');
+  }
+
+  emitImpersonationLogout() {
+    this.impersonationLogout.emit();
+  }
+
+  emitLogout() {
+    this.logout.emit();
   }
 }

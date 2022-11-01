@@ -1,11 +1,14 @@
 <div class="main-container">
   <div class="header-container">
-    <cirrus-header
+    <cirrus-global-header
       [cirrusUser]="(cirrusUser$ | async)!"
       [cirrusImpersonationReturnUser]="(cirrusImpersonateReturnUser$ | async)!"
       (hamburgerMenu)="openHamburgerMenu()"
       [notificationCount]="(notifications$ | async)?.length!"
-    ></cirrus-header>
+      (logout)="logout()"
+      (impersonationLogout)="impersonationLogout()"
+      [isScreenSmall]="(isScreenSmall$ | async)!"
+    ></cirrus-global-header>
   </div>
   <main fxLayout="row">
     <div
@@ -13,11 +16,13 @@
       class="sidenav"
       *ngIf="(isScreenSmall$ | async) === false"
     >
-      <cirrus-side-nav
+      <cirrus-global-side-nav
         [cirrusUser]="(cirrusUser$ | async)!"
         (emitCollapse)="toggleCollapse($event)"
         [notificationCount]="(notifications$ | async)?.length!"
-      ></cirrus-side-nav>
+        (toggleNotificationsMenu)="toggleNotificationsMenu()"
+        [deployUrl]="'courses'"
+      ></cirrus-global-side-nav>
     </div>
     <div class="content-container" [fxFlex]="100">
       <div

@@ -6,26 +6,14 @@ import {
   ViewChild,
 } from '@angular/core';
 import { Store } from '@ngrx/store';
-import {
-  delay,
-  distinctUntilChanged,
-  map,
-  share,
-  takeUntil,
-} from 'rxjs/operators';
+import { delay, map, takeUntil } from 'rxjs/operators';
 import { AppService } from './app.service';
 import * as appActions from './store/actions';
 import { setCirrusUser, setScreenSize } from './store/actions';
 import { AppState } from './store/reducers';
-import {
-  selectLesson,
-  selectLessonStateBusy,
-} from './store/selectors/lessons.selector';
-import { ICirrusUser, ILesson, INotification } from '@cirrus/models';
-import {
-  selectCirrusUser,
-  selectRole,
-} from './store/selectors/cirrus-user.selector';
+import { selectLessonStateBusy } from './store/selectors/lessons.selector';
+import { ICirrusUser, INotification } from '@cirrus/models';
+import { selectCirrusUser } from './store/selectors/cirrus-user.selector';
 import {
   BehaviorSubject,
   merge,
@@ -37,7 +25,6 @@ import {
 import { FormControl } from '@angular/forms';
 import {
   selectIsScreenSmall,
-  selectIsScreenTablet,
   selectSideNavOpen,
 } from './store/selectors/view.selector';
 import { MatSidenav } from '@angular/material/sidenav';
@@ -50,6 +37,8 @@ import { CoursesService } from './course/course.service';
 import { ErrorService } from '@cirrus/ui';
 import { environment } from '../environments/environment';
 import { CoursesFacadeService } from './courses-facade.service';
+import { SidenavHeaderService } from './services/sidenav-header.service';
+import { UserService } from './user/user.service';
 
 @Component({
   selector: 'cirrus-root',
@@ -60,11 +49,8 @@ export class AppComponent implements OnInit, OnDestroy {
   destroyed = new Subject<void>();
   student = 'John Doe';
   viewToggle = new FormControl(false);
-  toggle$ = this.viewToggle.valueChanges;
   lessonStateBusy$ = this.store.select(selectLessonStateBusy).pipe(delay(1));
 
-  role$ = this.store.select(selectRole);
-  lesson$: Observable<ILesson> = this.store.select(selectLesson);
   breakPoint$ = this.breakpointObserver.observe([
     Breakpoints.XSmall,
     Breakpoints.Small,
@@ -74,7 +60,6 @@ export class AppComponent implements OnInit, OnDestroy {
   ]);
   cirrusUser$ = this.store.select(selectCirrusUser);
   cirrusImpersonateReturnUser$!: Observable<ICirrusUser>;
-  courseId$ = this.appService.courseId$.pipe(distinctUntilChanged(), share());
 
   project = environment.project;
 
@@ -86,8 +71,6 @@ export class AppComponent implements OnInit, OnDestroy {
   ftgNotPilot = 160;
   ftgPilot = 112;
   isScreenSmall$: Observable<boolean> = this.store.select(selectIsScreenSmall);
-  isScreenTablet$: Observable<boolean> =
-    this.store.select(selectIsScreenTablet);
 
   private _isNotificationsMenuOpenSubject = new BehaviorSubject(false);
   isNotificationMenuOpen$ = this._isNotificationsMenuOpenSubject.asObservable();
@@ -107,7 +90,9 @@ export class AppComponent implements OnInit, OnDestroy {
     private breakpointObserver: BreakpointObserver,
     private courseService: CoursesService,
     private errorService: ErrorService,
-    private facade: CoursesFacadeService
+    private facade: CoursesFacadeService,
+    private sidenavHeaderService: SidenavHeaderService,
+    private userService: UserService
   ) {}
 
   ngOnInit() {
@@ -136,7 +121,7 @@ export class AppComponent implements OnInit, OnDestroy {
       this.store.dispatch(appActions.setInstructorView({ instructorView }))
     );
 
-    this.courseService.notificationMenuStateToggle$.subscribe(bool => {
+    this.sidenavHeaderService.showNotifications$.subscribe(bool => {
       if (this.drawer) {
         bool ? this.drawer.open() : this.drawer.close();
       }
@@ -166,7 +151,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   dismissNotificationsMenu() {
-    this.courseService.notificationMenuStateToggleSubject.next(false);
+    this.sidenavHeaderService.setShowNotifications(false);
   }
 
   clearNotifications(notifications: INotification[]) {
@@ -183,6 +168,20 @@ export class AppComponent implements OnInit, OnDestroy {
 
   declineInvite(notification: INotification) {
     this.facade.declineInvite(notification).subscribe();
+  }
+
+  toggleNotificationsMenu() {
+    this.sidenavHeaderService.toggleShowNotifications();
+  }
+
+  logout() {
+    this.userService.logout().subscribe(() => {
+      window.location.href = 'https://cirrusapproach.com';
+    });
+  }
+
+  impersonationLogout() {
+    this.userService.impersonationLogout();
   }
 
   drawerOpened() {

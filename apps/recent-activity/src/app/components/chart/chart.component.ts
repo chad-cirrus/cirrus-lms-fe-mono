@@ -1,17 +1,16 @@
 import { Component, Input, ViewChild } from '@angular/core';
 import {
-  ApexChart,
   ApexAxisChartSeries,
-  ChartComponent,
+  ApexChart,
   ApexDataLabels,
-  ApexPlotOptions,
-  ApexYAxis,
-  ApexLegend,
-  ApexGrid,
   ApexFill,
-  ApexStates,
-  ApexTooltip,
+  ApexGrid,
+  ApexLegend,
+  ApexPlotOptions,
   ApexTheme,
+  ApexTooltip,
+  ApexYAxis,
+  ChartComponent,
 } from 'ng-apexcharts';
 
 type ApexXAxis = {
@@ -160,13 +159,13 @@ export class CirrusChartComponent {
           },
         },
       },
-      tooltip: { 
+      tooltip: {
         enabled: true,
-        theme: 'dark'
+        theme: 'dark',
       },
       theme: {
-        mode: 'dark'
-      }
+        mode: 'dark',
+      },
     };
   }
 }

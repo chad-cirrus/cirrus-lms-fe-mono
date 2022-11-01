@@ -57,6 +57,8 @@ import { FormatCourseworkTypePipe } from './components/overall-progress/coursewo
 import { FormatIacraTypePipe } from './components/overall-progress/iacra/format-iacra-type.pipe';
 import { ImageFormatterPipe } from './image-formatter.pipe';
 import { HttpErrorInterceptor } from './interceptors/http-error.interceptor';
+import { SidenavHeaderService } from './services/sidenav-header.service';
+import { SidenavHeaderModule } from '@cirrus/sidenav-header';
 
 @NgModule({
   declarations: [
@@ -112,6 +114,7 @@ import { HttpErrorInterceptor } from './interceptors/http-error.interceptor';
     NotificationsMenuModule,
     SwiperModule,
     ReactiveFormsModule,
+    SidenavHeaderModule,
   ],
   providers: [
     {
@@ -129,6 +132,7 @@ import { HttpErrorInterceptor } from './interceptors/http-error.interceptor';
       multi: true,
     },
     UiDownloadService,
+    SidenavHeaderService,
   ],
   bootstrap: [AppComponent],
   exports: [
