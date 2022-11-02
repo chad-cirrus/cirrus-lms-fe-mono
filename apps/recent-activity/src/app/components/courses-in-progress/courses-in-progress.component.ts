@@ -20,9 +20,11 @@ export class CoursesInProgressComponent {
   set inProgressCourses(value: InProgressCourses[]) {
     this._inProgressCourses = value.map(course => ({
       ...course,
-      thumbnail_image_url: course.thumbnail_image_url
-        ? course.thumbnail_image_url
-        : environment.defaultThumbnailCourse,
+      thumbnail_image_url: `url('${
+        course.thumbnail_image_url
+          ? course.thumbnail_image_url
+          : environment.defaultThumbnailCourse
+      }')`,
     }));
   }
 

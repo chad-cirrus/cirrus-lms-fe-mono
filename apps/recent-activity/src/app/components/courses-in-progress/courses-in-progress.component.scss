@@ -4,14 +4,19 @@
 @import '~swiper/modules/navigation/navigation.min.css';
 @import '~swiper/modules/pagination/pagination.min.css';
 
+//:root {
+//  --urlString: url('https://cirrusapproachherokuprod.blob.core.windows.net/cirruslmsherokuprodcontainer/content-items/images/473f25c35b1d600ceeda8822ead350LandingCourseThumbnail%20(1).jpg');
+//}
+
 .courses-in-progress-outer-wrapper {
   position: relative;
 }
 
 .my-swiper {
-  &:before, &:after {
+  &:before,
+  &:after {
     z-index: 2;
-    content: "";
+    content: '';
     display: block;
     position: absolute;
     top: 0;
@@ -20,14 +25,15 @@
   }
   &:before {
     left: 0;
-    background: linear-gradient(90deg,#000000 -5%,rgba(31,31,31,0) 100%);
+    background: linear-gradient(90deg, #000000 -5%, rgba(31, 31, 31, 0) 100%);
   }
   &:after {
     right: 0;
-    background: linear-gradient(270deg,#000000 -5%,rgba(31,31,31,0) 100%);
+    background: linear-gradient(270deg, #000000 -5%, rgba(31, 31, 31, 0) 100%);
   }
   @include breakpoint(mobile) {
-    &:before, &:after {
+    &:before,
+    &:after {
       width: 70px;
     }
   }
@@ -70,10 +76,11 @@ cirrus-courses-in-progress .heading-3 {
   height: 300px;
   justify-content: space-between;
   background-image: radial-gradient(
-    circle,
-    rgba(255, 255, 255, 0.5) 36%,
-    rgba(0, 0, 0, 0.5) 100%
-  );
+      circle,
+      rgba(255, 255, 255, 0.5) 36%,
+      rgba(0, 0, 0, 0.5) 100%
+    ),
+    var(--urlString);
   padding: 17px;
   width: 100%;
   @include breakpoint(mobile) {
