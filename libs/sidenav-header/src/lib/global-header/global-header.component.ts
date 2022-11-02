@@ -16,6 +16,7 @@ import { Observable } from 'rxjs';
 })
 export class GlobalHeaderComponent {
   @Input() cirrusUser!: ICirrusUser;
+  @Input() deployUrl = '';
   @Input() cirrusImpersonationReturnUser!: ICirrusUser;
   @Output() hamburgerMenu = new EventEmitter();
   isDisplayingDropdown!: boolean;

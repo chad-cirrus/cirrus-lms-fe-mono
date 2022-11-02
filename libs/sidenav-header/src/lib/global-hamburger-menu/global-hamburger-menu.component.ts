@@ -26,6 +26,7 @@ export class GlobalHamburgerMenuComponent implements OnInit {
   showPanel$!: Observable<boolean>;
   private togglePanel = new BehaviorSubject(false);
   togglePanel$ = this.togglePanel.asObservable();
+  @Input() deployUrl = '';
 
   @ViewChild(CdkConnectedOverlay, { static: true })
   private connectedOverlay!: CdkConnectedOverlay;

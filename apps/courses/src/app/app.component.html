@@ -8,6 +8,7 @@
       (logout)="logout()"
       (impersonationLogout)="impersonationLogout()"
       [isScreenSmall]="(isScreenSmall$ | async)!"
+      [deployUrl]="'courses'"
     ></cirrus-global-header>
   </div>
   <main fxLayout="row">
@@ -44,14 +45,6 @@
       </div>
     </div>
   </main>
-</div>
-
-<div *ngIf="showHamburgerMenu" class="hamburger-menu-container">
-  <cirrus-side-nav
-    [cirrusUser]="(cirrusUser$ | async)!"
-    (emitCollapse)="toggleCollapse($event)"
-    [type]="'hamburger'"
-  ></cirrus-side-nav>
 </div>
 
 <mat-sidenav-container class="sidenav-container">

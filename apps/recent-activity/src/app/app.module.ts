@@ -23,17 +23,11 @@ import { LogbookComponent } from './components/overall-progress/logbook/logbook.
 import { CourseworkComponent } from './components/overall-progress/coursework/coursework.component';
 import { IACRAComponent } from './components/overall-progress/iacra/iacra.component';
 import { NotificationsSectionComponent } from './components/notifications/notifications-section.component';
-import { SideNavComponent } from './components/side-nav/side-nav.component';
 import { MatBadgeModule } from '@angular/material/badge';
 import { StoreModule } from '@ngrx/store';
 import { recentActivityReducers } from './store/reducers';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { HeaderComponent } from './components/header/header.component';
-import { UserMenusComponent } from './components/header/user-menus/user-menus.component';
-import { MenuSliderComponent } from './components/menu-slider/menu-slider.component';
-import { HeaderDropdownComponent } from './components/header-dropdown/header-dropdown.component';
 import { OverlayModule } from '@angular/cdk/overlay';
-import { HamburgerMenuComponent } from './components/header/hamburger-menu/hamburger-menu.component';
 import { AppRoutingModule } from './app-routing.module';
 import { CdkAccordionModule } from '@angular/cdk/accordion';
 import { CommonModule } from '@angular/common';
@@ -73,12 +67,6 @@ import { SidenavHeaderModule } from '@cirrus/sidenav-header';
     CourseworkComponent,
     IACRAComponent,
     NotificationsSectionComponent,
-    SideNavComponent,
-    HeaderComponent,
-    UserMenusComponent,
-    MenuSliderComponent,
-    HeaderDropdownComponent,
-    HamburgerMenuComponent,
     TotalFlightHoursComponent,
     CirrusChartComponent,
     NoopComponent,
