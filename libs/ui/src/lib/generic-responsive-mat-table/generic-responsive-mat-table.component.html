@@ -22,7 +22,7 @@
                 else value
               "
             >
-              <mat-spinner color="accent" [diameter]="35"></mat-spinner>
+              <mat-spinner color="accent" [diameter]="20"></mat-spinner>
             </div>
             <ng-template #value>
               <img
@@ -33,10 +33,10 @@
                 [src]="column.icon"
                 class="icon-container"
               />
-              <div>
-                {{ row[column.mat_col_name] | tableFormat: column:row }}
-              </div>
             </ng-template>
+            <div>
+              {{ row[column.mat_col_name] | tableFormat: column:row }}
+            </div>
           </div>
         </mat-cell>
       </ng-container>

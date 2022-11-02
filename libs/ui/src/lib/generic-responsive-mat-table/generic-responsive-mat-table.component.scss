@@ -1,21 +1,19 @@
-@use '../styles/variables'as *;
+@use '../styles/variables' as *;
 
 .gen-table {
-
-  // removes padding set in other style sheets we want to set it on the parent .mat-table 
+  // removes padding set in other style sheets we want to set it on the parent .mat-table
   // instead. Note that we're using a element selector intandem with a class nested within
-  // the main component parent class. This scopes these styles to only here and 
+  // the main component parent class. This scopes these styles to only here and
   mat-cell.mat-cell,
   mat-header-cell.mat-header-cell {
     padding: 0;
   }
 
   // sets the max width of the last column in the table to 100px.
-  // this moves these elements closer to the edge of table b/c they 
-  // are using the flex property justify content, so they  spread out 
+  // this moves these elements closer to the edge of table b/c they
+  // are using the flex property justify content, so they  spread out
   // in a row to the width of their parent
   @media (min-width: 600px) {
-
     .mat-cell:last-child,
     .mat-header-cell:last-child {
       max-width: 100px;
@@ -38,6 +36,18 @@ mat-cell.mat-cell {
   font-size: 16px;
   line-height: 22px;
   letter-spacing: 0.03em;
+}
+
+.value {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+
+  &:hover {
+    cursor: pointer;
+    color: white;
+    font-weight: bold;
+  }
 }
 
 mat-table.mat-table {
