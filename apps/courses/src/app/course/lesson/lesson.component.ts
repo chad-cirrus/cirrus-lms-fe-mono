@@ -122,7 +122,9 @@ export class LessonComponent implements OnInit, OnDestroy {
                   lesson: this._lesson.title,
                 }
               : {
-                  badge: 'courses/images/svg/AvionicsCourse2.svg',
+                  badge: courseOverview?.badge_image
+                    ? courseOverview?.badge_image
+                    : 'courses/images/svg/AvionicsCourse2.svg',
                   course: courseOverview.name,
                   student: user.name,
                   course_attempt_id: this._lesson.course_attempt_id,

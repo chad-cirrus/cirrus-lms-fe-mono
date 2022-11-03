@@ -30,6 +30,7 @@ export interface ICourseOverview {
   progress: IProgress;
   enrollments?: IEnrollmentHistory[];
   next_lesson: Partial<ICourseOverviewLesson>;
+  badge_image: string;
 }
 
 export interface ICourseOverviewStage {
