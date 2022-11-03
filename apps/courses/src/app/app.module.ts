@@ -24,19 +24,14 @@ import { AuthHttpInterceptor } from './interceptors/AuthHttpInterceptor';
 import { LessonsEffects } from './store/effects/lessons.effects';
 import { LessonComponent } from './course/lesson/lesson.component';
 import { MatDialogModule } from '@angular/material/dialog';
-import { TopNavbarComponent } from './top-navbar/top-navbar.component';
 import { ScormContentDialogComponent } from './dialog-service/scorm-content-dialog/scorm-content-dialog.component';
 import { MediaServerService } from './media.service';
 import { ReactiveFormsModule } from '@angular/forms';
-import { SideNavComponent } from './course/side-nav/side-nav.component';
-import { HeaderComponent } from './course/header/header.component';
 import { CommonModule } from '@angular/common';
 import { MatBadgeModule } from '@angular/material/badge';
 import { NoopComponent } from './shared/noop/noop.component';
-import { UserMenusComponent } from './course/header/user-menus/user-menus.component';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { A11yModule } from '@angular/cdk/a11y';
-import { HamburgerMenuComponent } from './course/header/hamburger-menu/hamburger-menu.component';
 import { ContentPlayerModule } from './content-player/content-player.module';
 import { ProgressEffects } from './store/effects/progress.effects';
 import { environment } from '../environments/environment';
@@ -54,13 +49,8 @@ import { SidenavHeaderModule } from '@cirrus/sidenav-header';
     AppComponent,
     CourseComponent,
     LessonComponent,
-    TopNavbarComponent,
     ScormContentDialogComponent,
-    SideNavComponent,
-    HeaderComponent,
     NoopComponent,
-    UserMenusComponent,
-    HamburgerMenuComponent,
     CourseOverviewRouteComponent,
     CourseLessonsRouteComponent,
     CourseEnrollmentsRouteComponent,
@@ -108,6 +98,5 @@ import { SidenavHeaderModule } from '@cirrus/sidenav-header';
     },
   ],
   bootstrap: [AppComponent],
-  exports: [HamburgerMenuComponent],
 })
 export class AppModule {}
