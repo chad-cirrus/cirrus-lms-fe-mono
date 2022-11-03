@@ -122,8 +122,8 @@ export class LessonLandingPageComponent {
     ) {
       setTimeout(() => {
         this.displayOverview(overview);
-        return;
       }, 1000);
+      return;
     }
     if (
       student_intro_video &&
