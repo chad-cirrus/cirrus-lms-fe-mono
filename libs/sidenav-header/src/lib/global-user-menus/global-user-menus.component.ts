@@ -44,10 +44,7 @@ export class GlobalUserMenusComponent implements OnInit {
       (value.ctc_admin ||
         value.role === ROLE.admin ||
         value.role === ROLE.super_admin);
-    this.showCTCDashboard =
-      this.cirrusUser.ctc_admin ||
-      this.cirrusUser.role === ROLE.admin ||
-      this.cirrusUser.role === ROLE.super_admin;
+    this.showCTCDashboard = this.cirrusUser.ctc_admin;
     this.showLMSDashboard =
       this.cirrusUser.role === ROLE.admin ||
       this.cirrusUser.role === ROLE.super_admin;
