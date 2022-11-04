@@ -1,13 +1,13 @@
 @use '../styles/variables' as *;
 
-.content-container {
-  height: 100%;
-  width: 320px;
-}
+// .content-container {
+//   height: 100%;
+//   width: 320px;
+// }
 
-.content-container-notifications-menu-active {
-  overflow-y: hidden;
-}
+// .content-container-notifications-menu-active {
+//   overflow-y: hidden;
+// }
 
 .error-container {
   z-index: 100;
@@ -24,28 +24,28 @@
   color: $secondary-font-color-grey;
 }
 
-.sidenav-menu {
-  padding: 24px 32px;
-  width: 24vw;
-  min-width: 300px;
-  .sidenav-menu-container {
-    width: 100%;
-    .header-row {
-      padding: 24px 32px;
-    }
-    .lesson {
-      margin-left: 0.5rem;
-      align-items: center;
-      height: 58px;
-      line-height: 58px;
-      padding: 0 24px;
-      border-radius: 14px;
-    }
-    .lesson:hover {
-      cursor: pointer;
-    }
-  }
-}
+// .sidenav-menu {
+//   padding: 24px 32px;
+//   width: 24vw;
+//   min-width: 300px;
+//   .sidenav-menu-container {
+//     width: 100%;
+//     .header-row {
+//       padding: 24px 32px;
+//     }
+//     .lesson {
+//       margin-left: 0.5rem;
+//       align-items: center;
+//       height: 58px;
+//       line-height: 58px;
+//       padding: 0 24px;
+//       border-radius: 14px;
+//     }
+//     .lesson:hover {
+//       cursor: pointer;
+//     }
+//   }
+// }
 
 .snav-close-button {
   cursor: pointer;
@@ -65,29 +65,29 @@ ul.student-name {
   padding-inline-start: 16px;
 }
 
-.sidenav {
-  height: 100%;
-  position: -webkit-sticky;
-  position: sticky;
-}
+// .sidenav {
+//   height: 100%;
+//   position: -webkit-sticky;
+//   position: sticky;
+// }
 
-.header-container {
-  top: 0;
-  position: sticky;
-  background-color: black;
-  z-index: 0;
-}
+// .header-container {
+//   top: 0;
+//   position: sticky;
+//   background-color: black;
+//   z-index: 0;
+// }
 
-.outlet-container {
-  position: relative;
-  overflow-y: scroll;
-  overflow-x: hidden;
-  height: 100%;
-  padding-bottom: 60px;
-  &.stop-scrolling {
-    overflow: hidden;
-  }
-}
+// .outlet-container {
+//   position: relative;
+//   overflow-y: scroll;
+//   overflow-x: hidden;
+//   height: 100%;
+//   padding-bottom: 60px;
+//   &.stop-scrolling {
+//     overflow: hidden;
+//   }
+// }
 
 .hamburger-menu-container {
   background-color: $menu-gray;
@@ -97,9 +97,9 @@ ul.student-name {
     color: $secondary-font-color-grey;
   }
 }
-.sidenav {
-  border-right: 1px solid $border-grey;
-}
+// .sidenav {
+//   border-right: 1px solid $border-grey;
+// }
 
 .spinner-container {
   z-index: 9999;
@@ -119,3 +119,76 @@ ul.student-name {
 //   top: 82px !important;
 //   left: 245px !important;
 // }
+
+
+@import 'apps/recent-activity/src/base-scss/import';
+
+.main-content-wrapper {
+  width: 100%;
+}
+
+.main-content-wrapper-notifications-menu-active {
+  height: 100vh;
+  overflow-y: hidden;
+}
+
+.sidenav-wrapper {
+  background: $black;
+  border-right: 1px solid $gray2;
+  height: 100%;
+  position: fixed;
+  padding: 1rem 20px;
+  top: 5.1rem;
+  z-index: 5;
+}
+
+.header-container {
+  background: $black;
+  border-bottom: 1px solid $gray2;
+  padding: 14px 17px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 5;
+
+  @include breakpoint(mobile) {
+    padding: 25px;
+  }
+
+  @include breakpoint(tablet) {
+    padding: 25px 60px;
+  }
+}
+
+.content-container {
+  background: $black;
+  color: $white;
+  margin-top: 6.9rem;
+  padding: 30px 0;
+  width: 100%;
+
+  @include breakpoint(mobile) {
+    float: right;
+    margin-top: 5.1rem;
+    width: calc(100% - 107px);
+  }
+
+  @include breakpoint(tablet) {
+    padding: 50px 0;
+    width: calc(100% - 244px);
+  }
+}
+
+.error-container {
+  z-index: 100;
+  position: fixed;
+  top: 91%;
+  right: 2%;
+}
+
+mat-sidenav {
+  background-color: black;
+  color: white;
+  top: 82px !important;
+  left: 245px !important;
+}

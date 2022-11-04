@@ -11,12 +11,15 @@
       [deployUrl]="'courses'"
     ></cirrus-global-header>
   </div>
-  <main fxLayout="row">
+  <main>
     <div
-      [fxFlex]="collapse ? '0 0 100px' : '0 0 200px'"
-      class="sidenav"
-      *ngIf="(isScreenSmall$ | async) === false"
+    [ngClass]="
+    (isNotificationMenuOpen$ | async)
+      ? 'main-content-wrapper-notifications-menu-active'
+      : 'main-content-wrapper'
+  "
     >
+    <div class="sidenav-wrapper" *ngIf="(isScreenSmall$ | async) === false">
       <cirrus-global-side-nav
         [cirrusUser]="(cirrusUser$ | async)!"
         (emitCollapse)="toggleCollapse($event)"
@@ -25,25 +28,29 @@
         [deployUrl]="'courses'"
       ></cirrus-global-side-nav>
     </div>
-    <div class="content-container" [fxFlex]="100">
+   
+    <div class="content-container">
+      <div *ngIf="error$ | async" class="error-container">
+        <cirrus-error-notification
+          [calledFromWhatMfe]="project"
+          (emitClose)="dismissErrorMessage()"
+        ></cirrus-error-notification>
+      </div>
+      
       <div
         class="outlet-container"
-        [ngClass]="{ 'stop-scrolling': sideNavOpen$ | async }"
         #outletContainer
       >
-        <div *ngIf="loadingIndicator$ | async" class="spinner-container">
+
+      <router-outlet></router-outlet>
+       
+      <div *ngIf="loadingIndicator$ | async" class="spinner-container">
           <mat-spinner color="accent"></mat-spinner>
         </div>
-        <div *ngIf="error$ | async" class="error-container">
-          <cirrus-error-notification
-            [calledFromWhatMfe]="project"
-            (emitClose)="dismissErrorMessage()"
-          ></cirrus-error-notification>
-        </div>
 
-        <router-outlet></router-outlet>
       </div>
     </div>
+  </div>
   </main>
 </div>
 
