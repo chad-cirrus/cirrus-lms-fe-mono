@@ -28,3 +28,10 @@ export const selectScreenSize = createSelector(
   selectViewFeature,
   state => state.screenSize
 );
+
+export const selectIsScreenTabletOrSmaller = createSelector(
+  selectViewFeature,
+  state =>
+    state.screenSize === Breakpoints.Small ||
+    state.screenSize === Breakpoints.XSmall
+);

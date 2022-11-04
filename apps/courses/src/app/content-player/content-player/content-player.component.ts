@@ -7,7 +7,7 @@ import {
   ViewChild,
 } from '@angular/core';
 
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import {
   IContent,
   ILessonFlightLog,
@@ -17,16 +17,16 @@ import {
 } from '@cirrus/models';
 import { LessonContentComponent } from '@cirrus/ui';
 import { Store } from '@ngrx/store';
-import { BehaviorSubject, combineLatest, Observable, of, Subject } from 'rxjs';
+import { BehaviorSubject, combineLatest, Observable, Subject } from 'rxjs';
 import {
   delay,
-  filter,
   map,
+  take,
   takeUntil,
   tap,
   withLatestFrom,
 } from 'rxjs/operators';
-import { startProgress, completeProgress } from '../../store/actions';
+import { completeProgress, startProgress } from '../../store/actions';
 import { AppState } from '../../store/reducers';
 import {
   selectCheckOffRequired,
@@ -34,14 +34,13 @@ import {
   selectMenuItems,
 } from '../../store/selectors/lessons.selector';
 import { TaskService } from '../../task.service';
-import { take } from 'rxjs/operators';
 
 import { componentDictionary } from '../component-dictionary';
 import { IContentPlayerData } from '../content-player-dialog.service';
 import { PlaceholderDirective } from '../PlaceHolderDirective';
 import { CONTENT_PLAYER_ICONS } from './content-player-icons';
 import { findNextContent, INextContentResponse } from './findNextContent';
-import { selectIsScreenTablet } from '../../store/selectors/view.selector';
+import { selectIsScreenTabletOrSmaller } from '../../store/selectors/view.selector';
 
 export interface INextContentRequest {
   type: string;
@@ -121,10 +120,12 @@ export class ContentPlayerComponent
           this.createComponent(content, tasks, logbook);
 
           this.store
-            .select(selectIsScreenTablet)
-            .pipe(take(1), filter(Boolean))
-            .subscribe(() => {
-              this.handleCloseMenu();
+            .select(selectIsScreenTabletOrSmaller)
+            .pipe(take(1))
+            .subscribe(isScreenTabletOrSmaller => {
+              if (isScreenTabletOrSmaller) {
+                this.handleCloseMenu();
+              }
             });
         } else {
           this.dialogRef.close();
