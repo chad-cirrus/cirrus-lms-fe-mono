@@ -30,7 +30,7 @@ export interface ICourseOverview {
   progress: IProgress;
   enrollments?: IEnrollmentHistory[];
   next_lesson: Partial<ICourseOverviewLesson>;
-  badge_image: string;
+  badge: IBadge;
 }
 
 export interface ICourseOverviewStage {
@@ -42,6 +42,15 @@ export interface ICourseOverviewStage {
   lessons_are_linear: boolean;
   lessons: ICourseOverviewLesson[];
   progress: IProgress;
+}
+
+export interface IBadge {
+  id: number;
+  name: string;
+  desc: string;
+  badge_image: string;
+  progress: number;
+  isActive: boolean;
 }
 
 export interface ICertificate {

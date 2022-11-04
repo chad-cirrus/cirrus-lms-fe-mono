@@ -49,7 +49,14 @@ export const initialCourseState: CourseState = {
     stages: [],
     enrollments: [],
     next_lesson: {},
-    badge_image: '',
+    badge: {
+      id: 0,
+      name: '',
+      desc: 'none',
+      badge_image: '',
+      progress: 0,
+      isActive: false,
+    },
   },
 };
 
