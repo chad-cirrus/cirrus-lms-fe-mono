@@ -50,7 +50,11 @@
     </div>
 
     <div class="tag-row" fxLayout="row wrap" fxLayoutGap="12px">
-      <button *ngFor="let tag of checkboxArray.controls" class="tag" (click)="removeTag(tag.value)">
+      <button
+        *ngFor="let tag of checkboxArray.controls"
+        class="tag"
+        (click)="removeTag(tag.value)"
+      >
         <div>
           <img src="courses/images/svg/close.svg" />
         </div>
@@ -68,7 +72,11 @@
     fxFlex="grow"
   >
     <h2>{{ stage.title }}</h2>
-    <p class="stage-overview" *ngIf="stage.desc">{{ stage.desc }}</p>
+    <p
+      class="stage-overview"
+      [innerHtml]="stage.overview"
+      *ngIf="stage.overview"
+    ></p>
     <div
       class="item-container"
       *ngFor="let courseLesson of stage.lessons"
