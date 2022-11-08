@@ -1,14 +1,5 @@
 @use '../styles/variables' as *;
 
-// .content-container {
-//   height: 100%;
-//   width: 320px;
-// }
-
-// .content-container-notifications-menu-active {
-//   overflow-y: hidden;
-// }
-
 .error-container {
   z-index: 100;
   position: fixed;
@@ -23,29 +14,6 @@
 .bullet {
   color: $secondary-font-color-grey;
 }
-
-// .sidenav-menu {
-//   padding: 24px 32px;
-//   width: 24vw;
-//   min-width: 300px;
-//   .sidenav-menu-container {
-//     width: 100%;
-//     .header-row {
-//       padding: 24px 32px;
-//     }
-//     .lesson {
-//       margin-left: 0.5rem;
-//       align-items: center;
-//       height: 58px;
-//       line-height: 58px;
-//       padding: 0 24px;
-//       border-radius: 14px;
-//     }
-//     .lesson:hover {
-//       cursor: pointer;
-//     }
-//   }
-// }
 
 .snav-close-button {
   cursor: pointer;
@@ -65,30 +33,6 @@ ul.student-name {
   padding-inline-start: 16px;
 }
 
-// .sidenav {
-//   height: 100%;
-//   position: -webkit-sticky;
-//   position: sticky;
-// }
-
-// .header-container {
-//   top: 0;
-//   position: sticky;
-//   background-color: black;
-//   z-index: 0;
-// }
-
-// .outlet-container {
-//   position: relative;
-//   overflow-y: scroll;
-//   overflow-x: hidden;
-//   height: 100%;
-//   padding-bottom: 60px;
-//   &.stop-scrolling {
-//     overflow: hidden;
-//   }
-// }
-
 .hamburger-menu-container {
   background-color: $menu-gray;
 
@@ -97,9 +41,6 @@ ul.student-name {
     color: $secondary-font-color-grey;
   }
 }
-// .sidenav {
-//   border-right: 1px solid $border-grey;
-// }
 
 .spinner-container {
   z-index: 9999;
@@ -112,13 +53,6 @@ ul.student-name {
     stroke: $cirrus-blue !important;
   }
 }
-
-// mat-sidenav {
-//   background-color: black;
-//   color: white;
-//   top: 82px !important;
-//   left: 245px !important;
-// }
 
 
 @import 'apps/recent-activity/src/base-scss/import';
@@ -138,7 +72,7 @@ ul.student-name {
   height: 100%;
   position: fixed;
   padding: 1rem 20px;
-  top: 5.1rem;
+  top: 5.8rem;
   z-index: 5;
 }
 
