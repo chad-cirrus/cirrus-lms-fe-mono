@@ -37,6 +37,7 @@ const routes: Routes = [
           'student-dashboard',
           'training-partners',
           'edit-profile',
+          'shopping-cart',
         ].includes(url[0].path)
       ) {
         return { consumed: url };

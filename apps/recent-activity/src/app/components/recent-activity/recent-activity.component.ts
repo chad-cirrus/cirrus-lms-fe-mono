@@ -8,8 +8,7 @@ import { Observable } from 'rxjs';
 import { totalFlightHoursString } from '../../helpers/totalFlightHoursString';
 
 import { MatSidenav } from '@angular/material/sidenav';
-
-import { SidenavHeaderService } from '../../services/sidenav-header.service';
+import { SidenavHeaderService } from '@cirrus/sidenav-header';
 
 @Component({
   selector: 'cirrus-recent-activity',

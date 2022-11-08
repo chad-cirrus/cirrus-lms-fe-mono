@@ -6,8 +6,10 @@ import {
   CirrusMaterialModule,
   ErrorNotificationModule,
   MatIconRegistryModule,
+  NotificationService,
   NotificationsMenuModule,
   UiModule,
+  UserService,
 } from '@cirrus/ui';
 
 import { AppComponent } from './app.component';
@@ -42,7 +44,10 @@ import { CourseOverviewRouteComponent } from './course/course-overview-route/cou
 import { CourseLessonsRouteComponent } from './course/course-lessons-route/course-lessons-route.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { CourseEnrollmentsRouteComponent } from './course/course-enrollments-route/course-enrollments-route.component';
-import { SidenavHeaderModule } from '@cirrus/sidenav-header';
+import {
+  SidenavHeaderModule,
+  SidenavHeaderService,
+} from '@cirrus/sidenav-header';
 
 @NgModule({
   declarations: [
@@ -96,6 +101,9 @@ import { SidenavHeaderModule } from '@cirrus/sidenav-header';
       provide: 'environment',
       useValue: environment,
     },
+    NotificationService,
+    UserService,
+    SidenavHeaderService,
   ],
   bootstrap: [AppComponent],
 })

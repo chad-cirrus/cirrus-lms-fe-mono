@@ -1,15 +1,21 @@
+import { Inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { environment } from '../../environments/environment';
 import { Router } from '@angular/router';
+import { IOrder } from '@cirrus/models';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class UserService {
-  constructor(private http: HttpClient, private router: Router) {}
+  private environment!: Record<string, unknown>;
+
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    @Inject('environment') environment: Record<string, unknown>
+  ) {
+    this.environment = environment;
+  }
   logout() {
-    const url = `${environment.baseUrl}/api/v3/users/sign_out/`;
+    const url = `${this.environment.baseUrl}/api/v3/users/sign_out/`;
     return this.http.post<any>(url, {});
   }
 
@@ -32,5 +38,11 @@ export class UserService {
     localStorage.removeItem('cirrus-impersonation-return-user');
 
     this.router.navigate(['admin']);
+  }
+
+  getMyOrders() {
+    return this.http.get<IOrder>(
+      `${this.environment.baseUrl}/api/v3/orders/my-orders`
+    );
   }
 }

@@ -9,6 +9,7 @@
       (impersonationLogout)="impersonationLogout()"
       [isScreenSmall]="(isScreenSmall$ | async)!"
       [deployUrl]="'courses'"
+      [orderCount]="(myOrdersCount$ | async)!"
     ></cirrus-global-header>
   </div>
   <main>

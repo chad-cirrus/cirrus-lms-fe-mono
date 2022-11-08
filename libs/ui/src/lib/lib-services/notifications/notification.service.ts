@@ -2,12 +2,11 @@ import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { INotification } from '@cirrus/models';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class NotificationService {
-  private environment!: Record<string, unknown>;
+  private readonly environment!: Record<string, unknown>;
 
   constructor(
     private http: HttpClient,
@@ -15,6 +14,15 @@ export class NotificationService {
   ) {
     this.environment = environment;
   }
+
+  getNotificationsCount() {
+    return this.http
+      .get<INotification[]>(
+        `${this.environment.baseUrl}/api/v3/notifications/my-notifications`
+      )
+      .pipe(map(notif => notif.length));
+  }
+
   clearNotifications(notifications: INotification[]): Observable<boolean> {
     const url = `${this.environment['baseUrl']}/api/v3/notifications/clear`;
     return this.http.post<boolean>(url, { notifications });

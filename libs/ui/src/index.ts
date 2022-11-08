@@ -40,9 +40,10 @@ export * from './lib/lib-services/error/error.service';
 
 export * from './lib/StageLessonNavigationEvent';
 
-// export * from '../../models/src/testing/testData';
 export * from '../../models/src/testing/testDataIcingLesson';
 export * from '../../models/src/testing/testData853';
 export * from '../../models/src/testing/testData855';
 
 export * from './lib/helpers/DownloadPdf';
+export * from './lib/shared/user.service';
+export * from './lib/cirrus-base/CirrusBase.component';

@@ -41,6 +41,7 @@ const routes: Routes = [
           'training-partners',
           'edit-profile',
           'recent-activity',
+          'shopping-cart',
         ].includes(url[0].path)
       ) {
         return { consumed: url };

@@ -9,8 +9,10 @@ import { AuthHttpInterceptor } from './interceptors/AuthHttpInterceptor';
 import {
   CirrusMaterialModule,
   ErrorNotificationModule,
+  NotificationService,
   NotificationsMenuModule,
   UiDownloadService,
+  UserService,
 } from '@cirrus/ui';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { CoursesInProgressComponent } from './components/courses-in-progress/courses-in-progress.component';
@@ -51,8 +53,10 @@ import { FormatCourseworkTypePipe } from './components/overall-progress/coursewo
 import { FormatIacraTypePipe } from './components/overall-progress/iacra/format-iacra-type.pipe';
 import { ImageFormatterPipe } from './image-formatter.pipe';
 import { HttpErrorInterceptor } from './interceptors/http-error.interceptor';
-import { SidenavHeaderService } from './services/sidenav-header.service';
-import { SidenavHeaderModule } from '@cirrus/sidenav-header';
+import {
+  SidenavHeaderModule,
+  SidenavHeaderService,
+} from '@cirrus/sidenav-header';
 
 @NgModule({
   declarations: [
@@ -121,6 +125,8 @@ import { SidenavHeaderModule } from '@cirrus/sidenav-header';
     },
     UiDownloadService,
     SidenavHeaderService,
+    UserService,
+    NotificationService,
   ],
   bootstrap: [AppComponent],
   exports: [

@@ -18,15 +18,16 @@ export class GlobalHeaderComponent {
   @Input() cirrusUser!: ICirrusUser;
   @Input() deployUrl = '';
   @Input() cirrusImpersonationReturnUser!: ICirrusUser;
-  @Output() hamburgerMenu = new EventEmitter();
-  isDisplayingDropdown!: boolean;
-  @Input() notificationCount!: number;
-  isDisplayingHamburger!: boolean;
-
   @Input() isScreenSmall = false;
+  @Input() notificationCount = 0;
+  @Input() orderCount = 0;
 
+  @Output() hamburgerMenu = new EventEmitter();
   @Output() logout = new EventEmitter();
   @Output() impersonationLogout = new EventEmitter();
+
+  isDisplayingDropdown!: boolean;
+  isDisplayingHamburger!: boolean;
 
   toggleDropdownDisplay(e: Observable<any>) {
     e.subscribe(data => (this.isDisplayingDropdown = data));

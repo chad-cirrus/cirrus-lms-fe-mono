@@ -3,12 +3,12 @@
     <cirrus-global-header
       [cirrusUser]="(cirrusUser$ | async)!"
       [cirrusImpersonationReturnUser]="(cirrusImpersonateReturnUser$ | async)!"
-      (hamburgerMenu)="openHamburgerMenu()"
       [notificationCount]="(notificationCount$ | async)!"
       (logout)="logout()"
       (impersonationLogout)="impersonationLogout()"
       [isScreenSmall]="(isScreenSmall$ | async)!"
       [deployUrl]="'recent-activity'"
+      [orderCount]="(myOrdersCount$ | async)!"
     ></cirrus-global-header>
   </div>
   <main class="">

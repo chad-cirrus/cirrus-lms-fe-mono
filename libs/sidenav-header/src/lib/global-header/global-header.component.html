@@ -6,10 +6,18 @@
   <img src="recent-activity/images/svg/Group 1333.svg" />
   <div
     fxLayout="row"
-    fxLayoutGap="5px"
+    fxLayoutGap="16px"
     fxLayoutAlign="space-between center"
     class="dropdown-hamburger-container"
   >
+    <a routerLink="/shopping-cart" *ngIf="cirrusUser.id > 0">
+      <img src="recent-activity/images/svg/cart.svg" />
+      <span
+        matBadge="{{ orderCount }}"
+        matBadgeColor="warn"
+        [matBadgeOverlap]="false"
+      ></span>
+    </a>
     <div
       [ngClass]="
         isDisplayingDropdown
