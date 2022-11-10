@@ -12,6 +12,7 @@ import { OverlayModule } from '@angular/cdk/overlay';
 import { GlobalUserMenusComponent } from './global-user-menus/global-user-menus.component';
 import { MatIconModule } from '@angular/material/icon';
 import { GlobalHeaderComponent } from './global-header/global-header.component';
+import { CirrusMaterialModule } from '@cirrus/ui';
 
 @NgModule({
   imports: [
@@ -22,6 +23,7 @@ import { GlobalHeaderComponent } from './global-header/global-header.component';
     FlexLayoutModule,
     OverlayModule,
     MatIconModule,
+    CirrusMaterialModule,
   ],
   declarations: [
     GlobalSideNavComponent,

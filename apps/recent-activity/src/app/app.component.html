@@ -9,6 +9,7 @@
       [isScreenSmall]="(isScreenSmall$ | async)!"
       [deployUrl]="'recent-activity'"
       [orderCount]="(myOrdersCount$ | async)!"
+      (toggleNotificationsMenu)="toggleNotificationsMenu()"
     ></cirrus-global-header>
   </div>
   <main class="">

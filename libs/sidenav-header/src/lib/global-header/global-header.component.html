@@ -43,6 +43,7 @@
         [notificationCount]="notificationCount"
         (displayHamburger)="toggleHamburgerDisplay($event)"
         [deployUrl]="deployUrl"
+        (toggleNotificationsMenu)="emitToggleNotifications()"
       ></cirrus-global-hamburger-menu>
       <div
         *ngIf="notificationCount && !isDisplayingHamburger"

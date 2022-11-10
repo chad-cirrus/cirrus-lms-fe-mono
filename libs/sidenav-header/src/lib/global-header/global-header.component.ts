@@ -25,6 +25,7 @@ export class GlobalHeaderComponent {
   @Output() hamburgerMenu = new EventEmitter();
   @Output() logout = new EventEmitter();
   @Output() impersonationLogout = new EventEmitter();
+  @Output() toggleNotificationsMenu = new EventEmitter();
 
   isDisplayingDropdown!: boolean;
   isDisplayingHamburger!: boolean;
@@ -47,5 +48,9 @@ export class GlobalHeaderComponent {
 
   emitLogout() {
     this.logout.emit();
+  }
+
+  emitToggleNotifications() {
+    this.toggleNotificationsMenu.emit();
   }
 }

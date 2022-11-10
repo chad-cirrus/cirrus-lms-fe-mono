@@ -2,15 +2,10 @@ import {
   Component,
   EventEmitter,
   Input,
-  OnInit,
   Output,
-  ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
 import { ICirrusUser } from '@cirrus/models';
-import { BehaviorSubject, merge, Observable } from 'rxjs';
-import { CdkConnectedOverlay } from '@angular/cdk/overlay';
-import { map, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'cirrus-global-hamburger-menu',
@@ -18,32 +13,21 @@ import { map, tap } from 'rxjs/operators';
   styleUrls: ['./global-hamburger-menu.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
 })
-export class GlobalHamburgerMenuComponent implements OnInit {
+export class GlobalHamburgerMenuComponent {
   @Input() cirrusUser!: ICirrusUser;
   @Output() displayHamburger = new EventEmitter<any>();
   @Input() notificationCount!: number;
-  isLeftVisible = true;
-  showPanel$!: Observable<boolean>;
-  private togglePanel = new BehaviorSubject(false);
-  togglePanel$ = this.togglePanel.asObservable();
+  @Output() toggleNotificationsMenu = new EventEmitter();
+
   @Input() deployUrl = '';
+  hamburgerIcon = true;
 
-  @ViewChild(CdkConnectedOverlay, { static: true })
-  private connectedOverlay!: CdkConnectedOverlay;
-
-  private isPanelHidden$!: Observable<boolean>;
-
-  ngOnInit(): void {
-    this.isPanelHidden$ = this.connectedOverlay.backdropClick.pipe(
-      map(() => false),
-      tap(() => this.togglePanel.next(false))
-    );
-    this.showPanel$ = merge(this.togglePanel$, this.isPanelHidden$);
+  showHamburgerIcon(icon: boolean) {
+    this.hamburgerIcon = icon;
   }
 
-  toggleMenu() {
-    console.log('toggle menu');
-    this.togglePanel.next(!this.togglePanel.value);
-    this.displayHamburger.emit(this.showPanel$);
+  showNotifications() {
+    console.log('show notifications');
+    this.toggleNotificationsMenu.emit();
   }
 }
