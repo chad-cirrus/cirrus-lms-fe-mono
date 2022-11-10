@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { IProgressUpdateResponses } from '@cirrus/models';
+import { IProgress, IProgressUpdateResponses } from '@cirrus/models';
 import { createAction, props } from '@ngrx/store';
 
 export const startProgress = createAction(
@@ -19,7 +19,13 @@ export const startProgressFailure = createAction(
 
 export const completeProgress = createAction(
   '[lesson component] complete progress',
-  props<{ id: number; courseId: number; stageId: number, lessonId: number }>()
+  props<{
+    id: number;
+    courseId: number;
+    stageId: number;
+    lessonId: number;
+    progress: IProgress;
+  }>()
 );
 
 export const completeProgressSuccess = createAction(

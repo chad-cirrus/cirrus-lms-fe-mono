@@ -242,6 +242,7 @@ export class ContentPlayerComponent
               courseId: lesson.course_id,
               stageId: lesson.stage_id,
               lessonId: lesson.id,
+              progress,
             })
           );
         }

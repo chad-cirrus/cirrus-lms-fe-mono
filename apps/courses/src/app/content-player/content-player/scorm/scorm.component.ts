@@ -1,18 +1,13 @@
-/* eslint-disable @nrwl/nx/enforce-module-boundaries */
+/* eslint-disable @nrwl/nx/enforce-module-boundaries,@typescript-eslint/no-empty-function,@angular-eslint/no-empty-lifecycle-method */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-this-alias */
-import {
-  AfterViewInit,
-  Component,
-  EventEmitter,
-  Output,
-  ViewChild,
-} from '@angular/core';
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { environment } from 'apps/courses/src/environments/environment';
 import { LessonContentComponent } from 'libs/ui/src/lib/LessonContentComponent';
 import { MediaServerService } from '../../../media.service';
+import { PROGRESS_STATUS } from '@cirrus/models';
 
 @Component({
   selector: 'cirrus-scorm',
@@ -23,8 +18,6 @@ export class ScormComponent
   extends LessonContentComponent
   implements AfterViewInit
 {
-  @Output() create_scorm: EventEmitter<any> = new EventEmitter<any>();
-  @Output() update_scorm: EventEmitter<any> = new EventEmitter<any>();
   @ViewChild('frame') frame: any;
   @ViewChild('wrapper', { static: true }) wrapper: any;
   complete = false;
@@ -32,6 +25,7 @@ export class ScormComponent
   url: any = '';
   api: any;
   loading = false;
+  grade = 0;
 
   constructor(
     private sanitizer: DomSanitizer,
@@ -39,6 +33,7 @@ export class ScormComponent
     private mediaServerService: MediaServerService
   ) {
     super();
+    const $this = this;
     const route = this.router.url;
     this.api = {
       LMSInitialize: function () {
@@ -63,32 +58,24 @@ export class ScormComponent
       LMSSetValue: function (key: any, value: any) {
         // window.console && console.log('LMSSetValue("' + key + '") - ' + value);
         this.data[key] = value;
-        if (key === 'cmi.suspend_data') {
-          let newValue = null;
-          try {
-            newValue = JSON.parse(value);
-          } catch (e) {
-            newValue = value;
-          }
-          this.scorm_progress = newValue;
-          if (newValue && newValue._isComplete) {
-            this.create_scorm.emit({ status: 2, scorm_progress: newValue });
-          } else if (newValue && newValue._progress === 100) {
-            this.update_scorm.emit({ status: 2, scorm_progress: newValue });
-          } else if (newValue) {
-            if (this.complete) {
-              return;
-            }
-            this.update_scorm.emit({ status: 1, scorm_progress: newValue });
-          }
-        } else if (key === 'cmi.core.lesson_status') {
-          if (value === 'completed') {
-            this.complete = true;
-            this.update_scorm.emit({
-              status: 2,
-              scorm_progress: this.scorm_progress,
-            });
-          }
+
+        if (key === 'cmi.core.score.raw') {
+          $this.grade = +value;
+        }
+
+        if (key === 'cmi.core.lesson_status') {
+          const id = $this.content.progress.id;
+          const status =
+            value === 'completed'
+              ? PROGRESS_STATUS.completed
+              : PROGRESS_STATUS.in_progress;
+
+          const payload =
+            value === 'completed'
+              ? { id, status, scorm: { pass: true, grade: $this.grade } }
+              : { id, status };
+
+          $this.updateProgress.emit(payload);
         }
 
         return 'true';
@@ -109,6 +96,11 @@ export class ScormComponent
       },
     };
   }
+
+  // override base ngOnInit and ngOnDestroy
+  ngOnInit() {}
+
+  ngOnDestroy() {}
 
   ngAfterViewInit() {
     this.loading = true;

@@ -5,6 +5,7 @@ import {
   IInitialFile,
   ILesson,
   INotification,
+  IProgress,
   IProgressUpdateResponses,
   PROGRESS_TYPE,
 } from '@cirrus/models';
@@ -88,11 +89,14 @@ export class CoursesService {
       );
   }
 
-  completeProgress(id: number): Observable<IProgressUpdateResponses> {
+  completeProgress(
+    id: number,
+    progress: IProgress
+  ): Observable<IProgressUpdateResponses> {
     return this.http
       .post<IProgressUpdateResponses>(
         `${environment.baseUrl}/api/v4/progresses/${id}/complete`,
-        {}
+        { ...progress.scorm }
       )
       .pipe(
         map(responses =>

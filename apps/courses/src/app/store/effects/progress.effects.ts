@@ -1,13 +1,11 @@
 import { Injectable } from '@angular/core';
-import { IProgressUpdateResponses } from '@cirrus/models';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
-import { catchError, mergeMap, map, switchMap } from 'rxjs/operators';
+import { catchError, mergeMap, switchMap } from 'rxjs/operators';
 import { CoursesService } from '../../course/course.service';
 import {
   completeProgress,
   completeProgressFailure,
-  completeProgressSuccess,
   fetchLessons,
   startProgress,
   startProgressFailure,
@@ -34,8 +32,8 @@ export class ProgressEffects {
   completeProgress$ = createEffect(() =>
     this.actions$.pipe(
       ofType(completeProgress),
-      mergeMap(({ id, courseId, stageId, lessonId }) =>
-        this.coursesService.completeProgress(id).pipe(
+      mergeMap(({ id, courseId, stageId, lessonId, progress }) =>
+        this.coursesService.completeProgress(id, progress).pipe(
           switchMap(() => [
             fetchCourseOverview({ courseId }),
             fetchLessons({ courseId, stageId, lessonId }),
