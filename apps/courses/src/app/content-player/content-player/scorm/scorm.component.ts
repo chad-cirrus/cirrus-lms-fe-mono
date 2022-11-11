@@ -64,6 +64,7 @@ export class ScormComponent
         }
 
         if (key === 'cmi.core.lesson_status') {
+          $this.hidePrevAndNext.emit(value !== 'completed');
           const id = $this.content.progress.id;
           const status =
             value === 'completed'
