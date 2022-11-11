@@ -4,6 +4,7 @@ storybook_result=0
 
 environment=${NX_ENV=production}
 
+cp apps/courses/src/environments/environment.ts.example apps/courses/src/environments/environment.ts
 yarn nx run-many --target=build --projects=courses,atc,recent-activity --configuration="$environment"
 build_result=$?
 if [[ $CREATE_STORYBOOK == "true" ]];
