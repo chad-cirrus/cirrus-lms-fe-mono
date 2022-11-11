@@ -111,6 +111,48 @@
               ],
               "outputHashing": "all"
             },
+            "staging": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "2mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "7kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "apps/courses/src/environments/environment.ts",
+                  "with": "apps/courses/src/environments/environment.staging.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "uat": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "2mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "7kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "apps/courses/src/environments/environment.ts",
+                  "with": "apps/courses/src/environments/environment.uat.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
             "development": {
               "buildOptimizer": false,
               "optimization": false,
@@ -131,6 +173,12 @@
           "configurations": {
             "production": {
               "browserTarget": "courses:build:production"
+            },
+            "staging": {
+              "browserTarget": "courses:build:staging"
+            },
+            "uat": {
+              "browserTarget": "courses:build:uat"
             },
             "development": {
               "host": "cirrusapproach.local",
@@ -311,6 +359,48 @@
               ],
               "outputHashing": "all"
             },
+            "staging": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "2mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "10kb",
+                  "maximumError": "20kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "apps/recent-activity/src/environments/environment.ts",
+                  "with": "apps/recent-activity/src/environments/environment.staging.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "uat": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "2mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "10kb",
+                  "maximumError": "20kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "apps/recent-activity/src/environments/environment.ts",
+                  "with": "apps/recent-activity/src/environments/environment.uat.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
             "development": {
               "buildOptimizer": false,
               "optimization": false,
@@ -327,6 +417,12 @@
           "configurations": {
             "production": {
               "browserTarget": "recent-activity:build:production"
+            },
+            "staging": {
+              "browserTarget": "recent-activity:build:staging"
+            },
+            "uat": {
+              "browserTarget": "recent-activity:build:uat"
             },
             "development": {
               "browserTarget": "recent-activity:build:development"
