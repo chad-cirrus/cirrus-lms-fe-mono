@@ -1,5 +1,5 @@
-import { Component, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Component, Inject, NgZone } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { LESSON_COMPLETION_CTA } from './LessonCompletionCtas';
 
 @Component({
@@ -16,6 +16,18 @@ export class CompletionDialogComponent {
     @Inject(MAT_DIALOG_DATA)
     public data: {
       lesson: string;
-    }
+    },
+    public dialogRef: MatDialogRef<CompletionDialogComponent>,
+    private ngZone: NgZone
   ) {}
+
+  close(closeType: string) {
+    this.ngZone.run(() => {
+      this.dialogRef.close(
+        closeType === 'next'
+          ? this.lessonCompletionCta.nextLesson
+          : this.lessonCompletionCta.reviewLesson
+      );
+    });
+  }
 }
