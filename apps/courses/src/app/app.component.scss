@@ -79,6 +79,8 @@ ul.student-name {
 .header-container {
   background: $black;
   border-bottom: 1px solid $gray2;
+  display: flex;
+  justify-content: space-between;
   padding: 14px 17px;
   position: fixed;
   top: 0;

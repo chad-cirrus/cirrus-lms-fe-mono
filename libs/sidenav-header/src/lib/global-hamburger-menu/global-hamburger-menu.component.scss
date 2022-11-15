@@ -1,43 +1,23 @@
-:host {
-  display: block;
-  overflow: hidden;
-}
+@import '../base-scss/import';
 
-button {
-  background-color: black;
-}
-
-.dropdown-container {
-  padding-top: 10px;
-  width: 100%;
-  min-height: 25rem;
-  box-sizing: border-box;
-}
-
-.dropdown-hamburger-container {
-  height: 100%;
-}
-
-.hamburger-menu-icon-container {
-  height: 100%;
-  background-color: black;
-}
-
-.menu-item {
-  width: 234px;
-  height: 53px;
-  padding-top: 1rem;
-  padding-left: 1rem;
-  padding-right: 0.5rem;
-  color: white;
-  background-color: black;
+.mobile-menu-link-wrapper {
+  align-items: center;
+  background: $gray1;
+  color: $gray5;
   cursor: pointer;
-}
+  display: flex;
+  font-size: 1rem;
+  gap: 17px;
+  line-height: 19px;
+  padding: 15px 17px;
+  text-decoration: none;
+  transition: all 0.3s ease;
 
-.menu-item:hover {
-  background-color: black;
-}
-
-.active-close {
-  background-color: black;
+  &:hover,
+  &:active,
+  &:focus {
+    background: $gray3;
+    color: $white;
+    font-weight: bold;
+  }
 }

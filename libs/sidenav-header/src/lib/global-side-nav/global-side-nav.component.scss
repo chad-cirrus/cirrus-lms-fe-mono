@@ -34,6 +34,12 @@
   justify-content: space-between;
 }
 
+.side-nav-bottom-icons-group-col {
+  @extend .side-nav-bottom-icons-group;
+  flex-direction: column;
+  gap: 5px;
+}
+
 .sidenav-link-wrapper {
   align-items: center;
   color: $gray4;

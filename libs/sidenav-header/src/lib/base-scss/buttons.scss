@@ -61,3 +61,13 @@
         border: 1px solid $gray5;
     }
 }
+
+.dave-panel + * .cdk-overlay-pane {
+    background-color: tomato;
+    width: 100%;
+  }
+  
+  .dave-panel + * .cdk-overlay-pane > div.mat-menu-panel {
+    background-color: tomato;
+    width: 100%;
+  }

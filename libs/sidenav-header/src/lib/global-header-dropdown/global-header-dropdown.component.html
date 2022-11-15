@@ -1,9 +1,5 @@
 <div
   class="dropdown-container"
-  fxLayout="row"
-  fxLayoutGap.gt-sm="12px"
-  fxLayoutGap.lt-md="6px"
-  fxLayoutAlign="center center"
 >
   <img src="recent-activity/images/svg/profile.svg" />
   <ng-container *ngIf="isScreenSmall">
@@ -18,7 +14,7 @@
   <div>
     <ng-container *ngIf="!isScreenSmall">
       <div class="welcome-back">Welcome back,</div>
-      <div fxLayout="row" fxLayoutGap="12px">
+      <div>
         <div class="user-name">{{ cirrusUser.name || cirrusUser.email }}</div>
         <ng-container>
           <div>

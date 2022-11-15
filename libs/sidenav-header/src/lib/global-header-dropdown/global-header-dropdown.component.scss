@@ -1,8 +1,9 @@
+@import '../base-scss/import';
+
 .dropdown-container {
-  height: 100%;
-  padding: 0px 15px 0px;
+  display: flex;
   cursor: pointer;
-  color: white;
+  color: $white;
 }
 
 .welcome-back {
@@ -10,15 +11,15 @@
 }
 
 .menu-option {
-  font-size: 16px;
+  font-size: 1rem;
   line-height: 20px;
 }
 
 .mat-menu-item {
-  font-size: 16px;
+  font-size: 1rem;
   line-height: 20px;
-  background-color: #3a3a3a;
-  color: rgba(255, 255, 255, 0.6);
+  background-color: $gray3;
+  color: $gray4;
 }
 
 .back-button {
@@ -30,7 +31,7 @@
 }
 
 .user-name {
-  font-size: 15px;
+  font-size: 1rem;
 }
 
 .mat-menu-submenu-icon {

@@ -21,7 +21,6 @@ import { map, takeUntil } from 'rxjs/operators';
 export class GlobalSideNavComponent implements OnInit, OnDestroy {
   destroyed = new Subject<void>();
   @Input() cirrusUser!: ICirrusUser;
-  @Input() type = '';
   @Input() notificationCount!: number;
   @Input() deployUrl = '';
 
@@ -37,7 +36,7 @@ export class GlobalSideNavComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.breakpointObserver
-      .observe('(max-width: 950px)')
+      .observe('(max-width: 960px)')
       .pipe(
         takeUntil(this.destroyed),
         map(({ matches }) => {
@@ -53,17 +52,6 @@ export class GlobalSideNavComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.destroyed.next();
     this.destroyed.complete();
-  }
-
-  get formatBadge() {
-    if (this.notificationCount) {
-      return this.notificationCount > 99 ? '99+' : this.notificationCount;
-    }
-    return '';
-  }
-
-  dismissHamburgerMenu() {
-    this.emitDismissHamburgerMenu.emit();
   }
 
   emitToggleNotificationsMenu() {

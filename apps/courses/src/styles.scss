@@ -160,3 +160,12 @@ img[type='button'] {
   border-top-left-radius: 90px 13px !important;
   border-bottom-left-radius: 90px 13px !important;
 }
+
+.mat-ui-menu-override + * .cdk-overlay-pane {
+  width: 100%;
+}
+
+.mat-ui-menu-override + * .cdk-overlay-pane > div.mat-menu-panel {
+  background-color: $gray1;
+  min-width: 100%;
+}

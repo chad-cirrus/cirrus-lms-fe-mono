@@ -1,14 +1,7 @@
-<div
-  class="header-container"
-  fxLayout="row"
-  fxLayoutAlign="space-between center"
->
+<div class="header-container">
   <img src="recent-activity/images/svg/Group 1333.svg" />
   <div
-    fxLayout="row"
-    fxLayoutGap="16px"
-    fxLayoutAlign="space-between center"
-    class="dropdown-hamburger-container"
+    class="icons-header-container"
   >
     <a routerLink="/shopping-cart" *ngIf="cirrusUser.id > 0">
       <img src="recent-activity/images/svg/cart.svg" />
@@ -18,7 +11,8 @@
         [matBadgeOverlap]="false"
       ></span>
     </a>
-    <div
+    <div class="dropdown-menus-header-container">
+      <div
       [ngClass]="
         isDisplayingDropdown
           ? 'hamburger-menu-container-active'
@@ -50,5 +44,7 @@
         class="notifications-dot"
       ></div>
     </div>
+    </div>
+ 
   </div>
 </div>
