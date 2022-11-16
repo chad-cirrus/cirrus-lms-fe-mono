@@ -58,6 +58,7 @@ ul.student-name {
 @import 'apps/recent-activity/src/base-scss/import';
 
 .main-content-wrapper {
+  position: relative;
   width: 100%;
 }
 
@@ -72,45 +73,39 @@ ul.student-name {
   height: 100%;
   position: fixed;
   padding: 1rem 20px;
-  top: 5.8rem;
-  z-index: 5;
-}
-
-.header-container {
-  background: $black;
-  border-bottom: 1px solid $gray2;
-  display: flex;
-  justify-content: space-between;
-  padding: 14px 17px;
-  position: fixed;
-  top: 0;
-  width: 100%;
+  top: 6.5rem;
   z-index: 5;
 
   @include breakpoint(mobile) {
-    padding: 25px;
+    top: 5.5rem;
   }
 
   @include breakpoint(tablet) {
-    padding: 25px 60px;
+    top: 6rem;
+  }
+  @include breakpoint(desktop) {
+    top: 6rem;
   }
 }
 
 .content-container {
   background: $black;
   color: $white;
-  margin-top: 6.9rem;
-  padding: 30px 0;
+  margin-top: 5.5rem;;
   width: 100%;
 
   @include breakpoint(mobile) {
     float: right;
-    margin-top: 5.1rem;
-    width: calc(100% - 107px);
+    margin-top: 5.5rem;;
+    width: calc(100% - 125px);
   }
 
   @include breakpoint(tablet) {
-    padding: 50px 0;
+    margin-top: 6rem;
+    width: calc(100% - 244px);
+  }
+  @include breakpoint(desktop) {
+    margin-top: 6rem;
     width: calc(100% - 244px);
   }
 }
@@ -128,3 +123,4 @@ mat-sidenav {
   top: 82px !important;
   left: 245px !important;
 }
+

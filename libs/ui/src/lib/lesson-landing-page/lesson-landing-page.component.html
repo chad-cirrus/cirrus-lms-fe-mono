@@ -47,7 +47,7 @@
     </div>
   </div>
 
-  <div class="main-content-wrapper" [ngClass]="instructorView ? 'instructor-view' : 'student-view'">
+  <div class="courses-main-content-inner-wrapper" [ngClass]="instructorView ? 'instructor-view' : 'student-view'">
     <div *ngIf="!instructorView && lesson.progress_stats" class="cirrus-progress-row">
       <cirrus-lesson-progress-stats [progress]="lesson.progress_stats"></cirrus-lesson-progress-stats>
     </div>

@@ -1,31 +1,15 @@
 <div
-  class="dropdown-container"
+  class="user-menu-dropdown-container"
 >
-  <img src="recent-activity/images/svg/profile.svg" />
-  <ng-container *ngIf="isScreenSmall">
-    <div>
-      <img
-        src="recent-activity/images/svg/down-chevron.svg"
-        height="8.63px"
-        width="24px"
-      />
-    </div>
-  </ng-container>
-  <div>
-    <ng-container *ngIf="!isScreenSmall">
-      <div class="welcome-back">Welcome back,</div>
-      <div>
-        <div class="user-name">{{ cirrusUser.name || cirrusUser.email }}</div>
-        <ng-container>
-          <div>
-            <img
-              src="recent-activity/images/svg/down-chevron.svg"
-              height="8.63px"
-              width="24px"
-            />
-          </div>
-        </ng-container>
-      </div>
-    </ng-container>
+  <img class="profile-icon" src="recent-activity/images/svg/profile.svg" />
+  <div class="welcome-back-wrapper">
+    <p class="welcome-back">Welcome back,</p>
+    <h1 class="heading-large user-name">{{ cirrusUser.name || cirrusUser.email }}</h1>
   </div>
+    <img
+    class="chevron-icon"
+    src="recent-activity/images/svg/down-chevron.svg"
+    height="8.63px"
+    width="24px"
+    />
 </div>

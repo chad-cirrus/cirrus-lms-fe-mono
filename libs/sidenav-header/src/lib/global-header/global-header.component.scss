@@ -6,6 +6,7 @@
   display: flex;
   justify-content: space-between;
   padding: 14px 17px;
+  padding-right: 0;
   position: fixed;
   top: 0;
   width: 100%;
@@ -16,7 +17,7 @@
   }
 
   @include breakpoint(tablet) {
-    padding: 25px 60px;
+    padding: 29px 60px;
   }
 }
 
@@ -24,16 +25,25 @@
   align-items: center;
   display: flex;
   justify-content: space-between;
-  min-width: 170px;
-
+  width: 50%;
+  @include breakpoint(mobile) {
+    width: 40%;
+  }
+  @include breakpoint(tablet) {
+    width: 25%;
+  }
+  @include breakpoint(desktop) {
+    width: 20%;
+  }
 }
 
 .dropdown-menus-header-container {
   align-items: center;
   display: flex;
-  gap: 1rem;
   justify-content: space-between;
-  max-width: 100px;
+
+  @include breakpoint(mobile) {
+  }
 }
 
 .notifications-dot {
@@ -44,4 +54,9 @@
   height: 7.09px;
   border-radius: 90px;
   background-color: $neon-red;
+}
+
+.shopping-cart-icon-wrapper { 
+  position: relative;
+  margin-right: 1rem;
 }

@@ -3,21 +3,19 @@
   <div
     class="icons-header-container"
   >
-    <a routerLink="/shopping-cart" *ngIf="cirrusUser.id > 0">
-      <img src="recent-activity/images/svg/cart.svg" />
-      <span
-        matBadge="{{ orderCount }}"
-        matBadgeColor="warn"
-        [matBadgeOverlap]="false"
-      ></span>
-    </a>
+    <div class="shopping-cart-icon-wrapper">
+      <a routerLink="/shopping-cart" *ngIf="cirrusUser.id > 0">
+        <img src="recent-activity/images/svg/cart.svg" />
+        <span
+          matBadge="{{ orderCount }}"
+          matBadgeColor="warn"
+          [matBadgeOverlap]="false"
+        ></span>
+      </a>
+    </div>
+ 
     <div class="dropdown-menus-header-container">
       <div
-      [ngClass]="
-        isDisplayingDropdown
-          ? 'hamburger-menu-container-active'
-          : 'hamburger-menu-container'
-      "
     >
       <cirrus-global-user-menus
         [cirrusUser]="cirrusUser"

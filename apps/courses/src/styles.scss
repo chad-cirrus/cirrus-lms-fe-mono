@@ -12,6 +12,7 @@
 @import '~@angular/cdk/overlay-prebuilt.css';
 
 @include app-component.cirrus-app-component($theme);
+@import 'apps/recent-activity/src/base-scss/import';
 
 html,
 body,
@@ -169,3 +170,15 @@ img[type='button'] {
   background-color: $gray1;
   min-width: 100%;
 }
+
+.courses-main-content-inner-wrapper {
+  padding: 30px 20px;
+
+  @include breakpoint(mobile) {
+    padding: 30px 25px;
+  }
+  @include breakpoint(tablet) {
+    padding: 45px 50px;
+  }
+}
+
