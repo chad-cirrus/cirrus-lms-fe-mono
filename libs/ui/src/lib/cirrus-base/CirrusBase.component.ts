@@ -42,7 +42,11 @@ export abstract class CirrusBaseComponent implements OnInit, OnDestroy {
   notificationCount$ = this.notificationService.getNotificationsCount();
   myOrdersCount$ = this.userService
     .getMyOrders()
-    .pipe(map(order => order.order_line_items.length));
+    .pipe(
+      map(
+        order => (order?.order_line_items && order.order_line_items.length) ?? 0
+      )
+    );
   error$ = this.errorService.error$;
 
   protected _isNotificationsMenuOpenSubject = new BehaviorSubject(false);
