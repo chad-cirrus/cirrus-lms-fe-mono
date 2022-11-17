@@ -58,6 +58,7 @@ ul.student-name {
 @import 'apps/recent-activity/src/base-scss/import';
 
 .main-content-wrapper {
+  overflow: hidden;
   position: relative;
   width: 100%;
 }
