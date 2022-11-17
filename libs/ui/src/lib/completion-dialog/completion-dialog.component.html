@@ -1,6 +1,11 @@
 <div class="container" fxLayout="column" fxLayoutAlign="space-between">
-  <div class="close" fxLayout="row" fxLayoutAlign="end center">
-    <img src="courses/images/svg/close-btn-heavy.svg" mat-dialog-close />
+  <div
+    class="close"
+    fxLayout="row"
+    fxLayoutAlign="end center"
+    (click)="close('review')"
+  >
+    <img src="courses/images/svg/close-btn-heavy.svg" />
   </div>
   <div class="main">
     <div class="message">You've completed {{ data.lesson }}</div>

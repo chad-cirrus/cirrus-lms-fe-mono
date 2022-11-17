@@ -101,7 +101,9 @@ export class ScormComponent
   // override base ngOnInit and ngOnDestroy
   ngOnInit() {}
 
-  ngOnDestroy() {}
+  ngOnDestroy() {
+    this.hidePrevAndNext.next(false);
+  }
 
   ngAfterViewInit() {
     this.loading = true;

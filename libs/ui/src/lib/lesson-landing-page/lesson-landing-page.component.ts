@@ -1,11 +1,5 @@
 /* eslint-disable @nrwl/nx/enforce-module-boundaries */
-import {
-  Component,
-  EventEmitter,
-  Input,
-  Output,
-  ViewChild,
-} from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { IContent, ICourseOverview, ILesson } from '@cirrus/models';
 import { StagesOverlayComponent } from '../stages-overlay/stages-overlay.component';
@@ -14,6 +8,7 @@ import { Router } from '@angular/router';
 
 enum LessonStatus {
   NOT_STARTED = 'not_started',
+  IN_PROGRESS = 'in_progress',
 }
 
 @Component({
@@ -175,17 +170,25 @@ export class LessonLandingPageComponent {
   }
 
   playCurrentContent() {
-    const content = this.lesson.contents.find(
+    const contentNotStarted = this.lesson.contents.find(
       c => c.progress.status === LessonStatus.NOT_STARTED
     );
 
-    if (!content) {
+    const contentInProgress = this.lesson.contents.find(
+      c => c.progress.status === LessonStatus.IN_PROGRESS
+    );
+
+    if (!contentNotStarted && !contentInProgress) {
       this.playNextLessonContent.emit(this.courseOverview);
       return;
     }
 
     setTimeout(() => {
-      this.fetchMediaOutput.next(content);
+      if (contentNotStarted) {
+        this.fetchMediaOutput.next(contentNotStarted);
+      } else {
+        this.fetchMediaOutput.next(contentInProgress);
+      }
     }, 1000);
   }
 

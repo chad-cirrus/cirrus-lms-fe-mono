@@ -192,9 +192,9 @@ export class LessonComponent implements OnInit, OnDestroy {
   }
 
   playNextLessonContent() {
-    this.nextLesson$.subscribe(nextLesson =>
-      this.router.navigate([nextLesson])
-    );
+    this.nextLesson$
+      .subscribe(nextLesson => this.router.navigate([nextLesson]))
+      .unsubscribe();
   }
 
   openSideNav() {
