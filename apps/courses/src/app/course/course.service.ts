@@ -28,11 +28,21 @@ export class CoursesService {
 
   private coursesUrl = 'api/v4/courses';
   private scormUrl = 'scorm';
-  notifications$ = this.http.get<INotification[]>(
-    `${environment.baseUrl}/api/v3/notifications/my-notifications`
-  );
+
+  notificationSubject = new BehaviorSubject<INotification[]>([]);
+  notifications$ = this.notificationSubject.asObservable();
 
   constructor(private http: HttpClient, private taskService: TaskService) {}
+
+  getNotifications() {
+    this.http
+      .get<INotification[]>(
+        `${environment.baseUrl}/api/v3/notifications/my-notifications`
+      )
+      .subscribe(val => {
+        this.notificationSubject.next(val);
+      });
+  }
 
   getLessons(
     courseId: number,

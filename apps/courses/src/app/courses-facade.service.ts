@@ -22,7 +22,7 @@ export class CoursesFacadeService {
   ) {}
 
   getNotifications() {
-    return this.courseService.notifications$.subscribe();
+    this.courseService.getNotifications();
   }
 
   acceptInvite(notification: INotification) {

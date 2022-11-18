@@ -3,7 +3,6 @@
     <cirrus-global-header
       [cirrusUser]="(cirrusUser$ | async)!"
       [cirrusImpersonationReturnUser]="(cirrusImpersonateReturnUser$ | async)!"
-      (hamburgerMenu)="openHamburgerMenu()"
       [notificationCount]="(notifications$ | async)?.length!"
       (logout)="logout()"
       (impersonationLogout)="impersonationLogout()"

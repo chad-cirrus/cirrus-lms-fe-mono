@@ -44,7 +44,9 @@ export class AppComponent
 
   project = environment.project;
 
-  notifications$: Observable<any> = this.courseService.notifications$;
+  notifications$: Observable<INotification[]> =
+    this.courseService.notifications$;
+
   sideNavOpen$: Observable<boolean> = this.store.select(selectSideNavOpen);
   ftgNotPilot = 160;
   ftgPilot = 112;
@@ -72,11 +74,12 @@ export class AppComponent
       notificationService,
       errorService
     );
-
   }
 
   ngOnInit() {
     super.ngOnInit();
+
+    this.courseService.getNotifications();
 
     this.triggerSubscription = this.appService.getTrigger().subscribe(() => {
       this.outletContainer.nativeElement.scrollTop = 0;
