@@ -39,8 +39,6 @@ export class AppComponent
   recentActivityNotifications$ =
     this.recentActivityService.recentActivityNotifications$;
 
-  screenOrientation: ScreenOrientation = window.screen.orientation;
-
   constructor(
     private store: Store<AppState>,
     private recentActivityService: RecentActivityService,
@@ -58,7 +56,6 @@ export class AppComponent
       notificationService,
       errorService
     );
-    this.screenOrientation.lock('portrait');
   }
 
   ngOnInit() {

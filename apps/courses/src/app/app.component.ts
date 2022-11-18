@@ -54,9 +54,6 @@ export class AppComponent
 
   triggerSubscription!: Subscription;
   @ViewChild(MatSidenav) sideNav!: MatSidenav;
-
-  screenOrientation: ScreenOrientation = window.screen.orientation;
-
   constructor(
     private store: Store<AppState>,
     private appService: AppService,
@@ -76,7 +73,6 @@ export class AppComponent
       errorService
     );
 
-    this.screenOrientation.lock('portrait');
   }
 
   ngOnInit() {

@@ -97,8 +97,6 @@ export class ContentPlayerComponent
 
   @ViewChild(PlaceholderDirective) vcref!: PlaceholderDirective;
 
-  screenOrientation: ScreenOrientation = window.screen.orientation;
-
   constructor(
     @Inject(MAT_DIALOG_DATA)
     public data: IContentPlayerData,
@@ -108,8 +106,6 @@ export class ContentPlayerComponent
   ) {}
 
   ngOnInit(): void {
-    this.screenOrientation.unlock();
-
     combineLatest([
       this.currentContentItem$,
       this.taskService.tasksAndLogBooks$,
@@ -150,7 +146,6 @@ export class ContentPlayerComponent
   ngOnDestroy(): void {
     this.destroy$.next(true);
     this.destroy$.unsubscribe();
-    this.screenOrientation.lock('portrait');
   }
 
   createComponent(
