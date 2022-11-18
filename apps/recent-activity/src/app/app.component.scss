@@ -1,12 +1,18 @@
 @import 'apps/recent-activity/src/base-scss/import';
 
+.error-container {
+  z-index: 100;
+  position: fixed;
+  top: 91%;
+  right: 2%;
+}
+
 .main-content-wrapper {
   width: 100%;
 }
 
-.main-content-wrapper-notifications-menu-active {
-  height: 100vh;
-  overflow-y: hidden;
+.notifications-menu-active {
+  opacity: 0.5;
 }
 
 .sidenav-wrapper {
@@ -38,16 +44,42 @@
   }
 }
 
-.error-container {
-  z-index: 100;
-  position: fixed;
-  top: 91%;
-  right: 2%;
-}
-
-mat-sidenav {
+.sidenav {
+  width: 100%;
   background-color: $black;
   color: $white;
-  top: 82px !important;
-  left: 245px !important;
+  @include breakpoint(mobile) {
+    width: 561px;
+    top: 82px !important;
+    left: 245px !important;
+  }
+  @include breakpoint(tablet) {
+    width: 434px;
+  }
+}
+
+.sidenav-collapse {
+  width: 100%;
+  background-color: $black;
+  color: $white;
+  @include breakpoint(mobile) {
+    width: 561px;
+    top: 82px !important;
+    left: 107px !important;
+  }
+  @include breakpoint(tablet) {
+    width: 434px;
+  }
+}
+
+.mat-drawer {
+  background-color: $gray1;
+}
+
+.mat-drawer-container {
+  z-index: 10;
+
+  @include breakpoint(mobile) {
+    z-index: 1;
+  }
 }

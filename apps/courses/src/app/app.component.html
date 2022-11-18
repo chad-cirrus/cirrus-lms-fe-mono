@@ -7,58 +7,55 @@
       [notificationCount]="(notifications$ | async)?.length!"
       (logout)="logout()"
       (impersonationLogout)="impersonationLogout()"
+      (toggleNotificationsMenu)="toggleNotificationsMenu()"
       [isScreenSmall]="(isScreenSmall$ | async)!"
       [deployUrl]="'courses'"
       [orderCount]="(myOrdersCount$ | async)!"
     ></cirrus-global-header>
   </div>
   <main>
-    <div
-    [ngClass]="
-    (isNotificationMenuOpen$ | async)
-      ? 'main-content-wrapper-notifications-menu-active'
-      : 'main-content-wrapper'
-  "
-    >
-    <div class="sidenav-wrapper" *ngIf="(isScreenSmall$ | async) === false">
-      <cirrus-global-side-nav
-        [cirrusUser]="(cirrusUser$ | async)!"
-        (emitCollapse)="toggleCollapse($event)"
-        [notificationCount]="(notifications$ | async)?.length!"
-        (toggleNotificationsMenu)="toggleNotificationsMenu()"
-        [deployUrl]="'courses'"
-      ></cirrus-global-side-nav>
-    </div>
-   
-    <div class="content-container">
-      <div *ngIf="error$ | async" class="error-container">
-        <cirrus-error-notification
-          [calledFromWhatMfe]="project"
-          (emitClose)="dismissErrorMessage()"
-        ></cirrus-error-notification>
+    <div class="main-content-wrapper">
+      <div class="sidenav-wrapper" *ngIf="(isScreenSmall$ | async) === false">
+        <cirrus-global-side-nav
+          [cirrusUser]="(cirrusUser$ | async)!"
+          (emitCollapse)="toggleCollapse($event)"
+          [notificationCount]="(notifications$ | async)?.length!"
+          (toggleNotificationsMenu)="toggleNotificationsMenu()"
+          [deployUrl]="'courses'"
+        ></cirrus-global-side-nav>
       </div>
-      
-      <div
-        class="outlet-container"
-        #outletContainer
-      >
 
-      <router-outlet></router-outlet>
-       
-      <div *ngIf="loadingIndicator$ | async" class="spinner-container">
-          <mat-spinner color="accent"></mat-spinner>
+      <div class="content-container">
+        <div *ngIf="error$ | async" class="error-container">
+          <cirrus-error-notification
+            [calledFromWhatMfe]="project"
+            (emitClose)="dismissErrorMessage()"
+          ></cirrus-error-notification>
         </div>
 
+        <div
+          [ngClass]="
+            (isNotificationMenuOpen$ | async)
+              ? 'main-content-wrapper-notifications-menu-active'
+              : 'main-content-wrapper'
+          "
+          #outletContainer
+        >
+          <router-outlet></router-outlet>
+
+          <div *ngIf="loadingIndicator$ | async" class="spinner-container">
+            <mat-spinner color="accent"></mat-spinner>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
   </main>
 </div>
 
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav
     #drawer
-    class="sidenav"
+    [ngClass]="collapse ? 'sidenav-collapse' : 'sidenav'"
     fixedInViewport="true"
     mode="push"
     (closedStart)="drawerClosed()"

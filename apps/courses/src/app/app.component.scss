@@ -7,6 +7,10 @@
   right: 2%;
 }
 
+.sidenav-container {
+  background-color: #fbc219 !important;
+}
+
 .course-name {
   border-bottom: 1px solid black;
 }
@@ -54,7 +58,6 @@ ul.student-name {
   }
 }
 
-
 @import 'apps/recent-activity/src/base-scss/import';
 
 .main-content-wrapper {
@@ -64,8 +67,7 @@ ul.student-name {
 }
 
 .main-content-wrapper-notifications-menu-active {
-  height: 100vh;
-  overflow-y: hidden;
+  opacity: 0.5;
 }
 
 .sidenav-wrapper {
@@ -118,10 +120,36 @@ ul.student-name {
   right: 2%;
 }
 
-mat-sidenav {
-  background-color: black;
-  color: white;
-  top: 82px !important;
-  left: 245px !important;
+mat-sidenav.sidenav {
+  width: 100%;
+  background-color: $black;
+  color: $white;
+  top: 62px;
+  @include breakpoint(mobile) {
+    width: 561px;
+    top: 82px;
+    left: 245px;
+  }
+  @include breakpoint(tablet) {
+    width: 434px;
+  }
+}
+
+mat-sidenav.sidenav-collapse {
+  width: 100%;
+  background-color: $black;
+  color: $white;
+  @include breakpoint(mobile) {
+    width: 561px;
+    top: 82px;
+    left: 107px;
+  }
+  @include breakpoint(tablet) {
+    width: 434px;
+  }
+}
+
+.mat-drawer {
+  background-color: $gray1;
 }
 

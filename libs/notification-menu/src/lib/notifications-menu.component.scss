@@ -1,8 +1,7 @@
-@use '../../styles/variables' as *;
+@import './base-scss/import';
 
 .notifications-container {
-  min-width: 564px;
-  background-color: $gray1;
+  overflow-y: scroll;
 }
 
 .title-container-wrapper {
@@ -20,6 +19,7 @@
   display: flex;
   align-items: center;
   gap: 12px;
+  margin: 17px 0 19px 0;
 }
 
 .clear-all {
@@ -54,13 +54,10 @@
   display: flex;
   justify-content: space-between;
   margin-bottom: 5px;
-  .body-copy-xsmall {
-    color: $gray4;
-  }
 }
 
 .small {
-  color: $gray6;
+  color: $gray4;
 }
 
 .message {
@@ -69,6 +66,7 @@
 
 .primary-btn {
   margin-right: 47px;
+  border: none;
 }
 
 .email-text {
@@ -77,4 +75,31 @@
 
 .title-notifications {
   padding: 17px 0px 19px 19px;
+}
+
+.action-container {
+  display: flex;
+  align-items: center;
+  margin-top: 24px;
+}
+
+.link {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.closeIcon {
+  cursor: pointer;
+}
+
+h3,
+p {
+  margin: 0;
+}
+
+.body-copy-xsmall {
+  font-size: 0.875rem;
+  letter-spacing: 0.03em;
+  line-height: 1.35;
+  color: $gray4;
 }

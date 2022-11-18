@@ -13,13 +13,7 @@
     ></cirrus-global-header>
   </div>
   <main class="">
-    <div
-      [ngClass]="
-        (isNotificationMenuOpen$ | async)
-          ? 'main-content-wrapper-notifications-menu-active'
-          : 'main-content-wrapper'
-      "
-    >
+    <div class="main-content-wrapper">
       <div class="sidenav-wrapper" *ngIf="(isScreenSmall$ | async) === false">
         <cirrus-global-side-nav
           [cirrusUser]="(cirrusUser$ | async)!"
@@ -38,7 +32,13 @@
           ></cirrus-error-notification>
         </div>
 
-        <div class="outlet-container" #outletContainer>
+        <div
+          class="router-outlet-wrapper"
+          [ngClass]="
+            (isNotificationMenuOpen$ | async) ? 'notifications-menu-active' : ''
+          "
+          #outletContainer
+        >
           <router-outlet></router-outlet>
         </div>
       </div>
@@ -49,7 +49,7 @@
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav
     #drawer
-    class="sidenav"
+    [ngClass]="collapse ? 'sidenav-collapse' : 'sidenav'"
     fixedInViewport="true"
     mode="push"
     (closedStart)="drawerClosed()"

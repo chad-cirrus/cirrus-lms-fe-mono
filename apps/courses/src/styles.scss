@@ -29,9 +29,9 @@ main {
   max-height: initial;
 }
 
-.mat-drawer-inner-container {
-  overflow: hidden !important;
-}
+// .mat-drawer-inner-container {
+//   overflow: hidden !important;
+// }
 
 //cursor for images set to button
 img[type='button'] {
@@ -90,7 +90,7 @@ img[type='button'] {
     border-bottom: 1px solid $gray1;
     background-color: $gray2;
     border-radius: 0px;
-    &~.text-filter-container {
+    & ~ .text-filter-container {
       border-top: 1px solid $gray1;
     }
   }
@@ -140,7 +140,7 @@ img[type='button'] {
   border: 1px solid $gray5;
   border-radius: 60px;
   cursor: pointer;
-  &>div {
+  & > div {
     display: flex;
   }
 }

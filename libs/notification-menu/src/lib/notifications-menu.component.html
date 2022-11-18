@@ -2,7 +2,7 @@
   <div class="title-container-wrapper">
     <div class="title-container">
       <div class="title-notifications">
-        <h1 class="heading-3">Notifications</h1>
+        <h3 class="heading-3">Notifications</h3>
         <span
           class="alarm-badge"
           matBadge="{{ notifications?.length }}"
@@ -10,7 +10,11 @@
           matBadgeOverlap="false"
         ></span>
       </div>
-      <img src="recent-activity/images/svg/close.svg" (click)="dismiss()" />
+      <img
+        class="closeIcon"
+        src="recent-activity/images/svg/close.svg"
+        (click)="dismiss()"
+      />
     </div>
   </div>
 
@@ -30,7 +34,7 @@
             (click)="deleteNotification(notification.id)"
           />
         </div>
-        <div class="heading-6 akzidenz-medium">
+        <div class="heading-6">
           {{ notification.notific_type | notificationTitleType: notification }}
         </div>
         <div class="notification-item-body">

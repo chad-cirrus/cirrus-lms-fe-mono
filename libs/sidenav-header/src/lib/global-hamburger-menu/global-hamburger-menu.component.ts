@@ -27,7 +27,6 @@ export class GlobalHamburgerMenuComponent {
   }
 
   showNotifications() {
-    console.log('show notifications');
     this.toggleNotificationsMenu.emit();
   }
 }

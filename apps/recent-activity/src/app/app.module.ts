@@ -10,10 +10,12 @@ import {
   CirrusMaterialModule,
   ErrorNotificationModule,
   NotificationService,
-  NotificationsMenuModule,
   UiDownloadService,
   UserService,
 } from '@cirrus/ui';
+
+import { NotificationsMenuModule } from '@cirrus/notification-menu';
+
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { CoursesInProgressComponent } from './components/courses-in-progress/courses-in-progress.component';
 import { AchievementsComponent } from './components/achievements/achievements.component';

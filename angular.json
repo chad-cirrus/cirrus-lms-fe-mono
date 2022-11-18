@@ -305,6 +305,32 @@
       },
       "tags": []
     },
+    "notification-menu": {
+      "projectType": "library",
+      "root": "libs/notification-menu",
+      "sourceRoot": "libs/notification-menu/src",
+      "prefix": "cirrus",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/notification-menu"],
+          "options": {
+            "jestConfig": "libs/notification-menu/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/notification-menu/src/**/*.ts",
+              "libs/notification-menu/src/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
     "recent-activity": {
       "projectType": "application",
       "root": "apps/recent-activity",

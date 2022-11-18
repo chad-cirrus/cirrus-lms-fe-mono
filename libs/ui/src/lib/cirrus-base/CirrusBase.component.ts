@@ -89,6 +89,7 @@ export abstract class CirrusBaseComponent implements OnInit, OnDestroy {
   }
 
   toggleNotificationsMenu() {
+    console.log('firing in base');
     this.sidenavHeaderService.toggleShowNotifications();
   }
 

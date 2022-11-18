@@ -7,10 +7,11 @@ import {
   ErrorNotificationModule,
   MatIconRegistryModule,
   NotificationService,
-  NotificationsMenuModule,
   UiModule,
   UserService,
 } from '@cirrus/ui';
+
+import { NotificationsMenuModule } from '@cirrus/notification-menu';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
