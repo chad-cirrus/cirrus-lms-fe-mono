@@ -2,7 +2,7 @@ import { Meta, moduleMetadata, Story } from '@storybook/angular';
 import { CertificatesFullComponent } from './certificates-full.component';
 import { Certificate } from '../../../models/IRecentActivity';
 import { HttpClientModule } from '@angular/common/http';
-import { UiDownloadService } from '@cirrus/ui';
+import { NotificationService, UiDownloadService } from '@cirrus/ui';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
@@ -52,6 +52,7 @@ export default {
           useValue: mockEnvironment,
         },
         UiDownloadService,
+        NotificationService,
       ],
     }),
   ],

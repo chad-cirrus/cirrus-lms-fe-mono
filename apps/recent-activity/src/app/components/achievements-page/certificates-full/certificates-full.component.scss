@@ -1,10 +1,10 @@
 @import 'apps/recent-activity/src/base-scss/import';
 
 .certificates-full-container {
-  margin-top: 20px;
+  padding: 20px 0;
 
   @include breakpoint(mobile) {
-    margin-top: 25px;
+    padding: 25px 0;
   }
 }
 
@@ -13,7 +13,7 @@
 
   .mat-form-field {
     width: 100%;
-    @include breakpoint(mobile){
+    @include breakpoint(mobile) {
       width: 50%;
     }
   }
@@ -28,9 +28,9 @@
 .cert-internal-item-wrapper {
   display: flex;
   flex-direction: column;
-  @include breakpoint(mobile){
-  flex-direction: row;
-  justify-content: space-between;
+  @include breakpoint(mobile) {
+    flex-direction: row;
+    justify-content: space-between;
   }
 }
 
@@ -39,32 +39,31 @@
   padding: 35px 20px;
   width: 100%;
 
-  @include breakpoint(mobile){
+  @include breakpoint(mobile) {
     margin-top: 35px;
     padding: 1rem;
     padding-left: 0;
-   }
+  }
 
-  @include breakpoint(tablet){
+  @include breakpoint(tablet) {
     margin-top: 30px;
     padding: 20px 15px;
     padding-left: 0;
   }
 }
 
-
 .certificate-item-outer-wrapper {
   border-bottom: 1px solid $gray3;
   padding: 35px 20px;
 
-  @include breakpoint(mobile){
+  @include breakpoint(mobile) {
     padding: 1rem;
     padding-left: 0;
-   }
+  }
 
-  @include breakpoint(tablet){
-   padding: 20px 15px;
-   padding-left: 0;
+  @include breakpoint(tablet) {
+    padding: 20px 15px;
+    padding-left: 0;
   }
 }
 
@@ -76,11 +75,11 @@
     width: 60%;
   }
 
-  @include breakpoint(tablet){
+  @include breakpoint(tablet) {
     width: 45%;
   }
 
-  @include breakpoint(desktop){
+  @include breakpoint(desktop) {
     width: 35%;
   }
 }
@@ -125,9 +124,9 @@
   cursor: pointer;
   display: flex;
   margin-top: 25px;
-  transition: all .3s ease;
+  transition: all 0.3s ease;
 
-  &:hover{
+  &:hover {
     color: $white;
     font-weight: bold;
   }
@@ -141,4 +140,13 @@
   height: 18px;
   margin-right: 9px;
   width: 15px;
+}
+
+.no-certs-full {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  padding: 48px 0;
+  align-items: center;
+  text-align: center;
 }

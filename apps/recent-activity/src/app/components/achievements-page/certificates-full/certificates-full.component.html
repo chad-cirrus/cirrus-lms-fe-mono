@@ -6,7 +6,7 @@
     training needs.
   </p>
 
-  <div class="certificates-input-wrapper">
+  <div class="certificates-input-wrapper" *ngIf="certificates.length">
     <mat-form-field *ngIf="certificates.length" appearance="fill">
       <input
         matInput
@@ -19,7 +19,6 @@
   </div>
 
   <div class="cert-table-wrapper" *ngIf="certificates.length; else noCerts">
-    
     <div class="cert-table-header-wrapper">
       <span class="heading-6">COURSE</span>
       <div class="cert-header-internal-wrapper">
@@ -28,32 +27,35 @@
       </div>
     </div>
 
-
     <div
       class="certificate-item-outer-wrapper"
       *ngFor="let cert of filteredCertList$ | async"
     >
-      <div class="cert-name-wrapper"><h6 class="heading-6">{{ cert.course_name }}</h6></div>
+      <div class="cert-name-wrapper">
+        <h6 class="heading-6">{{ cert.course_name }}</h6>
+      </div>
       <div class="cert-internal-item-wrapper">
-        <div class="cert-date-wrapper"><h6 class="body-copy-small cert-date">{{ cert.enrollment_date }}</h6></div>
+        <div class="cert-date-wrapper">
+          <p class="body-copy-small cert-date">{{ cert.enrollment_date }}</p>
+        </div>
 
         <span class="download download-cert-item" (click)="download(cert)">
-            <span
-              *ngIf="
-                (loading$ | async) &&
-                  cert.course_attempt_id === course_attempt_id;
-                else downloadIcon
-              "
-            >
-              <mat-spinner color="accent" [diameter]="20"></mat-spinner>
-            </span>
-            <ng-template #downloadIcon>
-              <img
-                class="download-icon"
-                src="recent-activity/images/svg/download-arrow.svg"
-                alt=""
-              />
-            </ng-template>
+          <span
+            *ngIf="
+              (loading$ | async) &&
+                cert.course_attempt_id === course_attempt_id;
+              else downloadIcon
+            "
+          >
+            <mat-spinner color="accent" [diameter]="20"></mat-spinner>
+          </span>
+          <ng-template #downloadIcon>
+            <img
+              class="download-icon"
+              src="recent-activity/images/svg/download-arrow.svg"
+              alt=""
+            />
+          </ng-template>
           <h6 class="body-copy-small">Download</h6>
         </span>
       </div>

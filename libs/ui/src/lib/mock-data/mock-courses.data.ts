@@ -5,6 +5,15 @@ import {
 } from '@cirrus/models';
 
 export const course351: ICourseOverview = {
+  badge: {
+    id: 0,
+    name: '',
+    desc: '',
+    badge_image: '',
+    progress: 0,
+    isActive: false,
+  },
+  started_at: '',
   id: 351,
   name: 'SR20 Avidyne Entegra Advanced Transition ',
   major_version: 4,
@@ -427,6 +436,15 @@ export const course351: ICourseOverview = {
 };
 
 export const course357: ICourseOverview = {
+  badge: {
+    id: 0,
+    name: '',
+    desc: '',
+    badge_image: '',
+    progress: 0,
+    isActive: false,
+  },
+  started_at: '',
   id: 357,
   name: 'Avidyne Entegra Advanced Avionics Differences',
   overview:
@@ -603,6 +621,15 @@ export const course357: ICourseOverview = {
 };
 
 export const course351Completed: ICourseOverview = {
+  badge: {
+    id: 0,
+    name: '',
+    desc: '',
+    badge_image: '',
+    progress: 0,
+    isActive: false,
+  },
+  started_at: '',
   id: 199,
   name: 'Instrument Flight Procedures Course',
   overview:
@@ -985,6 +1012,15 @@ export const course351Completed: ICourseOverview = {
 };
 
 export const course466: ICourseOverview = {
+  badge: {
+    id: 0,
+    name: '',
+    desc: '',
+    badge_image: '',
+    progress: 0,
+    isActive: false,
+  },
+  started_at: '',
   id: 466,
   name: 'SR Series Takeoffs and Landings Course',
   overview:
