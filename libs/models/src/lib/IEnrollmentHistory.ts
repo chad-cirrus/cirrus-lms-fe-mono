@@ -7,7 +7,10 @@ export interface IEnrollmentHistory {
   transcript_available: boolean;
   progress: {
     id: number;
-    status: PROGRESS_STATUS.completed | PROGRESS_STATUS.in_progress;
+    status:
+      | PROGRESS_STATUS.completed
+      | PROGRESS_STATUS.in_progress
+      | PROGRESS_STATUS.not_started;
   };
   user_certificate: {
     id: number;
