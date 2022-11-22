@@ -1,25 +1,16 @@
-.mat-badge-medium.mat-badge-after .mat-badge-content {
-    padding: 0 15px;
-    border-radius: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: $red;
+.mat-progress-bar-fill:after {
+  border-top-right-radius: 90px 13px !important;
+  border-bottom-right-radius: 90px 13px !important;
+  border-top-left-radius: 90px 13px !important;
+  border-bottom-left-radius: 90px 13px !important;
+}
+
+.apexcharts-menu {
+  background-color: $black !important;
+  .apexcharts-menu-item:hover {
+    background: $gray1;
   }
-  
-  .mat-progress-bar-fill:after {
-    border-top-right-radius: 90px 13px !important;
-    border-bottom-right-radius: 90px 13px !important;
-    border-top-left-radius: 90px 13px !important;
-    border-bottom-left-radius: 90px 13px !important;
-  }
-  
-  .apexcharts-menu {
-    background-color: $black !important;
-    .apexcharts-menu-item:hover {
-      background: $gray1;
-    }
-  }  
+}  
 
 .mat-ui-menu-override + * .cdk-overlay-pane {
   width: 100%;
