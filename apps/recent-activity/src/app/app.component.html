@@ -46,10 +46,10 @@
   </main>
 </div>
 
-<mat-sidenav-container class="sidenav-container">
+<mat-sidenav-container class="sidenav-popout-container">
   <mat-sidenav
     #drawer
-    [ngClass]="collapse ? 'sidenav-collapse' : 'sidenav'"
+    [ngClass]="collapse ? 'popout-collapse' : 'popout-open'"
     fixedInViewport="true"
     mode="push"
     (closedStart)="drawerClosed()"

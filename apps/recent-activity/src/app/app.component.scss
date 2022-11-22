@@ -44,7 +44,15 @@
   }
 }
 
-.sidenav {
+
+.error-container {
+  z-index: 100;
+  position: fixed;
+  top: 91%;
+  right: 2%;
+}
+
+.popout-open {
   width: 100%;
   background-color: $black;
   color: $white;
@@ -58,7 +66,7 @@
   }
 }
 
-.sidenav-collapse {
+.popout-collapse {
   width: 100%;
   background-color: $black;
   color: $white;
