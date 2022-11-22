@@ -23,6 +23,14 @@
   padding: 1rem 20px;
   top:6.5rem;
   z-index: 5;
+
+  @include breakpoint(mobile) {
+    top: 5.9rem;
+  }
+
+  @include breakpoint(tablet) {
+    top: 6.4rem;
+  }
 }
 
 .content-container {
@@ -52,27 +60,23 @@
   right: 2%;
 }
 
-.popout-open {
+.popout-open,.popout-collapse {
   width: 100%;
   background-color: $black;
   color: $white;
   @include breakpoint(mobile) {
     width: 561px;
-    top: 82px !important;
+    top: 95px !important;
     left: 245px !important;
   }
   @include breakpoint(tablet) {
+    top: 103px !important;
     width: 434px;
   }
 }
 
 .popout-collapse {
-  width: 100%;
-  background-color: $black;
-  color: $white;
   @include breakpoint(mobile) {
-    width: 561px;
-    top: 82px !important;
     left: 107px !important;
   }
   @include breakpoint(tablet) {

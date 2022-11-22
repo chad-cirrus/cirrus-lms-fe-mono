@@ -80,14 +80,11 @@ ul.student-name {
   z-index: 5;
 
   @include breakpoint(mobile) {
-    top: 5.5rem;
+    top: 5.9rem;
   }
 
   @include breakpoint(tablet) {
-    top: 6rem;
-  }
-  @include breakpoint(desktop) {
-    top: 6rem;
+    top: 6.4rem;
   }
 }
 
@@ -120,31 +117,24 @@ ul.student-name {
   right: 2%;
 }
 
-.popout-open {
+.popout-open,.popout-collapse {
   width: 100%;
   background-color: $black;
   color: $white;
   @include breakpoint(mobile) {
     width: 561px;
-    top: 82px !important;
+    top: 88px !important;
     left: 245px !important;
   }
   @include breakpoint(tablet) {
+    top: 96px !important;
     width: 434px;
   }
 }
 
 .popout-collapse {
-  width: 100%;
-  background-color: $black;
-  color: $white;
   @include breakpoint(mobile) {
-    width: 561px;
-    top: 82px !important;
     left: 107px !important;
-  }
-  @include breakpoint(tablet) {
-    width: 434px;
   }
 }
 
@@ -159,38 +149,3 @@ ul.student-name {
     z-index: 1;
   }
 }
-
-
-// mat-sidenav.sidenav {
-//   width: 100%;
-//   background-color: $black;
-//   color: $white;
-//   top: 62px;
-//   @include breakpoint(mobile) {
-//     width: 561px;
-//     top: 82px;
-//     left: 245px;
-//   }
-//   @include breakpoint(tablet) {
-//     width: 434px;
-//   }
-// }
-
-// mat-sidenav.sidenav-collapse {
-//   width: 100%;
-//   background-color: $black;
-//   color: $white;
-//   @include breakpoint(mobile) {
-//     width: 561px;
-//     top: 82px;
-//     left: 107px;
-//   }
-//   @include breakpoint(tablet) {
-//     width: 434px;
-//   }
-// }
-
-// .mat-drawer {
-//   background-color: $gray1;
-// }
-
