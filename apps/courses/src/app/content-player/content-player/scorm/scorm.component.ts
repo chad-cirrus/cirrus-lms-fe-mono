@@ -59,12 +59,15 @@ export class ScormComponent
         // window.console && console.log('LMSSetValue("' + key + '") - ' + value);
         this.data[key] = value;
 
+        if (key === 'cmi.suspend_data') {
+          $this.hidePrevAndNext.emit(true);
+        }
+
         if (key === 'cmi.core.score.raw') {
           $this.grade = +value;
         }
 
         if (key === 'cmi.core.lesson_status') {
-          $this.hidePrevAndNext.emit(value !== 'completed');
           const id = $this.content.progress.id;
           const status =
             value === 'completed'
