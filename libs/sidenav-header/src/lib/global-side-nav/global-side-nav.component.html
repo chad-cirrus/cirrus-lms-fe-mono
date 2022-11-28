@@ -103,7 +103,7 @@
             routerLink="help-center"
           />
         </span>
-        <span class="sidenav-icon-link">
+        <span class="sidenav-icon-link" *ngIf="!disableToggle">
           <img
             [src]="
               collapse
