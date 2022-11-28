@@ -49,6 +49,10 @@
   @include breakpoint(tablet) {
     padding: 50px 0;
     width: calc(100% - 244px);
+    
+    &.sidenav-collapsed {
+      width: calc(100% - 125px);
+    }
   }
 }
 

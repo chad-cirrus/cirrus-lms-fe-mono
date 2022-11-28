@@ -24,7 +24,10 @@
         ></cirrus-global-side-nav>
         <!--        <cirrus-global-side-nav></cirrus-global-side-nav>-->
       </div>
-      <div class="content-container">
+      <div 
+        class="content-container"
+        [ngClass]="collapse ? 'sidenav-collapsed' : 'sidenav-expanded'"
+      >
         <div *ngIf="error$ | async" class="error-container">
           <cirrus-error-notification
             [calledFromWhatMfe]="project"
