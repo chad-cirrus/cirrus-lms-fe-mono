@@ -60,6 +60,7 @@ export class ScormComponent
         this.data[key] = value;
 
         if (key === 'cmi.suspend_data') {
+          console.log('scorm component hiding');
           $this.hidePrevAndNext.emit(true);
         }
 

@@ -33,11 +33,7 @@
         fxFlex="nogrow"
         [ngClass]="{ 'adjust-padding': (menuOpen$ | async) }"
       >
-        <div
-          class="title-block"
-          fxLayout="column"
-          fxLayoutAlign="start start"
-        >
+        <div class="title-block" fxLayout="column" fxLayoutAlign="start start">
           <span class="title-header"> {{ lesson_title }} </span>
           <div
             class="sub-header"
@@ -83,7 +79,7 @@
         [ngClass]="{ 'adjust-padding': (menuOpen$ | async) }"
       >
         <div
-          *ngIf="!hideBtns"
+          [ngStyle]="{ display: (hideBtns$ | async) ? 'none' : 'flex' }"
           fxLayout="row"
           fxLayoutAlign="space-between start"
           [ngClass]="{ 'add-padding': (menuOpen$ | async) === false }"

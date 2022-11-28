@@ -1,5 +1,6 @@
 import {
   AfterViewInit,
+  ChangeDetectorRef,
   Component,
   Inject,
   OnDestroy,
@@ -68,7 +69,8 @@ export class ContentPlayerComponent
   checkoutOffsRequired$ = this.store.select(selectCheckOffRequired);
 
   // mutatable props
-  hideBtns = false;
+  _hideBtns = new BehaviorSubject<boolean>(false);
+  hideBtns$ = this._hideBtns.asObservable();
   addPadding = false;
   lesson_title = '';
   title = '';
@@ -102,7 +104,8 @@ export class ContentPlayerComponent
     public data: IContentPlayerData,
     private store: Store<AppState>,
     private taskService: TaskService,
-    private dialogRef: MatDialogRef<ContentPlayerComponent>
+    private dialogRef: MatDialogRef<ContentPlayerComponent>,
+    private changeDetectorRef: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -164,7 +167,11 @@ export class ContentPlayerComponent
     component.content = content;
     component.tasks = tasks;
     component.logbook = logbook;
-    component.hidePrevAndNext.subscribe(value => (this.hideBtns = value));
+    component.hidePrevAndNext.subscribe(value => {
+      console.log('content player hiding', value);
+      this._hideBtns.next(value);
+      this.changeDetectorRef.detectChanges();
+    });
     this.menuOpen$.subscribe(data => (component.menuOpen = data));
     component.updateProgress.subscribe(progress =>
       this.updateProgress(progress)
