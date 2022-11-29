@@ -59,7 +59,12 @@
       <mat-spinner color="accent" [diameter]="35"></mat-spinner>
     </div>
     <ng-template #value>
-      <div class="download-button" fxLayout="row" fxLayoutAlign="start center" (click)="downloadCert()">
+      <div
+        class="download-button"
+        fxLayout="row"
+        fxLayoutAlign="start center"
+        (click)="downloadCert()"
+      >
         <mat-icon class="download_arrow" svgIcon="download_arrow"></mat-icon
         ><span class="download">Download Certificate</span>
       </div>
@@ -82,9 +87,9 @@
       [text]="'Re-Enroll'"
       [icon]="reEnrollIconUrl"
     ></cirrus-cta-button>
-    <div class="expires-title">
+    <div class="expires-title" *ngIf="course.certificate.expiration">
       Certificate Expires:
-      <span class="expires-value">{{ '12/12/23' }}</span>
+      <span class="expires-value">{{ course?.certificate?.expiration }}</span>
     </div>
   </div>
 </ng-template>
