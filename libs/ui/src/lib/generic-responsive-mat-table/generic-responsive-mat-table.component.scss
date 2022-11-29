@@ -2,7 +2,7 @@
 
 .gen-table {
   // removes padding set in other style sheets we want to set it on the parent .mat-table
-  // instead. Note that we're using a element selector intandem with a class nested within
+  // instead. Note that we're using a element selector in tandem with a class nested within
   // the main component parent class. This scopes these styles to only here and
   mat-cell.mat-cell,
   mat-header-cell.mat-header-cell {
@@ -36,20 +36,32 @@ mat-cell.mat-cell {
   font-size: 16px;
   line-height: 22px;
   letter-spacing: 0.03em;
+  
+  &.mat-column-transcript_available,&.mat-column-user_certificate {
+    .value {
+      display: flex;
+      &:hover {
+        cursor: pointer;
+        text-decoration: underline;
+      }
+    }
+    .icon-container {
+      margin-right: .5rem;
+    }
+   
+  }
 }
 
 mat-table.mat-table {
   background: transparent;
-  margin: 0 28px;
+  padding: 0 20px;
 
   @media (min-width: 600px) {
-    margin: 0 47px;
-    padding: 0 24px;
+    padding: 0 25px;
   }
 
   @media (min-width: 960px) {
-    margin: 0 65px;
-    padding: 0 24px;
+    padding: 0 50px;
   }
 }
 

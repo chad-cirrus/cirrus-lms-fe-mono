@@ -2,7 +2,7 @@
 
 .lesson-image {
   min-height: 450px;
-  padding: 0 12px;
+  padding: 0 20px;
   margin-bottom: 50px;
   width: 100%;
   background-image: cover;
@@ -112,7 +112,7 @@ cirrus-cta-button {
 
 @media (min-width: 960px) {
   .lesson-image {
-    padding: 0 60px;
+    padding: 0 50px;
   }
 
   cirrus-course-progress {

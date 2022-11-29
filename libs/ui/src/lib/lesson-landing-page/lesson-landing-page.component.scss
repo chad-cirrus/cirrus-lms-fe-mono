@@ -338,6 +338,7 @@ cirrus-progress-card:last-child {
 }
 
 .breadcrumb-item-container {
+  background: $black;
   border-bottom: 1px solid transparent;
   display: flex;
   max-width: max-content;
@@ -355,4 +356,8 @@ cirrus-progress-card:last-child {
     letter-spacing: 0.02em;
     margin-left: 15px;
   }
+}
+
+.lesson-landing-wrapper,.lesson-landing-wrapper {
+  background: $black;
 }

@@ -1,4 +1,4 @@
-<div *ngIf="lesson" [ngStyle]="{ 'overflow-anchor': sideNavOpen ? 'none' : 'inherit' }">
+<div *ngIf="lesson" [ngStyle]="{ 'overflow-anchor': sideNavOpen ? 'none' : 'inherit' }" class="lesson-landing-wrapper">
 
   <div class="breadcrumb-container">
     <div class="breadcrumb-item-container" (click)="navigateToCourse()">
@@ -47,7 +47,7 @@
     </div>
   </div>
 
-  <div class="courses-main-content-inner-wrapper" [ngClass]="instructorView ? 'instructor-view' : 'student-view'">
+  <div class="courses-main-content-inner-wrapper lesson-landing-wrapper" [ngClass]="instructorView ? 'instructor-view' : 'student-view'">
     <div *ngIf="!instructorView && lesson.progress_stats" class="cirrus-progress-row">
       <cirrus-lesson-progress-stats [progress]="lesson.progress_stats"></cirrus-lesson-progress-stats>
     </div>
