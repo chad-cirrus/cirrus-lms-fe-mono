@@ -155,13 +155,6 @@ img[type='button'] {
   color: $primary-font-color;
 }
 
-.mat-progress-bar-fill:after {
-  border-top-right-radius: 90px 13px !important;
-  border-bottom-right-radius: 90px 13px !important;
-  border-top-left-radius: 90px 13px !important;
-  border-bottom-left-radius: 90px 13px !important;
-}
-
 .mat-ui-menu-override + * .cdk-overlay-pane {
   width: 100%;
 }

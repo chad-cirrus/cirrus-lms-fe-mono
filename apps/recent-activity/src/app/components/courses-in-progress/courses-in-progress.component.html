@@ -8,18 +8,18 @@
     </h2>
   </div>
 
-  <div [ngClass]="{ 'content-wrapper': inProgressCourses.length < 1 }">
+  <div class="content-wrapper">
     <div
       *ngIf="inProgressCourses.length; else noCourses"
       class="courses-in-progress-outer-wrapper"
     >
       <swiper
-        [loopFillGroupWithBlank]="true"
-        [loop]="false"
         [navigation]="true"
         [slidesPerView]="'auto'"
         [spaceBetween]="15"
+        [centeredSlides]="false"
         class="my-swiper"
+        [ngClass]="inProgressCourses.length < 2 ? 'swiper-disabled' : ''"
       >
         <ng-template
           swiperSlide

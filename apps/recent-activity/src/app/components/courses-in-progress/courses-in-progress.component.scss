@@ -12,32 +12,33 @@
   position: relative;
 }
 
-.my-swiper {
-  &:before,
-  &:after {
-    z-index: 2;
-    content: '';
-    display: block;
-    position: absolute;
-    top: 0;
-    height: 100%;
-    width: 55px;
-  }
-  &:before {
-    left: 0;
-    background: linear-gradient(90deg, #000000 -5%, rgba(31, 31, 31, 0) 100%);
-  }
-  &:after {
-    right: 0;
-    background: linear-gradient(270deg, #000000 -5%, rgba(31, 31, 31, 0) 100%);
-  }
-  @include breakpoint(mobile) {
-    &:before,
-    &:after {
-      width: 70px;
-    }
-  }
-}
+//.my-swiper {
+  //removing for now until we have more time to figure out issues with swiper to accomplish the desired designs that were provided
+  // &:before,
+  // &:after {
+  //   z-index: 2;
+  //   content: '';
+  //   display: block;
+  //   position: absolute;
+  //   top: 0;
+  //   height: 100%;
+  //   width: 55px;
+  // }
+  // &:before {
+  //   left: 0;
+  //   background: linear-gradient(90deg, #000000 -5%, rgba(31, 31, 31, 0) 100%);
+  // }
+  // &:after {
+  //   right: 0;
+  //   background: linear-gradient(270deg, #000000 -5%, rgba(31, 31, 31, 0) 100%);
+  // }
+  // @include breakpoint(mobile) {
+  //   &:before,
+  //   &:after {
+  //     width: 70px;
+  //   }
+  // }
+//}
 
 cirrus-courses-in-progress .heading-3 {
   margin: 40px 0 30px;
@@ -54,6 +55,9 @@ cirrus-courses-in-progress .heading-3 {
     display: block;
     z-index: 3;
   }
+  &.swiper-button-disabled {
+    display: none;
+  }
 }
 
 .swiper-slide {
@@ -66,6 +70,15 @@ cirrus-courses-in-progress .heading-3 {
   }
 }
 
+.swiper-disabled {
+  .swiper-slide {
+    width: 100%;
+    @include breakpoint(tablet) {
+      width: 422px;
+    }
+  }
+}
+
 .swiper-slide-container {
   background-repeat: no-repeat;
   background-size: cover;
@@ -75,17 +88,10 @@ cirrus-courses-in-progress .heading-3 {
   flex-direction: column;
   height: 300px;
   justify-content: space-between;
-  background-image: radial-gradient(
-      circle,
-      rgba(255, 255, 255, 0.5) 36%,
-      rgba(0, 0, 0, 0.5) 100%
-    ),
-    var(--urlString);
+  background-image: linear-gradient(1deg, rgb(0, 0, 0, .35), rgb(0 0 0 / 35%)), var(--urlString);
   padding: 17px;
-  width: 100%;
   @include breakpoint(mobile) {
     height: 192px;
-    width: 422px;
   }
 }
 
@@ -93,14 +99,13 @@ cirrus-courses-in-progress .heading-3 {
 .swiper-slide-container {
   .mat-progress-bar {
     width: 100%;
-    @include breakpoint(mobile) {
+    @include breakpoint(tablet) {
       width: 265px;
     }
   }
 
   .mat-progress-bar-element,
-  .mat-progress-bar,
-  .mat-progress-bar-fill::after {
+  .mat-progress-bar {
     border-radius: 10px;
     height: 13px;
   }
@@ -123,6 +128,11 @@ cirrus-courses-in-progress .heading-3 {
     flex-direction: row;
     justify-content: space-between;
 
+    .course-slide-progress-wrapper {
+      flex: 1 1;
+      margin-right: 35px;
+    }
+
     .primary-btn {
       margin-top: 0;
     }
@@ -140,7 +150,8 @@ cirrus-courses-in-progress .heading-3 {
 
 span.progress-bar-text {
   display: block;
-  margin-top: 1rem;
+  margin-top: 15px;
+  line-height: 1;
   .total {
     margin: 0 5px 0 2px;
   }
