@@ -32,6 +32,11 @@ export * from './lib/courses-tab-enrollment-history/courses-tab-enrollment-histo
 export * from './lib/course-completion/ui-download.service';
 export * from './lib/generic-responsive-mat-table/generic-responsive-mat-table.component';
 export * from './lib/table-format.pipe';
+export * from './lib/hours-and-landings/hours-and-landings.component';
+export * from './lib/helpers/HoursLandingTypeToIcon.pipe';
+export * from './lib/helpers/HoursLandingTypeToText.pipe';
+export * from './lib/filter/filter.component';
+export * from './lib/format-filter.pipe';
 
 export * from './lib/lib-services/connections/connections.service';
 export * from './lib/lib-services/notifications/notification.service';
@@ -46,3 +51,5 @@ export * from '../../models/src/testing/testData855';
 export * from './lib/helpers/DownloadPdf';
 export * from './lib/shared/user.service';
 export * from './lib/cirrus-base/CirrusBase.component';
+
+export * from './lib/mock-data/mock-courses.data';

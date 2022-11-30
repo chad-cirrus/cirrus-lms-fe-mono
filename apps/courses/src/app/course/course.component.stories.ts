@@ -2,6 +2,7 @@ import { CourseComponent } from './course.component';
 import { Meta, moduleMetadata, Story } from '@storybook/angular';
 // eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
 import {
+  course351,
   CourseContentProgressCircleComponent,
   CourseLandingPageComponent,
   CourseLessonContentCountComponent,
@@ -14,7 +15,12 @@ import {
   CoursesTabEnrollmentHistoryComponent,
   CourseSummaryCountsComponent,
   CtaButtonComponent,
+  FilterComponent,
+  FormatFilterPipe,
   GenericResponsiveMatTableComponent,
+  HoursAndLandingsComponent,
+  HoursLandingTypeToIconPipe,
+  HoursLandingTypeToTextPipe,
   MatIconRegistryModule,
   TableFormatPipe,
   UiDownloadService,
@@ -32,16 +38,15 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTableModule } from '@angular/material/table';
 // eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
-import { course351 } from '../../../../../libs/ui/src/lib/mock-data/mock-courses.data';
-
 import { MatMenuModule } from '@angular/material/menu';
-import { HoursAndLandingsComponent } from '../../../../../libs/ui/src/lib/hours-and-landings/hours-and-landings.component';
-import { HoursLandingTypeToIconPipe } from '../../../../../libs/ui/src/lib/helpers/HoursLandingTypeToIcon.pipe';
-import { FilterComponent } from '../../../../../libs/ui/src/lib/filter/filter.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { FormatFilterPipe } from '../../../../../libs/ui/src/lib/format-filter.pipe';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { HoursLandingTypeToTextPipe } from '../../../../../libs/ui/src/lib/helpers/HoursLandingTypeToText.pipe';
+
+import {
+  HoursAndLandingStatType,
+  ICourseOverview,
+  PROGRESS_STATUS,
+} from '@cirrus/models';
 
 const mockEnvironment = {
   production: false,
@@ -58,8 +63,18 @@ const mockEnvironment = {
     'https://cirrusapproachherokuprod.blob.core.windows.net/cirruslmsherokudevcontainer/content-items/images/default-course-hero-lg.jpg',
 };
 
-
 const course: ICourseOverview = {
+  badge: {
+    id: 0,
+    name: '',
+    desc: '',
+    badge_image: '',
+    progress: 0,
+    isActive: false,
+  },
+  completed_at: '',
+  course_attempt: { id: 0 },
+  started_at: '',
   id: 351,
   name: 'SR20 Avidyne Entegra Advanced Transition ',
   certificate: { expiration: 'This certificate does not expire' },

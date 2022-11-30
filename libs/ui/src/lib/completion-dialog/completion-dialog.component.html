@@ -1,24 +1,11 @@
 <div class="container" fxLayout="column" fxLayoutAlign="space-between">
-  <div
-    class="close"
-    fxLayout="row"
-    fxLayoutAlign="end center"
-    (click)="close('review')"
-  >
+  <div class="close" (click)="close('review')">
     <img src="courses/images/svg/close-btn-heavy.svg" />
   </div>
   <div class="main">
     <div class="message">You've completed {{ data.lesson }}</div>
 
-    <div
-      class="buttons"
-      fxLayout="row"
-      fxLayout.lt-sm="column"
-      fxLayoutAlign="center start"
-      fxLayoutAlign.lt-sm="center center"
-      fxLayoutGap="2.5rem"
-      fxLayoutGap.lt-sm="1.5rem"
-    >
+    <div class="buttons">
       <button class="review-lesson" mat-raised-button (click)="close('review')">
         Review Lesson
       </button>
