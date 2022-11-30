@@ -39,18 +39,13 @@
   .content-container {
     padding: 0;
     .title-content {
-      padding: 1rem;
-    }
-  }
-  .content-container {
-    .title-content {
-      padding: 1rem;
+      padding: 1rem 0;
     }
   }
 
   .contents-list-container {
     .content-item {
-      margin: 0 0.5rem;
+      margin: 0.5rem 0;
     }
   }
 }
@@ -58,7 +53,7 @@
 @media (min-width: 960px) {
   .contents-list-container {
     .content-item {
-      margin: 0 1rem;
+      margin: 1rem 0;
     }
   }
 }

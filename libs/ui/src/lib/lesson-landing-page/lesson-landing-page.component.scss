@@ -55,8 +55,8 @@ mat-drawer {
 
   .content {
     width: 100%;
-    margin-left: 0px;
-    padding: 64px 16px 0;
+    // margin-left: 0px;
+    // padding: 64px 16px 0;
 
     .mat-divider {
       border-top-color: rgba(255, 255, 255);
@@ -148,7 +148,8 @@ mat-drawer {
 
 .cirrus-progress-row {
   position: relative;
-  margin: 12px 12px 0 -24px;
+  margin-top: 12px;
+  // margin: 12px 12px 0 -24px;
   overflow-x: scroll;
   width: 100vw;
   scrollbar-width: none;
@@ -206,14 +207,16 @@ cirrus-progress-card:last-child {
 
 .contents-list-container {
   .content-item {
-    margin: 8px;
+    margin-top: 8px;
+    // margin: 8px;
   }
 }
 
 @media (min-width: 600px) {
   .lesson-image {
     .content {
-      padding: 48px 24px 0 24px;
+      margin-top: 48px;
+      // padding: 48px 24px 0 24px;
 
 
       .lesson-label {
@@ -246,8 +249,9 @@ cirrus-progress-card:last-child {
 @media (min-width: 960px) {
   .lesson-image {
     .content {
-      margin-left: 40px;
-      padding: 96px 40px 0 40px;
+      padding-top: 96px;
+      // margin-left: 40px;
+      // padding: 96px 40px 0 40px;
 
       p {
         margin: 25px 0 50px;
@@ -306,7 +310,7 @@ cirrus-progress-card:last-child {
 
   .cirrus-progress-row {
     width: 100%;
-    margin: -45px auto 20px;
+    // margin: -45px auto 20px;
     overflow-x: hidden;
     scrollbar-width: hidden;
     /* Firefox */
@@ -360,4 +364,16 @@ cirrus-progress-card:last-child {
 
 .lesson-landing-wrapper,.lesson-landing-wrapper {
   background: $black;
+}
+
+.content {
+  padding: 0 20px;
+
+  @media (min-width: 600px) {
+    padding: 0 25px;
+  }
+
+  @media (min-width: 960px) {
+    padding: 0 50px;
+  }
 }
