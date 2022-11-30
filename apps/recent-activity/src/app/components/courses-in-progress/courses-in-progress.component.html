@@ -2,7 +2,9 @@
   <div class="content-wrapper">
     <h2 class="heading-3">
       Courses In Progress
-      <span class="courses-counter">({{ inProgressCourses?.length || 0 }})</span>
+      <span class="courses-counter"
+        >({{ inProgressCourses?.length || 0 }})</span
+      >
     </h2>
   </div>
 
@@ -67,7 +69,9 @@
             You have no courses in progress at this time. View the course
             catalog to get started.
           </p>
-          <a class="primary-btn" href="#">Browse Course Catalog</a>
+          <a class="primary-btn" href="/course-catalog"
+            >Browse Course Catalog</a
+          >
         </div>
       </div>
     </ng-template>
