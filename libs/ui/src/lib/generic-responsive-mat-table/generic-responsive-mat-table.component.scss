@@ -23,8 +23,8 @@
 
 mat-header-cell.mat-header-cell {
   color: $primary-font-color;
-  font-family: 'Akzidenz-Grotesk BQ';
-  font-size: 14px;
+  font-family: $bqmedium-font;
+  font-size: 0.9375rem;
   line-height: 19px;
   letter-spacing: -0.005em;
   text-transform: uppercase;
@@ -33,7 +33,7 @@ mat-header-cell.mat-header-cell {
 mat-cell.mat-cell {
   color: $gray5;
   font-family: 'Akzidenz-Grotesk BQ';
-  font-size: 16px;
+  font-size: 1rem;
   line-height: 22px;
   letter-spacing: 0.03em;
   
