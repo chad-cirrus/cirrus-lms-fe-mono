@@ -8,9 +8,14 @@ import {
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { AppState } from '../store/reducers';
+import { Store } from '@ngrx/store';
+import { setCirrusUser } from '../store/actions/cirrus-user.actions';
 
 @Injectable()
 export class AuthHttpInterceptor implements HttpInterceptor {
+  constructor(private store: Store<AppState>) {}
+
   intercept(
     req: HttpRequest<any>,
     next: HttpHandler
@@ -33,7 +38,11 @@ export class AuthHttpInterceptor implements HttpInterceptor {
           const cirrusUser = val.headers.get('user');
 
           if (cirrusUser !== null) {
+            console.log('*******************', JSON.parse(cirrusUser));
             localStorage.setItem('cirrus-user', cirrusUser);
+            this.store.dispatch(
+              setCirrusUser({ cirrusUser: JSON.parse(cirrusUser) })
+            );
           }
         }
       })
