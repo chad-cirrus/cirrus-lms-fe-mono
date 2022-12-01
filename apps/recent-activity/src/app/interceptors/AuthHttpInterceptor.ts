@@ -1,8 +1,8 @@
 import {
-  HttpInterceptor,
   HttpEvent,
   HttpEventType,
   HttpHandler,
+  HttpInterceptor,
   HttpRequest,
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -28,6 +28,12 @@ export class AuthHttpInterceptor implements HttpInterceptor {
           const accessToken = val.headers.get('Access-Token');
           if (accessToken !== null) {
             localStorage.setItem('cirrus-token', accessToken);
+          }
+
+          const cirrusUser = val.headers.get('user');
+
+          if (cirrusUser !== null) {
+            localStorage.setItem('cirrus-user', cirrusUser);
           }
         }
       })
