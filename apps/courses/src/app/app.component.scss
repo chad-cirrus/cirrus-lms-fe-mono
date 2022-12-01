@@ -122,11 +122,10 @@ ul.student-name {
   color: $white;
   @include breakpoint(mobile) {
     width: 561px;
-    top: 88px !important;
+    top: 80px !important;
     left: 245px !important;
   }
   @include breakpoint(tablet) {
-    top: 96px !important;
     width: 434px;
   }
 }

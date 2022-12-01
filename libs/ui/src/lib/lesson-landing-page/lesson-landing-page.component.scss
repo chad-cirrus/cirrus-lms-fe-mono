@@ -149,7 +149,7 @@ mat-drawer {
 .cirrus-progress-row {
   position: relative;
   margin-top: 12px;
-  // margin: 12px 12px 0 -24px;
+  margin: 12px 12px 0 -20px;
   overflow-x: scroll;
   width: 100vw;
   scrollbar-width: none;
@@ -163,31 +163,32 @@ mat-drawer {
     width: 0px;
   }
 
-  @media (max-width: 960px) {
-    &:before {
-      content: ' ';
-      display: block;
-      position: absolute;
-      top: 0;
-      left: 0;
-      height: 100%;
-      width: 35px;
-      background: linear-gradient(90deg, #000000 3%, rgba(31, 31, 31, 0) 100%);
-      pointer-events: none;
-    }
+  //leaving this in here as I will bring it back in later, it worked previously until someone else made adjustments to fix the lesson landing page again
+  // @media (max-width: 960px) {
+  //   &:before {
+  //     content: ' ';
+  //     display: block;
+  //     position: absolute;
+  //     top: 0;
+  //     left: 0;
+  //     height: 100%;
+  //     width: 35px;
+  //     background: linear-gradient(90deg, #000000 3%, rgba(31, 31, 31, 0) 100%);
+  //     pointer-events: none;
+  //   }
 
-    &:after {
-      content: ' ';
-      display: block;
-      position: absolute;
-      top: 0;
-      right: 0;
-      height: 100%;
-      width: 35px;
-      background: linear-gradient(270deg, #000000 3%, rgba(31, 31, 31, 0) 100%);
-      pointer-events: none;
-    }
-  }
+  //   &:after {
+  //     content: ' ';
+  //     display: block;
+  //     position: absolute;
+  //     top: 0;
+  //     right: 0;
+  //     height: 100%;
+  //     width: 35px;
+  //     background: linear-gradient(270deg, #000000 3%, rgba(31, 31, 31, 0) 100%);
+  //     pointer-events: none;
+  //   }
+  // }
 }
 
 cirrus-progress-card {
@@ -310,7 +311,7 @@ cirrus-progress-card:last-child {
 
   .cirrus-progress-row {
     width: 100%;
-    // margin: -45px auto 20px;
+    margin: -45px auto 20px;
     overflow-x: hidden;
     scrollbar-width: hidden;
     /* Firefox */
