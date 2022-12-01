@@ -59,10 +59,11 @@ export class ScormComponent
         window.console && console.log('LMSSetValue("' + key + '") - ' + value);
         this.data[key] = value;
 
-        // if (key === 'cmi.suspend_data') {
-        //   console.log('scorm component hiding');
-        //   $this.hidePrevAndNext.emit(true);
-        // }
+
+        if (key === 'cmi.suspend_data') {
+          $this.hidePrevAndNext.emit(true);
+        }
+
 
         if (key === 'cmi.core.score.raw') {
           $this.grade = +value;
