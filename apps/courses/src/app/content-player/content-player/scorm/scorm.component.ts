@@ -56,19 +56,27 @@ export class ScormComponent
         return this.data[key];
       },
       LMSSetValue: function (key: any, value: any) {
-        // window.console && console.log('LMSSetValue("' + key + '") - ' + value);
+        window.console && console.log('LMSSetValue("' + key + '") - ' + value);
         this.data[key] = value;
 
-        if (key === 'cmi.suspend_data') {
-          console.log('scorm component hiding');
-          $this.hidePrevAndNext.emit(true);
-        }
+        // if (key === 'cmi.suspend_data') {
+        //   console.log('scorm component hiding');
+        //   $this.hidePrevAndNext.emit(true);
+        // }
 
         if (key === 'cmi.core.score.raw') {
           $this.grade = +value;
         }
 
         if (key === 'cmi.core.lesson_status') {
+          if (value === 'incomplete') {
+            $this.hidePrevAndNext.emit(true);
+          }
+
+          if (value === 'completed') {
+            $this.hidePrevAndNext.emit(false);
+          }
+
           const id = $this.content.progress.id;
           const status =
             value === 'completed'

@@ -3,7 +3,7 @@
     <img src="courses/images/svg/close-btn-heavy.svg" />
   </div>
   <div class="main">
-    <div class="message">You've completed {{ data.lesson }}</div>
+    <div class="message">You've completed {{ lesson$ | async }}</div>
 
     <div class="buttons">
       <button class="review-lesson" mat-raised-button (click)="close('review')">
