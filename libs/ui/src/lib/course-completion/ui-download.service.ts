@@ -10,6 +10,12 @@ export class UiDownloadService {
   private loadingSubject = new BehaviorSubject(false);
   loading$ = this.loadingSubject.asObservable();
 
+  private certificateLoadingSubject = new BehaviorSubject(false);
+  certificateLoading$ = this.certificateLoadingSubject.asObservable();
+
+  private transcriptLoadingSubject = new BehaviorSubject(false);
+  transcriptloading$ = this.transcriptLoadingSubject.asObservable();
+
   private selectedIdSubject = new BehaviorSubject(0);
   selectedCourseAttemptId$ = this.selectedIdSubject.asObservable();
 
@@ -28,25 +34,21 @@ export class UiDownloadService {
     const url = `${this.environment['baseUrl']}/api/v4/pdf/certificate`;
     const queryParams = { course_attempt_id };
     return of(null).pipe(
-      tap(() => this.loadingSubject.next(true)),
+      tap(() => this.certificateLoadingSubject.next(true)),
       concatMap(() =>
         this.http.get(url, { params: queryParams, responseType: 'blob' })
       ),
-      finalize(() => this.loadingSubject.next(false))
+      finalize(() => this.certificateLoadingSubject.next(false))
     );
   }
 
-  downloadTranscript(course_attempt_id: number) {
-    // Todo: implement get transcript when api is ready
-    // const url = `${this.environment['baseUrl']}/api/v4/pdf/transcript`;
-    // const queryParams = { course_attempt_id };
-    // return of(null).pipe(
-    //   tap(() => this.loadingSubject.next(true)),
-    //   concatMap(() =>
-    //     this.http.get(url, { params: queryParams, responseType: 'blob' })
-    //   ),
-    //   finalize(() => this.loadingSubject.next(false))
-    // );
+  downloadTranscript(course_id: number) {
+    const url = `${this.environment['baseUrl']}/api/v4/courses/${course_id}/transcript.pdf`;
+    return of(null).pipe(
+      tap(() => this.transcriptLoadingSubject.next(true)),
+      concatMap(() => this.http.get(url, { responseType: 'blob' })),
+      finalize(() => this.transcriptLoadingSubject.next(false))
+    );
   }
 
   courseReEnroll(payload: ReEnrollPayload) {

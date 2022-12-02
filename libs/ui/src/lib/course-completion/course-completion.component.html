@@ -30,6 +30,7 @@
       </ng-template>
       <button
         class="download-transcript"
+        (click)="downloadTranscript()"
         mat-raised-button
         [mat-dialog-close]="lessonCompletionCta.downloadTranscript"
       >

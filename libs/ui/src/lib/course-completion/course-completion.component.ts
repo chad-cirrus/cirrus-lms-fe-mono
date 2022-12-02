@@ -8,6 +8,7 @@ export interface ICourseCompletionData {
   badge: string;
   student: string;
   course: string;
+  course_id: number;
   course_attempt_id: number;
 }
 
@@ -33,7 +34,15 @@ export class CourseCompletionComponent {
     this.uiDownloadService
       .downloadCertificate(this.data.course_attempt_id)
       .subscribe((data: Blob) => {
-        downloadPdf(data);
+        downloadPdf(data, 'cert');
+      });
+  }
+
+  downloadTranscript() {
+    this.uiDownloadService
+      .downloadTranscript(this.data.course_id)
+      .subscribe((data: Blob) => {
+        downloadPdf(data, 'trans');
       });
   }
 }

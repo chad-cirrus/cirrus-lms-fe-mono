@@ -55,7 +55,7 @@
 
 <ng-template #downloadDocument>
   <div class="download-document">
-    <div *ngIf="loading$ | async; else value">
+    <div *ngIf="certificateLoading$ | async; else value">
       <mat-spinner color="accent" [diameter]="35"></mat-spinner>
     </div>
     <ng-template #value>
@@ -70,15 +70,20 @@
       </div>
     </ng-template>
 
-    <div
-      class="download-button"
-      fxLayout="row"
-      fxLayoutAlign="start center"
-      (click)="downloadTranscript()"
-    >
-      <mat-icon class="download_arrow" svgIcon="download_arrow"></mat-icon
-      ><span class="download">Download Transcript</span>
+    <div *ngIf="transcriptLoading$ | async; else value1">
+      <mat-spinner color="accent" [diameter]="35"></mat-spinner>
     </div>
+    <ng-template #value1>
+      <div
+        class="download-button"
+        fxLayout="row"
+        fxLayoutAlign="start center"
+        (click)="downloadTranscript()"
+      >
+        <mat-icon class="download_arrow" svgIcon="download_arrow"></mat-icon
+        ><span class="download">Download Transcript</span>
+      </div>
+    </ng-template>
   </div>
   <div class="re-enroll" *ngIf="course.can_reenroll">
     <cirrus-cta-button

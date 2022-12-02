@@ -61,7 +61,7 @@ export class CoursesTabEnrollmentHistoryComponent {
       this.uiDownloadService
         .downloadCertificate(value.course_attempt_id)
         .subscribe((data: Blob) => {
-          downloadPdf(data);
+          downloadPdf(data, 'cert');
         });
     }
   }

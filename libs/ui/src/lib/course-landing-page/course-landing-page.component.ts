@@ -22,7 +22,9 @@ import { downloadPdf } from '../helpers/DownloadPdf';
 })
 export class CourseLandingPageComponent {
   private readonly environment: Record<string, unknown>;
-  loading$ = this.downloadService.loading$;
+  certificateLoading$ = this.downloadService.certificateLoading$;
+  transcriptLoading$ = this.downloadService.transcriptloading$;
+
   @Input() user!: ICirrusUser;
 
   coursePlayerConfig: ICoursePlayerConfig = {
@@ -95,7 +97,7 @@ export class CourseLandingPageComponent {
     this.downloadService
       .downloadCertificate(this.course.course_attempt.id)
       .subscribe((data: Blob) => {
-        downloadPdf(data);
+        downloadPdf(data, 'cert');
       });
   }
 
@@ -155,10 +157,11 @@ export class CourseLandingPageComponent {
   }
 
   downloadTranscript() {
-    // Todo implement this method when api is ready
-    // this.downloadService
-    //   .downloadTranscript(this.course.course_attempt.id)
-    //   .subscribe();
+    this.downloadService
+      .downloadTranscript(this.course.id)
+      .subscribe((data: Blob) => {
+        downloadPdf(data, 'trans');
+      });
   }
 
   private setBackground() {
