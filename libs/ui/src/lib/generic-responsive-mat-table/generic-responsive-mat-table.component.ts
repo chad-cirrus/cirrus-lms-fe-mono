@@ -3,6 +3,7 @@ import {
   Component,
   EventEmitter,
   Input,
+  OnInit,
   Output,
   ViewChild,
 } from '@angular/core';
@@ -26,7 +27,6 @@ export class GenericResponsiveMatTableComponent implements AfterViewInit {
   @Input() columns!: Column[];
   @Output() emitValue = new EventEmitter();
   @Output() emitRow = new EventEmitter();
-  loading$ = this.uiDownloadService.loading$;
 
   @Input()
   set data(value: any) {
@@ -37,7 +37,7 @@ export class GenericResponsiveMatTableComponent implements AfterViewInit {
     return this._data;
   }
 
-  selectedCourseAttemptId$ = this.uiDownloadService.selectedCourseAttemptId$;
+  selectedRowId$ = this.uiDownloadService.selectedRowId$;
 
   constructor(private uiDownloadService: UiDownloadService) {}
 
@@ -51,7 +51,6 @@ export class GenericResponsiveMatTableComponent implements AfterViewInit {
   }
 
   valueSelect($event: MouseEvent, value: any, type: Column) {
-    console.log('vai;e', value);
     if (value.id) {
       this.uiDownloadService.setSelectedId(value.id);
     }
@@ -67,7 +66,7 @@ export interface Column {
   alias?: string;
   icon?: string;
   method?: formatFn;
-  isLoading?: boolean;
+  isLoading$?: Observable<boolean>;
 }
 
 interface formatFn {

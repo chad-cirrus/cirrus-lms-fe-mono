@@ -39,7 +39,7 @@ export class CertificatesFullComponent {
     this.course_attempt_id = cert.course_attempt_id;
     this.facade.downloadCertificate(cert.course_attempt_id).subscribe(
       (data: Blob) => {
-        downloadPdf(data);
+        downloadPdf(data, 'cert');
       },
       () => {
         // do nothing

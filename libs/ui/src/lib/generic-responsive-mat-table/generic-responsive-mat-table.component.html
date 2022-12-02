@@ -10,15 +10,11 @@
           [attr.data-label]="column.name"
           (click)="rowSelect(row)"
         >
-          <div
-            class="value"
-            (click)="valueSelect($event, row[column.mat_col_name], column)"
-          >
+          <div class="value" (click)="valueSelect($event, row, column)">
             <div
               *ngIf="
-                (loading$ | async) &&
-                  row[column.mat_col_name]?.id ===
-                    (selectedCourseAttemptId$ | async);
+                (column.isLoading$ | async) &&
+                  row.id === (selectedRowId$ | async);
                 else value
               "
             >

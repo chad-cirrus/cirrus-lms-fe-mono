@@ -1,6 +1,11 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
-import { ICertificate, IEnrollmentHistory } from '@cirrus/models';
+import {
+  ICertificate,
+  ICourse,
+  ICourseOverview,
+  IEnrollmentHistory,
+} from '@cirrus/models';
 
 import { UiDownloadService } from '../course-completion/ui-download.service';
 import { Column } from '../generic-responsive-mat-table/generic-responsive-mat-table.component';
@@ -13,9 +18,13 @@ import { formatCertificate, formatTranscript } from '../helpers/TableFormat';
   styleUrls: ['./courses-tab-enrollment-history.component.scss'],
 })
 export class CoursesTabEnrollmentHistoryComponent {
-  @Input() enrollments!: IEnrollmentHistory[] | undefined;
+  @Input() enrollments!: IEnrollmentHistory[];
+  @Input() certificate!: ICertificate;
+  @Input() courseId!: number;
 
-  @Input() certificate!: ICertificate | undefined;
+  transcriptloading$ = this.uiDownloadService.transcriptloading$;
+  certificateLoading$ = this.uiDownloadService.certificateLoading$;
+  loading!: boolean;
 
   displayedColumns: string[] = [
     'enrollment_date',
@@ -39,12 +48,14 @@ export class CoursesTabEnrollmentHistoryComponent {
       mat_col_name: 'transcript_available',
       icon: 'courses/images/svg/download-arrow.svg',
       method: formatTranscript,
+      isLoading$: this.transcriptloading$,
     },
     {
       name: 'Certificate',
       mat_col_name: 'user_certificate',
       icon: 'courses/images/svg/download-arrow.svg',
       method: formatCertificate,
+      isLoading$: this.certificateLoading$,
     },
   ];
 
@@ -59,9 +70,16 @@ export class CoursesTabEnrollmentHistoryComponent {
     if (value === null) return;
     if (type.mat_col_name === 'user_certificate') {
       this.uiDownloadService
-        .downloadCertificate(value.course_attempt_id)
+        .downloadCertificate(value.user_certificate.course_attempt_id)
         .subscribe((data: Blob) => {
           downloadPdf(data, 'cert');
+        });
+    } else {
+      this.uiDownloadService
+        .downloadTranscript(this.courseId)
+        .subscribe((data: Blob) => {
+          downloadPdf(data, 'trans');
+
         });
     }
   }

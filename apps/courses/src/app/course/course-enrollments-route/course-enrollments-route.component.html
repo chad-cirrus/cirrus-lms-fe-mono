@@ -1,4 +1,6 @@
 <cirrus-courses-tab-enrollment-history
-  [enrollments]="(courseOverview$ | async)?.enrollments"
-  [certificate]="(courseOverview$ | async)?.certificate">
+  [enrollments]="(courseOverview$ | async)?.enrollments!"
+  [certificate]="(courseOverview$ | async)?.certificate!"
+  [courseId]="(courseOverview$ | async)?.id!"
+>
 </cirrus-courses-tab-enrollment-history>

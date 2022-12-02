@@ -8,6 +8,7 @@ export class UiDownloadService {
   // eslint-disable-next-line @typescript-eslint/ban-types
   private readonly environment: Record<string, unknown>;
   private loadingSubject = new BehaviorSubject(false);
+
   loading$ = this.loadingSubject.asObservable();
 
   private certificateLoadingSubject = new BehaviorSubject(false);
@@ -17,7 +18,7 @@ export class UiDownloadService {
   transcriptloading$ = this.transcriptLoadingSubject.asObservable();
 
   private selectedIdSubject = new BehaviorSubject(0);
-  selectedCourseAttemptId$ = this.selectedIdSubject.asObservable();
+  selectedRowId$ = this.selectedIdSubject.asObservable();
 
   constructor(
     private http: HttpClient,
