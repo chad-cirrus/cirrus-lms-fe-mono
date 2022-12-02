@@ -60,9 +60,9 @@ export class ScormComponent
         this.data[key] = value;
 
 
-        if (key === 'cmi.suspend_data') {
-          $this.hidePrevAndNext.emit(true);
-        }
+        // if (key === 'cmi.suspend_data') {
+        //   $this.hidePrevAndNext.emit(true);
+        // }
 
 
         if (key === 'cmi.core.score.raw') {
@@ -70,17 +70,17 @@ export class ScormComponent
         }
 
         if (key === 'cmi.core.lesson_status') {
-          if (value === 'incomplete') {
+          if (value === 'incomplete' || value === 'failed') {
             $this.hidePrevAndNext.emit(true);
           }
 
-          if (value === 'completed') {
+          if (value === 'completed' || value === 'passed') {
             $this.hidePrevAndNext.emit(false);
           }
 
           const id = $this.content.progress.id;
           const status =
-            value === 'completed'
+            value === 'completed' || value === 'passed'
               ? PROGRESS_STATUS.completed
               : PROGRESS_STATUS.in_progress;
 
