@@ -44,3 +44,7 @@ body {
     padding: 0 50px;
   }
 }
+
+.mat-drawer-inner-container::-webkit-scrollbar {
+  display: none;
+}
