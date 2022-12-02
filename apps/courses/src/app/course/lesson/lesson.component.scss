@@ -21,3 +21,7 @@ mat-sidenav {
     max-width: 25rem;
   }
 }
+
+mat-sidenav-container {
+  z-index: 5;
+}
