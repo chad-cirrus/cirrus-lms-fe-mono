@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { FlightLogType, ILessonFlightLog, ITask } from '@cirrus/models';
 import { environment } from '../environments/environment';
 import { BehaviorSubject, forkJoin, Observable } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 export interface ITasksRequest {
   course_attempt_id: number;
@@ -64,10 +64,8 @@ export class TaskService {
   }
 
   getTasksAndLogbook(payload: ITasksRequest): void {
-    if (this._tasksAndLogBooks.value[0].length === 0) {
-      forkJoin([this.getTasks(payload), this.getLogbook(payload)]).subscribe(
-        response => this._tasksAndLogBooks.next(response)
-      );
-    }
+    forkJoin([this.getTasks(payload), this.getLogbook(payload)]).subscribe(
+      response => this._tasksAndLogBooks.next(response)
+    );
   }
 }
