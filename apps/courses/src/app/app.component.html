@@ -36,17 +36,20 @@
         </div>
 
         <div
-          class="router-outlet-wrapper"
           [ngClass]="
-          (isNotificationMenuOpen$ | async) ? 'notifications-menu-active' : ''
-        "
-        #outletContainer
-      >
-          <router-outlet></router-outlet>
-
+            (isNotificationMenuOpen$ | async)
+              ? 'main-content-wrapper-notifications-menu-active'
+              : ''
+          "
+          #outletContainer
+        >
           <div *ngIf="loadingIndicator$ | async" class="spinner-container">
-            <mat-spinner color="accent"></mat-spinner>
+            <mat-spinner class="mat-spinner" color="accent"></mat-spinner>
           </div>
+          <router-outlet>
+          </router-outlet>
+
+
         </div>
       </div>
     </div>
