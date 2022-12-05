@@ -1,10 +1,10 @@
 @use '../styles/variables' as *;
 
 .enrollment-history {
-  padding-top: 0px;
+  padding: 0px 0 20px;
 
   @media (min-width: 600px) {
-    padding-top: 48px;
+    padding: 48px 0 75px;
   }
 }
 
