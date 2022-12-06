@@ -8,7 +8,7 @@
     <img
       [src]="
         hamburgerIcon
-          ? deployUrl + '/images/hamburger-menu.png'
+          ? deployUrl + '/images/svg/hamburger.svg'
           : deployUrl + '/images/svg/close.svg'
       "
     />
@@ -18,103 +18,101 @@
 <mat-menu #menu="matMenu" backdropClass="mat-ui-menu-override">
   <div class="menu-wrapper">
     <div
-    routerLink="recent-activity"
-    class="image-container mobile-menu-link-wrapper"
-    routerLinkActive="active"
-  >
-    <img
-      [src]="deployUrl + '/images/svg/recent-activity.svg'"
-      height="26px"
-      width="26px"
-    />
-    <span class="mobile-menu-item-text">Recent Activity</span>
+      routerLink="recent-activity"
+      class="image-container mobile-menu-link-wrapper"
+      routerLinkActive="active"
+    >
+      <img
+        [src]="deployUrl + '/images/svg/recent-activity.svg'"
+        height="26px"
+        width="26px"
+      />
+      <span class="mobile-menu-item-text">Recent Activity</span>
+    </div>
+    <div
+      *ngIf="cirrusUser.role !== 'pilot'"
+      routerLink="instructor/dashboard"
+      class="image-container mobile-menu-link-wrapper"
+      routerLinkActive="active"
+    >
+      <img
+        [src]="deployUrl + '/images/svg/my-student.svg'"
+        height="26px"
+        width="26px"
+      />
+      <span class="mobile-menu-item-text">My Students</span>
+    </div>
+    <div
+      routerLink="my-courses"
+      class="image-container mobile-menu-link-wrapper"
+      routerLinkActive="active"
+    >
+      <img
+        [src]="deployUrl + '/images/svg/my-courses.svg'"
+        height="26px"
+        width="26px"
+      />
+      <span class="mobile-menu-item-text">My Courses</span>
+    </div>
+    <div
+      routerLink="course-catalog"
+      class="image-container mobile-menu-link-wrapper"
+      routerLinkActive="active"
+    >
+      <img
+        [src]="deployUrl + '/images/svg/catalog.svg'"
+        height="26px"
+        width="26px"
+      />
+      <span class="mobile-menu-item-text">Course Catalog</span>
+    </div>
+    <div
+      routerLink="training-partners"
+      class="image-container mobile-menu-link-wrapper"
+      routerLinkActive="active"
+    >
+      <img
+        [src]="deployUrl + '/images/svg/instructor.svg'"
+        height="26px"
+        width="26px"
+      />
+      <span class="mobile-menu-item-text">Training Partners</span>
+    </div>
+    <div
+      class="image-container mobile-menu-link-wrapper"
+      routerLinkActive="active"
+      routerLink="library"
+    >
+      <img
+        [src]="deployUrl + '/images/svg/library.svg'"
+        height="26px"
+        width="26px"
+      />
+      <span class="mobile-menu-item-text">Library</span>
+    </div>
+    <div
+      class="image-container mobile-menu-link-wrapper"
+      routerLinkActive="active"
+      (click)="showNotifications()"
+    >
+      <img
+        [src]="deployUrl + '/images/svg/alarm.svg'"
+        height="26px"
+        width="26px"
+      />
+      <span class="mobile-menu-item-text">Notifications</span>
+    </div>
+    <div
+      class="image-container mobile-menu-link-wrapper"
+      routerLinkActive="active"
+      routerLink="help-center"
+    >
+      <img
+        [src]="deployUrl + '/images/svg/clarity_help-line.svg'"
+        height="26px"
+        width="26px"
+      />
+      <span class="mobile-menu-item-text">Help Center</span>
+    </div>
   </div>
-  <div
-    *ngIf="cirrusUser.role !== 'pilot'"
-    routerLink="instructor/dashboard"
-    class="image-container mobile-menu-link-wrapper"
-    routerLinkActive="active"
-  >
-    <img
-      [src]="deployUrl + '/images/svg/my-student.svg'"
-      height="26px"
-      width="26px"
-    />
-    <span class="mobile-menu-item-text">My Students</span>
-  </div>
-  <div
-    routerLink="my-courses"
-    class="image-container mobile-menu-link-wrapper"
-    routerLinkActive="active"
-  >
-    <img
-      [src]="deployUrl + '/images/svg/my-courses.svg'"
-      height="26px"
-      width="26px"
-    />
-    <span class="mobile-menu-item-text">My Courses</span>
-  </div>
-  <div
-    routerLink="course-catalog"
-    class="image-container mobile-menu-link-wrapper"
-    routerLinkActive="active"
-  >
-    <img
-      [src]="deployUrl + '/images/svg/catalog.svg'"
-      height="26px"
-      width="26px"
-    />
-    <span class="mobile-menu-item-text">Course Catalog</span>
-  </div>
-  <div
-    routerLink="training-partners"
-    class="image-container mobile-menu-link-wrapper"
-    routerLinkActive="active"
-  >
-    <img
-      [src]="deployUrl + '/images/svg/instructor.svg'"
-      height="26px"
-      width="26px"
-    />
-    <span class="mobile-menu-item-text">Training Partners</span>
-  </div>
-  <div
-    class="image-container mobile-menu-link-wrapper"
-    routerLinkActive="active"
-    routerLink="library"
-  >
-    <img
-      [src]="deployUrl + '/images/svg/library.svg'"
-      height="26px"
-      width="26px"
-    />
-    <span class="mobile-menu-item-text">Library</span>
-  </div>
-  <div
-    class="image-container mobile-menu-link-wrapper"
-    routerLinkActive="active"
-    (click)="showNotifications()"
-  >
-    <img
-      [src]="deployUrl + '/images/svg/alarm.svg'"
-      height="26px"
-      width="26px"
-    />
-    <span class="mobile-menu-item-text">Notifications</span>
-  </div>
-  <div
-    
-    class="image-container mobile-menu-link-wrapper"
-    routerLinkActive="active"
-    routerLink="help-center"
-  >
-    <img
-      [src]="deployUrl + '/images/svg/clarity_help-line.svg'"
-      height="26px"
-      width="26px"
-    />
-    <span class="mobile-menu-item-text">Help Center</span>
-  </div>
-  </div>
-  
 </mat-menu>
