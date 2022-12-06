@@ -43,8 +43,12 @@ export class UiDownloadService {
     );
   }
 
-  downloadTranscript(course_id: number) {
-    const url = `${this.environment['baseUrl']}/api/v4/courses/${course_id}/transcript.pdf`;
+  downloadTranscript(course_id: number, course_attempt_id: number) {
+    const param =
+      course_attempt_id > 0 ? `?course_attempt_id=${course_attempt_id}` : '';
+    const url =
+      `${this.environment['baseUrl']}/api/v4/courses/${course_id}/transcript.pdf` +
+      param;
     return of(null).pipe(
       tap(() => this.transcriptLoadingSubject.next(true)),
       concatMap(() => this.http.get(url, { responseType: 'blob' })),

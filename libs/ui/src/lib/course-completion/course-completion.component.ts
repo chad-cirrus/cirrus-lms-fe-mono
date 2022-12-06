@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { LESSON_COMPLETION_CTA } from '../completion-dialog/LessonCompletionCtas';
 import { downloadPdf } from '../helpers/DownloadPdf';
@@ -40,7 +40,7 @@ export class CourseCompletionComponent {
 
   downloadTranscript() {
     this.uiDownloadService
-      .downloadTranscript(this.data.course_id)
+      .downloadTranscript(this.data.course_id, 0)
       .subscribe((data: Blob) => {
         downloadPdf(data, 'trans');
       });

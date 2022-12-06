@@ -1,11 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
-import {
-  ICertificate,
-  ICourse,
-  ICourseOverview,
-  IEnrollmentHistory,
-} from '@cirrus/models';
+import { ICertificate, IEnrollmentHistory } from '@cirrus/models';
 
 import { UiDownloadService } from '../course-completion/ui-download.service';
 import { Column } from '../generic-responsive-mat-table/generic-responsive-mat-table.component';
@@ -76,10 +71,12 @@ export class CoursesTabEnrollmentHistoryComponent {
         });
     } else {
       this.uiDownloadService
-        .downloadTranscript(this.courseId)
+        .downloadTranscript(
+          this.courseId,
+          value.user_certificate.course_attempt_id ?? 0
+        )
         .subscribe((data: Blob) => {
           downloadPdf(data, 'trans');
-
         });
     }
   }

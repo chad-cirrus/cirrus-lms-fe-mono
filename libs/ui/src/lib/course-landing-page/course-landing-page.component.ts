@@ -158,7 +158,7 @@ export class CourseLandingPageComponent {
 
   downloadTranscript() {
     this.downloadService
-      .downloadTranscript(this.course.id)
+      .downloadTranscript(this.course.id, 0)
       .subscribe((data: Blob) => {
         downloadPdf(data, 'trans');
       });
