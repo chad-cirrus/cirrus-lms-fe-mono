@@ -48,11 +48,10 @@ ul.student-name {
 
 .spinner-container {
   z-index: 9999;
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  position: absolute;
   .spinner {
     stroke: $cirrus-blue !important;
   }
@@ -90,7 +89,7 @@ ul.student-name {
 .content-container {
   background: $black;
   color: $white;
-  margin-top: 5.5rem;;
+  margin-top: 5.5rem;
   width: 100%;
 
   @include breakpoint(mobile) {
@@ -108,7 +107,6 @@ ul.student-name {
   }
 }
 
-
 .error-container {
   z-index: 100;
   position: fixed;
@@ -116,7 +114,8 @@ ul.student-name {
   right: 2%;
 }
 
-.popout-open,.popout-collapse {
+.popout-open,
+.popout-collapse {
   width: 100%;
   background-color: $black;
   color: $white;
