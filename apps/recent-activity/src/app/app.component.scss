@@ -25,11 +25,7 @@
   z-index: 5;
 
   @include breakpoint(mobile) {
-    top: 5.9rem;
-  }
-
-  @include breakpoint(tablet) {
-    top: 6.4rem;
+    top: 5.5rem;
   }
 }
 
@@ -74,7 +70,7 @@
     left: 245px !important;
   }
   @include breakpoint(tablet) {
-    top: 103px !important;
+    top: 89px !important;
     width: 434px;
   }
 }

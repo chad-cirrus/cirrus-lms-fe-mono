@@ -36,10 +36,6 @@ p.welcome-back {
   padding-left: 0px !important;
 }
 
-.mat-badge-medium.mat-badge-after .mat-badge-content {
-  // right: -8px;
-}
-
 h1.user-name {
   font-size: 1rem;
   margin: 0;
@@ -57,4 +53,9 @@ h1.user-name {
 
 .hideDashboard {
   display: none;
+}
+
+.chevron-icon {
+  align-self: end;
+  margin-bottom: 5px;
 }

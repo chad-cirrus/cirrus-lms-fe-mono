@@ -13,11 +13,11 @@
   z-index: 5;
 
   @include breakpoint(mobile) {
-    padding: 25px;
+    padding: 22px;
   }
 
   @include breakpoint(tablet) {
-    padding: 29px 60px;
+    padding: 22px 60px;
   }
 }
 
@@ -25,25 +25,12 @@
   align-items: center;
   display: flex;
   justify-content: space-between;
-  width: 50%;
-  @include breakpoint(mobile) {
-    width: 40%;
-  }
-  @include breakpoint(tablet) {
-    width: 25%;
-  }
-  @include breakpoint(desktop) {
-    width: 20%;
-  }
 }
 
 .dropdown-menus-header-container {
   align-items: center;
   display: flex;
   justify-content: space-between;
-
-  @include breakpoint(mobile) {
-  }
 }
 
 .notifications-dot {
@@ -58,5 +45,5 @@
 
 .shopping-cart-icon-wrapper { 
   position: relative;
-  margin-right: 1rem;
+  margin-right: 28px;
 }

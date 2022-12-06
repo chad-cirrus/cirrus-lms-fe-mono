@@ -78,11 +78,11 @@ ul.student-name {
   z-index: 5;
 
   @include breakpoint(mobile) {
-    top: 5.5rem;
+    top: 5.1rem;
   }
 
   @include breakpoint(tablet) {
-    top: 6rem;
+    top: 5.1rem;
   }
 }
 
