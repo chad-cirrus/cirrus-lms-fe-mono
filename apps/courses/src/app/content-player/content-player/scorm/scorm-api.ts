@@ -25,6 +25,9 @@ export class ScormAPI {
   }
 
   LMSInitialize() {
+    const status = PROGRESS_STATUS.in_progress;
+    const payload = { id: this.progress.id, status, scorm: { pass: this.isPassed, grade: this.grade }};
+    this.updateProgress.emit(payload);
     this.hideNavigation.emit(true);
     return 'true';
   }
