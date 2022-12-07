@@ -29,6 +29,7 @@
             notification.created_at | date: 'shortDate'
           }}</span>
           <img
+            *ngIf="!notification.notific_type.includes('invite')"
             class="trash"
             [src]="projectName + '/images/svg/Trash_Icon.svg'"
             (click)="deleteNotification(notification.id)"
