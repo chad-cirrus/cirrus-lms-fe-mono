@@ -71,10 +71,7 @@ export class CoursesTabEnrollmentHistoryComponent {
         });
     } else {
       this.uiDownloadService
-        .downloadTranscript(
-          this.courseId,
-          value.user_certificate.course_attempt_id ?? 0
-        )
+        .downloadTranscript(this.courseId, value.id || 0)
         .subscribe((data: Blob) => {
           downloadPdf(data, 'trans');
         });
