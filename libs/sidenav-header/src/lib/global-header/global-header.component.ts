@@ -19,8 +19,8 @@ export class GlobalHeaderComponent {
   @Input() deployUrl = '';
   @Input() cirrusImpersonationReturnUser!: ICirrusUser;
   @Input() isScreenSmall = false;
-  @Input() notificationCount = 0;
-  @Input() orderCount = 0;
+  @Input() notificationCount!: number;
+  @Input() orderCount!: number;
 
   @Output() hamburgerMenu = new EventEmitter();
   @Output() logout = new EventEmitter();

@@ -101,6 +101,12 @@
         width="26px"
       />
       <span class="mobile-menu-item-text">Notifications</span>
+      <span
+        *ngIf="notificationCount"
+        matBadge="{{ notificationCount }}"
+        matBadgeColor="warn"
+        [matBadgeOverlap]="false"
+      ></span>
     </div>
     <div
       class="image-container mobile-menu-link-wrapper"

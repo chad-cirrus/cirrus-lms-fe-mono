@@ -1,48 +1,45 @@
 <div class="header-container">
   <img src="recent-activity/images/svg/Group 1333.svg" />
-  <div
-    class="icons-header-container"
-  >
+  <div class="icons-header-container">
     <div class="shopping-cart-icon-wrapper">
       <a routerLink="/shopping-cart" *ngIf="cirrusUser.id > 0">
         <img src="recent-activity/images/svg/cart.svg" />
         <span
+          *ngIf="orderCount"
           matBadge="{{ orderCount }}"
           matBadgeColor="warn"
           [matBadgeOverlap]="false"
         ></span>
       </a>
     </div>
- 
+
     <div class="dropdown-menus-header-container">
+      <div>
+        <cirrus-global-user-menus
+          [cirrusUser]="cirrusUser"
+          [cirrusImpersonationReturnUser]="cirrusImpersonationReturnUser"
+          (displayPanel)="toggleDropdownDisplay($event)"
+          (logout)="emitLogout()"
+          (impersonationLogout)="emitImpersonationLogout()"
+          [isScreenSmall]="isScreenSmall"
+        ></cirrus-global-user-menus>
+      </div>
       <div
-    >
-      <cirrus-global-user-menus
-        [cirrusUser]="cirrusUser"
-        [cirrusImpersonationReturnUser]="cirrusImpersonationReturnUser"
-        (displayPanel)="toggleDropdownDisplay($event)"
-        (logout)="emitLogout()"
-        (impersonationLogout)="emitImpersonationLogout()"
-        [isScreenSmall]="isScreenSmall"
-      ></cirrus-global-user-menus>
+        *ngIf="isScreenSmall"
+        [ngClass]="isDisplayingHamburger ? 'dropdown-active' : 'dropdown'"
+      >
+        <cirrus-global-hamburger-menu
+          [cirrusUser]="cirrusUser"
+          [notificationCount]="notificationCount"
+          (displayHamburger)="toggleHamburgerDisplay($event)"
+          [deployUrl]="deployUrl"
+          (toggleNotificationsMenu)="emitToggleNotifications()"
+        ></cirrus-global-hamburger-menu>
+        <div
+          *ngIf="notificationCount && !isDisplayingHamburger"
+          class="notifications-dot"
+        ></div>
+      </div>
     </div>
-    <div
-      *ngIf="isScreenSmall"
-      [ngClass]="isDisplayingHamburger ? 'dropdown-active' : 'dropdown'"
-    >
-      <cirrus-global-hamburger-menu
-        [cirrusUser]="cirrusUser"
-        [notificationCount]="notificationCount"
-        (displayHamburger)="toggleHamburgerDisplay($event)"
-        [deployUrl]="deployUrl"
-        (toggleNotificationsMenu)="emitToggleNotifications()"
-      ></cirrus-global-hamburger-menu>
-      <div
-        *ngIf="notificationCount && !isDisplayingHamburger"
-        class="notifications-dot"
-      ></div>
-    </div>
-    </div>
- 
   </div>
 </div>
