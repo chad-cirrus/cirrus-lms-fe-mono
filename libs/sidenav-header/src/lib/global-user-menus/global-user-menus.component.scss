@@ -1,3 +1,5 @@
+@import '../base-scss/import';
+
 :host {
   display: block;
   overflow: hidden;
@@ -6,13 +8,20 @@
 .dropdown-container {
   padding-top: 10px;
   width: 234px;
-  min-height: 25rem;
-  box-sizing: border-box;
+  // min-height: 25rem;
+}
+
+cirrus-global-menu-slider{
+  border-radius: 5px;
+}
+
+.border-radius-bottom-fix {
+  border-radius: 0 0 5px 5px;
 }
 
 .dropdown-container-hamburger {
   @extend .dropdown-container;
-  padding-top: 18px;
+  padding-top: 16px;
 }
 
 .menu-item {
@@ -21,40 +30,42 @@
   padding-top: 1rem;
   padding-left: 1rem;
   padding-right: 0.5rem;
-  color: white;
-  background-color: black;
+  color: $gray4;
+  background-color: $gray1;
   cursor: pointer;
+  font-size: 1rem;
+  letter-spacing: .03em;
+  line-height: 22px;
+
+  &:hover {
+    background-color: $gray2;
+    color: $white;
+  }
   a {
+    color: $gray4;
     display: flex;
     align-items: center;
+    font-size: 1rem;
+    letter-spacing: .03em;
+    line-height: 22px;
+    text-decoration: none;
+
+    &:hover {
+      background-color: $gray2;
+      color: $white;
+    }
   }
   svg {
     margin-left: 10px;
   }
 }
 
-.menu-item:hover {
-  background-color: darkgrey;
-  color: white;
-  a {
-    color: white;
-    svg path {
-      stroke: white;
-    }
-  }
-}
-
 .menu-item-with-border {
   @extend .menu-item;
-  border-bottom: 1px solid darkgrey;
+  border-bottom: 1px solid $gray2;
 }
 
 .back-item {
   @extend .menu-item;
   padding: 1rem 0.2rem;
-}
-
-a {
-  color: darkgrey;
-  text-decoration: none;
 }
