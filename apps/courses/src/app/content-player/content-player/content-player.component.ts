@@ -57,6 +57,7 @@ export class ContentPlayerComponent
   implements OnInit, AfterViewInit, OnDestroy
 {
   destroy$: Subject<boolean> = new Subject<boolean>();
+  firstContentId = 0;
   menuItems$ = this.store.select(selectMenuItems);
   lesson$ = this.store
     .select(selectLesson)
@@ -66,6 +67,7 @@ export class ContentPlayerComponent
   nextContentRequest$ = this._nextContentRequest.asObservable();
 
   private _currentId = new BehaviorSubject<number>(0);
+
   checkoutOffsRequired$ = this.store.select(selectCheckOffRequired);
 
   // mutatable props
@@ -109,6 +111,9 @@ export class ContentPlayerComponent
   ) {}
 
   ngOnInit(): void {
+    this.menuItems$.pipe(take(1)).subscribe(item => {
+      this.firstContentId = item[0].id;
+    });
     combineLatest([
       this.currentContentItem$,
       this.taskService.tasksAndLogBooks$,
