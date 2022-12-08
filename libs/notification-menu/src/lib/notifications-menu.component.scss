@@ -1,7 +1,7 @@
 @import './base-scss/import';
 
 .notifications-container {
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 .title-container-wrapper {
