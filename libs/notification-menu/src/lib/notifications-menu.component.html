@@ -45,10 +45,12 @@
           *ngIf="notification.notific_type.includes('invite'); else message"
           class="action-container"
         >
-          <button class="primary-btn" (click)="acceptInvitation(notification)">
+          <span class="primary-btn" (click)="acceptInvitation(notification)">
             Accept
-          </button>
-          <a class="link" (click)="declineInvitation(notification)">Decline</a>
+          </span>
+          <span class="link" (click)="declineInvitation(notification)"
+            >Decline</span
+          >
         </div>
         <ng-template #message>
           <p class="small message">
