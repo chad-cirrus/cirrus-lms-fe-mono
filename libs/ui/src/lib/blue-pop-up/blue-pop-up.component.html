@@ -7,7 +7,7 @@
   <div class="action-btn-container">
     <div>
       <div *ngFor="let btn of data.buttons; let i = index">
-        <button (click)="close(btn)" [ngClass]="'btn' + i">{{ btn }}</button>
+        <span (click)="close(btn)" [ngClass]="'btn' + i">{{ btn }}</span>
       </div>
     </div>
   </div>
