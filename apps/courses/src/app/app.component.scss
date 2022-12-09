@@ -89,16 +89,16 @@ ul.student-name {
 .content-container {
   background: $black;
   color: $white;
-  margin-top: 5.5rem;
+  margin-top: 4rem;
   width: 100%;
 
   @include breakpoint(mobile) {
+    margin-top: 5rem;
     float: right;
     width: calc(100% - 125px);
   }
 
   @include breakpoint(tablet) {
-    margin-top: 6rem;
     width: calc(100% - 244px);
 
     &.sidenav-collapsed {
