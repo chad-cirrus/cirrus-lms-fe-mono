@@ -66,18 +66,19 @@
   color: $white;
   @include breakpoint(mobile) {
     width: 561px;
-    top: 95px !important;
-    left: 245px !important;
+    max-width: calc(100% - 124px);
+    top: 88px !important;
+    left: 244px !important;
   }
   @include breakpoint(tablet) {
-    top: 89px !important;
+    top: 88px !important;
     width: 434px;
   }
 }
 
 .popout-collapse {
   @include breakpoint(mobile) {
-    left: 107px !important;
+    left: 125px !important;
   }
   @include breakpoint(tablet) {
     width: 434px;
