@@ -13,11 +13,7 @@
   z-index: 5;
 
   @include breakpoint(mobile) {
-    padding: 22px;
-  }
-
-  @include breakpoint(tablet) {
-    padding: 22px 60px;
+    padding: 22px 40px;
   }
 }
 
