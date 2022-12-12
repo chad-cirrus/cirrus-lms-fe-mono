@@ -82,18 +82,14 @@
           [ngStyle]="{ display: (hideBtns$ | async) ? 'none' : 'flex' }"
           fxLayout="row"
           [fxLayoutAlign]="
-            (currentContentItem$ | async)?.content?.id !== firstContentId &&
-            !data.overview
-              ? 'space-between start'
-              : 'flex-end'
+            (showPreviousBtn$ | async) ? 'space-between start' : 'flex-end'
+
           "
           [ngClass]="{ 'add-padding': (menuOpen$ | async) === false }"
         >
           <button
-            *ngIf="
-              (currentContentItem$ | async)?.content?.id !== firstContentId &&
-              !data.overview
-            "
+            *ngIf="showPreviousBtn$ | async"
+
             class="right-button"
             mat-raised-button
             (click)="previousContent()"
