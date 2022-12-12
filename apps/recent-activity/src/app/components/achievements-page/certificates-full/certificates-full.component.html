@@ -42,12 +42,15 @@
         <span class="download download-cert-item" (click)="download(cert)">
           <span
             *ngIf="
-              (loading$ | async) &&
-                cert.course_attempt_id === course_attempt_id;
+              (certificateLoading$ | async) && cert.id === user_certificate_id;
               else downloadIcon
             "
           >
-            <mat-spinner color="accent" [diameter]="20"></mat-spinner>
+            <mat-spinner
+              class="download-icon"
+              color="accent"
+              [diameter]="20"
+            ></mat-spinner>
           </span>
           <ng-template #downloadIcon>
             <img

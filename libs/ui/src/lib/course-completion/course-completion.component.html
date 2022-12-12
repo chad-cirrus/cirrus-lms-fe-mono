@@ -16,10 +16,10 @@
       fxLayoutAlign.lt-sm="center center"
       fxLayoutGap="1.5rem"
     >
-      <div *ngIf="loading$ | async; else button">
+      <div *ngIf="certificateLoading$ | async; else cert">
         <mat-spinner color="accent" [diameter]="35"></mat-spinner>
       </div>
-      <ng-template #button>
+      <ng-template #cert>
         <button
           class="download-certificate"
           mat-raised-button
@@ -28,13 +28,18 @@
           Download Certificate
         </button>
       </ng-template>
-      <button
-        class="download-transcript"
-        (click)="downloadTranscript()"
-        mat-raised-button
-      >
-        Download Transcript
-      </button>
+      <div *ngIf="transcriptLoading$ | async; else transcript">
+        <mat-spinner color="accent" [diameter]="35"></mat-spinner>
+      </div>
+      <ng-template #transcript>
+        <button
+          class="download-transcript"
+          (click)="downloadTranscript()"
+          mat-raised-button
+        >
+          Download Transcript
+        </button>
+      </ng-template>
     </div>
   </div>
 </div>

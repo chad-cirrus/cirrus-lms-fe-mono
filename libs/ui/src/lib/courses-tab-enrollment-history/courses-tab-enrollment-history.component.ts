@@ -65,7 +65,7 @@ export class CoursesTabEnrollmentHistoryComponent {
     if (value === null) return;
     if (type.mat_col_name === 'user_certificate') {
       this.uiDownloadService
-        .downloadCertificate(value.user_certificate.course_attempt_id)
+        .downloadCertificate(value.user_certificate.id)
         .subscribe((data: Blob) => {
           downloadPdf(data, 'cert');
         });

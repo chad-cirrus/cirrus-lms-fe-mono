@@ -22,6 +22,7 @@ export interface OverallProgress {
 export interface Certificate {
   course_name: string;
   course_attempt_id: number;
+  id: number;
   enrollment_date: string;
 }
 

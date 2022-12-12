@@ -94,11 +94,13 @@ export class CourseLandingPageComponent {
   }
 
   downloadCert() {
-    this.downloadService
-      .downloadCertificate(this.course.course_attempt.id)
-      .subscribe((data: Blob) => {
-        downloadPdf(data, 'cert');
-      });
+    if (this.course.certificate.id) {
+      this.downloadService
+        .downloadCertificate(this.course.certificate.id)
+        .subscribe((data: Blob) => {
+          downloadPdf(data, 'cert');
+        });
+    }
   }
 
   reEnroll() {

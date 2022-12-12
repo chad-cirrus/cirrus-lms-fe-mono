@@ -1,7 +1,7 @@
 import { Component, Input, ViewEncapsulation } from '@angular/core';
 import { Certificate } from '../../../models/IRecentActivity';
 import { RecentActivityFacade } from '../../../facade.service';
-import { downloadPdf } from '@cirrus/ui';
+import { downloadPdf, UiDownloadService } from '@cirrus/ui';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
@@ -13,8 +13,8 @@ import { map, startWith } from 'rxjs/operators';
   encapsulation: ViewEncapsulation.Emulated,
 })
 export class CertificatesFullComponent {
-  loading$ = this.facade.downloadLoading$;
-  course_attempt_id = 0;
+  certificateLoading$ = this.downloadService.certificateLoading$;
+  user_certificate_id = 0;
   @Input() certificates: Certificate[] = [];
 
   searchParam = new FormControl('');
@@ -32,12 +32,14 @@ export class CertificatesFullComponent {
       )
     );
 
-  constructor(private facade: RecentActivityFacade) {}
+  constructor(
+    private facade: RecentActivityFacade,
+    private downloadService: UiDownloadService
+  ) {}
 
   download(cert: Certificate) {
-    console.log('download', cert);
-    this.course_attempt_id = cert.course_attempt_id;
-    this.facade.downloadCertificate(cert.course_attempt_id).subscribe(
+    this.user_certificate_id = cert.id;
+    this.facade.downloadCertificate(cert.id).subscribe(
       (data: Blob) => {
         downloadPdf(data, 'cert');
       },
@@ -45,7 +47,7 @@ export class CertificatesFullComponent {
         // do nothing
       },
       () => {
-        this.course_attempt_id = 0;
+        this.user_certificate_id = 0;
       }
     );
   }

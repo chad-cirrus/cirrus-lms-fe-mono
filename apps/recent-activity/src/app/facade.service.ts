@@ -58,7 +58,7 @@ export class RecentActivityFacade {
       .pipe(tap(() => this.getRecentActivityPayload()));
   }
 
-  downloadCertificate(course_attempt_id: number) {
-    return this.downloadService.downloadCertificate(course_attempt_id);
+  downloadCertificate(user_certificate_id: number) {
+    return this.downloadService.downloadCertificate(user_certificate_id);
   }
 }

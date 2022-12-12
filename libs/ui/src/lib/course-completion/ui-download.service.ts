@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { BehaviorSubject, of } from 'rxjs';
-import { concatMap, finalize, tap } from 'rxjs/operators';
+import { ICourse, ICourseOverview } from '@cirrus/models';
+import { BehaviorSubject, Observable, of } from 'rxjs';
+import { concatMap, filter, finalize, tap } from 'rxjs/operators';
 
 @Injectable()
 export class UiDownloadService {
@@ -31,14 +32,16 @@ export class UiDownloadService {
     this.selectedIdSubject.next(value);
   }
 
-  downloadCertificate(course_attempt_id: number) {
-    const url = `${this.environment['baseUrl']}/api/v4/pdf/certificate`;
-    const queryParams = { course_attempt_id };
+  getCourse(course_id: number): Observable<any> {
+    const url = `${this.environment['baseUrl']}/api/v4/courses/${course_id}}`;
+    return this.http.get(url);
+  }
+
+  downloadCertificate(user_certificate_id: number) {
+    const url = `${this.environment['baseUrl']}/api/v4/user_certificates/${user_certificate_id}`;
     return of(null).pipe(
       tap(() => this.certificateLoadingSubject.next(true)),
-      concatMap(() =>
-        this.http.get(url, { params: queryParams, responseType: 'blob' })
-      ),
+      concatMap(() => this.http.get(url, { responseType: 'blob' })),
       finalize(() => this.certificateLoadingSubject.next(false))
     );
   }

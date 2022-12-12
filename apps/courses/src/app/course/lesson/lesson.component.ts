@@ -110,7 +110,6 @@ export class LessonComponent implements OnInit, OnDestroy {
           )
         )
         .subscribe(([progress_type, courseOverview, user, lesson]) => {
-          console.log('course overview', courseOverview);
           const component: ComponentType<
             CompletionDialogComponent | CourseCompletionComponent
           > =
@@ -130,6 +129,7 @@ export class LessonComponent implements OnInit, OnDestroy {
                   course_id: courseOverview.id,
                   student: user.name,
                   course_attempt_id: this._lesson.course_attempt_id,
+                  user_certificate_id: courseOverview.certificate.id,
                 };
 
           const showCompletionDialog =

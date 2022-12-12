@@ -82,8 +82,8 @@
           [ngStyle]="{ display: (hideBtns$ | async) ? 'none' : 'flex' }"
           fxLayout="row"
           [fxLayoutAlign]="
-            (currentContentItem$ | async)?.content?.id !== firstContentId ||
-            data.overview
+            (currentContentItem$ | async)?.content?.id !== firstContentId &&
+            !data.overview
               ? 'space-between start'
               : 'flex-end'
           "
@@ -91,8 +91,8 @@
         >
           <button
             *ngIf="
-              (currentContentItem$ | async)?.content?.id !== firstContentId ||
-              data.overview
+              (currentContentItem$ | async)?.content?.id !== firstContentId &&
+              !data.overview
             "
             class="right-button"
             mat-raised-button
