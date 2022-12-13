@@ -71,18 +71,11 @@ export class ContentPlayerComponent
 
   checkoutOffsRequired$ = this.store.select(selectCheckOffRequired);
 
-  private _previousNextOrInitType = new BehaviorSubject<string>('initial');
-  previousNextOrInitType$ = this._previousNextOrInitType.asObservable();
-
-  showPreviousBtn$ = this.previousNextOrInitType$.pipe(
+  showPreviousBtn$ = this.nextContentRequest$.pipe(
     withLatestFrom(this.currentId$),
     map(([prev, id]) => {
-      console.log(prev, id, this.data);
       return (
-        id !== this.firstContentId &&
-        !this.data.overview &&
-        !this.data.intro &&
-        prev !== 'initial'
+        id !== this.firstContentId && !this.data.overview && !this.data.intro
       );
     })
   );
@@ -162,7 +155,6 @@ export class ContentPlayerComponent
       this.playIntroContent(this.data.content as IContent);
     } else {
       this._nextContentRequest.next({ type: 'initial', id: this.data.id });
-      this._previousNextOrInitType.next('initial');
     }
   }
 
@@ -221,7 +213,6 @@ export class ContentPlayerComponent
 
   handleSideNavSelect(contentId: number) {
     this._nextContentRequest.next({ type: 'initial', id: contentId });
-    this._previousNextOrInitType.next('initial');
   }
 
   handleCloseMenu() {
@@ -234,12 +225,10 @@ export class ContentPlayerComponent
 
   previousContent() {
     this._nextContentRequest.next({ type: 'prev' });
-    this._previousNextOrInitType.next('prev');
   }
 
   nextContent() {
     this._nextContentRequest.next({ type: 'next' });
-    this._previousNextOrInitType.next('next');
   }
 
   updateProgress(progress: IProgress) {
