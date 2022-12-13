@@ -14,9 +14,7 @@
   <section>
     <div
       [ngClass]="
-        isScreenSmall
-          ? 'dropdown-container-hamburger'
-          : 'dropdown-container'
+        isScreenSmall ? 'dropdown-container-hamburger' : 'dropdown-container'
       "
     >
       <cirrus-global-menu-slider
@@ -58,7 +56,6 @@
               target="_blank"
             >
               Learn to Fly
-            
             </a>
           </div>
           <div class="menu-item menu-item-with-border small">
@@ -67,7 +64,6 @@
               target="_blank"
             >
               Flight Fix
-              
             </a>
           </div>
           <div
@@ -86,14 +82,24 @@
           </div>
         </div>
 
-        <div rightPane fxLayout="column" fxLayoutAlign="center center" class="right-pane">
+        <div
+          rightPane
+          fxLayout="column"
+          fxLayoutAlign="center center"
+          class="right-pane"
+        >
           <div
             fxLayout="row"
             class="menu-item menu-item-with-border small"
             (click)="isLeftVisible = true"
           >
-            <div><mat-icon>keyboard_arrow_left</mat-icon></div>
-            <div>Back</div>
+            <div>
+              <img
+                class="chevron"
+                src="courses/images/svg/mobile-left-chevron.svg"
+              />
+            </div>
+            <div class="back-text">Back</div>
           </div>
           <div
             class="menu-item small"
