@@ -24,7 +24,7 @@
   
   .lower-footer-container {
     background: $gray2;
-    color: $gray4;
+    color: $gray5;
     padding: 25px 3.5rem;
     padding-bottom: 5rem;
   
@@ -43,7 +43,11 @@
 }
 
 .footer-link.secondary-link {
-    color: $gray4;
+    color: $gray5;
     font-size: 0.875rem;
     margin: 0 1rem;
+  }
+
+  .email-link {
+      color: $white;
   }
