@@ -34,6 +34,7 @@
   color: $white;
   margin-top: 6.9rem;
   padding: 30px 0;
+  padding-bottom: 0;
   width: 100%;
 
   @include breakpoint(mobile) {
@@ -44,6 +45,7 @@
 
   @include breakpoint(tablet) {
     padding: 50px 0;
+    padding-bottom: 0;
     width: calc(100% - 244px);
     
     &.sidenav-collapsed {

@@ -24,8 +24,8 @@
         ></cirrus-global-side-nav>
       </div>
 
-      <div 
-        class="content-container"     
+      <div
+        class="content-container"
         [ngClass]="collapse ? 'sidenav-collapsed' : 'sidenav-expanded'"
       >
         <div *ngIf="error$ | async" class="error-container">
@@ -47,9 +47,9 @@
             <mat-spinner class="mat-spinner" color="accent"></mat-spinner>
           </div>
           <router-outlet>
+           
           </router-outlet>
-
-
+          <cirrus-global-footer></cirrus-global-footer>
         </div>
       </div>
     </div>

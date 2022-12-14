@@ -1,0 +1,49 @@
+@import '../base-scss/import';
+
+.global-footer {
+    color: $gray5;
+    text-align: center;
+    margin-top: 2rem;
+    @include breakpoint(mobile) {
+    }
+  }
+  
+  .upper-footer-container {
+    background: darken($cirrus-blue, 25%);
+    padding:40px;
+    @include breakpoint(mobile) {
+        padding: 25px 70px;
+    }
+    @include breakpoint(tablet) {
+        padding: 30px 130px;
+      }
+      @include breakpoint(widescreen) {
+        padding: 30px 200px;
+      }
+  }
+  
+  .lower-footer-container {
+    background: $gray2;
+    color: $gray4;
+    padding: 25px 3.5rem;
+    padding-bottom: 5rem;
+  
+    @include breakpoint(mobile) {
+        padding: 25px 70px;
+        padding-bottom: 4rem;
+    }
+    @include breakpoint(tablet) {
+        padding: 30px 130px;
+        padding-bottom: 4rem;
+    }
+  }
+    
+.legal-links-container {
+    margin-top: .5rem;   
+}
+
+.footer-link.secondary-link {
+    color: $gray4;
+    font-size: 0.875rem;
+    margin: 0 1rem;
+  }

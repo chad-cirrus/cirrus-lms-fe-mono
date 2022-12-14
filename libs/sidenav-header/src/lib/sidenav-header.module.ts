@@ -13,6 +13,7 @@ import { GlobalUserMenusComponent } from './global-user-menus/global-user-menus.
 import { MatIconModule } from '@angular/material/icon';
 import { GlobalHeaderComponent } from './global-header/global-header.component';
 import { CirrusMaterialModule } from '@cirrus/ui';
+import { GlobalFooterComponent } from './global-footer/global-footer.component';
 
 @NgModule({
   imports: [
@@ -32,6 +33,7 @@ import { CirrusMaterialModule } from '@cirrus/ui';
     GlobalHamburgerMenuComponent,
     GlobalUserMenusComponent,
     GlobalHeaderComponent,
+    GlobalFooterComponent,
   ],
   exports: [
     GlobalSideNavComponent,
@@ -40,6 +42,7 @@ import { CirrusMaterialModule } from '@cirrus/ui';
     GlobalHamburgerMenuComponent,
     GlobalUserMenusComponent,
     GlobalHeaderComponent,
+    GlobalFooterComponent,
   ],
 })
 export class SidenavHeaderModule {}
