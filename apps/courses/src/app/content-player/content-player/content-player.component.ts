@@ -69,14 +69,15 @@ export class ContentPlayerComponent
   private _currentId = new BehaviorSubject<number>(0);
   currentId$ = this._currentId.asObservable();
 
+  private _currentContentType = new BehaviorSubject<string>('content_item');
+  currentContentType$ = this._currentContentType.asObservable();
+
   checkoutOffsRequired$ = this.store.select(selectCheckOffRequired);
 
   showPreviousBtn$ = this.nextContentRequest$.pipe(
-    withLatestFrom(this.currentId$),
-    map(([prev, id]) => {
-      return (
-        id !== this.firstContentId && !this.data.overview && !this.data.intro
-      );
+    withLatestFrom(this.currentId$, this.currentContentType$),
+    map(([prev, id, content_type]) => {
+      return id !== this.firstContentId && content_type === 'content_item';
     })
   );
 
@@ -192,6 +193,7 @@ export class ContentPlayerComponent
 
   playOverview(overview: string) {
     this.title = 'Overview';
+    this._currentContentType.next('overview');
     const lessonContentComponentRef =
       this.vcref.ViewContainerRef.createComponent(componentDictionary[8]);
 
@@ -201,6 +203,7 @@ export class ContentPlayerComponent
   }
 
   playIntroContent(content: IContent) {
+    this._currentContentType.next('intro');
     this.addPadding = true;
 
     const lessonContentComponentRef =
@@ -212,6 +215,7 @@ export class ContentPlayerComponent
   }
 
   handleSideNavSelect(contentId: number) {
+    this._currentContentType.next('overview');
     this._nextContentRequest.next({ type: 'initial', id: contentId });
   }
 
@@ -228,6 +232,7 @@ export class ContentPlayerComponent
   }
 
   nextContent() {
+    this._currentContentType.next('content_item');
     this._nextContentRequest.next({ type: 'next' });
   }
 
