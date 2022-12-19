@@ -12,14 +12,14 @@
 }
 
 .logbook-wrapper {
-  overflow-y: unset;
+  overflow-y: auto;
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   margin-top: 42px;
 
   @include breakpoint(tablet) {
     overflow-y: auto;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
   }
 }
 
