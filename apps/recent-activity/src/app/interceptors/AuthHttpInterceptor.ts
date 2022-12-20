@@ -38,7 +38,6 @@ export class AuthHttpInterceptor implements HttpInterceptor {
           const cirrusUser = val.headers.get('user');
 
           if (cirrusUser !== null) {
-            console.log('*******************', JSON.parse(cirrusUser));
             localStorage.setItem('cirrus-user', cirrusUser);
             this.store.dispatch(
               setCirrusUser({ cirrusUser: JSON.parse(cirrusUser) })

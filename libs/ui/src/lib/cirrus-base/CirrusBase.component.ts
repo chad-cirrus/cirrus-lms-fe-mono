@@ -1,4 +1,4 @@
-import { map } from 'rxjs/operators';
+import { map, takeUntil } from 'rxjs/operators';
 import {
   Component,
   ElementRef,
@@ -18,6 +18,8 @@ import { ICirrusUser } from '@cirrus/models';
 import { UserService } from '../shared/user.service';
 import { NotificationService } from '../lib-services/notifications/notification.service';
 import { ErrorService } from '../lib-services/error/error.service';
+import { Router } from '@angular/router';
+import { ViewportScroller } from '@angular/common';
 
 @Component({
   template: `<p>works</p>`,
@@ -60,14 +62,22 @@ export abstract class CirrusBaseComponent implements OnInit, OnDestroy {
     protected breakpointObserver: BreakpointObserver,
     protected sidenavHeaderService: SidenavHeaderService,
     protected notificationService: NotificationService,
-    protected errorService: ErrorService
+    protected errorService: ErrorService,
+    protected router: Router,
+    protected scroller: ViewportScroller
   ) {}
 
   ngOnInit() {
-    this.sidenavHeaderService.showNotifications$.subscribe(bool => {
-      if (this.drawer) {
-        bool ? this.drawer.open() : this.drawer.close();
-      }
+    this.sidenavHeaderService.showNotifications$
+      .pipe(takeUntil(this.destroyed))
+      .subscribe(bool => {
+        if (this.drawer) {
+          bool ? this.drawer.open() : this.drawer.close();
+        }
+      });
+
+    this.router.events.pipe(takeUntil(this.destroyed)).subscribe(() => {
+      this.scroller.scrollToPosition([0, 0]);
     });
   }
 

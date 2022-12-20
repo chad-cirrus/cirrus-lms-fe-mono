@@ -1,11 +1,4 @@
-import {
-  Component,
-  ElementRef,
-  HostListener,
-  OnDestroy,
-  OnInit,
-  ViewChild,
-} from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { AppState } from './store/reducers';
@@ -26,6 +19,8 @@ import { environment } from '../environments/environment';
 import { RecentActivityService } from './services/recent-activity.service';
 import { RecentActivityFacade } from './facade.service';
 import { SidenavHeaderService } from '@cirrus/sidenav-header';
+import { Router } from '@angular/router';
+import { ViewportScroller } from '@angular/common';
 
 @Component({
   selector: 'cirrus-root',
@@ -50,6 +45,8 @@ export class AppComponent
     private store: Store<AppState>,
     private recentActivityService: RecentActivityService,
     private facade: RecentActivityFacade,
+    router: Router,
+    scroller: ViewportScroller,
     errorService: ErrorService,
     notificationService: NotificationService,
     sidenavHeaderService: SidenavHeaderService,
@@ -61,7 +58,9 @@ export class AppComponent
       breakpointObserver,
       sidenavHeaderService,
       notificationService,
-      errorService
+      errorService,
+      router,
+      scroller
     );
   }
 

@@ -26,6 +26,8 @@ import {
 import { environment } from '../environments/environment';
 import { CoursesFacadeService } from './courses-facade.service';
 import { SidenavHeaderService } from '@cirrus/sidenav-header';
+import { Router } from '@angular/router';
+import { ViewportScroller } from '@angular/common';
 
 @Component({
   selector: 'cirrus-root',
@@ -61,6 +63,8 @@ export class AppComponent
     private appService: AppService,
     private courseService: CoursesService,
     private facade: CoursesFacadeService,
+    router: Router,
+    scroller: ViewportScroller,
     userService: UserService,
     breakpointObserver: BreakpointObserver,
     sidenavHeaderService: SidenavHeaderService,
@@ -72,7 +76,9 @@ export class AppComponent
       breakpointObserver,
       sidenavHeaderService,
       notificationService,
-      errorService
+      errorService,
+      router,
+      scroller
     );
   }
 

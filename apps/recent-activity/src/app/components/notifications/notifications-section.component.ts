@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { INotification } from '@cirrus/models';
 
 @Component({
@@ -6,17 +6,12 @@ import { INotification } from '@cirrus/models';
   templateUrl: './notifications-section.component.html',
   styleUrls: ['./notifications-section.component.scss'],
 })
-export class NotificationsSectionComponent implements OnInit {
+export class NotificationsSectionComponent {
   bellUrl = 'recent-activity/images/svg/Bell.svg';
   @Input() notifications: INotification[] = [];
   @Output() viewAllNotifications = new EventEmitter();
 
-  ngOnInit(): void {
-    console.log(this.notifications);
-  }
-
   emitViewAllNotifications() {
-    console.log('view all notifications');
     this.viewAllNotifications.emit();
   }
 }
