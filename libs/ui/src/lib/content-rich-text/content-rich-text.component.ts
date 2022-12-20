@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SafeResourceUrl } from '@angular/platform-browser';
 import { LessonContentComponent } from '../LessonContentComponent';
 import { CirrusSanitizerService } from '../shared/cirrus-sanitizer.service';
+import { ViewportScroller } from '@angular/common';
 
 @Component({
   selector: 'cirrus-content-rich-text',
@@ -18,7 +19,10 @@ export class ContentRichTextComponent
     return this._html;
   }
 
-  constructor(private cirrusSanitizer: CirrusSanitizerService) {
+  constructor(
+    private cirrusSanitizer: CirrusSanitizerService,
+    private scroller: ViewportScroller
+  ) {
     super();
   }
 
@@ -27,5 +31,6 @@ export class ContentRichTextComponent
     this._html = this.cirrusSanitizer.getSafeHtml(
       this.overview ? this.overview : this.content.content_html
     );
+    this.scroller.scrollToAnchor('scroll-anchor');
   }
 }
