@@ -32,14 +32,14 @@
 .content-container {
   background: $black;
   color: $white;
-  margin-top: 6.9rem;
+  margin-top: 66px;
   padding: 30px 0;
   padding-bottom: 0;
   width: 100%;
 
   @include breakpoint(mobile) {
     float: right;
-    margin-top: 7.1rem;
+    margin-top: 88px;
     width: calc(100% - 107px);
   }
 

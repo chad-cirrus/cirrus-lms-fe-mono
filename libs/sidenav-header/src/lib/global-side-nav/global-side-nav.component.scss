@@ -10,7 +10,7 @@
 
   @include breakpoint(mobile) {
     background: $black;
-    height: calc(100% - 5.8rem);
+    height: calc(100% - 88px);
   }
 }
 
@@ -23,7 +23,7 @@
   border-top: 1px solid $gray2;
   display: flex;
   justify-content: space-between;
-  padding: 2rem 0;
+  padding: 2rem 0 0;
   width: 100%;
 }
 
