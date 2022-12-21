@@ -1,4 +1,4 @@
-<div class="container" fxLayout="column" fxLayoutAlign="space-between">
+<div class="container">
   <div class="close" (click)="close('review')">
     <img src="courses/images/svg/close-btn-heavy.svg" />
   </div>
@@ -6,12 +6,17 @@
     <div class="message">You've completed {{ lesson$ | async }}</div>
 
     <div class="buttons">
-      <button class="review-lesson" mat-raised-button (click)="close('review')">
+      <button class="review-lesson" mat-button (click)="close('review')">
         Review Lesson
       </button>
-      <button class="next-lesson" mat-raised-button (click)="close('next')">
+      <button class="next-lesson" mat-button (click)="close('next')">
         Next Lesson
       </button>
+    </div>
+
+    <div class="feedback">
+      <p class="large">Thank you for participating in the early access period of the new Cirrus Approach experience. We would greatly appreciate any feedback that you would like to provide.</p>
+      <a href="https://cirrusaircraft.formstack.com/forms/lms_ppl_early_access_feedback" target="_blank">Send Feedback</a>
     </div>
   </div>
 </div>
