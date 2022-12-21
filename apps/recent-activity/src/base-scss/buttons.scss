@@ -58,3 +58,13 @@
         border: 1px solid $gray5;
     }
 }
+
+.secondary-btn-white-outline {
+    @extend %btn;
+    background: transparent;
+    border: 1px solid $white;
+    &:hover {
+        background: $white;
+        color: $black;
+    }
+}

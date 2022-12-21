@@ -6,6 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./global-footer.component.scss'],
 })
 export class GlobalFooterComponent implements OnInit {
+  
+  copyrightYear = new Date().getFullYear();
+
   constructor() {}
 
   ngOnInit(): void {}

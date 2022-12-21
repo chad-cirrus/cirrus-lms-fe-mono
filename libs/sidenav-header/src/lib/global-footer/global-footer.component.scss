@@ -11,6 +11,14 @@
   .upper-footer-container {
     background: darken($cirrus-blue, 25%);
     padding:40px;
+    .secondary-btn-white-outline {
+      display: inline-block;
+      margin-top: 30px;
+      text-decoration: none;
+      &:hover {
+        color: $black;
+      }
+    }
     @include breakpoint(mobile) {
         padding: 25px 70px;
     }
@@ -46,8 +54,4 @@
     color: $gray5;
     font-size: 0.875rem;
     margin: 0 1rem;
-  }
-
-  .email-text {
-      color: $white;
   }
