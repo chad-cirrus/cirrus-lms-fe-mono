@@ -95,14 +95,14 @@ ul.student-name {
   @include breakpoint(mobile) {
     margin-top: 5rem;
     float: right;
-    width: calc(100% - 125px);
+    width: calc(100% - 107px);
   }
 
   @include breakpoint(tablet) {
     width: calc(100% - 244px);
 
     &.sidenav-collapsed {
-      width: calc(100% - 125px);
+      width: calc(100% - 107px);
     }
   }
 }
