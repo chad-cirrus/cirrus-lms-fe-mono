@@ -12,15 +12,11 @@
     text-decoration: none;
     transition: all .3s ease;
 
-    @include breakpoint(tablet){
-        padding: 13px 35px;
-    }
-
     &.-wide-btn {
-        padding: 13px 80px;
+        padding: 11px 80px;
         
         @include breakpoint(tablet){
-            padding: 13px 35px;
+            padding: 11px 35px;
         }
     }
 }

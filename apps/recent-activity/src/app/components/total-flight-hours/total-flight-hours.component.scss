@@ -54,7 +54,7 @@
     font-size: clamp(1.25rem, -3.75rem + 25vw, 1.875rem);
   }
 
-  @include breakpoint(mobile) {
+  @media (min-width: 715px) {
     width: 245px;
     margin: 0 0 0 30px;
     padding: 8px;

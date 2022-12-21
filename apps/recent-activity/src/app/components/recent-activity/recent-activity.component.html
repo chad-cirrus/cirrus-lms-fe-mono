@@ -6,7 +6,13 @@
     "
   >
     <div class="recent-activity-welcome-heading content-wrapper">
-      <h1 class="heading-3">Welcome back, {{ (user$ | async)?.firstname }}</h1>
+      <div class="welcome-message">
+        <h1 class="heading-3">Welcome back, {{ (user$ | async)?.firstname }}</h1>
+        <p>Thank you for being an integral part of our “Early Access” Cirrus Approach experience. Your participation is important to us, and any feedback you provide will help to enhance the learning experience for all. Please feel free to share as often as you like.</p>
+        <a class="secondary-btn-black" href="https://cirrusaircraft.formstack.com/forms/lms_ppl_early_access_feedback" target="_blank">
+          Send Feedback
+        </a>
+      </div>
       <cirrus-total-flight-hours
         [hours]="(flightHoursString$ | async) || '0000'"
       ></cirrus-total-flight-hours>

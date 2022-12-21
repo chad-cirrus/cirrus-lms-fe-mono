@@ -12,10 +12,24 @@ cirrus-recent-activity {
   display: flex;
   flex-direction: column;
 
-  @include breakpoint(mobile) {
+  p {
+    max-width: 635px;
+    color: $gray6;
+    margin: 15px 0 30px;
+  }
+
+  .secondary-btn-black {
+    display: inline-block;
+  }
+
+  @media (min-width: 715px) {
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+    
+    p {
+      margin: 15px 30px 30px 0;
+    }
   }
 }
 
