@@ -59,12 +59,14 @@
     }
 }
 
-.secondary-btn-white-outline {
+.secondary-btn-white-outline, a.secondary-btn-white-outline {
     @extend %btn;
     background: transparent;
     border: 1px solid $white;
-    &:hover {
-        background: $white;
-        color: $black;
+    @media (hover: hover) {
+        &:hover {
+            background: $white;
+            color: $black !important; //important is temporary fix due to order that typography.scss is imported, sometimes we may need our a tags to be styled like a button
+        }
     }
 }

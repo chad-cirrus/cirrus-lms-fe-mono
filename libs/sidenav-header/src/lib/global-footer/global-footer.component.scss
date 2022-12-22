@@ -3,9 +3,7 @@
 .global-footer {
     color: $gray5;
     text-align: center;
-    margin-top: 2rem;
-    @include breakpoint(mobile) {
-    }
+    margin-top: 90px;
   }
   
   .upper-footer-container {
@@ -15,9 +13,6 @@
       display: inline-block;
       margin-top: 30px;
       text-decoration: none;
-      &:hover {
-        color: $black;
-      }
     }
     @include breakpoint(mobile) {
         padding: 25px 70px;

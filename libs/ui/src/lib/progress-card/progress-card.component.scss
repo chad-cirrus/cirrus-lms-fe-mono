@@ -4,10 +4,10 @@
   box-sizing: border-box;
   border-radius: 4.16px;
   padding: 17px;
-  min-width: 210px;
+  min-width: 150px;
   img {
-    max-height: 32px;
-    min-height: 24px;
+    height: 26px;
+    width: auto;
   }
   .progress-type {
     font-family: $BertholdAkzidenzGroteskBE;
@@ -15,6 +15,7 @@
     font-weight: 400;
     font-size: 0.9375rem;
     line-height: 1;
+    white-space: nowrap;
     letter-spacing: -0.045em;
     color: #e5e5e5;
     margin: 16px 0 14px;
@@ -42,7 +43,7 @@
   font-style: normal;
   font-weight: 400;
   font-size: 2.5rem;
-  line-height: 100%;
+  line-height: .8;
   /* or 37px */
 
   letter-spacing: -0.045em;
@@ -56,6 +57,7 @@
 
 @media (min-width: 600px) {
   .progress-card {
+    width: 175px;
     .progress-type {
       font-size: 0.9375rem;
     }
@@ -64,6 +66,7 @@
 
 @media (min-width: 960px) {
   .progress-card {
+    width: 210px;
     .progress-type {
       font-size: 1rem;
     }

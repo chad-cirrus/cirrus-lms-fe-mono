@@ -213,6 +213,7 @@ img {
 
 .mat-dialog-container {
   padding: 0 !important;
+  cursor: default;
   .cirrus-media-player {
     .mat-dialog-container {
       border-radius: 0;
@@ -259,7 +260,7 @@ img {
 .fullscreen-dialog {
   max-width: 100% !important;
   .mat-dialog-container {
-    background-color: $gray2;
+    background-color: $gray1;
   }
 }
 
