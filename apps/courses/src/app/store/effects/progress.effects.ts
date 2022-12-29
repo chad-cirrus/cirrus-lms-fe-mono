@@ -7,6 +7,7 @@ import {
   completeProgress,
   completeProgressFailure,
   fetchLessons,
+  fetchLessonsWithoutTasksLogbook,
   startProgress,
   startProgressFailure,
 } from '../actions';
@@ -17,11 +18,13 @@ export class ProgressEffects {
   startProgress$ = createEffect(() =>
     this.actions$.pipe(
       ofType(startProgress),
-      mergeMap(({ id, courseId, stageId, lessonId }) =>
+      mergeMap(({ id, courseId, stageId, lessonId, scorm }) =>
         this.coursesService.startProgress(id).pipe(
           switchMap(() => [
             fetchCourseOverview({ courseId }),
-            fetchLessons({ courseId, stageId, lessonId }),
+            scorm
+              ? fetchLessonsWithoutTasksLogbook({ courseId, stageId, lessonId })
+              : fetchLessons({ courseId, stageId, lessonId }),
           ]),
           catchError(error => of(startProgressFailure({ error })))
         )
@@ -32,11 +35,13 @@ export class ProgressEffects {
   completeProgress$ = createEffect(() =>
     this.actions$.pipe(
       ofType(completeProgress),
-      mergeMap(({ id, courseId, stageId, lessonId, progress }) =>
+      mergeMap(({ id, courseId, stageId, lessonId, progress, scorm }) =>
         this.coursesService.completeProgress(id, progress).pipe(
           switchMap(() => [
             fetchCourseOverview({ courseId }),
-            fetchLessons({ courseId, stageId, lessonId }),
+            scorm
+              ? fetchLessonsWithoutTasksLogbook({ courseId, stageId, lessonId })
+              : fetchLessons({ courseId, stageId, lessonId }),
           ]),
           catchError(error => of(completeProgressFailure({ error })))
         )

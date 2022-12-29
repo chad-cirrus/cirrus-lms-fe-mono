@@ -3,7 +3,20 @@ import { createAction, props } from '@ngrx/store';
 
 export const fetchLessons = createAction(
   '[courses component] fetch lessons',
-  props<{ courseId: number; stageId: number; lessonId: number }>()
+  props<{
+    courseId: number;
+    stageId: number;
+    lessonId: number;
+  }>()
+);
+
+export const fetchLessonsWithoutTasksLogbook = createAction(
+  '[courses component] fetch lessons without tasks logbook',
+  props<{
+    courseId: number;
+    stageId: number;
+    lessonId: number;
+  }>()
 );
 
 export const fetchLessonsSuccess = createAction(

@@ -64,6 +64,9 @@ export class TaskService {
   }
 
   getTasksAndLogbook(payload: ITasksRequest): void {
+    // why is this being called
+    // is this scorm related if yes skip
+
     forkJoin([this.getTasks(payload), this.getLogbook(payload)]).subscribe(
       response => this._tasksAndLogBooks.next(response)
     );

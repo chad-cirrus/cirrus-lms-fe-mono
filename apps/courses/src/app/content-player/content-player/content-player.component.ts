@@ -257,6 +257,7 @@ export class ContentPlayerComponent
               courseId: lesson.course_id,
               stageId: lesson.stage_id,
               lessonId: lesson.id,
+              scorm: content_type === 2,
             })
           );
         } else {
@@ -267,6 +268,7 @@ export class ContentPlayerComponent
               stageId: lesson.stage_id,
               lessonId: lesson.id,
               progress,
+              scorm: content_type === 2,
             })
           );
         }

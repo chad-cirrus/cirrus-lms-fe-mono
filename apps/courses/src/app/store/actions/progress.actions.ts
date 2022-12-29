@@ -4,7 +4,13 @@ import { createAction, props } from '@ngrx/store';
 
 export const startProgress = createAction(
   '[lesson component] start progress',
-  props<{ id: number; courseId: number; stageId: number; lessonId: number }>()
+  props<{
+    id: number;
+    courseId: number;
+    stageId: number;
+    lessonId: number;
+    scorm: boolean;
+  }>()
 );
 
 export const startProgressSuccess = createAction(
@@ -25,6 +31,7 @@ export const completeProgress = createAction(
     stageId: number;
     lessonId: number;
     progress: IProgress;
+    scorm: boolean;
   }>()
 );
 

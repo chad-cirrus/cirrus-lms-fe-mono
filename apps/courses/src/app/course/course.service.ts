@@ -47,7 +47,8 @@ export class CoursesService {
   getLessons(
     courseId: number,
     stageId: number,
-    lessonId: number
+    lessonId: number,
+    tasksLogbook = true
   ): Observable<ILesson> {
     return this.http
       .get<ILesson>(
@@ -69,7 +70,9 @@ export class CoursesService {
                 } as ITasksRequest)
             )
             .forEach(request => {
-              this.taskService.getTasksAndLogbook(request);
+              if (tasksLogbook) {
+                this.taskService.getTasksAndLogbook(request);
+              }
             });
         })
       );
