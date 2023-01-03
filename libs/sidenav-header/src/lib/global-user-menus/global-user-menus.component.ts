@@ -1,6 +1,7 @@
 import {
   Component,
   EventEmitter,
+  Inject,
   Input,
   OnInit,
   Output,
@@ -62,6 +63,15 @@ export class GlobalUserMenusComponent implements OnInit {
   private connectedOverlay!: CdkConnectedOverlay;
 
   private isPanelHidden$!: Observable<boolean>;
+
+  private readonly environment: Record<string, unknown>;
+  get editProfileUrl() {
+    return this.environment['profile'] + this.cirrusUser.salesforce_id;
+  }
+
+  constructor(@Inject('environment') environment: Record<string, unknown>) {
+    this.environment = environment;
+  }
 
   ngOnInit(): void {
     this.isPanelHidden$ = this.connectedOverlay.backdropClick.pipe(
