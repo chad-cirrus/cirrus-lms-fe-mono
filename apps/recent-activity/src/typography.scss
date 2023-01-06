@@ -32,7 +32,7 @@ $akzidenz-extended: 'akzidenz-extended', Helvetica, Verdana, sans-serif;
 
 $akzidenz: 'akzidenz', Helvetica, Verdana, sans-serif;
 
-$akzidenz-medium: 'akzidenz', Helvetica, Verdana, sans-serif;
+$akzidenz-medium: 'akzidenz-medium', Helvetica, Verdana, sans-serif;
 
 //removes default browser behavior
 h1,
@@ -193,7 +193,7 @@ a,
   transition: all 0.3s ease;
 
   &:hover {
-    color: $gray6;
+    color: $gray4;
   }
 }
 

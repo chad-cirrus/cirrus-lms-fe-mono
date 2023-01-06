@@ -30,8 +30,12 @@
 .side-nav-bottom-icons-group {
   align-items: center;
   display: flex;
-  gap: 7rem;
   justify-content: space-between;
+  width: 100%;
+}
+
+.side-nav-bottom-wrapper-outer {
+  width: 100%;
 }
 
 .side-nav-bottom-icons-group-col {
@@ -50,7 +54,6 @@
   font-weight: 400;
   line-height: 22px;
   letter-spacing: 0.02em;
-  gap: 18px;
   padding: 14px 20px;
   white-space: nowrap;
   transition: all 0.3s ease;
@@ -58,11 +61,15 @@
   &:hover {
     background: $gray3;
     color: $white;
-    font-weight: bold;
+    font-weight: 500;
   }
 
   @include breakpoint(mobile) {
     margin-top: 1rem;
+  }
+
+  img {
+    margin-right: 18px;
   }
 }
 

@@ -7,7 +7,7 @@
   >
     <div class="left-side" fxFlex.gt-sm="1 1 60%" *ngIf="courseOverview.overview">
       <h2>About this course</h2>
-      <div [innerHTML]="courseOverview.overview"></div>
+      <div class="wysiwyg-wrapper" [innerHTML]="courseOverview.overview"></div>
       <p class="about--version small">Version: {{ version }}</p>
     </div>
     <div

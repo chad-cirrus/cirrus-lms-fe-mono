@@ -89,7 +89,7 @@ body {
 h1 {
   font-family: $BertholdAkzidenzGroteskBE;
   font-style: normal;
-  font-weight: normal;
+  // font-weight: normal;
   font-size: 1.75rem;
   line-height: 1.2;
   letter-spacing: -0.03em;
@@ -337,5 +337,19 @@ cirrus-course-overview-lesson-progress-bar .lesson-progress-bar {
 cirrus-course-progress {
   mat-progress-bar .mat-progress-bar-fill::after {
     background: #ffffff;
+  }
+}
+
+.wysiwyg-wrapper {
+  a {
+    color: $white !important;
+    font-family: 'Akzidenz-Grotesk BQ';
+    text-decoration: underline;
+    transition: all 0.3s ease;
+  
+    &:hover {
+      color: $gray4;
+      cursor: pointer;
+    }
   }
 }
