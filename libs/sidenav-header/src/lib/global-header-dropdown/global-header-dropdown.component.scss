@@ -37,10 +37,10 @@ p.welcome-back {
 }
 
 h1.user-name {
-  font-size: 1rem;
+  font-size: .9375rem;
+  line-height: 1.1;
   font-family: $akzidenz-medium;
-  margin: 0;
-  margin-top: 4px;
+  margin: 3px 0 0;
   text-transform: capitalize;
   white-space: nowrap;
 }
