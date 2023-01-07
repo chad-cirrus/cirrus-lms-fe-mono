@@ -90,8 +90,14 @@ cirrus-courses-in-progress .heading-3 {
   justify-content: space-between;
   background-image: linear-gradient(180deg, rgb(0, 0, 0, .35), rgb(0, 0, 0, .65)), var(--urlString);
   padding: 17px;
+  h3.name {
+    font-size: 1.1875rem;
+  }
   @include breakpoint(mobile) {
     height: 192px;
+    h3.name {
+      font-size: 1.3125rem;
+    }
   }
 }
 
