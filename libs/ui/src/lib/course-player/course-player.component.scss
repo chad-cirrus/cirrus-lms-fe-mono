@@ -1,7 +1,9 @@
 @use '../styles/variables' as var;
 
 :host {
+  display: inline-block;
   width: 100%;
+  max-width: 653px;
 }
 
 .container {
@@ -45,9 +47,6 @@ cirrus-cta-button {
 }
 
 @media (min-width: 600px) {
-  :host {
-    width: auto;
-  }
   .container {
     padding: 17px 45px 17px 25px;
   }

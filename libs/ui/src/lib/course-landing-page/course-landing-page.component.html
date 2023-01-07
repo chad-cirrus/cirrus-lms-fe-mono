@@ -8,12 +8,8 @@
 <div
   class="lesson-image"
   [ngStyle]="background$ | async"
-  fxLayout="column"
-  fxLayoutAlign="center start"
 >
-  <div class="course-title">
-    <h1>{{ course.title }}</h1>
-  </div>
+  <h1>{{ course.title }}</h1>
   <mat-divider></mat-divider>
   <div class="course-sub-title" *ngIf="course.subtitle">
     <p class="large">{{ course.subtitle }}</p>

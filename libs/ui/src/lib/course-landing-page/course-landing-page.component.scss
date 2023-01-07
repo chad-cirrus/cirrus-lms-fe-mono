@@ -2,18 +2,14 @@
 
 .lesson-image {
   min-height: 450px;
-  padding: 0 20px;
+  padding: 95px 20px 0; 
   margin-bottom: 50px;
   width: 100%;
   background-image: cover;
 }
 
-.course-title {
-  margin-top: 95px;
-  h1 {
-    margin-bottom: 25px;
-    max-width: 18ch;
-  }
+h1 {
+  margin-bottom: 25px;
 }
 
 .course-sub-title {
@@ -73,6 +69,7 @@
 }
 
 cirrus-course-progress {
+  display: inline-block;
   width: 100%;
   margin: 20px 0 40px;
 }
@@ -97,7 +94,11 @@ cirrus-cta-button {
 
 @media (min-width: 600px) {
   .lesson-image {
-    padding: 0 25px;
+    padding: 140px 25px 0;
+  }
+  h1 {
+    margin-top: 0;
+    max-width: 85%;
   }
   .course-sub-title {
     max-width: 440px;
@@ -112,8 +113,8 @@ cirrus-cta-button {
 
 @media (min-width: 960px) {
   .lesson-image {
-    padding: 0 50px;
-    min-height: 70vh;
+    padding: 140px 50px 0;
+    height: calc(90vh - 151px);
   }
 
   cirrus-course-progress {

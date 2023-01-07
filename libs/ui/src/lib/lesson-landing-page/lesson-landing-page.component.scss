@@ -56,8 +56,6 @@ mat-drawer {
 
   .content {
     width: 100%;
-    // margin-left: 0px;
-    // padding: 64px 16px 0;
 
     .mat-divider {
       border-top-color: rgba(255, 255, 255);
@@ -74,7 +72,6 @@ mat-drawer {
     }
 
     h1 {
-      max-width: 18ch;
       margin-bottom: 20px;
       padding-right: 30px;
     }
@@ -210,7 +207,6 @@ cirrus-progress-card:last-child {
 .contents-list-container {
   .content-item {
     margin-top: 8px;
-    // margin: 8px;
   }
 }
 
@@ -218,8 +214,6 @@ cirrus-progress-card:last-child {
   .lesson-image {
     .content {
       margin-top: 48px;
-      // padding: 48px 24px 0 24px;
-
 
       .lesson-label {
         margin-bottom: 10px;
@@ -227,6 +221,7 @@ cirrus-progress-card:last-child {
 
       h1 {
         margin: 0 0 30px;
+        max-width: 85%;
       }
 
       p {
@@ -250,10 +245,8 @@ cirrus-progress-card:last-child {
 
 @media (min-width: 960px) {
   .lesson-image {
+    height: calc(90vh - 151px);
     .content {
-      padding-top: 96px;
-      // margin-left: 40px;
-      // padding: 96px 40px 0 40px;
 
       p {
         margin: 25px 0 50px;
