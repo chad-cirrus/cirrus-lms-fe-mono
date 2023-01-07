@@ -17,6 +17,15 @@
   .media-control {
     color: #bdbdbd;
   }
+  .contents-list-container {
+    .content-item {
+      margin: 5px 0;
+      padding-bottom: 5px;
+      &:not(:last-child) {
+        border-bottom: 1px solid rgba(78, 78, 78, 0.4);
+      }
+    }
+  }
 }
 
 .course-complete {
@@ -40,12 +49,6 @@
     padding: 0;
     .title-content {
       padding: 1rem 0;
-    }
-  }
-
-  .contents-list-container {
-    .content-item {
-      margin: 0.5rem 0;
     }
   }
 }
