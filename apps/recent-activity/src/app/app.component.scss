@@ -21,25 +21,25 @@
   height: 100%;
   position: fixed;
   padding: 1rem 20px;
-  top:6.5rem;
+  top: 65px;
   z-index: 5;
 
   @include breakpoint(mobile) {
-    top: 5.5rem;
+    top: 79.5px;
   }
 }
 
 .content-container {
   background: $black;
   color: $white;
-  margin-top: 66px;
+  margin-top: 65px;
   padding: 30px 0;
   padding-bottom: 0;
   width: 100%;
 
   @include breakpoint(mobile) {
     float: right;
-    margin-top: 88px;
+    margin-top: 79.5px;
     width: calc(100% - 107px);
   }
 
@@ -69,11 +69,10 @@
   @include breakpoint(mobile) {
     width: 561px;
     max-width: calc(100% - 124px);
-    top: 88px !important;
+    top: 78.8px !important;
     left: 244px !important;
   }
   @include breakpoint(tablet) {
-    top: 88px !important;
     width: 434px;
   }
 }
