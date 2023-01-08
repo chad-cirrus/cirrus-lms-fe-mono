@@ -93,9 +93,10 @@ img[type='button'] {
     border: none;
     border-bottom: 1px solid $gray1;
     background-color: $gray2;
-    border-radius: 0px;
+    border-radius: 5px 5px 0 0;
     & ~ .text-filter-container {
       border-top: 1px solid $gray1;
+      border-radius: 0 0 5px 5px;
     }
   }
 
