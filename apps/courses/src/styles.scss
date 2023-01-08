@@ -63,6 +63,10 @@ img[type='button'] {
   }
 }
 
+.mat-checkbox-label {
+  white-space: normal;
+}
+
 .mat-checkbox-checkmark-path {
   stroke: $white !important;
 }

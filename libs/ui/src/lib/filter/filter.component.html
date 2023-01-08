@@ -7,8 +7,10 @@
           <mat-checkbox
             (change)="onChange(item)"
             [checked]="checkboxArray.value.includes(item)"
-          ></mat-checkbox>
-          {{ item | formatFilter | titlecase }}
+            color="secondary"
+          >
+            {{ item | formatFilter | titlecase }}
+          </mat-checkbox>
         </div>
       </div>
     </div>
