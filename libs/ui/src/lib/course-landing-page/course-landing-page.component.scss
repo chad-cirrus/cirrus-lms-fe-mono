@@ -115,6 +115,7 @@ cirrus-cta-button {
   .lesson-image {
     padding: 140px 50px 0;
     height: calc(90vh - 151px);
+    min-height: 455px;
   }
 
   cirrus-course-progress {
