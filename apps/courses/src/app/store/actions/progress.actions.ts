@@ -9,7 +9,7 @@ export const startProgress = createAction(
     courseId: number;
     stageId: number;
     lessonId: number;
-    scorm: boolean;
+    assessment: boolean;
   }>()
 );
 

@@ -5,6 +5,11 @@ export interface IProgressUpdateResponses {
   progress_stats: ProgressStat[];
 }
 
+export const nullProgressUpdateResponses: IProgressUpdateResponses = {
+  progresses: [],
+  progress_stats: [],
+}
+
 export interface IProgressUpdateResponse {
   id: number;
   progressable_type: string;

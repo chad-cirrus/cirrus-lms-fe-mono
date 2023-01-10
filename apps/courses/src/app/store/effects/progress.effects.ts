@@ -12,19 +12,20 @@ import {
   startProgressFailure,
 } from '../actions';
 import { fetchCourseOverview } from '../actions/course.actions';
+import { nullProgressUpdateResponses } from '@cirrus/models';
 
 @Injectable()
 export class ProgressEffects {
   startProgress$ = createEffect(() =>
     this.actions$.pipe(
       ofType(startProgress),
-      mergeMap(({ id, courseId, stageId, lessonId, scorm }) =>
+      mergeMap(({ id, courseId, stageId, lessonId, assessment }) =>
         this.coursesService.startProgress(id).pipe(
           switchMap(() => [
             fetchCourseOverview({ courseId }),
-            scorm
-              ? fetchLessonsWithoutTasksLogbook({ courseId, stageId, lessonId })
-              : fetchLessons({ courseId, stageId, lessonId }),
+            assessment
+              ? fetchLessons({ courseId, stageId, lessonId })
+              : fetchLessonsWithoutTasksLogbook({ courseId, stageId, lessonId }),
           ]),
           catchError(error => of(startProgressFailure({ error })))
         )
