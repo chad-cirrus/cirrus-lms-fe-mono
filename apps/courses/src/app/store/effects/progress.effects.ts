@@ -36,13 +36,13 @@ export class ProgressEffects {
   completeProgress$ = createEffect(() =>
     this.actions$.pipe(
       ofType(completeProgress),
-      mergeMap(({ id, courseId, stageId, lessonId, progress, scorm }) =>
+      mergeMap(({ id, courseId, stageId, lessonId, progress, assessment }) =>
         this.coursesService.completeProgress(id, progress).pipe(
           switchMap(() => [
             fetchCourseOverview({ courseId }),
-            scorm
-              ? fetchLessonsWithoutTasksLogbook({ courseId, stageId, lessonId })
-              : fetchLessons({ courseId, stageId, lessonId }),
+            assessment
+              ? fetchLessons({ courseId, stageId, lessonId })
+              : fetchLessonsWithoutTasksLogbook({ courseId, stageId, lessonId }),
           ]),
           catchError(error => of(completeProgressFailure({ error })))
         )

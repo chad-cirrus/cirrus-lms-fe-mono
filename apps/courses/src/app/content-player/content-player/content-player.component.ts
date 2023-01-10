@@ -268,7 +268,7 @@ export class ContentPlayerComponent
               stageId: lesson.stage_id,
               lessonId: lesson.id,
               progress,
-              scorm: content_type === 2,
+              assessment: [9, 10].includes(content_type),
             })
           );
         }

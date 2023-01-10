@@ -31,7 +31,7 @@ export const completeProgress = createAction(
     stageId: number;
     lessonId: number;
     progress: IProgress;
-    scorm: boolean;
+    assessment: boolean;
   }>()
 );
 
