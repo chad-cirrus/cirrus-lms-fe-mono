@@ -28,9 +28,8 @@ export class ContentRichTextComponent
 
   ngOnInit(): void {
     super.ngOnInit();
-    this._html = this.cirrusSanitizer.getSafeHtml(
-      this.overview ? this.overview : this.content.content_html
-    );
+    this._html = this.overview ? this.overview : this.content.content_html;
+
     this.scroller.scrollToAnchor('scroll-anchor');
   }
 }
