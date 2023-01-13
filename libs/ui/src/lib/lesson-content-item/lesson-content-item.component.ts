@@ -23,8 +23,10 @@ export class LessonContentItemComponent {
   set content(value: IContent) {
     this._content = value;
     this._content_type_icon = mapContentTypeToIcon(value.content_type);
-    this._imageSrc = progressIconMapper(value.progress.status);
-    this._progressText = progressTextMapper(value.progress.status);
+    if (value.progress !== null) {
+      this._imageSrc = progressIconMapper(value.progress.status);
+      this._progressText = progressTextMapper(value.progress.status);
+    }
   }
 
   get content() {

@@ -30,13 +30,14 @@
       (fetchMediaOutput)="fetchMedia($event)"
       (fetchMediaOutputIntro)="fetchMediaForIntroVideo($event)"
       (displayOverviewOutput)="displayOverview($event)"
-      [instructorView]="(instructorView$ | async)!"
       [sideNavOpen]="(sideNavOpen$ | async)!"
       (openSideNav)="openSideNav()"
       [courseOverview]="(courseOverview$ | async)!"
       (navigateToLesson)="navigate($event)"
       [isScreenSmall]="(isScreenSmall$ | async)!"
       [lessonId]="lessonId"
+      [user]="(user$ | async)!"
+      (toggleInstructorMode)="toggleInstructorMode($event)"
     ></cirrus-lesson-landing-page>
   </mat-sidenav-content>
 </mat-sidenav-container>

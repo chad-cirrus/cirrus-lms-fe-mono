@@ -1,14 +1,11 @@
-@use '../styles/variables'as *;
+@use '../styles/variables' as *;
 
 .mat-dialog-container {
   padding: 0 !important;
-  background: $gray2;
 }
 
 button.snav-open-button {
   background-color: rgba(31, 31, 31, 1);
-  border: 1px solid #fff;
-  right: -2px;
   cursor: pointer;
   margin: 1rem 0;
   border-top-left-radius: 78.96px;
@@ -58,23 +55,26 @@ mat-drawer {
 
   .content {
     width: 100%;
+    // margin-left: 0px;
+    // padding: 64px 16px 0;
 
     .mat-divider {
       border-top-color: rgba(255, 255, 255);
       width: calc(100vw - 16px);
     }
 
-
     .lesson-label {
       display: inline-block;
-      background: #2E2E2E;
+      background: #2e2e2e;
       border-radius: 50px;
-      line-height: .8;
+      line-height: 0.8;
       padding: 9px 17px;
     }
 
     h1 {
+      max-width: 18ch;
       margin-bottom: 20px;
+      padding-right: 30px;
     }
 
     p {
@@ -93,7 +93,7 @@ mat-drawer {
       font-family: $primary_font;
       font-style: normal;
       font-weight: 500;
-      font-size: 1;
+      font-size: 1rem;
       line-height: 1.1;
       letter-spacing: 0.03em;
       color: #ffffff;
@@ -205,10 +205,18 @@ cirrus-progress-card:last-child {
   pointer-events: none;
 }
 
+.contents-list-container {
+  .content-item {
+    margin-top: 8px;
+    // margin: 8px;
+  }
+}
+
 @media (min-width: 600px) {
   .lesson-image {
     .content {
       margin-top: 48px;
+      // padding: 48px 24px 0 24px;
 
       .lesson-label {
         margin-bottom: 10px;
@@ -216,7 +224,6 @@ cirrus-progress-card:last-child {
 
       h1 {
         margin: 0 0 30px;
-        max-width: 85%;
       }
 
       p {
@@ -240,8 +247,10 @@ cirrus-progress-card:last-child {
 
 @media (min-width: 960px) {
   .lesson-image {
-    min-height: 550px;
     .content {
+      padding-top: 96px;
+      // margin-left: 40px;
+      // padding: 96px 40px 0 40px;
 
       p {
         margin: 25px 0 50px;
@@ -297,30 +306,39 @@ cirrus-progress-card:last-child {
     }
   }
 
-
   .cirrus-progress-row {
     width: 100%;
     margin: -45px auto 20px;
     overflow-x: hidden;
     scrollbar-width: hidden;
     /* Firefox */
-    -ms-overflow-style: hidden;
+    -ms-overflow-style: unset;
     /* IE 10+ */
 
     &::-webkit-scrollbar {
-      background: hidden;
+      background: unset;
       /* Chrome/Safari/Webkit */
-      width: hidden;
+      width: unset;
     }
   }
 
   .intro-video {
     padding: 16px;
   }
+
+  .courses-main-content-inner-wrapper.lesson-landing-wrapper.instructor-view {
+    margin-top: 80px;
+  }
 }
 
 .breadcrumb-container {
   padding: 16px 20px;
+  display: flex;
+  justify-content: space-between;
+
+  img {
+    height: 21px;
+  }
 
   @media (min-width: 600px) {
     padding: 25px 25px;
@@ -329,6 +347,27 @@ cirrus-progress-card:last-child {
   @media (min-width: 960px) {
     padding: 25px 50px;
   }
+}
+
+.instructor-view {
+  background-color: white;
+  .breadcrumb-item-container {
+    background-color: white;
+    .title {
+      color: black;
+    }
+  }
+  .toggle-container {
+    color: black;
+  }
+}
+
+span.mat-slide-toggle-thumb {
+  border: 1px solid $gray3;
+}
+
+label > span.mat-slide-toggle-bar .cloaked {
+  display: none;
 }
 
 .breadcrumb-item-container {
@@ -342,7 +381,7 @@ cirrus-progress-card:last-child {
   }
 
   .title {
-    color: #FFFFFF;
+    color: #ffffff;
     cursor: pointer;
     font-family: 'Akzidenz-Grotesk BQ';
     font-size: 16px;
@@ -352,7 +391,8 @@ cirrus-progress-card:last-child {
   }
 }
 
-.lesson-landing-wrapper,.lesson-landing-wrapper {
+.lesson-landing-wrapper,
+.lesson-landing-wrapper {
   background: $black;
 }
 

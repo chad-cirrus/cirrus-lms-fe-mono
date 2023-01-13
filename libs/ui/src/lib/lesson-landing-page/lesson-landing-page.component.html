@@ -1,30 +1,61 @@
-<div *ngIf="lesson" [ngStyle]="{ 'overflow-anchor': sideNavOpen ? 'none' : 'inherit' }" class="lesson-landing-wrapper">
-
-  <div class="breadcrumb-container">
+<div
+  *ngIf="lesson"
+  [ngStyle]="{ 'overflow-anchor': sideNavOpen ? 'none' : 'inherit' }"
+  class="lesson-landing-wrapper"
+>
+  <div
+    class="breadcrumb-container instructor-view"
+    *ngIf="
+      lesson.instructor_overview && lesson.instructor_overview.length > 0;
+      else studentView
+    "
+  >
     <div class="breadcrumb-item-container" (click)="navigateToCourse()">
-      <img src="courses/images/svg/chevron-left-white.svg" />
+      <img src="courses/images/svg/black_left_chevron.svg" />
       <div class="title">{{ courseOverview.title }}</div>
     </div>
-    
+
+    <div class="toggle-container">
+      <mat-slide-toggle [formControl]="instructorToggle" color="accent"
+        >Instructor View</mat-slide-toggle
+      >
+    </div>
   </div>
 
-  <div class="lesson-image" [ngStyle]="{
-      background:
-        'linear-gradient(90deg, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0.33) 44.11%, rgba(0, 0, 0, 0) 100%),
-    linear-gradient(360deg,#000000 1.79%,rgba(0,0,0,.24) 19.37%,rgba(0,0,0,0) 25%),
+  <ng-template #studentView>
+    <div class="breadcrumb-container">
+      <div class="breadcrumb-item-container" (click)="navigateToCourse()">
+        <img src="courses/images/svg/chevron-left-white.svg" />
+        <div class="title">{{ courseOverview.title }}</div>
+      </div>
+    </div>
+  </ng-template>
 
-    url(' +
+  <div
+    class="lesson-image"
+    fxLayout="column"
+    fxLayoutAlign="center start"
+    [ngStyle]="{
+      background:
+        'linear-gradient(90deg, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0.33) 44.11%, ' +
+        'rgba(0, 0, 0, 0) 61.94%), linear-gradient(360deg,#000000 1.79%,rgba(0,0,0,.24) 19.37%,rgba(0,0,0,0) 25%), ' +
+        'url(' +
         (bgImage | encodeUri) +
         ') no-repeat center',
       'background-size': 'cover',
       '-webkit-background-size': 'cover',
       '-moz-background-size': 'cover',
       '-o-background-size': 'cover'
-    }">
+    }"
+  >
     <div class="btn-container">
       <div class="example-sidenav-content">
-        <button type="button" mat-raised-button [ngClass]="isScreenSmall ? 'snav-mobile' : 'snav-desktop'"
-          (click)="emitOpenSideNav()">
+        <button
+          type="button"
+          mat-raised-button
+          [ngClass]="isScreenSmall ? 'snav-mobile' : 'snav-desktop'"
+          (click)="emitOpenSideNav()"
+        >
           <div fxLayout="row" fxLayoutAlign="center center">
             <img src="courses/images/svg/menu_lessons.svg" />
           </div>
@@ -32,29 +63,43 @@
       </div>
     </div>
     <div class="content">
-      <span 
-        class="xsmall lesson-label"
-        *ngIf="lesson.lesson_type === 3"
-      >
+      <span class="xsmall lesson-label" *ngIf="lesson.lesson_type === 3">
         Simulator Lesson
       </span>
       <h1>{{ lesson?.title }}</h1>
       <mat-divider></mat-divider>
       <p class="large">{{ lesson.subtitle }}</p>
-      <cirrus-lesson-progress [lesson]="lesson" [checkoutOffsRequired]="checkoutOffsRequired"></cirrus-lesson-progress>
-      <cirrus-cta-button class="start-lesson" [text]="buttonText" (btnClick)="startLesson()"
-        [ngClass]="{ 'course-complete': courseComplete }"></cirrus-cta-button>
+      <cirrus-lesson-progress
+        [lesson]="lesson"
+        [checkoutOffsRequired]="checkoutOffsRequired"
+      ></cirrus-lesson-progress>
+      <cirrus-cta-button
+        *ngIf="(instructorView$ | async) === false"
+        class="start-lesson"
+        [text]="buttonText"
+        (btnClick)="startLesson()"
+        [ngClass]="{ 'course-complete': courseComplete }"
+      ></cirrus-cta-button>
     </div>
   </div>
 
-  <div class="courses-main-content-inner-wrapper lesson-landing-wrapper" [ngClass]="instructorView ? 'instructor-view' : 'student-view'">
-    <div *ngIf="!instructorView && lesson.progress_stats" class="cirrus-progress-row">
-      <cirrus-lesson-progress-stats [progress]="lesson.progress_stats"></cirrus-lesson-progress-stats>
+  <div
+    class="courses-main-content-inner-wrapper lesson-landing-wrapper"
+    [ngClass]="(instructorView$ | async) ? 'instructor-view' : 'student-view'"
+  >
+    <div *ngIf="lesson.progress_stats" class="cirrus-progress-row">
+      <cirrus-lesson-progress-stats
+        [progress]="lesson.progress_stats"
+      ></cirrus-lesson-progress-stats>
     </div>
-    <div class="intro-video" *ngIf="
+    <div
+      class="intro-video"
+      *ngIf="
         lesson.student_intro_video &&
-        lesson.student_intro_video.content.content_type === 0
-      ">
+        lesson.student_intro_video.content.content_type === 0 &&
+        (instructorView$ | async) === false
+      "
+    >
       <h4 class="intro-video-title">Intro Video</h4>
       <div class="intro-video-play" (click)="playIntroVideo()">
         <div fxLayout="row" fxLayoutGap="18px">
@@ -68,18 +113,21 @@
           </div>
           <ng-template #customIntroText>
             <div class="intro-video-subtitle">
-
               {{ lesson.student_intro_video?.title }}
             </div>
           </ng-template>
         </div>
       </div>
     </div>
-    <br *ngIf="instructorView" />
+    <br *ngIf="instructorView$ | async" />
 
     <div #contentList>
-      <cirrus-lesson-contents id="cirrus-lesson-contents" [instructorView]="instructorView" [lesson]="lesson"
-        (fetchMedia)="fetchMedia($event)">
+      <cirrus-lesson-contents
+        id="cirrus-lesson-contents"
+        [instructorView]="(instructorView$ | async)!"
+        [lesson]="lesson"
+        (fetchMedia)="fetchMedia($event)"
+      >
       </cirrus-lesson-contents>
     </div>
   </div>

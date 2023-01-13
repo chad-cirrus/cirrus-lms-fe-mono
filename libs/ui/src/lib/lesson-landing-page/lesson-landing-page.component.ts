@@ -1,10 +1,13 @@
 /* eslint-disable @nrwl/nx/enforce-module-boundaries */
-import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { IContent, ICourseOverview, ILesson } from '@cirrus/models';
+import { ICirrusUser, IContent, ICourseOverview, ILesson } from '@cirrus/models';
 import { StagesOverlayComponent } from '../stages-overlay/stages-overlay.component';
 import { DomSanitizer } from '@angular/platform-browser';
-import { Router } from '@angular/router';
+import { Event, NavigationStart, Router } from '@angular/router';
+import { FormControl } from '@angular/forms';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { startWith, takeUntil, tap } from 'rxjs/operators';
 
 enum LessonStatus {
   NOT_STARTED = 'not_started',
@@ -16,10 +19,15 @@ enum LessonStatus {
   templateUrl: './lesson-landing-page.component.html',
   styleUrls: ['./lesson-landing-page.component.scss'],
 })
-export class LessonLandingPageComponent {
+export class LessonLandingPageComponent implements OnInit, OnDestroy {
   private _lesson!: ILesson;
   private _buttonText!: string;
   private _isScreenSmall!: boolean;
+
+  destroyed = new Subject<void>();
+
+  private _introVideoTitle = new BehaviorSubject<string>('');
+  introVideoTitle$ = this._introVideoTitle.asObservable();
 
   @Input()
   set isScreenSmall(value) {
@@ -44,11 +52,27 @@ export class LessonLandingPageComponent {
       ['failed']: '',
     };
     this._buttonText = dictionary[this.lesson.progress.status];
+    this._introVideoTitle.next(
+      this.lesson.student_intro_video?.title as string
+    );
   }
 
   get lesson() {
     return this._lesson;
   }
+
+  instructorToggle = new FormControl(false);
+  instructorView$ = this.instructorToggle.valueChanges.pipe(
+    startWith(false),
+    tap(instructor => {
+      this.toggleInstructorMode.next(instructor);
+      this._introVideoTitle.next(
+        instructor
+          ? (this.lesson.instructor_intro_video?.title as string)
+          : (this.lesson.student_intro_video?.title as string)
+      );
+    })
+  ) as Observable<boolean>;
 
   get buttonText() {
     return this._buttonText;
@@ -58,9 +82,8 @@ export class LessonLandingPageComponent {
   showFiller = false;
 
   @Input() lessonId!: number;
-
+  @Input() user!: ICirrusUser;
   @Input() checkoutOffsRequired!: boolean | null;
-  @Input() instructorView!: boolean;
   @Input() sideNavOpen!: boolean;
   @Input() courseOverview!: ICourseOverview;
 
@@ -82,6 +105,27 @@ export class LessonLandingPageComponent {
   @Output() navigateToLesson = new EventEmitter<any>();
   @Output() displayOverviewOutput = new EventEmitter<string>();
   @Output() playNextLessonContent = new EventEmitter();
+  @Output() toggleInstructorMode = new EventEmitter();
+
+  get playListButtonFilledIn() {
+    return 'courses/images/svg/play_button_filled_in.svg';
+  }
+
+  get hasVideo() {
+    return (
+      (this.lesson.student_intro_video &&
+        this.lesson.student_intro_video.content.content_type === 0) ||
+      (this.lesson.instructor_intro_video &&
+        this.lesson.instructor_intro_video.content.content_type === 0)
+    );
+  }
+
+  get noTitle() {
+    return (
+      !this.lesson.student_intro_video?.title &&
+      !this.lesson.instructor_intro_video?.title
+    );
+  }
 
   constructor(
     private dialog: MatDialog,
@@ -89,12 +133,19 @@ export class LessonLandingPageComponent {
     private router: Router
   ) {}
 
-  get lessonImageFxLayoutAlign() {
-    return this.sideNavOpen ? 'center center' : 'center start';
+  ngOnInit() {
+    this.router.events
+      .pipe(takeUntil(this.destroyed))
+      .subscribe((event: Event) => {
+        if (event instanceof NavigationStart) {
+          this.instructorToggle.setValue(false);
+        }
+      });
   }
 
-  get playListButtonFilledIn() {
-    return 'courses/images/svg/play_button_filled_in.svg';
+  ngOnDestroy() {
+    this.destroyed.next();
+    this.destroyed.complete();
   }
 
   setBackgroundImage(value: boolean): string {
@@ -193,7 +244,9 @@ export class LessonLandingPageComponent {
   }
 
   playIntroVideo() {
-    const content: IContent = this.lesson.student_intro_video.content;
+    const content: IContent = this.instructorToggle.value
+      ? (this.lesson.instructor_intro_video?.content as IContent)
+      : this.lesson.student_intro_video.content;
     setTimeout(() => {
       this.fetchMediaOutputIntro.next(content);
     }, 1000);

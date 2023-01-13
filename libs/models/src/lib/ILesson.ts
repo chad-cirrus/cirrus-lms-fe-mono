@@ -53,6 +53,7 @@ export interface StudentIntroVideo {
 }
 
 export interface InstructorIntroVideo {
+  content: IContent;
   content_id: number;
   created_at: string;
   hidden: boolean;
@@ -126,6 +127,31 @@ export const NullLesson: ILesson = {
     created_at: '',
   },
   instructor_intro_video: {
+    content: {
+      blob_directory: '',
+      order: 0,
+      quiz: '',
+      content_tasks: [],
+      progress: { id: 1, status: 'not_completed' },
+      content_file: '',
+      content_filename: '',
+      content_html: '',
+      content_type: 0,
+      created_by: 'Cirrus Aircraft',
+      desc: 'Perspective & Perspective+ Avionics Course',
+      id: 401,
+      jet_scoring: false,
+      meta_tags: [],
+      placeholder_image:
+        'https://cirrusapproachherokuprod.blob.core.windows.net/cirruslmsherokuprodcontainer/content-items/content-files/5c480eb38443724475091bf0d91ba12.2.png',
+      score: 0,
+      show_comments: true,
+      starter_file: '',
+      subtitle: 'Hello Cockpit [2.1]',
+      title: 'Hello Cockpit [2.1]',
+      upload_image: '',
+      url: '309005652',
+    },
     content_id: 401,
     created_at: '2022-05-18T15:55:59.249Z',
     hidden: false,

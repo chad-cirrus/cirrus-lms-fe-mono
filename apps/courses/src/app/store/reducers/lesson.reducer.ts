@@ -11,8 +11,8 @@ import {
 } from '../actions';
 import {
   fetchLessons,
-  fetchLessonsSuccess,
   fetchLessonsFailure,
+  fetchLessonsSuccess,
 } from '../actions/lessons.actions';
 
 export interface LessonState {
@@ -83,6 +83,31 @@ export const initialLessonState: LessonState = {
       created_at: '',
     },
     instructor_intro_video: {
+      content: {
+        blob_directory: '',
+        order: 0,
+        quiz: '',
+        content_tasks: [],
+        progress: { id: 1, status: 'not_completed' },
+        content_file: '',
+        content_filename: '',
+        content_html: '',
+        content_type: 0,
+        created_by: '',
+        desc: '',
+        id: 0,
+        jet_scoring: false,
+        meta_tags: [],
+        placeholder_image:
+          'https://cirrusapproachherokuprod.blob.core.windows.net/cirruslmsherokuprodcontainer/content-items/content-files/5c480eb38443724475091bf0d91ba12.2.png',
+        score: 0,
+        show_comments: true,
+        starter_file: '',
+        subtitle: '',
+        title: '',
+        upload_image: '',
+        url: '',
+      },
       content_id: 401,
       created_at: '2022-05-18T15:55:59.249Z',
       hidden: false,

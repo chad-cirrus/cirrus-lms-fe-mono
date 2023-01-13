@@ -22,7 +22,11 @@ import { map, tap, withLatestFrom } from 'rxjs/operators';
 import { AppService } from '../../app.service';
 
 import { ContentPlayerDialogService } from '../../content-player/content-player-dialog.service';
-import { fetchLessons, setSideNavOpen } from '../../store/actions';
+import {
+  fetchLessons,
+  setInstructorView,
+  setSideNavOpen,
+} from '../../store/actions';
 import { LessonState } from '../../store/reducers/lesson.reducer';
 import { selectCirrusUser } from '../../store/selectors/cirrus-user.selector';
 import {
@@ -30,7 +34,6 @@ import {
   selectLesson,
 } from '../../store/selectors/lessons.selector';
 import {
-  selectInstructorView,
   selectIsScreenSmall,
   selectSideNavOpen,
 } from '../../store/selectors/view.selector';
@@ -56,8 +59,7 @@ export class LessonComponent implements OnInit, OnDestroy {
       this._lesson = lesson;
     })
   );
-  instructorView$: Observable<boolean> =
-    this.store.select(selectInstructorView);
+  user$ = this.store.select(selectCirrusUser);
   isScreenSmall$: Observable<boolean> = this.store.select(selectIsScreenSmall);
   sideNavOpen$: Observable<boolean> = this.store.select(selectSideNavOpen);
   lessonSubscription = new Subscription();
@@ -102,14 +104,9 @@ export class LessonComponent implements OnInit, OnDestroy {
 
     this.lessonSubscription.add(
       this.lessonCompleted$
-        .pipe(
-          withLatestFrom(
-            this.courseOverview$,
-            this.store.select(selectCirrusUser),
-            this.lesson$
-          )
-        )
+        .pipe(withLatestFrom(this.courseOverview$, this.user$, this.lesson$))
         .subscribe(([progress_type, courseOverview, user, lesson]) => {
+          console.log('course overview', courseOverview);
           const component: ComponentType<
             CompletionDialogComponent | CourseCompletionComponent
           > =
@@ -129,7 +126,6 @@ export class LessonComponent implements OnInit, OnDestroy {
                   course_id: courseOverview.id,
                   student: user.name,
                   course_attempt_id: this._lesson.course_attempt_id,
-                  user_certificate_id: courseOverview.certificate.id,
                 };
 
           const showCompletionDialog =
@@ -222,5 +218,9 @@ export class LessonComponent implements OnInit, OnDestroy {
   }
   scrollToTop() {
     this.appService.scrollTrigger$.next(true);
+  }
+
+  toggleInstructorMode(instructorView: boolean) {
+    this.store.dispatch(setInstructorView({ instructorView }));
   }
 }

@@ -5,6 +5,7 @@ import {
   IContent,
   ILesson,
 } from '@cirrus/models';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'cirrus-lesson-contents',
@@ -12,9 +13,38 @@ import {
   styleUrls: ['./lesson-contents.component.scss'],
 })
 export class LessonContentsComponent {
-  @Input() instructorView!: boolean;
-  @Input() lesson!: ILesson;
+  private _lesson!: ILesson;
 
+  @Input()
+  set lesson(val: ILesson) {
+    this._lesson = val;
+    this._contents.next(val.contents);
+  }
+
+  get lesson() {
+    return this._lesson;
+  }
+
+  private _contents = new BehaviorSubject<IContent[]>([]);
+  contents$ = this._contents.asObservable();
+
+  get contents() {
+    return this._contents;
+  }
+
+  private _instructorView = false;
+
+  @Input()
+  set instructorView(val: boolean) {
+    this._instructorView = val;
+    this._contents.next(
+      val ? this.lesson.instructor_contents : this.lesson.contents
+    );
+  }
+
+  get instructorView() {
+    return this._instructorView;
+  }
 
   @Output() fetchMedia = new EventEmitter<IContent>();
 

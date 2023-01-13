@@ -3,6 +3,9 @@
 .content-container {
   padding: 0;
   &.instructor-view {
+    .overview {
+      padding: 30px;
+    }
     .title-content,
     .contents-list-container {
       background-color: var.$instructor-view-background;
@@ -12,7 +15,7 @@
     }
   }
   .overview {
-    color: #D1D1D1;
+    color: #d1d1d1;
   }
   .media-control {
     color: #bdbdbd;
