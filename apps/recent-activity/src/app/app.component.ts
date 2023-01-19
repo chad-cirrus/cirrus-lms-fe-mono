@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, isDevMode, OnDestroy, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { AppState } from './store/reducers';
@@ -21,7 +21,7 @@ import { RecentActivityFacade } from './facade.service';
 import { SidenavHeaderService } from '@cirrus/sidenav-header';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ViewportScroller } from '@angular/common';
-import { response } from 'express';
+import { FullStoryService } from '../../../../libs/ui/src/lib/full-story.service';
 
 @Component({
   selector: 'cirrus-root',
@@ -56,7 +56,8 @@ export class AppComponent
     sidenavHeaderService: SidenavHeaderService,
     breakpointObserver: BreakpointObserver,
     userService: UserService,
-    route: ActivatedRoute
+    route: ActivatedRoute,
+    private fullStoryService: FullStoryService,
   ) {
     super(
       userService,
@@ -72,6 +73,9 @@ export class AppComponent
 
   ngOnInit() {
     super.ngOnInit();
+
+    this.fullStoryService.init(environment.fullstoryOrgId);
+
     const cirrusUser = JSON.parse(
       <string>localStorage.getItem('cirrus-user')
     ) as ICirrusUser;

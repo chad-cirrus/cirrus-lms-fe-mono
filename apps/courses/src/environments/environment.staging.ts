@@ -14,4 +14,5 @@ export const environment = {
     'https://cirrusapproachherokuprod.blob.core.windows.net/cirruslmsherokudevcontainer/content-items/images/default-course-hero-sm.jpg',
   defaultDesktopCourse:
     'https://cirrusapproachherokuprod.blob.core.windows.net/cirruslmsherokudevcontainer/content-items/images/default-course-hero-lg.jpg',
+  fullstoryOrgId: 'o-1GNGTD-na1',
 };

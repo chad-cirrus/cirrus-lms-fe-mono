@@ -28,6 +28,7 @@ import { CoursesFacadeService } from './courses-facade.service';
 import { SidenavHeaderService } from '@cirrus/sidenav-header';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ViewportScroller } from '@angular/common';
+import { FullStoryService } from '../../../../libs/ui/src/lib/full-story.service';
 
 @Component({
   selector: 'cirrus-root',
@@ -70,7 +71,8 @@ export class AppComponent
     sidenavHeaderService: SidenavHeaderService,
     notificationService: NotificationService,
     errorService: ErrorService,
-    route: ActivatedRoute
+    route: ActivatedRoute,
+    private fullStoryService: FullStoryService,
   ) {
     super(
       userService,
@@ -86,6 +88,8 @@ export class AppComponent
 
   ngOnInit() {
     super.ngOnInit();
+
+    this.fullStoryService.init(environment.fullstoryOrgId)
 
     console.log('Environment variable test', process.env['NX_TEST_VARIABLE']);
 
