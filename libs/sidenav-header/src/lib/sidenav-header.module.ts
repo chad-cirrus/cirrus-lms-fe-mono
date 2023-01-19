@@ -14,6 +14,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { GlobalHeaderComponent } from './global-header/global-header.component';
 import { CirrusMaterialModule } from '@cirrus/ui';
 import { GlobalFooterComponent } from './global-footer/global-footer.component';
+import { BadgeModule } from '@cirrus/badge';
 
 @NgModule({
   imports: [
@@ -25,6 +26,7 @@ import { GlobalFooterComponent } from './global-footer/global-footer.component';
     OverlayModule,
     MatIconModule,
     CirrusMaterialModule,
+    BadgeModule,
   ],
   declarations: [
     GlobalSideNavComponent,

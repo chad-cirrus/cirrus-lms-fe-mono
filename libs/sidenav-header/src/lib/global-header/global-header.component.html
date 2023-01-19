@@ -4,13 +4,8 @@
     <div class="shopping-cart-icon-wrapper">
       <a routerLink="/shopping-cart" *ngIf="cirrusUser.id > 0">
         <img src="recent-activity/images/svg/cart.svg" />
-        <span
-          *ngIf="orderCount"
-          matBadge="{{ orderCount }}"
-          matBadgeColor="warn"
-          [matBadgeOverlap]="false"
-        ></span>
       </a>
+      <cirrus-badge [badgeNumber]="orderCount"></cirrus-badge>
     </div>
 
     <div class="dropdown-menus-header-container">

@@ -39,7 +39,8 @@
   background-color: $neon-red;
 }
 
-.shopping-cart-icon-wrapper { 
+.shopping-cart-icon-wrapper {
+  display: flex;
   position: relative;
   margin-right: 28px;
 }

@@ -8,5 +8,5 @@
     "types": []
   },
   "exclude": ["src/test-setup.ts", "**/*.spec.ts", "**/*.test.ts"],
-  "include": ["**/*.ts", "../../apps/recent-activity/src/app/to-string.pipe.ts"]
+  "include": ["**/*.ts"]
 }

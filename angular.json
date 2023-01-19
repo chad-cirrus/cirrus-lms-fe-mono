@@ -53,6 +53,32 @@
       },
       "tags": []
     },
+    "badge": {
+      "projectType": "library",
+      "root": "libs/badge",
+      "sourceRoot": "libs/badge/src",
+      "prefix": "cirrus",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/badge"],
+          "options": {
+            "jestConfig": "libs/badge/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/badge/src/**/*.ts",
+              "libs/badge/src/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
     "courses": {
       "projectType": "application",
       "root": "apps/courses",

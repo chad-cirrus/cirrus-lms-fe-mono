@@ -101,12 +101,7 @@
         width="26px"
       />
       <span class="mobile-menu-item-text">Notifications</span>
-      <span
-        *ngIf="notificationCount"
-        matBadge="{{ notificationCount }}"
-        matBadgeColor="warn"
-        [matBadgeOverlap]="false"
-      ></span>
+      <cirrus-badge [badgeNumber]="notificationCount"></cirrus-badge>
     </div>
   </div>
 </mat-menu>

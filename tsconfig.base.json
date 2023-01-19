@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@cirrus/badge": ["libs/badge/src/index.ts"],
       "@cirrus/models": ["libs/models/src/index.ts"],
       "@cirrus/notification-menu": ["libs/notification-menu/src/index.ts"],
       "@cirrus/sidenav-header": ["libs/sidenav-header/src/index.ts"],

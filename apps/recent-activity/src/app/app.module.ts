@@ -59,6 +59,7 @@ import {
   SidenavHeaderModule,
   SidenavHeaderService,
 } from '@cirrus/sidenav-header';
+import { BadgeModule } from '@cirrus/badge';
 
 @NgModule({
   declarations: [
@@ -109,6 +110,7 @@ import {
     SwiperModule,
     ReactiveFormsModule,
     SidenavHeaderModule,
+    BadgeModule,
   ],
   providers: [
     {

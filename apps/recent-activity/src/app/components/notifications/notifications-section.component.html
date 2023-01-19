@@ -2,12 +2,9 @@
   <div class="notification-title">
     <h2 class="heading-3">Notifications</h2>
 
-    <span
-      *ngIf="notifications?.length"
-      matBadge="{{ notifications.length > 99 ? '99+' : notifications.length }}"
-      matBadgeColor="warn"
-      matBadgeOverlap="false"
-    ></span>
+    <cirrus-badge
+      [badgeNumber]="notifications.length > 99 ? '99+' : notifications.length"
+    ></cirrus-badge>
   </div>
   <div class="lists" *ngIf="notifications.length; else noNotifications">
     <div
@@ -29,7 +26,10 @@
       </div>
     </div>
     <div class="notifications-btn-container">
-      <button class="secondary-btn-black -wide-btn" (click)="emitViewAllNotifications()">
+      <button
+        class="secondary-btn-black -wide-btn"
+        (click)="emitViewAllNotifications()"
+      >
         View All Notifications
       </button>
     </div>
