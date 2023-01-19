@@ -369,10 +369,16 @@ cirrus-progress-card:last-child {
     .title {
       color: black;
     }
+    &:hover {
+      border-bottom: 1px solid black;
+    }
   }
   .toggle-container {
     color: black;
     line-height: .7;
+    .small {
+      font-family: 'Akzidenz-Grotesk BQ';
+    }
   }
 }
 
