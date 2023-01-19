@@ -375,13 +375,13 @@ cirrus-course-progress {
 
 .wysiwyg-wrapper {
   a {
-    color: $white;
+    color: $cirrus-blue;
     font-family: 'Akzidenz-Grotesk BQ';
     text-decoration: underline;
     transition: all 0.3s ease;
 
     &:hover {
-      color: $gray4;
+      color: $cirrus-blue-hover;
       cursor: pointer;
     }
   }

@@ -16,7 +16,7 @@
     </div>
 
     <div class="toggle-container">
-      <mat-slide-toggle [formControl]="instructorToggle" color="accent"
+      <mat-slide-toggle [formControl]="instructorToggle" labelPosition='before' color="accent"
         ><span class="small">Instructor View</span></mat-slide-toggle
       >
     </div>
@@ -72,6 +72,7 @@
       <cirrus-lesson-progress
         [lesson]="lesson"
         [checkoutOffsRequired]="checkoutOffsRequired"
+        [ngClass]="(instructorView$ | async) ? 'instructor-view' : 'student-view'"
       ></cirrus-lesson-progress>
       <cirrus-cta-button
         *ngIf="(instructorView$ | async) === false"

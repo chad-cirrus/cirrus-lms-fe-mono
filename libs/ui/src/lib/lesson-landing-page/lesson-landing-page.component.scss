@@ -8,6 +8,8 @@ button.snav-open-button {
   background-color: rgba(31, 31, 31, 1);
   cursor: pointer;
   margin: 1rem 0;
+  border: 1px solid #fff;
+  right: -2px;
   border-top-left-radius: 78.96px;
   border-bottom-left-radius: 78.96px;
 
@@ -114,6 +116,17 @@ mat-drawer {
         color: #ffff00;
       }
     }
+  }
+}
+
+cirrus-lesson-progress.instructor-view {
+  display: block;
+  margin-bottom: 101.5px;
+  @media (min-width: 600px) {
+    margin-bottom: 156.5px;
+  }
+  @media (min-width: 960px) {
+    margin-bottom: 246.5px;
   }
 }
 
@@ -325,19 +338,17 @@ cirrus-progress-card:last-child {
   .intro-video {
     padding: 16px;
   }
-
-  .courses-main-content-inner-wrapper.lesson-landing-wrapper.instructor-view {
-    margin-top: 80px;
-  }
 }
 
 .breadcrumb-container {
   padding: 16px 20px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 
   img {
-    height: 21px;
+    width: 6px;
+    height: 20px;
   }
 
   @media (min-width: 600px) {
@@ -350,7 +361,9 @@ cirrus-progress-card:last-child {
 }
 
 .instructor-view {
-  background-color: white;
+  &.breadcrumb-container {
+    background: white;
+  }
   .breadcrumb-item-container {
     background-color: white;
     .title {
@@ -375,6 +388,7 @@ label > span.mat-slide-toggle-bar .cloaked {
   background: $black;
   border-bottom: 1px solid transparent;
   display: flex;
+  align-items: center;
   max-width: max-content;
 
   &:hover {

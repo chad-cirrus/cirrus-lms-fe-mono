@@ -2,14 +2,13 @@
   class="content-container"
   [ngClass]="instructorView ? 'instructor-view' : 'student-view'"
 >
-  <div class="title-content">
-    <div
-      class="overview wysiwyg-wrapper"
-      [innerHTML]="
-        instructorView ? lesson?.instructor_overview : lesson?.overview
-      "
-    ></div>
-  </div>
+  <div
+    class="overview wysiwyg-wrapper"
+    [innerHTML]="
+      instructorView ? lesson?.instructor_overview : lesson?.overview
+    "
+  ></div>
+
   <div class="contents-list-container" *ngIf="!instructorView">
     <div
       *ngFor="let content of contents$ | async; let i = index"
