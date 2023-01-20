@@ -1,5 +1,7 @@
-<div
-  [matBadge]="badgeNumber"
-  matBadgeOverlap="false"
-  matBadgeColor="warn"
-></div>
+<div *ngIf="badgeNumber">
+  <div
+    [matBadge]="badgeNumber"
+    matBadgeOverlap="false"
+    matBadgeColor="warn"
+  ></div>
+</div>

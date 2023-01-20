@@ -6,7 +6,7 @@ import { ICirrusUser, INotification } from '@cirrus/models';
 import { setCirrusUser } from './store/actions/cirrus-user.actions';
 import { selectCirrusUser } from './store/selectors/cirrus-user.selector';
 import { BreakpointObserver } from '@angular/cdk/layout';
-import { map, takeUntil, tap } from 'rxjs/operators';
+import { count, map, takeUntil, tap } from 'rxjs/operators';
 import { setScreenSize } from './store/actions/view.actions';
 import { selectIsScreenSmall } from './store/selectors/view.selector';
 import {
@@ -21,6 +21,7 @@ import { RecentActivityFacade } from './facade.service';
 import { SidenavHeaderService } from '@cirrus/sidenav-header';
 import { Router } from '@angular/router';
 import { ViewportScroller } from '@angular/common';
+import { response } from 'express';
 
 @Component({
   selector: 'cirrus-root',
@@ -39,7 +40,11 @@ export class AppComponent
   project = environment.project;
 
   recentActivityNotifications$ =
-    this.recentActivityService.recentActivityNotifications$;
+    this.recentActivityService.recentActivityNotifications$.pipe();
+
+  notificationCountRecentActivity$ = this.recentActivityNotifications$.pipe(
+    map(response => response.notifications.length)
+  );
 
   constructor(
     private store: Store<AppState>,

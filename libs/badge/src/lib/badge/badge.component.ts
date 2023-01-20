@@ -6,5 +6,5 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./badge.component.scss'],
 })
 export class BadgeComponent {
-  @Input() badgeNumber!: string | number;
+  @Input() badgeNumber!: any;
 }

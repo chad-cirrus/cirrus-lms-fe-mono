@@ -3,7 +3,7 @@
     <cirrus-global-header
       [cirrusUser]="(cirrusUser$ | async)!"
       [cirrusImpersonationReturnUser]="(cirrusImpersonateReturnUser$ | async)!"
-      [notificationCount]="(notificationCount$ | async)!"
+      [notificationCount]="(notificationCountRecentActivity$ | async)!"
       (logout)="logout()"
       (impersonationLogout)="impersonationLogout()"
       [isScreenSmall]="(isScreenSmall$ | async)!"
@@ -18,13 +18,13 @@
         <cirrus-global-side-nav
           [cirrusUser]="(cirrusUser$ | async)!"
           (emitCollapse)="toggleCollapse($event)"
-          [notificationCount]="(notificationCount$ | async)!"
+          [notificationCount]="(notificationCountRecentActivity$ | async)!"
           (toggleNotificationsMenu)="toggleNotificationsMenu()"
           [deployUrl]="'recent-activity'"
         ></cirrus-global-side-nav>
         <!--        <cirrus-global-side-nav></cirrus-global-side-nav>-->
       </div>
-      <div 
+      <div
         class="content-container"
         [ngClass]="collapse ? 'sidenav-collapsed' : 'sidenav-expanded'"
       >
@@ -42,18 +42,12 @@
           "
           #outletContainer
         >
-          <router-outlet>
-      
-          </router-outlet>
+          <router-outlet> </router-outlet>
           <cirrus-global-footer></cirrus-global-footer>
         </div>
       </div>
-
-
-
     </div>
   </main>
-
 </div>
 
 <mat-sidenav-container class="sidenav-popout-container">
@@ -76,4 +70,3 @@
     ></cirrus-notifications-menu>
   </mat-sidenav>
 </mat-sidenav-container>
-
