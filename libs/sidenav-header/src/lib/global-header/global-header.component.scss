@@ -12,6 +12,11 @@
   width: 100%;
   z-index: 5;
 
+  .approach-logo {
+    cursor: pointer;
+    line-height: 0;
+  }
+
   @include breakpoint(mobile) {
     padding: 22px 40px;
   }

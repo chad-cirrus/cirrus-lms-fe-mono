@@ -1,8 +1,8 @@
 <div class="header-container">
-  <img src="recent-activity/images/svg/Group 1333.svg" />
+  <img class="approach-logo" routerLink="recent-activity" src="recent-activity/images/svg/Group 1333.svg" />
   <div class="icons-header-container">
     <div class="shopping-cart-icon-wrapper">
-      <a routerLink="/shopping-cart" *ngIf="cirrusUser.id > 0">
+      <a routerLink="/shopping-cart">
         <img src="recent-activity/images/svg/cart.svg" />
       </a>
       <cirrus-badge [badgeNumber]="orderCount"></cirrus-badge>
