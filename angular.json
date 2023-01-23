@@ -86,7 +86,7 @@
       "prefix": "cirrus",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@nrwl/angular:webpack-browser",
           "outputs": ["{options.outputPath}"],
           "options": {
             "deployUrl": "/courses/",
@@ -109,7 +109,10 @@
             "stylePreprocessorOptions": {
               "includePaths": ["libs/ui/src/lib/styles"]
             },
-            "scripts": []
+            "scripts": [],
+            "customWebpackConfig": {
+              "path": "apps/courses/webpack.config.js"
+            }
           },
           "configurations": {
             "production": {
@@ -195,7 +198,7 @@
           "defaultConfiguration": "production"
         },
         "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
+          "builder": "@nrwl/angular:webpack-server",
           "configurations": {
             "production": {
               "browserTarget": "courses:build:production"
@@ -364,7 +367,7 @@
       "prefix": "cirrus",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@nrwl/angular:webpack-browser",
           "outputs": ["{options.outputPath}"],
           "options": {
             "deployUrl": "/recent-activity/",
@@ -465,7 +468,7 @@
           "defaultConfiguration": "production"
         },
         "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
+          "builder": "@nrwl/angular:webpack-server",
           "configurations": {
             "production": {
               "browserTarget": "recent-activity:build:production"
