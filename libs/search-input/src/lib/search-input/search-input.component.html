@@ -1,0 +1,27 @@
+<div class="filter-search">
+  <div class="search-input">
+    <input
+      [ngClass]="list?.length ? 'input-active' : 'input'"
+      [placeholder]="title"
+      matInput
+      [formControl]="searchInput"
+      [matAutocomplete]="auto"
+    />
+    <div>
+      <mat-autocomplete #auto="matAutocomplete" class="mat-auto">
+        <mat-option *ngFor="let item of list" (click)="selectedItem(item)">
+          <div>
+            <div>
+              <div>
+                {{ item.name }}
+              </div>
+              <div class="status">
+                {{ item.status | formatFilter | titlecase }}
+              </div>
+            </div>
+          </div>
+        </mat-option>
+      </mat-autocomplete>
+    </div>
+  </div>
+</div>

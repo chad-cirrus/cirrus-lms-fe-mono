@@ -572,6 +572,32 @@
       "tags": [],
       "implicitDependencies": ["recent-activity"]
     },
+    "search-input": {
+      "projectType": "library",
+      "root": "libs/search-input",
+      "sourceRoot": "libs/search-input/src",
+      "prefix": "cirrus",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/search-input"],
+          "options": {
+            "jestConfig": "libs/search-input/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/search-input/src/**/*.ts",
+              "libs/search-input/src/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
     "sidenav-header": {
       "projectType": "library",
       "root": "libs/sidenav-header",

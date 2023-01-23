@@ -59,6 +59,8 @@ import {
   SidenavHeaderModule,
   SidenavHeaderService,
 } from '@cirrus/sidenav-header';
+
+import { SearchInputModule } from '@cirrus/search-input';
 import { BadgeModule } from '@cirrus/badge';
 
 @NgModule({
@@ -105,12 +107,13 @@ import { BadgeModule } from '@cirrus/badge';
     ErrorNotificationModule,
     MatSidenavModule,
     SwiperModule,
-    ReactiveFormsModule,
     NotificationsMenuModule,
     SwiperModule,
     ReactiveFormsModule,
     SidenavHeaderModule,
+    SearchInputModule,
     BadgeModule,
+
   ],
   providers: [
     {

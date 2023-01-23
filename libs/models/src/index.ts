@@ -39,3 +39,5 @@ export * from './testing/testData855b';
 export * from './lib/IHoursAndLandingsStats';
 export * from './lib/IConnection';
 export * from './lib/IOrder';
+export * from './lib/ICoursesForRecentActivity';
+export * from './lib/ISearchInputData';

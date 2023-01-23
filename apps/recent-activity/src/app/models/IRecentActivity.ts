@@ -1,3 +1,5 @@
+import { ICoursesForRecentActivity } from '@cirrus/models';
+
 export interface LogbookStat {
   type: string;
   completed: [];
@@ -40,20 +42,7 @@ export interface Achievements {
 export interface IRecentActivity {
   overall_progress: OverallProgress;
   achievements: Achievements;
-  in_progress_courses: InProgressCourses[];
-}
-
-export interface InProgressCourses {
-  id: number;
-  lessons_completed: number;
-  lessons_total: number;
-  name: string;
-  title: string;
-  thumbnail_image_url: string | null;
-  next_lesson: {
-    stage_id: number;
-    lesson_id: number;
-  } | null;
+  courses: ICoursesForRecentActivity[];
 }
 
 export const initialRecentActivity: IRecentActivity = {
@@ -62,7 +51,7 @@ export const initialRecentActivity: IRecentActivity = {
     course_work_stats: [],
     iacra_stats: [],
   },
-  in_progress_courses: [],
+  courses: [],
   achievements: {
     certificates: [],
     badges: [],

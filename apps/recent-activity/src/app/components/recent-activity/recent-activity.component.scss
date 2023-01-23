@@ -2,7 +2,7 @@
 
 cirrus-recent-activity {
   padding: 30px 0;
-  
+
   @include breakpoint(tablet) {
     padding: 50px 0;
   }
@@ -26,7 +26,7 @@ cirrus-recent-activity {
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    
+
     p {
       margin: 15px 30px 30px 0;
     }
@@ -79,5 +79,21 @@ cirrus-recent-activity {
 
   @include breakpoint(mobile) {
     margin-top: 110px;
+  }
+}
+
+.search-input-container {
+  margin-top: 29px;
+
+  @include breakpoint(mobile) {
+    margin-top: 18px;
+  }
+
+  @include breakpoint(tablet) {
+    .input {
+      max-width: 522px;
+    }
+
+    margin-top: 28px;
   }
 }

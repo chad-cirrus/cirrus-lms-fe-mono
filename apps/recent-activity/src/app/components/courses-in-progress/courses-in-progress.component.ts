@@ -1,5 +1,5 @@
 import { Component, Input, ViewEncapsulation } from '@angular/core';
-import { InProgressCourses } from '../../models/IRecentActivity';
+import { ICoursesForRecentActivity } from '@cirrus/models';
 
 import SwiperCore, { Navigation, Pagination } from 'swiper';
 import { environment } from '../../../environments/environment';
@@ -14,10 +14,10 @@ SwiperCore.use([Navigation, Pagination]);
   encapsulation: ViewEncapsulation.None,
 })
 export class CoursesInProgressComponent {
-  private _inProgressCourses: InProgressCourses[] = [];
+  private _inProgressCourses: ICoursesForRecentActivity[] = [];
 
   @Input()
-  set inProgressCourses(value: InProgressCourses[]) {
+  set inProgressCourses(value: ICoursesForRecentActivity[]) {
     this._inProgressCourses = value.map(course => ({
       ...course,
       thumbnail_image_url: `url('${

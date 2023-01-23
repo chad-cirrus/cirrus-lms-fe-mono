@@ -79,6 +79,7 @@ import { HoursLandingTypeToTextPipe } from './helpers/HoursLandingTypeToText.pip
 import { HoursLandingTypeToIconPipe } from './helpers/HoursLandingTypeToIcon.pipe';
 import { ClickOutsideDirective } from './clickoutside.directive';
 import { BluePopUpComponent } from './blue-pop-up/blue-pop-up.component';
+import { SearchInputModule } from '@cirrus/search-input';
 
 @NgModule({
   imports: [
@@ -95,6 +96,7 @@ import { BluePopUpComponent } from './blue-pop-up/blue-pop-up.component';
     MatDialogModule,
     MatTabsModule,
     MatCardModule,
+    SearchInputModule,
   ],
   declarations: [
     LessonLandingPageComponent,

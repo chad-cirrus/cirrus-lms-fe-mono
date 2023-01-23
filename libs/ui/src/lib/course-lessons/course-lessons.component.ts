@@ -1,11 +1,25 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import {
   FilterMenuSection,
   ICourseOverviewLesson,
   ICourseOverviewStage,
+  ISearchInputData,
 } from '@cirrus/models';
-import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
+import {
+  BehaviorSubject,
+  combineLatest,
+  fromEvent,
+  Observable,
+  Subject,
+} from 'rxjs';
 
 import { debounceTime, map, startWith, tap } from 'rxjs/operators';
 import { StageLessonNavigationEvent } from '../StageLessonNavigationEvent';
@@ -20,7 +34,10 @@ export class CourseLessonsComponent implements OnInit {
   stagesSubject = new BehaviorSubject<ICourseOverviewStage[]>([]);
   lessonsSubject = new BehaviorSubject<ICourseOverviewLesson[]>([]);
   filteredStages$!: Observable<ICourseOverviewStage[]>;
-  filteredLessons$!: Observable<ICourseOverviewLesson[]>;
+  filteredLessons$!: Observable<ISearchInputData[]>;
+
+  private _filteredTextSubject = new Subject<string>();
+  filteredText$: Observable<string> = this._filteredTextSubject.asObservable();
 
   @Input()
   set stages(value: ICourseOverviewStage[]) {
@@ -63,10 +80,6 @@ export class CourseLessonsComponent implements OnInit {
     return this.filterForm.get('filterCheckbox') as FormArray;
   }
 
-  get filterText() {
-    return this.filterForm.get('filterText');
-  }
-
   ngOnInit() {
     this.filteredStages$ = combineLatest([
       this.checkboxArray.valueChanges.pipe(startWith([])),
@@ -98,29 +111,30 @@ export class CourseLessonsComponent implements OnInit {
     );
 
     this.filteredLessons$ = combineLatest([
-      this.filterForm.valueChanges.pipe(
-        startWith({ filterText: this.filterText?.value })
-      ),
+      this.filteredText$,
       this.lessonsSubject,
     ]).pipe(
-      debounceTime(200),
       map(([changes, lessons]) => {
-        this.showDropdown = true;
-        if (this.filterText?.value) {
-          this.showDropdown = true;
-        }
-        return !changes.filterText
+        return !changes
           ? []
           : lessons.filter(l => {
               const format = l.progress.status.replace('_', ' ');
               return (
-                l.title
-                  .toLowerCase()
-                  .includes(changes.filterText.toLowerCase()) ||
-                format.toLowerCase().includes(changes.filterText.toLowerCase())
+                l.title.toLowerCase().includes(changes.toLowerCase()) ||
+                format.toLowerCase().includes(changes.toLowerCase())
               );
             });
-      })
+      }),
+      map(lessons =>
+        lessons.map(lesson => {
+          return {
+            name: lesson.title,
+            status: lesson.progress.status,
+            stageId: lesson.stage_id,
+            lessonId: lesson.id,
+          };
+        })
+      )
     );
   }
 
@@ -160,6 +174,10 @@ export class CourseLessonsComponent implements OnInit {
     }
   }
 
+  filterText(val: string) {
+    this._filteredTextSubject.next(val);
+  }
+
   isProgressFiltered(changes: any) {
     return (
       changes.includes('not_started') ||
@@ -177,7 +195,8 @@ export class CourseLessonsComponent implements OnInit {
     this.showDropdown = false;
   }
 
-  emitNavigation({ stageId, lessonId }: StageLessonNavigationEvent) {
+  emitNavigation($event: StageLessonNavigationEvent) {
+    const { stageId, lessonId } = $event;
     this.navigate.next({ stageId, lessonId });
   }
 }

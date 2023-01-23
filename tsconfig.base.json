@@ -18,6 +18,7 @@
       "@cirrus/badge": ["libs/badge/src/index.ts"],
       "@cirrus/models": ["libs/models/src/index.ts"],
       "@cirrus/notification-menu": ["libs/notification-menu/src/index.ts"],
+      "@cirrus/search-input": ["libs/search-input/src/index.ts"],
       "@cirrus/sidenav-header": ["libs/sidenav-header/src/index.ts"],
       "@cirrus/ui": ["libs/ui/src/index.ts"]
     }

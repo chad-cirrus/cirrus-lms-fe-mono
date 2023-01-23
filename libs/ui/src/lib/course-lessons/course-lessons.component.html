@@ -5,39 +5,17 @@
 >
   <div class="filter-container" [formGroup]="filterForm">
     <div class="filter-search">
-      <div class="search-input">
-        <input
-          [ngClass]="filterText?.value ? 'input-active' : 'input'"
-          placeholder="Search Lessons"
-          formControlName="filterText"
-        />
-        <div
-          [ngClass]="showDropdown ? 'text-filter-container' : ''"
-          cirrusClickOutside
-          (clickOutside)="clickOutside()"
-        >
-          <div
-            *ngFor="let lesson of filteredLessons$ | async"
-            class="text-filter-section"
-            (click)="
-              emitNavigation({ stageId: lesson.stage_id, lessonId: lesson.id })
-            "
-          >
-            <div *ngIf="filterText?.value && showDropdown">
-              <div class="title">
-                {{ lesson.title }}
-              </div>
-              <div class="status">
-                {{ lesson.progress.status | formatFilter | titlecase }}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
       <button class="filter-button" [matMenuTriggerFor]="menu">
         Filter Lessons
       </button>
+      <cirrus-search-input
+        (textOutput)="filterText($event)"
+        [list]="filteredLessons$ | async"
+        title="Search Lessons"
+        (emitSelection)="emitNavigation($event)"
+      ></cirrus-search-input>
     </div>
+
     <mat-menu #menu="matMenu">
       <cirrus-filter
         [checkboxArray]="checkboxArray"
