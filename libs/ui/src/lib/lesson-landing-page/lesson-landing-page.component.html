@@ -6,7 +6,9 @@
   <div
     class="breadcrumb-container instructor-view"
     *ngIf="
-      lesson.instructor_overview && lesson.instructor_overview.length > 0;
+      lesson.instructor_overview &&
+        lesson.instructor_overview.length > 0 &&
+        user.role === 'instructor';
       else studentView
     "
   >
@@ -16,7 +18,10 @@
     </div>
 
     <div class="toggle-container">
-      <mat-slide-toggle [formControl]="instructorToggle" labelPosition='before' color="accent"
+      <mat-slide-toggle
+        [formControl]="instructorToggle"
+        labelPosition="before"
+        color="accent"
         ><span class="small">Instructor View</span></mat-slide-toggle
       >
     </div>
@@ -72,7 +77,9 @@
       <cirrus-lesson-progress
         [lesson]="lesson"
         [checkoutOffsRequired]="checkoutOffsRequired"
-        [ngClass]="(instructorView$ | async) ? 'instructor-view' : 'student-view'"
+        [ngClass]="
+          (instructorView$ | async) ? 'instructor-view' : 'student-view'
+        "
       ></cirrus-lesson-progress>
       <cirrus-cta-button
         *ngIf="(instructorView$ | async) === false"
