@@ -23,8 +23,9 @@
 
 .primary-btn{
     &:hover {
-    background: $cirrus-blue-hover;
-    border: 1px solid $cirrus-blue-hover;
+        background: $cirrus-blue-hover;
+        border: 1px solid $cirrus-blue-hover;
+        color: $white;
     }
 }
 
@@ -35,6 +36,7 @@
     &:hover {
         background: $gray2;
         border: 1px solid $gray2;
+        color: $white;
     }
 }
 
