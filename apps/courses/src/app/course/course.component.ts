@@ -30,6 +30,7 @@ export class CourseComponent implements OnInit {
         filter(overview => overview.id !== 0),
         take(1)
       )
+
       .subscribe(overview => {
         const defaultTab =
           overview?.progress?.status === 'not_started' ? 'overview' : 'lessons';

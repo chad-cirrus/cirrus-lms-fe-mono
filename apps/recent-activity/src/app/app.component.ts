@@ -19,7 +19,7 @@ import { environment } from '../environments/environment';
 import { RecentActivityService } from './services/recent-activity.service';
 import { RecentActivityFacade } from './facade.service';
 import { SidenavHeaderService } from '@cirrus/sidenav-header';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ViewportScroller } from '@angular/common';
 import { response } from 'express';
 
@@ -56,7 +56,8 @@ export class AppComponent
     notificationService: NotificationService,
     sidenavHeaderService: SidenavHeaderService,
     breakpointObserver: BreakpointObserver,
-    userService: UserService
+    userService: UserService,
+    route: ActivatedRoute
   ) {
     super(
       userService,
@@ -65,7 +66,8 @@ export class AppComponent
       notificationService,
       errorService,
       router,
-      scroller
+      scroller,
+      route
     );
   }
 

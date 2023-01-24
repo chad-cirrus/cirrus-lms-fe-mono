@@ -1,4 +1,4 @@
-import { map, takeUntil } from 'rxjs/operators';
+import { filter, map, takeUntil, tap } from 'rxjs/operators';
 import {
   Component,
   ElementRef,
@@ -18,7 +18,13 @@ import { ICirrusUser } from '@cirrus/models';
 import { UserService } from '../shared/user.service';
 import { NotificationService } from '../lib-services/notifications/notification.service';
 import { ErrorService } from '../lib-services/error/error.service';
-import { Router } from '@angular/router';
+import {
+  ActivatedRoute,
+  Event,
+  Navigation,
+  NavigationEnd,
+  Router,
+} from '@angular/router';
 import { ViewportScroller } from '@angular/common';
 
 @Component({
@@ -64,7 +70,8 @@ export abstract class CirrusBaseComponent implements OnInit, OnDestroy {
     protected notificationService: NotificationService,
     protected errorService: ErrorService,
     protected router: Router,
-    protected scroller: ViewportScroller
+    protected scroller: ViewportScroller,
+    protected route: ActivatedRoute
   ) {}
 
   ngOnInit() {
@@ -76,9 +83,22 @@ export abstract class CirrusBaseComponent implements OnInit, OnDestroy {
         }
       });
 
-    this.router.events.pipe(takeUntil(this.destroyed)).subscribe(() => {
-      this.scroller.scrollToPosition([0, 0]);
-    });
+    this.router.events
+      .pipe(
+        takeUntil(this.destroyed),
+        filter((event: any) => {
+          return (
+            event instanceof NavigationEnd &&
+            (event.url.includes('overview') || event.url.includes('enrollment'))
+          );
+        })
+      )
+      .subscribe((navEnd: NavigationEnd) => {
+        if (navEnd.id) {
+          return;
+        }
+        this.scroller.scrollToPosition([0, 0]);
+      });
   }
 
   ngOnDestroy() {
