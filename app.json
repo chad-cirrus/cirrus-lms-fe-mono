@@ -6,6 +6,7 @@
     }
   ],
   "env": {
+    "NX_TEST_VARIABLE": 'Hello, world',
     "SIGN_IN": {
       "description": "Salesforce sign-in URL",
       "value": "https://cirrus-lms-api-stage.herokuapp.com/users/saml/sign_in"

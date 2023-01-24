@@ -87,6 +87,8 @@ export class AppComponent
   ngOnInit() {
     super.ngOnInit();
 
+    console.log('Environment variable test', process.env['NX_TEST_VARIABLE']);
+
     this.courseService.getNotifications();
 
     this.triggerSubscription = this.appService.getTrigger().subscribe(() => {
