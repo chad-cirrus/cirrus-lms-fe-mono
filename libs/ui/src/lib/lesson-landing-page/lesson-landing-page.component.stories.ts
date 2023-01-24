@@ -83,7 +83,6 @@ const Template: Story<LessonLandingPageComponent> = (
 export const Primary = Template.bind({});
 Primary.args = {
   lesson: testData,
-  instructorView: false,
   sideNavOpen: false,
   courseComplete: false,
   isScreenSmall: false,
@@ -92,7 +91,6 @@ Primary.args = {
 export const PrimaryMobile = Template.bind({});
 PrimaryMobile.args = {
   lesson: testData,
-  instructorView: false,
   sideNavOpen: false,
   courseComplete: false,
   isScreenSmall: true,
@@ -104,7 +102,6 @@ CrashTestDummy.args = {
     ...ctdLesson,
     contents: ctdContents,
   },
-  instructorView: false,
   sideNavOpen: false,
   courseComplete: false,
 };
@@ -112,7 +109,6 @@ CrashTestDummy.args = {
 export const InstructorView = Template.bind({});
 InstructorView.args = {
   lesson: testData,
-  instructorView: true,
   sideNavOpen: false,
   courseComplete: false,
 };
@@ -120,7 +116,6 @@ InstructorView.args = {
 export const InProgress = Template.bind({});
 InProgress.args = {
   lesson: { ...testData, progress: { id: 0, status: 'in_progress' } },
-  instructorView: false,
   sideNavOpen: false,
   courseComplete: false,
 };
@@ -128,7 +123,6 @@ InProgress.args = {
 export const Completed = Template.bind({});
 Completed.args = {
   lesson: { ...testData, progress: { id: 0, status: 'completed' } },
-  instructorView: false,
   sideNavOpen: false,
   courseComplete: false,
 };
@@ -136,7 +130,6 @@ Completed.args = {
 export const NotStarted = Template.bind({});
 NotStarted.args = {
   lesson: testData,
-  instructorView: false,
   sideNavOpen: false,
   courseComplete: false,
 };
@@ -144,7 +137,6 @@ NotStarted.args = {
 export const LastLessonCompleteCourse = Template.bind({});
 LastLessonCompleteCourse.args = {
   lesson: { ...testData, progress: { id: 0, status: 'completed' } },
-  instructorView: false,
   sideNavOpen: false,
   courseComplete: true,
 };
@@ -152,7 +144,6 @@ LastLessonCompleteCourse.args = {
 export const FlightAssessmentOnly = Template.bind({});
 FlightAssessmentOnly.args = {
   lesson: { ...testData, lesson_type: 2 },
-  instructorView: false,
   sideNavOpen: false,
   courseComplete: false,
 };
@@ -160,7 +151,6 @@ FlightAssessmentOnly.args = {
 export const IcingAwarenessCourse = Template.bind({});
 IcingAwarenessCourse.args = {
   lesson: testDataIcingAwarenessCourse,
-  instructorView: false,
   sideNavOpen: false,
   courseComplete: false,
 };
@@ -168,7 +158,6 @@ IcingAwarenessCourse.args = {
 export const TakeOffsAndLandings = Template.bind({});
 TakeOffsAndLandings.args = {
   lesson: testData855,
-  instructorView: false,
   sideNavOpen: false,
   courseComplete: false,
 };
