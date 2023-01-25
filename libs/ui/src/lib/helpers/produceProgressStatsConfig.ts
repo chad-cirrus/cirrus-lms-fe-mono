@@ -36,6 +36,5 @@ export const produceProgressStatsConfig = (
     completed: stat.completed,
     total: stat.total,
   }));
-  console.log(configs);
   return configs;
 };

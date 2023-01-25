@@ -87,9 +87,6 @@ export class LessonComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.nextLesson$.subscribe(path => {
-      console.log('Next lesson path', path);
-    });
 
     this.lessonSubscription.add(
       this.route.params.subscribe(({ courseId, stageId, lessonId }) => {

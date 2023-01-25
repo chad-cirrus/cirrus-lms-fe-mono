@@ -87,14 +87,15 @@ export abstract class CirrusBaseComponent implements OnInit, OnDestroy {
       .pipe(
         takeUntil(this.destroyed),
         filter((event: any) => {
-          return (
-            event instanceof NavigationEnd &&
-            (event.url.includes('overview') || event.url.includes('enrollment'))
-          );
+          return event instanceof NavigationEnd;
         })
       )
       .subscribe((navEnd: NavigationEnd) => {
-        if (navEnd.id) {
+        if (
+          navEnd.url.includes('overview') ||
+          navEnd.url.includes('enrollment') ||
+          (navEnd.url.includes('lessons') && !navEnd.url.includes('stages'))
+        ) {
           return;
         }
         this.scroller.scrollToPosition([0, 0]);
@@ -119,7 +120,6 @@ export abstract class CirrusBaseComponent implements OnInit, OnDestroy {
   }
 
   toggleNotificationsMenu() {
-    console.log('firing in base');
     this.sidenavHeaderService.toggleShowNotifications();
   }
 

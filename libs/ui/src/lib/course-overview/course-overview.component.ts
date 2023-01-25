@@ -42,7 +42,6 @@ export class CourseOverviewComponent {
       .filter(stat => stat.type !== 'self_study')
       .map(stat => stat.total)
       .reduce((sum, current) => sum + current, 0);
-    console.log(totalAssessmentContent);
 
     this.showHoursAndLandings = totalAssessmentContent > 0;
   }

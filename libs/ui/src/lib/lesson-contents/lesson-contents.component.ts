@@ -38,7 +38,7 @@ export class LessonContentsComponent {
   set instructorView(val: boolean) {
     this._instructorView = val;
     this._contents.next(
-      val ? this.lesson.instructor_contents : this.lesson.contents
+      val ? this.lesson?.instructor_contents : this.lesson?.contents
     );
   }
 
