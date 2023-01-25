@@ -61,7 +61,7 @@ export class RecentActivityComponent implements OnInit {
       }
       return courses.map(course => {
         return {
-          name: course.name,
+          name: course.title,
           status: course.status,
           courseId: course.id,
         };
