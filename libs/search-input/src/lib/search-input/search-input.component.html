@@ -1,12 +1,20 @@
 <div class="filter-search">
   <div class="search-input">
-    <input
-      [ngClass]="list?.length ? 'input-active' : 'input'"
-      [placeholder]="title"
-      matInput
-      [formControl]="searchInput"
-      [matAutocomplete]="auto"
-    />
+    <div class="input-container">
+        <input
+        [ngClass]="list?.length ? 'input-active' : 'input'"
+        [placeholder]="title"
+        matInput
+        [formControl]="searchInput"
+        [matAutocomplete]="auto"
+      />
+      <img 
+        [src]="projectName + '/images/svg/search-icon.svg'"
+        alt="Search Icon"
+        [ngClass]="list?.length ? 'input-active' : ''"
+      >
+    </div>
+
     <div>
       <mat-autocomplete #auto="matAutocomplete" class="mat-auto">
         <mat-option *ngFor="let item of list" (click)="selectedItem(item)">
