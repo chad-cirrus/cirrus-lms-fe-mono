@@ -52,7 +52,7 @@ export class RecentActivityComponent implements OnInit {
         return;
       }
       return courses.filter(course =>
-        course.name.toLowerCase().includes(input)
+        course.name.toLowerCase().includes(input.toLowerCase())
       );
     }),
     map(courses => {
@@ -97,7 +97,7 @@ export class RecentActivityComponent implements OnInit {
     private store: Store<AppState>,
     private sidenavHeaderService: SidenavHeaderService,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.recentActivityService.getRecentActivityAndNotifications();

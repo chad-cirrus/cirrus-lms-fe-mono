@@ -34,8 +34,7 @@ export class AppComponent
 {
   cirrusUser$ = this.store.select(selectCirrusUser);
   isScreenSmall$: Observable<boolean> = this.store
-    .select(selectIsScreenSmall)
-    .pipe(tap(small => console.log('small: ', small)));
+    .select(selectIsScreenSmall);
 
   project = environment.project;
 
