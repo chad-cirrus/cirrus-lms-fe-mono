@@ -111,7 +111,7 @@
             },
             "scripts": [],
             "customWebpackConfig": {
-              "path": "apps/courses/webpack.config.js"
+              "path": "webpack.config.js"
             }
           },
           "configurations": {
@@ -408,7 +408,10 @@
             "stylePreprocessorOptions": {
               "includePaths": ["libs/ui/src/lib/styles"]
             },
-            "scripts": []
+            "scripts": [],
+            "customWebpackConfig": {
+              "path": "webpack.config.js"
+            }
           },
           "configurations": {
             "production": {
