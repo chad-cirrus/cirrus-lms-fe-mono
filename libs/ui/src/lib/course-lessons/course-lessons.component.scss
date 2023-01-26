@@ -18,10 +18,12 @@
 
 .filter-container {
   width: 100%;
+  .filter-button {
+    margin-bottom: 22px;
+  }
   .filter-search {
     display: flex;
     flex-direction: column;
-    gap: 22px;
   }
   .filter-message {
     padding: 20px 0px 17px 0px;
@@ -52,6 +54,9 @@ cirrus-search-input {
 
 @media (min-width: 960px) {
   .filter-container {
+    .filter-button {
+      margin: 0 22px 0 0;
+    }
     .filter-search {
       flex-direction: row;
     }
