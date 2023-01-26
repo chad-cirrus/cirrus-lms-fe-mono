@@ -182,6 +182,24 @@
               ],
               "outputHashing": "all"
             },
+            "review": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": {
+                "scripts": true,
+                "styles": true,
+                "hidden": false
+              },
+              "namedChunks": true,
+              "fileReplacements": [
+                {
+                  "replace": "apps/courses/src/environments/environment.ts",
+                  "with": "apps/courses/src/environments/environment.template.ts"
+                }
+              ]
+            },
             "development": {
               "buildOptimizer": false,
               "optimization": false,
@@ -455,6 +473,24 @@
                 }
               ],
               "outputHashing": "all"
+            },
+            "review": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": {
+                "scripts": true,
+                "styles": true,
+                "hidden": false
+              },
+              "namedChunks": true,
+              "fileReplacements": [
+                {
+                  "replace": "apps/recent-activity/src/environments/environment.ts",
+                  "with": "apps/recent-activity/src/environments/environment.template.ts"
+                }
+              ]
             },
             "development": {
               "buildOptimizer": false,

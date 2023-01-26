@@ -1,19 +1,12 @@
 {
-  "name": "cirrus-lms-fe",
+  "name": "cirrus-lms-fe-mono",
   "buildpacks": [
     {
       "url": "heroku/nodejs"
     }
   ],
   "env": {
-    "NX_TEST_VARIABLE": "Hello, world",
-    "SIGN_IN": {
-      "description": "Salesforce sign-in URL",
-      "value": "https://cirrus-lms-api-stage.herokuapp.com/users/saml/sign_in"
-    },
-    "SIGN_OUT": {
-      "description": "Salesforce sign-out URL",
-      "value": "https://cirrus-lms-api-stage.herokuapp.com/users/logout/"
-    }
+    "NX_ENV": "review",
+    "NX_BASE_URL": "https://cirrus-lms-api-br-chore-review.herokuapp.com"
   }
 }
