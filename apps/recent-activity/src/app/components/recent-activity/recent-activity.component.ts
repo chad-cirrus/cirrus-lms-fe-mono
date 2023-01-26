@@ -14,6 +14,7 @@ import { IRecentActivityNotifications } from '../../models/IRecentActivityNotifi
 import { PROGRESS_STATUS } from '@cirrus/models';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'cirrus-recent-activity',
@@ -26,6 +27,7 @@ export class RecentActivityComponent implements OnInit {
   events: string[] = [];
   opened!: boolean;
   courseInputVal = new FormControl('');
+  project = environment.project;
 
   private _filteredTextSubject: Subject<string> = new Subject();
   filteredText$: Observable<string> = this._filteredTextSubject.asObservable();

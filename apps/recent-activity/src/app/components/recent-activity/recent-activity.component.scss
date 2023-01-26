@@ -90,10 +90,11 @@ cirrus-recent-activity {
   }
 
   @include breakpoint(tablet) {
+    margin-top: 28px;
+  }
+  @include breakpoint(desktop) {
     .input {
       max-width: 522px;
     }
-
-    margin-top: 28px;
   }
 }

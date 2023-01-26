@@ -47,6 +47,7 @@
           [list]="filteredCourses$ | async"
           title="Search Courses"
           (emitSelection)="emitNavigation($event)"
+          [projectName]="project"
         ></cirrus-search-input>
       </div>
     </div>
