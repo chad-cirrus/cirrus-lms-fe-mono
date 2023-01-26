@@ -71,67 +71,6 @@ img[type='button'] {
   stroke: $white !important;
 }
 
-.search-input {
-  position: relative;
-  display: flex;
-  width: 100%;
-  .input {
-    width: 100%;
-    border: 1px solid $gray7;
-    border-radius: 74px;
-    background-color: $black;
-    padding: 10px 22px;
-    color: $gray4;
-    font-size: 1rem;
-    &:focus-visible {
-      outline: none;
-    }
-  }
-
-  .input-active {
-    @extend .input;
-    border: none;
-    border-bottom: 1px solid $gray1;
-    background-color: $gray2;
-    border-radius: 5px 5px 0 0;
-    & ~ .text-filter-container {
-      border-top: 1px solid $gray1;
-      border-radius: 0 0 5px 5px;
-    }
-  }
-
-  .text-filter-container {
-    position: absolute;
-    top: 38px;
-    width: 100%;
-    max-height: 450px;
-    overflow-y: auto;
-    background-color: $gray2;
-
-    .text-filter-section {
-      cursor: pointer;
-      padding: 17px 27px;
-      &:hover {
-        background: $gray3;
-      }
-    }
-
-    .title {
-      font-size: 1rem;
-      font-family: $bqmedium-font;
-    }
-
-    .status {
-      padding-top: 2px;
-      font-size: 0.875rem;
-      color: $gray4;
-    }
-  }
-  @media (min-width: 960px) {
-    order: 2;
-  }
-}
-
 .tag {
   display: flex;
   justify-content: space-around;

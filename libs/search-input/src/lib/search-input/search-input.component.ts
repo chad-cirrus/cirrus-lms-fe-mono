@@ -13,7 +13,6 @@ export class SearchInputComponent implements OnInit {
   @Input() title!: string;
   @Output() textOutput = new EventEmitter();
   @Output() emitSelection = new EventEmitter();
-  @Input() projectName!: string;
 
   isOpened = false;
 
