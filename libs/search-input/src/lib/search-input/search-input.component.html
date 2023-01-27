@@ -7,11 +7,23 @@
         matInput
         [formControl]="searchInput"
         [matAutocomplete]="auto"
+        (focus)="focus()"
+        (focusout)="focusout()"
+        [(ngModel)]="value"
       />
       <img 
+        class="search-icon"
         src="recent-activity/images/svg/search-icon.svg"
         alt="Search Icon"
         [ngClass]="list?.length ? 'input-active' : ''"
+      >
+      <img 
+        class="close-icon"
+        src="recent-activity/images/svg/close-icon-gray5.svg" 
+        alt="Close button icon."
+        *ngIf="value"  
+        aria-label="Clear"
+        (click)="value = ''"
       >
     </div>
 

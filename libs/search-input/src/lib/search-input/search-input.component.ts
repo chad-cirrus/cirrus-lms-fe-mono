@@ -17,6 +17,7 @@ export class SearchInputComponent implements OnInit {
   isOpened = false;
 
   searchInput = new FormControl();
+  value = '';
 
   ngOnInit(): void {
     this.searchInput.valueChanges.pipe(debounceTime(200)).subscribe(input => {
@@ -26,5 +27,13 @@ export class SearchInputComponent implements OnInit {
 
   selectedItem(item: ISearchInputData) {
     this.emitSelection.emit(item);
+  }
+  focus(){
+    const body = document.body;
+    body.style.overflow = "hidden";
+  }
+  focusout(){
+    const body = document.body;
+    body.style.overflow = "auto";
   }
 }

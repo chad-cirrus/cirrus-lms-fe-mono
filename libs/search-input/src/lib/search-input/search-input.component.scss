@@ -14,7 +14,12 @@
     right: 22px;
     top: 50%;
     transform: translateY(-50%);
-    pointer-events: none;
+    &.search-icon {
+      pointer-events: none;
+    }
+    &.close-icon {
+      cursor: pointer;
+    }
     &.input-active {
       display: none;
     }
