@@ -7,6 +7,6 @@
   ],
   "env": {
     "NX_ENV": "review",
-    "NX_BASE_URL": "https://cirrus-lms-api-br-chore-review.herokuapp.com"
+    "NX_BASE_URL": "https://cirrus-lms-api-br-master.herokuapp.com"
   }
 }
