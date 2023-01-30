@@ -31,9 +31,11 @@ export class SearchInputComponent implements OnInit {
   focus(){
     const body = document.body;
     body.style.overflow = "hidden";
+    body.style.touchAction = "none";
   }
   focusout(){
     const body = document.body;
     body.style.overflow = "auto";
+    body.style.touchAction = "initial";
   }
 }
