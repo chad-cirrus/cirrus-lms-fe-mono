@@ -9,7 +9,6 @@
         [matAutocomplete]="auto"
         (focus)="focus()"
         (focusout)="focusout()"
-        [(ngModel)]="value"
       />
       <img 
         class="search-icon"
@@ -21,9 +20,9 @@
         class="close-icon"
         src="recent-activity/images/svg/close-icon-gray5.svg" 
         alt="Close button icon."
-        *ngIf="value"  
+        *ngIf="list?.length"  
         aria-label="Clear"
-        (click)="value = ''"
+        (click) = "clearSearchText()"
       >
     </div>
 

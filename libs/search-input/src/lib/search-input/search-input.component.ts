@@ -17,12 +17,16 @@ export class SearchInputComponent implements OnInit {
   isOpened = false;
 
   searchInput = new FormControl();
-  value = '';
 
   ngOnInit(): void {
     this.searchInput.valueChanges.pipe(debounceTime(200)).subscribe(input => {
       this.textOutput.emit(input);
     });
+  }
+
+  clearSearchText() {
+    this.searchInput.setValue('');
+    this.textOutput.emit('');
   }
 
   selectedItem(item: ISearchInputData) {
