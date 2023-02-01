@@ -1,8 +1,8 @@
 <div class="filter-search">
   <div class="search-input">
     <div class="input-container">
-        <input
-        [ngClass]="list?.length ? 'input-active' : 'input'"
+      <input
+        [ngClass]="isOpened ? 'input-active' : 'input'"
         [placeholder]="title"
         matInput
         [formControl]="searchInput"
@@ -10,36 +10,43 @@
         (focus)="focus()"
         (focusout)="focusout()"
       />
-      <img 
+      <img
         class="search-icon"
         src="recent-activity/images/svg/search-icon.svg"
+        *ngIf="!searchInput.value; else close"
         alt="Search Icon"
-        [ngClass]="list?.length ? 'input-active' : ''"
-      >
-      <img 
-        class="close-icon"
-        src="recent-activity/images/svg/close-icon-gray5.svg" 
-        alt="Close button icon."
-        *ngIf="list?.length"  
-        aria-label="Clear"
-        (click) = "clearSearchText()"
-      >
+        [ngClass]="isOpened ? 'input-active' : ''"
+      />
+      <ng-template #close>
+        <img
+          class="close-icon"
+          src="recent-activity/images/svg/close-icon-gray5.svg"
+          alt="Close button icon."
+          aria-label="Clear"
+          (click)="clearSearchText()"
+        />
+      </ng-template>
     </div>
 
     <div>
       <mat-autocomplete #auto="matAutocomplete" class="mat-auto">
-        <mat-option *ngFor="let item of list" (click)="selectedItem(item)">
-          <div>
+        <div *ngIf="list?.length; else noResult">
+          <mat-option *ngFor="let item of list" (click)="selectedItem(item)">
             <div>
               <div>
-                {{ item.name }}
-              </div>
-              <div class="status">
-                {{ item.status | formatFilter | titlecase }}
+                <div>
+                  {{ item.name }}
+                </div>
+                <div class="status">
+                  {{ item.status | formatFilter | titlecase }}
+                </div>
               </div>
             </div>
-          </div>
-        </mat-option>
+          </mat-option>
+        </div>
+        <ng-template #noResult>
+          <mat-option (click)="focusout()">No results to show</mat-option>
+        </ng-template>
       </mat-autocomplete>
     </div>
   </div>

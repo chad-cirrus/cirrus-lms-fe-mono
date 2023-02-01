@@ -45,7 +45,7 @@
         <cirrus-search-input
           (textOutput)="filterText($event)"
           [list]="filteredCourses$ | async"
-          title="Search Courses"
+          title="Search My Courses"
           (emitSelection)="emitNavigation($event)"
         ></cirrus-search-input>
       </div>
@@ -53,7 +53,9 @@
 
     <cirrus-overall-progress
       class="overall-progress-wrapper"
-      [overallProgress]="recentActivityNotifications?.recentActivity?.overall_progress!"
+      [overallProgress]="
+        recentActivityNotifications?.recentActivity?.overall_progress!
+      "
     >
     </cirrus-overall-progress>
 

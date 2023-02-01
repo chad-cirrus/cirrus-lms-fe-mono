@@ -32,14 +32,16 @@ export class SearchInputComponent implements OnInit {
   selectedItem(item: ISearchInputData) {
     this.emitSelection.emit(item);
   }
-  focus(){
+  focus() {
+    this.isOpened = true;
     const body = document.body;
-    body.style.overflow = "hidden";
-    body.style.touchAction = "none";
+    body.style.overflow = 'hidden';
+    body.style.touchAction = 'none';
   }
-  focusout(){
+  focusout() {
+    this.isOpened = false;
     const body = document.body;
-    body.style.overflow = "auto";
-    body.style.touchAction = "initial";
+    body.style.overflow = 'auto';
+    body.style.touchAction = 'initial';
   }
 }
