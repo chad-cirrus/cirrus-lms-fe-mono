@@ -19,7 +19,12 @@
 .filter-container {
   width: 100%;
   .filter-button {
-    margin-bottom: 22px;
+    order: 2;
+    margin-top: 22px;
+  }
+  cirrus-search-input {
+    flex-grow: 1;
+    order: 1;
   }
   .filter-search {
     display: flex;
@@ -30,10 +35,6 @@
     font-size: 0.875rem;
     color: var.$secondary-font-color-grey;
   }
-}
-
-cirrus-search-input {
-  flex-grow: 1;
 }
 
 .right {
@@ -56,6 +57,10 @@ cirrus-search-input {
   .filter-container {
     .filter-button {
       margin: 0 22px 0 0;
+      order: 1;
+    }
+    cirrus-search-input {
+      order: 2;
     }
     .filter-search {
       flex-direction: row;
