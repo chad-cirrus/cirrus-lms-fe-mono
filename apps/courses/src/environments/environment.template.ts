@@ -13,4 +13,5 @@
     'https://cirrusapproachherokuprod.blob.core.windows.net/cirruslmsherokudevcontainer/content-items/images/default-course-hero-sm.jpg',
   defaultDesktopCourse:
     'https://cirrusapproachherokuprod.blob.core.windows.net/cirruslmsherokudevcontainer/content-items/images/default-course-hero-lg.jpg',
+   fullstoryOrgId: process.env['FULL_STORY_ORG_ID'],
 };
