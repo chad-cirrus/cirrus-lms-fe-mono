@@ -31,6 +31,7 @@ export class SearchInputComponent implements OnInit {
 
   selectedItem(item: ISearchInputData) {
     this.emitSelection.emit(item);
+    this.focusout();
   }
   focus() {
     this.isOpened = true;
