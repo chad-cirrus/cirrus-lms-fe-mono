@@ -8,7 +8,9 @@ export class FullStoryService {
 
   constructor() {}
 
-  init(orgId: string) {
+  init(orgId?: string) {
+    if (orgId === undefined) return; // Skip initialization if orgId is missing
+
     FullStory.init({ orgId, devMode: isDevMode() });
   }
 }
