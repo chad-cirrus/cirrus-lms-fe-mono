@@ -28,7 +28,7 @@ describe('ClickoutsideDirective', () => {
     directive = fixture.debugElement
       .query(By.directive(ClickOutsideDirective))
       .injector.get(ClickOutsideDirective) as ClickOutsideDirective;
-    spy = jest.spyOn(directive, 'emitClickOutside');
+    spy = jest.spyOn(directive, 'clickOutside');
     const h1 = fixture.debugElement.query(By.css('h1'));
     h1.nativeElement.click();
     fixture.detectChanges();
@@ -39,7 +39,7 @@ describe('ClickoutsideDirective', () => {
     directive = fixture.debugElement
       .query(By.directive(ClickOutsideDirective))
       .injector.get(ClickOutsideDirective) as ClickOutsideDirective;
-    spy = jest.spyOn(directive, 'emitClickOutside');
+    spy = jest.spyOn(directive, 'clickOutside');
     const h2 = fixture.debugElement.query(By.css('h2'));
     h2.nativeElement.click();
     fixture.detectChanges();

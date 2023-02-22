@@ -1,0 +1,18 @@
+<ng-container
+  *ngIf="recentActivityNotifications$ | async as recentActivityNotifications"
+>
+  <div class="recent-activity-welcome-heading content-wrapper">
+    <div class="welcome-toggle-container">
+      <h1 class="heading-3">Welcome back, {{ user?.firstname }}</h1>
+      <cirrus-toggle-instructor-student
+        (toggleViewEmit)="toggleView()"
+        [activeName]="'Instructor'"
+      ></cirrus-toggle-instructor-student>
+    </div>
+
+    <cirrus-total-flight-hours-instructor
+      [instructorHours]="instructorHours"
+      [studentHours]="studentHours"
+    ></cirrus-total-flight-hours-instructor>
+  </div>
+</ng-container>

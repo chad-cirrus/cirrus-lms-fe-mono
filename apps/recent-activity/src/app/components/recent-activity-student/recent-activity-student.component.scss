@@ -1,0 +1,129 @@
+@import 'apps/recent-activity/src/base-scss/import';
+
+cirrus-recent-activity-student {
+  padding: 30px 0;
+
+  @include breakpoint(tablet) {
+    padding: 50px 0;
+  }
+}
+
+.recent-activity-welcome-heading {
+  display: flex;
+  flex-direction: column;
+
+  p {
+    max-width: 635px;
+    color: $gray6;
+    margin: 15px 0 30px;
+  }
+
+  .secondary-btn-black {
+    display: inline-block;
+  }
+
+  .toggle-container {
+    cursor: pointer;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 194px;
+    height: 35px;
+    border: 1px solid;
+    border-radius: 60px;
+    border-color: $white;
+
+    margin-top: 40px;
+    margin-bottom: 40px;
+
+    .chevron {
+      width: 18px;
+      height: 7px;
+    }
+
+    @include breakpoint(mobile) {
+      width: 171px;
+
+      .chevron {
+        width: 20px;
+        height: 7px;
+      }
+    }
+  }
+
+  @media (min-width: 715px) {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    p {
+      margin: 15px 30px 30px 0;
+    }
+  }
+}
+
+.cirrus-courses-in-progress-wrapper {
+  width: 100%;
+}
+
+.notifications-achievements-wrapper {
+  display: flex;
+  flex-direction: column;
+  margin-top: 90px;
+  width: 100%;
+
+  @include breakpoint(mobile) {
+    margin-top: 110px;
+  }
+
+  @include breakpoint(tablet) {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+.notifications-wrapper,
+.achievements-wrapper {
+  width: 100%;
+  @include breakpoint(tablet) {
+    width: 48%;
+  }
+}
+
+.achievements-wrapper {
+  margin-top: 90px;
+
+  @include breakpoint(mobile) {
+    margin-top: 110px;
+  }
+
+  @include breakpoint(tablet) {
+    margin-top: 0;
+  }
+}
+
+.overall-progress-wrapper {
+  margin-top: 90px;
+  width: 100%;
+
+  @include breakpoint(mobile) {
+    margin-top: 110px;
+  }
+}
+
+.search-input-container {
+  margin-top: 29px;
+
+  @include breakpoint(mobile) {
+    margin-top: 18px;
+  }
+
+  @include breakpoint(tablet) {
+    margin-top: 28px;
+  }
+  @include breakpoint(desktop) {
+    .input {
+      max-width: 522px;
+    }
+  }
+}

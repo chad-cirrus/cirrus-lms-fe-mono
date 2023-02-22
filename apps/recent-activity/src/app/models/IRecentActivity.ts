@@ -17,8 +17,14 @@ export interface IacraStat {
 
 export interface OverallProgress {
   logbook_stats: LogbookStat[];
+  flight_hours: FlightHours[];
   course_work_stats: CourseWorkStat[];
   iacra_stats: IacraStat[];
+}
+
+export interface FlightHours {
+  type: string;
+  completed: number;
 }
 
 export interface Certificate {
@@ -50,6 +56,7 @@ export const initialRecentActivity: IRecentActivity = {
     logbook_stats: [],
     course_work_stats: [],
     iacra_stats: [],
+    flight_hours: [],
   },
   courses: [],
   achievements: {

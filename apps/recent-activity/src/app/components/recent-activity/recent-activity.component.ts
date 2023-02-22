@@ -1,125 +1,80 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { filter, flatMap, map, mergeMap, switchMap, tap } from 'rxjs/operators';
-import { RecentActivityService } from '../../services/recent-activity.service';
-import { selectCirrusUser } from '../../store/selectors/cirrus-user.selector';
-import { AppState } from '../../store/reducers';
-import { Store } from '@ngrx/store';
-import { combineLatest, Observable, Subject } from 'rxjs';
-import { totalFlightHoursString } from '../../helpers/totalFlightHoursString';
+import {
+  AfterContentInit,
+  AfterViewInit,
+  Component,
+  Injector,
+  OnInit,
+} from '@angular/core';
 
-import { MatSidenav } from '@angular/material/sidenav';
-import { SidenavHeaderService } from '@cirrus/sidenav-header';
-import { ICoursesForRecentActivity, ISearchInputData } from '@cirrus/models';
-import { IRecentActivityNotifications } from '../../models/IRecentActivityNotifications';
-import { PROGRESS_STATUS } from '@cirrus/models';
-import { FormControl } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ICirrusUser } from '@cirrus/models';
+import { Store } from '@ngrx/store';
+import { Observable, Subject } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
+import { FlightHours } from '../../models/IRecentActivity';
+import { RecentActivityService } from '../../services/recent-activity.service';
+import { AppState } from '../../store/reducers';
+import { selectCirrusUser } from '../../store/selectors/cirrus-user.selector';
+import { selectScreenSize } from '../../store/selectors/view.selector';
 
 @Component({
   selector: 'cirrus-recent-activity',
   templateUrl: './recent-activity.component.html',
   styleUrls: ['./recent-activity.component.scss'],
 })
-export class RecentActivityComponent implements OnInit {
-  @ViewChild('drawer') drawer!: MatSidenav;
-
-  events: string[] = [];
-  opened!: boolean;
-  courseInputVal = new FormControl('');
-
-  private _filteredTextSubject: Subject<string> = new Subject();
-  filteredText$: Observable<string> = this._filteredTextSubject.asObservable();
-
-  private _courseInputSubject: Subject<string> = new Subject();
-  courseInput$: Observable<string> = this._courseInputSubject.asObservable();
+export class RecentActivityComponent implements AfterViewInit {
+  user$ = this.store.select(selectCirrusUser);
+  private _displaySubject = new Subject();
+  displayStudentOrInstructorView$ = this._displaySubject.asObservable();
 
   recentActivityNotifications$ =
     this.recentActivityService.recentActivityNotifications$;
 
-  courses$ = this.recentActivityNotifications$.pipe(
-    map(
-      recentActivityNotifications =>
-        recentActivityNotifications.recentActivity.courses
-    )
-  );
-
-  filteredCourses$: Observable<ISearchInputData[]> = combineLatest([
-    this.filteredText$,
-    this.courses$,
-  ]).pipe(
-    map(([input, courses]) => {
-      if (!input) {
-        return;
-      }
-      return courses.filter(course =>
-        course.name.toLowerCase().includes(input.toLowerCase())
-      );
-    }),
-    map(courses => {
-      if (!courses) {
-        return [];
-      }
-      return courses.map(course => {
-        return {
-          name: course.title,
-          status: course.status,
-          courseId: course.id,
-        };
-      });
-    })
-  );
-
-  inProgressCourses$: Observable<ICoursesForRecentActivity[]> =
-    this.recentActivityNotifications$.pipe(
-      map((resp: IRecentActivityNotifications) =>
-        resp.recentActivity.courses.filter(
-          (course: ICoursesForRecentActivity) =>
-            course.status === PROGRESS_STATUS.in_progress
-        )
-      )
-    );
-
-  user$ = this.store.select(selectCirrusUser);
-  flightHoursString$: Observable<string> =
+  flightHoursString$: Observable<FlightHours[]> =
     this.recentActivityNotifications$.pipe(
       map(
         activityNotifications =>
-          activityNotifications.recentActivity.overall_progress.logbook_stats
-      ),
-      map(stats =>
-        stats[0] !== undefined ? Math.round(+stats[0].completed) : 0
-      ),
-      map(hoursAsNumber => totalFlightHoursString(hoursAsNumber))
+          activityNotifications.recentActivity.overall_progress.flight_hours
+      )
     );
 
+  flightHoursStringInstructor$: Observable<number> =
+    this.flightHoursString$.pipe(
+      map(arr => {
+        const ifh = arr.filter(a => a.type === 'instructor_flight_hours');
+        if (ifh[0]?.completed) {
+          return Math.floor(ifh[0].completed);
+        }
+        return 0;
+      })
+    );
+  flightHoursStringStudent$: Observable<number> = this.flightHoursString$.pipe(
+    map(arr => {
+      const ifh = arr.filter(a => a.type === 'student_flight_hours');
+
+      if (ifh[0]?.completed) {
+        return Math.floor(ifh[0].completed);
+      }
+      return 0;
+    })
+  );
+
   constructor(
-    private recentActivityService: RecentActivityService,
     private store: Store<AppState>,
-    private sidenavHeaderService: SidenavHeaderService,
-    private router: Router
-  ) { }
+    private recentActivityService: RecentActivityService
+  ) {}
 
-  ngOnInit() {
-    this.recentActivityService.getRecentActivityAndNotifications();
+  ngAfterViewInit() {
+    const cirrusUser = JSON.parse(
+      <string>localStorage.getItem('cirrus-user')
+    ) as ICirrusUser;
 
-    this.courseInputVal.valueChanges
-      .pipe(
-        tap(input => {
-          this._courseInputSubject.next(input);
-        })
-      )
-      .subscribe();
+    const path = cirrusUser.role === 'instructor' ? 'instructor' : 'student';
+    setTimeout(() => {
+      this._displaySubject.next(path);
+    }, 0);
   }
 
-  filterText(val: string) {
-    this._filteredTextSubject.next(val);
-  }
-
-  viewAllNotifications() {
-    this.sidenavHeaderService.setShowNotifications(true);
-  }
-
-  emitNavigation($event: ISearchInputData) {
-    this.router.navigate(['courses', $event.courseId]);
+  toggleView(e: any) {
+    this._displaySubject.next(e);
   }
 }

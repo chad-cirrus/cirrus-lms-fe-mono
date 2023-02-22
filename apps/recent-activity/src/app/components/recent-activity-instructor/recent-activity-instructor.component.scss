@@ -1,0 +1,47 @@
+@import 'apps/recent-activity/src/base-scss/import';
+
+cirrus-recent-activity-instructer {
+  padding: 18px 0;
+
+  @include breakpoint(mobile) {
+    padding: 29px 0;
+  }
+
+  @include breakpoint(tablet) {
+    padding: 50px 0;
+  }
+}
+
+.recent-activity-welcome-heading {
+  display: flex;
+  flex-direction: column;
+
+  p {
+    max-width: 635px;
+    color: $gray6;
+    margin: 15px 0 30px;
+  }
+
+  .secondary-btn-black {
+    display: inline-block;
+  }
+
+  @include breakpoint(tablet) {
+    .welcome-toggle-container {
+      display: flex;
+      align-items: center;
+    }
+    cirrus-toggle-instructor-student {
+      margin-left: 11px;
+    }
+  }
+
+  @include breakpoint(mobile) {
+    flex-direction: row;
+    justify-content: space-between;
+
+    p {
+      margin: 15px 30px 30px 0;
+    }
+  }
+}

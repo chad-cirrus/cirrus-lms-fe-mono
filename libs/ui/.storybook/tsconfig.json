@@ -4,5 +4,5 @@
     "emitDecoratorMetadata": true
   },
   "exclude": ["../**/*.spec.ts"],
-  "include": ["../src/**/*", "*.js"]
+  "include": ["../src/**/*", "*.js", "../../../apps/recent-activity/src/app/directives/clickoutside.directive.ts", "../../../apps/recent-activity/src/app/directives/clickoutside.directive.spec.ts"]
 }

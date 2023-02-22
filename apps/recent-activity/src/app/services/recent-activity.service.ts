@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, forkJoin, Observable } from 'rxjs';
+import { BehaviorSubject, forkJoin, Observable, Subject } from 'rxjs';
 import { environment } from '../../environments/environment';
 import {
   initialRecentActivity,
@@ -26,6 +26,9 @@ export class RecentActivityService {
     });
   recentActivityNotifications$ =
     this._recentActivityNotifications.asObservable();
+
+  displayComponentSubject: Subject<string> = new Subject();
+  display$: Observable<string> = this.displayComponentSubject.asObservable();
 
   constructor(private http: HttpClient) {}
   getRecentActivity(): Observable<IRecentActivity> {

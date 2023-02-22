@@ -1,0 +1,21 @@
+<span cirrusClickOutside (clickOutside)="dismissPanel()">
+  <div
+    class="toggle-container"
+    *ngIf="view; else switch"
+    (click)="togglePanel($event)"
+  >
+    <h5>{{ activeName }} View</h5>
+    <img
+      class="chevron"
+      [src]="'recent-activity/images/svg/down-chevron.svg'"
+    />
+  </div>
+  <ng-template #switch>
+    <div class="panel-container">
+      <div class="top-view" (click)="dismissPanel()">{{ activeName }} View</div>
+      <div class="bottom-view" (click)="navigate()">
+        {{ inactiveName }} View
+      </div>
+    </div>
+  </ng-template>
+</span>

@@ -77,7 +77,6 @@ import { FormatFilterPipe } from './format-filter.pipe';
 
 import { HoursLandingTypeToTextPipe } from './helpers/HoursLandingTypeToText.pipe';
 import { HoursLandingTypeToIconPipe } from './helpers/HoursLandingTypeToIcon.pipe';
-import { ClickOutsideDirective } from './clickoutside.directive';
 import { BluePopUpComponent } from './blue-pop-up/blue-pop-up.component';
 import { SearchInputModule } from '@cirrus/search-input';
 
@@ -153,7 +152,6 @@ import { SearchInputModule } from '@cirrus/search-input';
     HoursLandingTypeToIconPipe,
     FilterComponent,
     FormatFilterPipe,
-    ClickOutsideDirective,
     BluePopUpComponent,
   ],
   exports: [
@@ -208,7 +206,6 @@ import { SearchInputModule } from '@cirrus/search-input';
     HoursLandingTypeToIconPipe,
     FilterComponent,
     FormatFilterPipe,
-    ClickOutsideDirective,
     BluePopUpComponent,
   ],
   providers: [

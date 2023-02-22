@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { environment } from '../environments/environment';
 
 import { AppComponent } from './app.component';
+import { RecentActivityStudentComponent } from './components/recent-activity-student/recent-activity-student.component';
 import { RecentActivityComponent } from './components/recent-activity/recent-activity.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthHttpInterceptor } from './interceptors/AuthHttpInterceptor';
@@ -55,18 +56,24 @@ import { FormatCourseworkTypePipe } from './components/overall-progress/coursewo
 import { FormatIacraTypePipe } from './components/overall-progress/iacra/format-iacra-type.pipe';
 import { ImageFormatterPipe } from './image-formatter.pipe';
 import { HttpErrorInterceptor } from './interceptors/http-error.interceptor';
+
 import {
   SidenavHeaderModule,
   SidenavHeaderService,
 } from '@cirrus/sidenav-header';
+import { ClickOutsideDirective } from './directives/clickoutside.directive';
 
 import { SearchInputModule } from '@cirrus/search-input';
 import { BadgeModule } from '@cirrus/badge';
+import { RecentActivityInstructorComponent } from './components/recent-activity-instructor/recent-activity-instructor.component';
+import { TotalFlightHoursInstructorComponent } from './components/recent-activity/total-flight-hours-instructor/total-flight-hours-instructor.component';
+import { ToggleInstructorStudentComponent } from './components/toggle-instructor-student/toggle-instructor-student.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     RecentActivityComponent,
+    RecentActivityStudentComponent,
     CoursesInProgressComponent,
     AchievementsComponent,
     OverallProgressComponent,
@@ -87,6 +94,10 @@ import { BadgeModule } from '@cirrus/badge';
     FormatCourseworkTypePipe,
     FormatIacraTypePipe,
     ImageFormatterPipe,
+    RecentActivityInstructorComponent,
+    TotalFlightHoursInstructorComponent,
+    ClickOutsideDirective,
+    ToggleInstructorStudentComponent,
   ],
   imports: [
     CommonModule,
@@ -113,7 +124,6 @@ import { BadgeModule } from '@cirrus/badge';
     SidenavHeaderModule,
     SearchInputModule,
     BadgeModule,
-
   ],
   providers: [
     {
@@ -138,6 +148,7 @@ import { BadgeModule } from '@cirrus/badge';
   bootstrap: [AppComponent],
   exports: [
     RecentActivityComponent,
+    RecentActivityStudentComponent,
     CoursesInProgressComponent,
     AchievementsComponent,
     OverallProgressComponent,
@@ -151,6 +162,8 @@ import { BadgeModule } from '@cirrus/badge';
     FormatCourseworkTypePipe,
     FormatIacraTypePipe,
     ImageFormatterPipe,
+    TotalFlightHoursInstructorComponent,
+    ClickOutsideDirective,
   ],
 })
 export class AppModule {}

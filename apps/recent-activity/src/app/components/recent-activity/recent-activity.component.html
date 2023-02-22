@@ -1,83 +1,24 @@
-<div class="recent-activity-outer-wrapper">
-  <ng-container
-    *ngIf="
-      recentActivityNotifications$ | async as recentActivityNotifications;
-      else noRa
-    "
-  >
-    <div class="recent-activity-welcome-heading content-wrapper">
-      <div class="welcome-message">
-        <h1 class="heading-3">
-          Welcome back, {{ (user$ | async)?.firstname }}
-        </h1>
-        <p>
-          Thank you for being an integral part of our “Early Access” Cirrus
-          Approach experience. Your participation is important to us, and any
-          feedback you provide will help to enhance the learning experience for
-          all. Please feel free to share as often as you like.
-        </p>
-        <a
-          class="secondary-btn-black"
-          href="https://cirrusaircraft.formstack.com/forms/lms_ppl_early_access_feedback"
-          target="_blank"
-        >
-          Send Feedback
-        </a>
-      </div>
-      <cirrus-total-flight-hours
-        [hours]="(flightHoursString$ | async) || '0000'"
-      ></cirrus-total-flight-hours>
-    </div>
-    <div
-      class="cirrus-courses-in-progress-wrapper"
-      *ngIf="inProgressCourses$ | async as inProgressCourses"
-    >
-      <cirrus-courses-in-progress
-        [inProgressCourses]="inProgressCourses"
-      ></cirrus-courses-in-progress>
-    </div>
+<!-- <ng-container *ngComponentOutlet="currentComponent$ | async"></ng-container> -->
 
-    <div
-      class="search-input-container content-wrapper"
-      *ngIf="recentActivityNotifications.recentActivity.courses.length"
-    >
-      <div class="input">
-        <cirrus-search-input
-          (textOutput)="filterText($event)"
-          [list]="filteredCourses$ | async"
-          title="Search My Courses"
-          (emitSelection)="emitNavigation($event)"
-        ></cirrus-search-input>
-      </div>
-    </div>
+<div
+  *ngIf="
+    (displayStudentOrInstructorView$ | async) === 'instructor';
+    else student
+  "
+>
+  <cirrus-recent-activity-instructor
+    (toggleViewEmit)="toggleView($event)"
+    [user]="user$ | async"
+    [instructorHours]="flightHoursStringInstructor$ | async"
+    [studentHours]="flightHoursStringStudent$ | async"
+  ></cirrus-recent-activity-instructor>
 
-    <cirrus-overall-progress
-      class="overall-progress-wrapper"
-      [overallProgress]="
-        recentActivityNotifications?.recentActivity?.overall_progress!
-      "
-    >
-    </cirrus-overall-progress>
-
-    <div class="notifications-achievements-wrapper content-wrapper">
-      <cirrus-notifications-section
-        class="notifications-wrapper"
-        [notifications]="recentActivityNotifications.notifications"
-        (viewAllNotifications)="viewAllNotifications()"
-      ></cirrus-notifications-section>
-
-      <cirrus-achievements
-        class="achievements-wrapper"
-        [achievements]="
-          recentActivityNotifications?.recentActivity?.achievements!
-        "
-      ></cirrus-achievements>
-    </div>
-  </ng-container>
 </div>
-
-<ng-template #noRa>
-  <div class="recent-activity-welcome-heading content-wrapper">
-    <h1 class="heading-3">Welcome back, {{ (user$ | async)?.firstname }}</h1>
-  </div>
+<ng-template #student>
+  <cirrus-recent-activity-student
+    (toggleViewEmit)="toggleView($event)"
+    [user]="user$ | async"
+    [instructorHours]="flightHoursStringInstructor$ | async"
+    [studentHours]="flightHoursStringStudent$ | async"
+  ></cirrus-recent-activity-student>
 </ng-template>

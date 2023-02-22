@@ -7,5 +7,5 @@ import { Component, Input, ViewEncapsulation } from '@angular/core';
   encapsulation: ViewEncapsulation.Emulated,
 })
 export class TotalFlightHoursComponent {
-  @Input() hours = '0000';
+  @Input() hours!: number | null;
 }

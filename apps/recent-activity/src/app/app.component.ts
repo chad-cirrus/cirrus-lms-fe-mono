@@ -33,8 +33,7 @@ export class AppComponent
   implements OnInit, OnDestroy
 {
   cirrusUser$ = this.store.select(selectCirrusUser);
-  isScreenSmall$: Observable<boolean> = this.store
-    .select(selectIsScreenSmall);
+  isScreenSmall$: Observable<boolean> = this.store.select(selectIsScreenSmall);
 
   project = environment.project;
 

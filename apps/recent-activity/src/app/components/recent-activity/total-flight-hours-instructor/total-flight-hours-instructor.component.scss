@@ -1,0 +1,163 @@
+@import 'apps/recent-activity/src/base-scss/import';
+
+.flight-hours-wrapper {
+  padding: 10px 13px;
+  background: linear-gradient(
+    90.3deg,
+    #818181 7.48%,
+    #d2d2d2 29.15%,
+    #797878 46.69%,
+    #d0d0d0 77.79%,
+    #616060 99.94%
+  );
+  border-radius: 3px;
+  width: 100%;
+
+  .body-copy-xsmall {
+    color: $gray6;
+  }
+
+  .instructor-container {
+    display: flex;
+
+    @include breakpoint(mobile) {
+      flex-direction: row-reverse;
+    }
+  }
+
+  .image-container {
+    @include breakpoint(mobile) {
+      align-self: flex-end;
+    }
+  }
+
+  .hours-header-container {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+
+    @include breakpoint(mobile) {
+      flex-direction: column-reverse;
+    }
+  }
+
+  .flight-hours-label {
+    color: $gray1;
+    font-size: 0.8125rem;
+    line-height: 1.4;
+    letter-spacing: 0.03em;
+    margin: 0 16px 0 11px;
+  }
+
+  .flight-hours-inner-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .flight-hours-inner-wrapper-instructor {
+    @extend .flight-hours-inner-wrapper;
+    margin: 5px 0 0 4px;
+
+    @include breakpoint(mobile) {
+      margin-left: 0;
+    }
+  }
+
+  .flight-number-container {
+    display: flex;
+    flex: 1;
+
+    @include breakpoint(mobile) {
+      flex-direction: column;
+      flex: 70%;
+    }
+  }
+
+  .hours-wrapper {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .hours-text-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 38px;
+    flex-grow: 1;
+    background: $gray1;
+    border-radius: 5px;
+    padding: 0 5px;
+    text-align: center;
+  }
+
+  .hours {
+    color: $white;
+    font-size: 1.875rem;
+    letter-spacing: 0.34em;
+    margin-left: 0.34em;
+    text-align: center;
+    font-size: clamp(1.25rem, -3.75rem + 25vw, 1.875rem);
+  }
+
+  .image {
+    width: 38px;
+    height: 39px;
+    @include breakpoint(mobile) {
+      height: 45px;
+      width: 47px;
+    }
+  }
+
+  @include breakpoint(mobile) {
+    width: 208px;
+    margin: 0 0 0 30px;
+    padding: 8px;
+    .flight-hours-inner-wrapper {
+      flex-wrap: wrap;
+    }
+    .flight-hours-label {
+      order: 1;
+      width: 100%;
+      text-align: center;
+      margin-bottom: 2px;
+    }
+    .hours-text-wrapper {
+      width: 80%;
+      order: 2;
+    }
+
+    .hours-text-wrapper-instructor {
+      width: 100%;
+
+      @include breakpoint(mobile) {
+        width: 94%;
+        justify-content: flex-start;
+      }
+    }
+
+    .hours img {
+      order: 3;
+      width: calc(20% - 5px);
+      margin-left: 5px;
+    }
+  }
+
+  @include breakpoint(tablet) {
+    width: 220px;
+  }
+
+  .hours-instructor-student {
+    font-size: 0.875rem;
+  }
+
+  .hours-text-wrapper-instructor {
+    @extend .hours-text-wrapper;
+    height: 21px;
+    margin: 0 6px;
+
+    @include breakpoint(mobile) {
+      margin-bottom: 3px;
+    }
+  }
+}
