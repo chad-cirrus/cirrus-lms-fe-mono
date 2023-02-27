@@ -1,12 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, forkJoin, Observable, Subject } from 'rxjs';
+import { BehaviorSubject, forkJoin, Observable, of, Subject } from 'rxjs';
 import { environment } from '../../environments/environment';
 import {
   initialRecentActivity,
   IRecentActivity,
 } from '../models/IRecentActivity';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { IRecentActivityNotifications } from '../models/IRecentActivityNotifications';
 import { INotification } from '@cirrus/models';
 
@@ -24,8 +24,18 @@ export class RecentActivityService {
       recentActivity: initialRecentActivity,
       notifications: [],
     });
+
+  private _recentActivityNotificationsInstructors =
+    new BehaviorSubject<IRecentActivityNotifications>({
+      recentActivity: initialRecentActivity,
+      notifications: [],
+    });
+
   recentActivityNotifications$ =
     this._recentActivityNotifications.asObservable();
+
+  recentActivityNotificationsInstructors$ =
+    this._recentActivityNotificationsInstructors.asObservable();
 
   displayComponentSubject: Subject<string> = new Subject();
   display$: Observable<string> = this.displayComponentSubject.asObservable();
@@ -50,5 +60,18 @@ export class RecentActivityService {
         }))
       )
       .subscribe(response => this._recentActivityNotifications.next(response));
+  }
+
+  getRecentActivityAndNotificationsInstructor(): void {
+    forkJoin([of(initialRecentActivity), this.getNotifications()])
+      .pipe(
+        map(([recentActivity, notifications]) => ({
+          recentActivity,
+          notifications,
+        }))
+      )
+      .subscribe(response =>
+        this._recentActivityNotificationsInstructors.next(response)
+      );
   }
 }

@@ -1,7 +1,6 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Observable } from 'rxjs';
-import { filter, map, tap } from 'rxjs/operators';
-import { FlightHours } from '../../models/IRecentActivity';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { SidenavHeaderService } from '@cirrus/sidenav-header';
+import { tap } from 'rxjs/operators';
 import { RecentActivityService } from '../../services/recent-activity.service';
 import { UserState } from '../../store/reducers/cirrus-user.reducer';
 
@@ -10,16 +9,27 @@ import { UserState } from '../../store/reducers/cirrus-user.reducer';
   templateUrl: './recent-activity-instructor.component.html',
   styleUrls: ['./recent-activity-instructor.component.scss'],
 })
-export class RecentActivityInstructorComponent {
+export class RecentActivityInstructorComponent implements OnInit {
   @Output() toggleViewEmit = new EventEmitter();
   @Input() user!: UserState | null;
   @Input() instructorHours!: number | null;
   @Input() studentHours!: number | null;
 
-  recentActivityNotifications$ =
-    this.recentActivityService.recentActivityNotifications$;
+  recentActivityNotificationsInstructors$ =
+    this.recentActivityService.recentActivityNotificationsInstructors$;
 
-  constructor(private recentActivityService: RecentActivityService) {}
+  constructor(
+    private recentActivityService: RecentActivityService,
+    private sidenavHeaderService: SidenavHeaderService
+  ) {}
+
+  ngOnInit(): void {
+    this.recentActivityService.getRecentActivityAndNotificationsInstructor();
+  }
+
+  viewAllNotifications() {
+    this.sidenavHeaderService.setShowNotifications(true);
+  }
 
   toggleView() {
     this.toggleViewEmit.emit('student');

@@ -45,3 +45,27 @@ cirrus-recent-activity-instructer {
     }
   }
 }
+
+.notifications-student-task-wrapper {
+  display: flex;
+  flex-direction: column;
+  margin-top: 90px;
+  width: 100%;
+
+  @include breakpoint(mobile) {
+    margin-top: 110px;
+  }
+
+  @include breakpoint(tablet) {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+.notifications-wrapper,
+.student-task-wrapper {
+  width: 100%;
+  @include breakpoint(tablet) {
+    width: 48%;
+  }
+}

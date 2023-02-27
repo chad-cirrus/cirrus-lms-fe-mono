@@ -1,5 +1,8 @@
 <ng-container
-  *ngIf="recentActivityNotifications$ | async as recentActivityNotifications"
+  *ngIf="
+    recentActivityNotificationsInstructors$
+      | async as recentActivityNotificationsInstructor
+  "
 >
   <div class="recent-activity-welcome-heading content-wrapper">
     <div class="welcome-toggle-container">
@@ -14,5 +17,17 @@
       [instructorHours]="instructorHours"
       [studentHours]="studentHours"
     ></cirrus-total-flight-hours-instructor>
+  </div>
+
+  <div class="notifications-student-task-wrapper content-wrapper">
+    <cirrus-notifications-section
+      class="notifications-wrapper"
+      [notifications]="recentActivityNotificationsInstructor.notifications"
+      (viewAllNotifications)="viewAllNotifications()"
+    ></cirrus-notifications-section>
+
+    <cirrus-student-task-performance
+      class="student-task-wrapper"
+    ></cirrus-student-task-performance>
   </div>
 </ng-container>

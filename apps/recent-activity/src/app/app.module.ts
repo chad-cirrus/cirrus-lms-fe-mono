@@ -68,6 +68,7 @@ import { BadgeModule } from '@cirrus/badge';
 import { RecentActivityInstructorComponent } from './components/recent-activity-instructor/recent-activity-instructor.component';
 import { TotalFlightHoursInstructorComponent } from './components/recent-activity/total-flight-hours-instructor/total-flight-hours-instructor.component';
 import { ToggleInstructorStudentComponent } from './components/toggle-instructor-student/toggle-instructor-student.component';
+import { StudentTaskPerformanceComponent } from './components/student-task-performance/student-task-performance.component';
 
 @NgModule({
   declarations: [
@@ -98,6 +99,7 @@ import { ToggleInstructorStudentComponent } from './components/toggle-instructor
     TotalFlightHoursInstructorComponent,
     ClickOutsideDirective,
     ToggleInstructorStudentComponent,
+    StudentTaskPerformanceComponent,
   ],
   imports: [
     CommonModule,
