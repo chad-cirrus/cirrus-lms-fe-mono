@@ -51,9 +51,13 @@ export interface Achievement {
   achieved_on: string;
 }
 
+export interface RecentStudents {
+  recent_students: IRecentStudent[];
+}
+
 export interface IRecentActivityInstructors {
   overall_progress: OverallProgress;
-  recent_instructor_students: IRecentStudent[];
+  instructor_students: RecentStudents;
   students: any[];
   student_task_performance: StudentTaskPerformance[];
   flight_instruction_hours: FlightInstructionHour[];
@@ -69,7 +73,7 @@ export const initialRecentActivityInstructors: IRecentActivityInstructors = {
   overall_progress: {
     flight_hours: [],
   },
-  recent_instructor_students: [],
+  instructor_students: { recent_students: [] },
   students: [],
   student_task_performance: [
     {
