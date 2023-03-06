@@ -16,7 +16,9 @@ export class RecentActivityInstructorComponent implements OnInit {
   @Input() studentHours!: number | null;
 
   recentActivityNotificationsInstructors$ =
-    this.recentActivityService.recentActivityNotificationsInstructors$;
+    this.recentActivityService.recentActivityNotificationsInstructors$.pipe(
+      tap(a => console.log('receent', a))
+    );
 
   constructor(
     private recentActivityService: RecentActivityService,

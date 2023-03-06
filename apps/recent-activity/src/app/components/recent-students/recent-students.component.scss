@@ -1,0 +1,125 @@
+@import 'apps/recent-activity/src/base-scss/import';
+
+.recent-students-header-container {
+  padding-top: 48px;
+  padding-bottom: 26px;
+
+  @include breakpoint(mobile) {
+    padding-top: 77px;
+  }
+
+  @include breakpoint(tablet) {
+    padding-bottom: 36px;
+    padding-top: 36px;
+  }
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  display: none;
+
+  @include breakpoint(mobile) {
+    color: $white;
+    display: block;
+    z-index: 3;
+  }
+  &.swiper-button-disabled {
+    display: none;
+  }
+}
+
+.swiper-disabled {
+  .swiper-slide {
+    width: 100%;
+    @include breakpoint(tablet) {
+      width: 422px;
+    }
+  }
+}
+
+.recent-students-empty-wrapper {
+  background: $gray1;
+  border-radius: 5px;
+  padding: 85px 15px;
+
+  @include breakpoint(mobile) {
+    padding: 35px 5px;
+  }
+}
+
+.swiper-slide-content {
+  display: flex;
+  flex-direction: column;
+
+  .primary-btn {
+    margin-top: 20px;
+  }
+
+  @include breakpoint(mobile) {
+    align-items: start;
+    flex-direction: row;
+    justify-content: space-between;
+
+    .course-slide-progress-wrapper {
+      flex: 1 1;
+    }
+
+    .primary-btn {
+      margin-top: 0;
+    }
+  }
+}
+
+.recent-student-outer-wrapper {
+  position: relative;
+}
+
+.recent-students-empty-content {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  max-width: 350px;
+  text-align: center;
+
+  .primary-btn {
+    margin-top: 2rem;
+  }
+}
+
+.recent-student-card {
+  display: flex;
+  min-width: 304px;
+  padding: 30px;
+  background-color: $gray1;
+  border-radius: 5px;
+
+  @include breakpoint(mobile) {
+    min-width: 325px;
+    padding: 25px;
+  }
+}
+
+.name-connection-container {
+  padding-left: 17px;
+  align-self: center;
+
+  .name {
+    font-size: 1.188rem;
+
+    @include breakpoint(mobile) {
+      font-size: 1rem;
+    }
+  }
+
+  .connection-status {
+    font-size: 0.938rem;
+    @include breakpoint(mobile) {
+      font-size: 0.875rem;
+    }
+  }
+}
+
+.body-copy-small {
+  color: $gray4;
+}

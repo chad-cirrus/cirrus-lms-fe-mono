@@ -69,6 +69,9 @@ import { RecentActivityInstructorComponent } from './components/recent-activity-
 import { TotalFlightHoursInstructorComponent } from './components/recent-activity/total-flight-hours-instructor/total-flight-hours-instructor.component';
 import { ToggleInstructorStudentComponent } from './components/toggle-instructor-student/toggle-instructor-student.component';
 import { StudentTaskPerformanceComponent } from './components/student-task-performance/student-task-performance.component';
+import { RecentStudentsComponent } from './components/recent-students/recent-students.component';
+import { ProfileInitialsComponent } from './components/profile-initials/profile-initials.component';
+import { DisplayInitialsPipe } from './components/profile-initials/display-initials.pipe';
 
 @NgModule({
   declarations: [
@@ -100,6 +103,9 @@ import { StudentTaskPerformanceComponent } from './components/student-task-perfo
     ClickOutsideDirective,
     ToggleInstructorStudentComponent,
     StudentTaskPerformanceComponent,
+    RecentStudentsComponent,
+    ProfileInitialsComponent,
+    DisplayInitialsPipe,
   ],
   imports: [
     CommonModule,

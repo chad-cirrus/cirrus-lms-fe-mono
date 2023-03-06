@@ -9,6 +9,11 @@ import {
 import { map, tap } from 'rxjs/operators';
 import { IRecentActivityNotifications } from '../models/IRecentActivityNotifications';
 import { INotification } from '@cirrus/models';
+import {
+  initialRecentActivityInstructors,
+  IRecentActivityInstructors,
+  IRecentActivityInstructorsNotifications,
+} from '../models/IRecentActivityInstructors';
 
 export interface IRecentActivityTotal {
   notifications: INotification[];
@@ -26,8 +31,8 @@ export class RecentActivityService {
     });
 
   private _recentActivityNotificationsInstructors =
-    new BehaviorSubject<IRecentActivityNotifications>({
-      recentActivity: initialRecentActivity,
+    new BehaviorSubject<IRecentActivityInstructorsNotifications>({
+      recentActivity: initialRecentActivityInstructors,
       notifications: [],
     });
 
@@ -44,6 +49,11 @@ export class RecentActivityService {
   getRecentActivity(): Observable<IRecentActivity> {
     const url = `${environment.baseUrl}/api/v4/recent_activity`;
     return this.http.get<IRecentActivity>(url);
+  }
+
+  getRecentActivityInstructor(): Observable<IRecentActivityInstructors> {
+    const url = `${environment.baseUrl}/api/v4/recent_activity/instructor`;
+    return this.http.get<IRecentActivityInstructors>(url);
   }
 
   getNotifications() {
@@ -63,7 +73,7 @@ export class RecentActivityService {
   }
 
   getRecentActivityAndNotificationsInstructor(): void {
-    forkJoin([of(initialRecentActivity), this.getNotifications()])
+    forkJoin([this.getRecentActivityInstructor(), this.getNotifications()])
       .pipe(
         map(([recentActivity, notifications]) => ({
           recentActivity,

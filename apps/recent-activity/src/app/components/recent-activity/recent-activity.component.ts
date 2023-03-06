@@ -14,7 +14,6 @@ import { FlightHours } from '../../models/IRecentActivity';
 import { RecentActivityService } from '../../services/recent-activity.service';
 import { AppState } from '../../store/reducers';
 import { selectCirrusUser } from '../../store/selectors/cirrus-user.selector';
-import { selectScreenSize } from '../../store/selectors/view.selector';
 
 @Component({
   selector: 'cirrus-recent-activity',

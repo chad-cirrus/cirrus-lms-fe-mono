@@ -1,0 +1,59 @@
+<div>
+  <h2 class="heading-3 recent-students-header-container">Recent Students</h2>
+
+  <div>
+    <div
+      *ngIf="recentStudents.length; else noStudents"
+      class="recent-student-outer-wrapper"
+    >
+      <swiper
+        [navigation]="true"
+        [slidesPerView]="'auto'"
+        [spaceBetween]="15"
+        [centeredSlides]="false"
+        class="my-swiper"
+        [ngClass]="recentStudents.length < 2 ? 'swiper-disabled' : ''"
+      >
+        <ng-template
+          swiperSlide
+          *ngFor="let student of recentStudents; index as i"
+        >
+          <div>
+            <div class="swiper-slide-content">
+              <div class="recent-student-progress-wrapper">
+                <div class="recent-student-card">
+                  <div>
+                    <cirrus-profile-initials
+                      [firstName]="student.first_name"
+                      [lastName]="student.last_name"
+                    ></cirrus-profile-initials>
+                  </div>
+                  <div class="name-connection-container">
+                    <h4 class="name">
+                      {{ student.first_name | titlecase }}
+                      {{ student.last_name | titlecase }}
+                    </h4>
+                    <p class="connection-status body-copy-small">
+                      {{ student.connection.status | titlecase }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+      </swiper>
+    </div>
+
+    <ng-template #noStudents>
+      <div class="recent-students-empty-wrapper">
+        <div class="recent-students-empty-content">
+          <p class="body-copy-medium">
+            You have no recent or connected students at this time.
+          </p>
+          <a class="primary-btn" href="/course-catalog">Browse All Students</a>
+        </div>
+      </div>
+    </ng-template>
+  </div>
+</div>

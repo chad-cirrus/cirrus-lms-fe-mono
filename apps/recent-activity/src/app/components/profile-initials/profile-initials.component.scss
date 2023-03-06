@@ -1,0 +1,14 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  font-weight: 500;
+  height: 54px;
+  width: 54px;
+  background: linear-gradient(to bottom, #0088cc 0%, #6a57cb 100%);
+}
+
+.initals {
+  font-size: 1.25rem;
+}

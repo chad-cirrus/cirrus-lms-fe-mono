@@ -19,6 +19,15 @@
     ></cirrus-total-flight-hours-instructor>
   </div>
 
+  <div class="content-wrapper">
+    <cirrus-recent-students
+      [recentStudents]="
+        recentActivityNotificationsInstructor.recentActivity
+          .recent_instructor_students
+      "
+    ></cirrus-recent-students>
+  </div>
+
   <div class="notifications-student-task-wrapper content-wrapper">
     <cirrus-notifications-section
       class="notifications-wrapper"

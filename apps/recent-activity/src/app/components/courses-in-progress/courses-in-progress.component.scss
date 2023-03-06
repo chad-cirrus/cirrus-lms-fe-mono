@@ -10,34 +10,44 @@
 
 .courses-in-progress-outer-wrapper {
   position: relative;
+
+  .swiper-slide {
+    border-radius: 5px;
+    height: 300px;
+    width: 280px;
+    @include breakpoint(mobile) {
+      height: 192px;
+      width: 422px;
+    }
+  }
 }
 
 //.my-swiper {
-  //removing for now until we have more time to figure out issues with swiper to accomplish the desired designs that were provided
-  // &:before,
-  // &:after {
-  //   z-index: 2;
-  //   content: '';
-  //   display: block;
-  //   position: absolute;
-  //   top: 0;
-  //   height: 100%;
-  //   width: 55px;
-  // }
-  // &:before {
-  //   left: 0;
-  //   background: linear-gradient(90deg, #000000 -5%, rgba(31, 31, 31, 0) 100%);
-  // }
-  // &:after {
-  //   right: 0;
-  //   background: linear-gradient(270deg, #000000 -5%, rgba(31, 31, 31, 0) 100%);
-  // }
-  // @include breakpoint(mobile) {
-  //   &:before,
-  //   &:after {
-  //     width: 70px;
-  //   }
-  // }
+//removing for now until we have more time to figure out issues with swiper to accomplish the desired designs that were provided
+// &:before,
+// &:after {
+//   z-index: 2;
+//   content: '';
+//   display: block;
+//   position: absolute;
+//   top: 0;
+//   height: 100%;
+//   width: 55px;
+// }
+// &:before {
+//   left: 0;
+//   background: linear-gradient(90deg, #000000 -5%, rgba(31, 31, 31, 0) 100%);
+// }
+// &:after {
+//   right: 0;
+//   background: linear-gradient(270deg, #000000 -5%, rgba(31, 31, 31, 0) 100%);
+// }
+// @include breakpoint(mobile) {
+//   &:before,
+//   &:after {
+//     width: 70px;
+//   }
+// }
 //}
 
 cirrus-courses-in-progress .heading-3 {
@@ -60,16 +70,6 @@ cirrus-courses-in-progress .heading-3 {
   }
 }
 
-.swiper-slide {
-  border-radius: 5px;
-  height: 300px;
-  width: 280px;
-  @include breakpoint(mobile) {
-    height: 192px;
-    width: 422px;
-  }
-}
-
 .swiper-disabled {
   .swiper-slide {
     width: 100%;
@@ -88,7 +88,12 @@ cirrus-courses-in-progress .heading-3 {
   flex-direction: column;
   height: 300px;
   justify-content: space-between;
-  background-image: linear-gradient(180deg, rgb(0, 0, 0, .35), rgb(0, 0, 0, .65)), var(--urlString);
+  background-image: linear-gradient(
+      180deg,
+      rgb(0, 0, 0, 0.35),
+      rgb(0, 0, 0, 0.65)
+    ),
+    var(--urlString);
   padding: 17px;
   h3.name {
     font-size: 1.1875rem;

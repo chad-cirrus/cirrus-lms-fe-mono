@@ -32,6 +32,20 @@ body {
   }
 }
 
+.recent-student-outer-wrapper {
+  .swiper-slide {
+    width: 304px;
+
+    @include breakpoint(mobile) {
+      width: 325px;
+    }
+  }
+}
+
+:root {
+  --swiper-navigation-size: 32px !important;
+}
+
 .content-wrapper {
   padding: 0 20px;
   max-width: 1300px;
