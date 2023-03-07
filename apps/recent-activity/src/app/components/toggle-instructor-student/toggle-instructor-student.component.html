@@ -11,7 +11,7 @@
     />
   </div>
   <ng-template #switch>
-    <div class="panel-container">
+    <div class="panel-container {{ activeName | lowercase }}">
       <div class="top-view" (click)="dismissPanel()">{{ activeName }} View</div>
       <div class="bottom-view" (click)="navigate()">
         {{ inactiveName }} View
