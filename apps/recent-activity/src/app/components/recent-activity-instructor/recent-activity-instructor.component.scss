@@ -37,12 +37,14 @@ cirrus-recent-activity-instructer {
   }
 
   @include breakpoint(mobile) {
-    flex-direction: row;
-    justify-content: space-between;
-
     p {
       margin: 15px 30px 30px 0;
     }
+  }
+
+  @media (min-width: 715px) {
+    flex-direction: row;
+    justify-content: space-between;
   }
 }
 

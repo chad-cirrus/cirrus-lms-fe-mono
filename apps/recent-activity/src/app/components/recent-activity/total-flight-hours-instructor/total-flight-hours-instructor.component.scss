@@ -12,6 +12,7 @@
   );
   border-radius: 3px;
   width: 100%;
+  margin-top: 30px;
 
   .body-copy-xsmall {
     color: $gray6;
@@ -19,14 +20,10 @@
 
   .instructor-container {
     display: flex;
-
-    @include breakpoint(mobile) {
-      flex-direction: row-reverse;
-    }
   }
 
   .image-container {
-    @include breakpoint(mobile) {
+    @media (min-width: 715px) {
       align-self: flex-end;
     }
   }
@@ -66,9 +63,13 @@
 
   .flight-number-container {
     display: flex;
+    flex-direction: column;
     flex: 1;
 
-    @include breakpoint(mobile) {
+    @media screen and (min-width: 420px) {
+      flex-direction: row;
+    }
+    @media screen and (min-width: 715px) {
       flex-direction: column;
       flex: 70%;
     }
@@ -110,18 +111,18 @@
   }
 
   @include breakpoint(mobile) {
-    width: 208px;
-    margin: 0 0 0 30px;
     padding: 8px;
+
     .flight-hours-inner-wrapper {
       flex-wrap: wrap;
     }
+
     .flight-hours-label {
       order: 1;
       width: 100%;
-      text-align: center;
       margin-bottom: 2px;
     }
+    
     .hours-text-wrapper {
       width: 80%;
       order: 2;
@@ -143,8 +144,17 @@
     }
   }
 
-  @include breakpoint(tablet) {
+  @media screen and (min-width: 715px) {
     width: 220px;
+    margin: 0 0 0 30px;
+
+    .flight-hours-label {
+      text-align: center;
+    }
+
+    .instructor-container {
+      flex-direction: row-reverse;
+    }
   }
 
   .hours-instructor-student {
@@ -154,10 +164,10 @@
   .hours-text-wrapper-instructor {
     @extend .hours-text-wrapper;
     height: 21px;
-    margin: 0 6px;
+    margin: 0 6px 3px;
 
     @include breakpoint(mobile) {
-      margin-bottom: 3px;
+      // margin-bottom: 3px;
     }
   }
 }
