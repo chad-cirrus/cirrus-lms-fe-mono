@@ -18,3 +18,10 @@ export interface HorizontalChartData {
   title: string;
   csvRightColumnTitle: string;
 }
+
+export interface HorizontalChartData {
+  data: any[];
+  chartColors: ChartColors;
+  title: string;
+  csvRightColumnTitle: string;
+}
