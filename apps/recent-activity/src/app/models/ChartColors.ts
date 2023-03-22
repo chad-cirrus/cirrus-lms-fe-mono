@@ -60,4 +60,3 @@ export const FlightInstructionColors = {
     '#122E8F',
   ],
 };
-
