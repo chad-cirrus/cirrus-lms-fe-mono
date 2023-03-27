@@ -76,7 +76,6 @@ import { CirrusHorizontalChartComponent } from './components/horizontal-chart/ho
 import { FlightInstructionHoursComponent } from './components/flight-instruction-hours/flight-instruction-hours.component';
 import { FeatureDirective } from './directives/feature/feature.directive';
 
-
 @NgModule({
   declarations: [
     AppComponent,
