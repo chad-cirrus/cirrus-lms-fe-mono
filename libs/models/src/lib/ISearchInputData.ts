@@ -4,4 +4,5 @@ export interface ISearchInputData {
   stageId?: number;
   lessonId?: number;
   courseId?: number;
+  connection_status?: string;
 }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { FlightLogType, ILessonFlightLog, ITask } from '@cirrus/models';
+import { FlightLogType, ILessonFlightLog, ITask, IAssessment } from '@cirrus/models';
 import { environment } from '../environments/environment';
 import { BehaviorSubject, forkJoin, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -10,13 +10,14 @@ export interface ITasksRequest {
   content_id: number;
   lesson_id: number;
   stage_id: number;
+  course_id: number;
 }
 
 @Injectable({
   providedIn: 'root',
 })
 export class TaskService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   private _tasksAndLogBooks = new BehaviorSubject<
     [ITask[], ILessonFlightLog[]]
@@ -39,10 +40,12 @@ export class TaskService {
   }
 
   getTasks(payload: ITasksRequest) {
-    const { course_attempt_id, content_id, lesson_id, stage_id } = payload;
-    return this.http.get<ITask[]>(
-      `${environment.baseUrl}/api/v4/assessments?course_attempt_id=${course_attempt_id}&content_id=${content_id}&lesson_id=${lesson_id}&stage_id=${stage_id}`
-    );
+    const { content_id, lesson_id, stage_id, course_id } = payload;
+
+  return this.http.get<IAssessment>(
+      `${environment.baseUrl}/api/v4/courses/${course_id}/stages/${stage_id}/lessons/${lesson_id}/contents/${content_id}/assessment`
+    ).pipe(map((response) => response.assessment_tasks.tasklist))
+
   }
 
   getLogbook(payload: ITasksRequest) {

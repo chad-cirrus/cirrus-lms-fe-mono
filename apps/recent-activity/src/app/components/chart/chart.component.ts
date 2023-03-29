@@ -12,6 +12,8 @@ import {
   ApexYAxis,
   ChartComponent,
 } from 'ng-apexcharts';
+import { ChartData } from '../../models/ChartData';
+import { FlightInstructionHour } from '../../models/IRecentActivityInstructors';
 
 type ApexXAxis = {
   type?: 'category' | 'datetime' | 'numeric';
@@ -48,10 +50,11 @@ export class CirrusChartComponent {
   @ViewChild('chart') chart!: ChartComponent;
   public chartOptions!: Partial<ChartOptions>;
 
-  private _data!: any;
+  private _data!: ChartData;
 
   @Input()
-  set data(value: any) {
+  set data(value: ChartData | null) {
+    console.log('valllll', value);
     if (value) {
       this._data = value;
       this.setChartOptions();
@@ -66,8 +69,9 @@ export class CirrusChartComponent {
     this.chartOptions = {
       series: [
         {
-          name: this.data.csvRightColumnTitle,
-          data: this.data.hours.map((a: any) => a.total),
+          name: this.data?.csvRightColumnTitle,
+          data:
+            this.data?.data.map((a: FlightInstructionHour) => a.total) || [],
         },
       ],
       chart: {
@@ -96,7 +100,7 @@ export class CirrusChartComponent {
           },
           export: {
             csv: {
-              filename: this.data.title,
+              filename: this.data?.title,
               columnDelimiter: ',',
               headerCategory: 'Months',
               headerValue: 'Completed',
@@ -105,10 +109,10 @@ export class CirrusChartComponent {
               },
             },
             svg: {
-              filename: this.data.title,
+              filename: this.data?.title,
             },
             png: {
-              filename: this.data.title,
+              filename: this.data?.title,
             },
           },
           autoSelected: 'zoom',
@@ -117,17 +121,15 @@ export class CirrusChartComponent {
 
       fill: {
         type: 'gradient',
+        colors: this.data?.chartColors.gradientFromColors,
         gradient: {
-          shade: 'dark',
           type: 'vertical',
-          shadeIntensity: 1,
-          gradientToColors: this.data.chartColors.gradientToColors,
+          gradientToColors: this.data?.chartColors.gradientToColors,
           opacityFrom: 1,
           opacityTo: 1,
           stops: [0, 100],
         },
       },
-
       plotOptions: {
         bar: {
           columnWidth: '85%',
@@ -151,7 +153,7 @@ export class CirrusChartComponent {
         show: true,
       },
       xaxis: {
-        categories: this.data.hours.map((a: any) => a.month),
+        categories: this.data?.data.map((a: any) => a.month || a.range),
         labels: {
           style: {
             colors: '#E5E5E5',

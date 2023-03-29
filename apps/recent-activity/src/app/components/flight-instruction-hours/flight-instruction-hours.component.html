@@ -1,0 +1,29 @@
+<h2 class="heading-3">Flight Instruction Hours</h2>
+
+<div class="flight-instructor-hours-header-container">
+  <div class="chart-header">
+    <div class="chart-header-body-container">
+      <p class="total-hours">
+        Total hours from {{ displayDateRange }}:
+        <span class="bold">{{ displayTotalHours }}</span>
+      </p>
+      <div class="total-filter-container">
+        <mat-select
+          [(value)]="selected"
+          (valueChange)="filterChanged()"
+          disableOptionCentering
+          panelClass="flight-instructor-hours-filter-panel"
+        >
+          <mat-option [value]="'calendar_year_flight_logs'">1 Year</mat-option>
+          <mat-option [value]="'rolling_calendar_flight_logs'"
+            >Year to Date</mat-option
+          >
+          <mat-option [value]="'weekly_flight_logs'">Last 8 Weeks</mat-option>
+        </mat-select>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="(chartDataObservable$ | async)?.data?.length">
+    <cirrus-chart [data]="chartDataObservable$ | async"></cirrus-chart>
+  </div>
+</div>

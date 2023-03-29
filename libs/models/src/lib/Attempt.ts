@@ -9,8 +9,8 @@ export interface Attempt {
   id: number;
   instructor_name: string;
   lesson_id: number;
-  missed: boolean | null;
-  passed: boolean;
+  failed: boolean | null;
+  success: boolean;
   perfect: boolean | null;
   stage_id: number;
   standards_missed: [];

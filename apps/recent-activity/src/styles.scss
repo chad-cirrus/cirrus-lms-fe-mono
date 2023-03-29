@@ -62,3 +62,7 @@ body {
 .mat-drawer-inner-container::-webkit-scrollbar {
   display: none;
 }
+
+cirrus-horizontal-chart .apexcharts-canvas {
+  margin: 0 auto;
+}

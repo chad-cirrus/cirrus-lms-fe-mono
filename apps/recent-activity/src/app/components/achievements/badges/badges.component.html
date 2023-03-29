@@ -1,6 +1,6 @@
 <div class="badge-container" *ngIf="badges.length > 0; else noBadges">
   <div class="badge-list-item" *ngFor="let badge of badges">
-    <img class="badge-icon" [src]="badge.badge_image" alt="" />
+    <img class="badge-icon" [src]="badge.badge_image" alt="" [ngClass]="{ grey: badge.achieved_on === null }" />
     <div class="badge-item-text">
       <p class="achieved-date body-copy-xsmall" *ngIf="badge.achieved_on">
         Achieved {{ badge.achieved_on }}

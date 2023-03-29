@@ -10,6 +10,7 @@ import { ICirrusUser } from '@cirrus/models';
 import { Store } from '@ngrx/store';
 import { Observable, Subject } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
+import { RecentActivityFacade } from '../../facade.service';
 import { FlightHours } from '../../models/IRecentActivity';
 import { RecentActivityService } from '../../services/recent-activity.service';
 import { AppState } from '../../store/reducers';
@@ -57,9 +58,13 @@ export class RecentActivityComponent implements AfterViewInit {
     })
   );
 
+  isFeatureFlagEnabled$: Observable<boolean> =
+    this.facadeService.isFeatureFlagEnabled('instructor_recent_activity');
+
   constructor(
     private store: Store<AppState>,
-    private recentActivityService: RecentActivityService
+    private recentActivityService: RecentActivityService,
+    private facadeService: RecentActivityFacade
   ) {}
 
   ngAfterViewInit() {

@@ -2,7 +2,8 @@
 
 <div
   *ngIf="
-    (displayStudentOrInstructorView$ | async) === 'instructor';
+    (displayStudentOrInstructorView$ | async) === 'instructor' &&
+      (this.isFeatureFlagEnabled$ | async);
     else student
   "
 >
@@ -12,7 +13,6 @@
     [instructorHours]="flightHoursStringInstructor$ | async"
     [studentHours]="flightHoursStringStudent$ | async"
   ></cirrus-recent-activity-instructor>
-
 </div>
 <ng-template #student>
   <cirrus-recent-activity-student

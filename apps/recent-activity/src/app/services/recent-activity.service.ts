@@ -13,6 +13,7 @@ import {
   initialRecentActivityInstructors,
   IRecentActivityInstructors,
   IRecentActivityInstructorsNotifications,
+  StudentTaskPerformance,
 } from '../models/IRecentActivityInstructors';
 
 export interface IRecentActivityTotal {
@@ -83,5 +84,15 @@ export class RecentActivityService {
       .subscribe(response =>
         this._recentActivityNotificationsInstructors.next(response)
       );
+  }
+
+  getStudentTaskPerformance(
+    range?: string
+  ): Observable<StudentTaskPerformance> {
+    const url = range
+      ? `${environment.baseUrl}/api/v4/task_attempts/performance?range=${range}`
+      : `${environment.baseUrl}/api/v4/task_attempts/performance`;
+
+    return this.http.get<StudentTaskPerformance>(url);
   }
 }

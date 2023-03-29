@@ -35,9 +35,9 @@
             <div>
               <div>
                 <div>
-                  {{ item.name }}
+                  {{ item.name | titlecase }}
                 </div>
-                <div class="status">
+                <div class="sub">
                   {{ item.status | formatFilter | titlecase }}
                 </div>
               </div>

@@ -1,7 +1,19 @@
 import { ChartColors } from './ChartColors';
+import {
+  FlightInstructionHour,
+  MostMissedTask,
+  MostPassedTask,
+} from './IRecentActivityInstructors';
 
 export interface ChartData {
-  hours: any;
+  data: FlightInstructionHour[];
+  chartColors: ChartColors;
+  title: string;
+  csvRightColumnTitle: string;
+}
+
+export interface HorizontalChartData {
+  data: MostPassedTask[] | MostMissedTask[];
   chartColors: ChartColors;
   title: string;
   csvRightColumnTitle: string;

@@ -4,11 +4,11 @@
   <div *ngFor="let a of attempts; let i = index">
     <div
       [ngClass]="i + 1 === attempts.length ? 'attempt-item-container-missed' : 'attempt-item-container'"
-      (click)="a.missed ? nav(a, i) : null"
+      (click)="a.failed ? nav(a, i) : null"
     >
     <div class="inside" fxLayout="row"
     fxLayoutAlign="none center"
-    [ngClass]=" a.missed
+    [ngClass]=" a.failed
       ? 'attempt-missed'
       : 'attempt'
   "
@@ -18,23 +18,23 @@
             height="8px"
             width="8px"
             [src]="
-              a.passed
+              a.success
                 ? 'courses/images/svg/green-ellipse.svg'
                 : 'courses/images/svg/red-ellipse.svg'
             "
           />
           <div class="index">{{ i + 1 }}</div>
-          <div class="value">{{ a.passed ? 'Passed' : 'Missed' }}</div>
+          <div class="value">{{ a.success ? 'Passed' : 'Missed' }}</div>
         </div>
         <div fxFlex="50" fxLayoutGap="12px" fxLayout="row" fxLayoutAlign="end">
           <div class="value" *ngIf="a.instructor_name">
             Instructor: {{ a.instructor_name }}
           </div>
           <div class="border"></div>
-          <div [ngClass]="a.missed ? 'value date' : 'value passed'">
+          <div [ngClass]="a.failed ? 'value date' : 'value passed'">
             {{ a.created_at | date: 'longDate' }}
           </div>
-          <img *ngIf="a.missed" src="courses/images/svg/right-chevron.svg" />
+          <img *ngIf="a.failed" src="courses/images/svg/right-chevron.svg" />
         </div>
         </div>
       </div>
@@ -46,8 +46,8 @@
     <div
       fxLayout="row"
       fxLayoutAlign="space-between center"
-      [ngClass]="a.missed ? 'attempts-container-mobile-missed' : 'attempts-container-mobile'"
-      (click)="a.missed ? nav(a, i) : null"
+      [ngClass]="a.failed ? 'attempts-container-mobile-missed' : 'attempts-container-mobile'"
+      (click)="a.failed ? nav(a, i) : null"
     >
       <div>
         <div
@@ -60,25 +60,25 @@
             height="8px"
             width="8px"
             [src]="
-              a.passed
+              a.success
                 ? 'courses/images/svg/green-ellipse.svg'
                 : 'courses/images/svg/red-ellipse.svg'
             "
           />
           <div class="index">{{ i + 1 }}</div>
-          <div class="value">{{ a.passed ? 'Passed' : 'Missed' }}</div>
+          <div class="value">{{ a.success ? 'Passed' : 'Missed' }}</div>
         </div>
 
         <div class="value row" *ngIf="a.instructor_name">
           Instructor: {{ a.instructor_name }}
         </div>
 
-        <div [ngClass]="a.missed ? 'value date' : 'value passed'" class="row">
+        <div [ngClass]="a.failed ? 'value date' : 'value passed'" class="row">
           {{ a.created_at | date: 'longDate' }}
         </div>
       </div>
       <div>
-        <img *ngIf="a.missed" src="courses/images/svg/right-chevron.svg" />
+        <img *ngIf="a.failed" src="courses/images/svg/right-chevron.svg" />
       </div>
     </div>
   </div>

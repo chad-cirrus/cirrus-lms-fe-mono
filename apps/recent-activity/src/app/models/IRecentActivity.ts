@@ -7,12 +7,12 @@ export interface LogbookStat {
 
 export interface CourseWorkStat {
   type: string;
-  completed: boolean;
+  completed: [];
 }
 
 export interface IacraStat {
   type: string;
-  completed: boolean;
+  completed: [];
 }
 
 export interface OverallProgress {

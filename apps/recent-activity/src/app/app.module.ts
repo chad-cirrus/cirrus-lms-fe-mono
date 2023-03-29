@@ -61,7 +61,7 @@ import {
   SidenavHeaderModule,
   SidenavHeaderService,
 } from '@cirrus/sidenav-header';
-import { ClickOutsideDirective } from './directives/clickoutside.directive';
+import { ClickOutsideDirective } from './directives/clickoutside/clickoutside.directive';
 
 import { SearchInputModule } from '@cirrus/search-input';
 import { BadgeModule } from '@cirrus/badge';
@@ -72,6 +72,9 @@ import { StudentTaskPerformanceComponent } from './components/student-task-perfo
 import { RecentStudentsComponent } from './components/recent-students/recent-students.component';
 import { ProfileInitialsComponent } from './components/profile-initials/profile-initials.component';
 import { DisplayInitialsPipe } from './components/profile-initials/display-initials.pipe';
+import { CirrusHorizontalChartComponent } from './components/horizontal-chart/horizontal-chart.component';
+import { FlightInstructionHoursComponent } from './components/flight-instruction-hours/flight-instruction-hours.component';
+import { FeatureDirective } from './directives/feature/feature.directive';
 
 @NgModule({
   declarations: [
@@ -106,6 +109,9 @@ import { DisplayInitialsPipe } from './components/profile-initials/display-initi
     RecentStudentsComponent,
     ProfileInitialsComponent,
     DisplayInitialsPipe,
+    CirrusHorizontalChartComponent,
+    FlightInstructionHoursComponent,
+    FeatureDirective,
   ],
   imports: [
     CommonModule,

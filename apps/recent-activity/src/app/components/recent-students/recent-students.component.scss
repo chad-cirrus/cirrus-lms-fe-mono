@@ -93,6 +93,8 @@
   padding: 30px;
   background-color: $gray1;
   border-radius: 5px;
+  cursor: pointer;
+
 
   @include breakpoint(mobile) {
     min-width: 325px;
@@ -123,3 +125,12 @@
 .body-copy-small {
   color: $gray4;
 }
+
+
+/* Disconnected State - More styles in `mat-ui-overrides.scss` */
+.rs-status-disconnected {
+  .name {
+    color: $gray5;
+  }
+}
+

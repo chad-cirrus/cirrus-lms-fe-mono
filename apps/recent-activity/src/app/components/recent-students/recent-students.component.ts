@@ -1,7 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 import SwiperCore, { Navigation, Pagination } from 'swiper';
-import { IRecentStudent } from '../../models/IRecentActivityInstructors';
+import { IStudent } from '../../models/IRecentActivityInstructors';
+
 
 // install Swiper modules
 SwiperCore.use([Navigation, Pagination]);
@@ -12,5 +13,6 @@ SwiperCore.use([Navigation, Pagination]);
   styleUrls: ['./recent-students.component.scss'],
 })
 export class RecentStudentsComponent {
-  @Input() recentStudents: IRecentStudent[] = [];
+  @Input() recentStudents: IStudent[] = [];
+
 }

@@ -1,0 +1,25 @@
+<div id="chart" *ngIf="data">
+  <h5 class="title heading-5">
+    {{ data.title }}
+  </h5>
+  <div class="chart-container-wrapper">
+    <div class="chart-container">
+      <ng-container *ngIf="chartOptions">
+        <apx-chart
+          [series]="chartOptions?.series!"
+          [theme]="chartOptions?.theme!"
+          [chart]="chartOptions?.chart!"
+          [dataLabels]="chartOptions?.dataLabels!"
+          [plotOptions]="chartOptions?.plotOptions!"
+          [yaxis]="chartOptions?.yaxis!"
+          [xaxis]="chartOptions?.xaxis!"
+          [legend]="chartOptions?.legend!"
+          [grid]="chartOptions?.grid!"
+          [fill]="chartOptions?.fill!"
+          [tooltip]="chartOptions?.tooltip!"
+          [responsive]="chartOptions?.responsive!"
+        ></apx-chart>
+      </ng-container>
+    </div>
+  </div>
+</div>

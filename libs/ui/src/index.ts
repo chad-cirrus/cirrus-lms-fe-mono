@@ -41,6 +41,7 @@ export * from './lib/format-filter.pipe';
 export * from './lib/lib-services/connections/connections.service';
 export * from './lib/lib-services/notifications/notification.service';
 export * from './lib/lib-services/error/error.service';
+export * from './lib/lib-services/feature-flag/feature-flag.service';
 
 export * from './lib/StageLessonNavigationEvent';
 

@@ -7,13 +7,16 @@
   >
     <div class="recent-activity-welcome-heading content-wrapper">
       <div class="welcome-message">
-        <h1 class="heading-3">Welcome back, {{ user?.firstname }}</h1>
-        <div *ngIf="user?.role === 'instructor'">
-          <cirrus-toggle-instructor-student
-            (toggleViewEmit)="toggleView()"
-            [activeName]="'Student'"
-          ></cirrus-toggle-instructor-student>
-        </div>
+        <header class="welcome-header">
+          <h1 class="heading-3">Welcome back, {{ user?.firstname }}</h1>
+          <div *ngIf="user?.role === 'instructor'">
+            <cirrus-toggle-instructor-student
+              *cirrusFeature="'instructor_recent_activity'"
+              (toggleViewEmit)="toggleView()"
+              [activeName]="'Student'"
+            ></cirrus-toggle-instructor-student>
+          </div>
+        </header>
         <p>
           Thank you for being an integral part of our “Early Access” Cirrus
           Approach experience. Your participation is important to us, and any

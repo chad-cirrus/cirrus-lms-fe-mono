@@ -64,6 +64,15 @@ export interface ITaskCategory {
   created_at: string;
   updated_at: string;
 }
+export interface IAssessment {
+  assessment_progress: object;
+  assessment_tasks: IAssessmentTasks;
+  overview: object;
+}
+export interface IAssessmentTasks {
+  tasklist: ITask[]
+}
+
 
 
 

@@ -1,0 +1,50 @@
+@import 'apps/recent-activity/src/base-scss/import';
+
+.flight-instructor-hours-header-container {
+  margin-top: 21px;
+  font-size: 16px;
+  @include breakpoint(mobile) {
+    margin-top: 24px;
+  }
+
+  .total-hours {
+    text-align: center;
+    @include breakpoint(mobile) {
+      text-align: left;
+    }
+  }
+
+  .total-filter-container {
+    margin-top: 1rem;
+    margin-left: 0;
+    @include breakpoint(mobile) {
+      margin-top: 0;
+      margin-left: 2rem;
+    }
+  }
+}
+
+mat-select {
+  width: auto;
+  text-align: center;
+  font-size: 16px;
+  @include breakpoint(mobile) {
+    width: 150px;
+    text-align: right;
+  }
+}
+
+.chart-header-body-container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+
+  span.bold {
+    padding-left: 10px;
+  }
+
+  @include breakpoint(mobile) {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}

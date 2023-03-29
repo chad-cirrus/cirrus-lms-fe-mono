@@ -3,7 +3,7 @@
   .apexcharts-menu-item:hover {
     background: $gray1;
   }
-}  
+}
 
 .mat-ui-menu-override + * .cdk-overlay-pane {
   width: 100%;
@@ -12,4 +12,187 @@
 .mat-ui-menu-override + * .cdk-overlay-pane > div.mat-menu-panel {
   background-color: $gray1;
   min-width: 100%;
+}
+
+
+/* Disconnected State - recent-students.component.scss */
+.rs-status-disconnected {
+  cirrus-profile-initials {
+    .container {
+      background: $gray3;
+    }
+
+    .initials {
+      color:$gray4;
+    }
+  }
+}
+/**
+ * Student Performance Matrial Tab Styles
+ * @component student-task-performance
+ */
+cirrus-student-task-performance .mat-tab-body-wrapper {
+  margin-top: 4rem;
+}
+@media screen and (min-width: 680px) {
+  cirrus-student-task-performance .mat-tab-body-wrapper {
+    margin-top: 0;
+  }
+}
+
+@include breakpoint(desktop) {
+  cirrus-student-task-performance .mat-tab-body-wrapper {
+    margin-top: 4rem;
+  }
+}
+
+@include breakpoint(widescreen) {
+  cirrus-student-task-performance .mat-tab-body-wrapper {
+    margin-top: 0;
+  }
+}
+
+/**
+ * Tab Time Filter Styles
+ * @component student-task-performance
+ */
+#tab-filter-duration {
+  mat-select {
+    font-size: 14px;
+    height: 48px;
+    padding: 0 24px;
+    cursor: pointer;
+    box-sizing: border-box;
+    opacity: 0.6;
+    min-width: 160px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    white-space: nowrap;
+    position: relative;
+  }
+}
+.student-task-performance-filter {
+  margin-top: 2rem;
+
+  .mat-option:hover:not(.mat-option-disabled),
+  .mat-option:focus:not(.mat-option-disabled),
+  .mat-option.mat-selected:not(.mat-option-multiple) {
+    color: $gray2;
+    background-color: $gray5;
+  }
+}
+
+.tab-filter-durations {
+  .mat-select-arrow {
+    width: initial;
+    height: initial;
+    border-left: initial;
+    border-right: initial;
+    border-top: initial;
+    margin: initial;
+
+    &:after {
+      content: url("data:image/svg+xml,%3Csvg width='18' height='8' viewBox='0 0 18 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M-0.203125 1.28068L0.202713 0.722656L8.99979 7.12053L17.7969 0.722656L18.2027 1.28068L8.99979 7.97372L-0.203125 1.28068Z' fill='white'/%3E%3C/svg%3E%0A");
+      margin-left: 11px;
+      display: block;
+      transition: all 0.25s ease-in-out;
+    }
+  }
+
+  &[aria-expanded='true'] .mat-select-arrow {
+    &:after {
+      transform: rotate(180deg);
+    }
+  }
+}
+
+cirrus-flight-instruction-hours .chart-header {
+  background-color: #2e2e2e;
+  padding: 10px 12px 12px 13px;
+}
+
+
+/**
+ * Flight Instruction Hours
+ * @desc Styles for the flight intstruction hours chart
+ * @locations: /recent-activity/
+ * @component flight-instruction-hours
+ */
+.mat-select-panel.flight-instructor-hours-filter-panel {
+  margin-left: -24px;
+  position: absolute;
+  top: 33px;
+  right: -28px;
+  border-radius: 0;
+}
+.flight-instructor-hours-header-container {
+  .chart-container-wrapper {
+    overflow-y: hidden;
+  }
+  
+  mat-select {
+    .mat-select-value {
+      padding-right: 1.6rem;
+    }
+    .mat-select-arrow {
+      border-left: none;
+      border-right: none;
+      border-top: none;
+      &::after {
+        content: url("data:image/svg+xml,%3Csvg width='18' height='8' viewBox='0 0 18 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M-0.203125 1.28068L0.202713 0.722656L8.99979 7.12053L17.7969 0.722656L18.2027 1.28068L8.99979 7.97372L-0.203125 1.28068Z' fill='white'/%3E%3C/svg%3E%0A");
+        display: block;
+        top: -0.36rem;
+        margin-left: -0.81rem;
+        position: absolute;
+        transition: all .25s ease-in-out;
+        transform: rotate(0deg);
+      }
+    }
+    &[aria-expanded="true"] {
+      .mat-select-arrow {
+        &::after {
+          transform: rotate(180deg);
+        }
+      }
+    }
+  }
+}
+
+
+/**
+ * Recent Student Component
+ * @desc Recent student component, equal height cards
+ * @locations: /recent-activity/
+ * @component recent-students
+ */
+cirrus-recent-students {
+
+  .swiper-slide {
+    height: auto;
+  }
+
+  .swiper-slide > div,
+  .swiper-slide-content,
+  .recent-student-progress-wrapper,
+  .recent-student-card {
+    height: 100%;
+  }
+
+  .recent-student-card:first-child {
+    display: flex;
+    align-items: center;
+  }
+}
+
+/**
+ * Achievements
+ * @desc Styles for the achievements list
+ * @locations: /recent-activity/
+ * @component achievements
+ */
+cirrus-achievements .mat-tab-group,
+cirrus-achievements .mat-tab-label {
+  font-family: "akzidenz", Helvetica, Verdana, sans-serif;
 }

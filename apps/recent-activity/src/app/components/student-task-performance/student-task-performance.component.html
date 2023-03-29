@@ -1,1 +1,64 @@
-<p>student-task-performance works!</p>
+<h2 class="heading-3 task-performance-header-container">
+  Student Task Performance
+</h2>
+
+<div class="tab-filter-container">
+  <mat-tab-group (selectedTabChange)="tabChanged($event)" dynamicHeight>
+    <mat-tab label="Most Passed">
+      <div class="tab-container">
+        <div
+          class="task-performance-empty-content"
+          *ngIf="!(chartDataObservable$ | async)?.data?.length; else chart"
+        >
+          You have no connected students at this time. Task Performance stats
+          will appear once you begin instructions.
+        </div>
+        <ng-template #chart>
+          <cirrus-horizontal-chart
+            [data]="chartDataObservable$ | async"
+          ></cirrus-horizontal-chart>
+        </ng-template>
+      </div>
+    </mat-tab>
+    <mat-tab label="Most Missed">
+      <div class="tab-container">
+        <div
+          class="task-performance-empty-content body-copy-medium"
+          *ngIf="!(chartDataObservable$ | async)?.data?.length; else chart"
+        >
+          You have no connected students at this time. Task Performance stats
+          will appear once you begin instructions.
+        </div>
+        <ng-template #chart>
+          <cirrus-horizontal-chart
+            [data]="chartDataObservable$ | async"
+          ></cirrus-horizontal-chart>
+        </ng-template>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+
+  <div id="tab-filter-duration">
+    <mat-select
+      class="tab-filter-durations"
+      [(value)]="selected"
+      (valueChange)="filterChanged()"
+      panelClass="student-task-performance-filter filter-value-{{ selected }}"
+      disableOptionCentering="true"
+    >
+      <mat-option class="tab-filter-duration" [value]="'7'"
+        >Last 7 Days</mat-option
+      >
+      <mat-option class="tab-filter-duration" [value]="'30'"
+        >Last 30 Days</mat-option
+      >
+      <mat-option class="tab-filter-duration" [value]="'60'"
+        >Last 60 Days</mat-option
+      >
+      <mat-option class="tab-filter-duration" [value]="'90'"
+        >Last 90 Days</mat-option
+      >
+      <mat-option class="tab-filter-duration" [value]="''">All Time</mat-option>
+    </mat-select>
+  </div>
+</div>

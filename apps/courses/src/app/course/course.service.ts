@@ -67,6 +67,7 @@ export class CoursesService {
                   content_id: c.id,
                   lesson_id: lesson.id,
                   stage_id: lesson.stage_id,
+                  course_id: lesson.course_id,
                 } as ITasksRequest)
             )
             .forEach(request => {

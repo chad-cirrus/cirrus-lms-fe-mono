@@ -1,21 +1,34 @@
 @import 'apps/recent-activity/src/base-scss/import';
 
+.student-view .toggle-container {
+  @include breakpoint(tablet) {
+    margin-top: 16px;
+    margin-bottom: 40px;
+  }
+  @include breakpoint(desktop) {
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: 11px;
+  }
+}
+
 .toggle-container {
   cursor: pointer;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   width: 194px;
   height: 35px;
   border: 1px solid;
   border-radius: 60px;
   border-color: $white;
-
-  margin-top: 40px;
+  margin-top: 16px;
   margin-bottom: 40px;
+  padding: 0 18px;
 
   h5 {
-    font-size: 0.938rem;;
+    font-size: 0.938rem;
+    font-weight: 400;
   }
 
   .chevron {
@@ -24,9 +37,9 @@
   }
 
   @include breakpoint(mobile) {
-    width: 171px;
+    width: 167px;
 
-    margin-top: 12px;
+    margin-top: 16px;
 
     .chevron {
       width: 20px;
@@ -39,21 +52,48 @@
     margin-bottom: 0;
   }
 }
-.panel-container {
-  min-width: 167px;
-  max-width: 167px;
-  font-size: 1rem;
-  margin: 40px 0;
 
-  &.instructor {
-    position: relative;
-    top: 22px;
+
+.panel-container {
+  width: 194px;
+  font-size: 1rem;
+  margin: 16px 0 0;
+  position: relative;
+  top: 0;
+  height: 75px;
+
+  &.student {
+    margin: 16px 0 0;
+  }
+  @include breakpoint(mobile) {
+    top: 16px;
+    width: 167px;
+    margin: 0;
+    height: 91px;
+    &.student {
+      margin: 0 0 14px;
+      height: initial;
+    }
+  }
+  @include breakpoint(tablet) {
+    top: 28px;
+
+    &.student {
+      top: 16px;
+    }
+  }
+  @include breakpoint(desktop) {
+    &.student {
+      top: 0px;
+      left: 12px;
+      height: 21px;
+    }
   }
 
   .view {
     cursor: pointer;
-    margin-left: 11px;
-    padding: 8px;
+    padding: 8px 18px;
+    font-size: 0.938rem;
 
     background-color: $gray3;
     &:hover {
@@ -68,7 +108,5 @@
   .bottom-view {
     @extend .view;
   }
-  @include breakpoint(mobile) {
-    margin: 0;
-  }
+  
 }

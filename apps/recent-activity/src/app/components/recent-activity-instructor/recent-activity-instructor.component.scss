@@ -58,7 +58,7 @@ cirrus-recent-activity-instructer {
     margin-top: 110px;
   }
 
-  @include breakpoint(tablet) {
+  @include breakpoint(desktop) {
     flex-direction: row;
     justify-content: space-between;
   }
@@ -67,7 +67,36 @@ cirrus-recent-activity-instructer {
 .notifications-wrapper,
 .student-task-wrapper {
   width: 100%;
-  @include breakpoint(tablet) {
+  @include breakpoint(desktop) {
     width: 48%;
   }
+}
+
+.student-task-wrapper {
+  margin-top: 90px;
+  @include breakpoint(desktop) {
+    margin-top: 0;
+  }
+}
+
+.flight-instruction-hours-wrapper {
+  margin-top: 87px;
+  @include breakpoint(mobile) {
+    margin-top: 110px;
+  }
+}
+
+.students-input-wrapper {
+  margin-top: 50px;
+
+  .mat-form-field {
+    width: 100%;
+    @include breakpoint(mobile) {
+      width: 50%;
+    }
+  }
+}
+
+.search-input-container {
+  max-width: 522px;
 }

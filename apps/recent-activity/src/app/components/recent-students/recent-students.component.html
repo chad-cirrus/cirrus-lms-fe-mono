@@ -21,7 +21,7 @@
           <div>
             <div class="swiper-slide-content">
               <div class="recent-student-progress-wrapper">
-                <div class="recent-student-card">
+                <div class="recent-student-card rs-status-{{ student.connection.status | lowercase }}">
                   <div>
                     <cirrus-profile-initials
                       [firstName]="student.first_name"

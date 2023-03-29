@@ -4,7 +4,9 @@ import {
   ConnectionsService,
   UiDownloadService,
   NotificationService,
+  FeatureFlagService,
 } from '@cirrus/ui';
+import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { RecentActivityService } from './services/recent-activity.service';
 
@@ -25,7 +27,8 @@ export class RecentActivityFacade {
     private recentActivityService: RecentActivityService,
     private connectionService: ConnectionsService,
     private downloadService: UiDownloadService,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private featureFlagService: FeatureFlagService
   ) {}
 
   getRecentActivityPayload() {
@@ -60,5 +63,9 @@ export class RecentActivityFacade {
 
   downloadCertificate(user_certificate_id: number) {
     return this.downloadService.downloadCertificate(user_certificate_id);
+  }
+
+  isFeatureFlagEnabled(featureName: string): Observable<boolean> {
+    return this.featureFlagService.isFeatureEnabled(featureName);
   }
 }

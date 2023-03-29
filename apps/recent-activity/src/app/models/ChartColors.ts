@@ -38,3 +38,25 @@ export const LogBookChartColors = {
     '#6F44CA',
   ],
 };
+export const StudentTaskPerformanceColors = {
+  gradientFromColors: ['#00FFFF', '#FF3939'],
+  gradientToColors: ['#00FF00', '#FFFF00'],
+};
+
+export const FlightInstructionColors = {
+  gradientFromColors: ['#BCE7FF'],
+  gradientToColors: [
+    '#122E8F',
+    '#122E8F',
+    '#122E8F',
+    '#122E8F',
+    '#122E8F',
+    '#122E8F',
+    '#122E8F',
+    '#122E8F',
+    '#122E8F',
+    '#122E8F',
+    '#122E8F',
+    '#122E8F',
+  ],
+};

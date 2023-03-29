@@ -28,6 +28,23 @@
     ></cirrus-recent-students>
   </div>
 
+  <div
+    class="content-wrapper students-input-wrapper"
+    *ngIf="
+      recentActivityNotificationsInstructor.recentActivity.instructor_students
+        .students.length
+    "
+  >
+    <div class="search-input-container">
+      <cirrus-search-input
+        (textOutput)="filterText($event)"
+        [list]="filteredStudents$ | async"
+        title="Search My Students"
+        (emitSelection)="emitNavigation($event)"
+      ></cirrus-search-input>
+    </div>
+  </div>
+
   <div class="notifications-student-task-wrapper content-wrapper">
     <cirrus-notifications-section
       class="notifications-wrapper"
@@ -38,5 +55,14 @@
     <cirrus-student-task-performance
       class="student-task-wrapper"
     ></cirrus-student-task-performance>
+  </div>
+
+  <div class="flight-instruction-hours-wrapper content-wrapper">
+    <cirrus-flight-instruction-hours
+      [flightInstructionsHours]="
+        recentActivityNotificationsInstructor.recentActivity.overall_progress
+          .instructor_flight_log_stats
+      "
+    ></cirrus-flight-instruction-hours>
   </div>
 </ng-container>

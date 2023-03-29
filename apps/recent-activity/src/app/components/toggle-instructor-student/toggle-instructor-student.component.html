@@ -1,4 +1,4 @@
-<span cirrusClickOutside (clickOutside)="dismissPanel()">
+<span cirrusClickOutside (clickOutside)="dismissPanel()" class="{{ activeName | lowercase }}-view">
   <div
     class="toggle-container"
     *ngIf="view; else switch"
