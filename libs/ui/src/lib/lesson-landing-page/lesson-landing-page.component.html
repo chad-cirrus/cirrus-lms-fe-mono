@@ -71,7 +71,7 @@
       <span class="xsmall lesson-label" *ngIf="lesson.lesson_type === 3">
         Simulator Lesson
       </span>
-      <h1>{{ lesson?.title }}</h1>
+      <h1>{{ lesson.title }}</h1>
       <mat-divider></mat-divider>
       <p class="large">{{ lesson.subtitle }}</p>
       <cirrus-lesson-progress
@@ -114,14 +114,14 @@
           <mat-icon svgIcon="play"></mat-icon>
 
           <div
-            *ngIf="!lesson.student_intro_video?.title; else customIntroText"
+            *ngIf="!lesson.student_intro_video.title; else customIntroText"
             class="intro-video-subtitle"
           >
             Lesson Introduction Video
           </div>
           <ng-template #customIntroText>
             <div class="intro-video-subtitle">
-              {{ lesson.student_intro_video?.title }}
+              {{ lesson.student_intro_video.title }}
             </div>
           </ng-template>
         </div>

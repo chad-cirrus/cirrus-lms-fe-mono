@@ -1,0 +1,77 @@
+name: Tests
+on:
+  push:
+    pull_request:
+      branches: [ master, develop ]
+    push:
+      branches: [ master, develop ]
+    workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Make Courses test environment config available
+        uses: canastro/copy-file-action@master
+        with:
+          source: "apps/courses/src/environments/environment.ts.example"
+          target: "apps/courses/src/environments/environment.ts"
+
+      - name: Make Recent Activity test environment config available
+        uses: canastro/copy-file-action@master
+        with:
+          source: "apps/recent-activity/src/environments/environment.ts.example"
+          target: "apps/recent-activity/src/environments/environment.ts"
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.14
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Run Tests
+        uses: mansagroup/nrwl-nx-action@v3
+        with:
+          targets: test
+          all: true
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.14
+
+      - name: Make Courses test environment config available
+        uses: canastro/copy-file-action@master
+        with:
+          source: "apps/courses/src/environments/environment.ts.example"
+          target: "apps/courses/src/environments/environment.ts"
+
+      - name: Make Recent Activity test environment config available
+        uses: canastro/copy-file-action@master
+        with:
+          source: "apps/recent-activity/src/environments/environment.ts.example"
+          target: "apps/recent-activity/src/environments/environment.ts"
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Run Build
+        uses: mansagroup/nrwl-nx-action@v3
+        with:
+          targets: build
+          projects: courses,recent-activity,atc

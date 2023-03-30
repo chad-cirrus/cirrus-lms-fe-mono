@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CourseProgressComponent } from './course-progress.component';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 describe('CourseProgressComponent', () => {
   let component: CourseProgressComponent;
@@ -8,6 +9,7 @@ describe('CourseProgressComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [MatProgressBarModule],
       declarations: [ CourseProgressComponent ]
     })
     .compileComponents();

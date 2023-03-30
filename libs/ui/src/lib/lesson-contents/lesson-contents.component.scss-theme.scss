@@ -1,4 +1,4 @@
-@use '~@angular/material/theming' as material;
+@use '@angular/material' as material;
 @use '../styles/variables' as var;
 
 @mixin cirrus-lesson-contents-typography($typography-config) {
@@ -68,8 +68,8 @@
 }
 
 @mixin cirrus-lesson-contents-theme($theme) {
-  $theme-colors: material.mat-get-color-config($theme);
-  $typography: material.mat-get-typography-config($theme);
+  $theme-colors: material.get-color-config($theme);
+  $typography: material.get-typography-config($theme);
   $backgrounds: map-get($theme-colors, background);
 
   @if $typography != null {
@@ -88,7 +88,7 @@
   cirrus-lesson-contents {
     .content-container.student-view {
       .title-content {
-        background-color: material.mat-color($theme-colors, card);
+        background-color: material.color($theme-colors, card);
         .subtitle {
           color: var.$secondary-font-color-light-grey;
         }

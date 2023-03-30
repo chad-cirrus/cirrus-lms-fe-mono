@@ -11,6 +11,7 @@ module.exports = {
     '../src/app/**/*.stories.@(js|jsx|ts|tsx)',
   ],
   addons: [
+    '@storybook/addon-essentials',
     ...rootMain.addons,
     '@storybook/preset-scss',
     'storybook-addon-mock',

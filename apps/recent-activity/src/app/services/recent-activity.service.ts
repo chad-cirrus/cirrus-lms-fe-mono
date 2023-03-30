@@ -1,12 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, forkJoin, Observable, of, Subject } from 'rxjs';
+import { BehaviorSubject, forkJoin, Observable, Subject } from 'rxjs';
 import { environment } from '../../environments/environment';
-import {
-  initialRecentActivity,
-  IRecentActivity,
-} from '../models/IRecentActivity';
-import { map, tap } from 'rxjs/operators';
+import { initialRecentActivity, IRecentActivity } from '../models/IRecentActivity';
+import { map } from 'rxjs/operators';
 import { IRecentActivityNotifications } from '../models/IRecentActivityNotifications';
 import { INotification } from '@cirrus/models';
 import {
@@ -24,7 +21,7 @@ export interface IRecentActivityTotal {
 @Injectable({
   providedIn: 'root',
 })
-export class RecentActivityService {
+export class  RecentActivityService {
   private _recentActivityNotifications =
     new BehaviorSubject<IRecentActivityNotifications>({
       recentActivity: initialRecentActivity,

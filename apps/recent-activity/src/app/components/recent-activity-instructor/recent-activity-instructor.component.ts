@@ -2,10 +2,10 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ISearchInputData } from '@cirrus/models';
 import { SidenavHeaderService } from '@cirrus/sidenav-header';
-import { combineLatest, Observable, Subject } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { RecentActivityService } from '../../services/recent-activity.service';
 import { UserState } from '../../store/reducers/cirrus-user.reducer';
+import { combineLatest, Observable, Subject } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'cirrus-recent-activity-instructor',

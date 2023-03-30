@@ -1,9 +1,5 @@
-import { Component, Inject, Input, OnInit } from '@angular/core';
-import {
-  MatDialog,
-  MatDialogRef,
-  MAT_DIALOG_DATA,
-} from '@angular/material/dialog';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { SafeResourceUrl } from '@angular/platform-browser';
 import { CirrusSanitizerService } from '../shared/cirrus-sanitizer.service';
 

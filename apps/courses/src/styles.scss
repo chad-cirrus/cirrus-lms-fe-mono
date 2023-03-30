@@ -1,12 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
-@use '~@angular/material/theming' as material;
+@use '@angular/material' as material;
 @use 'variables' as *;
 @use 'fonts';
 @use 'palette';
 
 @use './app/app.component.scss-theme.scss' as app-component;
 
-// @use 'cirrus-ui-module' as cirrus-ui;
 
 @import 'cirrus-ui-styles';
 @import '~@angular/cdk/overlay-prebuilt.css';

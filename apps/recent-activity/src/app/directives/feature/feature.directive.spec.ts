@@ -1,18 +1,8 @@
 import { Component, TemplateRef, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FeatureDirective } from './feature.directive';
-import { RecentActivityFacade } from '../../facade.service';
-import { Observable, of } from 'rxjs';
-
-class MockRecentActivityFacade {
-  isFeatureFlagEnabled(featureName: string): Observable<boolean> {
-    if (featureName === 'cirrusFeature') {
-      return of(true);
-    } else {
-      return of(false);
-    }
-  }
-}
+import { of } from 'rxjs';
+import { RecentActivityFacade } from '../../recent-activity-facade.service';
 
 @Component({
   template: `
@@ -29,13 +19,15 @@ class TestComponent {
 describe('FeatureDirective', () => {
   let component: TestComponent;
   let fixture: ComponentFixture<TestComponent>;
-  let facadeService: RecentActivityFacade;
+  const facadeService = {
+    isFeatureFlagEnabled: jest.fn(),
+  };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [FeatureDirective, TestComponent],
       providers: [
-        { provide: RecentActivityFacade, useClass: MockRecentActivityFacade },
+        { provide: RecentActivityFacade, useValue: facadeService },
       ],
     }).compileComponents();
   });
@@ -43,8 +35,6 @@ describe('FeatureDirective', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(TestComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
-    facadeService = TestBed.inject(RecentActivityFacade);
   });
 
   it('should create', () => {
@@ -52,7 +42,7 @@ describe('FeatureDirective', () => {
   });
 
   it('should display content when feature flag is enabled', () => {
-    spyOn(facadeService, 'isFeatureFlagEnabled').and.returnValue(of(true));
+    facadeService.isFeatureFlagEnabled.mockReturnValue(of(true));
 
     fixture.detectChanges();
 
@@ -61,7 +51,7 @@ describe('FeatureDirective', () => {
   });
 
   it('should not display content when feature flag is disabled', () => {
-    spyOn(facadeService, 'isFeatureFlagEnabled').and.returnValue(of(false));
+    facadeService.isFeatureFlagEnabled.mockReturnValue(of(false));
 
     fixture.detectChanges();
 

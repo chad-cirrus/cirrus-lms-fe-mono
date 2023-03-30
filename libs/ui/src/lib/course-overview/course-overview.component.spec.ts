@@ -1,10 +1,26 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ICourseOverview, ProgressType } from '@cirrus/models';
-import { CourseSummaryCountsComponent } from '../course-summary-counts/course-summary-counts.component';
+import { ContentCounts, IBadge, ICertificate, ICourseOverview, ICourseOverviewLesson } from '@cirrus/models';
 
 import { CourseOverviewComponent } from './course-overview.component';
+import { MockComponent } from 'ng-mocks';
+import { CourseOverviewLessonProgressBarComponent, CourseSummaryCountsComponent } from '@cirrus/ui';
+
+const summaryCounts: ContentCounts = {};
+const nextLesson: Partial<ICourseOverviewLesson> = {};
+const badge: IBadge = { badge_image: '', desc: '', id: 0, isActive: false, name: '', progress: 0 };
+const certificate: ICertificate = { expiration: '' };
 
 const course: ICourseOverview = {
+  badge: badge,
+  certificate: certificate,
+  completed_at: '',
+  course_attempt: { id: 0 },
+  course_content_stats: [],
+  hours_and_landings_stats: [],
+  next_lesson: nextLesson,
+  started_at: '',
+  summary_counts: summaryCounts,
+  thumbnail_image_url: '',
   id: 351,
   name: 'Private Pilot License Course ',
   major_version: 4,
@@ -22,38 +38,6 @@ const course: ICourseOverview = {
   mobile_hero_image_url: '',
   can_reenroll: true,
   lessons_stats: { completed: 1, total: 15 },
-  progress_stats: [
-    {
-      type: ProgressType.SelfStudy,
-      completed: 3,
-      total: 73,
-      status: 'in_progress',
-    },
-    {
-      type: ProgressType.Ground,
-      completed: 0.0,
-      total: 0,
-      status: 'completed',
-    },
-    {
-      type: ProgressType.Assessment,
-      completed: 0,
-      total: 179,
-      status: 'not_started',
-    },
-    {
-      type: ProgressType.Flight,
-      completed: 0.0,
-      total: 0,
-      status: 'completed',
-    },
-    {
-      type: ProgressType.Landings,
-      completed: 0,
-      total: 0,
-      status: 'completed',
-    },
-  ],
   stages: [
     {
       id: 243,
@@ -64,6 +48,7 @@ const course: ICourseOverview = {
       lessons: [
         {
           id: 692,
+          stage_id: 0,
           title: 'Welcome To Your Cirrus Training',
           order: 0,
           index: '1.1',
@@ -85,6 +70,7 @@ const course: ICourseOverview = {
       lessons: [
         {
           id: 857,
+          stage_id: 0,
           title: 'CAPS',
           order: 0,
           index: '2.1',
@@ -96,6 +82,7 @@ const course: ICourseOverview = {
         },
         {
           id: 318,
+          stage_id: 0,
           title: 'Takeoffs and Landings',
           order: 1,
           index: '2.2',
@@ -107,6 +94,7 @@ const course: ICourseOverview = {
         },
         {
           id: 317,
+          stage_id: 0,
           title: 'Engine Management',
           order: 2,
           index: '2.3',
@@ -118,6 +106,7 @@ const course: ICourseOverview = {
         },
         {
           id: 595,
+          stage_id: 0,
           title: 'Workbook',
           order: 3,
           index: '2.4',
@@ -139,6 +128,7 @@ const course: ICourseOverview = {
       lessons: [
         {
           id: 834,
+          stage_id: 0,
           title: 'Lesson 1',
           order: 0,
           index: '3.1',
@@ -150,6 +140,7 @@ const course: ICourseOverview = {
         },
         {
           id: 835,
+          stage_id: 0,
           title: 'Lesson 2',
           order: 1,
           index: '3.2',
@@ -161,6 +152,7 @@ const course: ICourseOverview = {
         },
         {
           id: 836,
+          stage_id: 0,
           title: 'Lesson 3',
           order: 2,
           index: '3.3',
@@ -172,6 +164,7 @@ const course: ICourseOverview = {
         },
         {
           id: 837,
+          stage_id: 0,
           title: 'Lesson 4',
           order: 3,
           index: '3.4',
@@ -183,6 +176,7 @@ const course: ICourseOverview = {
         },
         {
           id: 838,
+          stage_id: 0,
           title: 'Lesson 5',
           order: 4,
           index: '3.5',
@@ -194,6 +188,7 @@ const course: ICourseOverview = {
         },
         {
           id: 839,
+          stage_id: 0,
           title: 'Lesson 6',
           order: 5,
           index: '3.6',
@@ -215,6 +210,7 @@ const course: ICourseOverview = {
       lessons: [
         {
           id: 840,
+          stage_id: 0,
           title: 'Lesson 7',
           order: 0,
           index: '4.1',
@@ -226,6 +222,7 @@ const course: ICourseOverview = {
         },
         {
           id: 841,
+          stage_id: 0,
           title: 'Lesson 8',
           order: 1,
           index: '4.2',
@@ -237,6 +234,7 @@ const course: ICourseOverview = {
         },
         {
           id: 842,
+          stage_id: 0,
           title: 'Lesson 9',
           order: 2,
           index: '4.3',
@@ -248,6 +246,7 @@ const course: ICourseOverview = {
         },
         {
           id: 843,
+          stage_id: 0,
           title: 'Lesson 10',
           order: 3,
           index: '4.4',
@@ -261,7 +260,7 @@ const course: ICourseOverview = {
       progress: { id: 1775555, status: 'not_started' },
     },
   ],
-  progress: { id: 1775461, status: 'in_progress' },
+  progress: { id: 1775461, status: 'in_progress' }
 };
 
 describe('CourseOverviewComponent', () => {
@@ -270,7 +269,11 @@ describe('CourseOverviewComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [CourseOverviewComponent, CourseSummaryCountsComponent],
+      declarations: [
+        CourseOverviewComponent,
+        MockComponent(CourseSummaryCountsComponent),
+        MockComponent(CourseOverviewLessonProgressBarComponent),
+      ],
     }).compileComponents();
   });
 

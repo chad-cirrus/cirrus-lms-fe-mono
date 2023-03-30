@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MenuSliderComponent } from './menu-slider.component';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('MenuSliderComponent', () => {
   let component: MenuSliderComponent;
@@ -8,6 +9,9 @@ describe('MenuSliderComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [
+        NoopAnimationsModule,
+      ],
       declarations: [ MenuSliderComponent ]
     })
     .compileComponents();

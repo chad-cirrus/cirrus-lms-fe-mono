@@ -78,14 +78,11 @@
         fxFlex="nogrow"
         [ngClass]="{ 'adjust-padding': (menuOpen$ | async) }"
       >
-        <div
-          [ngStyle]="{ display: (hideBtns$ | async) ? 'none' : 'flex' }"
-          fxLayout="row"
-          [fxLayoutAlign]="
-            (showPreviousBtn$ | async) ? 'space-between start' : 'flex-end'
-          "
-          [ngClass]="{ 'add-padding': (menuOpen$ | async) === false }"
-        >
+        <div class='content-player__controls'>
+          <button class="next-button" mat-raised-button (click)="nextContent()">
+            <span class="next" fxHide.lt-sm>Next</span>
+            <img class="right-chevron" [src]="icons.rightChevron" alt="r" />
+          </button>
           <button
             *ngIf="showPreviousBtn$ | async"
             class="right-button"
@@ -94,10 +91,6 @@
           >
             <span class="previous" fxHide.lt-sm>Previous</span>
             <img class="left-chevron" [src]="icons.leftChevron" alt="l" />
-          </button>
-          <button class="next-button" mat-raised-button (click)="nextContent()">
-            <span class="next" fxHide.lt-sm>Next</span>
-            <img class="right-chevron" [src]="icons.rightChevron" alt="r" />
           </button>
         </div>
       </div>

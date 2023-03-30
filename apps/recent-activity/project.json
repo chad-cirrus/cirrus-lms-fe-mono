@@ -1,0 +1,205 @@
+{
+  "name": "recent-activity",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/recent-activity/src",
+  "prefix": "cirrus",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/angular:webpack-browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "deployUrl": "/recent-activity/",
+        "outputPath": "dist/apps/recent-activity",
+        "index": "apps/recent-activity/src/index.html",
+        "main": "apps/recent-activity/src/main.ts",
+        "polyfills": "apps/recent-activity/src/polyfills.ts",
+        "tsConfig": "apps/recent-activity/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": [
+          "apps/recent-activity/src/favicon.ico",
+          "apps/recent-activity/src/assets",
+          {
+            "input": "libs/ui/src/assets",
+            "glob": "**/*",
+            "output": ""
+          }
+        ],
+        "styles": ["apps/recent-activity/src/styles.scss"],
+        "stylePreprocessorOptions": {
+          "includePaths": ["libs/ui/src/lib/styles", "./node_modules"]
+        },
+        "scripts": [],
+        "customWebpackConfig": {
+          "path": "webpack.config.js"
+        }
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "2mb",
+              "maximumError": "3mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "10kb",
+              "maximumError": "20kb"
+            }
+          ],
+          "fileReplacements": [
+            {
+              "replace": "apps/recent-activity/src/environments/environment.ts",
+              "with": "apps/recent-activity/src/environments/environment.prod.ts"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "staging": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "2mb",
+              "maximumError": "3mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "10kb",
+              "maximumError": "20kb"
+            }
+          ],
+          "fileReplacements": [
+            {
+              "replace": "apps/recent-activity/src/environments/environment.ts",
+              "with": "apps/recent-activity/src/environments/environment.staging.ts"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "uat": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "2mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "10kb",
+              "maximumError": "20kb"
+            }
+          ],
+          "fileReplacements": [
+            {
+              "replace": "apps/recent-activity/src/environments/environment.ts",
+              "with": "apps/recent-activity/src/environments/environment.uat.ts"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "review": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": {
+            "scripts": true,
+            "styles": true,
+            "hidden": false
+          },
+          "namedChunks": true,
+          "fileReplacements": [
+            {
+              "replace": "apps/recent-activity/src/environments/environment.ts",
+              "with": "apps/recent-activity/src/environments/environment.template.ts"
+            }
+          ]
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@nrwl/angular:webpack-dev-server",
+      "configurations": {
+        "production": {
+          "browserTarget": "recent-activity:build:production"
+        },
+        "staging": {
+          "browserTarget": "recent-activity:build:staging"
+        },
+        "uat": {
+          "browserTarget": "recent-activity:build:uat"
+        },
+        "development": {
+          "browserTarget": "recent-activity:build:development"
+        }
+      },
+      "defaultConfiguration": "development",
+      "options": {
+        "host": "cirrusapproach.local",
+        "port": 4202
+      }
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "browserTarget": "recent-activity:build"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "apps/recent-activity/src/**/*.ts",
+          "apps/recent-activity/src/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/recent-activity"],
+      "options": {
+        "jestConfig": "apps/recent-activity/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "storybook": {
+      "executor": "@nrwl/storybook:storybook",
+      "options": {
+        "uiFramework": "@storybook/angular",
+        "port": 4400,
+        "configDir": "apps/recent-activity/.storybook"
+      },
+      "configurations": {
+        "ci": {
+          "quiet": true
+        }
+      }
+    },
+    "build-storybook": {
+      "executor": "@nrwl/storybook:build",
+      "outputs": ["{options.outputDir}"],
+      "options": {
+        "uiFramework": "@storybook/angular",
+        "styles": ["./apps/recent-activity/src/styles.scss"],
+        "configDir": "apps/recent-activity/.storybook",
+        "outputDir": "dist/storybook/recent-activity"
+      },
+      "configurations": {
+        "ci": {
+          "quiet": true
+        }
+      }
+    }
+  },
+  "tags": []
+}

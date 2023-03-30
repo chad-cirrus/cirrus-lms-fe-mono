@@ -8,4 +8,8 @@ import { CourseWorkStat } from '../../../models/IRecentActivity';
 })
 export class CourseworkComponent {
   @Input() courseWorkStats!: CourseWorkStat[];
+
+  get courseWorkStatsSubset() {
+    return this.courseWorkStats.slice(0, 5);
+  }
 }

@@ -1,10 +1,4 @@
-import {
-  AfterViewInit,
-  Component,
-  ElementRef,
-  OnDestroy,
-  ViewChild,
-} from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, ViewChild } from '@angular/core';
 import { PROGRESS_STATUS } from '@cirrus/models';
 import Player from '@vimeo/player';
 import { LessonContentComponent } from '../LessonContentComponent';

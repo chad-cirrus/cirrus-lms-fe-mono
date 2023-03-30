@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { FormArray, FormControl, FormGroup } from '@angular/forms';
+import { UntypedFormArray, UntypedFormControl, FormGroup } from '@angular/forms';
 import { FilterMenuSection } from '@cirrus/models';
 
 @Component({
@@ -9,12 +9,12 @@ import { FilterMenuSection } from '@cirrus/models';
 })
 export class FilterComponent {
   @Input() sections!: FilterMenuSection[];
-  @Input() checkboxArray!: FormArray;
+  @Input() checkboxArray!: UntypedFormArray;
 
   onChange(item: string) {
     const index = this.checkboxArray.value.indexOf(item);
     index === -1
-      ? this.checkboxArray.push(new FormControl(item))
+      ? this.checkboxArray.push(new UntypedFormControl(item))
       : this.checkboxArray.removeAt(index);
   }
   stopProp($event: Event) {

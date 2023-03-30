@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { BluePopUpComponent } from './blue-pop-up.component';
+import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { CirrusSanitizerService } from '../shared/cirrus-sanitizer.service';
 
 describe('BluePopUpComponent', () => {
   let component: BluePopUpComponent;
@@ -8,7 +10,15 @@ describe('BluePopUpComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ BluePopUpComponent ]
+      imports:[
+        MatDialogModule,
+      ],
+      declarations: [BluePopUpComponent],
+      providers: [
+        { provide: MAT_DIALOG_DATA, useValue: {} },
+        { provide: MatDialogRef, useValue: {} },
+        { provide: CirrusSanitizerService, useClass: CirrusSanitizerService },
+      ]
     })
     .compileComponents();
   });

@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SearchInputComponent } from './search-input.component';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 describe('SearchInputComponent', () => {
   let component: SearchInputComponent;
@@ -9,6 +11,7 @@ describe('SearchInputComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [SearchInputComponent],
+      imports: [MatAutocompleteModule, FormsModule, ReactiveFormsModule]
     }).compileComponents();
   });
 

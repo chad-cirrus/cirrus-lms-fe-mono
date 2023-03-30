@@ -5,7 +5,7 @@ import { ICirrusUser, IContent, ICourseOverview, ILesson } from '@cirrus/models'
 import { StagesOverlayComponent } from '../stages-overlay/stages-overlay.component';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Event, NavigationStart, Router } from '@angular/router';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { startWith, takeUntil, tap } from 'rxjs/operators';
 
@@ -61,7 +61,7 @@ export class LessonLandingPageComponent implements OnInit, OnDestroy {
     return this._lesson;
   }
 
-  instructorToggle = new FormControl(false);
+  instructorToggle = new UntypedFormControl(false);
   instructorView$ = this.instructorToggle.valueChanges.pipe(
     startWith(false),
     tap(instructor => {

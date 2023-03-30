@@ -1,4 +1,4 @@
-import { Component, isDevMode, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { AppState } from './store/reducers';
@@ -6,22 +6,16 @@ import { ICirrusUser, INotification } from '@cirrus/models';
 import { setCirrusUser } from './store/actions/cirrus-user.actions';
 import { selectCirrusUser } from './store/selectors/cirrus-user.selector';
 import { BreakpointObserver } from '@angular/cdk/layout';
-import { count, map, takeUntil, tap } from 'rxjs/operators';
+import { map, takeUntil } from 'rxjs/operators';
 import { setScreenSize } from './store/actions/view.actions';
 import { selectIsScreenSmall } from './store/selectors/view.selector';
-import {
-  CirrusBaseComponent,
-  ErrorService,
-  NotificationService,
-  UserService,
-} from '@cirrus/ui';
+import { CirrusBaseComponent, ErrorService, NotificationService, UserService } from '@cirrus/ui';
 import { environment } from '../environments/environment';
 import { RecentActivityService } from './services/recent-activity.service';
-import { RecentActivityFacade } from './facade.service';
+import { RecentActivityFacade } from './recent-activity-facade.service';
 import { SidenavHeaderService } from '@cirrus/sidenav-header';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ViewportScroller } from '@angular/common';
-import { FullStoryService } from '../../../../libs/ui/src/lib/full-story.service';
 
 @Component({
   selector: 'cirrus-root',
@@ -56,7 +50,6 @@ export class AppComponent
     breakpointObserver: BreakpointObserver,
     userService: UserService,
     route: ActivatedRoute,
-    private fullStoryService: FullStoryService,
   ) {
     super(
       userService,
@@ -72,8 +65,6 @@ export class AppComponent
 
   ngOnInit() {
     super.ngOnInit();
-
-    this.fullStoryService.init(environment.fullstoryOrgId);
 
     const cirrusUser = JSON.parse(
       <string>localStorage.getItem('cirrus-user')

@@ -9,7 +9,7 @@ import { selectLessonStateBusy } from './store/selectors/lessons.selector';
 import { ICirrusUser, INotification } from '@cirrus/models';
 import { selectCirrusUser } from './store/selectors/cirrus-user.selector';
 import { merge, Observable, Subscription } from 'rxjs';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 import {
   selectIsScreenSmall,
   selectSideNavOpen,
@@ -17,18 +17,12 @@ import {
 import { MatSidenav } from '@angular/material/sidenav';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { CoursesService } from './course/course.service';
-import {
-  CirrusBaseComponent,
-  ErrorService,
-  NotificationService,
-  UserService,
-} from '@cirrus/ui';
+import { CirrusBaseComponent, ErrorService, NotificationService, UserService } from '@cirrus/ui';
 import { environment } from '../environments/environment';
 import { CoursesFacadeService } from './courses-facade.service';
 import { SidenavHeaderService } from '@cirrus/sidenav-header';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ViewportScroller } from '@angular/common';
-import { FullStoryService } from '../../../../libs/ui/src/lib/full-story.service';
 
 @Component({
   selector: 'cirrus-root',
@@ -40,7 +34,7 @@ export class AppComponent
   implements OnInit, OnDestroy
 {
   student = 'John Doe';
-  viewToggle = new FormControl(false);
+  viewToggle = new UntypedFormControl(false);
   lessonStateBusy$ = this.store.select(selectLessonStateBusy).pipe(delay(1));
 
   cirrusUser$ = this.store.select(selectCirrusUser);
@@ -72,7 +66,6 @@ export class AppComponent
     notificationService: NotificationService,
     errorService: ErrorService,
     route: ActivatedRoute,
-    private fullStoryService: FullStoryService,
   ) {
     super(
       userService,
@@ -88,11 +81,6 @@ export class AppComponent
 
   ngOnInit() {
     super.ngOnInit();
-
-    this.fullStoryService.init(environment.fullstoryOrgId)
-
-    console.log('Environment variable test', process.env['NX_TEST_VARIABLE']);
-
     this.courseService.getNotifications();
 
     this.triggerSubscription = this.appService.getTrigger().subscribe(() => {

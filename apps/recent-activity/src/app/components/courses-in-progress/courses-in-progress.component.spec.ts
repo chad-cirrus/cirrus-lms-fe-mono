@@ -2,6 +2,12 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CoursesInProgressComponent } from './courses-in-progress.component';
 
+jest.mock('swiper', () => ({
+  Swiper: { use() {} },
+  Navigation: () => null,
+  Pagination: () => null,
+}));
+
 describe('CoursesInProgressComponent', () => {
   let component: CoursesInProgressComponent;
   let fixture: ComponentFixture<CoursesInProgressComponent>;

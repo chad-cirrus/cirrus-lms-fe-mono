@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { RecentActivityFacade } from '../../facade.service';
+import { RecentActivityFacade } from '../../recent-activity-facade.service';
 import { Observable } from 'rxjs';
 import { Achievements } from '../../models/IRecentActivity';
 

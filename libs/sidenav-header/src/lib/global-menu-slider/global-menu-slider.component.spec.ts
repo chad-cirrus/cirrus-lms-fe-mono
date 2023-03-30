@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { GlobalMenuSliderComponent } from './global-menu-slider.component';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('GlobalMenuSliderComponent', () => {
   let component: GlobalMenuSliderComponent;
@@ -9,6 +10,7 @@ describe('GlobalMenuSliderComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [GlobalMenuSliderComponent],
+      imports: [NoopAnimationsModule],
     }).compileComponents();
   });
 

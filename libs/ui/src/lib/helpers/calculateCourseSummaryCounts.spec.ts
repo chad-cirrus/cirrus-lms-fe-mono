@@ -1,14 +1,12 @@
 import { ICourseOverviewLesson, ICourseOverviewStage } from '@cirrus/models';
-import {
-  calculateCourseSummaryCounts,
-  calculateLessonSummaryCounts,
-} from './calculateCourseSummaryCounts';
+import { calculateCourseSummaryCounts, calculateLessonSummaryCounts } from './calculateCourseSummaryCounts';
 
 describe('calcuate course summary counts', () => {
   it('should return correct lesson summary count', () => {
     const lessons: ICourseOverviewLesson[] = [
       {
         id: 692,
+        stage_id: 0,
         title: 'Welcome To Your Cirrus Training',
         order: 0,
         index: '1.1',
@@ -29,6 +27,7 @@ describe('calcuate course summary counts', () => {
     const lessons: ICourseOverviewLesson[] = [
       {
         id: 692,
+        stage_id: 0,
         title: 'Welcome To Your Cirrus Training',
         order: 0,
         index: '1.1',
@@ -40,6 +39,7 @@ describe('calcuate course summary counts', () => {
       },
       {
         id: 692,
+        stage_id: 0,
         title: 'Welcome To Your Cirrus Training',
         order: 0,
         index: '1.1',
@@ -60,6 +60,7 @@ describe('calcuate course summary counts', () => {
     const lessons: ICourseOverviewLesson[] = [
       {
         id: 692,
+        stage_id: 0,
         title: 'Welcome To Your Cirrus Training',
         order: 0,
         index: '1.1',
@@ -71,6 +72,7 @@ describe('calcuate course summary counts', () => {
       },
       {
         id: 692,
+        stage_id: 0,
         title: 'Welcome To Your Cirrus Training',
         order: 0,
         index: '1.1',
@@ -82,6 +84,7 @@ describe('calcuate course summary counts', () => {
       },
       {
         id: 692,
+        stage_id: 0,
         title: 'Welcome To Your Cirrus Training',
         order: 0,
         index: '1.1',
@@ -101,6 +104,7 @@ describe('calcuate course summary counts', () => {
     const lessons: ICourseOverviewLesson[] = [
       {
         id: 692,
+        stage_id: 0,
         title: 'Welcome To Your Cirrus Training',
         order: 0,
         index: '1.1',
@@ -112,6 +116,7 @@ describe('calcuate course summary counts', () => {
       },
       {
         id: 692,
+        stage_id: 0,
         title: 'Welcome To Your Cirrus Training',
         order: 0,
         index: '1.1',
@@ -123,6 +128,7 @@ describe('calcuate course summary counts', () => {
       },
       {
         id: 692,
+        stage_id: 0,
         title: 'Welcome To Your Cirrus Training',
         order: 0,
         index: '1.1',
@@ -134,6 +140,7 @@ describe('calcuate course summary counts', () => {
       },
       {
         id: 692,
+        stage_id: 0,
         title: 'Welcome To Your Cirrus Training',
         order: 0,
         index: '1.1',
@@ -145,6 +152,7 @@ describe('calcuate course summary counts', () => {
       },
       {
         id: 692,
+        stage_id: 0,
         title: 'Welcome To Your Cirrus Training',
         order: 0,
         index: '1.1',
@@ -156,6 +164,7 @@ describe('calcuate course summary counts', () => {
       },
       {
         id: 692,
+        stage_id: 0,
         title: 'Welcome To Your Cirrus Training',
         order: 0,
         index: '1.1',
@@ -167,6 +176,7 @@ describe('calcuate course summary counts', () => {
       },
       {
         id: 692,
+        stage_id: 0,
         title: 'Welcome To Your Cirrus Training',
         order: 0,
         index: '1.1',
@@ -195,6 +205,7 @@ describe('calcuate course summary counts', () => {
         lessons: [
           {
             id: 692,
+            stage_id: 0,
             title: 'Welcome To Your Cirrus Training',
             subtitle: '',
             order: 0,
@@ -218,6 +229,7 @@ describe('calcuate course summary counts', () => {
         lessons: [
           {
             id: 857,
+            stage_id: 0,
             title: 'CAPS',
             subtitle: '',
             order: 0,
@@ -230,6 +242,7 @@ describe('calcuate course summary counts', () => {
           },
           {
             id: 318,
+            stage_id: 0,
             title: 'Takeoffs and Landings',
             subtitle: '',
             order: 1,
@@ -242,6 +255,7 @@ describe('calcuate course summary counts', () => {
           },
           {
             id: 317,
+            stage_id: 0,
             title: 'Engine Management',
             subtitle: '',
             order: 2,
@@ -254,6 +268,7 @@ describe('calcuate course summary counts', () => {
           },
           {
             id: 595,
+            stage_id: 0,
             title: 'Workbook',
             subtitle: '',
             order: 3,
@@ -277,6 +292,7 @@ describe('calcuate course summary counts', () => {
         lessons: [
           {
             id: 834,
+            stage_id: 0,
             title: 'Lesson 1',
             subtitle: '',
             order: 0,
@@ -289,6 +305,7 @@ describe('calcuate course summary counts', () => {
           },
           {
             id: 835,
+            stage_id: 0,
             title: 'Lesson 2',
             subtitle: '',
             order: 1,
@@ -301,6 +318,7 @@ describe('calcuate course summary counts', () => {
           },
           {
             id: 836,
+            stage_id: 0,
             title: 'Lesson 3',
             subtitle: '',
             order: 2,
@@ -313,6 +331,7 @@ describe('calcuate course summary counts', () => {
           },
           {
             id: 837,
+            stage_id: 0,
             title: 'Lesson 4',
             subtitle: '',
             order: 3,
@@ -325,6 +344,7 @@ describe('calcuate course summary counts', () => {
           },
           {
             id: 838,
+            stage_id: 0,
             title: 'Lesson 5',
             subtitle: '',
             order: 4,
@@ -337,6 +357,7 @@ describe('calcuate course summary counts', () => {
           },
           {
             id: 839,
+            stage_id: 0,
             title: 'Lesson 6',
             subtitle: '',
             order: 5,
@@ -360,6 +381,7 @@ describe('calcuate course summary counts', () => {
         lessons: [
           {
             id: 840,
+            stage_id: 0,
             title: 'Lesson 7',
             subtitle: '',
             order: 0,
@@ -372,6 +394,7 @@ describe('calcuate course summary counts', () => {
           },
           {
             id: 841,
+            stage_id: 0,
             title: 'Lesson 8',
             subtitle: '',
             order: 1,
@@ -384,6 +407,7 @@ describe('calcuate course summary counts', () => {
           },
           {
             id: 842,
+            stage_id: 0,
             title: 'Lesson 9',
             subtitle: '',
             order: 2,
@@ -396,6 +420,7 @@ describe('calcuate course summary counts', () => {
           },
           {
             id: 843,
+            stage_id: 0,
             title: 'Lesson 10',
             subtitle: '',
             order: 3,
@@ -412,8 +437,6 @@ describe('calcuate course summary counts', () => {
     ];
 
     const actual = calculateCourseSummaryCounts(stages);
-
-    console.log('actual', actual);
 
     expect(actual).toEqual({
       // lessons: 15,
@@ -434,6 +457,7 @@ describe('calcuate course summary counts', () => {
         lessons: [
           {
             id: 692,
+            stage_id: 0,
             title: 'Welcome To Your Cirrus Training',
             order: 0,
             index: '1.1',
@@ -455,6 +479,7 @@ describe('calcuate course summary counts', () => {
         lessons: [
           {
             id: 692,
+            stage_id: 0,
             title: 'Welcome To Your Cirrus Training',
             order: 0,
             index: '1.1',
@@ -487,6 +512,7 @@ describe('calcuate course summary counts', () => {
         lessons: [
           {
             id: 692,
+            stage_id: 0,
             title: 'Welcome To Your Cirrus Training',
             order: 0,
             index: '1.1',
@@ -498,6 +524,7 @@ describe('calcuate course summary counts', () => {
           },
           {
             id: 692,
+            stage_id: 0,
             title: 'Welcome To Your Cirrus Training',
             order: 0,
             index: '1.1',
@@ -509,6 +536,7 @@ describe('calcuate course summary counts', () => {
           },
           {
             id: 692,
+            stage_id: 0,
             title: 'Welcome To Your Cirrus Training',
             order: 0,
             index: '1.1',
@@ -530,6 +558,7 @@ describe('calcuate course summary counts', () => {
         lessons: [
           {
             id: 692,
+            stage_id: 0,
             title: 'Welcome To Your Cirrus Training',
             order: 0,
             index: '1.1',
@@ -541,6 +570,7 @@ describe('calcuate course summary counts', () => {
           },
           {
             id: 692,
+            stage_id: 0,
             title: 'Welcome To Your Cirrus Training',
             order: 0,
             index: '1.1',
@@ -562,6 +592,7 @@ describe('calcuate course summary counts', () => {
         lessons: [
           {
             id: 692,
+            stage_id: 0,
             title: 'Welcome To Your Cirrus Training',
             order: 0,
             index: '1.1',
@@ -573,6 +604,7 @@ describe('calcuate course summary counts', () => {
           },
           {
             id: 692,
+            stage_id: 0,
             title: 'Welcome To Your Cirrus Training',
             order: 0,
             index: '1.1',
@@ -594,6 +626,7 @@ describe('calcuate course summary counts', () => {
         lessons: [
           {
             id: 692,
+            stage_id: 0,
             title: 'Welcome To Your Cirrus Training',
             order: 0,
             index: '1.1',
@@ -615,6 +648,7 @@ describe('calcuate course summary counts', () => {
         lessons: [
           {
             id: 692,
+            stage_id: 0,
             title: 'Welcome To Your Cirrus Training',
             order: 0,
             index: '1.1',
@@ -636,6 +670,7 @@ describe('calcuate course summary counts', () => {
         lessons: [
           {
             id: 692,
+            stage_id: 0,
             title: 'Welcome To Your Cirrus Training',
             order: 0,
             index: '1.1',

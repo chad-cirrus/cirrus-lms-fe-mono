@@ -1,14 +1,6 @@
-import {
-  Component,
-  Input,
-  Output,
-  ViewChild,
-  EventEmitter,
-  OnInit,
-} from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { ICirrusUser, ROLE } from '@cirrus/models';
-import { Observable } from 'rxjs';
 
 
 @Component({

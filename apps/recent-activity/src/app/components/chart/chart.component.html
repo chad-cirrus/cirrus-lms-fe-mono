@@ -5,17 +5,18 @@
   <div class="chart-container-wrapper">
     <div class="chart-container">
       <apx-chart
-        [series]="chartOptions?.series!"
-        [theme]="chartOptions?.theme!"
-        [chart]="chartOptions?.chart!"
-        [dataLabels]="chartOptions?.dataLabels!"
-        [plotOptions]="chartOptions?.plotOptions!"
-        [yaxis]="chartOptions?.yaxis!"
-        [xaxis]="chartOptions?.xaxis!"
-        [legend]="chartOptions?.legend!"
-        [grid]="chartOptions?.grid!"
-        [fill]="chartOptions?.fill!"
-        [tooltip]="chartOptions?.tooltip!"
+        [series]="chartOptions.series!"
+        [theme]="chartOptions.theme!"
+        [chart]="chartOptions.chart!"
+        [dataLabels]="chartOptions.dataLabels!"
+        [plotOptions]="chartOptions.plotOptions!"
+        [yaxis]="chartOptions.yaxis!"
+        [xaxis]="chartOptions.xaxis!"
+        [legend]="chartOptions.legend!"
+        [colors]="data.chartColors.gradientFromColors"
+        [grid]="chartOptions.grid!"
+        [fill]="chartOptions.fill!"
+        [tooltip]="chartOptions.tooltip!"
       ></apx-chart>
     </div>
   </div>

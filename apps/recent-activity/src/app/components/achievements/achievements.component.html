@@ -1,14 +1,14 @@
 <div class="achievements-wrapper">
   <h2 class="heading-3">Achievements</h2>
 
-  <mat-tab-group dynamicHeight>
+  <mat-tab-group dynamicHeight mat-stretch-tabs='false' mat-align-tabs='start'>
     <mat-tab label="Certificates">
       <cirrus-certificates
-        [certificates]="achievements?.certificates!"
+        [certificates]="achievements.certificates!"
       ></cirrus-certificates>
     </mat-tab>
     <mat-tab label="Badges">
-      <cirrus-badges [badges]="achievements?.badges!"></cirrus-badges>
+      <cirrus-badges [badges]="achievements.badges!"></cirrus-badges>
     </mat-tab>
   </mat-tab-group>
 </div>

@@ -1,10 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 
-import { TaskService } from './task.service';
-import {
-  HttpClientTestingModule,
-  HttpTestingController,
-} from '@angular/common/http/testing';
+import { ITasksRequest, TaskService } from './task.service';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { FlightLogType, ILessonFlightLog } from '@cirrus/models';
 import { environment } from '../environments/environment';
 
@@ -59,11 +56,12 @@ describe('TaskService', () => {
       to_airport: 'ATL',
     };
 
-    const payload = {
+    const payload: ITasksRequest = {
+      course_id: 0,
       course_attempt_id: 213,
       content_id: 218,
       lesson_id: 369,
-      stage_id: 117,
+      stage_id: 117
     };
 
     service.getLogbook(payload).subscribe(t => {

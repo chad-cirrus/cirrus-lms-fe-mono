@@ -84,6 +84,7 @@ describe('course complete response logic', () => {
           ios_uuid: null,
         },
       ],
+      progress_stats: [],
     };
 
     const actual = completeProgressHandler(progresses);

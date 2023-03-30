@@ -1,39 +1,14 @@
-import {
-  AfterViewInit,
-  ChangeDetectorRef,
-  Component,
-  Inject,
-  OnDestroy,
-  OnInit,
-  ViewChild,
-} from '@angular/core';
+import { AfterContentInit, ChangeDetectorRef, Component, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
 
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import {
-  IContent,
-  ILessonFlightLog,
-  IProgress,
-  ITask,
-  PROGRESS_STATUS,
-} from '@cirrus/models';
+import { MAT_DIALOG_DATA, MatDialogRef as MatDialogRef } from '@angular/material/dialog';
+import { IContent, ILessonFlightLog, IProgress, ITask, PROGRESS_STATUS } from '@cirrus/models';
 import { LessonContentComponent } from '@cirrus/ui';
 import { Store } from '@ngrx/store';
 import { BehaviorSubject, combineLatest, Observable, Subject } from 'rxjs';
-import {
-  delay,
-  map,
-  take,
-  takeUntil,
-  tap,
-  withLatestFrom,
-} from 'rxjs/operators';
+import { delay, map, startWith, take, takeUntil, tap, withLatestFrom } from 'rxjs/operators';
 import { completeProgress, startProgress } from '../../store/actions';
 import { AppState } from '../../store/reducers';
-import {
-  selectCheckOffRequired,
-  selectLesson,
-  selectMenuItems,
-} from '../../store/selectors/lessons.selector';
+import { selectCheckOffRequired, selectLesson, selectMenuItems } from '../../store/selectors/lessons.selector';
 import { TaskService } from '../../task.service';
 
 import { componentDictionary } from '../component-dictionary';
@@ -54,7 +29,7 @@ export interface INextContentRequest {
   styleUrls: ['./content-player.component.scss'],
 })
 export class ContentPlayerComponent
-  implements OnInit, AfterViewInit, OnDestroy
+  implements OnInit, AfterContentInit, OnDestroy
 {
   destroy$: Subject<boolean> = new Subject<boolean>();
   firstContentId = 0;
@@ -75,6 +50,7 @@ export class ContentPlayerComponent
   checkoutOffsRequired$ = this.store.select(selectCheckOffRequired);
 
   showPreviousBtn$ = this.nextContentRequest$.pipe(
+    startWith(true),
     withLatestFrom(this.currentId$, this.currentContentType$),
     map(([prev, id, content_type]) => {
       return id !== this.firstContentId && content_type === 'content_item';
@@ -149,7 +125,7 @@ export class ContentPlayerComponent
       });
   }
 
-  ngAfterViewInit(): void {
+  ngAfterContentInit(): void {
     if (this.data.overview) {
       this.playOverview(this.data.overview);
     } else if (this.data.intro) {

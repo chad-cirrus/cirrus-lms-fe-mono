@@ -3,7 +3,7 @@
     <div class="title-container">
       <div class="title-notifications">
         <h3 class="heading-3">Notifications</h3>
-        <cirrus-badge [badgeNumber]="notifications?.length"></cirrus-badge>
+        <cirrus-badge [badgeNumber]="notifications.length"></cirrus-badge>
       </div>
       <img
         class="closeIcon"
@@ -17,7 +17,7 @@
     <div class="clear-all">
       <p class="clear-all-text" (click)="clearNotifications()">Clear All</p>
     </div>
-    <div *ngIf="notifications?.length">
+    <div *ngIf="notifications.length">
       <div *ngFor="let notification of notifications" class="notification-item">
         <div class="date-trash-container">
           <span class="body-copy-xsmall">{{

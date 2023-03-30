@@ -1,44 +1,38 @@
 @use '../styles/variables' as *;
 
-
-
 .tabs-container {
+  .mdc-tab {
+    --mdc-tab-indicator-active-indicator-color: white;
 
-  .mat-tab-body.mat-tab-body-active {
+    .mdc-tab__text-label {
+      font-family: $bqmedium-font;
+      color: white;
+      opacity: .6;
+    }
+  }
+
+  .mdc-tab.mdc-tab--active {
+    .mdc-tab__text-label {
+      font-family: $bqmedium-font;
+      color: white;
+      opacity: 1;
+    }
+  }
+
+  .mat-mdc-tab-body.mat-mdc-tab-body-active {
     overflow: unset;
   }
-  .mat-tab-body-content {
+  .mat-mdc-tab-body-content {
     overflow: unset;
-  }
-
-  .mat-tab-label-active {
-    font-family: $bqmedium-font;
-    color: white;
-    opacity: 1 !important;
   }
 
   .mat-tab-label-content {
     padding-bottom: 18px;
   }
 
-
-  // border-bottom: none!important;
-
   .mat-ripple.mat-tab-label.mat-focus-indicator.mat-tab-disabled {
     display: none;
   }
-
-
-  .mat-table {
-    width: 100%;
-    background-color: rgba(0, 0, 0, 0.32);
-  }
-
-  tr.mat-row {
-    height: 68px;
-  }
-
-
 
   .tasks {
     font-style: normal;
@@ -63,5 +57,4 @@
   .image {
     padding-right: 10px;
   }
-
 }

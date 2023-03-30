@@ -1,5 +1,15 @@
 // eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
-import { ILesson, ProgressStat, ProgressType } from '@cirrus/models';
+import {
+  ContentCounts,
+  IBadge,
+  ICertificate,
+  ICourseOverview,
+  ILesson,
+  ILessonsstats,
+  IProgress,
+  ProgressStat,
+  ProgressType,
+} from '@cirrus/models';
 
 const progressStats: ProgressStat[] = [
   {
@@ -40,7 +50,7 @@ export const testData: ILesson = {
     'The SR Series Systems self-study lesson for flight training courses.',
 
   updated_at: '2020-02-14T20:21:44.256Z',
-  subtitle: '',
+  subtitle: 'SR Series Systems Self Study Lesson - Flight Training Courses',
   thumbnail_image_url: '',
   mobile_hero_image_url: '',
   desktop_hero_image_url: '',
@@ -409,4 +419,37 @@ export const testData2: ILesson = {
   instructor_overview: '',
   instructor_contents: [],
   progress_stats: progressStats,
+};
+
+export const summary_counts: ContentCounts = {};
+export const progress: IProgress = { id: 0, status: 'not_started' };
+export const lessons_stats: ILessonsstats = { completed: 0, total: 0 };
+export const certificate: ICertificate = { expiration: '' };
+export const badge: IBadge = { badge_image: '', desc: '', id: 0, isActive: false, name: '', progress: 0 };
+export const courseOverview: ICourseOverview = {
+  agreement_body: '',
+  badge,
+  can_reenroll: false,
+  certificate,
+  completed_at: '',
+  course_attempt: { id: 0 },
+  course_content_stats: [],
+  desktop_hero_image_url: '',
+  has_agreement: false,
+  hours_and_landings_stats: [],
+  id: 0,
+  lessons_stats,
+  major_version: 0,
+  minimum_flight_hours: 0,
+  minor_version: 0,
+  mobile_hero_image_url: '',
+  name: '',
+  next_lesson: testData,
+  progress,
+  stages: [],
+  started_at: '',
+  subtitle: '',
+  summary_counts,
+  thumbnail_image_url: '',
+  title: ''
 };

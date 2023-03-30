@@ -1,0 +1,29 @@
+{
+  "name": "recent-activity-e2e",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/recent-activity-e2e/src",
+  "projectType": "application",
+  "targets": {
+    "e2e": {
+      "executor": "@nrwl/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/recent-activity-e2e/cypress.json",
+        "devServerTarget": "recent-activity:serve:development"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "recent-activity:serve:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/recent-activity-e2e/**/*.{js,ts}"]
+      }
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["recent-activity"]
+}

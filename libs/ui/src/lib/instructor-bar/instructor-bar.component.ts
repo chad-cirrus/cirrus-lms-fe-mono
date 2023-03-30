@@ -5,7 +5,7 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -15,7 +15,7 @@ import { Subscription } from 'rxjs';
 })
 export class InstructorBarComponent implements OnInit, OnDestroy {
   student = 'John Doe';
-  viewToggle = new FormControl(false);
+  viewToggle = new UntypedFormControl(false);
   toggle$ = this.viewToggle.valueChanges;
   subscription = new Subscription();
   @Output() instructorView = new EventEmitter<boolean>();

@@ -1,12 +1,5 @@
-import {
-  Directive,
-  Input,
-  OnInit,
-  TemplateRef,
-  ViewContainerRef,
-} from '@angular/core';
-import { RecentActivityFacade } from '../../facade.service';
-import { RecentActivityService } from '../../services/recent-activity.service';
+import { Directive, Input, OnInit, TemplateRef, ViewContainerRef } from '@angular/core';
+import { RecentActivityFacade } from '../../recent-activity-facade.service';
 
 @Directive({
   selector: '[cirrusFeature]',

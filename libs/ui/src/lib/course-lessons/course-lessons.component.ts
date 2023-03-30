@@ -6,7 +6,7 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
-import { FormArray, FormControl, FormGroup } from '@angular/forms';
+import { UntypedFormArray, UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import {
   FilterMenuSection,
   ICourseOverviewLesson,
@@ -65,9 +65,9 @@ export class CourseLessonsComponent implements OnInit {
 
   @Output() navigate = new EventEmitter<StageLessonNavigationEvent>();
 
-  filterForm = new FormGroup({
-    filterText: new FormControl(null),
-    filterCheckbox: new FormArray([]),
+  filterForm = new UntypedFormGroup({
+    filterText: new UntypedFormControl(null),
+    filterCheckbox: new UntypedFormArray([]),
   });
 
   changes!: string[];
@@ -77,7 +77,7 @@ export class CourseLessonsComponent implements OnInit {
   }
 
   get checkboxArray() {
-    return this.filterForm.get('filterCheckbox') as FormArray;
+    return this.filterForm.get('filterCheckbox') as UntypedFormArray;
   }
 
   ngOnInit() {

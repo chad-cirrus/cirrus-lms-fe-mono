@@ -1,4 +1,4 @@
-import { Component, DebugElement } from '@angular/core';
+import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { ClickOutsideDirective } from './clickoutside.directive';
@@ -28,7 +28,7 @@ describe('ClickoutsideDirective', () => {
     directive = fixture.debugElement
       .query(By.directive(ClickOutsideDirective))
       .injector.get(ClickOutsideDirective) as ClickOutsideDirective;
-    spy = jest.spyOn(directive, 'clickOutside');
+    spy = jest.spyOn(directive.clickOutside, 'emit');
     const h1 = fixture.debugElement.query(By.css('h1'));
     h1.nativeElement.click();
     fixture.detectChanges();
@@ -39,7 +39,7 @@ describe('ClickoutsideDirective', () => {
     directive = fixture.debugElement
       .query(By.directive(ClickOutsideDirective))
       .injector.get(ClickOutsideDirective) as ClickOutsideDirective;
-    spy = jest.spyOn(directive, 'clickOutside');
+    spy = jest.spyOn(directive.clickOutside, 'emit');
     const h2 = fixture.debugElement.query(By.css('h2'));
     h2.nativeElement.click();
     fixture.detectChanges();

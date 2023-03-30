@@ -196,3 +196,14 @@ cirrus-achievements .mat-tab-group,
 cirrus-achievements .mat-tab-label {
   font-family: "akzidenz", Helvetica, Verdana, sans-serif;
 }
+
+
+
+/* Overriding the background color of progress bars in CourseProgressComponent */
+cirrus-course-progress mat-progress-bar div.mdc-linear-progress__buffer-bar {
+  background-color: #242424;
+}
+
+cirrus-course-overview-lesson-progress-bar mat-progress-bar div.mdc-linear-progress__buffer-bar {
+  background-color: #004040;
+}

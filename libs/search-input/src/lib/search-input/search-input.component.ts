@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 import { ISearchInputData } from '@cirrus/models';
 import { debounceTime } from 'rxjs/operators';
 
@@ -16,7 +16,7 @@ export class SearchInputComponent implements OnInit {
 
   isOpened = false;
 
-  searchInput = new FormControl();
+  searchInput = new UntypedFormControl();
 
   ngOnInit(): void {
     this.searchInput.valueChanges.pipe(debounceTime(200)).subscribe(input => {

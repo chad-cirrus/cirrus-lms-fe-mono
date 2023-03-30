@@ -16,6 +16,7 @@ describe('CourseworkComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(CourseworkComponent);
     component = fixture.componentInstance;
+    component.courseWorkStats = [];
     fixture.detectChanges();
   });
 

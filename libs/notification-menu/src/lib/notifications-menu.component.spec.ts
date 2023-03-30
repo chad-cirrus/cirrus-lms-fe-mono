@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NotificationsMenuComponent } from './notifications-menu.component';
+import { MockComponent } from 'ng-mocks';
+import { BadgeComponent } from '@cirrus/badge';
 
 describe('NotificationsMenuComponent', () => {
   let component: NotificationsMenuComponent;
@@ -8,7 +10,7 @@ describe('NotificationsMenuComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [NotificationsMenuComponent],
+      declarations: [NotificationsMenuComponent, MockComponent(BadgeComponent)],
     }).compileComponents();
   });
 

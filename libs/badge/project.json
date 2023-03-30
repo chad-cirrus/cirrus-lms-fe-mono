@@ -1,0 +1,27 @@
+{
+  "name": "badge",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/badge/src",
+  "prefix": "cirrus",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/badge"],
+      "options": {
+        "jestConfig": "libs/badge/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/badge/src/**/*.ts",
+          "libs/badge/src/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

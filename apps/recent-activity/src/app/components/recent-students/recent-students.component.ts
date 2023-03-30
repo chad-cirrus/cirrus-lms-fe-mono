@@ -1,11 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
-
-import SwiperCore, { Navigation, Pagination } from 'swiper';
+import { Component, Input } from '@angular/core';
+import { Navigation, Pagination, Swiper } from 'swiper';
 import { IStudent } from '../../models/IRecentActivityInstructors';
 
-
 // install Swiper modules
-SwiperCore.use([Navigation, Pagination]);
+Swiper.use([Navigation, Pagination]);
 
 @Component({
   selector: 'cirrus-recent-students',

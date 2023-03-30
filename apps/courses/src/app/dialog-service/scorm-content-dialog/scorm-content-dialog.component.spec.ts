@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ScormContentDialogComponent } from './scorm-content-dialog.component';
+import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 
 describe('ScormContentDialogComponent', () => {
   let component: ScormContentDialogComponent;
@@ -8,7 +9,11 @@ describe('ScormContentDialogComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ScormContentDialogComponent ]
+      declarations: [ ScormContentDialogComponent ],
+      imports: [MatDialogModule],
+      providers: [
+        { provide: MAT_DIALOG_DATA, useValue: {} },
+      ],
     })
     .compileComponents();
   });

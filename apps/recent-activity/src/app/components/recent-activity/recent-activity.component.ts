@@ -1,20 +1,13 @@
-import {
-  AfterContentInit,
-  AfterViewInit,
-  Component,
-  Injector,
-  OnInit,
-} from '@angular/core';
-
+import { AfterViewInit, Component } from '@angular/core';
 import { ICirrusUser } from '@cirrus/models';
 import { Store } from '@ngrx/store';
 import { Observable, Subject } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
-import { RecentActivityFacade } from '../../facade.service';
+import { map } from 'rxjs/operators';
 import { FlightHours } from '../../models/IRecentActivity';
 import { RecentActivityService } from '../../services/recent-activity.service';
 import { AppState } from '../../store/reducers';
 import { selectCirrusUser } from '../../store/selectors/cirrus-user.selector';
+import { RecentActivityFacade } from '../../recent-activity-facade.service';
 
 @Component({
   selector: 'cirrus-recent-activity',

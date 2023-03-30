@@ -125,6 +125,24 @@ export class MatIconRegistryModule {
         this.domSanitizer.bypassSecurityTrustResourceUrl(
           'courses/images/svg/landing_hours_icon.svg'
         )
+      )
+      .addSvgIcon(
+        're-enroll',
+        this.domSanitizer.bypassSecurityTrustResourceUrl(
+          'courses/images/svg/re-enroll.svg'
+        )
+      )
+      .addSvgIcon(
+        'assessment3',
+        this.domSanitizer.bypassSecurityTrustResourceUrl(
+          'courses/images/svg/assessment3.svg'
+        )
+      )
+      .addSvgIcon(
+        'logbook',
+        this.domSanitizer.bypassSecurityTrustResourceUrl(
+          'courses/images/svg/logbook.svg'
+        )
       );
   }
 }

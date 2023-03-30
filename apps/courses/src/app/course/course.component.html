@@ -1,25 +1,36 @@
-<div fxLayout="column">
-  <cirrus-course-landing-page
-    [user]="(cirrusUser$ | async)!"
-    [course]="(courseOverview$ | async)!"
-    [size]="(screenSize$ | async)!"
-    (refreshCourse)="setCourse($event)"
-  ></cirrus-course-landing-page>
-  <div *ngIf="courseOverview$ | async as overview">
-    <nav mat-tab-nav-bar>
-      <a mat-tab-link [routerLink]='["/", "courses", overview.id, "overview"]'>
-        <mat-icon svgIcon="eye"></mat-icon>
-        <span class="cirrus-tab-label"> Overview </span>
-      </a>
-      <a mat-tab-link [routerLink]='["/", "courses", overview.id, "lessons"]'>
-        <mat-icon svgIcon="open_lessons"></mat-icon>
-        <span class="cirrus-tab-label"> Lessons </span>
-      </a>
-      <a mat-tab-link [routerLink]='["/", "courses", overview.id, "enrollments"]'>
-        <mat-icon svgIcon="enrollment_history"></mat-icon>
-        <span class="cirrus-tab-label"> Enrollment History </span>
-      </a>
-    </nav>
-    <router-outlet></router-outlet>
-  </div>
-</div>
+<cirrus-course-landing-page
+  [user]="(cirrusUser$ | async)!"
+  [course]="(courseOverview$ | async)!"
+  [size]="(screenSize$ | async)!"
+  (refreshCourse)="setCourse($event)"
+></cirrus-course-landing-page>
+<nav
+  *ngIf='courseOverview$ | async as overview'
+  mat-tab-nav-bar
+  color='primary'
+  backgroundColor='primary'
+  [tabPanel]='tabPanel'
+  mat-stretch-tabs='false'
+  mat-align-tabs='start'>
+  <a mat-tab-link
+     routerLink='overview'
+     routerLinkActive='active'>
+    <mat-icon svgIcon='eye'></mat-icon>
+    Overview
+  </a>
+  <a mat-tab-link
+     routerLink='lessons'
+     routerLinkActive='active'>
+    <mat-icon svgIcon='open_lessons'></mat-icon>
+    Lessons
+  </a>
+  <a mat-tab-link
+     routerLink='enrollments'
+     routerLinkActive='active'>
+    <mat-icon svgIcon='enrollment_history'></mat-icon>
+    Enrollment History
+  </a>
+</nav>
+<mat-tab-nav-panel #tabPanel>
+  <router-outlet></router-outlet>
+</mat-tab-nav-panel>

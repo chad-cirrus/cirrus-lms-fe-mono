@@ -1,11 +1,11 @@
 import { Component, Input, ViewEncapsulation } from '@angular/core';
 import { ICoursesForRecentActivity } from '@cirrus/models';
 
-import SwiperCore, { Navigation, Pagination } from 'swiper';
+import { Navigation, Pagination, Swiper } from 'swiper';
 import { environment } from '../../../environments/environment';
 
 // install Swiper modules
-SwiperCore.use([Navigation, Pagination]);
+Swiper.use([Navigation, Pagination]);
 
 @Component({
   selector: 'cirrus-courses-in-progress',

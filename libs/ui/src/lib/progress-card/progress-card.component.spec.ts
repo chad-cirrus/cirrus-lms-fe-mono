@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ICourseProgress, ProgressType } from '@cirrus/models';
+import { ProgressStat, ProgressType } from '@cirrus/models';
 import { CirrusMaterialModule } from '../cirrus-material.module';
 
 import { ProgressCardComponent } from './progress-card.component';
@@ -27,9 +27,10 @@ describe('ProgressCardComponent', () => {
 
   it('should display the correct progress type and progress', () => {
     component.progress = {
+      status: '',
       type: ProgressType.Ground,
-      completedCourses: 5,
-      totalCourses: 10,
+      completed: 5,
+      total: 10
     };
     fixture.detectChanges();
     const progressTypeElement = fixture.debugElement.nativeElement;
@@ -47,17 +48,18 @@ describe('ProgressCardComponent', () => {
 
 
   it('should display round number or one decimal for courses completed', () => {
-   const progress: ICourseProgress = {
-      type: ProgressType.SelfStudy,
-      completedCourses: 2.55,
-      totalCourses: 5.5
+   const progress: ProgressStat = {
+     status: '',
+     type: ProgressType.SelfStudy,
+      completed: 2.55,
+      total: 5.5
     }
 
-    component.progress = progress
+    component.progress = progress;
     fixture.detectChanges();
     const progressTypeElement = fixture.debugElement.nativeElement;
-    const text = progressTypeElement.querySelector('.courses-completed')
-    const format = text.textContent
+    const text = progressTypeElement.querySelector('.courses-completed');
+    const format = text.textContent;
     const index = format.indexOf('.');
     const numbersAfterDec = index === -1 ? true  : format.slice(index + 1).length < 2
 

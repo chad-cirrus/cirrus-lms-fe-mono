@@ -1,11 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { MatTabChangeEvent } from '@angular/material/tabs';
 import { BehaviorSubject } from 'rxjs';
-import {
-  ChartColors,
-  CourseWorkChartColors,
-  LogBookChartColors,
-} from '../../models/ChartColors';
+import { ChartColors, CourseWorkChartColors, LogBookChartColors } from '../../models/ChartColors';
 import { ChartData } from '../../models/ChartData';
 import { OverallProgress } from '../../models/IRecentActivity';
 

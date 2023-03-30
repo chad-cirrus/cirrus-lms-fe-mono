@@ -1,6 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { GlobalHeaderComponent } from './global-header.component';
+import { MockComponent } from 'ng-mocks';
+import { BadgeComponent } from '@cirrus/badge';
+import { GlobalUserMenusComponent } from '../global-user-menus/global-user-menus.component';
 
 describe('GlobalHeaderComponent', () => {
   let component: GlobalHeaderComponent;
@@ -8,7 +11,7 @@ describe('GlobalHeaderComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [GlobalHeaderComponent],
+      declarations: [GlobalHeaderComponent, MockComponent(BadgeComponent), MockComponent(GlobalUserMenusComponent)],
     }).compileComponents();
   });
 

@@ -1,4 +1,4 @@
-<button mat-button (click)="onClick()">
-  <img *ngIf="icon.length" [src]="icon" alt="" />
+<button mat-fab extended (click)="onClick()" color='primary'>
+  <mat-icon [svgIcon]='icon' *ngIf='icon.length'></mat-icon>
   {{ text }}
 </button>

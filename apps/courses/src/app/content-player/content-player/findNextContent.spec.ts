@@ -1,11 +1,27 @@
-import {
-  IContentPlayerMenuItem,
-  ILesson,
-  ProgressType,
-  PROGRESS_STATUS,
-} from '@cirrus/models';
+import { IContent, IContentPlayerMenuItem, ILesson, IProgress, PROGRESS_STATUS, ProgressType } from '@cirrus/models';
 import { findNextContent } from './findNextContent';
 
+let nullProgress: IProgress = { id: 0, scorm: { grade: 0, pass: false }, status: '' };
+let nullContent: IContent = {
+  blob_directory: '',
+  content_file: '',
+  content_filename: '',
+  content_html: '',
+  content_tasks: [],
+  content_type: 0,
+  created_by: '',
+  desc: '',
+  jet_scoring: false,
+  meta_tags: [],
+  placeholder_image: '',
+  progress: nullProgress,
+  quiz: undefined,
+  score: 0,
+  show_comments: false,
+  starter_file: '',
+  upload_image: '',
+  url: '',
+  id: 0, order: 0, title: '', subtitle: '' };
 const lesson: ILesson = {
   id: 757,
   course_id: 215,
@@ -252,6 +268,7 @@ const lesson: ILesson = {
     content_id: 0,
   },
   instructor_intro_video: {
+    content: nullContent,
     content_id: 0,
     created_at: '',
     hidden: false,

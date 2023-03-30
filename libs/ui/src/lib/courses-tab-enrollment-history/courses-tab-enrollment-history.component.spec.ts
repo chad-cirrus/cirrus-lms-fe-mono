@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CoursesTabEnrollmentHistoryComponent } from './courses-tab-enrollment-history.component';
+import { GenericResponsiveMatTableComponent, UiDownloadService } from '@cirrus/ui';
+import { MockComponent } from 'ng-mocks';
 
 describe('CoursesTabEnrollmentHistoryComponent', () => {
   let component: CoursesTabEnrollmentHistoryComponent;
@@ -8,7 +10,10 @@ describe('CoursesTabEnrollmentHistoryComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CoursesTabEnrollmentHistoryComponent ]
+      declarations: [ CoursesTabEnrollmentHistoryComponent, MockComponent(GenericResponsiveMatTableComponent) ],
+      providers: [
+        { provide: UiDownloadService, useClass: MockUIDownloadService },
+      ]
     })
     .compileComponents();
   });
@@ -23,3 +28,5 @@ describe('CoursesTabEnrollmentHistoryComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+
+class MockUIDownloadService {}

@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ProfileInitialsComponent } from './profile-initials.component';
+import { DisplayInitialsPipe } from './display-initials.pipe';
 
 describe('ProfileInitialsComponent', () => {
   let component: ProfileInitialsComponent;
@@ -8,7 +9,7 @@ describe('ProfileInitialsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ProfileInitialsComponent],
+      declarations: [ProfileInitialsComponent, DisplayInitialsPipe],
     }).compileComponents();
   });
 

@@ -19,7 +19,7 @@
   padding-top: 12px;
 }
 
-span.cirrus-tab-label {
+span.mdc-tab__text-label {
   font-family: 'Akzidenz-Grotesk BQ';
   font-size: 1.0625rem;
   line-height: 22px;
@@ -36,14 +36,26 @@ span.cirrus-tab-label {
 }
 
 
-  .mat-tab-nav-bar {
-    padding: 0 20px;
-    @media (min-width: 600px) {
-      padding: 0 25px;
-    }
-    @media (min-width: 960px) {
+.mat-mdc-tab-nav-bar {
+  padding: 0 20px;
+  border-bottom: 1px solid rgba(255,255,255,.12);
+
+  @media (min-width: 600px) {
+    padding: 0 25px;
+  }
+
+  @media (min-width: 960px) {
     padding: 0 50px;
     max-width: 1300px;
     margin: 0 auto;
   }
+}
+
+.mat-mdc-tab-link {
+  text-decoration: none;
+  opacity: .6;
+}
+
+.active {
+  opacity: 1;
 }

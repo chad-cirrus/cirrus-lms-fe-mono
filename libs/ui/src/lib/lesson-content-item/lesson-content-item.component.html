@@ -13,7 +13,7 @@
     fxLayoutGap="16px"
   >
     <img [src]="this.content_type_icon" />
-    <p>{{ content?.title }}</p>
+    <p>{{ content.title }}</p>
   </div>
   <div
     class="progress-column"
@@ -24,6 +24,6 @@
     fxFlex.xs="0 0 18px"
   >
     <img [src]="imageSrc" />
-    <p>{{ progressText }}</p>
+    <p class='lesson-content-item__progress'>{{ progressText }}</p>
   </div>
 </div>

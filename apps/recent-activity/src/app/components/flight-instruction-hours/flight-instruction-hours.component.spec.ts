@@ -4,6 +4,7 @@ import { ChartData } from '../../models/ChartData';
 import { FlightLogStatsType } from '../../models/IRecentActivityInstructors';
 
 import { FlightInstructionHoursComponent } from './flight-instruction-hours.component';
+import { MatSelectModule } from '@angular/material/select';
 
 describe('FlightInstructionHoursComponent', () => {
   let component: FlightInstructionHoursComponent;
@@ -11,6 +12,7 @@ describe('FlightInstructionHoursComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [MatSelectModule],
       declarations: [FlightInstructionHoursComponent],
     }).compileComponents();
   });

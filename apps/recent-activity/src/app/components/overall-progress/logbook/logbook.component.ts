@@ -8,4 +8,8 @@ import { LogbookStat } from '../../../models/IRecentActivity';
 })
 export class LogbookComponent {
   @Input() logbookStats!: LogbookStat[];
+
+  public get logbookSubset(): LogbookStat[] {
+    return this.logbookStats.slice(0, 5);
+  }
 }

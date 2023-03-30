@@ -1,6 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CourseCompletionComponent } from './course-completion.component';
+import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { UiDownloadService } from '@cirrus/ui';
+import { of } from 'rxjs';
 
 describe('CourseCompletionComponent', () => {
   let component: CourseCompletionComponent;
@@ -8,7 +11,13 @@ describe('CourseCompletionComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CourseCompletionComponent ]
+      declarations: [ CourseCompletionComponent ],
+      imports: [MatDialogModule],
+      providers: [
+        { provide: MAT_DIALOG_DATA, useValue: {} },
+        { provide: MatDialogRef, useValue: {} },
+        { provide: UiDownloadService, useClass: MockUIDownloadService },
+      ]
     })
     .compileComponents();
   });
@@ -23,3 +32,9 @@ describe('CourseCompletionComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+
+class MockUIDownloadService {
+  getCourse(course_id: number): any {
+    return of('');
+  }
+}

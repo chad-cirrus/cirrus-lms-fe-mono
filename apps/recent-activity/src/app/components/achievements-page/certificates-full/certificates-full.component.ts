@@ -1,8 +1,8 @@
 import { Component, Input, ViewEncapsulation } from '@angular/core';
 import { Certificate } from '../../../models/IRecentActivity';
-import { RecentActivityFacade } from '../../../facade.service';
+import { RecentActivityFacade } from '../../../recent-activity-facade.service';
 import { downloadPdf, UiDownloadService } from '@cirrus/ui';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 
@@ -17,7 +17,7 @@ export class CertificatesFullComponent {
   user_certificate_id = 0;
   @Input() certificates: Certificate[] = [];
 
-  searchParam = new FormControl('');
+  searchParam = new UntypedFormControl('');
   filteredCertList$: Observable<Certificate[]> =
     this.searchParam.valueChanges.pipe(
       startWith(''),

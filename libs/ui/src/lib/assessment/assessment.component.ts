@@ -1,14 +1,8 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
-import {
-  Component,
-  ViewEncapsulation,
-  ViewChild,
-  OnInit,
-  Input,
-} from '@angular/core';
+import { Component, Input, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { MatTabGroup } from '@angular/material/tabs';
 import { Attempt } from '@cirrus/models';
-import { Observable } from 'rxjs';
+import { combineLatest, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { LessonContentComponent } from '../LessonContentComponent';
 
@@ -28,6 +22,8 @@ export class AssessmentComponent
   mobile$!: Observable<boolean>;
   _isMenuOpen!: boolean;
   attempt_index!: number;
+
+  logbookLabel$!: Observable<string>;
 
   constructor(private breakpointObserver: BreakpointObserver) {
     super();
@@ -93,6 +89,17 @@ export class AssessmentComponent
         return matches;
       })
     );
+
+    this.logbookLabel$ = combineLatest([this.tablet$, this.mobile$])
+      .pipe(
+        map(([isTablet, isMobile]) => {
+          if (isTablet || isMobile) {
+            return 'Logbook';
+          } else {
+            return 'Logbook Entry';
+          }
+        }),
+      );
   }
 
   handleBack() {

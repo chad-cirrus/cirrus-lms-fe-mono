@@ -1,16 +1,17 @@
-module.exports = {
+/* eslint-disable */
+export default {
   displayName: 'recent-activity',
   preset: '../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
-  globals: {
-    'ts-jest': {
-      tsconfig: '<rootDir>/tsconfig.spec.json',
-      stringifyContentPathRegex: '\\.(html|svg)$',
-    },
-  },
-  coverageDirectory: '../../coverage/apps/recent-activity',
+  globals: {},
   transform: {
-    '^.+\\.(ts|mjs|js|html)$': 'jest-preset-angular',
+    '^.+\\.(ts|mjs|js|html)$': [
+      'jest-preset-angular',
+      {
+        tsconfig: '<rootDir>/tsconfig.spec.json',
+        stringifyContentPathRegex: '\\.(html|svg)$',
+      },
+    ],
   },
   transformIgnorePatterns: ['node_modules/(?!.*\\.mjs$)'],
   snapshotSerializers: [
@@ -19,6 +20,7 @@ module.exports = {
     'jest-preset-angular/build/serializers/html-comment',
   ],
   moduleNameMapper: {
+    "swiper/css": "swiper/swiper.min.css",
     "@cirrus/ui": "<rootDir>/../../libs/ui/src"
   }
 };

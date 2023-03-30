@@ -1,15 +1,14 @@
 import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
-
 import { RecentActivityComponent } from './recent-activity.component';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { RecentActivityService } from '../../services/recent-activity.service';
-import { RecentActivityFacade } from '../../facade.service';
 import { BehaviorSubject, of } from 'rxjs';
 import { initialRecentActivity, IRecentActivity, OverallProgress } from '../../models/IRecentActivity';
 import { IRecentActivityNotifications } from '../../models/IRecentActivityNotifications';
 import { ICirrusUser } from '@cirrus/models';
 import { MockComponent } from 'ng-mocks';
 import { RecentActivityStudentComponent } from '../recent-activity-student/recent-activity-student.component';
+import { RecentActivityFacade } from '../../recent-activity-facade.service';
 
 describe('RecentActivityComponent', () => {
   let component: RecentActivityComponent;

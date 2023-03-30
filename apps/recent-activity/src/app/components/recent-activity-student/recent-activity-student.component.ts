@@ -1,24 +1,15 @@
-import {
-  Component,
-  EventEmitter,
-  Input,
-  OnInit,
-  Output,
-  ViewChild,
-} from '@angular/core';
-import { filter, flatMap, map, mergeMap, switchMap, tap } from 'rxjs/operators';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { map, tap } from 'rxjs/operators';
 import { RecentActivityService } from '../../services/recent-activity.service';
-import { selectCirrusUser } from '../../store/selectors/cirrus-user.selector';
 import { AppState } from '../../store/reducers';
 import { Store } from '@ngrx/store';
 import { combineLatest, Observable, Subject } from 'rxjs';
 
 import { MatSidenav } from '@angular/material/sidenav';
 import { SidenavHeaderService } from '@cirrus/sidenav-header';
-import { ICoursesForRecentActivity, ISearchInputData } from '@cirrus/models';
+import { ICoursesForRecentActivity, ISearchInputData, PROGRESS_STATUS } from '@cirrus/models';
 import { IRecentActivityNotifications } from '../../models/IRecentActivityNotifications';
-import { PROGRESS_STATUS } from '@cirrus/models';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserState } from '../../store/reducers/cirrus-user.reducer';
 
@@ -36,7 +27,7 @@ export class RecentActivityStudentComponent implements OnInit {
 
   events: string[] = [];
   opened!: boolean;
-  courseInputVal = new FormControl('');
+  courseInputVal = new UntypedFormControl('');
 
   private _filteredTextSubject: Subject<string> = new Subject();
   filteredText$: Observable<string> = this._filteredTextSubject.asObservable();

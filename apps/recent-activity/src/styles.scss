@@ -1,14 +1,13 @@
-@use '~@angular/material/theming' as material;
-
-@include material.mat-core();
+@use '@angular/material' as material;
+@include material.core();
 
 @import 'apps/recent-activity/src/base-scss/import';
 @import 'typography';
 
-$primary: material.mat-define-palette($custom-palette);
-$accent: material.mat-define-palette($custom-palette, A200, A100, A400);
+$primary: material.define-palette($custom-palette);
+$accent: material.define-palette($custom-palette, A200, A100, A400);
 
-$theme: material.mat-dark-theme(
+$theme: material.define-dark-theme(
   (
     color: (
       primary: $primary,
@@ -17,7 +16,8 @@ $theme: material.mat-dark-theme(
   )
 );
 
-@include material.angular-material-theme($theme);
+@include material.core-theme($theme);
+@include material.all-component-themes($theme);
 
 body {
   color: $white;

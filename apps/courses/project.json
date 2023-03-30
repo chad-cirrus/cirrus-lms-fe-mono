@@ -1,0 +1,218 @@
+{
+  "name": "courses",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/courses/src",
+  "prefix": "cirrus",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/angular:webpack-browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "deployUrl": "/courses/",
+        "outputPath": "dist/apps/courses",
+        "index": "apps/courses/src/index.html",
+        "main": "apps/courses/src/main.ts",
+        "polyfills": "apps/courses/src/polyfills.ts",
+        "tsConfig": "apps/courses/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": [
+          "apps/courses/src/favicon.ico",
+          "apps/courses/src/assets",
+          {
+            "input": "libs/ui/src/assets",
+            "glob": "**/*",
+            "output": ""
+          }
+        ],
+        "styles": ["apps/courses/src/styles.scss"],
+        "stylePreprocessorOptions": {
+          "includePaths": ["libs/ui/src/lib/styles", "./node_modules"]
+        },
+        "scripts": [],
+        "customWebpackConfig": {
+          "path": "webpack.config.js"
+        }
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "2mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "20kb"
+            }
+          ],
+          "fileReplacements": [
+            {
+              "replace": "apps/courses/src/environments/environment.ts",
+              "with": "apps/courses/src/environments/environment.prod.ts"
+            },
+            {
+              "replace": "apps/courses/src/app/build-specifics/index.ts",
+              "with": "apps/courses/src/app/build-specifics/index.prod.ts"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "staging": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "2mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "20kb"
+            }
+          ],
+          "fileReplacements": [
+            {
+              "replace": "apps/courses/src/environments/environment.ts",
+              "with": "apps/courses/src/environments/environment.staging.ts"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "uat": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "2mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "7kb"
+            }
+          ],
+          "fileReplacements": [
+            {
+              "replace": "apps/courses/src/environments/environment.ts",
+              "with": "apps/courses/src/environments/environment.uat.ts"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "review": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": {
+            "scripts": true,
+            "styles": true,
+            "hidden": false
+          },
+          "namedChunks": true,
+          "fileReplacements": [
+            {
+              "replace": "apps/courses/src/environments/environment.ts",
+              "with": "apps/courses/src/environments/environment.template.ts"
+            }
+          ]
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": {
+            "scripts": true,
+            "styles": true,
+            "hidden": false
+          },
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@nrwl/angular:webpack-dev-server",
+      "configurations": {
+        "production": {
+          "browserTarget": "courses:build:production"
+        },
+        "staging": {
+          "browserTarget": "courses:build:staging"
+        },
+        "uat": {
+          "browserTarget": "courses:build:uat"
+        },
+        "development": {
+          "host": "cirrusapproach.local",
+          "browserTarget": "courses:build:development"
+        }
+      },
+      "defaultConfiguration": "development",
+      "options": {
+        "host": "cirrusapproach.local",
+        "port": 4201,
+        "browserTarget": "courses:build:development"
+      }
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "browserTarget": "courses:build"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "apps/courses/src/**/*.ts",
+          "apps/courses/src/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/courses"],
+      "options": {
+        "jestConfig": "apps/courses/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "storybook": {
+      "executor": "@nrwl/storybook:storybook",
+      "options": {
+        "uiFramework": "@storybook/angular",
+        "port": 4400,
+        "configDir": "apps/courses/.storybook"
+      },
+      "configurations": {
+        "ci": {
+          "quiet": true
+        }
+      }
+    },
+    "build-storybook": {
+      "executor": "@nrwl/storybook:build",
+      "outputs": ["{options.outputDir}"],
+      "options": {
+        "uiFramework": "@storybook/angular",
+        "styles": ["apps/courses/src/styles.scss"],
+        "stylePreprocessorOptions": {
+          "includePaths": ["libs/ui/src/lib/styles"]
+        },
+        "configDir": "apps/courses/.storybook",
+        "outputDir": "dist/storybook/courses"
+      },
+      "configurations": {
+        "ci": {
+          "quiet": true
+        }
+      }
+    }
+  },
+  "tags": []
+}

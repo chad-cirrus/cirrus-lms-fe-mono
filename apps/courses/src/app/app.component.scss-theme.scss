@@ -1,4 +1,4 @@
-@use '~@angular/material/theming' as material;
+@use '@angular/material' as material;
 @use 'variables' as var;
 
 @mixin cirrus-app-component-typography($typography-config) {
@@ -25,8 +25,8 @@
 }
 
 @mixin cirrus-app-component($theme) {
-  $theme-colors: material.mat-get-color-config($theme);
-  $typography: material.mat-get-typography-config($theme);
+  $theme-colors: material.get-color-config($theme);
+  $typography: material.get-typography-config($theme);
   $backgrounds: map-get($theme-colors, background);
 
   @if $typography != null {

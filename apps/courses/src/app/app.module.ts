@@ -39,16 +39,14 @@ import { ContentPlayerModule } from './content-player/content-player.module';
 import { ProgressEffects } from './store/effects/progress.effects';
 import { environment } from '../environments/environment';
 
-import { HttpErrorInterceptor } from './interceptors/httperror.interceptor';
+import { HttpErrorInterceptor } from './interceptors/http-error.interceptor';
 
 import { CourseOverviewRouteComponent } from './course/course-overview-route/course-overview-route.component';
 import { CourseLessonsRouteComponent } from './course/course-lessons-route/course-lessons-route.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { CourseEnrollmentsRouteComponent } from './course/course-enrollments-route/course-enrollments-route.component';
-import {
-  SidenavHeaderModule,
-  SidenavHeaderService,
-} from '@cirrus/sidenav-header';
+import { SidenavHeaderModule, SidenavHeaderService } from '@cirrus/sidenav-header';
+import { MatRippleModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -85,6 +83,7 @@ import {
     ErrorNotificationModule,
     NotificationsMenuModule,
     SidenavHeaderModule,
+    MatRippleModule,
   ],
   providers: [
     {

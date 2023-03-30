@@ -3,6 +3,11 @@
   "compilerOptions": {
     "emitDecoratorMetadata": true
   },
-  "exclude": ["../**/*.spec.ts"],
-  "include": ["../src/**/*", "*.js", "../../../apps/recent-activity/src/app/directives/clickoutside/clickoutside.directive.ts", "../../../apps/recent-activity/src/app/directives/clickoutside/clickoutside.directive.spec.ts"]
+  "exclude": ["../**/*.spec.ts", "jest.config.ts"],
+  "include": [
+    "../src/**/*",
+    "*.js",
+    "../../../apps/recent-activity/src/app/directives/clickoutside.directive.ts",
+    "../../../apps/recent-activity/src/app/directives/clickoutside.directive.spec.ts"
+  ]
 }

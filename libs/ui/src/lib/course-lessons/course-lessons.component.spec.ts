@@ -1,6 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CourseLessonsComponent } from './course-lessons.component';
+import { MatMenuModule } from '@angular/material/menu';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MockComponent } from 'ng-mocks';
+import { SearchInputComponent } from '@cirrus/search-input';
+import { FilterComponent } from '@cirrus/ui';
 
 describe('CourseLessonsComponent', () => {
   let component: CourseLessonsComponent;
@@ -8,7 +13,8 @@ describe('CourseLessonsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CourseLessonsComponent ]
+      imports: [MatMenuModule, FormsModule, ReactiveFormsModule],
+      declarations: [CourseLessonsComponent, MockComponent(SearchInputComponent), MockComponent(FilterComponent)]
     })
     .compileComponents();
   });
