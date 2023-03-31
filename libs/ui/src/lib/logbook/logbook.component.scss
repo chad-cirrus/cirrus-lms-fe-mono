@@ -8,12 +8,21 @@
 .logbook-item-container {
   background-color: $lesson-content-item-hover;
   margin: 15px 0px 15px 3px;
-  padding: 15px 17px 16px 18px;
   border-radius: 10px;
+  & > div {
+    padding: 15px 17px 16px 18px;
+    // place-content: center space-between !important;
+    // justify-content: space-between;
+    &:first-child:hover {
+      cursor: pointer;
+    }
+    &:last-child {
+      padding-top: 0;
+    }
+  }
 }
 
 .border {
-  padding-top: 15px;
   border-bottom: 1px solid $border-grey2;
 }
 
@@ -62,6 +71,9 @@
   color: $light-grey;
 }
 
+.location-from-to {
+  align-items: center;
+}
 
 @media (min-width: 325px) and (max-width: 600px)  {
 
@@ -71,7 +83,6 @@
     }
 
     .caret {
-      cursor: pointer;
       padding-top: 19px;
     }
 
