@@ -3,8 +3,18 @@ import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSidenav } from '@angular/material/sidenav';
 import { ActivatedRoute, Router } from '@angular/router';
-import { IContent, ICourseOverview, ICourseOverviewLesson, ILesson, PROGRESS_STATUS } from '@cirrus/models';
-import { CompletionDialogComponent, CourseCompletionComponent, LESSON_COMPLETION_CTA } from '@cirrus/ui';
+import {
+  IContent,
+  ICourseOverview,
+  ICourseOverviewLesson,
+  ILesson,
+  PROGRESS_STATUS,
+} from '@cirrus/models';
+import {
+  CompletionDialogComponent,
+  CourseCompletionComponent,
+  LESSON_COMPLETION_CTA,
+} from '@cirrus/ui';
 import { select, Store } from '@ngrx/store';
 
 import { Observable, Subscription } from 'rxjs';
@@ -12,15 +22,28 @@ import { map, tap, withLatestFrom } from 'rxjs/operators';
 import { AppService } from '../../app.service';
 
 import { ContentPlayerDialogService } from '../../content-player/content-player-dialog.service';
-import { fetchLessons, setInstructorView, setSideNavOpen } from '../../store/actions';
+import {
+  fetchLessons,
+  setInstructorView,
+  setSideNavOpen,
+} from '../../store/actions';
 import { LessonState } from '../../store/reducers/lesson.reducer';
 import { selectCirrusUser } from '../../store/selectors/cirrus-user.selector';
-import { selectCheckOffRequired, selectLesson } from '../../store/selectors/lessons.selector';
-import { selectIsScreenSmall, selectSideNavOpen } from '../../store/selectors/view.selector';
+import {
+  selectCheckOffRequired,
+  selectLesson,
+} from '../../store/selectors/lessons.selector';
+import {
+  selectIsScreenSmall,
+  selectSideNavOpen,
+} from '../../store/selectors/view.selector';
 import { CoursesService } from '../course.service';
 import { environment } from '../../../environments/environment';
 import { fetchCourseOverview } from '../../store/actions/course.actions';
-import { selectCourseOverview, selectNextLessonPath } from '../../store/selectors/course.selector';
+import {
+  selectCourseOverview,
+  selectNextLessonPath,
+} from '../../store/selectors/course.selector';
 
 @Component({
   selector: 'cirrus-lesson',
@@ -64,7 +87,6 @@ export class LessonComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-
     this.lessonSubscription.add(
       this.route.params.subscribe(({ courseId, stageId, lessonId }) => {
         this.coursId = parseInt(courseId);
@@ -80,7 +102,6 @@ export class LessonComponent implements OnInit, OnDestroy {
       this.lessonCompleted$
         .pipe(withLatestFrom(this.courseOverview$, this.user$, this.lesson$))
         .subscribe(([progress_type, courseOverview, user, lesson]) => {
-          console.log('course overview', courseOverview);
           const component: ComponentType<
             CompletionDialogComponent | CourseCompletionComponent
           > =

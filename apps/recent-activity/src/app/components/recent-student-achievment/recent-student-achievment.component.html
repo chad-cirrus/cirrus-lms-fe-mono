@@ -1,0 +1,17 @@
+<div class="recent-student-achievements">
+  <h3>Recent Student Achievements</h3>
+
+  <ul class="student-achievements-list">
+    <li
+      *ngFor="let achievement of student_achievements"
+      class="student-achievements-list-item"
+    >
+      <div class="achievement-date">{{ achievement.completed_on }}</div>
+
+      <div class="achievement-data">
+        <div class="user-name">{{ achievement.user_name }}:</div>
+        <div class="achievement-name">{{ achievement.course_name }}</div>
+      </div>
+    </li>
+  </ul>
+</div>

@@ -1,7 +1,12 @@
-import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { ICirrusUser, ROLE } from '@cirrus/models';
-
 
 @Component({
   selector: 'cirrus-header-dropdown',
@@ -50,5 +55,4 @@ export class HeaderDropdownComponent {
   openHamburgerMenu() {
     this.hamburgerMenu.emit('dksjfkajsf');
   }
-
 }

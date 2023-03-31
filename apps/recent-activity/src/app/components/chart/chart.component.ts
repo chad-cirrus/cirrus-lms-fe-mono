@@ -54,7 +54,6 @@ export class CirrusChartComponent {
 
   @Input()
   set data(value: ChartData | null) {
-    console.log('valllll', value);
     if (value) {
       this._data = value;
       this.setChartOptions();

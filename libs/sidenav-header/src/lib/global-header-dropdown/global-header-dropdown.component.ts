@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Input, Output, ViewChild, ViewEncapsulation } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  ViewChild,
+  ViewEncapsulation,
+} from '@angular/core';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { ICirrusUser, ROLE } from '@cirrus/models';
 

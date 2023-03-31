@@ -1,5 +1,11 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
-import { Component, Input, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnInit,
+  ViewChild,
+  ViewEncapsulation,
+} from '@angular/core';
 import { MatTabGroup } from '@angular/material/tabs';
 import { Attempt } from '@cirrus/models';
 import { combineLatest, Observable } from 'rxjs';
@@ -90,16 +96,15 @@ export class AssessmentComponent
       })
     );
 
-    this.logbookLabel$ = combineLatest([this.tablet$, this.mobile$])
-      .pipe(
-        map(([isTablet, isMobile]) => {
-          if (isTablet || isMobile) {
-            return 'Logbook';
-          } else {
-            return 'Logbook Entry';
-          }
-        }),
-      );
+    this.logbookLabel$ = combineLatest([this.tablet$, this.mobile$]).pipe(
+      map(([isTablet, isMobile]) => {
+        if (isTablet || isMobile) {
+          return 'Logbook';
+        } else {
+          return 'Logbook Entry';
+        }
+      })
+    );
   }
 
   handleBack() {

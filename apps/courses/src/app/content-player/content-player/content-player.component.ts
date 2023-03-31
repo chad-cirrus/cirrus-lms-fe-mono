@@ -1,14 +1,43 @@
-import { AfterContentInit, ChangeDetectorRef, Component, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import {
+  AfterContentInit,
+  ChangeDetectorRef,
+  Component,
+  Inject,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 
-import { MAT_DIALOG_DATA, MatDialogRef as MatDialogRef } from '@angular/material/dialog';
-import { IContent, ILessonFlightLog, IProgress, ITask, PROGRESS_STATUS } from '@cirrus/models';
+import {
+  MAT_DIALOG_DATA,
+  MatDialogRef as MatDialogRef,
+} from '@angular/material/dialog';
+import {
+  IContent,
+  ILessonFlightLog,
+  IProgress,
+  ITask,
+  PROGRESS_STATUS,
+} from '@cirrus/models';
 import { LessonContentComponent } from '@cirrus/ui';
 import { Store } from '@ngrx/store';
 import { BehaviorSubject, combineLatest, Observable, Subject } from 'rxjs';
-import { delay, map, startWith, take, takeUntil, tap, withLatestFrom } from 'rxjs/operators';
+import {
+  delay,
+  map,
+  startWith,
+  take,
+  takeUntil,
+  tap,
+  withLatestFrom,
+} from 'rxjs/operators';
 import { completeProgress, startProgress } from '../../store/actions';
 import { AppState } from '../../store/reducers';
-import { selectCheckOffRequired, selectLesson, selectMenuItems } from '../../store/selectors/lessons.selector';
+import {
+  selectCheckOffRequired,
+  selectLesson,
+  selectMenuItems,
+} from '../../store/selectors/lessons.selector';
 import { TaskService } from '../../task.service';
 
 import { componentDictionary } from '../component-dictionary';

@@ -49,9 +49,7 @@ import { CourseInProgressValuePipe } from './components/courses-in-progress/cour
 import { SwiperModule } from 'swiper/angular';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AchievementsPageComponent } from './components/achievements-page/achievements-page.component';
-import {
-  CertificatesFullComponent,
-} from './components/achievements-page/certificates-full/certificates-full.component';
+import { CertificatesFullComponent } from './components/achievements-page/certificates-full/certificates-full.component';
 import { BadgesFullComponent } from './components/achievements-page/badges-full/badges-full.component';
 import { FormatLogbookTypePipe } from './components/overall-progress/logbook/format-logbook-type.pipe';
 import { FormatCourseworkTypePipe } from './components/overall-progress/coursework/format-coursework-type.pipe';
@@ -59,31 +57,25 @@ import { FormatIacraTypePipe } from './components/overall-progress/iacra/format-
 import { ImageFormatterPipe } from './image-formatter.pipe';
 import { HttpErrorInterceptor } from './interceptors/http-error.interceptor';
 
-import { SidenavHeaderModule, SidenavHeaderService } from '@cirrus/sidenav-header';
+import {
+  SidenavHeaderModule,
+  SidenavHeaderService,
+} from '@cirrus/sidenav-header';
 
 import { SearchInputModule } from '@cirrus/search-input';
 import { BadgeModule } from '@cirrus/badge';
-import {
-  RecentActivityInstructorComponent,
-} from './components/recent-activity-instructor/recent-activity-instructor.component';
-import {
-  TotalFlightHoursInstructorComponent,
-} from './components/recent-activity/total-flight-hours-instructor/total-flight-hours-instructor.component';
-import {
-  ToggleInstructorStudentComponent,
-} from './components/toggle-instructor-student/toggle-instructor-student.component';
-import {
-  StudentTaskPerformanceComponent,
-} from './components/student-task-performance/student-task-performance.component';
+import { RecentActivityInstructorComponent } from './components/recent-activity-instructor/recent-activity-instructor.component';
+import { TotalFlightHoursInstructorComponent } from './components/recent-activity/total-flight-hours-instructor/total-flight-hours-instructor.component';
+import { ToggleInstructorStudentComponent } from './components/toggle-instructor-student/toggle-instructor-student.component';
+import { StudentTaskPerformanceComponent } from './components/student-task-performance/student-task-performance.component';
 import { RecentStudentsComponent } from './components/recent-students/recent-students.component';
 import { ProfileInitialsComponent } from './components/profile-initials/profile-initials.component';
 import { DisplayInitialsPipe } from './components/profile-initials/display-initials.pipe';
 import { CirrusHorizontalChartComponent } from './components/horizontal-chart/horizontal-chart.component';
-import {
-  FlightInstructionHoursComponent,
-} from './components/flight-instruction-hours/flight-instruction-hours.component';
+import { FlightInstructionHoursComponent } from './components/flight-instruction-hours/flight-instruction-hours.component';
 import { FeatureDirective } from './directives/feature/feature.directive';
 import { ClickOutsideDirective } from './directives/clickoutside/clickoutside.directive';
+import { RecentStudentAchievmentComponent } from './components/recent-student-achievment/recent-student-achievment.component';
 
 @NgModule({
   declarations: [
@@ -121,6 +113,7 @@ import { ClickOutsideDirective } from './directives/clickoutside/clickoutside.di
     CirrusHorizontalChartComponent,
     FlightInstructionHoursComponent,
     FeatureDirective,
+    RecentStudentAchievmentComponent,
   ],
   imports: [
     CommonModule,

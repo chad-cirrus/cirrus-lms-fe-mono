@@ -65,4 +65,13 @@
       "
     ></cirrus-flight-instruction-hours>
   </div>
+  <div class="content-wrapper">
+    <cirrus-recent-student-achievment
+      class="recent-student-achievements"
+      [student_achievements]="
+        recentActivityNotificationsInstructor.recentActivity
+          .recent_student_achievements
+      "
+    ></cirrus-recent-student-achievment>
+  </div>
 </ng-container>

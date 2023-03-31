@@ -23,7 +23,11 @@ import { StagesOverlayComponent } from './stages-overlay/stages-overlay.componen
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatCardModule } from '@angular/material/card';
 
-import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import {
+  MAT_DIALOG_DATA,
+  MatDialogModule,
+  MatDialogRef,
+} from '@angular/material/dialog';
 
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { LessonContentPlayerMenuComponent } from './lesson-content-player-menu/lesson-content-player-menu.component';
@@ -59,21 +63,13 @@ import { CtaButtonComponent } from './cta-button/cta-button.component';
 import { CourseLessonsComponent } from './course-lessons/course-lessons.component';
 import { CourseLessonItemComponent } from './course-lesson-item/course-lesson-item.component';
 import { CourseLessonContentCountComponent } from './course-lesson-content-count/course-lesson-content-count.component';
-import {
-  CoursesTabEnrollmentHistoryComponent,
-} from './courses-tab-enrollment-history/courses-tab-enrollment-history.component';
-import {
-  CourseOverviewLessonProgressBarComponent,
-} from './course-overview-lesson-progress-bar/course-overview-lesson-progress-bar.component';
+import { CoursesTabEnrollmentHistoryComponent } from './courses-tab-enrollment-history/courses-tab-enrollment-history.component';
+import { CourseOverviewLessonProgressBarComponent } from './course-overview-lesson-progress-bar/course-overview-lesson-progress-bar.component';
 import { CourseOverviewComponent } from './course-overview/course-overview.component';
 import { CourseSummaryCountsComponent } from './course-summary-counts/course-summary-counts.component';
-import {
-  CourseContentProgressCircleComponent,
-} from './course-content-progress-circle/course-content-progress-circle.component';
+import { CourseContentProgressCircleComponent } from './course-content-progress-circle/course-content-progress-circle.component';
 import { HoursAndLandingsComponent } from './hours-and-landings/hours-and-landings.component';
-import {
-  GenericResponsiveMatTableComponent,
-} from './generic-responsive-mat-table/generic-responsive-mat-table.component';
+import { GenericResponsiveMatTableComponent } from './generic-responsive-mat-table/generic-responsive-mat-table.component';
 import { TableFormatPipe } from './table-format.pipe';
 import { LessonTypePipe } from './helpers/LessonTypePipe';
 import { FilterComponent } from './filter/filter.component';

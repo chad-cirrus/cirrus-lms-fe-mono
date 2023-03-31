@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { map, tap } from 'rxjs/operators';
 import { RecentActivityService } from '../../services/recent-activity.service';
 import { AppState } from '../../store/reducers';
@@ -7,7 +14,11 @@ import { combineLatest, Observable, Subject } from 'rxjs';
 
 import { MatSidenav } from '@angular/material/sidenav';
 import { SidenavHeaderService } from '@cirrus/sidenav-header';
-import { ICoursesForRecentActivity, ISearchInputData, PROGRESS_STATUS } from '@cirrus/models';
+import {
+  ICoursesForRecentActivity,
+  ISearchInputData,
+  PROGRESS_STATUS,
+} from '@cirrus/models';
 import { IRecentActivityNotifications } from '../../models/IRecentActivityNotifications';
 import { UntypedFormControl } from '@angular/forms';
 import { Router } from '@angular/router';

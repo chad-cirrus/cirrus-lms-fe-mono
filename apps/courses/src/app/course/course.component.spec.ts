@@ -22,10 +22,14 @@ describe('CourseComponent', () => {
         MatIconTestingModule,
         MatTabsModule,
       ],
-      declarations: [CourseComponent, MockComponent(CourseLandingPageComponent), MatIcon],
+      declarations: [
+        CourseComponent,
+        MockComponent(CourseLandingPageComponent),
+        MatIcon,
+      ],
       providers: [
         { provide: UiDownloadService, useClass: MockUIDownloadService },
-      ]
+      ],
     }).compileComponents();
   });
 

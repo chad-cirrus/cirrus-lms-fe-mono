@@ -2,10 +2,16 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ISearchInputData } from '@cirrus/models';
 import { SidenavHeaderService } from '@cirrus/sidenav-header';
-import { RecentActivityService } from '../../services/recent-activity.service';
-import { UserState } from '../../store/reducers/cirrus-user.reducer';
 import { combineLatest, Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
+import {
+  IRecentActivityInstructors,
+  IStudent,
+  IStudentAchievement,
+  RecentStudents,
+} from '../../models/IRecentActivityInstructors';
+import { RecentActivityService } from '../../services/recent-activity.service';
+import { UserState } from '../../store/reducers/cirrus-user.reducer';
 
 @Component({
   selector: 'cirrus-recent-activity-instructor',
@@ -31,7 +37,7 @@ export class RecentActivityInstructorComponent implements OnInit {
 
   students$ = this.recentActivityNotificationsInstructors$.pipe(
     map(ra => ra.recentActivity.instructor_students.students),
-    map(students =>
+    map((students: IStudent[]) =>
       students.filter(
         student => (student.first_name !== null && student.last_name) || null
       )

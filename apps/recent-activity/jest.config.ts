@@ -20,7 +20,7 @@ export default {
     'jest-preset-angular/build/serializers/html-comment',
   ],
   moduleNameMapper: {
-    "swiper/css": "swiper/swiper.min.css",
-    "@cirrus/ui": "<rootDir>/../../libs/ui/src"
-  }
+    'swiper/css': 'swiper/swiper.min.css',
+    '@cirrus/ui': '<rootDir>/../../libs/ui/src',
+  },
 };

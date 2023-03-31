@@ -17,7 +17,12 @@ import {
 import { MatSidenav } from '@angular/material/sidenav';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { CoursesService } from './course/course.service';
-import { CirrusBaseComponent, ErrorService, NotificationService, UserService } from '@cirrus/ui';
+import {
+  CirrusBaseComponent,
+  ErrorService,
+  NotificationService,
+  UserService,
+} from '@cirrus/ui';
 import { environment } from '../environments/environment';
 import { CoursesFacadeService } from './courses-facade.service';
 import { SidenavHeaderService } from '@cirrus/sidenav-header';
@@ -65,7 +70,7 @@ export class AppComponent
     sidenavHeaderService: SidenavHeaderService,
     notificationService: NotificationService,
     errorService: ErrorService,
-    route: ActivatedRoute,
+    route: ActivatedRoute
   ) {
     super(
       userService,

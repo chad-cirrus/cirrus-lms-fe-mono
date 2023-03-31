@@ -10,9 +10,7 @@ import {
 } from '../../models/IRecentActivityInstructors';
 import { MockComponent } from 'ng-mocks';
 import { ToggleInstructorStudentComponent } from '../toggle-instructor-student/toggle-instructor-student.component';
-import {
-  TotalFlightHoursInstructorComponent,
-} from '../recent-activity/total-flight-hours-instructor/total-flight-hours-instructor.component';
+import { TotalFlightHoursInstructorComponent } from '../recent-activity/total-flight-hours-instructor/total-flight-hours-instructor.component';
 import { RecentStudentsComponent } from '../recent-students/recent-students.component';
 import { NotificationsSectionComponent } from '../notifications/notifications-section.component';
 import { StudentTaskPerformanceComponent } from '../student-task-performance/student-task-performance.component';
@@ -42,7 +40,7 @@ describe('RecentActivityInstructorComponent', () => {
       providers: [
         { provide: RecentActivityService, useClass: MockRecentActivityService },
         { provide: SidenavHeaderService, useClass: SidenavHeaderService },
-      ]
+      ],
     }).compileComponents();
   });
 
@@ -59,7 +57,7 @@ describe('RecentActivityInstructorComponent', () => {
 
 class MockRecentActivityService {
   private nullRecentActivity: IRecentActivityInstructors = {
-    achievements: [],
+    recent_student_achievements: [],
     flight_instruction_hours: [],
     instructor_students: { recent_students: [], students: [] },
     overall_progress: { flight_hours: [], instructor_flight_log_stats: [] },
@@ -67,7 +65,7 @@ class MockRecentActivityService {
   };
   private nullNotifications: IRecentActivityInstructorsNotifications = {
     notifications: [],
-    recentActivity: this.nullRecentActivity
+    recentActivity: this.nullRecentActivity,
   };
   recentActivityNotificationsInstructors$ = of(this.nullNotifications);
 

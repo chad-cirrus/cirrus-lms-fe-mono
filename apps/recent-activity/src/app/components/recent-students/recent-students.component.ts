@@ -12,5 +12,4 @@ Swiper.use([Navigation, Pagination]);
 })
 export class RecentStudentsComponent {
   @Input() recentStudents: IStudent[] = [];
-
 }

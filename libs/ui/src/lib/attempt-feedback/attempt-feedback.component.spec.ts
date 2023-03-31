@@ -6,7 +6,7 @@ import { Attempt } from '@cirrus/models';
 describe('AttemptFeedbackComponent', () => {
   let component: AttemptFeedbackComponent;
   let fixture: ComponentFixture<AttemptFeedbackComponent>;
-  let attempt: Attempt = {
+  const attempt: Attempt = {
     attempt_type: '',
     content_id: 0,
     course_attempt_id: 0,
@@ -22,14 +22,13 @@ describe('AttemptFeedbackComponent', () => {
     standards_missed: [],
     task_id: 0,
     task_name: '',
-    user_id: 0
+    user_id: 0,
   };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AttemptFeedbackComponent ]
-    })
-    .compileComponents();
+      declarations: [AttemptFeedbackComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

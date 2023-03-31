@@ -1,0 +1,47 @@
+@import 'apps/recent-activity/src/base-scss/import';
+
+h3 {
+  color: $white;
+  margin-bottom: 3rem;
+  font-size: 1.5rem;
+  font-family: 'akzidenz-extended';
+  font-style: normal;
+  font-weight: 400;
+  line-height: 120%;
+}
+
+.recent-student-achievements {
+  margin-top: 110px;
+}
+
+.student-achievements-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.student-achievements-list-item {
+  padding: 0.81rem 0.36rem;
+  border-bottom: solid 1px $gray3;
+}
+
+.achievement-date {
+  color: $gray4;
+  font-size: 0.875rem;
+  font-weight: 400;
+}
+
+.achievement-data {
+  display: flex;
+  font-size: 1rem;
+  font-weight: 400;
+
+  .user-name {
+    color: $white;
+    font-weight: 500;
+  }
+
+  .achievement-name {
+    color: $gray5;
+    padding-left: 10px;
+  }
+}

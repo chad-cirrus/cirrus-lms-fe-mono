@@ -2,7 +2,12 @@ import { TestBed } from '@angular/core/testing';
 
 import { RecentActivityFacade } from './recent-activity-facade.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { ConnectionsService, FeatureFlagService, NotificationService, UiDownloadService } from '@cirrus/ui';
+import {
+  ConnectionsService,
+  FeatureFlagService,
+  NotificationService,
+  UiDownloadService,
+} from '@cirrus/ui';
 
 describe('RecentActivityFacade', () => {
   let service: RecentActivityFacade;
@@ -15,7 +20,7 @@ describe('RecentActivityFacade', () => {
         { provide: UiDownloadService, useClass: MockUIDownloadService },
         { provide: NotificationService, useClass: MockNotificationService },
         { provide: FeatureFlagService, useClass: MockFeatureFlagService },
-      ]
+      ],
     });
     service = TestBed.inject(RecentActivityFacade);
   });

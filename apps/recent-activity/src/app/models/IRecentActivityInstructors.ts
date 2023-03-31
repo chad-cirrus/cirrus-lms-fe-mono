@@ -52,12 +52,6 @@ export interface FlightInstructionHour {
   range?: string;
 }
 
-export interface Achievement {
-  student_name: string;
-  course_name: string;
-  achieved_on: string;
-}
-
 export interface RecentStudents {
   recent_students: IStudent[];
   students: IStudent[];
@@ -68,12 +62,19 @@ export interface IRecentActivityInstructors {
   instructor_students: RecentStudents;
   student_task_performance: StudentTaskPerformance;
   flight_instruction_hours: FlightInstructionHour[];
-  achievements: Achievement[];
+  recent_student_achievements: IStudentAchievement[];
 }
 
 export interface IRecentActivityInstructorsNotifications {
   recentActivity: IRecentActivityInstructors;
   notifications: INotification[];
+}
+
+export interface IStudentAchievement {
+  user_id: number;
+  user_name: string;
+  course_name: string;
+  completed_on: string;
 }
 
 export interface StudentTaskPerformance {
@@ -165,11 +166,12 @@ export const initialRecentActivityInstructors: IRecentActivityInstructors = {
       year: '2022',
     },
   ],
-  achievements: [
+  recent_student_achievements: [
     {
-      student_name: 'Andrew',
+      user_id: 3,
+      user_name: 'Andrew',
       course_name: 'CAPS',
-      achieved_on: 'date here',
+      completed_on: '1/26/23',
     },
   ],
 };
