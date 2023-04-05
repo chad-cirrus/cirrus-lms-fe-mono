@@ -16,9 +16,18 @@
     <mat-tab>
       <ng-template mat-tab-label>
         <img src="courses/images/svg/logbook.svg" class="image" />
-        {{logbookLabel$ | async}}
+        {{ logbookLabel$ | async }}
       </ng-template>
       <cirrus-logbook [logbook]="logbook"></cirrus-logbook>
+    </mat-tab>
+    <mat-tab disabled="true">
+      <ng-template matTabContent>
+        <cirrus-attempt-feedback
+          [attempt]="attempt"
+          [attempt_index]="attempt_index"
+          (emitBack)="handleBack()"
+        ></cirrus-attempt-feedback>
+      </ng-template>
     </mat-tab>
   </mat-tab-group>
 </div>

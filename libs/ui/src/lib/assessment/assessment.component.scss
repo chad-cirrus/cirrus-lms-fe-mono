@@ -7,7 +7,7 @@
     .mdc-tab__text-label {
       font-family: $bqmedium-font;
       color: white;
-      opacity: .6;
+      opacity: 0.6;
     }
   }
 
@@ -30,7 +30,7 @@
     padding-bottom: 18px;
   }
 
-  .mat-ripple.mat-tab-label.mat-focus-indicator.mat-tab-disabled {
+  #mat-tab-label-0-2 {
     display: none;
   }
 
