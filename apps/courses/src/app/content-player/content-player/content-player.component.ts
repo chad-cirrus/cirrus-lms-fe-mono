@@ -220,7 +220,7 @@ export class ContentPlayerComponent
   }
 
   handleSideNavSelect(contentId: number) {
-    this._currentContentType.next('overview');
+    this._currentContentType.next('content_item');
     this._nextContentRequest.next({ type: 'initial', id: contentId });
   }
 
