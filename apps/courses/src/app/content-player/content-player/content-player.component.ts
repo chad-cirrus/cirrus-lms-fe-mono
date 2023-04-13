@@ -1,5 +1,5 @@
 import {
-  AfterContentInit,
+  AfterViewInit,
   ChangeDetectorRef,
   Component,
   Inject,
@@ -58,7 +58,7 @@ export interface INextContentRequest {
   styleUrls: ['./content-player.component.scss'],
 })
 export class ContentPlayerComponent
-  implements OnInit, AfterContentInit, OnDestroy
+  implements OnInit, AfterViewInit, OnDestroy
 {
   destroy$: Subject<boolean> = new Subject<boolean>();
   firstContentId = 0;
@@ -154,7 +154,7 @@ export class ContentPlayerComponent
       });
   }
 
-  ngAfterContentInit(): void {
+  ngAfterViewInit(): void {
     if (this.data.overview) {
       this.playOverview(this.data.overview);
     } else if (this.data.intro) {
@@ -162,6 +162,7 @@ export class ContentPlayerComponent
     } else {
       this._nextContentRequest.next({ type: 'initial', id: this.data.id });
     }
+    this.changeDetectorRef.detectChanges();
   }
 
   ngOnDestroy(): void {
