@@ -7,15 +7,10 @@
   </p>
 
   <div class="certificates-input-wrapper" *ngIf="certificates.length">
-    <mat-form-field *ngIf="certificates.length" appearance="fill">
-      <input
-        matInput
-        type="text"
-        placeholder="Search My Certificates"
-        [formControl]="searchParam"
-      />
+    <div class="search-input-wrapper">
+      <input type="text" role="search" placeholder="Search My Certificates" [formControl]="searchParam" class="" >
       <img src="recent-activity/images/svg/search-icon.svg" matSuffix />
-    </mat-form-field>
+    </div>
   </div>
 
   <div class="cert-table-wrapper" *ngIf="certificates.length; else noCerts">

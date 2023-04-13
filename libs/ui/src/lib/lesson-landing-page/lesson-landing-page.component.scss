@@ -88,6 +88,10 @@ mat-drawer {
     .start-lesson {
       display: inline-block;
       margin: 30px auto;
+      width: 100%;
+      button {
+        height: 48px;
+      }
     }
 
     .self-study,
@@ -249,6 +253,10 @@ cirrus-progress-card:last-child {
 
       .start-lesson {
         margin: 35px 0 80px;
+        width: auto;
+        button {
+          height: 40px;
+        }
       }
     }
   }

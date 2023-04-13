@@ -27,30 +27,48 @@
     }
   }
 }
+
+
 /**
  * Student Performance Matrial Tab Styles
  * @component student-task-performance
  */
-cirrus-student-task-performance .mat-tab-body-wrapper {
-  margin-top: 4rem;
-}
-@media screen and (min-width: 680px) {
-  cirrus-student-task-performance .mat-tab-body-wrapper {
-    margin-top: 0;
-  }
-}
-
-@include breakpoint(desktop) {
-  cirrus-student-task-performance .mat-tab-body-wrapper {
+cirrus-student-task-performance {
+  .mat-tab-body-wrapper {
     margin-top: 4rem;
   }
-}
 
-@include breakpoint(widescreen) {
-  cirrus-student-task-performance .mat-tab-body-wrapper {
-    margin-top: 0;
+  cirrus-horizontal-chart .chart-container {
+    margin-top: 4rem;
+    display: block;
+  }
+
+  @media screen and (min-width: 680px) {
+    .mat-tab-body-wrapper {
+      margin-top: 0;
+    }
+    .mat-mdc-tab-label-container {
+      max-width: calc(100% - 160px);
+    }
+  }
+  @include breakpoint(desktop) {
+    .mat-tab-body-wrapper {
+      margin-top: 4rem;
+    }
+    .mat-mdc-tab-label-container {
+      max-width: 100%;
+    }
+  }
+  @include breakpoint(widescreen) {
+    .mat-tab-body-wrapper {
+      margin-top: 0;
+    }
+    .mat-mdc-tab-label-container {
+      max-width: calc(100% - 160px);
+    }
   }
 }
+
 
 /**
  * Tab Time Filter Styles
@@ -59,7 +77,7 @@ cirrus-student-task-performance .mat-tab-body-wrapper {
 #tab-filter-duration {
   mat-select {
     font-size: 14px;
-    height: 48px;
+    height: 48.5px;
     padding: 0 24px;
     cursor: pointer;
     box-sizing: border-box;
@@ -71,21 +89,28 @@ cirrus-student-task-performance .mat-tab-body-wrapper {
     align-items: center;
     white-space: nowrap;
     position: relative;
+    @media screen and (min-width: 680px) {
+      border-bottom: solid 1px $white;
+    }
+    @include breakpoint(desktop) {
+      border-bottom: none;
+    }
+    @include breakpoint(widescreen) {
+      border-bottom: solid 1px $white;
+      height: 49px;
+    }
   }
 }
 .student-task-performance-filter {
-  margin-top: 2rem;
-
-  .mat-option:hover:not(.mat-option-disabled),
-  .mat-option:focus:not(.mat-option-disabled),
-  .mat-option.mat-selected:not(.mat-option-multiple) {
-    color: $gray2;
-    background-color: $gray5;
+  &.mdc-menu-surface.mat-mdc-select-panel {
+    margin-top: 0.81rem;
+    position: relative;
+    right: 1.5rem;
+    padding: 0;
   }
 }
-
 .tab-filter-durations {
-  .mat-select-arrow {
+  .mat-mdc-select-arrow {
     width: initial;
     height: initial;
     border-left: initial;
@@ -101,10 +126,14 @@ cirrus-student-task-performance .mat-tab-body-wrapper {
     }
   }
 
-  &[aria-expanded='true'] .mat-select-arrow {
+  &[aria-expanded='true'] .mat-mdc-select-arrow {
     &:after {
       transform: rotate(180deg);
     }
+  }
+
+  .mat-mdc-select-arrow-wrapper svg {
+    display: none;
   }
 }
 
@@ -120,12 +149,17 @@ cirrus-flight-instruction-hours .chart-header {
  * @locations: /recent-activity/
  * @component flight-instruction-hours
  */
-.mat-select-panel.flight-instructor-hours-filter-panel {
-  margin-left: -24px;
-  position: absolute;
-  top: 33px;
-  right: -28px;
+.flight-instructor-hours-filter-panel.mdc-menu-surface.mat-mdc-select-panel {
+  position: relative;
+  top: 12px;
+  right: -12px;
   border-radius: 0;
+  padding: 0;
+}
+cirrus-flight-instruction-hours {
+  .mat-mdc-select-arrow-wrapper svg {
+    display: none;
+  }
 }
 .flight-instructor-hours-header-container {
   .chart-container-wrapper {
@@ -133,17 +167,17 @@ cirrus-flight-instruction-hours .chart-header {
   }
   
   mat-select {
-    .mat-select-value {
+    .mat-mdc-select-value {
       padding-right: 1.6rem;
     }
-    .mat-select-arrow {
+    .mat-mdc-select-arrow {
       border-left: none;
       border-right: none;
       border-top: none;
       &::after {
         content: url("data:image/svg+xml,%3Csvg width='18' height='8' viewBox='0 0 18 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M-0.203125 1.28068L0.202713 0.722656L8.99979 7.12053L17.7969 0.722656L18.2027 1.28068L8.99979 7.97372L-0.203125 1.28068Z' fill='white'/%3E%3C/svg%3E%0A");
         display: block;
-        top: -0.36rem;
+        top: -0.6rem;
         margin-left: -0.81rem;
         position: absolute;
         transition: all .25s ease-in-out;
@@ -151,7 +185,7 @@ cirrus-flight-instruction-hours .chart-header {
       }
     }
     &[aria-expanded="true"] {
-      .mat-select-arrow {
+      .mat-mdc-select-arrow {
         &::after {
           transform: rotate(180deg);
         }
@@ -159,6 +193,32 @@ cirrus-flight-instruction-hours .chart-header {
     }
   }
 }
+
+
+/**
+ * Recent Activity Drop Downs / Select Menus
+ * @desc Material Select Menu customizations
+ * @locations: /recent-activity/
+ * @component Material: select
+ */
+ .flight-instructor-hours-filter-panel,
+ .student-task-performance-filter {
+ 
+   .mat-mdc-option:hover:not(.mdc-list-item--disabled), 
+   .mat-mdc-option:focus:not(.mdc-list-item--disabled), 
+   .mat-mdc-option.mat-mdc-option-active, 
+   .mat-mdc-option.mdc-list-item--selected:not(.mat-mdc-option-multiple):not(.mdc-list-item--disabled) {
+     background-color: $gray5;
+     .mdc-list-item__primary-text  {
+       color: $gray1;
+     }
+   }
+ 
+   .mat-pseudo-checkbox {
+     display: none;
+   }
+ 
+ }
 
 
 /**
@@ -206,4 +266,206 @@ cirrus-course-progress mat-progress-bar div.mdc-linear-progress__buffer-bar {
 
 cirrus-course-overview-lesson-progress-bar mat-progress-bar div.mdc-linear-progress__buffer-bar {
   background-color: #004040;
+}
+
+
+/**
+ * Material Table
+ * @desc Styles tables
+ * @locations: /courses/{{ID}}/enrollments
+ * @component Material: Table
+ */
+mat-table mat-cell.mdc-data-table__cell {
+  border: none;
+}
+
+
+/**
+ * Courses In Progress - Progress Bar
+ * @desc Progress bar styles for the "courses in progress" section on
+ * the recent activity page
+ * @locations: /recent-activity/
+ * @component Material: Progress Bar
+ */
+.swiper-slide-container.course mat-progress-bar {
+  border-radius: 30px;
+}
+.course-slide-progress-wrapper {
+  .mat-mdc-progress-bar.mdc-linear-progress {
+    height: 12px;
+  }
+  .mdc-linear-progress__bar-inner {
+    border-top-width: var(--mdc-linear-progress-track-height, 12px);
+  }
+}
+
+
+/**
+ * Material Badge
+ * @desc Styles for the notification icons in the dashboard
+ * @locations: Sidebar, Top Navigation
+ * @component cirrus-badge
+ */
+.mat-badge-content {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  font-size: 0.875rem;
+}
+/**
+ * These styles are not imported by default for the courses app, but 
+ * are loaded in the recent activity app. There is probably a better
+ * way to load this specific block of styles.
+ */
+.mat-badge {
+  position: relative;
+  &.mat-badge-warn .mat-badge-content {
+    line-height: 1.3;
+    font-size: 0.875rem;
+    text-align: center;
+    height: 18px;
+    padding: 0 9px;
+    border-radius: 50px;
+    background: #FF3939;
+    position: absolute;
+  }
+  &.mat-badge-medium.mat-badge-after .mat-badge-content {
+    right: -29px;
+  }
+  &.mat-badge-medium.mat-badge-above .mat-badge-content {
+    top: -11px;
+  }
+}
+
+
+/**
+ * Mobile Menu
+ * @desc Style fixes for the mobile menu
+ * @locations: Mobile Menu
+ * @component Material: Menu Panel
+ */
+.cdk-overlay-container .mat-mdc-menu-panel.mat-mdc-menu-panel {
+  max-width: 100%;
+  width: 100%;
+}
+.cdk-overlay-container .mat-mdc-menu-panel .mat-mdc-menu-content {
+  padding: 0 0;
+}
+
+
+/**
+ * Material Dialog
+ * @desc Styles for material dialog
+ * @locations: Courses
+ * @component Material Dialog
+ */
+.mat-mdc-dialog-container .mat-mdc-dialog-surface.mdc-dialog__surface {
+  background-color: $black;
+}
+
+
+/**
+ * Material Button
+ * @desc Styles for Material UI Buttons
+ * @locations: Everywhere
+ * @component Material Button
+ */
+.mdc-button {
+  text-decoration: none;
+}
+
+
+/**
+ * Material Autocomplete 
+ * @desc Styles for autocomplete search bars
+ * @locations: Recent Activity
+ * @component Material Option
+ */
+.mat-mdc-autocomplete-panel .mat-mdc-option {
+  padding: 10px 16px;
+}
+
+
+/**
+ * Cirrus Tasks
+ * @desc Styles Cirrus Tasks component
+ * @locations: Courses
+ * @component cirrus-task
+ */
+cirrus-task .mat-mdc-card {
+  border-radius: 0;
+}
+
+
+/**
+ * Certificates Full Search Input
+ * @desc Styles for a generic search component
+ * @note Consider making a generic component for better re-usability 
+ * across the app
+ * @locations: /recent-activity/achievements
+ * @component: certificates-full
+ */
+.search-input-wrapper {
+  width: 100%;
+  position: relative;
+  padding: 0 2px;
+
+  input {
+    box-sizing: border-box;
+    width: 100%;
+    border: 1px solid;
+    border-radius: 74px;
+    background-color: #000000;
+    padding: 10px 22px;
+    color: #969696;
+    font-size: 1rem;
+  }
+
+  img {
+    position: absolute;
+    right: 22px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
+.certificates-full-container {
+  .search-input-wrapper {
+    @include breakpoint(mobile) {
+      width: 50%;
+    }
+  }
+}
+
+
+/**
+ * Material Tabs
+ * @desc Styles Cirrus Tasks component
+ * @locations: /recent-activity/
+ * @component Material: Tabs
+ */
+.mat-mdc-tab-list {
+  border-bottom: solid 1px $gray4;
+}
+.mdc-tab-indicator__content--underline {
+  position: relative;
+  top: 1px;
+}
+
+
+/**
+ * Material Buttons
+ * @desc Styles for material buttons
+ * @locations: /courses/{{course_id}}/stages/{{stage_id}}/lessons/{{lesson_id}}}
+ * @component Material: Buttons
+ */
+cirrus-course-player,
+cirrus-lesson-landing-page {
+  cirrus-cta-button {
+    button.mat-mdc-extended-fab {
+      height: 48px;
+      @include breakpoint(mobile) {
+        height: 40px;
+      }
+    }
+  }
 }
