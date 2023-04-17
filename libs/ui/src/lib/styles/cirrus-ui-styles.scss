@@ -1,4 +1,5 @@
 @use '@angular/material' as material;
+
 @use './variables' as *;
 @use './fonts';
 @use '../../assets/fonts/akzidenz-grotesk/akzidenz-grotesk_fonts';
@@ -97,7 +98,6 @@ $theme: material.define-dark-theme(
   )
 );
 
-@include material.core-theme($theme);
 //@include material.progress-bar-theme($theme);
 @include material.tabs-theme($theme);
 
@@ -190,7 +190,6 @@ h6 {
   font-size: 1rem;
   line-height: 1.4;
 }
-
 //additional body styling classes from figma ui library
 .large {
   font-size: 1.125rem;
@@ -389,4 +388,8 @@ cirrus-course-progress {
       cursor: pointer;
     }
   }
+}
+.mat-mdc-progress-spinner .mdc-circular-progress__determinate-circle,
+.mat-mdc-progress-spinner .mdc-circular-progress__indeterminate-circle-graphic {
+  stroke: $white !important;
 }

@@ -1,6 +1,11 @@
 import { Component, EventEmitter, Inject, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import { ICirrusUser, ICourseOverview, ICoursePlayerConfig, PROGRESS_STATUS } from '@cirrus/models';
+import {
+  ICirrusUser,
+  ICourseOverview,
+  ICoursePlayerConfig,
+  PROGRESS_STATUS,
+} from '@cirrus/models';
 import { produceConfig } from './produce-config';
 import { Breakpoints } from '@angular/cdk/layout';
 // eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
@@ -88,6 +93,7 @@ export class CourseLandingPageComponent {
   }
 
   downloadCert() {
+    console.log('course', this.course);
     if (this.course.certificate.id) {
       this.downloadService
         .downloadCertificate(this.course.certificate.id)

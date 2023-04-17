@@ -3,6 +3,7 @@ export const formatTranscript = (row: any) => {
 };
 
 export const formatCertificate = (row: any) => {
+  console.log('row', row);
   const completedOrProgress =
     row.progress.status === 'completed' ? 'Completed' : 'In Progress';
 

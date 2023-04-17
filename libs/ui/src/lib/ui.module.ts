@@ -12,7 +12,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LessonProgressComponent } from './lesson-progress/lesson-progress.component';
 import { LessonContentsComponent } from './lesson-contents/lesson-contents.component';
 import { HeaderDropdownComponent } from './header-dropdown/header-dropdown.component';
-import { RecentActivityComponent } from './recent-activity/recent-activity.component';
 import { MatBadgeModule } from '@angular/material/badge';
 import { CdkAccordionModule } from '@angular/cdk/accordion';
 import { OverlayModule } from '@angular/cdk/overlay';
@@ -106,7 +105,6 @@ import { SearchInputModule } from '@cirrus/search-input';
     LessonProgressComponent,
     LessonContentsComponent,
     HeaderDropdownComponent,
-    RecentActivityComponent,
     MenuSliderComponent,
     EditProfileComponent,
     StagesOverlayComponent,
@@ -163,7 +161,6 @@ import { SearchInputModule } from '@cirrus/search-input';
     LessonProgressComponent,
     LessonContentsComponent,
     HeaderDropdownComponent,
-    RecentActivityComponent,
     MenuSliderComponent,
     EditProfileComponent,
     CdkAccordionModule,

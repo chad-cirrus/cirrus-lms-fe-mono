@@ -29,6 +29,7 @@ export class GenericResponsiveMatTableComponent implements AfterViewInit {
 
   @Input()
   set data(value: any) {
+    console.log('value', value);
     this.dataSource.data = value;
   }
 
