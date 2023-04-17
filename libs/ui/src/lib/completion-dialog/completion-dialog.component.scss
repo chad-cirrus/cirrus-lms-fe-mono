@@ -54,7 +54,7 @@
   align-items: center;
   align-content: center;
   gap: 24px;
-  margin: 60px 0;
+  margin: 60px 0 0;
 
   @include breakpoint(mobile) {
     flex-direction: row;
@@ -70,7 +70,7 @@
     align-items: flex-start;
     align-content: flex-start;
     gap: 24px;
-    margin: 130px 0;
+    margin: 130px 0 0;
   }
 
   .review-lesson,
