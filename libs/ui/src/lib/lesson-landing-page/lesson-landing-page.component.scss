@@ -26,9 +26,20 @@ button.snav-mobile {
 }
 
 button.snav-desktop {
-  width: 75px;
-  height: 45px;
+  width: 65px;
+  height: 35px;
+  position: fixed;
+  top: 130px;
+  z-index: 999;
+
+  @media (min-width: 600px) {
+    top: 160px;
+  }
+
   @extend .snav-open-button;
+}
+.lesson-image .btn-container {
+  min-height: 92px;
 }
 
 mat-drawer {
