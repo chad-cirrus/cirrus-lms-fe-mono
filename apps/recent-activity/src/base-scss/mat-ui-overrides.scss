@@ -450,7 +450,9 @@ cirrus-task .mat-mdc-card {
   position: relative;
   top: 1px;
 }
-
+cirrus-course .mdc-tab.mat-mdc-tab-link.mat-mdc-focus-indicator.active .mdc-tab-indicator__content--underline {
+  opacity: 1;
+}
 
 /**
  * Material Buttons
