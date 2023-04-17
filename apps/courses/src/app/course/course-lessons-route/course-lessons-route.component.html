@@ -1,4 +1,6 @@
 <cirrus-course-lessons
-  [stages]='(stages$ | async)!'
-  (navigate)='navigateToLesson($event)'>
+  [stages]="(stages$ | async)!"
+  [course]="(course$ | async)!"
+  (navigate)="navigateToLesson($event)"
+>
 </cirrus-course-lessons>

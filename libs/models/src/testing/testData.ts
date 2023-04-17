@@ -425,14 +425,28 @@ export const summary_counts: ContentCounts = {};
 export const progress: IProgress = { id: 0, status: 'not_started' };
 export const lessons_stats: ILessonsstats = { completed: 0, total: 0 };
 export const certificate: ICertificate = { expiration: '' };
-export const badge: IBadge = { badge_image: '', desc: '', id: 0, isActive: false, name: '', progress: 0 };
+export const badge: IBadge = {
+  badge_image: '',
+  desc: '',
+  id: 0,
+  isActive: false,
+  name: '',
+  progress: 0,
+};
 export const courseOverview: ICourseOverview = {
   agreement_body: '',
   badge,
   can_reenroll: false,
   certificate,
   completed_at: '',
-  course_attempt: { id: 0 },
+  course_attempt: {
+    id: 0,
+    user_course: {
+      accepted_agreement: false,
+      accepted_agreement_at: '',
+      id: 234234,
+    },
+  },
   course_content_stats: [],
   desktop_hero_image_url: '',
   has_agreement: false,
@@ -451,5 +465,5 @@ export const courseOverview: ICourseOverview = {
   subtitle: '',
   summary_counts,
   thumbnail_image_url: '',
-  title: ''
+  title: '',
 };

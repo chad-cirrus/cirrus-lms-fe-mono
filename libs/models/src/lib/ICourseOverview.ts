@@ -17,7 +17,7 @@ export interface ICourseOverview {
   started_at: string;
   overview?: string;
   completion_time?: string;
-  course_attempt: { id: number };
+  course_attempt: { id: number; user_course: UserCourse };
   minimum_flight_hours: number;
   desktop_hero_image_url: string;
   mobile_hero_image_url: string;
@@ -31,6 +31,12 @@ export interface ICourseOverview {
   enrollments?: IEnrollmentHistory[];
   next_lesson: Partial<ICourseOverviewLesson>;
   badge: IBadge;
+}
+
+export interface UserCourse {
+  accepted_agreement?: boolean;
+  accepted_agreement_at?: string;
+  id: number;
 }
 
 export interface ICourseOverviewStage {

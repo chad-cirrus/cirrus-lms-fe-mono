@@ -27,7 +27,14 @@ export const initialCourseState: CourseState = {
     hours_and_landings_stats: [],
     agreement_body: '',
     completion_time: undefined,
-    course_attempt: { id: 0 },
+    course_attempt: {
+      id: 0,
+      user_course: {
+        accepted_agreement: false,
+        accepted_agreement_at: '',
+        id: 234234,
+      },
+    },
     course_content_stats: [],
     minimum_flight_hours: 0,
     certificate: { expiration: null },

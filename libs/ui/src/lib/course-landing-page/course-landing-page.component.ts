@@ -9,11 +9,13 @@ import {
 import { produceConfig } from './produce-config';
 import { Breakpoints } from '@angular/cdk/layout';
 // eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { UiDownloadService } from '../course-completion/ui-download.service';
 import { MatDialog } from '@angular/material/dialog';
 import { BluePopUpComponent } from '../blue-pop-up/blue-pop-up.component';
 import { downloadPdf } from '../helpers/DownloadPdf';
+import { map } from 'rxjs/operators';
+import { TermsAgreementServiceService } from './terms-agreement-service.service';
 
 @Component({
   selector: 'cirrus-course-landing-page',
@@ -77,6 +79,7 @@ export class CourseLandingPageComponent {
     private router: Router,
     private downloadService: UiDownloadService,
     private dialog: MatDialog,
+    private tcService: TermsAgreementServiceService,
     @Inject('environment') environment: Record<string, unknown>
   ) {
     this.environment = environment;
@@ -87,6 +90,21 @@ export class CourseLandingPageComponent {
   }
 
   navigateToNextLesson() {
+    const { accepted_agreement } = this.course.course_attempt.user_course;
+    if (!accepted_agreement) {
+      this.tcService
+        .openTermsAndConditionsModal(this.course)
+        .subscribe(bool => {
+          if (bool) {
+            this.navigate();
+          }
+        });
+    } else {
+      this.navigate();
+    }
+  }
+
+  navigate() {
     this.router.navigate([
       `/courses/${this._course.id}/stages/${this._course.next_lesson.stage_id}/lessons/${this._course.next_lesson.id}`,
     ]);
@@ -104,35 +122,12 @@ export class CourseLandingPageComponent {
   }
 
   reEnroll() {
-    this.openTermsAndConditionsModal();
-  }
-
-  openTermsAndConditionsModal() {
     const payload: ModalPayload = {
       course_id: this.course.id,
       user_id: this.user.id,
     };
-
-    if (!this.course.has_agreement) {
-      this.openConfirmationModal(payload);
-      return;
-    }
-
-    const data = {
-      title: 'Terms And Conditions',
-      subTitle:
-        'Please read the following before re-enrolling then click Agree to continue',
-      body: this.course.agreement_body,
-      buttons: ['Agree', 'Disagree'],
-    };
-
-    const dialogRef = this.dialog.open(BluePopUpComponent, {
-      data: data,
-      height: '70%',
-      maxWidth: '515px',
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      if (result.data === 'Agree') {
+    this.tcService.openTermsAndConditionsModal(this.course).subscribe(bool => {
+      if (bool) {
         this.openConfirmationModal(payload);
       }
     });

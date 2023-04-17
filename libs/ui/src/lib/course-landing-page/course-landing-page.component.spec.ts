@@ -1,7 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CourseLandingPageComponent } from './course-landing-page.component';
-import { CoursePlayerComponent, CourseProgressComponent, UiDownloadService } from '@cirrus/ui';
+import {
+  CoursePlayerComponent,
+  CourseProgressComponent,
+  UiDownloadService,
+} from '@cirrus/ui';
 import { MatDialogModule } from '@angular/material/dialog';
 import {
   ContentCounts,
@@ -14,24 +18,39 @@ import {
 } from '@cirrus/models';
 import { MatDividerModule } from '@angular/material/divider';
 import { MockComponent } from 'ng-mocks';
+import { HttpClientModule } from '@angular/common/http';
 
 describe('CourseLandingPageComponent', () => {
   let component: CourseLandingPageComponent;
   let fixture: ComponentFixture<CourseLandingPageComponent>;
-  let environment: Record<string, unknown> = {};
-  let summaryCounts: ContentCounts = {};
-  let progress: IProgress = { id: 0, status: '' };
-  let lesson: Partial<ICourseOverviewLesson> = {};
-  let lessonStats: ILessonsstats = { completed: 0, total: 0 };
-  let certificate: ICertificate = { expiration: '' };
-  let badge: IBadge = { badge_image: '', desc: '', id: 0, isActive: false, name: '', progress: 0 };
-  let course: ICourseOverview = {
+  const environment: Record<string, unknown> = {};
+  const summaryCounts: ContentCounts = {};
+  const progress: IProgress = { id: 0, status: '' };
+  const lesson: Partial<ICourseOverviewLesson> = {};
+  const lessonStats: ILessonsstats = { completed: 0, total: 0 };
+  const certificate: ICertificate = { expiration: '' };
+  const badge: IBadge = {
+    badge_image: '',
+    desc: '',
+    id: 0,
+    isActive: false,
+    name: '',
+    progress: 0,
+  };
+  const course: ICourseOverview = {
     agreement_body: '',
     badge: badge,
     can_reenroll: false,
     certificate: certificate,
     completed_at: '',
-    course_attempt: { id: 0 },
+    course_attempt: {
+      id: 0,
+      user_course: {
+        accepted_agreement: false,
+        accepted_agreement_at: '',
+        id: 234234,
+      },
+    },
     course_content_stats: [],
     desktop_hero_image_url: '',
     has_agreement: false,
@@ -50,19 +69,22 @@ describe('CourseLandingPageComponent', () => {
     subtitle: '',
     summary_counts: summaryCounts,
     thumbnail_image_url: '',
-    title: ''
+    title: '',
   };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [CourseLandingPageComponent, MockComponent(CourseProgressComponent), MockComponent(CoursePlayerComponent)],
-      imports: [MatDialogModule, MatDividerModule],
+      declarations: [
+        CourseLandingPageComponent,
+        MockComponent(CourseProgressComponent),
+        MockComponent(CoursePlayerComponent),
+      ],
+      imports: [MatDialogModule, MatDividerModule, HttpClientModule],
       providers: [
         { provide: UiDownloadService, useClass: MockUIDownloadService },
         { provide: 'environment', useValue: environment },
-      ]
-    })
-    .compileComponents();
+      ],
+    }).compileComponents();
   });
 
   beforeEach(() => {

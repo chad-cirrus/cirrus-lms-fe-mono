@@ -1,4 +1,8 @@
-import { HoursAndLandingStatType, ICourseOverview, PROGRESS_STATUS } from '@cirrus/models';
+import {
+  HoursAndLandingStatType,
+  ICourseOverview,
+  PROGRESS_STATUS,
+} from '@cirrus/models';
 
 export const course351: ICourseOverview = {
   badge: {
@@ -34,7 +38,14 @@ export const course351: ICourseOverview = {
     expiration: null,
   },
   completed_at: '',
-  course_attempt: { id: 0 },
+  course_attempt: {
+    id: 0,
+    user_course: {
+      accepted_agreement: false,
+      accepted_agreement_at: '',
+      id: 234234,
+    },
+  },
   thumbnail_image_url: '',
   course_content_stats: [
     {
@@ -462,7 +473,14 @@ export const course357: ICourseOverview = {
   summary_counts: { lessons: 7, documents: 3, assessments: 6 },
   certificate: { expiration: null },
   completed_at: '',
-  course_attempt: { id: 0 },
+  course_attempt: {
+    id: 0,
+    user_course: {
+      accepted_agreement: false,
+      accepted_agreement_at: '',
+      id: 234234,
+    },
+  },
   course_content_stats: [
     { type: 'self_study', completed: 3, total: 3 },
     { type: 'flight_assessment', completed: 0, total: 6 },
@@ -637,7 +655,14 @@ export const course351Completed: ICourseOverview = {
   has_agreement: false,
   agreement_body: '',
   completion_time: '1h 1m',
-  course_attempt: { id: 123456 },
+  course_attempt: {
+    id: 0,
+    user_course: {
+      accepted_agreement: false,
+      accepted_agreement_at: '',
+      id: 234234,
+    },
+  },
   minimum_flight_hours: 0,
   desktop_hero_image_url: '',
   mobile_hero_image_url: '',
@@ -1037,7 +1062,14 @@ export const course466: ICourseOverview = {
   summary_counts: { lessons: 12, videos: 50 },
   certificate: { expiration: null },
   completed_at: '',
-  course_attempt: { id: 0 },
+  course_attempt: {
+    id: 0,
+    user_course: {
+      accepted_agreement: false,
+      accepted_agreement_at: '',
+      id: 234234,
+    },
+  },
   course_content_stats: [
     { type: 'self_study', completed: 0, total: 51 },
     { type: 'flight_assessment', completed: 0, total: 0 },
@@ -1287,7 +1319,14 @@ export const course357CourseNotStarted: ICourseOverview = {
   summary_counts: { lessons: 7, documents: 3, assessments: 6 },
   certificate: { expiration: null },
   completed_at: '',
-  course_attempt: { id: 0 },
+  course_attempt: {
+    id: 0,
+    user_course: {
+      accepted_agreement: false,
+      accepted_agreement_at: '',
+      id: 234234,
+    },
+  },
   course_content_stats: [
     { type: 'self_study', completed: 3, total: 3 },
     { type: 'flight_assessment', completed: 0, total: 6 },

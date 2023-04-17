@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
-import { selectStages } from '../../store/selectors/course.selector';
+import {
+  selectCourseOverview,
+  selectStages,
+} from '../../store/selectors/course.selector';
 import { Store } from '@ngrx/store';
 import { StageLessonNavigationEvent } from '@cirrus/ui';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -11,6 +14,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class CourseLessonsRouteComponent {
   stages$ = this.store.select(selectStages);
+  course$ = this.store.select(selectCourseOverview);
 
   constructor(
     private store: Store,

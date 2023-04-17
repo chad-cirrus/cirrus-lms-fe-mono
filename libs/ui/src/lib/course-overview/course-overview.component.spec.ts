@@ -1,20 +1,43 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ContentCounts, IBadge, ICertificate, ICourseOverview, ICourseOverviewLesson } from '@cirrus/models';
+import {
+  ContentCounts,
+  IBadge,
+  ICertificate,
+  ICourseOverview,
+  ICourseOverviewLesson,
+} from '@cirrus/models';
 
 import { CourseOverviewComponent } from './course-overview.component';
 import { MockComponent } from 'ng-mocks';
-import { CourseOverviewLessonProgressBarComponent, CourseSummaryCountsComponent } from '@cirrus/ui';
+import {
+  CourseOverviewLessonProgressBarComponent,
+  CourseSummaryCountsComponent,
+} from '@cirrus/ui';
 
 const summaryCounts: ContentCounts = {};
 const nextLesson: Partial<ICourseOverviewLesson> = {};
-const badge: IBadge = { badge_image: '', desc: '', id: 0, isActive: false, name: '', progress: 0 };
+const badge: IBadge = {
+  badge_image: '',
+  desc: '',
+  id: 0,
+  isActive: false,
+  name: '',
+  progress: 0,
+};
 const certificate: ICertificate = { expiration: '' };
 
 const course: ICourseOverview = {
   badge: badge,
   certificate: certificate,
   completed_at: '',
-  course_attempt: { id: 0 },
+  course_attempt: {
+    id: 0,
+    user_course: {
+      accepted_agreement: false,
+      accepted_agreement_at: '',
+      id: 234234,
+    },
+  },
   course_content_stats: [],
   hours_and_landings_stats: [],
   next_lesson: nextLesson,
@@ -260,7 +283,7 @@ const course: ICourseOverview = {
       progress: { id: 1775555, status: 'not_started' },
     },
   ],
-  progress: { id: 1775461, status: 'in_progress' }
+  progress: { id: 1775461, status: 'in_progress' },
 };
 
 describe('CourseOverviewComponent', () => {

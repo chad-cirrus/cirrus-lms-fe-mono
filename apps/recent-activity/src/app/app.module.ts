@@ -180,6 +180,7 @@ import { RecentStudentAchievmentComponent } from './components/recent-student-ac
     ImageFormatterPipe,
     TotalFlightHoursInstructorComponent,
     ClickOutsideDirective,
+    RecentStudentAchievmentComponent,
   ],
 })
 export class AppModule {}

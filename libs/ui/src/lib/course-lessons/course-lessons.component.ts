@@ -6,9 +6,14 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
-import { UntypedFormArray, UntypedFormControl, UntypedFormGroup } from '@angular/forms';
+import {
+  UntypedFormArray,
+  UntypedFormControl,
+  UntypedFormGroup,
+} from '@angular/forms';
 import {
   FilterMenuSection,
+  ICourseOverview,
   ICourseOverviewLesson,
   ICourseOverviewStage,
   ISearchInputData,
@@ -23,6 +28,7 @@ import {
 
 import { debounceTime, map, startWith, tap } from 'rxjs/operators';
 import { StageLessonNavigationEvent } from '../StageLessonNavigationEvent';
+import { TermsAgreementServiceService } from '../course-landing-page/terms-agreement-service.service';
 
 @Component({
   selector: 'cirrus-course-lessons',
@@ -35,6 +41,7 @@ export class CourseLessonsComponent implements OnInit {
   lessonsSubject = new BehaviorSubject<ICourseOverviewLesson[]>([]);
   filteredStages$!: Observable<ICourseOverviewStage[]>;
   filteredLessons$!: Observable<ISearchInputData[]>;
+  @Input() course!: ICourseOverview;
 
   private _filteredTextSubject = new Subject<string>();
   filteredText$: Observable<string> = this._filteredTextSubject.asObservable();
@@ -79,6 +86,8 @@ export class CourseLessonsComponent implements OnInit {
   get checkboxArray() {
     return this.filterForm.get('filterCheckbox') as UntypedFormArray;
   }
+
+  constructor(private tcService: TermsAgreementServiceService) {}
 
   ngOnInit() {
     this.filteredStages$ = combineLatest([
@@ -197,6 +206,19 @@ export class CourseLessonsComponent implements OnInit {
 
   emitNavigation($event: StageLessonNavigationEvent) {
     const { stageId, lessonId } = $event;
-    this.navigate.next({ stageId, lessonId });
+
+    const { accepted_agreement } = this.course.course_attempt.user_course;
+
+    if (!accepted_agreement) {
+      this.tcService
+        .openTermsAndConditionsModal(this.course)
+        .subscribe(bool => {
+          if (bool) {
+            this.navigate.next({ stageId, lessonId });
+          }
+        });
+    } else {
+      this.navigate.next({ stageId, lessonId });
+    }
   }
 }

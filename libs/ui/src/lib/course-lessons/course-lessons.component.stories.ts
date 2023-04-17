@@ -14,6 +14,7 @@ import { FilterComponent } from '../filter/filter.component';
 import { FormatFilterPipe } from '../format-filter.pipe';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatDialogModule } from '@angular/material/dialog';
 
 const mockEnvironment = {
   production: false,
@@ -262,6 +263,7 @@ export default {
         MatMenuModule,
         MatCheckboxModule,
         ReactiveFormsModule,
+        MatDialogModule,
       ],
       declarations: [
         CourseLessonItemComponent,
