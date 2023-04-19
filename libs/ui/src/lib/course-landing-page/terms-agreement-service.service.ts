@@ -1,6 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { ICourseOverview } from '@cirrus/models';
+import {
+  ICourseOverview,
+  TermsAgreementModalResult,
+  TermsAgreementSubtitleText,
+} from '@cirrus/models';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { BluePopUpComponent } from '../blue-pop-up/blue-pop-up.component';
@@ -22,14 +26,16 @@ export class TermsAgreementServiceService {
     this.environment = environment;
   }
 
-  openTermsAndConditionsModal(course: ICourseOverview): Observable<boolean> {
+  openTermsAndConditionsModal(
+    course: ICourseOverview,
+    subtitle_text: TermsAgreementSubtitleText
+  ): Observable<boolean> {
     if (!course.has_agreement) {
       return of(true);
     }
     const data = {
       title: 'Terms And Conditions',
-      subTitle:
-        'Please read the following before re-enrolling then click Agree to continue',
+      subTitle: `Please read the following before ${subtitle_text} then click Agree to continue`,
       body: course.agreement_body,
       buttons: ['Agree', 'Disagree'],
     };

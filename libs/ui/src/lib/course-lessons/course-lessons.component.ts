@@ -17,6 +17,7 @@ import {
   ICourseOverviewLesson,
   ICourseOverviewStage,
   ISearchInputData,
+  TermsAgreementSubtitleText,
 } from '@cirrus/models';
 import {
   BehaviorSubject,
@@ -211,7 +212,10 @@ export class CourseLessonsComponent implements OnInit {
 
     if (!accepted_agreement) {
       this.tcService
-        .openTermsAndConditionsModal(this.course)
+        .openTermsAndConditionsModal(
+          this.course,
+          TermsAgreementSubtitleText.START
+        )
         .subscribe(bool => {
           if (bool) {
             this.navigate.next({ stageId, lessonId });

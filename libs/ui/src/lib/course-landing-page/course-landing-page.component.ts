@@ -5,6 +5,7 @@ import {
   ICourseOverview,
   ICoursePlayerConfig,
   PROGRESS_STATUS,
+  TermsAgreementSubtitleText,
 } from '@cirrus/models';
 import { produceConfig } from './produce-config';
 import { Breakpoints } from '@angular/cdk/layout';
@@ -93,7 +94,10 @@ export class CourseLandingPageComponent {
     const { accepted_agreement } = this.course.course_attempt.user_course;
     if (!accepted_agreement) {
       this.tcService
-        .openTermsAndConditionsModal(this.course)
+        .openTermsAndConditionsModal(
+          this.course,
+          TermsAgreementSubtitleText.START
+        )
         .subscribe(bool => {
           if (bool) {
             this.navigate();
@@ -126,11 +130,16 @@ export class CourseLandingPageComponent {
       course_id: this.course.id,
       user_id: this.user.id,
     };
-    this.tcService.openTermsAndConditionsModal(this.course).subscribe(bool => {
-      if (bool) {
-        this.openConfirmationModal(payload);
-      }
-    });
+    this.tcService
+      .openTermsAndConditionsModal(
+        this.course,
+        TermsAgreementSubtitleText.REENROLL
+      )
+      .subscribe(bool => {
+        if (bool) {
+          this.openConfirmationModal(payload);
+        }
+      });
   }
 
   openConfirmationModal(payload: ModalPayload) {

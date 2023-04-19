@@ -41,3 +41,4 @@ export * from './lib/IConnection';
 export * from './lib/IOrder';
 export * from './lib/ICoursesForRecentActivity';
 export * from './lib/ISearchInputData';
+export * from './lib/TermsAgreement';

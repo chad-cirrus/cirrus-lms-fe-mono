@@ -3,7 +3,7 @@ import { TestBed } from '@angular/core/testing';
 import { TermsAgreementServiceService } from './terms-agreement-service.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { ICourseOverview } from '@cirrus/models';
+import { ICourseOverview, TermsAgreementSubtitleText } from '@cirrus/models';
 import { of } from 'rxjs';
 import { course351 } from '../mock-data/mock-courses.data';
 
@@ -51,10 +51,12 @@ describe('TermsAgreementServiceService', () => {
       const course: ICourseOverview = {
         has_agreement: false,
       } as ICourseOverview;
-      service.openTermsAndConditionsModal(course).subscribe(result => {
-        expect(result).toBe(true);
-        done();
-      });
+      service
+        .openTermsAndConditionsModal(course, TermsAgreementSubtitleText.START)
+        .subscribe(result => {
+          expect(result).toBe(true);
+          done();
+        });
     });
   });
   describe('openTermsAndConditionsModal', () => {
@@ -67,10 +69,12 @@ describe('TermsAgreementServiceService', () => {
       const course: ICourseOverview = {
         has_agreement: true,
       } as ICourseOverview;
-      service.openTermsAndConditionsModal(course).subscribe(result => {
-        expect(result).toBe(false);
-        done();
-      });
+      service
+        .openTermsAndConditionsModal(course, TermsAgreementSubtitleText.START)
+        .subscribe(result => {
+          expect(result).toBe(false);
+          done();
+        });
     });
   });
 });
