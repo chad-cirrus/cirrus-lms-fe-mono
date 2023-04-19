@@ -187,7 +187,6 @@ export class ContentPlayerComponent
     component.tasks = tasks;
     component.logbook = logbook;
     component.hidePrevAndNext.subscribe(value => {
-      console.log('content player hiding', value);
       this._hideBtns.next(value);
       this.changeDetectorRef.detectChanges();
     });

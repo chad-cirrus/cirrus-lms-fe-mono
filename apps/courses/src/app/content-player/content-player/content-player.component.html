@@ -78,7 +78,10 @@
         fxFlex="nogrow"
         [ngClass]="{ 'adjust-padding': (menuOpen$ | async) }"
       >
-        <div class="content-player__controls">
+        <div
+          class="content-player__controls"
+          *ngIf="(hideBtns$ | async) === false"
+        >
           <button class="next-button" mat-raised-button (click)="nextContent()">
             <span class="next" fxHide.lt-sm>Next</span>
             <img class="right-chevron" [src]="icons.rightChevron" alt="r" />
