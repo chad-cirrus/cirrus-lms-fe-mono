@@ -5,7 +5,9 @@ import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { BluePopUpComponent } from '../blue-pop-up/blue-pop-up.component';
 import { MatDialog } from '@angular/material/dialog';
-
+interface TermsAgreementModalResult {
+  data: 'Disagree' | 'Agree';
+}
 @Injectable({
   providedIn: 'root',
 })
@@ -39,11 +41,11 @@ export class TermsAgreementServiceService {
     });
 
     return dialogRef.afterClosed().pipe(
-      map(result => {
-        if (!result) {
+      map((result: TermsAgreementModalResult) => {
+        if (result.data === 'Disagree') {
           return false;
         }
-
+        console.log('result', result);
         this.acceptTermsServiceAgreement(
           course.course_attempt.user_course.id
         ).subscribe();

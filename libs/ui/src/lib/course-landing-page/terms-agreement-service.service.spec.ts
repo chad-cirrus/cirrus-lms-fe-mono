@@ -13,14 +13,14 @@ describe('TermsAgreementServiceService', () => {
   const dialogMock1 = {
     open: () => {
       return {
-        afterClosed: () => of(true),
+        afterClosed: () => of({ data: 'Agree' }),
       };
     },
   };
   const dialogMock2 = {
     open: () => {
       return {
-        afterClosed: () => of(false),
+        afterClosed: () => of({ data: 'Disagree' }),
       };
     },
   };
