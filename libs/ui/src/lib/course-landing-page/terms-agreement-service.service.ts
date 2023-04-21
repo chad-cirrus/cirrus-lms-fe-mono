@@ -9,6 +9,9 @@ import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { BluePopUpComponent } from '../blue-pop-up/blue-pop-up.component';
 import { MatDialog } from '@angular/material/dialog';
+interface TermsAgreementModalResult {
+  data: 'Disagree' | 'Agree';
+}
 @Injectable({
   providedIn: 'root',
 })
