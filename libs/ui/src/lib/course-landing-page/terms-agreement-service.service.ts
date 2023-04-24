@@ -1,17 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import {
-  ICourseOverview,
-  TermsAgreementModalResult,
-  TermsAgreementSubtitleText,
-} from '@cirrus/models';
+import { ICourseOverview, TermsAgreementModalResult, TermsAgreementSubtitleText } from '@cirrus/models';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { BluePopUpComponent } from '../blue-pop-up/blue-pop-up.component';
 import { MatDialog } from '@angular/material/dialog';
-interface TermsAgreementModalResult {
-  data: 'Disagree' | 'Agree';
-}
+
 @Injectable({
   providedIn: 'root',
 })
