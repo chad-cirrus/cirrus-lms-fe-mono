@@ -20,4 +20,11 @@ export class MediaServerService {
       .get<ScormResponse>(url)
       .pipe(map(response => response.initialFile));
   }
+
+  updateScormProgress(progress_id: number, token: string) {
+    const url = `${environment.baseUrl}/api/v4/progresses/${progress_id}`;
+    const payload = { scorm_progress: token };
+    console.log('payload', payload);
+    return this.http.patch(url, payload);
+  }
 }

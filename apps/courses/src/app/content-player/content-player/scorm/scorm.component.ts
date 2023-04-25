@@ -6,7 +6,7 @@ import { environment } from 'apps/courses/src/environments/environment';
 import { LessonContentComponent } from 'libs/ui/src/lib/LessonContentComponent';
 import { MediaServerService } from '../../../media.service';
 import { ScormAPI } from './scorm-api';
-import { filter } from 'rxjs/operators';
+import { filter, tap } from 'rxjs/operators';
 import { BehaviorSubject } from 'rxjs';
 
 @Component({
@@ -35,8 +35,13 @@ export class ScormComponent
 
   // override base ngOnInit and ngOnDestroy
   ngOnInit() {
-    this.api = new ScormAPI(this.content.progress, this.updateProgress, this.hidePrevAndNext);
-    this.loadingSubject.subscribe((isLoading) => {
+    this.api = new ScormAPI(
+      this.content.progress,
+      this.updateProgress,
+      this.hidePrevAndNext,
+      this.mediaServerService
+    );
+    this.loadingSubject.subscribe(isLoading => {
       this.loading = isLoading;
     });
   }
@@ -52,16 +57,18 @@ export class ScormComponent
       .scormStartingUrl(blob_directory)
       .pipe(filter(url => url !== undefined && url !== null))
       .subscribe(
-        (url) => {
-          this.url = this.sanitizer.bypassSecurityTrustResourceUrl(`${environment.baseUrl}/${url.toString()}`);
+        url => {
+          this.url = this.sanitizer.bypassSecurityTrustResourceUrl(
+            `${environment.baseUrl}/${url.toString()}`
+          );
           window['API' as string] = this.api;
-          this.loadingSubject.next(false)
+          this.loadingSubject.next(false);
           this.hidePrevAndNext.emit(true);
         },
-        (error) => {
+        error => {
           console.log(error);
           this.loadingSubject.next(false);
         }
-    );
+      );
   }
 }

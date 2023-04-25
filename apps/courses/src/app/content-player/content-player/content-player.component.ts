@@ -191,9 +191,9 @@ export class ContentPlayerComponent
       this.changeDetectorRef.detectChanges();
     });
     this.menuOpen$.subscribe(data => (component.menuOpen = data));
-    component.updateProgress.subscribe(progress =>
-      this.updateProgress(progress)
-    );
+    component.updateProgress.subscribe(progress => {
+      return this.updateProgress(progress);
+    });
   }
 
   playOverview(overview: string) {
