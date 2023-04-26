@@ -1,7 +1,6 @@
 @use '../styles/variables' as *;
 
 .gen-table {
-  padding: 0 50px;
 
   mat-header-row, mat-row {
     border-bottom: solid 1px rgba(255, 255, 255, .12);

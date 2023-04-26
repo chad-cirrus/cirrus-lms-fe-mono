@@ -1,13 +1,15 @@
 <div class="enrollment-history">
-  <p class="enrollment-history-container" *ngIf="certificate?.expiration">
-    {{ certificate.expiration }}
-  </p>
+  <div class="courses-main-content-inner-wrapper">
+    <p class="enrollment-history-container" *ngIf="certificate?.expiration">
+      {{ certificate.expiration }}
+    </p>
 
-  <cirrus-generic-responsive-mat-table
-    [data]="enrollments"
-    [columns]="columns"
-    [displayedColumns]="displayedColumns"
-    (emitValue)="valueSelected($event)"
-    (emitRow)="rowSelected($event)"
-  ></cirrus-generic-responsive-mat-table>
+    <cirrus-generic-responsive-mat-table
+      [data]="enrollments"
+      [columns]="columns"
+      [displayedColumns]="displayedColumns"
+      (emitValue)="valueSelected($event)"
+      (emitRow)="rowSelected($event)"
+    ></cirrus-generic-responsive-mat-table>
+  </div>
 </div>
