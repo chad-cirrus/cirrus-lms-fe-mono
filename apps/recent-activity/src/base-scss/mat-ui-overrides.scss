@@ -486,3 +486,8 @@ cirrus-lesson-landing-page {
     margin-top: auto;
   }
 }
+
+cirrus-video-player .cirrus-video-player > div {
+  position: initial !important;
+  padding: 0 !important;
+}
