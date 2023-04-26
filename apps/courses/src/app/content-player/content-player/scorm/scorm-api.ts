@@ -43,10 +43,13 @@ export class ScormAPI {
     this.data['cmi.suspend_data'] = this.progress.scorm_progress;
     this.updateProgress.emit(payload);
     this.hideNavigation.emit(true);
-    this.scormProgress.pipe(
-      exhaustMap((scormProgress) =>
-        this.mediaService.updateScormProgress(this.progress.id, scormProgress)),
-    )
+    this.scormProgress
+      .pipe(
+        exhaustMap(scormProgress =>
+          this.mediaService.updateScormProgress(this.progress.id, scormProgress)
+        )
+      )
+      .subscribe();
     return 'true';
   }
 
