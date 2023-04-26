@@ -190,7 +190,9 @@ export class ContentPlayerComponent
       this._hideBtns.next(value);
       this.changeDetectorRef.detectChanges();
     });
-    this.changeDetectorRef.detectChanges();
+    if (content.content_type === 2) {
+      this.changeDetectorRef.detectChanges();
+    }
 
     this.menuOpen$.subscribe(data => (component.menuOpen = data));
     component.updateProgress.subscribe(progress => {
