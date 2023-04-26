@@ -61,7 +61,7 @@ mat-cell.mat-mdc-cell {
   }
 }
 
-mat-table.mat-table {
+mat-table.mat-mdc-table {
   background: transparent;
   padding: 0 20px;
 
@@ -76,7 +76,7 @@ mat-table.mat-table {
 
 //styling for mobile layout only. Usually we'd do mobile first but skiping that for simplicity here
 @media (max-width: 599px) {
-  mat-header-cell.mat-header-cell {
+  mat-header-cell.mat-mdc-header-cell {
     color: $primary-font-color;
     font-family: 'Akzidenz-Grotesk BQ';
     font-size: 14px;
@@ -86,7 +86,7 @@ mat-table.mat-table {
     width: 100%;
   }
 
-  mat-cell.mat-cell {
+  mat-cell.mat-mdc-cell {
     color: $gray5;
     font-family: 'Akzidenz-Grotesk BQ';
     font-size: 14px;
@@ -98,18 +98,18 @@ mat-table.mat-table {
     width: 100%;
   }
 
-  .mat-header-row {
+  .mat-mdc-header-row {
     display: none;
   }
 
-  .mat-row {
+  .mat-mdc-row {
     align-items: start;
     border-bottom: 1px solid $gray3;
     flex-direction: column;
     padding: 56px 0 24px 0;
   }
 
-  .mat-cell:before {
+  .mat-mdc-cell:before {
     color: $primary-font-color;
     content: attr(data-label);
     font-family: $bqmedium-font;
