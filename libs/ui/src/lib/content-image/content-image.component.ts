@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { SafeResourceUrl } from '@angular/platform-browser';
 import { IContent } from '@cirrus/models';
 import { LessonContentComponent } from '../LessonContentComponent';
@@ -9,7 +9,10 @@ import { CirrusSanitizerService } from '../shared/cirrus-sanitizer.service';
   templateUrl: './content-image.component.html',
   styleUrls: ['./content-image.component.scss'],
 })
-export class ContentImageComponent extends LessonContentComponent {
+export class ContentImageComponent
+  extends LessonContentComponent
+  implements OnInit
+{
   private _upload_image!: SafeResourceUrl;
 
   get upload_image() {
@@ -30,5 +33,9 @@ export class ContentImageComponent extends LessonContentComponent {
 
   constructor(private cirrusSanitizer: CirrusSanitizerService) {
     super();
+  }
+
+  ngOnInit(): void {
+    this.hidePrevAndNext.emit(false);
   }
 }

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { SafeResourceUrl } from '@angular/platform-browser';
 import { IContent } from '@cirrus/models';
 import { LessonContentComponent } from '../LessonContentComponent';
@@ -9,7 +9,10 @@ import { CirrusSanitizerService } from '../shared/cirrus-sanitizer.service';
   templateUrl: './interactive.component.html',
   styleUrls: ['./interactive.component.scss'],
 })
-export class InteractiveComponent extends LessonContentComponent {
+export class InteractiveComponent
+  extends LessonContentComponent
+  implements OnInit
+{
   private _url!: SafeResourceUrl;
 
   get url() {
@@ -28,5 +31,9 @@ export class InteractiveComponent extends LessonContentComponent {
 
   constructor(private cirrusSanitizer: CirrusSanitizerService) {
     super();
+  }
+
+  ngOnInit(): void {
+    this.hidePrevAndNext.emit(false);
   }
 }

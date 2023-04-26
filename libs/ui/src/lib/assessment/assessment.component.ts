@@ -82,6 +82,8 @@ export class AssessmentComponent
   }
 
   ngOnInit(): void {
+    this.hidePrevAndNext.emit(false);
+
     super.ngOnInit();
 
     this.tablet$ = this.breakpointObserver.observe('(max-width: 959px)').pipe(
