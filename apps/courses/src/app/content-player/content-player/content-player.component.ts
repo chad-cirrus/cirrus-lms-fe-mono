@@ -192,9 +192,7 @@ export class ContentPlayerComponent
       this.changeDetectorRef.detectChanges();
     });
     if (content.content_type === 2) {
-      setTimeout(() => {
-        this.changeDetectorRef.detectChanges();
-      }, 500);
+      this.changeDetectorRef.detectChanges();
     }
 
     this.menuOpen$.subscribe(data => (component.menuOpen = data));
