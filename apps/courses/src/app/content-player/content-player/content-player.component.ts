@@ -119,7 +119,7 @@ export class ContentPlayerComponent
     private store: Store<AppState>,
     private taskService: TaskService,
     private dialogRef: MatDialogRef<ContentPlayerComponent>,
-    private changeDetectorRef: ChangeDetectorRef
+    private changeDetectorRef: ChangeDetectorRef,
   ) {}
 
   ngOnInit(): void {
@@ -139,6 +139,7 @@ export class ContentPlayerComponent
           this.currentContentType = content.content_type;
           this.title = content.title;
           this.createComponent(content, tasks, logbook);
+          this.changeDetectorRef.detectChanges();
 
           this.store
             .select(selectIsScreenTabletOrSmaller)
