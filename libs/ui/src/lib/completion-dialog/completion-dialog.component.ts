@@ -1,11 +1,4 @@
-import {
-  AfterViewInit,
-  ChangeDetectorRef,
-  Component,
-  Inject,
-  NgZone,
-  OnInit,
-} from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, Inject, NgZone, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { LESSON_COMPLETION_CTA } from './LessonCompletionCtas';
 import { BehaviorSubject } from 'rxjs';
@@ -37,7 +30,9 @@ export class CompletionDialogComponent implements AfterViewInit, OnInit {
     this.ngZone.run(() => {
       const lesson = this.data.lesson ?? 'the lesson!';
       this._lesson.next(lesson);
+      this.changeDetectorRef.detectChanges();
     });
+    this.changeDetectorRef.detectChanges();
   }
 
   ngAfterViewInit() {
