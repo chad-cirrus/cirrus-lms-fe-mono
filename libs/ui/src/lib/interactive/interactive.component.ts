@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { SafeResourceUrl } from '@angular/platform-browser';
-import { IContent } from '@cirrus/models';
+import { IContent, PROGRESS_STATUS } from '@cirrus/models';
 import { LessonContentComponent } from '../LessonContentComponent';
 import { CirrusSanitizerService } from '../shared/cirrus-sanitizer.service';
 
@@ -34,6 +34,7 @@ export class InteractiveComponent
   }
 
   ngOnInit(): void {
+    super.ngOnInit();
     this.hidePrevAndNext.emit(false);
   }
 }

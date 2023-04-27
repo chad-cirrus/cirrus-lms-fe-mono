@@ -82,6 +82,8 @@ export class AssessmentComponent
   }
 
   ngOnInit(): void {
+    super.ngOnInit();
+
     this.hidePrevAndNext.emit(false);
 
     super.ngOnInit();

@@ -119,7 +119,7 @@ export class ContentPlayerComponent
     private store: Store<AppState>,
     private taskService: TaskService,
     private dialogRef: MatDialogRef<ContentPlayerComponent>,
-    private changeDetectorRef: ChangeDetectorRef,
+    private changeDetectorRef: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -191,6 +191,7 @@ export class ContentPlayerComponent
       this._hideBtns.next(value);
       this.changeDetectorRef.detectChanges();
     });
+
     if (content.content_type === 2) {
       this.changeDetectorRef.detectChanges();
     }

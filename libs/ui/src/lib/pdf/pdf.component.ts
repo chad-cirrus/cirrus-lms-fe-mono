@@ -17,6 +17,7 @@ export class PdfComponent extends LessonContentComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    super.ngOnInit();
     this.hidePrevAndNext.emit(false);
     super.ngOnInit();
     this.mobile$ = this.breakpointObserver.observe('(max-width: 600px)').pipe(

@@ -35,6 +35,8 @@ export class ScormComponent
 
   // override base ngOnInit and ngOnDestroy
   ngOnInit() {
+    super.ngOnInit();
+
     this.api = new ScormAPI(
       this.content.progress,
       this.updateProgress,
