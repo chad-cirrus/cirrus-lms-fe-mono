@@ -38,6 +38,7 @@ export class TermsAgreementServiceService {
       data: data,
       height: '70%',
       maxWidth: '515px',
+      panelClass: 'blue-popup-container',
     });
 
     return dialogRef.afterClosed().pipe(
