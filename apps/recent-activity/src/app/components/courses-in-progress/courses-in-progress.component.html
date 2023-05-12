@@ -33,13 +33,11 @@
             <div class="swiper-slide-content">
               <div class="course-slide-progress-wrapper">
                 <mat-progress-bar
-                  [value]="course | courseInProgressValue"
+                  [value]="course.percent_complete"
                   mode="determinate"
                 ></mat-progress-bar>
-                <span class="progress-bar-text body-copy-small"
-                  ><span>{{ course.lessons_completed }}</span
-                  >/<span class="total">{{ course.lessons_total }}</span
-                  >Lessons Complete
+                <span class="progress-bar-text body-copy-small">
+                  <span>{{ course.percent_complete }}</span>% Complete
                 </span>
               </div>
               <button
@@ -47,10 +45,7 @@
                 [routerLink]="[
                   '/courses',
                   course.id,
-                  'stages',
-                  course.next_lesson.stage_id,
-                  'lessons',
-                  course.next_lesson.lesson_id
+                  'next-lesson',
                 ]"
                 class="primary-btn slider-card-button"
               >

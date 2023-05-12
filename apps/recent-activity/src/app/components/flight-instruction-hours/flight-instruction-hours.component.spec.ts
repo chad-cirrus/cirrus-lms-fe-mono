@@ -5,6 +5,8 @@ import { FlightLogStatsType } from '../../models/IRecentActivityInstructors';
 
 import { FlightInstructionHoursComponent } from './flight-instruction-hours.component';
 import { MatSelectModule } from '@angular/material/select';
+import { MockComponent } from 'ng-mocks';
+import { CirrusChartComponent } from '../chart/chart.component';
 
 describe('FlightInstructionHoursComponent', () => {
   let component: FlightInstructionHoursComponent;
@@ -13,7 +15,10 @@ describe('FlightInstructionHoursComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [MatSelectModule],
-      declarations: [FlightInstructionHoursComponent],
+      declarations: [
+        FlightInstructionHoursComponent,
+        MockComponent(CirrusChartComponent),
+      ],
     }).compileComponents();
   });
 
