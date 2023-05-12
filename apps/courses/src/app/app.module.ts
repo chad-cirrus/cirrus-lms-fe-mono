@@ -45,8 +45,12 @@ import { CourseOverviewRouteComponent } from './course/course-overview-route/cou
 import { CourseLessonsRouteComponent } from './course/course-lessons-route/course-lessons-route.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { CourseEnrollmentsRouteComponent } from './course/course-enrollments-route/course-enrollments-route.component';
-import { SidenavHeaderModule, SidenavHeaderService } from '@cirrus/sidenav-header';
+import {
+  SidenavHeaderModule,
+  SidenavHeaderService,
+} from '@cirrus/sidenav-header';
 import { MatRippleModule } from '@angular/material/core';
+import { NextLessonRedirectComponent } from './next-lesson-redirect/next-lesson-redirect.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +62,7 @@ import { MatRippleModule } from '@angular/material/core';
     CourseOverviewRouteComponent,
     CourseLessonsRouteComponent,
     CourseEnrollmentsRouteComponent,
+    NextLessonRedirectComponent,
   ],
   imports: [
     BrowserModule,
