@@ -8,7 +8,7 @@
     *ngIf="
       lesson.instructor_overview &&
         lesson.instructor_overview.length > 0 &&
-        user.role === 'instructor';
+        (user.role !== 'pilot' || user.ctc_admin);
       else studentView
     "
   >

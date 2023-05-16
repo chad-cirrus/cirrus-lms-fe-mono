@@ -8,6 +8,7 @@ import { NoopComponent } from './shared/noop/noop.component';
 import { CourseOverviewRouteComponent } from './course/course-overview-route/course-overview-route.component';
 import { CourseLessonsRouteComponent } from './course/course-lessons-route/course-lessons-route.component';
 import { CourseEnrollmentsRouteComponent } from './course/course-enrollments-route/course-enrollments-route.component';
+import { NextLessonRedirectComponent } from './next-lesson-redirect/next-lesson-redirect.component';
 
 const getResolvedUrl = (route: ActivatedRouteSnapshot): string => {
   const params = Object.keys(route.params)
@@ -63,6 +64,7 @@ const routes: Routes = [
       { path: 'enrollments', component: CourseEnrollmentsRouteComponent },
     ],
   },
+  { path: 'courses/:courseId/next-lesson', component: NextLessonRedirectComponent },
   {
     path: 'courses/:courseId/stages/:stageId/lessons/:lessonId',
     component: LessonComponent,

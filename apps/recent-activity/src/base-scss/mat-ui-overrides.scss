@@ -362,7 +362,11 @@ mat-table mat-cell.mdc-data-table__cell {
 .mat-mdc-dialog-container .mat-mdc-dialog-surface.mdc-dialog__surface {
   background-color: $black;
 }
-
+.blue-popup-container {
+  .mat-mdc-dialog-container .mat-mdc-dialog-surface.mdc-dialog__surface {
+    height: auto;
+  }
+} 
 
 /**
  * Material Button

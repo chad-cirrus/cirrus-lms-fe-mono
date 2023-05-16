@@ -15,6 +15,7 @@ import { RecentStudentsComponent } from '../recent-students/recent-students.comp
 import { NotificationsSectionComponent } from '../notifications/notifications-section.component';
 import { StudentTaskPerformanceComponent } from '../student-task-performance/student-task-performance.component';
 import { FlightInstructionHoursComponent } from '../flight-instruction-hours/flight-instruction-hours.component';
+import { RecentStudentAchievmentComponent } from '../recent-student-achievment/recent-student-achievment.component';
 
 jest.mock('swiper', () => ({
   Swiper: { use() {} },
@@ -36,6 +37,7 @@ describe('RecentActivityInstructorComponent', () => {
         MockComponent(NotificationsSectionComponent),
         MockComponent(StudentTaskPerformanceComponent),
         MockComponent(FlightInstructionHoursComponent),
+        MockComponent(RecentStudentAchievmentComponent),
       ],
       providers: [
         { provide: RecentActivityService, useClass: MockRecentActivityService },

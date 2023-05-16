@@ -1,5 +1,6 @@
 export interface ICoursesForRecentActivity {
   id: number;
+  percent_complete: number;
   lessons_completed: number;
   lessons_total: number;
   name: string;
