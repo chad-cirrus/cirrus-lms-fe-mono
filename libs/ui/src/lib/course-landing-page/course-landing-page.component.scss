@@ -126,6 +126,12 @@ cirrus-cta-button {
   }
 }
 
+@media (min-width: 1400px) {
+  .lesson-image {
+    height: calc( 75vh - 80px );
+  }
+}
+
 @media (max-width: 600px) {
   .congrats-text {
     font-size: 0.875rem;
