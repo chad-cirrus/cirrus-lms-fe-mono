@@ -77,7 +77,7 @@ cirrus-student-task-performance {
 #tab-filter-duration {
   mat-select {
     font-size: 14px;
-    height: 48.5px;
+    height: 49px;
     padding: 0 24px;
     cursor: pointer;
     box-sizing: border-box;
@@ -97,7 +97,6 @@ cirrus-student-task-performance {
     }
     @include breakpoint(widescreen) {
       border-bottom: solid 1px $white;
-      height: 49px;
     }
   }
 }
@@ -255,6 +254,11 @@ cirrus-recent-students {
 cirrus-achievements .mat-tab-group,
 cirrus-achievements .mat-tab-label {
   font-family: "akzidenz", Helvetica, Verdana, sans-serif;
+}
+@media screen and (min-width: 680px) {
+  .mat-mdc-tab-group.mat-mdc-tab-group-stretch-tabs>.mat-mdc-tab-header .mat-mdc-tab {
+    flex-grow: 0;
+  }
 }
 
 

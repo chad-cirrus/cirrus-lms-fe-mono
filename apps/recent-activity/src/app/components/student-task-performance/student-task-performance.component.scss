@@ -38,14 +38,14 @@ mat-tab-group {
   }
 }
 
-@include breakpoint(desktop) {
-  #tab-filter-duration {
-    top: 3.6em;
-    left: 0;
-    right: inherit;
-    z-index: 1;
-  }
-}
+// @include breakpoint(desktop) {
+//   #tab-filter-duration {
+//     top: 3.6em;
+//     left: 0;
+//     right: inherit;
+//     z-index: 1;
+//   }
+// }
 
 @include breakpoint(widescreen) {
   #tab-filter-duration {
@@ -55,16 +55,6 @@ mat-tab-group {
   }
 }
 
-mat-tab-group {
-  width: 100%;
-}
-
-#tab-filter-duration {
-  position: absolute;
-  top: 3.6em;
-  left: 0;
-  z-index: 1;
-}
 .tab-filter-durations {
   list-style: none;
   padding: 0;
@@ -111,14 +101,14 @@ mat-tab-group {
   }
 }
 
-@include breakpoint(desktop) {
-  #tab-filter-duration {
-    top: 3.6em;
-    left: 0;
-    right: inherit;
-    z-index: 1;
-  }
-}
+// @include breakpoint(desktop) {
+//   #tab-filter-duration {
+//     top: 3.6em;
+//     left: 0;
+//     right: inherit;
+//     z-index: 1;
+//   }
+// }
 
 @include breakpoint(widescreen) {
   #tab-filter-duration {
