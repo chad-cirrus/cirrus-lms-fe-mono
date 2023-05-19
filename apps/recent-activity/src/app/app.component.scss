@@ -18,14 +18,16 @@
 .sidenav-wrapper {
   background: $black;
   border-right: 1px solid $gray2;
-  height: 100%;
+  height: calc(100% - 80px);
   position: fixed;
   padding: 1rem 20px;
   top: 65px;
   z-index: 5;
+  overflow-y: auto;
 
   @include breakpoint(mobile) {
     top: 79.5px;
+    overflow-y: none;
   }
 }
 
