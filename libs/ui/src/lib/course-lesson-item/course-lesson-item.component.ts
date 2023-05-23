@@ -19,6 +19,7 @@ export class CourseLessonItemComponent {
   @Input() stage!: ICourseOverviewStage;
   @Input() courseLesson!: ICourseOverviewLesson;
   @Output() navigate = new EventEmitter<StageLessonNavigationEvent>();
+  @Input() previewCourse!: boolean;
 
   get lessonType(): string {
     const lessonDict: { [lessonType: number]: string } = {
@@ -57,6 +58,7 @@ export class CourseLessonItemComponent {
   }
 
   emitNavigation() {
+    if (this.previewCourse) return;
     this.navigate.emit({
       stageId: this.stage.id,
       lessonId: this.courseLesson.id,

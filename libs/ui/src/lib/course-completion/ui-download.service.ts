@@ -66,6 +66,20 @@ export class UiDownloadService {
       {}
     );
   }
+
+  courseEnroll(course: ICourseOverview): Observable<any> {
+    const order = {
+      order: {
+        order_line_items: [
+          { list_price: course.list_price, product_id: course.id },
+        ],
+      },
+    };
+    return this.http.post(
+      `${this.environment.baseUrl}/api/v3/orders/update-cart`,
+      order
+    );
+  }
 }
 
 interface ReEnrollPayload {

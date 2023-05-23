@@ -1,29 +1,36 @@
-<div
-  class="container"
-  fxLayout="column"
-  fxLayoutAlign="space-between start"
-  fxLayout.gt-xs="row"
-  fxLayoutAlign.gt-xs="space-between center"
->
+<div class="container">
   <div
-    class="lesson-info"
-    fxLayout="row"
-    fxLayoutAlign="start start"
-    fxLayoutGap="12px"
+    fxLayout="column"
+    fxLayoutAlign="space-between start"
+    fxLayout.gt-xs="row"
+    fxLayoutAlign.gt-xs="space-between center"
   >
-    <img [src]="config.thumbnail" alt="" class="thumbnail" />
+    <div
+      class="lesson-info"
+      fxLayout="row"
+      fxLayoutAlign="start start"
+      fxLayoutGap="12px"
+    >
+      <img [src]="config.thumbnail" alt="" class="thumbnail" />
 
-    <div class="text-container">
-      <div class="header">{{ config.header }}</div>
+      <div class="text-container">
+        <div class="header">{{ config.header }}</div>
 
-      <div class="description">
-        <span class="chapter">{{ config.index }}</span
-        >{{ config.title }}
+        <div class="description">
+          <span class="chapter">{{ config.index }}</span
+          >{{ config.title }}
+        </div>
       </div>
     </div>
+    <cirrus-cta-button
+      [text]="config.buttonText"
+      (btnClick)="emitNavigate()"
+    ></cirrus-cta-button>
   </div>
-  <cirrus-cta-button
-    [text]="config.buttonText"
-    (btnClick)="emitNavigate()"
-  ></cirrus-cta-button>
+  <div class="watch-preview-container">
+    <div class="watch-preview">
+      <img height="45px" width="45px" src="courses/images/svg/play-logo.svg" />
+      <p>Watch Preview</p>
+    </div>
+  </div>
 </div>

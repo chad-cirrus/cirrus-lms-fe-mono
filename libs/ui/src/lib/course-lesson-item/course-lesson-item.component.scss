@@ -15,7 +15,7 @@ img {
 }
 
 div.lesson-type {
-  background: #2E2E2E;
+  background: #2e2e2e;
   border-radius: 20px;
   padding: 6px 20px;
   line-height: 1.3;
@@ -36,7 +36,7 @@ div.progress {
   line-height: 1.3;
   margin-left: 12px;
   letter-spacing: 0.02em;
-  color: #BDBDBD;
+  color: #bdbdbd;
 }
 .type-progress {
   width: 100%;
@@ -54,7 +54,7 @@ span.chapter {
   margin: 0 0 15px;
 }
 .description {
-  color: #C4C4C4;
+  color: #c4c4c4;
   margin: 24px 0 0;
 }
 @media (min-width: 600px) {
@@ -74,7 +74,7 @@ span.chapter {
 }
 
 @media (min-width: 960px) {
-  .container {
+  .non-preview-course-hover {
     &:hover {
       background-color: #1f1f1f;
       cursor: pointer;

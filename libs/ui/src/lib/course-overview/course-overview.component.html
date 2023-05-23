@@ -5,8 +5,11 @@
     fxLayout="row"
     fxLayoutAlign="space-between"
   >
-    <div class="left-side" fxFlex.gt-sm="1 1 60%" *ngIf="courseOverview.overview">
-      <h2>About this course</h2>
+    <div
+      class="left-side"
+      fxFlex.gt-sm="1 1 60%"
+      *ngIf="courseOverview.overview"
+    >
       <div class="wysiwyg-wrapper" [innerHTML]="courseOverview.overview"></div>
       <p class="about--version small">Version: {{ version }}</p>
     </div>
@@ -22,7 +25,9 @@
         fxLayout="column"
         fxLayoutGap="24px"
         fxFlex.xs="1 1 100%"
-        *ngIf="courseOverview.minimum_flight_hours || courseOverview.completion_time"
+        *ngIf="
+          courseOverview.minimum_flight_hours || courseOverview.completion_time
+        "
       >
         <div
           fxLayout="row"
@@ -30,7 +35,7 @@
           *ngIf="courseOverview.minimum_flight_hours"
         >
           <div class="mcf">
-            {{courseOverview.minimum_flight_hours}}
+            {{ courseOverview.minimum_flight_hours }}
           </div>
           <span class="mcf-label">Minimum Course Flight Hours</span>
         </div>
@@ -46,17 +51,14 @@
           <span class="ect-label">Estimated Course Time</span>
         </div>
       </div>
-      <div
-        fxFlex.xs="1 1 100%"
-        fxFlex.gt-xs="1 1 35%"
-      >
+      <div fxFlex.xs="1 1 100%" fxFlex.gt-xs="1 1 35%">
         <cirrus-course-summary-counts
           [courseSummaryCounts]="courseOverview.summary_counts"
         ></cirrus-course-summary-counts>
       </div>
     </div>
   </section>
-  <section class="row-progress">
+  <section class="row-progress" *ngIf="courseOverview.course_attempt?.id">
     <h2>Course Progress</h2>
     <h5 class="started-date" *ngIf="courseOverview.started_at">
       Started: <span>{{ courseOverview.started_at }}</span>

@@ -1,7 +1,7 @@
 <div class="breadcrumb-container">
-  <div class="breadcrumb-item-container" (click)="navigateToCourses()">
+  <div class="breadcrumb-item-container" (click)="navigateToCoursesOrCatalog()">
     <img src="courses/images/svg/chevron-left-white.svg" />
-    <div class="title">My Courses</div>
+    <div class="title">{{ breadcrumbsTitle }}</div>
   </div>
 </div>
 
@@ -12,79 +12,97 @@
     <p class="large">{{ course.subtitle }}</p>
   </div>
 
-  <cirrus-course-progress
-    *ngIf="
-      course.progress.status !== PROGRESS_STATUS.completed;
-      else completedCourse
-    "
-    [completed_at]="course.completed_at"
-    [lessonStats]="course.lessons_stats"
-  ></cirrus-course-progress>
-  <cirrus-course-player
-    *ngIf="
-      course.progress.status !== PROGRESS_STATUS.completed;
-      else downloadDocument
-    "
-    [config]="coursePlayerConfig"
-    (navigateToNextLesson)="navigateToNextLesson()"
-  >
-  </cirrus-course-player>
+  <div *ngIf="course.course_attempt?.id; else coursePreview">
+    <cirrus-course-progress
+      *ngIf="
+        course.progress.status !== PROGRESS_STATUS.completed;
+        else completedCourse
+      "
+      [completed_at]="course.completed_at"
+      [lessonStats]="course.lessons_stats"
+    ></cirrus-course-progress>
+
+    <cirrus-course-player
+      *ngIf="
+        course.progress.status !== PROGRESS_STATUS.completed;
+        else downloadDocument
+      "
+      [config]="coursePlayerConfig"
+      (ctaAction)="navigateToNextLesson()"
+    >
+    </cirrus-course-player>
+
+    <ng-template #completedCourse>
+      <div class="completed-course-announcement">
+        <p fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+          <mat-icon svgIcon="completed"></mat-icon>
+          <span
+            *ngIf="course?.completed_at && course.completed_at.length > 0"
+            class="congrats-text"
+          >
+            Congrats! You've completed this course as of
+            {{ course.completed_at | date : 'MM/dd/yy' }}
+          </span>
+        </p>
+      </div>
+    </ng-template>
+
+    <ng-template #downloadDocument>
+      <div class="download-document">
+        <div
+          class="download-button"
+          fxLayout="row"
+          fxLayoutAlign="start center"
+          (click)="downloadCert()"
+          *ngIf="course.certificate.id"
+        >
+          <div *ngIf="certificateLoading$ | async; else value">
+            <mat-spinner color="accent" [diameter]="35"></mat-spinner>
+          </div>
+          <ng-template #value>
+            <mat-icon
+              class="download_arrow"
+              svgIcon="download_arrow"
+            ></mat-icon>
+          </ng-template>
+          <span class="download">Download Certificate</span>
+        </div>
+
+        <div
+          class="download-button"
+          fxLayout="row"
+          fxLayoutAlign="start center"
+          (click)="downloadTranscript()"
+        >
+          <div *ngIf="transcriptLoading$ | async; else value1">
+            <mat-spinner color="accent" [diameter]="35"></mat-spinner>
+          </div>
+          <ng-template #value1>
+            <mat-icon
+              class="download_arrow"
+              svgIcon="download_arrow"
+            ></mat-icon>
+          </ng-template>
+          <span class="download">Download Transcript</span>
+        </div>
+      </div>
+      <div class="re-enroll" *ngIf="course.can_reenroll">
+        <cirrus-cta-button
+          (click)="reEnroll()"
+          class="cta-btn"
+          [text]="'Re-Enroll'"
+          icon="re-enroll"
+        ></cirrus-cta-button>
+      </div>
+    </ng-template>
+  </div>
 </div>
 
-<ng-template #completedCourse>
-  <div class="completed-course-announcement">
-    <p fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
-      <mat-icon svgIcon="completed"></mat-icon>
-      <span
-        *ngIf="course?.completed_at && course.completed_at.length > 0"
-        class="congrats-text"
-      >
-        Congrats! You've completed this course as of
-        {{ course.completed_at | date : 'MM/dd/yy' }}
-      </span>
-    </p>
-  </div>
-</ng-template>
-
-<ng-template #downloadDocument>
-  <div class="download-document">
-    <div
-      class="download-button"
-      fxLayout="row"
-      fxLayoutAlign="start center"
-      (click)="downloadCert()"
-      *ngIf="course.certificate.id"
-    >
-      <div *ngIf="certificateLoading$ | async; else value">
-        <mat-spinner color="accent" [diameter]="35"></mat-spinner>
-      </div>
-      <ng-template #value>
-        <mat-icon class="download_arrow" svgIcon="download_arrow"></mat-icon>
-      </ng-template>
-      <span class="download">Download Certificate</span>
-    </div>
-
-    <div
-      class="download-button"
-      fxLayout="row"
-      fxLayoutAlign="start center"
-      (click)="downloadTranscript()"
-    >
-      <div *ngIf="transcriptLoading$ | async; else value1">
-        <mat-spinner color="accent" [diameter]="35"></mat-spinner>
-      </div>
-      <ng-template #value1>
-        <mat-icon class="download_arrow" svgIcon="download_arrow"></mat-icon>
-      </ng-template>
-      <span class="download">Download Transcript</span>
-    </div>
-  </div>
-  <div class="re-enroll" *ngIf="course.can_reenroll">
-    <cirrus-cta-button
-      (click)="reEnroll()"
-      class="cta-btn"
-      [text]="'Re-Enroll'"
-      icon="re-enroll"
-    ></cirrus-cta-button>
+<ng-template #coursePreview>
+  <div class="course-preview-container">
+    <cirrus-course-player
+      [config]="coursePlayerConfig"
+      (ctaAction)="enroll()"
+    ></cirrus-course-player>
   </div>
 </ng-template>

@@ -16,6 +16,7 @@ export interface ICourseOverview {
   agreement_body: string;
   started_at: string;
   overview?: string;
+  list_price?: number;
   completion_time?: string;
   course_attempt: { id: number; user_course: UserCourse };
   minimum_flight_hours: number;
