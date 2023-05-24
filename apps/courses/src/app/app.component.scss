@@ -76,6 +76,7 @@ ul.student-name {
   position: fixed;
   padding: 1rem 20px;
   z-index: 5;
+  max-height: calc(100% - 80px);
 
   @include breakpoint(mobile) {
     top: 78.5px;

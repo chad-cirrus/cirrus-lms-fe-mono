@@ -7,11 +7,16 @@
   flex-direction: column;
   justify-content: space-between;
   width: 100%;
+  height: calc(100% - 88px);
 
   @include breakpoint(mobile) {
     background: $black;
-    height: calc(100% - 88px);
   }
+
+  @media screen and (min-width: 600px) and (min-height: 600px) {
+      height: 100%;
+  }
+
 }
 
 .options-container {
@@ -25,7 +30,7 @@
   justify-content: space-between;
   padding: 2rem 0 0;
   width: 100%;
-  @media screen and (max-height: 660px) {
+  @media screen and (max-height: 599px) {
     padding: 2rem 0;
   }
 }
