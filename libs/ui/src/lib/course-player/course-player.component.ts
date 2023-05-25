@@ -8,9 +8,9 @@ import { ICoursePlayerConfig } from '@cirrus/models';
 })
 export class CoursePlayerComponent {
   @Input() config!: ICoursePlayerConfig;
-  @Output() navigateToNextLesson = new EventEmitter();
+  @Output() ctaAction = new EventEmitter();
 
   emitNavigate() {
-    this.navigateToNextLesson.emit();
+    this.ctaAction.emit();
   }
 }

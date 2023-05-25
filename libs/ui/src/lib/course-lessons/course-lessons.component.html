@@ -55,14 +55,12 @@
       [innerHtml]="stage.overview"
       *ngIf="stage.overview"
     ></p>
-    <div
-      class="item-container"
-      *ngFor="let courseLesson of stage.lessons"
-    >
+    <div class="item-container" *ngFor="let courseLesson of stage.lessons">
       <cirrus-course-lesson-item
         [courseLesson]="courseLesson"
         [stage]="stage"
         (navigate)="emitNavigation($event)"
+        [previewCourse]="!course.course_attempt?.id"
       ></cirrus-course-lesson-item>
     </div>
   </div>

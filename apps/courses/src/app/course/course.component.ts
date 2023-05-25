@@ -32,8 +32,11 @@ export class CourseComponent implements OnInit {
       )
 
       .subscribe(overview => {
+        const preview = !overview.course_attempt?.id;
         const defaultTab =
-          overview?.progress?.status === 'not_started' ? 'overview' : 'lessons';
+          overview?.progress?.status === 'not_started' || preview
+            ? 'overview'
+            : 'lessons';
         this.router.navigate(['/', 'courses', overview.id, defaultTab]);
       });
 

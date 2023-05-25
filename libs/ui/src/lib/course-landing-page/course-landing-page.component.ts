@@ -2,6 +2,7 @@ import { Component, EventEmitter, Inject, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import {
   ICirrusUser,
+  ICourse,
   ICourseOverview,
   ICoursePlayerConfig,
   PROGRESS_STATUS,
@@ -38,8 +39,9 @@ export class CourseLandingPageComponent {
     thumbnail: '',
   };
   background = new BehaviorSubject({});
-
   background$ = this.background.asObservable();
+
+  breadcrumbsTitle!: string;
 
   private _course!: ICourseOverview;
   private _size = Breakpoints.Large;
@@ -49,6 +51,16 @@ export class CourseLandingPageComponent {
   @Input()
   set course(value: ICourseOverview) {
     this._course = value;
+    this.breadcrumbsTitle = value.course_attempt?.id
+      ? 'My Courses'
+      : 'Course Catalog';
+    this.setBackground();
+
+    if (!value.course_attempt?.id) {
+      this.setPreviewCourseConfig(value);
+      return;
+    }
+
     if (
       value.next_lesson !== null &&
       Object.keys(value.next_lesson).length > 0
@@ -59,7 +71,6 @@ export class CourseLandingPageComponent {
         this.environment.defaultLessonThumbnail as string
       );
     }
-    this.setBackground();
   }
 
   get course() {
@@ -86,8 +97,11 @@ export class CourseLandingPageComponent {
     this.environment = environment;
   }
 
-  navigateToCourses() {
-    this.router.navigate([`/my-courses`]);
+  navigateToCoursesOrCatalog() {
+    const path = this.course.course_attempt?.id
+      ? `/my-courses`
+      : '/course-catalog';
+    this.router.navigate([path]);
   }
 
   navigateToNextLesson() {
@@ -108,14 +122,29 @@ export class CourseLandingPageComponent {
     }
   }
 
+  enroll() {
+    this.downloadService.courseEnroll(this.course).subscribe();
+  }
+
   navigate() {
     this.router.navigate([
       `/courses/${this._course.id}/stages/${this._course.next_lesson.stage_id}/lessons/${this._course.next_lesson.id}`,
     ]);
   }
 
+  setPreviewCourseConfig(course: ICourseOverview) {
+    this.coursePlayerConfig = {
+      index: '',
+      header: '',
+      title: course.title,
+      buttonText: 'Enroll Now',
+      thumbnail: course.thumbnail_image_url
+        ? course.thumbnail_image_url
+        : (this.environment.defaultLessonThumbnail as string),
+    };
+  }
+
   downloadCert() {
-    console.log('course', this.course);
     if (this.course.certificate.id) {
       this.downloadService
         .downloadCertificate(this.course.certificate.id)

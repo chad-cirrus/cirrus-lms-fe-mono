@@ -2,7 +2,7 @@
 
 .lesson-image {
   min-height: 450px;
-  padding: 95px 20px 0; 
+  padding: 95px 20px 0;
   margin-bottom: 50px;
   width: 100%;
   background-image: cover;
@@ -29,7 +29,7 @@ mat-spinner {
 
 .congrats-text {
   font-size: 1.125rem;
-  line-height: 1.3; 
+  line-height: 1.3;
   color: var.$gray6;
 }
 
@@ -53,7 +53,7 @@ mat-spinner {
 
 .expires-value {
   font-size: 1rem;
-  font-family: "Akzidenz-Grotesk BQ"
+  font-family: 'Akzidenz-Grotesk BQ';
 }
 
 .download-button {
@@ -70,6 +70,11 @@ mat-spinner {
 .mat-divider {
   border-top-color: rgba(255, 255, 255);
   width: calc(100vw - 16px);
+}
+
+.course-preview-container {
+  display: flex;
+  justify-content: end;
 }
 
 cirrus-course-progress {
@@ -123,6 +128,12 @@ cirrus-cta-button {
 
   cirrus-course-progress {
     margin-bottom: 30px;
+  }
+}
+
+@media (min-width: 1400px) {
+  .lesson-image {
+    height: calc( 75vh - 80px );
   }
 }
 

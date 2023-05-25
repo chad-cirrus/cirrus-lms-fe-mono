@@ -47,6 +47,20 @@ cirrus-cta-button {
   margin-right: 8px;
 }
 
+.watch-preview-container {
+  display: flex;
+  justify-content: end;
+}
+
+.watch-preview {
+  display: flex;
+  align-items: center;
+
+  p {
+    padding-left: 16px;
+  }
+}
+
 @media (min-width: 600px) {
   .container {
     padding: 17px 45px 17px 25px;

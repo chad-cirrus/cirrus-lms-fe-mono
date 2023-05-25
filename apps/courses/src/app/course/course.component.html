@@ -5,29 +5,29 @@
   (refreshCourse)="setCourse($event)"
 ></cirrus-course-landing-page>
 <nav
-  *ngIf='courseOverview$ | async as overview'
+  *ngIf="courseOverview$ | async as overview"
   mat-tab-nav-bar
-  color='primary'
-  backgroundColor='primary'
-  [tabPanel]='tabPanel'
-  mat-stretch-tabs='false'
-  mat-align-tabs='start'>
-  <a mat-tab-link
-     routerLink='overview'
-     routerLinkActive='active'>
-    <mat-icon svgIcon='eye'></mat-icon>
+  color="primary"
+  backgroundColor="primary"
+  [tabPanel]="tabPanel"
+  mat-stretch-tabs="false"
+  mat-align-tabs="start"
+>
+  <a mat-tab-link routerLink="overview" routerLinkActive="active">
+    <mat-icon svgIcon="eye"></mat-icon>
     Overview
   </a>
-  <a mat-tab-link
-     routerLink='lessons'
-     routerLinkActive='active'>
-    <mat-icon svgIcon='open_lessons'></mat-icon>
+  <a mat-tab-link routerLink="lessons" routerLinkActive="active">
+    <mat-icon svgIcon="open_lessons"></mat-icon>
     Lessons
   </a>
-  <a mat-tab-link
-     routerLink='enrollments'
-     routerLinkActive='active'>
-    <mat-icon svgIcon='enrollment_history'></mat-icon>
+  <a
+    mat-tab-link
+    *ngIf="overview.course_attempt?.id"
+    routerLink="enrollments"
+    routerLinkActive="active"
+  >
+    <mat-icon svgIcon="enrollment_history"></mat-icon>
     Enrollment History
   </a>
 </nav>
