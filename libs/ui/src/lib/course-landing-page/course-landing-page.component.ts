@@ -37,6 +37,7 @@ export class CourseLandingPageComponent {
     title: '',
     buttonText: 'Get Started',
     thumbnail: '',
+    preview: false,
   };
   background = new BehaviorSubject({});
   background$ = this.background.asObservable();
@@ -138,6 +139,7 @@ export class CourseLandingPageComponent {
       header: '',
       title: course.title,
       buttonText: 'Enroll Now',
+      preview: true,
       thumbnail: course.thumbnail_image_url
         ? course.thumbnail_image_url
         : (this.environment.defaultLessonThumbnail as string),

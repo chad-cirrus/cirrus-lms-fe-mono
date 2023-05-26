@@ -4,4 +4,5 @@ export interface ICoursePlayerConfig {
   title: string;
   buttonText: string;
   thumbnail: string;
+  preview: boolean;
 }
