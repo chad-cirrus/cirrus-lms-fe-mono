@@ -8,16 +8,19 @@ import { CtaButtonComponent } from '@cirrus/ui';
 describe('CoursePlayerComponent', () => {
   let component: CoursePlayerComponent;
   let fixture: ComponentFixture<CoursePlayerComponent>;
-  let config: ICoursePlayerConfig = { buttonText: '', header: '', index: '', thumbnail: '', title: '' };
+  const config: ICoursePlayerConfig = {
+    buttonText: '',
+    header: '',
+    index: '',
+    thumbnail: '',
+    title: '',
+    preview: false,
+  };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [
-        CoursePlayerComponent,
-        MockComponent(CtaButtonComponent),
-      ],
-    })
-    .compileComponents();
+      declarations: [CoursePlayerComponent, MockComponent(CtaButtonComponent)],
+    }).compileComponents();
   });
 
   beforeEach(() => {

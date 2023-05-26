@@ -11,6 +11,7 @@ export const produceConfig = (
 ): ICoursePlayerConfig => {
   return {
     index: lesson.index ?? '',
+    preview: false,
     header:
       courseProgress.status === 'not_started' ? 'START LESSON' : 'JUMP BACK IN',
     title: lesson.title ?? '',
