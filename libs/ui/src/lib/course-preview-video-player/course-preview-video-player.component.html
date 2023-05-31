@@ -1,0 +1,26 @@
+<div class="cirrus-course-preview-video-player">
+    
+    <div class="content-container">
+        
+        <header>
+            <div class="video-preview-title">
+                <h2>{{data.title}}</h2>
+                <h3>{{data.subtitle}}</h3>
+            </div>
+            
+            <button class="close-preview" (click)="closeModal()">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1 1L18.75 18.75" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M18.75 1L1 18.75" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span class="sr-only">Close</span>
+            </button>
+        </header>
+
+        <div class="video-wrapper">
+            <cirrus-video-player></cirrus-video-player>
+        </div>
+
+    </div>
+
+</div>

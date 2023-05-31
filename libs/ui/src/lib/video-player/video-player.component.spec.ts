@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { VideoPlayerComponent } from './video-player.component';
 import { IContent, IProgress } from '@cirrus/models';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 jest.mock('@vimeo/player', () => {
   return { default: function() {
@@ -14,8 +15,8 @@ jest.mock('@vimeo/player', () => {
 describe('VideoPlayerComponent', () => {
   let component: VideoPlayerComponent;
   let fixture: ComponentFixture<VideoPlayerComponent>;
-  let progress: IProgress = { id: 0, scorm: { grade: 0, pass: false }, status: '' };
-  let content: IContent = {
+  const progress: IProgress = { id: 0, scorm: { grade: 0, pass: false }, status: '' };
+  const content: IContent = {
     blob_directory: '',
     content_file: '',
     content_filename: '',
@@ -42,7 +43,11 @@ describe('VideoPlayerComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ VideoPlayerComponent ]
+      declarations: [ VideoPlayerComponent ],
+      providers: [
+        { provide: MAT_DIALOG_DATA, useValue: {} },
+        { provide: MatDialogRef, useValue: {} },
+      ]
     })
     .compileComponents();
   });

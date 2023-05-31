@@ -1,0 +1,33 @@
+:host {
+  height: 100%;
+}
+.cirrus-course-preview-video-player {
+  width: 100%;
+  height: 100%;
+}
+.content-container header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: start;
+}
+.video-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+}
+.sr-only {
+  display: none;
+}
+button.close-preview {
+  background-color: transparent;
+  border: none;
+  padding: 1rem;
+  &:hover {
+    cursor: pointer;
+  }
+  &:focus-visible {
+    outline: none;
+  }
+}

@@ -1,6 +1,7 @@
 import { IProgress } from './IProgress';
 import { IEnrollmentHistory } from './IEnrollmentHistory';
 import { IHoursAndLandingsStat } from './IHoursAndLandingsStats';
+import { IContent } from './IContent';
 
 export interface ICourseOverview {
   id: number;
@@ -32,6 +33,7 @@ export interface ICourseOverview {
   enrollments?: IEnrollmentHistory[];
   next_lesson: Partial<ICourseOverviewLesson>;
   badge: IBadge;
+  course_overview_video?: IContent;
 }
 
 export interface UserCourse {

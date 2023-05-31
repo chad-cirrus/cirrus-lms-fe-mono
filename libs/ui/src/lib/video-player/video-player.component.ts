@@ -2,12 +2,16 @@ import {
   AfterViewInit,
   Component,
   ElementRef,
+  Inject,
   OnDestroy,
+  OnInit,
   ViewChild,
 } from '@angular/core';
 import { PROGRESS_STATUS } from '@cirrus/models';
 import Player from '@vimeo/player';
 import { LessonContentComponent } from '../LessonContentComponent';
+import { DomSanitizer } from '@angular/platform-browser';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'cirrus-video-player',
@@ -16,15 +20,21 @@ import { LessonContentComponent } from '../LessonContentComponent';
 })
 export class VideoPlayerComponent
   extends LessonContentComponent
-  implements AfterViewInit, OnDestroy
+  implements OnInit, AfterViewInit, OnDestroy
 {
   @ViewChild('cirrusvideoplayer', { static: false })
   cirrusvideoplayer!: ElementRef;
 
+  ngOnInit(): void {
+    console.log('data', this.data);
+    console.log('content', this.content);
+  }
+
   ngAfterViewInit(): void {
+    const content = this.content ? this.content : this.data;
     this.hidePrevAndNext.emit(false);
     const player = new Player(this.cirrusvideoplayer.nativeElement, {
-      id: +this.content.url,
+      id: +content.url,
       responsive: true,
     });
     player.play();
@@ -42,11 +52,20 @@ export class VideoPlayerComponent
   }
 
   ngOnDestroy(): void {
-    if (this.content.progress) {
+    console.log('this content', this.content);
+    if (this.content?.progress) {
       this.updateProgress.emit({
         id: this.content.progress.id,
         status: PROGRESS_STATUS.completed,
       });
     }
+  }
+
+  constructor(
+    public dialogRef: MatDialogRef<VideoPlayerComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private sanitizer: DomSanitizer
+  ) {
+    super();
   }
 }

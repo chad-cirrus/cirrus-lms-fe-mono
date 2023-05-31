@@ -30,7 +30,7 @@
   <div class="watch-preview-container" *ngIf="config.preview">
     <div class="watch-preview">
       <img height="45px" width="45px" src="courses/images/svg/play-logo.svg" />
-      <p>Watch Preview</p>
+      <p (click)="emitWatchPreview()">Watch Preview</p>
     </div>
   </div>
 </div>

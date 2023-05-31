@@ -9,8 +9,13 @@ import { ICoursePlayerConfig } from '@cirrus/models';
 export class CoursePlayerComponent {
   @Input() config!: ICoursePlayerConfig;
   @Output() ctaAction = new EventEmitter();
+  @Output() watchPreview = new EventEmitter();
 
   emitNavigate() {
     this.ctaAction.emit();
+  }
+
+  emitWatchPreview() {
+    this.watchPreview.emit();
   }
 }

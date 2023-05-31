@@ -495,7 +495,34 @@ cirrus-lesson-landing-page {
   }
 }
 
-cirrus-video-player .cirrus-video-player > div {
+
+/**
+ * Content Player
+ * @desc Styles course popups with video content
+ * @locations: /courses/{{course_id}}/stages/{{stage_id}}/lessons/{{lesson_id}}
+ * @component cirrus-course-preview-video-player 
+ */
+cirrus-content-player .content-player-body cirrus-video-player .cirrus-video-player > div  {
   position: initial !important;
   padding: 0 !important;
 }
+
+/**
+ * Course Preview Video Player
+ * @desc Styles modal video 
+ * @locations: /courses/{{course_id}}/overview
+ * @component cirrus-course-preview-video-player 
+ */
+cirrus-video-player {
+  width: 100%;
+}
+
+
+.cdk-overlay-backdrop.course-preview-video {
+  background-color: #000;
+}
+cirrus-course-landing-page { 
+  .watch-preview:hover {
+    cursor:pointer;
+  }
+} 

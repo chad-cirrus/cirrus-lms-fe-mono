@@ -18,6 +18,8 @@ import { BluePopUpComponent } from '../blue-pop-up/blue-pop-up.component';
 import { downloadPdf } from '../helpers/DownloadPdf';
 import { map } from 'rxjs/operators';
 import { TermsAgreementServiceService } from './terms-agreement-service.service';
+import { VideoPlayerComponent } from '../video-player/video-player.component';
+import { CoursePreviewVideoPlayerComponent } from '../course-preview-video-player/course-preview-video-player.component';
 
 @Component({
   selector: 'cirrus-course-landing-page',
@@ -131,6 +133,15 @@ export class CourseLandingPageComponent {
     this.router.navigate([
       `/courses/${this._course.id}/stages/${this._course.next_lesson.stage_id}/lessons/${this._course.next_lesson.id}`,
     ]);
+  }
+
+  watchPreview() {
+    this.dialog.open(CoursePreviewVideoPlayerComponent, {
+      data: this.course.course_overview_video,
+      width: '100%',
+      backdropClass: 'course-preview-video',
+      panelClass: 'course-preview-video',
+    });
   }
 
   setPreviewCourseConfig(course: ICourseOverview) {
