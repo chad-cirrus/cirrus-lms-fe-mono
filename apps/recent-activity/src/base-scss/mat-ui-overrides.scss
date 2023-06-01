@@ -507,6 +507,7 @@ cirrus-content-player .content-player-body cirrus-video-player .cirrus-video-pla
   padding: 0 !important;
 }
 
+
 /**
  * Course Preview Video Player
  * @desc Styles modal video 
@@ -516,8 +517,6 @@ cirrus-content-player .content-player-body cirrus-video-player .cirrus-video-pla
 cirrus-video-player {
   width: 100%;
 }
-
-
 .cdk-overlay-backdrop.course-preview-video {
   background-color: #000;
 }
@@ -526,3 +525,8 @@ cirrus-course-landing-page {
     cursor:pointer;
   }
 } 
+
+
+apx-chart .apexcharts-toolbar {
+  z-index: 4;
+}
