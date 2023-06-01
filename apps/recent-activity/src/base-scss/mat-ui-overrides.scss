@@ -499,3 +499,7 @@ cirrus-video-player .cirrus-video-player > div {
   position: initial !important;
   padding: 0 !important;
 }
+
+apx-chart .apexcharts-toolbar {
+  z-index: 4;
+}
