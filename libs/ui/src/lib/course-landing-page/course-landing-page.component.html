@@ -99,11 +99,26 @@
 </div>
 
 <ng-template #coursePreview>
-  <div class="course-preview-container">
+  <div class="course-preview-container" #coursePlayer>
     <cirrus-course-player
       [config]="coursePlayerConfig"
       (ctaAction)="enroll()"
       (watchPreview)="watchPreview()"
+      [ngClass]="{'sticky' : isSticky}"
     ></cirrus-course-player>
+  </div>
+
+  <div class="mobile-preview-video">
+    <!-- <img src="{{course.course_overview_video?.placeholder_image}}" [attr.dataUrl]="course.course_overview_video?.url" class="zappy"> -->
+
+    <iframe
+      [src]="previewVideoUrl$ | async"
+      width="640"
+      height="360"
+      frameborder="0"
+      allow="autoplay; fullscreen; picture-in-picture"
+      allowfullscreen
+      *ngIf="(previewVideoUrl$ | async) !== null"
+    ></iframe>
   </div>
 </ng-template>

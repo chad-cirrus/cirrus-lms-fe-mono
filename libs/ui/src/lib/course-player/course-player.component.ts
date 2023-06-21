@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ICoursePlayerConfig } from '@cirrus/models';
-
 @Component({
   selector: 'cirrus-course-player',
   templateUrl: './course-player.component.html',

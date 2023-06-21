@@ -10,10 +10,9 @@ import { Observable, of } from 'rxjs';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatListModule } from '@angular/material/list';
-import {
-  LessonLandingPageComponent,
-} from '../../../../../../libs/ui/src/lib/lesson-landing-page/lesson-landing-page.component';
+import { LessonLandingPageComponent } from '../../../../../../libs/ui/src/lib/lesson-landing-page/lesson-landing-page.component';
 import { MockComponent } from 'ng-mocks';
+import { HttpClientModule } from '@angular/common/http';
 
 describe('LessonComponent', () => {
   let component: LessonComponent;
@@ -22,16 +21,27 @@ describe('LessonComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [LessonComponent, MockComponent(LessonLandingPageComponent)],
+      declarations: [
+        LessonComponent,
+        MockComponent(LessonLandingPageComponent),
+      ],
       providers: [
         provideMockStore(),
         { provide: ActivatedRoute, useClass: MockActivatedRoute },
-        { provide: ContentPlayerDialogService, useClass: MockContentPlayerDialogService },
+        {
+          provide: ContentPlayerDialogService,
+          useClass: MockContentPlayerDialogService,
+        },
         { provide: CoursesService, useClass: MockCoursesService },
       ],
-      imports: [MatDialogModule, MatSidenavModule, NoopAnimationsModule, MatListModule],
-    })
-    .compileComponents();
+      imports: [
+        MatDialogModule,
+        MatSidenavModule,
+        NoopAnimationsModule,
+        MatListModule,
+        HttpClientModule,
+      ],
+    }).compileComponents();
 
     store = TestBed.inject(MockStore);
   });

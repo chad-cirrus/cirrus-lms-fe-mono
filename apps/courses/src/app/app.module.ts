@@ -51,6 +51,7 @@ import {
 } from '@cirrus/sidenav-header';
 import { MatRippleModule } from '@angular/material/core';
 import { NextLessonRedirectComponent } from './next-lesson-redirect/next-lesson-redirect.component';
+import { OrderEffects } from './store/effects/order.effects';
 
 @NgModule({
   declarations: [
@@ -71,7 +72,7 @@ import { NextLessonRedirectComponent } from './next-lesson-redirect/next-lesson-
     UiModule,
     StoreModule.forRoot(coursesReducers),
     extModules,
-    EffectsModule.forRoot([LessonsEffects, ProgressEffects]),
+    EffectsModule.forRoot([LessonsEffects, ProgressEffects, OrderEffects]),
     AppRoutingModule,
     FlexLayoutModule,
     MatSidenavModule,

@@ -101,6 +101,12 @@ cirrus-cta-button {
   }
 }
 
+.mobile-preview-video iframe {
+  max-width: 100%;
+  margin: 0 auto;
+  display: block;
+}
+
 @media (min-width: 600px) {
   .lesson-image {
     padding: 140px 25px 0;
@@ -128,6 +134,12 @@ cirrus-cta-button {
 
   cirrus-course-progress {
     margin-bottom: 30px;
+  }
+}
+
+@media (min-width: 1200px) {
+  h1 {
+    max-width: calc(100% - 310px - 2rem);
   }
 }
 

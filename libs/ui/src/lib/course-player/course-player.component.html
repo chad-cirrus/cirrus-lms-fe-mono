@@ -1,9 +1,10 @@
 <div class="container">
   <div
     fxLayout="column"
-    fxLayoutAlign="space-between start"
+    fxLayoutAlign="space-between center"
     fxLayout.gt-xs="row"
     fxLayoutAlign.gt-xs="space-between center"
+    style="align-items: center;"
   >
     <div
       class="lesson-info"
@@ -11,26 +12,40 @@
       fxLayoutAlign="start start"
       fxLayoutGap="12px"
     >
-      <img [src]="config.thumbnail" alt="" class="thumbnail" />
 
       <div class="text-container">
-        <div class="header">{{ config.header }}</div>
+        <div class="header">
+          <img [src]="config.thumbnail" alt="" class="thumbnail" />
+          <div class="stripes">
+            <div class="stripe"></div>
+            <div class="stripe"></div>
+            <div class="stripe"></div>
+          </div>
+          {{ config.header }}
+        </div>
 
         <div class="description">
-          <span class="chapter">{{ config.index }}</span
-          >{{ config.title }}
+          <span class="chapter">{{ config.index }}</span>
+          {{ config.title }}
+          <div class="course-price-container course-price-mobile">Price: <span class="course-price">${{ config.list_price | number:'1.0-0' }}</span></div>
         </div>
+
+        <div class="watch-preview-container" *ngIf="config.preview">
+          <div class="watch-preview">
+            <img height="45px" width="45px" src="courses/images/svg/play-logo.svg" />
+            <p (click)="emitWatchPreview()">Watch Preview</p>
+          </div>
+        </div>
+
+        <div class="course-price-container course-price-desktop">Price: <span class="course-price">${{ config.list_price | number:'1.0-0' }}</span></div>
+
       </div>
     </div>
+
     <cirrus-cta-button
       [text]="config.buttonText"
       (btnClick)="emitNavigate()"
     ></cirrus-cta-button>
-  </div>
-  <div class="watch-preview-container" *ngIf="config.preview">
-    <div class="watch-preview">
-      <img height="45px" width="45px" src="courses/images/svg/play-logo.svg" />
-      <p (click)="emitWatchPreview()">Watch Preview</p>
-    </div>
+
   </div>
 </div>

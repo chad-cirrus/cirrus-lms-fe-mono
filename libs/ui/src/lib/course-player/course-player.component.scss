@@ -32,6 +32,7 @@ cirrus-cta-button {
   line-height: 22px;
   letter-spacing: 0.02em;
   text-transform: uppercase;
+  position: relative;
 }
 
 .chapter,
@@ -61,6 +62,18 @@ cirrus-cta-button {
   }
 }
 
+.course-price-container {
+
+  .course-price {
+    font-weight: bold;
+  }
+
+  &.course-price-desktop {
+    display: none;
+  }
+}
+
+
 @media (min-width: 600px) {
   .container {
     padding: 17px 45px 17px 25px;
@@ -74,7 +87,7 @@ cirrus-cta-button {
   }
 }
 
-@media (min-width: 960px) {
+@media (min-width: 1200px) {
   .container {
     .lesson-info {
       margin-right: 15px;
@@ -102,4 +115,34 @@ cirrus-cta-button {
       }
     }
   }
+
+  .course-price-container {
+    margin-bottom: 1rem;
+    .course-price {
+      font-weight: bold;
+    }
+  
+    &.course-price-mobile {
+      display: none;
+    }
+    &.course-price-desktop {
+      display: block;
+    }
+  }
 }
+
+
+
+// .course-preview-container {
+//   cirrus-course-player {
+//     .container {
+//       background-color: var.$gray7;
+//     }
+//   }
+// }
+
+// cirrus-course-player {
+//   .container {
+//     background-color: var.$gray7;
+//   }
+// }

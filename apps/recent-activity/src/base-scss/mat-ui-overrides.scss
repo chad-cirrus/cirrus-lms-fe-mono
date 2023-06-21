@@ -530,3 +530,267 @@ cirrus-course-landing-page {
 apx-chart .apexcharts-toolbar {
   z-index: 4;
 }
+
+
+
+.course-preview-container {
+  position: relative;
+  height: 74px;
+
+  cirrus-course-player {
+    display: inline-block;
+    width: 100vw;
+    max-width: 100vw;
+    position: absolute;
+    left: -20px;
+    z-index: 2;
+
+    &.sticky {
+      position: fixed;
+      top: 65px;
+      left: initial;
+      right: 0;
+      width: 100%;
+      max-width: 100%;
+    }
+
+    .container {
+      background-color: $gray7;
+      border-radius: 0;
+      padding: 20px;
+      filter: drop-shadow(0px 4px 20px rgba(0, 0, 0, 0.45));
+
+      & > div {
+        flex-direction: row !important;
+      }
+    }
+
+    .text-container {
+      height: 3.167rem;
+      width: 100%;
+    }
+
+    .lesson-info {
+      margin-right: 1rem;
+      flex: 1;
+    }
+
+    .description {
+      font-size: 0.88rem;
+      font-weight: 500;
+      line-height: 120%;
+
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    cirrus-cta-button {
+      width: auto !important;
+      margin-top: 0 !important;
+      min-width: 112px !important;
+      
+      button {
+        height: 36px;
+        padding: 0;
+      }
+      
+  
+      span.mdc-button__label {
+        font-size: 0.88rem;
+      }
+    }
+  }
+
+  .stripes {
+    width: 100%;
+    -webkit-clip-path: polygon(0 0, 100% 0, 90% 100%, 0% 100%);
+    clip-path: polygon(0 0, 100% 0, 90% 100%, 0% 100%);
+    position: absolute;
+    z-index: -1;
+
+    .stripe {
+      height: 15px;
+      display: block;
+      margin: 4px 0;
+      background: rgb(90,90,90);
+      background: linear-gradient(90deg, rgba(90,90,90,1) 0%, rgba(122,122,122,1) 100%);
+      
+      &:first-child {
+        margin-top: 0;
+      }
+    }
+  }
+
+  .chapter,
+  .thumbnail,
+  .watch-preview-container {
+    display: none !important;
+  }
+
+  @include breakpoint(mobile) {
+    height: 105px;
+    margin-bottom: 50px;
+    cirrus-course-player {
+      width: calc(100vw - 107px);
+      max-width: calc(100vw - 107px);
+      left: -25px;
+
+      &.sticky {
+        position: fixed;
+        top: 78px;
+        left: initial;
+        right: 0;
+        width: calc(100% - 107px);
+        max-width: calc(100% - 107px);
+      }
+
+      .container {
+        padding: 20px 25px;
+      }
+  
+      .text-container {
+        display: flex;
+        align-items: center;
+        height: 100%;
+        width: 100%;
+        min-height: 65px;
+
+        .header {
+          width: calc(100% - 50px - 112px - 1rem);
+          position:absolute;
+        }
+      }
+
+      .stripes {
+        -webkit-clip-path: polygon(0 0, 100% 0, 95% 100%, 0% 100%);
+        clip-path: polygon(0 0, 100% 0, 95% 100%, 0% 100%);
+        top: 0.4rem;
+      }
+
+      .description {
+        font-size: 1.125rem;
+        line-height: 21.6px;
+        margin-left: 6rem;
+      }
+
+    }
+    .thumbnail {
+      display: block !important;
+      margin-right: 20px !important;
+    }
+    .mobile-preview-video {
+      display: none;
+    }
+  }
+
+  @media (min-width: 960px) {
+    cirrus-course-player {
+      width: calc(100vw - 263px);
+      max-width: calc(100vw - 263px);
+      left: -49px;
+
+      &.sticky {
+        width: calc(100% - 245px);
+        max-width: calc(100% - 245px);
+      }
+
+      button {
+        width: 100%;
+      }
+    }
+    
+  }
+  @include breakpoint(desktop) {
+    height: auto;
+    position: initial;
+    cirrus-course-player {
+      width: 310px;
+      max-width: 310px;
+      left:initial;
+      position: absolute;
+      top: 285px;
+
+      &.sticky {
+        position: fixed;
+        top: 150px;
+        width: 310px;
+        max-width: 310px;
+        right: 3.1rem;
+      }
+      
+      .container {
+        border-radius: 6px;
+
+        & > div {
+          flex-direction: column !important;
+          align-items: flex-start !important;
+        }
+      }
+
+      .stripes {
+        -webkit-clip-path: polygon(0 0, 100% 0, 85% 100%, 0% 100%);
+        clip-path: polygon(0 0, 100% 0, 85% 100%, 0% 100%);
+      }
+
+      .lesson-info {
+        margin-right: 0 !important;
+        flex-direction: column !important;
+      }
+      
+      .text-container {
+        align-items: flex-start;
+        flex-direction: column;
+        margin-right: 0;
+        .header {
+          width: 100%;
+          position:relative;
+        }
+      }
+
+      .description {
+        margin-top: 1.5rem;
+        margin-left: 0;
+      }
+
+      cirrus-cta-button {
+        width: 100% !important;
+        max-width: 158px !important;
+        
+        button {
+          height: 39px;
+          width: 100%;
+        }
+      }
+
+      .watch-preview {
+        padding: 0.72rem 0;
+
+        img {
+          max-width: 35px;  
+        }
+      }
+
+    }
+
+    .thumbnail {
+      margin-right: 0px !important;
+    }
+
+    .watch-preview-container {
+      display: block !important;
+      width: 100%;
+      border-bottom: solid 1px #969696;
+      margin-bottom: 1rem;
+    }
+  }
+  
+}
+
+@include breakpoint(desktop) {
+  .mobile-preview-video {
+    display: none;
+  }
+}
+

@@ -1,26 +1,28 @@
+import { Breakpoints } from '@angular/cdk/layout';
 import { Component, EventEmitter, Inject, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import {
   ICirrusUser,
-  ICourse,
   ICourseOverview,
   ICoursePlayerConfig,
+  IOrder,
   PROGRESS_STATUS,
-  TermsAgreementSubtitleText,
+  TermsAgreementSubtitleText
 } from '@cirrus/models';
 import { produceConfig } from './produce-config';
-import { Breakpoints } from '@angular/cdk/layout';
 // eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
-import { BehaviorSubject, Observable, of } from 'rxjs';
-import { UiDownloadService } from '../course-completion/ui-download.service';
 import { MatDialog } from '@angular/material/dialog';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { filter, map, tap } from 'rxjs/operators';
 import { BluePopUpComponent } from '../blue-pop-up/blue-pop-up.component';
-import { downloadPdf } from '../helpers/DownloadPdf';
-import { map } from 'rxjs/operators';
-import { TermsAgreementServiceService } from './terms-agreement-service.service';
-import { VideoPlayerComponent } from '../video-player/video-player.component';
+import { UiDownloadService } from '../course-completion/ui-download.service';
 import { CoursePreviewVideoPlayerComponent } from '../course-preview-video-player/course-preview-video-player.component';
-
+import { downloadPdf } from '../helpers/DownloadPdf';
+import { CirrusSanitizerService } from '../shared/cirrus-sanitizer.service';
+import { TermsAgreementServiceService } from './terms-agreement-service.service';
+import { HostListener } from "@angular/core";
+import { ViewChild } from '@angular/core';
+import { ElementRef } from '@angular/core';
 @Component({
   selector: 'cirrus-course-landing-page',
   templateUrl: './course-landing-page.component.html',
@@ -40,6 +42,7 @@ export class CourseLandingPageComponent {
     buttonText: 'Get Started',
     thumbnail: '',
     preview: false,
+    list_price: 0,
   };
   background = new BehaviorSubject({});
   background$ = this.background.asObservable();
@@ -49,7 +52,21 @@ export class CourseLandingPageComponent {
   private _course!: ICourseOverview;
   private _size = Breakpoints.Large;
 
+  private previewVideoUrlSubject = new BehaviorSubject<string | null>(null);
+  public previewVideoUrl$ = this.previewVideoUrlSubject
+    .asObservable()
+    .pipe(
+      tap(console.log),
+      filter(url => url !== null),
+      map(url => this.cirrusSanitizer.getSafeResourceUrl(url as string)),
+    );
+
+  public isSticky = false;
+  @ViewChild('coursePlayer') coursePlayerEl!: ElementRef;
+
   @Output() refreshCourse = new EventEmitter<number>();
+
+  @Input() order!: IOrder | null;
 
   @Input()
   set course(value: ICourseOverview) {
@@ -61,6 +78,7 @@ export class CourseLandingPageComponent {
 
     if (!value.course_attempt?.id) {
       this.setPreviewCourseConfig(value);
+      this.previewVideoUrlSubject.next(`https://player.vimeo.com/video/${value.course_overview_video?.url}?app_id=122963`);
       return;
     }
 
@@ -95,6 +113,7 @@ export class CourseLandingPageComponent {
     private downloadService: UiDownloadService,
     private dialog: MatDialog,
     private tcService: TermsAgreementServiceService,
+    private cirrusSanitizer: CirrusSanitizerService,
     @Inject('environment') environment: Record<string, unknown>
   ) {
     this.environment = environment;
@@ -126,7 +145,13 @@ export class CourseLandingPageComponent {
   }
 
   enroll() {
-    this.downloadService.courseEnroll(this.course).subscribe();
+    if (this.order?.id) {
+      this.downloadService
+        .courseEnroll(this.course, this.order)
+        .subscribe(() => {
+          this.router.navigate(['/shopping-cart']);
+        });
+    }
   }
 
   navigate() {
@@ -150,10 +175,11 @@ export class CourseLandingPageComponent {
       header: '',
       title: course.title,
       buttonText: 'Enroll Now',
-      preview: true,
+      preview: !!course.course_overview_video,
       thumbnail: course.thumbnail_image_url
         ? course.thumbnail_image_url
         : (this.environment.defaultLessonThumbnail as string),
+      list_price: course.list_price ? course.list_price : 0,
     };
   }
 
@@ -212,6 +238,21 @@ export class CourseLandingPageComponent {
       });
   }
 
+  
+
+  @HostListener('window:scroll', ['$event'])
+  checkScroll() {   
+    if( this._size == "(max-width: 599.98px)" ) {
+      const distanceToTop = this.coursePlayerEl.nativeElement.getBoundingClientRect().top;
+      this.isSticky = distanceToTop <= 65;
+    } else if( this._size == "(min-width: 600px) and (max-width: 959.98px)" || this._size == "(min-width: 960px) and (max-width: 1279.98px)" ) {
+      const distanceToTop = this.coursePlayerEl.nativeElement.getBoundingClientRect().top;
+      this.isSticky = distanceToTop <= 78;
+    } else if(this._size == "(min-width: 1280px) and (max-width: 1919.98px)" || this._size == "(min-width: 1920px)") {
+      this.isSticky = window.scrollY >= 130;
+    }
+  }
+
   private setBackground() {
     const uri =
       this._size === Breakpoints.XSmall
@@ -223,7 +264,10 @@ export class CourseLandingPageComponent {
                   url(${encodeURI(uri)}) no-repeat top / cover`,
     });
   }
+
+
 }
+
 
 interface ModalPayload {
   course_id: number;

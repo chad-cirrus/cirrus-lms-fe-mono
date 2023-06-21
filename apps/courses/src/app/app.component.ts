@@ -28,6 +28,8 @@ import { CoursesFacadeService } from './courses-facade.service';
 import { SidenavHeaderService } from '@cirrus/sidenav-header';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ViewportScroller } from '@angular/common';
+import { fetchOrders } from './store/actions/orders.actions';
+import { mockOrder } from './course/testData';
 
 @Component({
   selector: 'cirrus-root',
@@ -87,6 +89,10 @@ export class AppComponent
   ngOnInit() {
     super.ngOnInit();
     this.courseService.getNotifications();
+
+    this.myOrders$.subscribe(order => {
+      this.store.dispatch(fetchOrders({ order }));
+    });
 
     this.triggerSubscription = this.appService.getTrigger().subscribe(() => {
       this.outletContainer.nativeElement.scrollTop = 0;

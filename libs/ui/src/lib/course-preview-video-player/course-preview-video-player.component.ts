@@ -21,7 +21,6 @@ export class CoursePreviewVideoPlayerComponent
   }
 
   closeModal() {
-    console.log('hello from here');
     this.dialogRef.close();
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { fetchCourseOverview } from '../store/actions/course.actions';
@@ -6,7 +6,12 @@ import { CourseState } from '../store/reducers/course.reducer';
 import { selectCourseOverview } from '../store/selectors/course.selector';
 import { selectScreenSize } from '../store/selectors/view.selector';
 import { selectCirrusUser } from '../store/selectors/cirrus-user.selector';
-import { filter, take } from 'rxjs/operators';
+import { filter, map, take, tap } from 'rxjs/operators';
+import { selectOrder } from '../store/selectors/orders.selector';
+import { Observable } from 'rxjs';
+import { OrderState } from '../store/reducers/order.reducer';
+import { IOrder } from '@cirrus/models';
+import { mockOrder } from './testData';
 
 @Component({
   selector: 'cirrus-course',
@@ -17,6 +22,9 @@ export class CourseComponent implements OnInit {
   courseOverview$ = this.store.select(selectCourseOverview);
   screenSize$ = this.store.select(selectScreenSize);
   cirrusUser$ = this.store.select(selectCirrusUser);
+  order$: Observable<IOrder> = this.store
+    .select(selectOrder)
+    .pipe(map(order => order.order));
 
   constructor(
     private route: ActivatedRoute,

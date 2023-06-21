@@ -1,11 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CourseLandingPageComponent } from './course-landing-page.component';
-import {
-  CoursePlayerComponent,
-  CourseProgressComponent,
-  UiDownloadService,
-} from '@cirrus/ui';
+import { CoursePlayerComponent } from '../course-player/course-player.component';
+import { CourseProgressComponent } from '../course-progress/course-progress.component';
+import { UiDownloadService } from '../course-completion/ui-download.service';
 import { MatDialogModule } from '@angular/material/dialog';
 import {
   ContentCounts,
@@ -19,6 +17,7 @@ import {
 import { MatDividerModule } from '@angular/material/divider';
 import { MockComponent } from 'ng-mocks';
 import { HttpClientModule } from '@angular/common/http';
+import { CirrusSanitizerService } from '../shared/cirrus-sanitizer.service';
 
 describe('CourseLandingPageComponent', () => {
   let component: CourseLandingPageComponent;
@@ -82,6 +81,7 @@ describe('CourseLandingPageComponent', () => {
       imports: [MatDialogModule, MatDividerModule, HttpClientModule],
       providers: [
         { provide: UiDownloadService, useClass: MockUIDownloadService },
+        { provide: CirrusSanitizerService, useClass: MockCirrusSanitizerService },
         { provide: 'environment', useValue: environment },
       ],
     }).compileComponents();
@@ -100,3 +100,4 @@ describe('CourseLandingPageComponent', () => {
 });
 
 class MockUIDownloadService {}
+class MockCirrusSanitizerService {}
