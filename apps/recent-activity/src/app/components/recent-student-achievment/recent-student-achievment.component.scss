@@ -34,6 +34,7 @@ h3 {
   display: flex;
   font-size: 1rem;
   font-weight: 400;
+  flex-direction: column;
 
   .user-name {
     color: $white;
@@ -42,6 +43,12 @@ h3 {
 
   .achievement-name {
     color: $gray5;
-    padding-left: 10px;
+  }
+
+  @include breakpoint(mobile) {
+    flex-direction: row;
+    .achievement-name {
+      padding-left: 10px;
+    }
   }
 }
