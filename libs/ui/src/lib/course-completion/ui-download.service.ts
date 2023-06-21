@@ -69,6 +69,10 @@ export class UiDownloadService {
 
   courseEnroll(course: ICourseOverview, order: IOrder): Observable<any> {
     const previousCartItems = [...order.order_line_items];
+    const courseExistsInCart = previousCartItems.filter((item) => item.product_id === course.id).length !== 0;
+    if(courseExistsInCart) {
+      return of(true)
+    }
 
     const formatOrder = {
       order: {
