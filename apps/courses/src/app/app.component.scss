@@ -81,9 +81,7 @@ ul.student-name {
   @include breakpoint(mobile) {
     top: 78.5px;
   }
-
   @media (max-height: 659px) {
-    max-height: calc(100% - 80px);
     overflow-y: auto;
   }
 }
