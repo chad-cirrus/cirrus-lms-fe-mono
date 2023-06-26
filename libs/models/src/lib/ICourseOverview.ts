@@ -34,6 +34,7 @@ export interface ICourseOverview {
   next_lesson: Partial<ICourseOverviewLesson>;
   badge: IBadge;
   course_overview_video?: IContent;
+  sales_desc?: string;
 }
 
 export interface UserCourse {

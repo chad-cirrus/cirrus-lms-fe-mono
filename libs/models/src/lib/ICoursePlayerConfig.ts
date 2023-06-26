@@ -6,4 +6,5 @@ export interface ICoursePlayerConfig {
   thumbnail: string;
   preview: boolean;
   list_price?: number;
+  overview?: string;
 }

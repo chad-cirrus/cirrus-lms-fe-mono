@@ -39,6 +39,7 @@ export class CourseLandingPageComponent {
     index: '',
     header: '',
     title: '',
+    overview: '',
     buttonText: 'Get Started',
     thumbnail: '',
     preview: false,
@@ -56,7 +57,6 @@ export class CourseLandingPageComponent {
   public previewVideoUrl$ = this.previewVideoUrlSubject
     .asObservable()
     .pipe(
-      tap(console.log),
       filter(url => url !== null),
       map(url => this.cirrusSanitizer.getSafeResourceUrl(url as string)),
     );
@@ -180,6 +180,7 @@ export class CourseLandingPageComponent {
         ? course.thumbnail_image_url
         : (this.environment.defaultLessonThumbnail as string),
       list_price: course.list_price ? course.list_price : 0,
+      overview: course.sales_desc? course.sales_desc : course.overview
     };
   }
 
@@ -238,10 +239,10 @@ export class CourseLandingPageComponent {
       });
   }
 
-  
+
 
   @HostListener('window:scroll', ['$event'])
-  checkScroll() {   
+  checkScroll() {
     if( this._size == "(max-width: 599.98px)" ) {
       const distanceToTop = this.coursePlayerEl.nativeElement.getBoundingClientRect().top;
       this.isSticky = distanceToTop <= 65;
