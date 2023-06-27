@@ -21,6 +21,22 @@ section:not(:last-child) {
   }
 }
 
+.training-partner-container,
+.support-container,
+.have-questions-container {
+  padding-top: 29px;
+}
+
+.devices {
+  flex-direction: column;
+  font-size: 1.125rem;
+  color: var.$gray5;
+}
+
+.device {
+  padding-top: 17px;
+}
+
 .started-date {
   color: #969696;
   margin-bottom: 40px;
@@ -48,7 +64,7 @@ section:not(:last-child) {
   padding: 12px;
   font-size: 1.875rem;
   line-height: 1;
-  letter-spacing: .03em;
+  letter-spacing: 0.03em;
   text-indent: 0.03em;
   text-align: center;
 }
@@ -84,7 +100,7 @@ section:not(:last-child) {
   flex-wrap: wrap;
   justify-content: space-between;
   cirrus-course-content-progress-circle {
-    flex-basis: calc(50% - 25px );
+    flex-basis: calc(50% - 25px);
     margin: 0 25px 40px 0;
     flex-grow: 1;
   }
@@ -107,13 +123,22 @@ section:not(:last-child) {
 }
 
 @media (min-width: 600px) {
-  .mcf-label, .ect-label {
+  .mcf-label,
+  .ect-label {
     width: 175px;
   }
   .row-progress {
     h2 {
       padding-bottom: 30px;
     }
+  }
+  .devices {
+    display: flex;
+    gap: 52px;
+    flex-direction: row;
+  }
+  .device {
+    padding-top: 0
   }
 }
 
@@ -171,4 +196,3 @@ section:not(:last-child) {
     }
   }
 }
-
