@@ -1,6 +1,6 @@
 <div
   class="container"
-  [ngClass]="previewCourse ? '' : 'non-preview-course-hover'"
+  [ngClass]="displayHoverState ? 'non-preview-course-hover' : ''"
   fxLayout="row"
   fxLayoutAlign="space-between start"
   fxLayoutAlign.gt-sm="start start"
@@ -44,5 +44,13 @@
     <cirrus-course-lesson-content-count
       [contentCountsCompletionTime]="contentCountsCompletionTime"
     ></cirrus-course-lesson-content-count>
+  </div>
+  <div
+    *ngIf="isPreviewVideo && previewCourse && hasIntroVidOrContent"
+    class="watch-preview-container"
+  >
+    <img class="play-logo" src="courses/images/svg/play-logo.svg" />
+    <div class="watch">Watch</div>
+    <div class="preview">Preview</div>
   </div>
 </div>

@@ -80,6 +80,8 @@ export interface ICourseOverviewLesson {
   content_counts: ContentCounts;
   progress: IProgress;
   stage_id: number;
+  student_intro_video?: any;
+  contents?: IContent[];
 }
 
 export interface ContentCounts {

@@ -42,6 +42,7 @@ export class CourseLessonsComponent implements OnInit {
   lessonsSubject = new BehaviorSubject<ICourseOverviewLesson[]>([]);
   filteredStages$!: Observable<ICourseOverviewStage[]>;
   filteredLessons$!: Observable<ISearchInputData[]>;
+
   @Input() course!: ICourseOverview;
 
   private _filteredTextSubject = new Subject<string>();
@@ -55,6 +56,9 @@ export class CourseLessonsComponent implements OnInit {
     this.lessonsOverallCount = combine.length;
     this.stagesSubject.next(value);
     this.lessonsSubject.next(combine);
+
+    this.previewVideoEnabledIds = this.videoPreviewLessonIds(combine);
+
     this.filterMenuSections = [
       { title: 'Status', items: ['completed', 'in_progress', 'not_started'] },
       { title: 'Stages', items: this.getStageTitles(this._stages) },
@@ -64,6 +68,8 @@ export class CourseLessonsComponent implements OnInit {
   get stages() {
     return this._stages;
   }
+
+  previewVideoEnabledIds!: number[];
 
   filterMenuSections!: FilterMenuSection[];
 
@@ -146,6 +152,10 @@ export class CourseLessonsComponent implements OnInit {
         })
       )
     );
+  }
+
+  videoPreviewLessonIds(lessons: any[]) {
+    return lessons.filter((l, i) => i < 4).map(l => l.id);
   }
 
   getStageTitles(stages: ICourseOverviewStage[]) {

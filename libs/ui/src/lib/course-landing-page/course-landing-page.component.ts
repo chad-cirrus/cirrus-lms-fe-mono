@@ -7,7 +7,7 @@ import {
   ICoursePlayerConfig,
   IOrder,
   PROGRESS_STATUS,
-  TermsAgreementSubtitleText
+  TermsAgreementSubtitleText,
 } from '@cirrus/models';
 import { produceConfig } from './produce-config';
 // eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
@@ -20,9 +20,10 @@ import { CoursePreviewVideoPlayerComponent } from '../course-preview-video-playe
 import { downloadPdf } from '../helpers/DownloadPdf';
 import { CirrusSanitizerService } from '../shared/cirrus-sanitizer.service';
 import { TermsAgreementServiceService } from './terms-agreement-service.service';
-import { HostListener } from "@angular/core";
+import { HostListener } from '@angular/core';
 import { ViewChild } from '@angular/core';
 import { ElementRef } from '@angular/core';
+import { UiCourseService } from '../ui-course.service';
 @Component({
   selector: 'cirrus-course-landing-page',
   templateUrl: './course-landing-page.component.html',
@@ -78,7 +79,9 @@ export class CourseLandingPageComponent {
 
     if (!value.course_attempt?.id) {
       this.setPreviewCourseConfig(value);
-      this.previewVideoUrlSubject.next(`https://player.vimeo.com/video/${value.course_overview_video?.url}?app_id=122963`);
+      this.previewVideoUrlSubject.next(
+        `https://player.vimeo.com/video/${value.course_overview_video?.url}?app_id=122963`
+      );
       return;
     }
 
@@ -111,6 +114,7 @@ export class CourseLandingPageComponent {
   constructor(
     private router: Router,
     private downloadService: UiDownloadService,
+    private uiCourseService: UiCourseService,
     private dialog: MatDialog,
     private tcService: TermsAgreementServiceService,
     private cirrusSanitizer: CirrusSanitizerService,
@@ -161,12 +165,9 @@ export class CourseLandingPageComponent {
   }
 
   watchPreview() {
-    this.dialog.open(CoursePreviewVideoPlayerComponent, {
-      data: this.course.course_overview_video,
-      width: '100%',
-      backdropClass: 'course-preview-video',
-      panelClass: 'course-preview-video',
-    });
+    if (this.course.course_overview_video) {
+      this.uiCourseService.watchPreview(this.course.course_overview_video);
+    }
   }
 
   setPreviewCourseConfig(course: ICourseOverview) {
@@ -240,16 +241,24 @@ export class CourseLandingPageComponent {
   }
 
 
-
   @HostListener('window:scroll', ['$event'])
   checkScroll() {
-    if( this._size == "(max-width: 599.98px)" ) {
-      const distanceToTop = this.coursePlayerEl.nativeElement.getBoundingClientRect().top;
+    if (this._size == '(max-width: 599.98px)') {
+      const distanceToTop =
+        this.coursePlayerEl.nativeElement.getBoundingClientRect().top;
+
       this.isSticky = distanceToTop <= 65;
-    } else if( this._size == "(min-width: 600px) and (max-width: 959.98px)" || this._size == "(min-width: 960px) and (max-width: 1279.98px)" ) {
-      const distanceToTop = this.coursePlayerEl.nativeElement.getBoundingClientRect().top;
+    } else if (
+      this._size == '(min-width: 600px) and (max-width: 959.98px)' ||
+      this._size == '(min-width: 960px) and (max-width: 1279.98px)'
+    ) {
+      const distanceToTop =
+        this.coursePlayerEl.nativeElement.getBoundingClientRect().top;
       this.isSticky = distanceToTop <= 78;
-    } else if(this._size == "(min-width: 1280px) and (max-width: 1919.98px)" || this._size == "(min-width: 1920px)") {
+    } else if (
+      this._size == '(min-width: 1280px) and (max-width: 1919.98px)' ||
+      this._size == '(min-width: 1920px)'
+    ) {
       this.isSticky = window.scrollY >= 130;
     }
   }
@@ -265,10 +274,7 @@ export class CourseLandingPageComponent {
                   url(${encodeURI(uri)}) no-repeat top / cover`,
     });
   }
-
-
 }
-
 
 interface ModalPayload {
   course_id: number;

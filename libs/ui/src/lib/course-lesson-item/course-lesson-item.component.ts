@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Inject, Input, Output } from '@angular/core';
 import {
+  IContent,
   ICourseOverviewLesson,
   ICourseOverviewStage,
   LESSON_TYPE,
@@ -8,6 +9,7 @@ import { progressTextMapperDictionary } from '../helpers/progressTextMapper';
 import { IContentCountAndCompletionTime } from '../course-lesson-content-count/course-lesson-content-count.component';
 
 import { StageLessonNavigationEvent } from '../StageLessonNavigationEvent';
+import { UiCourseService } from '../ui-course.service';
 
 @Component({
   selector: 'cirrus-course-lesson-item',
@@ -18,8 +20,10 @@ export class CourseLessonItemComponent {
   private environment: Record<string, unknown>;
   @Input() stage!: ICourseOverviewStage;
   @Input() courseLesson!: ICourseOverviewLesson;
+  @Input() index!: number;
   @Output() navigate = new EventEmitter<StageLessonNavigationEvent>();
   @Input() previewCourse!: boolean;
+  @Input() isPreviewVideo!: boolean;
 
   get lessonType(): string {
     const lessonDict: { [lessonType: number]: string } = {
@@ -53,12 +57,48 @@ export class CourseLessonItemComponent {
     };
   }
 
-  constructor(@Inject('environment') environment: Record<string, unknown>) {
+  get hasIntroVidOrContent(): boolean {
+    return (
+      this.courseLesson.student_intro_video ||
+      this.courseLesson.contents?.length
+    );
+  }
+
+  get displayHoverState(): boolean {
+    if (this.previewCourse) {
+      return this.isPreviewVideo && this.hasIntroVidOrContent;
+    } else {
+      return true;
+    }
+  }
+
+  constructor(
+    @Inject('environment') environment: Record<string, unknown>,
+    private uiCourseService: UiCourseService
+  ) {
     this.environment = environment;
   }
 
+  watchPreview() {
+    let content;
+    if (!this.isPreviewVideo) {
+      return;
+    }
+    if (this.courseLesson.student_intro_video) {
+      content = this.courseLesson.student_intro_video;
+    } else if (this.courseLesson.contents?.length) {
+      content = this.courseLesson.contents[0];
+    }
+    if (content) {
+      this.uiCourseService.watchPreview(content);
+    }
+  }
+
   emitNavigation() {
-    if (this.previewCourse) return;
+    if (this.previewCourse) {
+      this.watchPreview();
+      return;
+    }
     this.navigate.emit({
       stageId: this.stage.id,
       lessonId: this.courseLesson.id,

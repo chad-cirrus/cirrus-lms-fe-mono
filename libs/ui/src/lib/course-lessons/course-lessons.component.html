@@ -59,8 +59,9 @@
       <cirrus-course-lesson-item
         [courseLesson]="courseLesson"
         [stage]="stage"
+        [isPreviewVideo]="previewVideoEnabledIds.includes(courseLesson.id)"
         (navigate)="emitNavigation($event)"
-        [previewCourse]="!course.course_attempt.id"
+        [previewCourse]="!course?.course_attempt?.id"
       ></cirrus-course-lesson-item>
     </div>
   </div>
