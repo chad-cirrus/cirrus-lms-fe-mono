@@ -552,6 +552,7 @@ apx-chart .apexcharts-toolbar {
       right: 0;
       width: 100%;
       max-width: 100%;
+      box-shadow: 2px 8px 24px 0px rgba(0, 0, 0, 0.80);
     }
 
     .container {
@@ -596,7 +597,6 @@ apx-chart .apexcharts-toolbar {
         padding: 0;
       }
       
-  
       span.mdc-button__label {
         font-size: 0.88rem;
       }
@@ -702,7 +702,7 @@ apx-chart .apexcharts-toolbar {
     }
     
   }
-  @include breakpoint(desktop) {
+  @media screen and (min-width: 1280px) {
     height: auto;
     position: initial;
     cirrus-course-player {
@@ -718,6 +718,7 @@ apx-chart .apexcharts-toolbar {
         width: 310px;
         max-width: 310px;
         right: 3.1rem;
+        box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
       }
       
       .container {
@@ -762,6 +763,11 @@ apx-chart .apexcharts-toolbar {
           height: 39px;
           width: 100%;
         }
+
+        span.mdc-button__label {
+          font-size: 1.06rem;
+        }
+
       }
 
       .watch-preview {
@@ -788,9 +794,26 @@ apx-chart .apexcharts-toolbar {
   
 }
 
-@include breakpoint(desktop) {
+@media screen and (min-width: 1280px) {
   .mobile-preview-video {
     display: none;
   }
 }
 
+.sidenav-collapsed {
+  .course-preview-container {
+    @include breakpoint(mobile) {
+      cirrus-course-player {
+        width: calc(100vw - 125px);
+        max-width: calc(100vw - 125px);
+      }
+    }
+
+    @media screen and (min-width: 1280px) {
+      cirrus-course-player {
+        width: 310px;
+        max-width: 310px;
+      }
+    }
+  }
+}

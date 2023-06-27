@@ -25,7 +25,8 @@ cirrus-cta-button {
   margin-top: 20px;
 }
 
-.header {
+.header,
+.course-header {
   color: var.$gray5;
   font-family: var.$akzidenz-grotesk_bqLtEx400;
   font-size: 0.6875rem;
@@ -87,7 +88,7 @@ cirrus-cta-button {
   }
 }
 
-@media (min-width: 1200px) {
+@media screen and (min-width: 1280px) {
   .container {
     .lesson-info {
       margin-right: 15px;
@@ -108,8 +109,8 @@ cirrus-cta-button {
         }
         .description {
           font-family: var.$AkzidenzGroteskBQ;
-          font-size: 1.25rem;
-          line-height: 24px;
+          font-size: 1.4rem;
+          line-height: 27px;
           max-width: 334px;
         }
       }
@@ -132,17 +133,21 @@ cirrus-cta-button {
 }
 
 
+.course-started {
+  .text-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-// .course-preview-container {
-//   cirrus-course-player {
-//     .container {
-//       background-color: var.$gray7;
-//     }
-//   }
-// }
+    .thumbnail {
+      margin: auto 1rem auto 0;
+      display: block;
+    }
 
-// cirrus-course-player {
-//   .container {
-//     background-color: var.$gray7;
-//   }
-// }
+    .description .title,
+    .description .chapter {
+      font-size: 20px;
+    }
+  }
+}
+
