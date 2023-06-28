@@ -120,7 +120,10 @@
       </div>
     </div>
   </section>
-  <section class="row-terms-conditions" *ngIf="courseOverview.agreement_body">
+  <section
+    class="row-terms-conditions"
+    *ngIf="courseOverview.agreement_body && courseOverview.course_attempt?.id"
+  >
     <h3>Terms & Conditions</h3>
     <div
       class="agreement-body xsmall"
