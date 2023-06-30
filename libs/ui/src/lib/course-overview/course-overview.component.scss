@@ -18,6 +18,9 @@ section:not(:last-child) {
   &--version {
     color: #969696;
     margin: 0;
+    a {
+      color: #969696;
+    }
   }
 }
 
