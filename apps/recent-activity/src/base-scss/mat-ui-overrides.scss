@@ -603,6 +603,17 @@ apx-chart .apexcharts-toolbar {
     }
   }
 
+  &.noPreviewVideo {
+    cirrus-course-player {
+      
+    }
+  }
+  &.hasPreviewVideo {
+    cirrus-course-player {
+      
+    }
+  }
+
   .stripes {
     width: 100%;
     -webkit-clip-path: polygon(0 0, 100% 0, 90% 100%, 0% 100%);
@@ -702,6 +713,7 @@ apx-chart .apexcharts-toolbar {
     }
     
   }
+
   @media screen and (min-width: 1280px) {
     height: auto;
     position: initial;
@@ -753,6 +765,7 @@ apx-chart .apexcharts-toolbar {
       .description {
         margin-top: 1.5rem;
         margin-left: 0;
+        margin-bottom: 0.72rem;
       }
 
       cirrus-cta-button {
@@ -771,8 +784,6 @@ apx-chart .apexcharts-toolbar {
       }
 
       .watch-preview {
-        padding: 0.72rem 0;
-
         img {
           max-width: 35px;  
         }
@@ -787,8 +798,7 @@ apx-chart .apexcharts-toolbar {
     .watch-preview-container {
       display: block !important;
       width: 100%;
-      border-bottom: solid 1px #969696;
-      margin-bottom: 1rem;
+      margin-bottom: 0.72rem;
     }
   }
   
@@ -814,6 +824,42 @@ apx-chart .apexcharts-toolbar {
         width: 310px;
         max-width: 310px;
       }
+    }
+  }
+}
+
+.course-preview-divider {
+  display: none;
+}
+
+.course-preview-container {
+
+  @media screen and (min-width: 1280px) {
+    .course-preview-divider {
+      display: block;
+      border-top: solid 1px #969696;
+      width: 100%;
+      margin-bottom: 1rem;
+    }
+  }
+  
+}
+
+
+.course-started {
+  .text-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .thumbnail {
+      margin: auto 1rem auto 0;
+      display: block;
+    }
+
+    .description .title,
+    .description .chapter {
+      font-size: 20px;
     }
   }
 }

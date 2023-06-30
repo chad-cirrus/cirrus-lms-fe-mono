@@ -128,26 +128,32 @@ cirrus-cta-button {
     }
     &.course-price-desktop {
       display: block;
+      width: 100%;
     }
   }
 }
 
 
-.course-started {
-  .text-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+// .course-started {
+//   .text-container {
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
 
-    .thumbnail {
-      margin: auto 1rem auto 0;
-      display: block;
-    }
+//     .thumbnail {
+//       margin: auto 1rem auto 0;
+//       display: block;
+//     }
 
-    .description .title,
-    .description .chapter {
-      font-size: 20px;
-    }
-  }
-}
+//     .description .title,
+//     .description .chapter {
+//       font-size: 20px;
+//     }
+//   }
+// }
+
+
+
+
+
 

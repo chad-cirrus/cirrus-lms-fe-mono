@@ -1,4 +1,4 @@
-<div class="container" [ngClass]="config.preview ? 'course-preview' : 'course-started'">
+<div class="container" [ngClass]="config.preview ? 'course-preview' : ''">
   <div
     fxLayout="column"
     fxLayoutAlign="space-between center"
@@ -27,7 +27,7 @@
           <div class="course-header" *ngIf="config.header">{{ config.header }}</div>
           <span class="chapter">{{ config.index }}</span>
           <span class="title">{{ config.title }}</span>
-          <div *ngIf="config.preview" class="course-price-container course-price-mobile">Price: <span class="course-price">${{ config.list_price | number:'1.0-0' }}</span></div>
+          <div *ngIf="config.list_price" class="course-price-container course-price-mobile">Price: <span class="course-price">${{ config.list_price | number:'1.0-0' }}</span></div>
         </div>
 
         <div class="watch-preview-container" *ngIf="config.preview">
@@ -37,7 +37,10 @@
           </div>
         </div>
 
-        <div *ngIf="config.preview" class="course-price-container course-price-desktop">Price: <span class="course-price">${{ config.list_price | number:'1.0-0' }}</span></div>
+        <div class="course-preview-divider"></div>
+        <!-- <mat-divider class="mat-divider mat-divider-horizontal"></mat-divider> -->
+
+        <div *ngIf="config.list_price" class="course-price-container course-price-desktop">Price: <span class="course-price">${{ config.list_price | number:'1.0-0' }}</span></div>
 
       </div>
     </div>

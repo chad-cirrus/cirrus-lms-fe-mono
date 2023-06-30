@@ -79,9 +79,13 @@ export class CourseLandingPageComponent {
 
     if (!value.course_attempt?.id) {
       this.setPreviewCourseConfig(value);
-      this.previewVideoUrlSubject.next(
-        `https://player.vimeo.com/video/${value.course_overview_video?.url}?app_id=122963`
-      );
+
+      if(value.course_overview_video?.url) {
+        this.previewVideoUrlSubject.next(
+          `https://player.vimeo.com/video/${value.course_overview_video?.url}?app_id=122963`
+        );
+      }
+      
       return;
     }
 
