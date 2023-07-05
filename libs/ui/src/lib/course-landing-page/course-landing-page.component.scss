@@ -201,3 +201,40 @@ cirrus-cta-button {
     margin-left: 15px;
   }
 }
+
+
+
+.course-stats {
+  list-style: none;
+  margin: 1rem 0;
+  padding: 0;
+  display: flex;
+  width: 100%;
+  font-family: 'Berthold Akzidenz Grotesk BE';
+  
+  .course-stat {
+    margin: 0 1.5rem 0 0;
+    padding: 1rem 1.5rem 1rem 0;
+    border-right: solid 1px #fff;
+
+    &:last-child {
+      border-right: none;
+    }
+  }
+
+  .course-stat-title {
+    font-size: 12px;
+  }
+  .course-stat-value {
+    font-size: 32px;
+  }
+
+  @media screen and (min-width: 1280px) {
+    .course-stat-title {
+      font-size: 15px;
+    }
+    .course-stat-value {
+      font-size: 44px;
+    }
+  }
+}
