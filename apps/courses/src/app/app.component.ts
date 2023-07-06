@@ -88,7 +88,6 @@ export class AppComponent
 
   ngOnInit() {
     super.ngOnInit();
-    this.courseService.getNotifications();
 
     this.myOrders$.subscribe(order => {
       this.store.dispatch(fetchOrders({ order }));
@@ -107,6 +106,11 @@ export class AppComponent
     const cirrusUser = JSON.parse(
       <string>localStorage.getItem('cirrus-user')
     ) as ICirrusUser;
+
+    if (cirrusUser) {
+      this.courseService.getNotifications();
+    }
+    
     this.store.dispatch(setCirrusUser({ cirrusUser }));
 
     this.viewToggle.valueChanges.subscribe(instructorView =>
