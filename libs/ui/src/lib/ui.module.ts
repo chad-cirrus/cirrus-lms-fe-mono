@@ -79,6 +79,7 @@ import { HoursLandingTypeToIconPipe } from './helpers/HoursLandingTypeToIcon.pip
 import { BluePopUpComponent } from './blue-pop-up/blue-pop-up.component';
 import { SearchInputModule } from '@cirrus/search-input';
 import { CoursePreviewVideoPlayerComponent } from './course-preview-video-player/course-preview-video-player.component';
+import { ConvertToSpacesPipe } from './course-landing-page/pipes/convert-to-spaces.pipe';
 
 @NgModule({
   imports: [
@@ -146,6 +147,7 @@ import { CoursePreviewVideoPlayerComponent } from './course-preview-video-player
     HoursAndLandingsComponent,
     GenericResponsiveMatTableComponent,
     TableFormatPipe,
+    ConvertToSpacesPipe,
     LessonTypePipe,
     HoursLandingTypeToTextPipe,
     HoursLandingTypeToIconPipe,
@@ -200,6 +202,7 @@ import { CoursePreviewVideoPlayerComponent } from './course-preview-video-player
     CourseOverviewLessonProgressBarComponent,
     GenericResponsiveMatTableComponent,
     TableFormatPipe,
+    ConvertToSpacesPipe,
     LessonTypePipe,
     HoursLandingTypeToTextPipe,
     HoursLandingTypeToIconPipe,
