@@ -170,7 +170,11 @@ export class CourseLandingPageComponent {
 
   watchPreview() {
     if (this.course.course_overview_video) {
-      this.uiCourseService.watchPreview(this.course.course_overview_video);
+      const courseVideoInfo = {
+        ...this.course.course_overview_video,
+        courseTitle: this.course.title
+      }
+      this.uiCourseService.watchPreview(courseVideoInfo);
     }
   }
 
