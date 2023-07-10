@@ -153,13 +153,20 @@ export class CourseLandingPageComponent {
   }
 
   enroll() {
+    console.log('BING')
+    // ORDER IS NULL
+    // How does order work...? should we be expecting a null value 
+    console.log(this.order)
     if (this.order?.id) {
       this.downloadService
         .courseEnroll(this.course, this.order)
         .subscribe(() => {
           this.router.navigate(['/shopping-cart']);
         });
-    }
+    } 
+    // else {
+      
+    // }
   }
 
   navigate() {
