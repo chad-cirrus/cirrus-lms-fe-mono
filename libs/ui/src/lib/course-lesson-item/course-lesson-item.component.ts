@@ -90,7 +90,11 @@ export class CourseLessonItemComponent {
       content = this.courseLesson.contents[0];
     }
     if (content) {
-      this.uiCourseService.watchPreview(content);
+      const courseVideoInfo = {
+        ...content,
+        courseTitle: this.courseLesson.title
+      }
+      this.uiCourseService.watchPreview(courseVideoInfo);
     }
   }
 
