@@ -15,7 +15,7 @@
 
       <div class="text-container">
         <div class="header">
-          <img [src]="config.thumbnail" alt="" class="thumbnail" />
+          <img [src]="config.badge ? config.badge : config.thumbnail" alt="" class="thumbnail" />
           <div class="stripes">
             <div class="stripe"></div>
             <div class="stripe"></div>
