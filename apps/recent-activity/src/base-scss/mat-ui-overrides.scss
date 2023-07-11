@@ -520,6 +520,13 @@ cirrus-video-player {
 .cdk-overlay-backdrop.course-preview-video {
   background-color: #000;
 }
+.cdk-overlay-pane.course-preview-video {
+  max-width: 100% !important;
+  padding: 16px;
+  @include breakpoint(tablet) {
+    padding: 35px;
+  }
+}
 cirrus-course-landing-page { 
   .watch-preview:hover {
     cursor:pointer;
