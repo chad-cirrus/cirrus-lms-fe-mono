@@ -527,6 +527,9 @@ cirrus-video-player {
     padding: 35px;
   }
 }
+.cirrus-course-preview-video-player iframe {
+  max-height: 72vh;
+}
 cirrus-course-landing-page { 
   .watch-preview:hover {
     cursor:pointer;
