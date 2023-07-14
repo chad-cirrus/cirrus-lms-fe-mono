@@ -3,6 +3,7 @@ import { Store } from '@ngrx/store';
 import { selectCourseOverview } from '../../store/selectors/course.selector';
 import { filter } from 'rxjs/operators';
 import { ICourseOverview } from '@cirrus/models';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'cirrus-course-overview-route',
@@ -14,5 +15,9 @@ export class CourseOverviewRouteComponent {
     .select(selectCourseOverview)
     .pipe(filter<ICourseOverview>(Boolean));
 
-  constructor(private store: Store) {}
+  constructor(private store: Store, private router: Router) {}
+
+  navigateTrainingPartners() {
+    this.router.navigate(['training-partners']);
+  }
 }

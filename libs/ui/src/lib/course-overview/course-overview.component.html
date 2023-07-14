@@ -102,6 +102,29 @@
         <cirrus-course-summary-counts
           [courseSummaryCounts]="courseOverview.summary_counts"
         ></cirrus-course-summary-counts>
+
+        <div
+          *ngIf="
+            courseOverview.summary_counts.assessments &&
+            courseOverview.course_attempt?.id
+          "
+          class="training-partner-container"
+        >
+          <h3>Training Partner</h3>
+          <p class="about--version">
+            You will need to partner with a Cirrus Training Center (CTC) or a Cirrus Specialized Flight Instructor (CSIP) in order to complete this course.
+          </p>
+
+          <button
+            style="margin-top: 1rem;"
+            class="view secondary-btn-black -wide-btn"
+            [routerLink]="['training-partners']"
+            (click)="emitNavigation()"
+          >
+            Find a Training Partner
+          </button>
+
+        </div>
       </div>
     </div>
   </section>
