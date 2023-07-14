@@ -479,6 +479,9 @@ cirrus-lesson-landing-page {
     }
   }
 }
+cirrus-course-player cirrus-cta-button .mat-mdc-fab {
+  box-shadow: none;
+}
 
 .content-container {
   flex-direction: column;
