@@ -8,9 +8,21 @@
     <div
       class="left-side"
       fxFlex.gt-sm="1 1 60%"
-      *ngIf="courseOverview.overview"
     >
+
+    <div *ngIf="courseOverview.course_attempt?.id; else unenrolled">
       <div class="wysiwyg-wrapper" [innerHTML]="courseOverview.overview"></div>
+    </div>
+
+    <ng-template #unenrolled>
+      <div *ngIf="courseOverview.sales_desc; else overview">
+        <div class="wysiwyg-wrapper" [innerHTML]="courseOverview.sales_desc"></div>
+      </div>
+      <ng-template #overview>
+        <div class="wysiwyg-wrapper" [innerHTML]="courseOverview.overview"></div>
+      </ng-template>
+    </ng-template>
+      
       <p class="about--version small">Version: {{ version }}</p>
 
       <div
@@ -90,6 +102,29 @@
         <cirrus-course-summary-counts
           [courseSummaryCounts]="courseOverview.summary_counts"
         ></cirrus-course-summary-counts>
+
+        <div
+          *ngIf="
+            courseOverview.summary_counts.assessments &&
+            courseOverview.course_attempt?.id
+          "
+          class="training-partner-container"
+        >
+          <h3>Training Partner</h3>
+          <p class="about--version">
+            You will need to partner with a Cirrus Training Center (CTC) or a Cirrus Specialized Flight Instructor (CSIP) in order to complete this course.
+          </p>
+
+          <button
+            style="margin-top: 1rem;"
+            class="view secondary-btn-black -wide-btn"
+            [routerLink]="['training-partners']"
+            (click)="emitNavigation()"
+          >
+            Find a Training Partner
+          </button>
+
+        </div>
       </div>
     </div>
   </section>

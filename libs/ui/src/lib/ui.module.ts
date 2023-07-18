@@ -80,6 +80,7 @@ import { BluePopUpComponent } from './blue-pop-up/blue-pop-up.component';
 import { SearchInputModule } from '@cirrus/search-input';
 import { CoursePreviewVideoPlayerComponent } from './course-preview-video-player/course-preview-video-player.component';
 import { ConvertToSpacesPipe } from './course-landing-page/pipes/convert-to-spaces.pipe';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   imports: [
@@ -97,6 +98,7 @@ import { ConvertToSpacesPipe } from './course-landing-page/pipes/convert-to-spac
     MatTabsModule,
     MatCardModule,
     SearchInputModule,
+    RouterModule
   ],
   declarations: [
     LessonLandingPageComponent,

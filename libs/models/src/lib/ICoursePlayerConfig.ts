@@ -4,6 +4,7 @@ export interface ICoursePlayerConfig {
   title: string;
   buttonText: string;
   thumbnail: string;
+  badge?: string;
   preview: boolean;
   list_price?: number;
   overview?: string;

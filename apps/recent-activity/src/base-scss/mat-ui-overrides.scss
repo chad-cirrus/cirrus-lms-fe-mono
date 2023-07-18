@@ -479,6 +479,9 @@ cirrus-lesson-landing-page {
     }
   }
 }
+cirrus-course-player cirrus-cta-button .mat-mdc-fab {
+  box-shadow: none;
+}
 
 .content-container {
   flex-direction: column;
@@ -520,6 +523,16 @@ cirrus-video-player {
 .cdk-overlay-backdrop.course-preview-video {
   background-color: #000;
 }
+.cdk-overlay-pane.course-preview-video {
+  max-width: 100% !important;
+  padding: 16px;
+  @include breakpoint(tablet) {
+    padding: 35px;
+  }
+}
+.cirrus-course-preview-video-player iframe {
+  max-height: 72vh;
+}
 cirrus-course-landing-page { 
   .watch-preview:hover {
     cursor:pointer;
@@ -540,7 +553,7 @@ apx-chart .apexcharts-toolbar {
   cirrus-course-player {
     display: inline-block;
     width: 100vw;
-    max-width: 100vw;
+    max-width: initial;
     position: absolute;
     left: -20px;
     z-index: 2;
@@ -551,7 +564,6 @@ apx-chart .apexcharts-toolbar {
       left: initial;
       right: 0;
       width: 100%;
-      max-width: 100%;
       box-shadow: 2px 8px 24px 0px rgba(0, 0, 0, 0.80);
     }
 
@@ -574,6 +586,7 @@ apx-chart .apexcharts-toolbar {
     .lesson-info {
       margin-right: 1rem;
       flex: 1;
+      width: 100%;
     }
 
     .description {
@@ -600,17 +613,6 @@ apx-chart .apexcharts-toolbar {
       span.mdc-button__label {
         font-size: 0.88rem;
       }
-    }
-  }
-
-  &.noPreviewVideo {
-    cirrus-course-player {
-      
-    }
-  }
-  &.hasPreviewVideo {
-    cirrus-course-player {
-      
     }
   }
 
@@ -645,7 +647,6 @@ apx-chart .apexcharts-toolbar {
     margin-bottom: 50px;
     cirrus-course-player {
       width: calc(100vw - 107px);
-      max-width: calc(100vw - 107px);
       left: -25px;
 
       &.sticky {
@@ -654,7 +655,6 @@ apx-chart .apexcharts-toolbar {
         left: initial;
         right: 0;
         width: calc(100% - 107px);
-        max-width: calc(100% - 107px);
       }
 
       .container {
@@ -698,13 +698,11 @@ apx-chart .apexcharts-toolbar {
 
   @media (min-width: 960px) {
     cirrus-course-player {
-      width: calc(100vw - 263px);
-      max-width: calc(100vw - 263px);
+      width: calc(100vw - 245px);
       left: -49px;
 
       &.sticky {
         width: calc(100% - 245px);
-        max-width: calc(100% - 245px);
       }
 
       button {
@@ -719,7 +717,6 @@ apx-chart .apexcharts-toolbar {
     position: initial;
     cirrus-course-player {
       width: 310px;
-      max-width: 310px;
       left:initial;
       position: absolute;
       top: 285px;
@@ -728,7 +725,6 @@ apx-chart .apexcharts-toolbar {
         position: fixed;
         top: 150px;
         width: 310px;
-        max-width: 310px;
         right: 3.1rem;
         box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
       }
@@ -814,15 +810,13 @@ apx-chart .apexcharts-toolbar {
   .course-preview-container {
     @include breakpoint(mobile) {
       cirrus-course-player {
-        width: calc(100vw - 125px);
-        max-width: calc(100vw - 125px);
+        width: calc(100vw - 107px);
       }
     }
 
     @media screen and (min-width: 1280px) {
       cirrus-course-player {
         width: 310px;
-        max-width: 310px;
       }
     }
   }

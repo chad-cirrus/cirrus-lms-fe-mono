@@ -43,6 +43,7 @@ export class CourseLandingPageComponent {
     overview: '',
     buttonText: 'Get Started',
     thumbnail: '',
+    badge: '',
     preview: false,
     list_price: 0,
   };
@@ -188,6 +189,7 @@ export class CourseLandingPageComponent {
       thumbnail: course.thumbnail_image_url
         ? course.thumbnail_image_url
         : (this.environment.defaultLessonThumbnail as string),
+      badge: course.badge.badge_image,
       list_price: course.list_price ? course.list_price : 0,
       overview: course.sales_desc? course.sales_desc : course.overview
     };
