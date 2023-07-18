@@ -67,7 +67,7 @@ export class UiDownloadService {
     );
   }
 
-  courseEnroll(course: ICourseOverview, order: IOrder): Observable<any> {
+  courseEnroll(course: ICourseOverview, order: any): Observable<any> {
     const previousCartItems = [...order.order_line_items];
     const courseExistsInCart = previousCartItems.filter((item) => item.product_id === course.id).length !== 0;
     if(courseExistsInCart) {
@@ -88,10 +88,15 @@ export class UiDownloadService {
       },
     };
 
-    return this.http.post(
-      `${this.environment.baseUrl}/api/v3/orders/update-cart`,
-      formatOrder
-    );
+    if (order?.id) {
+      return this.http.post(
+        `${this.environment.baseUrl}/api/v3/orders/update-cart`,
+        formatOrder
+      );
+    } else {
+      localStorage.setItem('checkout-state', JSON.stringify(formatOrder));
+      return of(true);
+    }
   }
 }
 
