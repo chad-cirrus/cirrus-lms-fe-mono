@@ -15,8 +15,7 @@ export class UserService {
     this.environment = environment;
   }
   logout() {
-    const url = `${this.environment.baseUrl}/api/v3/users/sign_out/`;
-    return this.http.post<any>(url, {});
+    this.router.navigate(['/sign-out']);
   }
 
   impersonationLogout() {

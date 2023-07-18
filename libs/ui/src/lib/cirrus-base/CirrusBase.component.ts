@@ -50,7 +50,7 @@ export abstract class CirrusBaseComponent implements OnInit, OnDestroy {
   notificationCount$ = this.notificationService.getNotificationsCount();
 
   cirrusUser = localStorage.getItem('cirrus-user');
-  
+
   myOrders$: Observable<any> = defer(() => {
     if (this.cirrusUser) {
       return this.userService.getMyOrders().pipe(shareReplay(1));
@@ -148,9 +148,7 @@ export abstract class CirrusBaseComponent implements OnInit, OnDestroy {
   }
 
   logout() {
-    this.userService.logout().subscribe(() => {
-      window.location.href = 'https://cirrusapproach.com';
-    });
+    this.userService.logout();
   }
 
   impersonationLogout() {
