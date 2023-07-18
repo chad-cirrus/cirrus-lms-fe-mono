@@ -12,8 +12,8 @@
     <p class="large">{{ course.subtitle }}</p>
   </div>
 
-  <div class="course-stats-wrapper">
-    <ul class="course-stats" *ngIf="course.course_content_stats.length">
+  <div class="course-stats-wrapper" *ngIf="!course.course_attempt?.id && course.course_content_stats.length">
+    <ul class="course-stats">
 
       <li *ngFor="let stat of course.course_content_stats" class="course-stat">
         <div class="icon" [ngSwitch]="stat.type">
