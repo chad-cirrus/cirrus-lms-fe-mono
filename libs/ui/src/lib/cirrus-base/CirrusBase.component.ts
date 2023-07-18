@@ -7,7 +7,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
-import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
+import { BehaviorSubject, defer, Observable, of, Subject } from 'rxjs';
 import {
   BreakpointObserver,
   Breakpoints,
@@ -49,9 +49,15 @@ export abstract class CirrusBaseComponent implements OnInit, OnDestroy {
   );
   notificationCount$ = this.notificationService.getNotificationsCount();
 
-  myOrders$: Observable<IOrder> = this.userService
-    .getMyOrders()
-    .pipe(shareReplay(1));
+  cirrusUser = localStorage.getItem('cirrus-user');
+  
+  myOrders$: Observable<any> = defer(() => {
+    if (this.cirrusUser) {
+      return this.userService.getMyOrders().pipe(shareReplay(1));
+    } else {
+      return of(null);
+    }
+  });
 
   myOrdersCount$ = this.myOrders$.pipe(
     map(

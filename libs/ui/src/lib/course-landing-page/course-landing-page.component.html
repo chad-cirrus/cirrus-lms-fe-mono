@@ -12,11 +12,11 @@
     <p class="large">{{ course.subtitle }}</p>
   </div>
 
-  <div class="course-stats">
-    <div class="course-stats-wrapper">
-      <ul class="course-stats" *ngIf="course.course_content_stats.length">
+  <div class="course-stats-wrapper" *ngIf="!course.course_attempt?.id && course.course_content_stats.length">
+    <ul class="course-stats">
 
-        <li *ngFor="let stat of course.course_content_stats" class="course-stat">
+      <ng-container *ngFor="let stat of course.course_content_stats">
+        <li class="course-stat" *ngIf="stat.total > 0">
           <div class="icon" [ngSwitch]="stat.type">
 
             <svg *ngSwitchCase="'self_study'" width="23" height="27" viewBox="0 0 23 27" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -32,15 +32,15 @@
                 </clipPath>
                 </defs>
             </svg>
-
+  
             <svg *ngSwitchCase="'ground_assessment'" width="38" height="27" viewBox="0 0 38 27" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" clip-rule="evenodd" d="M11.1112 6.53125H16.5072C17.0095 6.53125 17.5921 6.70312 17.9853 7.26466L25.1876 15.6485H33.9182C34.7041 15.6485 35.477 15.9634 36.0831 16.5681L36.824 17.3074C37.583 18.0646 37.5212 19.1661 36.8696 19.9788L36.8482 20.0054L35.9596 20.892C35.3535 21.4968 34.5806 21.8116 33.7948 21.8116H5.76417C4.38721 21.8116 3.141 20.8967 2.82 19.5009L0.619141 11.9523H4.24195L6.7116 15.6485H16.421L11.1112 6.53125ZM13.2593 7.76608L18.5691 16.8834H6.05157L3.58191 13.1872H2.26541L4.01631 19.1924L4.02064 19.2119C4.20112 20.0222 4.92519 20.5768 5.76417 20.5768H33.7948C34.2437 20.5768 34.7057 20.3988 35.0874 20.0179L35.9255 19.1817C36.24 18.7722 36.1762 18.4054 35.9518 18.1815L35.2109 17.4423C34.8292 17.0614 34.3672 16.8834 33.9182 16.8834H24.6204L17.0024 8.01552L16.9817 7.9845C16.8809 7.83375 16.7358 7.76608 16.5072 7.76608H13.2593Z" fill="#C4C4C4"/>
                 <path fill-rule="evenodd" clip-rule="evenodd" d="M26.1911 3.24942C24.0411 3.31869 22.2643 4.40614 21.0994 6.00771C20.9494 6.214 20.6605 6.25959 20.4543 6.10955C20.248 5.95952 20.2024 5.67066 20.3524 5.46437C21.6656 3.65893 23.695 2.40563 26.1613 2.32617C30.2016 2.19598 33.6551 5.43391 33.7853 9.47419C33.8263 10.7447 33.5714 11.9469 33.0004 12.972C32.8762 13.1948 32.595 13.2748 32.3721 13.1507C32.1493 13.0266 32.0693 12.7453 32.1934 12.5225C32.6708 11.6654 32.8985 10.6339 32.8621 9.50394C32.7483 5.97356 29.7214 3.13567 26.1911 3.24942Z" fill="#C4C4C4"/>
                 <path fill-rule="evenodd" clip-rule="evenodd" d="M26.7429 6.00661C26.9978 5.9984 27.2112 6.19841 27.2194 6.45336L27.3304 9.89931L29.9497 11.5262C30.1664 11.6607 30.2329 11.9455 30.0983 12.1622C29.9638 12.3789 29.679 12.4454 29.4623 12.3108L26.6331 10.5536C26.5019 10.4721 26.4201 10.3305 26.4151 10.1761L26.2961 6.48311C26.2879 6.22816 26.4879 6.01482 26.7429 6.00661Z" fill="#C4C4C4"/>
                 <path d="M0.207031 26H37.2519" stroke="#C4C4C4" stroke-miterlimit="10"/>
             </svg>
-
-
+  
+  
             <svg *ngSwitchCase="'flight_assessment'" width="22" height="26" viewBox="0 0 22 26" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g clip-path="url(#clip0_11240_31211)">
                 <path d="M0.771484 8.4775H8.68453V0.564453" stroke="#CCCCCC" stroke-miterlimit="10"/>
@@ -56,13 +56,14 @@
                 </clipPath>
                 </defs>
             </svg>
-
+  
           </div>
           <div class="course-stat-title">{{ stat.type | convertToSpaces: '_' | titlecase }}</div>
           <div class="course-stat-value">{{ stat.total }}</div>
         </li>
-      </ul>
-    </div>
+      </ng-container>
+      
+    </ul>
   </div>
   
   <div *ngIf="course.course_attempt?.id; else coursePreview" class="course-started">

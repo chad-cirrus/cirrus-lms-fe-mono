@@ -19,6 +19,7 @@
 
   @include breakpoint(mobile) {
     padding: 22px 40px;
+    min-height: 78px;
   }
 }
 

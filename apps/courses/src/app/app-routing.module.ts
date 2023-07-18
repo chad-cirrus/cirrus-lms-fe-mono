@@ -10,6 +10,7 @@ import { CourseLessonsRouteComponent } from './course/course-lessons-route/cours
 import { CourseEnrollmentsRouteComponent } from './course/course-enrollments-route/course-enrollments-route.component';
 import { NextLessonRedirectComponent } from './next-lesson-redirect/next-lesson-redirect.component';
 import { AuthGuard } from './auth.guard';
+import { FeatureGuard } from './feature.guard';
 
 const getResolvedUrl = (route: ActivatedRouteSnapshot): string => {
   const params = Object.keys(route.params)
@@ -58,6 +59,8 @@ const routes: Routes = [
   },
   {
     path: 'courses/:courseId',
+    canActivate: [FeatureGuard],
+    data: { feature: 'course_preview' },
     component: CourseComponent,
     children: [
       { path: 'overview', component: CourseOverviewRouteComponent },
@@ -89,4 +92,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

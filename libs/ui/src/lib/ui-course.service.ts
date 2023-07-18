@@ -9,7 +9,7 @@ import { MatDialog } from '@angular/material/dialog';
 export class UiCourseService {
   constructor(private dialog: MatDialog) {}
 
-  watchPreview(content: any) {
+  watchPreview(content: IContent) {
     this.dialog.open(CoursePreviewVideoPlayerComponent, {
       data: content,
       width: '100%',

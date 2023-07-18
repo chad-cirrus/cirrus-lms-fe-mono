@@ -58,10 +58,7 @@ export class CourseLessonItemComponent {
   }
 
   get hasIntroVidOrContent(): boolean {
-    return (
-      this.courseLesson.student_intro_video ||
-      this.courseLesson.contents?.length
-    );
+    return this.courseLesson.student_intro_video || this.content();
   }
 
   get displayHoverState(): boolean {
@@ -79,18 +76,28 @@ export class CourseLessonItemComponent {
     this.environment = environment;
   }
 
+  content(): IContent | undefined {
+    return this.courseLesson?.contents?.find(
+      content => content.content_type === 0
+    );
+  }
+
   watchPreview() {
     let content;
     if (!this.isPreviewVideo) {
       return;
     }
     if (this.courseLesson.student_intro_video) {
-      content = this.courseLesson.student_intro_video;
-    } else if (this.courseLesson.contents?.length) {
-      content = this.courseLesson.contents[0];
+      content = this.courseLesson.student_intro_video.content;
+    } else if (this.content()) {
+      content = this.content();
     }
     if (content) {
-      this.uiCourseService.watchPreview(content);
+      const courseVideoInfo = {
+        ...content,
+        courseTitle: this.courseLesson.title
+      }
+      this.uiCourseService.watchPreview(courseVideoInfo);
     }
   }
 

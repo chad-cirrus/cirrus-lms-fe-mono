@@ -31,3 +31,25 @@ button.close-preview {
     outline: none;
   }
 }
+.video-preview-title {
+  h2 {
+    font-size: 1rem;
+    @media screen and (min-width: 600px) {
+      font-size: 1.438rem;
+    }
+    @media screen and (min-width: 960px) {
+      font-size: 1.875rem;
+    }
+  }
+  h3 {
+    font-family: 'Akzidenz-Grotesk BQ';
+    font-size: 1rem;
+    @media screen and (min-width: 600px) {
+      font-size: 1.25rem;
+    }
+    @media screen and (min-width: 960px) {
+      font-size: 1.563rem;
+    }
+    
+  }
+}
