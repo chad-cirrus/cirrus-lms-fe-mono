@@ -64,11 +64,12 @@
       class="right-side"
       fxFlex.gt-sm="1 1 40%"
       fxLayout="column"
-      fxLayout.sm="row"
+      fxLayout.sm="row wrap"
       fxLayoutGap="35px"
       fxLayoutAlign.sm="space-between"
     >
       <div
+        class="flight-hours-completion-estimate"
         fxLayout="column"
         fxLayoutGap="24px"
         fxFlex.xs="1 1 100%"
@@ -98,11 +99,12 @@
           <span class="ect-label">Estimated Course Time</span>
         </div>
       </div>
-      <div fxFlex.xs="1 1 100%" fxFlex.gt-xs="1 1 35%">
+      <div fxFlex.xs="1 1 100%" fxFlex.gt-md="1 1 35%">
         <cirrus-course-summary-counts
           [courseSummaryCounts]="courseOverview.summary_counts"
         ></cirrus-course-summary-counts>
-
+      </div>
+      <div fxFlex.xs="1 1 100%" fxFlex.gt-md="1 1 35%">
         <div
           *ngIf="
             courseOverview.summary_counts.assessments &&
@@ -126,6 +128,8 @@
 
         </div>
       </div>
+      
+
     </div>
   </section>
   <section class="row-progress" *ngIf="courseOverview.course_attempt?.id">
