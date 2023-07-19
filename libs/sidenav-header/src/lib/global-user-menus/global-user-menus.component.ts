@@ -66,7 +66,7 @@ export class GlobalUserMenusComponent implements OnInit {
 
   private readonly environment: Record<string, unknown>;
   get editProfileUrl() {
-    return this.environment['profile'] + this.cirrusUser.salesforce_id;
+    return this.environment['profile'];
   }
 
   constructor(@Inject('environment') environment: Record<string, unknown>) {
