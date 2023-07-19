@@ -89,8 +89,14 @@ export class AppComponent
   ngOnInit() {
     super.ngOnInit();
 
+    const cirrusUser = JSON.parse(
+      <string>localStorage.getItem('cirrus-user')
+    ) as ICirrusUser;
+
     this.myOrders$.subscribe(order => {
-      this.store.dispatch(fetchOrders({ order }));
+      if (cirrusUser) {
+        this.store.dispatch(fetchOrders({ order }));
+      }
     });
 
     this.triggerSubscription = this.appService.getTrigger().subscribe(() => {
@@ -102,10 +108,6 @@ export class AppComponent
       .subscribe(screenSize =>
         this.store.dispatch(setScreenSize({ screenSize }))
       );
-
-    const cirrusUser = JSON.parse(
-      <string>localStorage.getItem('cirrus-user')
-    ) as ICirrusUser;
 
     if (cirrusUser) {
       this.courseService.getNotifications();
