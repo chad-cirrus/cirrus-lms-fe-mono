@@ -150,9 +150,7 @@ export abstract class CirrusBaseComponent implements OnInit, OnDestroy {
   }
 
   logout() {
-    this.userService.logout().subscribe(() => {
-      window.location.href = 'https://cirrusapproach.com';
-    });
+    this.userService.logout();
   }
 
   impersonationLogout() {
