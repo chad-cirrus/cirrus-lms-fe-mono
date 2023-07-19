@@ -6,16 +6,18 @@
 
 .watch-preview-container {
   display: flex;
-  gap: 6%;
   align-items: center;
   font-size: 1.125rem;
   color: var.$gray5;
-  padding-right: 48px;
+  margin-left: 15px;
 
   .play-logo {
     padding-right: 7px;
     height: 35px;
     width: 35px;
+  }
+  .watch {
+    display: none;
   }
 }
 
@@ -112,9 +114,11 @@ span.chapter {
   }
 }
 
-@media (max-width: 600px) {
-  .watch,
-  .preview {
-    display: none;
+@media (min-width: 600px) {
+  .watch-preview-container {
+    .watch {
+      display: block;
+      margin-left: 15px;
+    }
   }
 }
