@@ -49,7 +49,9 @@ export abstract class CirrusBaseComponent implements OnInit, OnDestroy {
   );
   notificationCount$ = this.notificationService.getNotificationsCount();
 
-  cirrusUser = localStorage.getItem('cirrus-user');
+  cirrusUser = JSON.parse(
+    <string>localStorage.getItem('cirrus-user')
+    ) as ICirrusUser;
   
   myOrders$: Observable<any> = defer(() => {
     if (this.cirrusUser) {
