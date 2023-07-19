@@ -15,6 +15,7 @@ export class UserService {
     this.environment = environment;
   }
   logout() {
+    localStorage.setItem('cirrus-signout', 'true');
     this.router.navigate(['/sign-out']);
   }
 
