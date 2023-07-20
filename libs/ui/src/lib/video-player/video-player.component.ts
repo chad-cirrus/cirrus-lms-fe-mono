@@ -4,7 +4,6 @@ import {
   ElementRef,
   Inject,
   OnDestroy,
-  OnInit,
   ViewChild,
 } from '@angular/core';
 import { PROGRESS_STATUS } from '@cirrus/models';
@@ -20,15 +19,10 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 })
 export class VideoPlayerComponent
   extends LessonContentComponent
-  implements OnInit, AfterViewInit, OnDestroy
+  implements AfterViewInit, OnDestroy
 {
   @ViewChild('cirrusvideoplayer', { static: false })
   cirrusvideoplayer!: ElementRef;
-
-  ngOnInit(): void {
-    console.log('data', this.data);
-    console.log('content', this.content);
-  }
 
   ngAfterViewInit(): void {
     const content = this.content ? this.content : this.data;

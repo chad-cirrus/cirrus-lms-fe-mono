@@ -51,7 +51,7 @@ export abstract class CirrusBaseComponent implements OnInit, OnDestroy {
 
   cirrusUser = JSON.parse(
     <string>localStorage.getItem('cirrus-user')
-    ) as ICirrusUser;
+  ) as ICirrusUser;
   
   myOrders$: Observable<any> = defer(() => {
     if (this.cirrusUser) {
@@ -150,9 +150,7 @@ export abstract class CirrusBaseComponent implements OnInit, OnDestroy {
   }
 
   logout() {
-    this.userService.logout().subscribe(() => {
-      window.location.href = 'https://cirrusapproach.com';
-    });
+    this.userService.logout();
   }
 
   impersonationLogout() {

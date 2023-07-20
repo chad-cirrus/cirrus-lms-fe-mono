@@ -45,6 +45,7 @@ const routes: Routes = [
           'edit-profile',
           'recent-activity',
           'shopping-cart',
+          'sign-out',
         ].includes(url[0].path)
       ) {
         return { consumed: url };
@@ -92,4 +93,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
