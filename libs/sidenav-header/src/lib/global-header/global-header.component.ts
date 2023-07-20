@@ -43,14 +43,13 @@ export class GlobalHeaderComponent {
   }
 
   checkoutState() {
-    const checkoutStateString = localStorage.getItem('checkout-state');
-    console.log('checkoutStateString', checkoutStateString)
+    const checkoutStateString = JSON.parse(<string>(localStorage.getItem('checkout-state')));
     if (checkoutStateString !== null) {
-      const checkoutState = JSON.parse(checkoutStateString);
-      const { order } = checkoutState;
-      console.log(order.order_lines_items.length);
-      return order.order_lines_items.length;
+      const { order } = checkoutStateString;
+      const orderLineItemLength = order['order_line_items'].length;
+      return orderLineItemLength;
     }
+    return 0;
   }
 
   emitImpersonationLogout() {
