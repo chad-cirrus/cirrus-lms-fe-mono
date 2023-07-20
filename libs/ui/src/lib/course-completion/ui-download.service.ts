@@ -81,8 +81,6 @@ export class UiDownloadService {
             product_id: course.id,
             product: {
               list_price: course.list_price,
-              title: course.title,
-              thumbnail_image_url: course.thumbnail_image_url
             },
           },
           ...previousCartItems,

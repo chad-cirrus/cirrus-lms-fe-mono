@@ -46,8 +46,7 @@ export class GlobalHeaderComponent {
     const checkoutStateString = JSON.parse(<string>(localStorage.getItem('checkout-state')));
     if (checkoutStateString !== null) {
       const { order } = checkoutStateString;
-      const orderLineItemLength = order['order_line_items'].length;
-      return orderLineItemLength;
+      return order['order_line_items'].length;
     }
     return 0;
   }
