@@ -94,7 +94,26 @@ export class UiDownloadService {
         formatOrder
       );
     } else {
-      localStorage.setItem('checkout-state', JSON.stringify(formatOrder));
+      // figure out what kind of order I need to add
+      // also check local storage for similar items
+      // probably break this out into it's own logic
+      // lesssssssss gooooooo
+      const unauthFormatOrder = {
+        order: {
+          order_line_items: [
+            {
+              product_id: course.id,
+              product: {
+                list_price: course.list_price,
+              },
+            }
+          ],
+        },
+      };
+      // add check for course exists in current shopping cart
+      // const checkoutState = localStorage.getItem('checkout-state');
+      localStorage.setItem('checkout-state', JSON.stringify(unauthFormatOrder));
+      localStorage.setItem('is-checkout', JSON.stringify({isCheckout: true}))
       return of(true);
     }
   }
