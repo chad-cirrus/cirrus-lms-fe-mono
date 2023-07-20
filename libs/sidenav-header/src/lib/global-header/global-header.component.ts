@@ -42,6 +42,17 @@ export class GlobalHeaderComponent {
     this.hamburgerMenu.emit('dksjfkajsf');
   }
 
+  checkoutState() {
+    const checkoutStateString = localStorage.getItem('checkout-state');
+    console.log('checkoutStateString', checkoutStateString)
+    if (checkoutStateString !== null) {
+      const checkoutState = JSON.parse(checkoutStateString);
+      const { order } = checkoutState;
+      console.log(order.order_lines_items.length);
+      return order.order_lines_items.length;
+    }
+  }
+
   emitImpersonationLogout() {
     this.impersonationLogout.emit();
   }
