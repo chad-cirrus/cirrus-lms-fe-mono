@@ -67,7 +67,7 @@ export class UiDownloadService {
     );
   }
 
-  courseEnroll(course: ICourseOverview, order: IOrder): Observable<any> {
+  courseEnroll(course: ICourseOverview, order: any): Observable<any> {
     const previousCartItems = [...order.order_line_items];
     const courseExistsInCart = previousCartItems.filter((item) => item.product_id === course.id).length !== 0;
     if(courseExistsInCart) {
@@ -88,10 +88,30 @@ export class UiDownloadService {
       },
     };
 
-    return this.http.post(
-      `${this.environment.baseUrl}/api/v3/orders/update-cart`,
-      formatOrder
-    );
+    if (order?.id) {
+      return this.http.post(
+        `${this.environment.baseUrl}/api/v3/orders/update-cart`,
+        formatOrder
+      );
+    } else {
+      const unAuthOrder = {
+        order: {
+          order_line_items: [
+            {
+              product_id: course.id,
+              product: {
+                list_price: course.list_price,
+                title: course.title,
+                thumbnail_image_url: course.thumbnail_image_url
+              },
+            }
+          ]
+        }
+      }
+      localStorage.setItem('checkout-state', JSON.stringify(unAuthOrder));
+      localStorage.setItem('is-checkout', 'true');
+      return of(true);
+    }
   }
 }
 
