@@ -25,21 +25,6 @@
       
       <p class="about--version small">Version: {{ version }}</p>
 
-      <div
-        *ngIf="
-          courseOverview.summary_counts.assessments &&
-          !courseOverview.course_attempt
-        "
-        class="training-partner-container"
-      >
-        <h3>Training Partner</h3>
-        <p class="about--version">
-          This course requires instructor sign off, and you will need to partner with a
-          Cirrus Training Center (CTC) or a Cirrus Specialized Flight Instructor
-          (CSIP) in order to complete this program. After purchasing the course
-          you will be able to connect with a training partner.
-        </p>
-      </div>
       <div *ngIf="!courseOverview.course_attempt">
         <div class="support-container">
           <h3>Supported Devices</h3>
@@ -65,7 +50,6 @@
       fxFlex.gt-sm="1 1 40%"
       fxLayout="column"
       fxLayout.sm="row wrap"
-      fxLayoutGap="35px"
       fxLayoutAlign.sm="space-between"
     >
       <div
@@ -126,6 +110,21 @@
             Find a Training Partner
           </button>
 
+        </div>
+        <div
+          *ngIf="
+            courseOverview.summary_counts.assessments &&
+            !courseOverview.course_attempt
+          "
+          class="training-partner-container"
+        >
+          <h3>Training Partner</h3>
+          <p class="about--version">
+            This course requires instructor sign off, and you will need to partner with a
+            Cirrus Training Center (CTC) or a Cirrus Specialized Flight Instructor
+            (CSIP) in order to complete this program. After purchasing the course
+            you will be able to connect with a training partner.
+          </p>
         </div>
       </div>
       
