@@ -60,8 +60,6 @@ const routes: Routes = [
   },
   {
     path: 'courses/:courseId',
-    canActivate: [FeatureGuard],
-    data: { feature: 'course_preview' },
     component: CourseComponent,
     children: [
       { path: 'overview', component: CourseOverviewRouteComponent },
