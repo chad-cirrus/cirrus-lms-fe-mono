@@ -154,15 +154,15 @@ export class CourseLandingPageComponent {
   }
 
   enroll() {
-    if (this.order?.id) {
+    if (this.order?.id || this.user) {
       this.downloadService
-        .courseEnroll(this.course, this.order)
+        .courseEnroll(this.course, this.order, this.user)
         .subscribe(() => {
           this.router.navigate(['/shopping-cart']);
         });
     } else {
       this.downloadService
-        .courseEnroll(this.course, this.order)
+        .courseEnroll(this.course, null, null)
         .subscribe(() => {
           this.router.navigate(['/shopping-cart']);
       });

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { ICourse, ICourseOverview, IOrder } from '@cirrus/models';
+import { ICirrusUser, ICourse, ICourseOverview, IOrder } from '@cirrus/models';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { concatMap, filter, finalize, tap } from 'rxjs/operators';
 
@@ -67,51 +67,64 @@ export class UiDownloadService {
     );
   }
 
-  courseEnroll(course: ICourseOverview, order: any): Observable<any> {
-    const previousCartItems = [...order.order_line_items];
-    const courseExistsInCart = previousCartItems.filter((item) => item.product_id === course.id).length !== 0;
-    if(courseExistsInCart) {
-      return of(true)
+  courseEnroll(course: ICourseOverview, order: IOrder | null, user: ICirrusUser | null): Observable<any> {
+    // use user to save to db vs add to 
+    if (!user) {
+      return this.saveOrderToLocalStorageForUnauth(course);
+    }
+    return this.saveOrderToDbForAuth(course, order);
+  }
+
+  saveOrderToDbForAuth(course: ICourseOverview, order: IOrder | null): Observable<any> {
+    const newOrderLineItem = {
+      product_id: course.id,
+      product: {
+        list_price: course.list_price?.toString(),
+      }
+    };
+    const formatOrder = {
+      order: {
+        order_line_items: [
+          newOrderLineItem    
+        ],
+      },
+    };
+
+    if (order && order.order_line_items.length > 0) {
+      const previousCartItems = [...order.order_line_items];
+      const courseExistsInCart = previousCartItems.filter((item) => item.product_id === course.id).length !== 0;
+
+      if(courseExistsInCart) {
+        return of(true)
+      }
+
+      formatOrder.order.order_line_items.push(...previousCartItems);
     }
 
-    const formatOrder = {
+      return this.http.post(
+        `${this.environment.baseUrl}/api/v3/orders/update-cart`,
+        formatOrder
+      );
+  }
+
+  saveOrderToLocalStorageForUnauth(course: ICourseOverview): Observable<any> {
+    const unAuthOrder = {
       order: {
         order_line_items: [
           {
             product_id: course.id,
             product: {
-              list_price: course.list_price,
+              list_price: course.list_price?.toString(),
+              title: course.title,
+              thumbnail_image_url: course.thumbnail_image_url
             },
-          },
-          ...previousCartItems,
-        ],
-      },
-    };
-
-    if (order?.id) {
-      return this.http.post(
-        `${this.environment.baseUrl}/api/v3/orders/update-cart`,
-        formatOrder
-      );
-    } else {
-      const unAuthOrder = {
-        order: {
-          order_line_items: [
-            {
-              product_id: course.id,
-              product: {
-                list_price: course.list_price,
-                title: course.title,
-                thumbnail_image_url: course.thumbnail_image_url
-              },
-            }
-          ]
-        }
+          }
+        ]
       }
-      localStorage.setItem('checkout-state', JSON.stringify(unAuthOrder));
-      localStorage.setItem('is-checkout', 'true');
-      return of(true);
     }
+    localStorage.setItem('checkout-state', JSON.stringify(unAuthOrder));
+    localStorage.setItem('is-checkout', 'true');
+    return of(true);
   }
 }
 
