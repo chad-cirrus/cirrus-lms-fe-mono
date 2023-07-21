@@ -6,7 +6,7 @@ import { CourseState } from '../store/reducers/course.reducer';
 import { selectCourseOverview } from '../store/selectors/course.selector';
 import { selectScreenSize } from '../store/selectors/view.selector';
 import { selectCirrusUser } from '../store/selectors/cirrus-user.selector';
-import { filter, map, take, tap, switchMap } from 'rxjs/operators';
+import { filter, map, take, tap, switchMap, first } from 'rxjs/operators';
 import { selectOrder } from '../store/selectors/orders.selector';
 import { Observable } from 'rxjs';
 import { OrderState } from '../store/reducers/order.reducer';
@@ -31,31 +31,39 @@ export class CourseComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private store: Store<CourseState>,
-    private featureFlagService: FeatureFlagService,
-  ) { }
+    private featureFlagService: FeatureFlagService
+  ) {}
 
   ngOnInit(): void {
     this.courseOverview$
       .pipe(
         filter(overview => overview.id !== 0),
+        first(),
         switchMap(overview => {
           // Check if the 'course_preview' feature is enabled
-          return this.featureFlagService.isFeatureEnabled('course_preview').pipe(
-            tap((isFeatureEnabled) => {
-              if (!isFeatureEnabled && !overview.course_attempt?.id) {
-                // Feature is not enabled and !course_attempt_id, navigate to course catalog
-                this.router.navigate(['/course-catalog']);
-              } else {
-                // Feature is enabled or course_attempt_id, determine the default tab
-                const preview = !overview.course_attempt?.id;
-                const defaultTab =
-                  overview?.progress?.status === 'not_started' || preview
-                  ? 'overview'
-                  : 'lessons';
-                this.router.navigate(['/', 'courses', overview.id, defaultTab]);
-              }
-            })
-          );
+          return this.featureFlagService
+            .isFeatureEnabled('course_preview')
+            .pipe(
+              tap(isFeatureEnabled => {
+                if (!isFeatureEnabled && !overview.course_attempt?.id) {
+                  // Feature is not enabled and !course_attempt_id, navigate to course catalog
+                  this.router.navigate(['/course-catalog']);
+                } else {
+                  // Feature is enabled or course_attempt_id, determine the default tab
+                  const preview = !overview.course_attempt?.id;
+                  const defaultTab =
+                    overview?.progress?.status === 'not_started' || preview
+                      ? 'overview'
+                      : 'lessons';
+                  this.router.navigate([
+                    '/',
+                    'courses',
+                    overview.id,
+                    defaultTab,
+                  ]);
+                }
+              })
+            );
         })
       )
       .subscribe();
