@@ -67,25 +67,16 @@ export class UiDownloadService {
     );
   }
 
-  courseEnroll(course: ICourseOverview, order: IOrder | null, user: ICirrusUser | null): Observable<any> {
-    // use user to save to db vs add to 
-    if (!user) {
-      return this.saveOrderToLocalStorageForUnauth(course);
-    }
-    return this.saveOrderToDbForAuth(course, order);
-  }
-
-  saveOrderToDbForAuth(course: ICourseOverview, order: IOrder | null): Observable<any> {
-    const newOrderLineItem = {
-      product_id: course.id,
-      product: {
-        list_price: course.list_price?.toString(),
-      }
-    };
+  courseEnroll(course: ICourseOverview, order: IOrder | null): Observable<any> {
     const formatOrder = {
       order: {
         order_line_items: [
-          newOrderLineItem    
+          {
+            product_id: course.id,
+            product: {
+              list_price: course.list_price?.toString(),
+            }
+          }
         ],
       },
     };
@@ -101,14 +92,14 @@ export class UiDownloadService {
       formatOrder.order.order_line_items.push(...previousCartItems);
     }
 
-      return this.http.post(
-        `${this.environment.baseUrl}/api/v3/orders/update-cart`,
-        formatOrder
-      );
+    return this.http.post(
+      `${this.environment.baseUrl}/api/v3/orders/update-cart`,
+      formatOrder
+    );
   }
 
-  saveOrderToLocalStorageForUnauth(course: ICourseOverview): Observable<any> {
-    const unAuthOrder = {
+  courseEnrollForUnauth(course: ICourseOverview): Observable<any> {
+    const newOrder = {
       order: {
         order_line_items: [
           {
@@ -118,11 +109,25 @@ export class UiDownloadService {
               title: course.title,
               thumbnail_image_url: course.thumbnail_image_url
             },
-          }
+          },
         ]
       }
     }
-    localStorage.setItem('checkout-state', JSON.stringify(unAuthOrder));
+    const exisitingCourses = JSON.parse(<string>localStorage.getItem('checkout-state'));
+
+    if (exisitingCourses !== null) {
+      const existingOrderLineItems = [...exisitingCourses?.order.order_line_items];
+
+      if (existingOrderLineItems.length > 0) {
+        const courseExistsInCart  = existingOrderLineItems.filter((item) => item.product_id === course.id).length !== 0;
+        if (courseExistsInCart) {
+          return of(true);
+        }
+        newOrder.order.order_line_items.push(...existingOrderLineItems)
+      }
+    }
+    
+    localStorage.setItem('checkout-state', JSON.stringify(newOrder));
     localStorage.setItem('is-checkout', 'true');
     return of(true);
   }
