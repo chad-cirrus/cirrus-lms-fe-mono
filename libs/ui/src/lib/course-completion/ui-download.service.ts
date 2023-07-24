@@ -116,7 +116,7 @@ export class UiDownloadService {
     const exisitingCourses = JSON.parse(<string>localStorage.getItem('checkout-state'));
 
     if (exisitingCourses !== null) {
-      const existingOrderLineItems = [...exisitingCourses?.order.order_line_items];
+      const existingOrderLineItems = [...exisitingCourses.order.order_line_items];
 
       if (existingOrderLineItems.length > 0) {
         const courseExistsInCart  = existingOrderLineItems.filter((item) => item.product_id === course.id).length !== 0;
