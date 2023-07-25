@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { ICirrusUser, ICourse, ICourseOverview, IOrder } from '@cirrus/models';
+import { ICourseOverview, IOrder } from '@cirrus/models';
 import { BehaviorSubject, Observable, of } from 'rxjs';
-import { concatMap, filter, finalize, tap } from 'rxjs/operators';
+import { concatMap, finalize, tap } from 'rxjs/operators';
 
 @Injectable()
 export class UiDownloadService {
