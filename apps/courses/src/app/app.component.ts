@@ -28,6 +28,8 @@ import { CoursesFacadeService } from './courses-facade.service';
 import { SidenavHeaderService } from '@cirrus/sidenav-header';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ViewportScroller } from '@angular/common';
+import { fetchOrders } from './store/actions/orders.actions';
+import { mockOrder } from './course/testData';
 
 @Component({
   selector: 'cirrus-root',
@@ -86,7 +88,16 @@ export class AppComponent
 
   ngOnInit() {
     super.ngOnInit();
-    this.courseService.getNotifications();
+
+    const cirrusUser = JSON.parse(
+      <string>localStorage.getItem('cirrus-user')
+    ) as ICirrusUser;
+
+    this.myOrders$.subscribe(order => {
+      if (cirrusUser) {
+        this.store.dispatch(fetchOrders({ order }));
+      }
+    });
 
     this.triggerSubscription = this.appService.getTrigger().subscribe(() => {
       this.outletContainer.nativeElement.scrollTop = 0;
@@ -98,9 +109,10 @@ export class AppComponent
         this.store.dispatch(setScreenSize({ screenSize }))
       );
 
-    const cirrusUser = JSON.parse(
-      <string>localStorage.getItem('cirrus-user')
-    ) as ICirrusUser;
+    if (cirrusUser) {
+      this.courseService.getNotifications();
+    }
+    
     this.store.dispatch(setCirrusUser({ cirrusUser }));
 
     this.viewToggle.valueChanges.subscribe(instructorView =>

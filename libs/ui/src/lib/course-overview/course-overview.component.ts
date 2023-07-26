@@ -1,9 +1,10 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ICourseOverview } from '@cirrus/models';
 import {
   produceProgressStatsConfig,
   ProgressStatConfig,
 } from '../helpers/produceProgressStatsConfig';
+
 
 @Component({
   selector: 'cirrus-course-overview',
@@ -11,6 +12,9 @@ import {
   styleUrls: ['./course-overview.component.scss'],
 })
 export class CourseOverviewComponent {
+  
+  @Output() navigateTrainingPartners = new EventEmitter<void>();
+
   private _lessonProgress: { total: number; completed: number } = {
     total: 0,
     completed: 0,
@@ -53,4 +57,9 @@ export class CourseOverviewComponent {
   get version() {
     return `${this.courseOverview.major_version}.${this.courseOverview.minor_version}`;
   }
+
+  emitNavigation() {
+    this.navigateTrainingPartners.emit();
+  }
+
 }

@@ -479,6 +479,9 @@ cirrus-lesson-landing-page {
     }
   }
 }
+cirrus-course-player cirrus-cta-button .mat-mdc-fab {
+  box-shadow: none;
+}
 
 .content-container {
   flex-direction: column;
@@ -495,11 +498,361 @@ cirrus-lesson-landing-page {
   }
 }
 
-cirrus-video-player .cirrus-video-player > div {
+
+/**
+ * Content Player
+ * @desc Styles course popups with video content
+ * @locations: /courses/{{course_id}}/stages/{{stage_id}}/lessons/{{lesson_id}}
+ * @component cirrus-course-preview-video-player 
+ */
+cirrus-content-player .content-player-body cirrus-video-player .cirrus-video-player > div  {
   position: initial !important;
   padding: 0 !important;
 }
 
+
+/**
+ * Course Preview Video Player
+ * @desc Styles modal video 
+ * @locations: /courses/{{course_id}}/overview
+ * @component cirrus-course-preview-video-player 
+ */
+cirrus-video-player {
+  width: 100%;
+}
+.cdk-overlay-backdrop.course-preview-video {
+  background-color: #000;
+}
+.cdk-overlay-pane.course-preview-video {
+  max-width: 100% !important;
+  padding: 16px;
+  @include breakpoint(tablet) {
+    padding: 35px;
+  }
+}
+.cirrus-course-preview-video-player iframe {
+  max-height: 72vh;
+}
+cirrus-course-landing-page { 
+  .watch-preview:hover {
+    cursor:pointer;
+  }
+} 
+
+
 apx-chart .apexcharts-toolbar {
   z-index: 4;
+}
+
+
+
+.course-preview-container {
+  position: relative;
+  height: 74px;
+
+  cirrus-course-player {
+    display: inline-block;
+    width: 100vw;
+    max-width: initial;
+    position: absolute;
+    left: -20px;
+    z-index: 2;
+
+    &.sticky {
+      position: fixed;
+      top: 65px;
+      left: initial;
+      right: 0;
+      width: 100%;
+      box-shadow: 2px 8px 24px 0px rgba(0, 0, 0, 0.80);
+    }
+
+    .container {
+      background-color: $gray7;
+      border-radius: 0;
+      padding: 20px;
+      filter: drop-shadow(0px 4px 20px rgba(0, 0, 0, 0.45));
+
+      & > div {
+        flex-direction: row !important;
+      }
+    }
+
+    .text-container {
+      height: 3.167rem;
+      width: 100%;
+    }
+
+    .lesson-info {
+      margin-right: 1rem;
+      flex: 1;
+      width: 100%;
+    }
+
+    .description {
+      font-size: 0.88rem;
+      font-weight: 500;
+      line-height: 120%;
+
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    cirrus-cta-button {
+      width: auto !important;
+      margin-top: 0 !important;
+      min-width: 112px !important;
+      
+      button {
+        height: 36px;
+        padding: 0;
+      }
+      
+      span.mdc-button__label {
+        font-size: 0.88rem;
+      }
+    }
+  }
+
+  .stripes {
+    width: 100%;
+    -webkit-clip-path: polygon(0 0, 100% 0, 90% 100%, 0% 100%);
+    clip-path: polygon(0 0, 100% 0, 90% 100%, 0% 100%);
+    position: absolute;
+    z-index: -1;
+
+    .stripe {
+      height: 15px;
+      display: block;
+      margin: 4px 0;
+      background: rgb(90,90,90);
+      background: linear-gradient(90deg, rgba(90,90,90,1) 0%, rgba(122,122,122,1) 100%);
+      
+      &:first-child {
+        margin-top: 0;
+      }
+    }
+  }
+
+  .chapter,
+  .thumbnail,
+  .watch-preview-container {
+    display: none !important;
+  }
+
+  @include breakpoint(mobile) {
+    height: 105px;
+    margin-bottom: 50px;
+    cirrus-course-player {
+      width: calc(100vw - 107px);
+      left: -25px;
+
+      &.sticky {
+        position: fixed;
+        top: 78px;
+        left: initial;
+        right: 0;
+        width: calc(100% - 107px);
+      }
+
+      .container {
+        padding: 20px 25px;
+      }
+  
+      .text-container {
+        display: flex;
+        align-items: center;
+        height: 100%;
+        width: 100%;
+        min-height: 65px;
+
+        .header {
+          width: calc(100% - 50px - 112px - 1rem);
+          position:absolute;
+        }
+      }
+
+      .stripes {
+        -webkit-clip-path: polygon(0 0, 100% 0, 95% 100%, 0% 100%);
+        clip-path: polygon(0 0, 100% 0, 95% 100%, 0% 100%);
+        top: 0.4rem;
+      }
+
+      .description {
+        font-size: 1.125rem;
+        line-height: 21.6px;
+        margin-left: 6rem;
+      }
+
+    }
+    .thumbnail {
+      display: block !important;
+      margin-right: 20px !important;
+    }
+    .mobile-preview-video {
+      display: none;
+    }
+  }
+
+  @media (min-width: 960px) {
+    cirrus-course-player {
+      width: calc(100vw - 245px);
+      left: -49px;
+
+      &.sticky {
+        width: calc(100% - 245px);
+      }
+
+      button {
+        width: 100%;
+      }
+    }
+    
+  }
+
+  @media screen and (min-width: 1280px) {
+    height: auto;
+    position: initial;
+    cirrus-course-player {
+      width: 310px;
+      left:initial;
+      position: absolute;
+      top: 285px;
+
+      &.sticky {
+        position: fixed;
+        top: 150px;
+        width: 310px;
+        right: 3.1rem;
+        box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+      }
+      
+      .container {
+        border-radius: 6px;
+
+        & > div {
+          flex-direction: column !important;
+          align-items: flex-start !important;
+        }
+      }
+
+      .stripes {
+        -webkit-clip-path: polygon(0 0, 100% 0, 85% 100%, 0% 100%);
+        clip-path: polygon(0 0, 100% 0, 85% 100%, 0% 100%);
+      }
+
+      .lesson-info {
+        margin-right: 0 !important;
+        flex-direction: column !important;
+      }
+      
+      .text-container {
+        align-items: flex-start;
+        flex-direction: column;
+        margin-right: 0;
+        .header {
+          width: 100%;
+          position:relative;
+        }
+      }
+
+      .description {
+        margin-top: 1.5rem;
+        margin-left: 0;
+        margin-bottom: 0.72rem;
+      }
+
+      cirrus-cta-button {
+        width: 100% !important;
+        max-width: 158px !important;
+        
+        button {
+          height: 39px;
+          width: 100%;
+        }
+
+        span.mdc-button__label {
+          font-size: 1.06rem;
+        }
+
+      }
+
+      .watch-preview {
+        img {
+          max-width: 35px;  
+        }
+      }
+
+    }
+
+    .thumbnail {
+      margin-right: 0px !important;
+    }
+
+    .watch-preview-container {
+      display: block !important;
+      width: 100%;
+      margin-bottom: 0.72rem;
+    }
+  }
+  
+}
+
+@media screen and (min-width: 1280px) {
+  .mobile-preview-video {
+    display: none;
+  }
+}
+
+.sidenav-collapsed {
+  .course-preview-container {
+    @include breakpoint(mobile) {
+      cirrus-course-player {
+        width: calc(100vw - 107px);
+      }
+    }
+
+    @media screen and (min-width: 1280px) {
+      cirrus-course-player {
+        width: 310px;
+      }
+    }
+  }
+}
+
+.course-preview-divider {
+  display: none;
+}
+
+.course-preview-container {
+
+  @media screen and (min-width: 1280px) {
+    .course-preview-divider {
+      display: block;
+      border-top: solid 1px #969696;
+      width: 100%;
+      margin-bottom: 1rem;
+    }
+  }
+  
+}
+
+
+.course-started {
+  .text-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .thumbnail {
+      display: block;
+    }
+
+    .description .title,
+    .description .chapter {
+      font-size: 20px;
+    }
+  }
 }

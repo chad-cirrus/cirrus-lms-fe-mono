@@ -1,4 +1,4 @@
-import { filter, map, takeUntil, tap } from 'rxjs/operators';
+import { filter, map, shareReplay, takeUntil, tap } from 'rxjs/operators';
 import {
   Component,
   ElementRef,
@@ -7,14 +7,14 @@ import {
   ViewChild,
 } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
-import { BehaviorSubject, of, Subject } from 'rxjs';
+import { BehaviorSubject, defer, Observable, of, Subject } from 'rxjs';
 import {
   BreakpointObserver,
   Breakpoints,
   BreakpointState,
 } from '@angular/cdk/layout';
 import { SidenavHeaderService } from '@cirrus/sidenav-header';
-import { ICirrusUser } from '@cirrus/models';
+import { ICirrusUser, IOrder } from '@cirrus/models';
 import { UserService } from '../shared/user.service';
 import { NotificationService } from '../lib-services/notifications/notification.service';
 import { ErrorService } from '../lib-services/error/error.service';
@@ -48,13 +48,24 @@ export abstract class CirrusBaseComponent implements OnInit, OnDestroy {
     ) as ICirrusUser
   );
   notificationCount$ = this.notificationService.getNotificationsCount();
-  myOrdersCount$ = this.userService
-    .getMyOrders()
-    .pipe(
-      map(
-        order => (order?.order_line_items && order.order_line_items.length) ?? 0
-      )
-    );
+
+  cirrusUser = JSON.parse(
+    <string>localStorage.getItem('cirrus-user')
+  ) as ICirrusUser;
+  
+  myOrders$: Observable<any> = defer(() => {
+    if (this.cirrusUser) {
+      return this.userService.getMyOrders().pipe(shareReplay(1));
+    } else {
+      return of(null);
+    }
+  });
+
+  myOrdersCount$ = this.myOrders$.pipe(
+    map(
+      order => (order?.order_line_items && order.order_line_items.length) ?? 0
+    )
+  );
   error$ = this.errorService.error$;
 
   protected _isNotificationsMenuOpenSubject = new BehaviorSubject(false);
@@ -139,9 +150,7 @@ export abstract class CirrusBaseComponent implements OnInit, OnDestroy {
   }
 
   logout() {
-    this.userService.logout().subscribe(() => {
-      window.location.href = 'https://cirrusapproach.com';
-    });
+    this.userService.logout();
   }
 
   impersonationLogout() {

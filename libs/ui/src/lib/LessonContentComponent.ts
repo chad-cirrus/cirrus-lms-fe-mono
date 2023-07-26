@@ -26,6 +26,7 @@ export abstract class LessonContentComponent implements OnInit, OnDestroy {
 
   @Input()
   public set content(value: IContent) {
+    console.log('value', value);
     this._content = value;
   }
 

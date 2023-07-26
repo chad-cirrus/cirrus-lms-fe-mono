@@ -8,20 +8,52 @@
     <div
       class="left-side"
       fxFlex.gt-sm="1 1 60%"
-      *ngIf="courseOverview.overview"
     >
+
+    <div *ngIf="courseOverview.course_attempt?.id; else unenrolled">
       <div class="wysiwyg-wrapper" [innerHTML]="courseOverview.overview"></div>
+    </div>
+
+    <ng-template #unenrolled>
+      <div *ngIf="courseOverview.sales_desc; else overview">
+        <div class="wysiwyg-wrapper" [innerHTML]="courseOverview.sales_desc"></div>
+      </div>
+      <ng-template #overview>
+        <div class="wysiwyg-wrapper" [innerHTML]="courseOverview.overview"></div>
+      </ng-template>
+    </ng-template>
+      
       <p class="about--version small">Version: {{ version }}</p>
+
+      <div *ngIf="!courseOverview.course_attempt">
+        <div class="support-container">
+          <h3>Supported Devices</h3>
+          <div class="devices">
+            <div>Desktop</div>
+            <div class="device">Tablet</div>
+            <div class="device">Mobile</div>
+          </div>
+        </div>
+        <div class="have-questions-container">
+          <h3>Have Questions?</h3>
+          <p class="about--version">
+            If you need help purchasing this course or have any questions,
+            please contact us at <a href="mailto:learning@cirrusaircraft.com">learning@cirrusaircraft.com</a> and we’ll be happy
+            to help you through the signup process and get you flying in no
+            time!
+          </p>
+        </div>
+      </div>
     </div>
     <div
       class="right-side"
       fxFlex.gt-sm="1 1 40%"
       fxLayout="column"
-      fxLayout.sm="row"
-      fxLayoutGap="35px"
+      fxLayout.sm="row wrap"
       fxLayoutAlign.sm="space-between"
     >
       <div
+        class="flight-hours-completion-estimate"
         fxLayout="column"
         fxLayoutGap="24px"
         fxFlex.xs="1 1 100%"
@@ -51,11 +83,52 @@
           <span class="ect-label">Estimated Course Time</span>
         </div>
       </div>
-      <div fxFlex.xs="1 1 100%" fxFlex.gt-xs="1 1 35%">
+      <div fxFlex.xs="1 1 100%" fxFlex.gt-md="1 1 35%">
         <cirrus-course-summary-counts
           [courseSummaryCounts]="courseOverview.summary_counts"
         ></cirrus-course-summary-counts>
       </div>
+      <div fxFlex.xs="1 1 100%" fxFlex.gt-md="1 1 35%">
+        <div
+          *ngIf="
+            courseOverview.summary_counts.assessments &&
+            courseOverview.course_attempt?.id
+          "
+          class="training-partner-container"
+        >
+          <h3>Training Partner</h3>
+          <p class="about--version">
+            You will need to partner with a Cirrus Training Center (CTC) or a Cirrus Specialized Flight Instructor (CSIP) in order to complete this course.
+          </p>
+
+          <button
+            style="margin-top: 1rem;"
+            class="view secondary-btn-black -wide-btn"
+            [routerLink]="['training-partners']"
+            (click)="emitNavigation()"
+          >
+            Find a Training Partner
+          </button>
+
+        </div>
+        <div
+          *ngIf="
+            courseOverview.summary_counts.assessments &&
+            !courseOverview.course_attempt
+          "
+          class="training-partner-container"
+        >
+          <h3>Training Partner</h3>
+          <p class="about--version">
+            This course requires instructor sign off, and you will need to partner with a
+            Cirrus Training Center (CTC) or a Cirrus Specialized Flight Instructor
+            (CSIP) in order to complete this program. After purchasing the course
+            you will be able to connect with a training partner.
+          </p>
+        </div>
+      </div>
+      
+
     </div>
   </section>
   <section class="row-progress" *ngIf="courseOverview.course_attempt?.id">
@@ -85,7 +158,10 @@
       </div>
     </div>
   </section>
-  <section class="row-terms-conditions" *ngIf="courseOverview.agreement_body">
+  <section
+    class="row-terms-conditions"
+    *ngIf="courseOverview.agreement_body && courseOverview.course_attempt?.id"
+  >
     <h3>Terms & Conditions</h3>
     <div
       class="agreement-body xsmall"

@@ -1,6 +1,6 @@
 <div
   class="container"
-  [ngClass]="previewCourse ? '' : 'non-preview-course-hover'"
+  [ngClass]="displayHoverState ? 'non-preview-course-hover' : ''"
   fxLayout="row"
   fxLayoutAlign="space-between start"
   fxLayoutAlign.gt-sm="start start"
@@ -21,9 +21,17 @@
         fxLayout="row"
         fxLayoutAlign="space-between center"
         fxLayoutGap="2px"
+        *ngIf="!previewCourse"
       >
         <mat-icon [svgIcon]="courseLesson.progress.status"></mat-icon>
         <div class="progress">{{ progress }}</div>
+      </div>
+      <div
+        *ngIf="isPreviewVideo && previewCourse && hasIntroVidOrContent"
+        class="watch-preview-container"
+      >
+        <img class="play-logo" src="courses/images/svg/play-logo.svg" />
+        <div class="watch">Watch Preview</div>
       </div>
     </div>
     <div

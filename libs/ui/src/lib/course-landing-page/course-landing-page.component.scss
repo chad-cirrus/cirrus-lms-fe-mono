@@ -101,6 +101,12 @@ cirrus-cta-button {
   }
 }
 
+.mobile-preview-video iframe {
+  max-width: 100%;
+  margin: 0 auto;
+  display: block;
+}
+
 @media (min-width: 600px) {
   .lesson-image {
     padding: 140px 25px 0;
@@ -128,6 +134,12 @@ cirrus-cta-button {
 
   cirrus-course-progress {
     margin-bottom: 30px;
+  }
+}
+
+@media (min-width: 1200px) {
+  h1 {
+    max-width: calc(100% - 310px - 2rem);
   }
 }
 
@@ -187,5 +199,46 @@ cirrus-cta-button {
     line-height: 130%;
     letter-spacing: 0.02em;
     margin-left: 15px;
+  }
+}
+
+
+
+.course-stats {
+  list-style: none;
+  margin: 2rem 0;
+  padding: 0;
+  display: flex;
+  width: 100%;
+  font-family: 'Berthold Akzidenz Grotesk BE';
+  overflow-x: auto;
+  
+  .course-stat {
+    margin: 0 1.5rem 0 0;
+    padding: 1rem 1.5rem 1rem 0;
+    border-right: solid 1px #fff;
+    display: flex;
+    flex-direction: column;
+
+    &:last-child {
+      border-right: none;
+    }
+  }
+
+  .course-stat-title {
+    font-size: 0.75rem;
+    flex: 1;
+  }
+  .course-stat-value {
+    font-size: 2rem;
+  }
+
+  @media screen and (min-width: 1280px) {
+    .course-stat-title {
+      font-size: 0.938rem;
+    }
+    .course-stat-value {
+      font-size: 2.75rem;
+    }
   }
 }

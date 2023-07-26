@@ -1,9 +1,10 @@
-<div class="container">
+<div class="container" [ngClass]="config.preview ? 'course-preview' : ''">
   <div
     fxLayout="column"
-    fxLayoutAlign="space-between start"
+    fxLayoutAlign="space-between center"
     fxLayout.gt-xs="row"
     fxLayoutAlign.gt-xs="space-between center"
+    style="align-items: center;"
   >
     <div
       class="lesson-info"
@@ -11,21 +12,44 @@
       fxLayoutAlign="start start"
       fxLayoutGap="12px"
     >
-      <img [src]="config.thumbnail" alt="" class="thumbnail" />
 
       <div class="text-container">
-        <div class="header">{{ config.header }}</div>
+        <div class="header">
+          <img [src]="config.badge ? config.badge : config.thumbnail" alt="" class="thumbnail" />
+          <div class="stripes">
+            <div class="stripe"></div>
+            <div class="stripe"></div>
+            <div class="stripe"></div>
+          </div>
+        </div>
 
         <div class="description">
-          <span class="chapter">{{ config.index }}</span
-          >{{ config.title }}
+          <div class="course-header" *ngIf="config.header">{{ config.header }}</div>
+          <span class="chapter">{{ config.index }}</span>
+          <span class="title">{{ config.title }}</span>
+          <div *ngIf="config.list_price" class="course-price-container course-price-mobile">Price: <span class="course-price">${{ config.list_price | number:'1.0-0' }}</span></div>
         </div>
+
+        <div class="watch-preview-container" *ngIf="config.preview">
+          <div class="watch-preview" (click)="emitWatchPreview()">
+            <img height="45px" width="45px" src="courses/images/svg/play-logo.svg" />
+            <p>Watch Preview</p>
+          </div>
+        </div>
+
+        <div class="course-preview-divider"></div>
+        <!-- <mat-divider class="mat-divider mat-divider-horizontal"></mat-divider> -->
+
+        <div *ngIf="config.list_price" class="course-price-container course-price-desktop">Price: <span class="course-price">${{ config.list_price | number:'1.0-0' }}</span></div>
+
       </div>
     </div>
+
     <cirrus-cta-button
       [text]="config.buttonText"
       (btnClick)="emitNavigate()"
     ></cirrus-cta-button>
+
   </div>
   <div class="watch-preview-container" *ngIf="config.preview">
     <div class="watch-preview">

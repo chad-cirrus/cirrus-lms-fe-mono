@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { ICourse, ICourseOverview } from '@cirrus/models';
+import { ICourse, ICourseOverview, IOrder } from '@cirrus/models';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { concatMap, filter, finalize, tap } from 'rxjs/operators';
 
@@ -67,18 +67,51 @@ export class UiDownloadService {
     );
   }
 
-  courseEnroll(course: ICourseOverview): Observable<any> {
-    const order = {
+  courseEnroll(course: ICourseOverview, order: any): Observable<any> {
+    const previousCartItems = [...order.order_line_items];
+    const courseExistsInCart = previousCartItems.filter((item) => item.product_id === course.id).length !== 0;
+    if(courseExistsInCart) {
+      return of(true)
+    }
+
+    const formatOrder = {
       order: {
         order_line_items: [
-          { list_price: course.list_price, product_id: course.id },
+          {
+            product_id: course.id,
+            product: {
+              list_price: course.list_price,
+            },
+          },
+          ...previousCartItems,
         ],
       },
     };
-    return this.http.post(
-      `${this.environment.baseUrl}/api/v3/orders/update-cart`,
-      order
-    );
+
+    if (order?.id) {
+      return this.http.post(
+        `${this.environment.baseUrl}/api/v3/orders/update-cart`,
+        formatOrder
+      );
+    } else {
+      const unAuthOrder = {
+        order: {
+          order_line_items: [
+            {
+              product_id: course.id,
+              product: {
+                list_price: course.list_price,
+                title: course.title,
+                thumbnail_image_url: course.thumbnail_image_url
+              },
+            }
+          ]
+        }
+      }
+      localStorage.setItem('checkout-state', JSON.stringify(unAuthOrder));
+      localStorage.setItem('is-checkout', 'true');
+      return of(true);
+    }
   }
 }
 

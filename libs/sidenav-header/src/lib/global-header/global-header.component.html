@@ -5,7 +5,7 @@
       <a routerLink="/shopping-cart">
         <img src="recent-activity/images/svg/cart.svg" />
       </a>
-      <cirrus-badge [badgeNumber]="orderCount"></cirrus-badge>
+      <cirrus-badge [badgeNumber]="orderCount || checkoutState()"></cirrus-badge>
     </div>
 
     <div class="dropdown-menus-header-container">

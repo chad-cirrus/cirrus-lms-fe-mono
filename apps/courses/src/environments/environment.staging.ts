@@ -3,7 +3,7 @@ export const environment = {
   project: 'courses',
   baseUrl: 'https://lmsstage.cirrusapproach.com',
   profile:
-    'https://cirrusaircraft--cirfullsb.sandbox.my.site.com/approachsso/s/profile/',
+    'https://env-ciam-cirrus-aircraft-multisite.pantheonsite.io/account/profile/',
   defaultLessonThumbnail:
     'https://cirrusapproachherokuprod.blob.core.windows.net/cirruslmsherokudevcontainer/content-items/images/default-lesson-thumbnail.jpg',
   defaultMobileLesson:

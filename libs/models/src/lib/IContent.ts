@@ -24,6 +24,7 @@ export interface IContent {
   starter_file: string;
   blob_directory: string;
   show_comments: boolean;
+  courseTitle?: string;
 }
 
 export enum CONTENT_STATUS {

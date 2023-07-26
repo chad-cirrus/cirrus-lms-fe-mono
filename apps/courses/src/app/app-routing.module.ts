@@ -10,6 +10,7 @@ import { CourseLessonsRouteComponent } from './course/course-lessons-route/cours
 import { CourseEnrollmentsRouteComponent } from './course/course-enrollments-route/course-enrollments-route.component';
 import { NextLessonRedirectComponent } from './next-lesson-redirect/next-lesson-redirect.component';
 import { AuthGuard } from './auth.guard';
+import { FeatureGuard } from './feature.guard';
 
 const getResolvedUrl = (route: ActivatedRouteSnapshot): string => {
   const params = Object.keys(route.params)
@@ -44,6 +45,7 @@ const routes: Routes = [
           'edit-profile',
           'recent-activity',
           'shopping-cart',
+          'sign-out',
         ].includes(url[0].path)
       ) {
         return { consumed: url };

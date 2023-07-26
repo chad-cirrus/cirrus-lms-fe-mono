@@ -78,6 +78,9 @@ import { HoursLandingTypeToTextPipe } from './helpers/HoursLandingTypeToText.pip
 import { HoursLandingTypeToIconPipe } from './helpers/HoursLandingTypeToIcon.pipe';
 import { BluePopUpComponent } from './blue-pop-up/blue-pop-up.component';
 import { SearchInputModule } from '@cirrus/search-input';
+import { CoursePreviewVideoPlayerComponent } from './course-preview-video-player/course-preview-video-player.component';
+import { ConvertToSpacesPipe } from './course-landing-page/pipes/convert-to-spaces.pipe';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   imports: [
@@ -95,6 +98,7 @@ import { SearchInputModule } from '@cirrus/search-input';
     MatTabsModule,
     MatCardModule,
     SearchInputModule,
+    RouterModule
   ],
   declarations: [
     LessonLandingPageComponent,
@@ -145,12 +149,14 @@ import { SearchInputModule } from '@cirrus/search-input';
     HoursAndLandingsComponent,
     GenericResponsiveMatTableComponent,
     TableFormatPipe,
+    ConvertToSpacesPipe,
     LessonTypePipe,
     HoursLandingTypeToTextPipe,
     HoursLandingTypeToIconPipe,
     FilterComponent,
     FormatFilterPipe,
     BluePopUpComponent,
+    CoursePreviewVideoPlayerComponent
   ],
   exports: [
     LessonLandingPageComponent,
@@ -198,12 +204,14 @@ import { SearchInputModule } from '@cirrus/search-input';
     CourseOverviewLessonProgressBarComponent,
     GenericResponsiveMatTableComponent,
     TableFormatPipe,
+    ConvertToSpacesPipe,
     LessonTypePipe,
     HoursLandingTypeToTextPipe,
     HoursLandingTypeToIconPipe,
     FilterComponent,
     FormatFilterPipe,
     BluePopUpComponent,
+    CoursePreviewVideoPlayerComponent
   ],
   providers: [
     { provide: MAT_DIALOG_DATA, useValue: {} },

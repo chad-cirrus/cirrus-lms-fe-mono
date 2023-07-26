@@ -5,8 +5,8 @@ export interface IProduct {
   name: string;
   desc: string;
   course_type: number;
-  created_at: Date;
-  updated_at: Date;
+  created_at?: Date;
+  updated_at?: Date;
   course_category_id: number;
   is_ecommerce_enabled: boolean;
   is_active: boolean;

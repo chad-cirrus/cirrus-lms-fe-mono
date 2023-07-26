@@ -1,8 +1,9 @@
- export const environment = {
+export const environment = {
   production: true,
   project: 'courses',
   baseUrl: process.env['NX_BASE_URL'],
-  profile: 'https://login.cirrusapproach.com/s/profile/',
+  profile:
+    'https://env-ciam-cirrus-aircraft-multisite.pantheonsite.io/account/profile/',
   defaultLessonThumbnail:
     'https://cirrusapproachherokuprod.blob.core.windows.net/cirruslmsherokudevcontainer/content-items/images/default-lesson-thumbnail.jpg',
   defaultMobileLesson:

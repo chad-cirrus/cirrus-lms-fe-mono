@@ -9,6 +9,10 @@ import { MatIconTestingModule } from '@angular/material/icon/testing';
 import { MatIcon } from '@angular/material/icon';
 import { MockComponent } from 'ng-mocks';
 import { MatTabsModule } from '@angular/material/tabs';
+import { FeatureFlagService } from '@cirrus/ui';
+class MockFeatureFlagService {
+
+}
 
 describe('CourseComponent', () => {
   let component: CourseComponent;
@@ -29,6 +33,7 @@ describe('CourseComponent', () => {
       ],
       providers: [
         { provide: UiDownloadService, useClass: MockUIDownloadService },
+        { provide: FeatureFlagService, useClass: MockFeatureFlagService},
       ],
     }).compileComponents();
   });

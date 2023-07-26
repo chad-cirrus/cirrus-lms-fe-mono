@@ -3,7 +3,9 @@
   [course]="(courseOverview$ | async)!"
   [size]="(screenSize$ | async)!"
   (refreshCourse)="setCourse($event)"
+  [order]="order$ | async"
 ></cirrus-course-landing-page>
+
 <nav
   *ngIf="courseOverview$ | async as overview"
   mat-tab-nav-bar

@@ -14,8 +14,8 @@
 }
 
 .thumbnail {
-  width: 65px;
   height: 65px;
+  min-width: 65px;
   object-fit: cover;
 }
 
@@ -25,13 +25,15 @@ cirrus-cta-button {
   margin-top: 20px;
 }
 
-.header {
+.header,
+.course-header {
   color: var.$gray5;
   font-family: var.$akzidenz-grotesk_bqLtEx400;
   font-size: 0.6875rem;
   line-height: 22px;
   letter-spacing: 0.02em;
   text-transform: uppercase;
+  position: relative;
 }
 
 .chapter,
@@ -45,6 +47,10 @@ cirrus-cta-button {
 .chapter {
   color: var.$gray4;
   margin-right: 8px;
+}
+
+.description {
+  margin-left: 1rem;
 }
 
 .watch-preview-container {
@@ -61,6 +67,18 @@ cirrus-cta-button {
   }
 }
 
+.course-price-container {
+
+  .course-price {
+    font-weight: bold;
+  }
+
+  &.course-price-desktop {
+    display: none;
+  }
+}
+
+
 @media (min-width: 600px) {
   .container {
     padding: 17px 45px 17px 25px;
@@ -74,7 +92,7 @@ cirrus-cta-button {
   }
 }
 
-@media (min-width: 960px) {
+@media screen and (min-width: 1280px) {
   .container {
     .lesson-info {
       margin-right: 15px;
@@ -95,11 +113,51 @@ cirrus-cta-button {
         }
         .description {
           font-family: var.$AkzidenzGroteskBQ;
-          font-size: 1.25rem;
-          line-height: 24px;
+          font-size: 1.4rem;
+          line-height: 27px;
           max-width: 334px;
         }
       }
     }
   }
+
+  .course-price-container {
+    margin-bottom: 1rem;
+    .course-price {
+      font-weight: bold;
+    }
+  
+    &.course-price-mobile {
+      display: none;
+    }
+    &.course-price-desktop {
+      display: block;
+      width: 100%;
+    }
+  }
 }
+
+
+// .course-started {
+//   .text-container {
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+
+//     .thumbnail {
+//       margin: auto 1rem auto 0;
+//       display: block;
+//     }
+
+//     .description .title,
+//     .description .chapter {
+//       font-size: 20px;
+//     }
+//   }
+// }
+
+
+
+
+
+

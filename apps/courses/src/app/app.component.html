@@ -1,4 +1,4 @@
-<div class="main-container">
+<div class="main-container" [ngClass]="collapse ? 'sidenav-collapsed' : 'sidenav-expanded'">
   <div>
     <cirrus-global-header
       [cirrusUser]="(cirrusUser$ | async)!"
