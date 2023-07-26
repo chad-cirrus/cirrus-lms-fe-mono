@@ -1,5 +1,5 @@
 import { Breakpoints } from '@angular/cdk/layout';
-import { Component, EventEmitter, importProvidersFrom, Inject, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Inject, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import {
   ICirrusUser,
@@ -154,7 +154,7 @@ export class CourseLandingPageComponent {
   }
 
   enroll() {
-    if (this.order?.id) {
+    if (this.user?.id || this.order?.id) {
       this.downloadService
         .courseEnroll(this.course, this.order)
         .subscribe(() => {
@@ -162,7 +162,7 @@ export class CourseLandingPageComponent {
         });
     } else {
       this.downloadService
-        .courseEnroll(this.course, this.order)
+        .courseEnrollForUnauth(this.course)
         .subscribe(() => {
           this.router.navigate(['/shopping-cart']);
       });
