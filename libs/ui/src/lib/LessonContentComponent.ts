@@ -21,6 +21,7 @@ export abstract class LessonContentComponent implements OnInit, OnDestroy {
   private _logbook: ILessonFlightLog[] = [];
   private _menuOpen!: boolean;
   private _overview!: string;
+  private _lesson_title!: string;
 
   @Output() hidePrevAndNext = new EventEmitter<boolean>();
 
@@ -70,6 +71,15 @@ export abstract class LessonContentComponent implements OnInit, OnDestroy {
 
   public set overview(value: string) {
     this._overview = value;
+  }
+
+  @Input()
+  public get lessonTitle(): string {
+    return this._lesson_title;
+  }
+
+  public set lessonTitle(value: string) {
+    this._lesson_title = value;
   }
 
   ngOnInit(): void {

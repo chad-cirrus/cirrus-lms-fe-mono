@@ -8,6 +8,10 @@ import { MediaServerService } from '../../../media.service';
 import { ScormAPI } from './scorm-api';
 import { filter, tap } from 'rxjs/operators';
 import { BehaviorSubject } from 'rxjs';
+import { CoursesFacadeService } from '../../../courses-facade.service';
+import { Store } from '@ngrx/store';
+import { AppState } from '../../../store/reducers';
+import { selectCourseOverview } from '../../../store/selectors/course.selector';
 
 @Component({
   selector: 'cirrus-scorm',
@@ -24,11 +28,17 @@ export class ScormComponent
   api: any;
   loading = false;
   loadingSubject = new BehaviorSubject(false);
+  courseTitle!: string;
+  courseTitle$ = this.store.select(selectCourseOverview).pipe(
+    tap(course => this.courseTitle = course.title)
+  ).subscribe();
 
   constructor(
     private sanitizer: DomSanitizer,
     private router: Router,
-    private mediaServerService: MediaServerService
+    private mediaServerService: MediaServerService,
+    private facadeService: CoursesFacadeService,
+    private store: Store<AppState>
   ) {
     super();
   }
@@ -41,8 +51,13 @@ export class ScormComponent
       this.content.progress,
       this.updateProgress,
       this.hidePrevAndNext,
-      this.mediaServerService
+      this.mediaServerService,
+      this.facadeService,
+      this.lessonTitle,
+      this.courseTitle,
+      this.content
     );
+    console.log('API: ', this.api)
     this.loadingSubject.subscribe(isLoading => {
       this.loading = isLoading;
     });

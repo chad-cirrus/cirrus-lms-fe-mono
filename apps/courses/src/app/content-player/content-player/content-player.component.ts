@@ -187,6 +187,8 @@ export class ContentPlayerComponent
     component.content = content;
     component.tasks = tasks;
     component.logbook = logbook;
+    component.lessonTitle = this.lesson_title;
+    
     component.hidePrevAndNext.subscribe(value => {
       this._hideBtns.next(value);
       this.changeDetectorRef.detectChanges();
