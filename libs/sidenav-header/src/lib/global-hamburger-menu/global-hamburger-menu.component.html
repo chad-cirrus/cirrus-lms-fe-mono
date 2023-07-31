@@ -101,7 +101,7 @@
         width="26px"
       />
       <span class="mobile-menu-item-text">Notifications</span>
-      <cirrus-badge [badgeNumber]="notificationCount"></cirrus-badge>
+      <cirrus-badge [badgeNumber]="notificationCount > 99 ? '99+' : notificationCount"></cirrus-badge>
     </div>
     <a href="https://www.cirrusapproach.com/help-center/" target="_blank" class="image-container mobile-menu-link-wrapper">
       <img

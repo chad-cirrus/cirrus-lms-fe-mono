@@ -17,11 +17,25 @@ import { FlightInstructionHour } from '../../models/IRecentActivityInstructors';
 
 type ApexXAxis = {
   type?: 'category' | 'datetime' | 'numeric';
+  tickAmount?: number;
+  min?: number;
+  max?: number;
+  axisBorder?: {
+    color: string;
+  };
+  axisTicks?: {
+    color: string;
+  };
+  tickPlacement?: string;
   categories?: any;
   labels?: {
+    tickAmount?: number;
+    type?: string;
+    formatter?: any;
     style?: {
       colors?: string | string[];
       fontSize?: string;
+      fontFamily?: string;
     };
   };
 };
@@ -150,6 +164,7 @@ export class CirrusChartComponent {
       },
       grid: {
         show: true,
+        borderColor: '#2E2E2E',
       },
       xaxis: {
         categories: this.data?.data.map((a: any) => a.month || a.range),
@@ -159,6 +174,12 @@ export class CirrusChartComponent {
             fontSize: '13px',
           },
         },
+        axisBorder : {
+          color: '#2E2E2E',
+        },
+        axisTicks : {
+          color: '#2E2E2E',
+        }
       },
       tooltip: {
         enabled: true,

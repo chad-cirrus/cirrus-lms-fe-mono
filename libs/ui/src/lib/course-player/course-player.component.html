@@ -27,7 +27,12 @@
           <div class="course-header" *ngIf="config.header">{{ config.header }}</div>
           <span class="chapter">{{ config.index }}</span>
           <span class="title">{{ config.title }}</span>
-          <div *ngIf="config.list_price" class="course-price-container course-price-mobile">Price: <span class="course-price">${{ config.list_price | number:'1.0-0' }}</span></div>
+              
+          <div *ngIf="config.list_price && config.list_price>0; else freeCourseMobile" class="course-price-container course-price-mobile">Price: <span class="course-price">${{ config.list_price | number:'1.0-0' }}</span></div>
+          <ng-template #freeCourseMobile>
+            <div class="course-price-container course-price-mobile">Price: <span class="course-price">Free</span></div>
+          </ng-template>
+          
         </div>
 
         <div class="watch-preview-container" *ngIf="config.preview">
@@ -38,9 +43,11 @@
         </div>
 
         <div class="course-preview-divider"></div>
-        <!-- <mat-divider class="mat-divider mat-divider-horizontal"></mat-divider> -->
 
-        <div *ngIf="config.list_price" class="course-price-container course-price-desktop">Price: <span class="course-price">${{ config.list_price | number:'1.0-0' }}</span></div>
+        <div *ngIf="config.list_price && config.list_price>0; else freeCourseDesktop" class="course-price-container course-price-desktop">Price: <span class="course-price">${{ config.list_price | number:'1.0-0' }}</span></div>
+        <ng-template #freeCourseDesktop>
+          <div class="course-price-container course-price-desktop">Price: <span class="course-price">Free</span></div>
+        </ng-template>
 
       </div>
     </div>

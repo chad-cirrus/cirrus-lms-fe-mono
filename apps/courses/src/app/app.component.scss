@@ -144,6 +144,6 @@ ul.student-name {
   z-index: 10;
 
   @include breakpoint(mobile) {
-    z-index: 1;
+    z-index: 2;
   }
 }

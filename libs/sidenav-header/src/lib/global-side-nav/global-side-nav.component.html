@@ -94,7 +94,7 @@
           (click)="emitToggleNotificationsMenu()"
         >
           <img [src]="deployUrl + '/images/svg/alarm.svg'" />
-          <cirrus-badge [badgeNumber]="notificationCount"></cirrus-badge>
+          <cirrus-badge [badgeNumber]="notificationCount > 99 ? '99+' : notificationCount"></cirrus-badge>
         </div>
 
         <a class="sidenav-icon-link" href="https://www.cirrusapproach.com/help-center/" target="_blank" >
