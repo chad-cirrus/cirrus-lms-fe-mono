@@ -17,7 +17,6 @@ export class FullstoryService {
   }
 
   event(eventName: string, eventProperties: FullStoryEvent) {
-    console.log('EVENT NAME:', eventName);
     FullStory.event(eventName, eventProperties);
   }
 }

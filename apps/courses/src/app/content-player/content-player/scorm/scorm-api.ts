@@ -15,7 +15,6 @@ export class ScormAPI {
   updateProgress: EventEmitter<IProgress>;
   hideNavigation: EventEmitter<boolean>;
   scormProgress = new BehaviorSubject<string>('');
-  // lesson_title: string;
 
   constructor(
     progress: IProgress,
@@ -30,9 +29,6 @@ export class ScormAPI {
     this.progress = progress;
     this.updateProgress = updateProgress;
     this.hideNavigation = hideNavigation;
-    console.log(this.lessonTitle);
-    console.log(this.courseTitle);
-    console.log(this.content.title);
   }
 
   get isPassed() {
@@ -44,8 +40,6 @@ export class ScormAPI {
   }
 
   LMSInitialize() {
-    console.log('INITIALIZE', this.data);
-
     const status = PROGRESS_STATUS.in_progress;
     const payload = {
       id: this.progress.id,
@@ -74,7 +68,15 @@ export class ScormAPI {
       status,
       scorm: { pass: this.isPassed, grade: this.data['cmi.core.score.raw'] },
     };
-    console.log('COMMIT PAYLOAD', this.data);
+    
+    const fullstoryEvent = new FullStoryEvent(
+      this.courseTitle,
+      this.lessonTitle,
+      this.content.title,
+      this.data
+    );
+    this.facadeService.fullstoryEvent(fullstoryEvent.eventName, fullstoryEvent);
+
     this.scormProgress.next(this.data['cmi.suspend_data']);
     this.updateProgress.emit(payload);
     this.hideNavigation.emit(!this.isPassed);
@@ -102,13 +104,6 @@ export class ScormAPI {
 
   LMSSetValue(key: any, value: any) {
     this.data[key] = value;
-    const fullstoryEvent = new FullStoryEvent(
-      this.courseTitle,
-      this.lessonTitle,
-      this.content.title,
-      this.data
-    );
-    this.facadeService.fullstoryEvent(fullstoryEvent.eventName, fullstoryEvent);
     return 'true';
   }
 }

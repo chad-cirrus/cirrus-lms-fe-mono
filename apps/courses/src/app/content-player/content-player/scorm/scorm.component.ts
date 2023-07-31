@@ -57,7 +57,7 @@ export class ScormComponent
       this.courseTitle,
       this.content
     );
-    console.log('API: ', this.api)
+    
     this.loadingSubject.subscribe(isLoading => {
       this.loading = isLoading;
     });
