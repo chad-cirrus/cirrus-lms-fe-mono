@@ -41,7 +41,7 @@
 $badgeImagePadding : 14px;
 
 .badge-image {
-  width: calc(95px + $badgeImagePadding);
+  flex: 0 0 calc(95px + $badgeImagePadding);
   height: 100%;
   display: flex;
   justify-content: center;
@@ -49,19 +49,16 @@ $badgeImagePadding : 14px;
 
   
   @include breakpoint(mobile) {
-    width: calc(75px + $badgeImagePadding);
+    flex: 0 0 calc(75px + $badgeImagePadding);
   }
-  @include breakpoint(tablet) {
-    width: calc(125px + $badgeImagePadding);
+  @include breakpoint(desktop) {
+    flex: 0 0 calc(125px + $badgeImagePadding);
   }
 }
 
 .badge-info {
   margin-left: 22px;
   @include breakpoint(mobile) {
-    margin-left: 25px;
-  }
-  @include breakpoint(tablet) {
     margin-left: 25px;
   }
 }
