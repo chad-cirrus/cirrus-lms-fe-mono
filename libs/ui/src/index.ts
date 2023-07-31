@@ -30,6 +30,8 @@ export * from './lib/course-overview/course-overview.component';
 export * from './lib/course-summary-counts/course-summary-counts.component';
 export * from './lib/courses-tab-enrollment-history/courses-tab-enrollment-history.component';
 export * from './lib/course-completion/ui-download.service';
+export * from './lib/lib-services/fullstory/fullstory.service';
+export * from './lib/lib-services/fullstory/full-story-event';
 export * from './lib/generic-responsive-mat-table/generic-responsive-mat-table.component';
 export * from './lib/table-format.pipe';
 export * from './lib/hours-and-landings/hours-and-landings.component';

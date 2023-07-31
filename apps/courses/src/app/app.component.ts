@@ -84,10 +84,13 @@ export class AppComponent
       scroller,
       route
     );
+
   }
 
   ngOnInit() {
     super.ngOnInit();
+
+    this.facade.fullstoryInit();
 
     const cirrusUser = JSON.parse(
       <string>localStorage.getItem('cirrus-user')

@@ -1,8 +1,10 @@
-import { IProgress, PROGRESS_STATUS } from '@cirrus/models';
 import { EventEmitter } from '@angular/core';
-import { MediaServerService } from '../../../media.service';
+import { IContent, IProgress, PROGRESS_STATUS } from '@cirrus/models';
 import { BehaviorSubject } from 'rxjs';
 import { exhaustMap } from 'rxjs/operators';
+import { CoursesFacadeService } from '../../../courses-facade.service';
+import { MediaServerService } from '../../../media.service';
+import { FullStoryEvent } from '@cirrus/ui';
 
 export class ScormAPI {
   data: {} = {
@@ -18,7 +20,11 @@ export class ScormAPI {
     progress: IProgress,
     updateProgress: EventEmitter<IProgress>,
     hideNavigation: EventEmitter<boolean>,
-    private mediaService: MediaServerService
+    private mediaService: MediaServerService,
+    private facadeService: CoursesFacadeService,
+    private lessonTitle: string,
+    private courseTitle: string,
+    private content: IContent
   ) {
     this.progress = progress;
     this.updateProgress = updateProgress;
@@ -62,6 +68,15 @@ export class ScormAPI {
       status,
       scorm: { pass: this.isPassed, grade: this.data['cmi.core.score.raw'] },
     };
+    
+    const fullstoryEvent = new FullStoryEvent(
+      this.courseTitle,
+      this.lessonTitle,
+      this.content.title,
+      this.data
+    );
+    this.facadeService.fullstoryEvent(fullstoryEvent.eventName, fullstoryEvent);
+
     this.scormProgress.next(this.data['cmi.suspend_data']);
     this.updateProgress.emit(payload);
     this.hideNavigation.emit(!this.isPassed);

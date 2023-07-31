@@ -81,6 +81,7 @@ import { SearchInputModule } from '@cirrus/search-input';
 import { CoursePreviewVideoPlayerComponent } from './course-preview-video-player/course-preview-video-player.component';
 import { ConvertToSpacesPipe } from './course-landing-page/pipes/convert-to-spaces.pipe';
 import { RouterModule } from '@angular/router';
+import { FullstoryService } from './lib-services/fullstory/fullstory.service';
 
 @NgModule({
   imports: [
@@ -218,6 +219,7 @@ import { RouterModule } from '@angular/router';
     { provide: MatDialogRef, useValue: {} },
     CirrusSanitizerService,
     UiDownloadService,
+    FullstoryService
   ],
 })
 export class UiModule {}
