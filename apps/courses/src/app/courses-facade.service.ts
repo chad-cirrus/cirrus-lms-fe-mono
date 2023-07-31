@@ -4,10 +4,11 @@ import {
   ConnectionsService,
   UiDownloadService,
   NotificationService,
-  FullstoryService
+  FullstoryService,
 } from '@cirrus/ui';
 import { tap } from 'rxjs/operators';
 import { CoursesService } from './course/course.service';
+import { FullStoryEvent } from '../../../../libs/ui/src/lib/lib-services/fullstory/full-story-event';
 
 @Injectable({
   providedIn: 'root',
@@ -61,7 +62,7 @@ export class CoursesFacadeService {
     this.fullstoryService.init();
   }
 
-  fullstoryEvent(eventName: string, eventProperties: {}) {
+  fullstoryEvent(eventName: string, eventProperties: FullStoryEvent) {
     this.fullstoryService.event(eventName, eventProperties);
   }
 }

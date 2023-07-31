@@ -1,11 +1,10 @@
-import { IContent, IProgress, PROGRESS_STATUS } from '@cirrus/models';
 import { EventEmitter } from '@angular/core';
-import { MediaServerService } from '../../../media.service';
+import { IContent, IProgress, PROGRESS_STATUS } from '@cirrus/models';
 import { BehaviorSubject } from 'rxjs';
 import { exhaustMap } from 'rxjs/operators';
 import { CoursesFacadeService } from '../../../courses-facade.service';
-import { Store } from '@ngrx/store';
-import { AppState } from '../../../store/reducers';
+import { MediaServerService } from '../../../media.service';
+import { FullStoryEvent } from '@cirrus/ui';
 
 export class ScormAPI {
   data: {} = {
@@ -45,7 +44,7 @@ export class ScormAPI {
   }
 
   LMSInitialize() {
-    console.log("INITIALIZE", this.data);
+    console.log('INITIALIZE', this.data);
 
     const status = PROGRESS_STATUS.in_progress;
     const payload = {
@@ -75,7 +74,7 @@ export class ScormAPI {
       status,
       scorm: { pass: this.isPassed, grade: this.data['cmi.core.score.raw'] },
     };
-    console.log("COMMIT PAYLOAD", this.data);
+    console.log('COMMIT PAYLOAD', this.data);
     this.scormProgress.next(this.data['cmi.suspend_data']);
     this.updateProgress.emit(payload);
     this.hideNavigation.emit(!this.isPassed);
@@ -103,33 +102,13 @@ export class ScormAPI {
 
   LMSSetValue(key: any, value: any) {
     this.data[key] = value;
-    console.log('VALUE', this.data);
-
-    const eventName = this.data['cmi.interactions.undefined.objectives.0.id'] ? 
-      'quizQuestion' : 'interactiveQuestion';
-
-    const quizQuestionProperties = {
-      courseTitle: this.courseTitle,
-      lessonTitle: this.lessonTitle,
-      contentTitle: this.content.title,
-      quizId: this.data['cmi.interactions.undefined.objectives.0.id'],
-      quizQuestionId: this.data['cmi.interactions.undefined.id'],
-      correctAnswer: this.data['cmi.interactions.undefined.correct_responses.0.pattern'],
-      answerResult: this.data['cmi.interactions.undefined.result'],
-      userAnswer: this.data['cmi.interactions.undefined.student_response'],
-    }
-
-    const interactiveQuestionProperties = {
-      courseTitle: this.courseTitle,
-      lessonTitle: this.lessonTitle,
-      contentTitle: this.content.title,
-    }
-
-    const eventProperties = eventName === 'quizQuestion' ? quizQuestionProperties : interactiveQuestionProperties;
-
-    console.log(eventName, eventProperties);
-    
-    this.facadeService.fullstoryEvent(eventName, eventProperties);
+    const fullstoryEvent = new FullStoryEvent(
+      this.courseTitle,
+      this.lessonTitle,
+      this.content.title,
+      this.data
+    );
+    this.facadeService.fullstoryEvent(fullstoryEvent.eventName, fullstoryEvent);
     return 'true';
   }
 }
