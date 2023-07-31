@@ -5,10 +5,10 @@ import {
   UiDownloadService,
   NotificationService,
   FullstoryService,
+  FullStoryEvent,
 } from '@cirrus/ui';
 import { tap } from 'rxjs/operators';
 import { CoursesService } from './course/course.service';
-import { FullStoryEvent } from '../../../../libs/ui/src/lib/lib-services/fullstory/full-story-event';
 
 @Injectable({
   providedIn: 'root',

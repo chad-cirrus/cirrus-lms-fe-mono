@@ -20,14 +20,23 @@ import { of } from 'rxjs';
 import { IContact, IOrder, IOrderUser } from '@cirrus/models';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { MockComponent } from 'ng-mocks';
-import { GlobalHeaderComponent } from '../../../../libs/sidenav-header/src/lib/global-header/global-header.component';
-import { NotificationsMenuComponent } from '../../../../libs/notification-menu/src/lib/notifications-menu.component';
 import { HttpClientModule } from '@angular/common/http';
+import { GlobalHeaderComponent } from '@cirrus/sidenav-header';
+import { NotificationsMenuComponent } from '@cirrus/notification-menu';
+
+class MockCoursesFacadeService {
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  fullstoryInit() {}
+}
+
+class MockCoursesService {
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  getNotifications() {}
+}
 
 describe('AppComponent', () => {
   beforeEach(async () => {
     let store: MockStore;
-    let coursesService = { getNotifications() {} };
 
     await TestBed.configureTestingModule({
       imports: [
@@ -45,10 +54,10 @@ describe('AppComponent', () => {
       ],
       providers: [
         provideMockStore(),
-        { provide: CoursesService, useValue: coursesService },
+        { provide: CoursesService, useClass: MockCoursesService },
         { provide: ConnectionsService, useValue: {} },
         { provide: UiDownloadService, useValue: {} },
-        { provide: CoursesFacadeService, useValue: {} },
+        { provide: CoursesFacadeService, useClass: MockCoursesFacadeService },
         { provide: UserService, useClass: MockUserService },
         { provide: SidenavHeaderService, useClass: SidenavHeaderService },
         { provide: NotificationService, useClass: MockNotificationService },
