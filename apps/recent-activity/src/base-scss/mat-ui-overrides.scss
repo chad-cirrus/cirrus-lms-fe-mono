@@ -544,8 +544,6 @@ apx-chart .apexcharts-toolbar {
   z-index: 4;
 }
 
-
-
 .course-preview-container {
   position: relative;
   height: 74px;
@@ -728,7 +726,6 @@ apx-chart .apexcharts-toolbar {
         right: 3.1rem;
         box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
       }
-      
       .container {
         border-radius: 6px;
 
@@ -853,6 +850,14 @@ apx-chart .apexcharts-toolbar {
     .description .title,
     .description .chapter {
       font-size: 20px;
+    }
+  }
+
+  cirrus-course-player .course-price-container.course-price-desktop,
+  cirrus-course-player .course-price-container.course-price-mobile {
+    display: none;
+    @media screen and (min-width: 1280px) {
+      display: none;
     }
   }
 }
