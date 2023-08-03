@@ -3,6 +3,18 @@ enum EventName {
   quizQuestion = 'quizQuestion',
 }
 
+export interface FullStoryEventData {
+  courseTitle: string;
+  lessonTitle: string;
+  contentTitle: string;
+  eventName: EventName;
+  quizId: string;
+  quizQuestionId: string;
+  correctAnswer: string;
+  answerResult: string;
+  userAnswer: string;
+}
+
 export class FullStoryEvent {
   constructor(
     public courseTitle: string,
@@ -35,5 +47,19 @@ export class FullStoryEvent {
 
   get userAnswer(): string {
     return this.data['cmi.interactions.undefined.student_response'] as string;
+  }
+
+  get eventData(): FullStoryEventData {
+    return {
+      courseTitle: this.courseTitle,
+      lessonTitle: this.lessonTitle,
+      contentTitle: this.contentTitle,
+      eventName: this.eventName,
+      quizId: this.quizId,
+      quizQuestionId: this.quizQuestionId,
+      correctAnswer: this.correctAnswer,
+      answerResult: this.answerResult,
+      userAnswer: this.userAnswer,
+    };
   }
 }
