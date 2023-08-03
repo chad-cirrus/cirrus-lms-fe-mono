@@ -5,7 +5,7 @@ import {
   UiDownloadService,
   NotificationService,
   FullstoryService,
-  FullStoryEvent,
+  FullStoryEventData,
 } from '@cirrus/ui';
 import { tap } from 'rxjs/operators';
 import { CoursesService } from './course/course.service';
@@ -62,7 +62,7 @@ export class CoursesFacadeService {
     this.fullstoryService.init();
   }
 
-  fullstoryEvent(eventName: string, eventProperties: FullStoryEvent) {
+  fullstoryEvent(eventName: string, eventProperties: FullStoryEventData) {
     this.fullstoryService.event(eventName, eventProperties);
   }
 }

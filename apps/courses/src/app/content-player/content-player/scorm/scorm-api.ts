@@ -68,14 +68,17 @@ export class ScormAPI {
       status,
       scorm: { pass: this.isPassed, grade: this.data['cmi.core.score.raw'] },
     };
-    
+
     const fullstoryEvent = new FullStoryEvent(
       this.courseTitle,
       this.lessonTitle,
       this.content.title,
       this.data
     );
-    this.facadeService.fullstoryEvent(fullstoryEvent.eventName, fullstoryEvent);
+    this.facadeService.fullstoryEvent(
+      fullstoryEvent.eventName,
+      fullstoryEvent.eventData
+    );
 
     this.scormProgress.next(this.data['cmi.suspend_data']);
     this.updateProgress.emit(payload);

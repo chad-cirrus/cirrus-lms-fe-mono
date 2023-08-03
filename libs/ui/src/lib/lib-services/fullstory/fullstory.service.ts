@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@angular/core';
 import * as FullStory from '@fullstory/browser';
-import { FullStoryEvent } from './full-story-event';
+import { FullStoryEventData } from './full-story-event';
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +16,7 @@ export class FullstoryService {
     FullStory.init({ orgId: this.environment.fullstoryOrgId as string });
   }
 
-  event(eventName: string, eventProperties: FullStoryEvent) {
+  event(eventName: string, eventProperties: FullStoryEventData) {
     FullStory.event(eventName, eventProperties);
   }
 }
