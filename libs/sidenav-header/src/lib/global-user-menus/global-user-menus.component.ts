@@ -12,6 +12,7 @@ import { ICirrusUser, ROLE } from '@cirrus/models';
 import { BehaviorSubject, merge, Observable } from 'rxjs';
 import { CdkConnectedOverlay } from '@angular/cdk/overlay';
 import { map, tap } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'cirrus-global-user-menus',
@@ -37,6 +38,9 @@ export class GlobalUserMenusComponent implements OnInit {
   showCTCDashboard = false;
   showLMSDashboard = false;
 
+  private isLoggedIn = new BehaviorSubject(false);
+  public isLoggedIn$ = this.isLoggedIn.asObservable();
+
   @Input()
   set cirrusUser(value: ICirrusUser) {
     this._cirrusUser = value;
@@ -49,6 +53,8 @@ export class GlobalUserMenusComponent implements OnInit {
     this.showLMSDashboard =
       this.cirrusUser.role === ROLE.admin ||
       this.cirrusUser.role === ROLE.super_admin;
+    // The null user has an id of zero and no real user will have an id lower than this
+    this.isLoggedIn.next(value.id > 0);
   }
 
   get cirrusUser() {
@@ -69,7 +75,10 @@ export class GlobalUserMenusComponent implements OnInit {
     return this.environment['profile'];
   }
 
-  constructor(@Inject('environment') environment: Record<string, unknown>) {
+  constructor(
+    @Inject('environment') environment: Record<string, unknown>,
+    private router: Router
+  ) {
     this.environment = environment;
   }
 
@@ -91,5 +100,9 @@ export class GlobalUserMenusComponent implements OnInit {
 
   emitImpersonationLogout() {
     this.impersonationLogout.emit();
+  }
+
+  signIn() {
+    this.router.navigate(['/sign-in']);
   }
 }

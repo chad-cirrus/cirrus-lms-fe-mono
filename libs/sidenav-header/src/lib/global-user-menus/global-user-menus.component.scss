@@ -58,6 +58,11 @@ cirrus-global-menu-slider {
   svg {
     margin-left: 10px;
   }
+
+  &__dashboard {
+    display: flex;
+    justify-content: space-between;
+  }
 }
 
 .menu-item-with-border {
@@ -76,4 +81,46 @@ cirrus-global-menu-slider {
 
 .chevron {
   padding-top: 3px;
+}
+
+.container {
+  display: flex;
+}
+
+.profile-icon {
+  margin-right: 1rem;
+}
+
+.login-button {
+  width: auto;
+  height: auto;
+  padding: 8px 0;
+  font-family: $akzidenz;
+  border: none;
+  color: $white;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  text-transform: uppercase;
+
+  &:hover {
+    cursor: pointer;
+  }
+  &:focus {
+    outline: none;
+  }
+}
+
+.profile-icon.logged-in {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  width: 32px;
+  height: 32px;
+  border-radius: 100%;
+  border: solid 1px #fff;
+  font-size: 0.81rem;
+  font-weight: 300;
+  line-height: 1em;
 }

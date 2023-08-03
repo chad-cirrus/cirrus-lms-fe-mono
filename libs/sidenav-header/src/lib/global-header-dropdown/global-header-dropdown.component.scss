@@ -65,17 +65,3 @@ p.welcome-back {
     display: block;
   }
 }
-
-.profile-icon.logged-in {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: transparent;
-  width: 32px;
-  height: 32px;
-  border-radius: 100%;
-  border: solid 1px #fff;
-  font-size: 0.81rem;
-  font-weight: 300;
-  line-height: 1em;
-}
