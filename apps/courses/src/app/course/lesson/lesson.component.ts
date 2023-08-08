@@ -63,7 +63,6 @@ export class LessonComponent implements OnInit, OnDestroy {
   isScreenSmall$: Observable<boolean> = this.store.select(selectIsScreenSmall);
   sideNavOpen$: Observable<boolean> = this.store.select(selectSideNavOpen);
   lessonSubscription = new Subscription();
-  
   courseOverview$ = this.store.select(selectCourseOverview);
   stages$ = this.courseOverview$.pipe(map(overview => overview.stages));
 
@@ -99,11 +98,10 @@ export class LessonComponent implements OnInit, OnDestroy {
       this.route.params.subscribe(({ courseId, stageId, lessonId }) => {
         this.courseId = parseInt(courseId);
         this.lessonId = parseInt(lessonId);
-          this.store.dispatch(fetchLessons({ courseId, stageId, lessonId }));
-          this.store.dispatch(fetchCourseOverview({ courseId }));
+        this.store.dispatch(fetchLessons({ courseId, stageId, lessonId }));
+        this.store.dispatch(fetchCourseOverview({ courseId }));
       })
     );
-  
     this.lessonCompleted$ = this.courseService.lessonComplete$;
 
     this.lessonSubscription.add(
