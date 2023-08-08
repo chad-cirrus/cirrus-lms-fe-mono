@@ -18,7 +18,7 @@ import {
 } from '@cirrus/ui';
 import { select, Store } from '@ngrx/store';
 
-import { Observable, Subscription } from 'rxjs';
+import { Observable, Subscription, combineLatest } from 'rxjs';
 import { map, tap, withLatestFrom } from 'rxjs/operators';
 import { AppService } from '../../app.service';
 
@@ -64,7 +64,7 @@ export class LessonComponent implements OnInit, OnDestroy {
   isScreenSmall$: Observable<boolean> = this.store.select(selectIsScreenSmall);
   sideNavOpen$: Observable<boolean> = this.store.select(selectSideNavOpen);
   lessonSubscription = new Subscription();
-
+  
   courseOverview$ = this.store.select(selectCourseOverview);
   stages$ = this.courseOverview$.pipe(map(overview => overview.stages));
 
@@ -88,24 +88,23 @@ export class LessonComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    const cirrusUser = JSON.parse(
-      <string>localStorage.getItem('cirrus-user')
-    ) as ICirrusUser;
+    this.lessonSubscription.add(
+      this.courseOverview$.subscribe(course => {
+        if (!course.course_attempt) {
+          this.router.navigate(['/course-catalog']);
+        }
+      })
+    )
 
     this.lessonSubscription.add(
       this.route.params.subscribe(({ courseId, stageId, lessonId }) => {
         this.courseId = parseInt(courseId);
         this.lessonId = parseInt(lessonId);
-
-        if (cirrusUser) {
           this.store.dispatch(fetchLessons({ courseId, stageId, lessonId }));
           this.store.dispatch(fetchCourseOverview({ courseId }));
-        } else {
-          this.router.navigate(["/course-catalog"]);
-        }
       })
     );
-
+  
     this.lessonCompleted$ = this.courseService.lessonComplete$;
 
     this.lessonSubscription.add(
