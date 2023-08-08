@@ -4,7 +4,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSidenav } from '@angular/material/sidenav';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
-  ICirrusUser,
   IContent,
   ICourseOverview,
   ICourseOverviewLesson,
@@ -18,7 +17,7 @@ import {
 } from '@cirrus/ui';
 import { select, Store } from '@ngrx/store';
 
-import { Observable, Subscription, combineLatest } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { map, tap, withLatestFrom } from 'rxjs/operators';
 import { AppService } from '../../app.service';
 
