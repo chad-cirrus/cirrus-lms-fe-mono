@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSidenav } from '@angular/material/sidenav';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
+  ICirrusUser,
   IContent,
   ICourseOverview,
   ICourseOverviewLesson,
@@ -67,7 +68,7 @@ export class LessonComponent implements OnInit, OnDestroy {
   courseOverview$ = this.store.select(selectCourseOverview);
   stages$ = this.courseOverview$.pipe(map(overview => overview.stages));
 
-  coursId!: number;
+  courseId!: number;
   lessonId!: number;
   @ViewChild('snav') sidenav!: MatSidenav;
   lessonCompleted$!: Observable<string>;
@@ -87,12 +88,21 @@ export class LessonComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
+    const cirrusUser = JSON.parse(
+      <string>localStorage.getItem('cirrus-user')
+    ) as ICirrusUser;
+
     this.lessonSubscription.add(
       this.route.params.subscribe(({ courseId, stageId, lessonId }) => {
-        this.coursId = parseInt(courseId);
+        this.courseId = parseInt(courseId);
         this.lessonId = parseInt(lessonId);
-        this.store.dispatch(fetchLessons({ courseId, stageId, lessonId }));
-        this.store.dispatch(fetchCourseOverview({ courseId }));
+
+        if (cirrusUser) {
+          this.store.dispatch(fetchLessons({ courseId, stageId, lessonId }));
+          this.store.dispatch(fetchCourseOverview({ courseId }));
+        } else {
+          this.router.navigate(["/course-catalog"]);
+        }
       })
     );
 
