@@ -5,6 +5,9 @@ p {
   &:first-child {
     margin-top: 0;
   }
+  &:last-child {
+    margin-bottom: 0;
+  }
   mat-icon {
     flex-grow: 0;
     flex-shrink: 0;
