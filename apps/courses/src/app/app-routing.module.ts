@@ -9,7 +9,6 @@ import { CourseOverviewRouteComponent } from './course/course-overview-route/cou
 import { CourseLessonsRouteComponent } from './course/course-lessons-route/course-lessons-route.component';
 import { CourseEnrollmentsRouteComponent } from './course/course-enrollments-route/course-enrollments-route.component';
 import { NextLessonRedirectComponent } from './next-lesson-redirect/next-lesson-redirect.component';
-import { AuthGuard } from './auth.guard';
 import { FeatureGuard } from './feature.guard';
 
 const getResolvedUrl = (route: ActivatedRouteSnapshot): string => {
@@ -74,7 +73,6 @@ const routes: Routes = [
   {
     path: 'courses/:courseId/stages/:stageId/lessons/:lessonId',
     component: LessonComponent,
-    canActivate: [AuthGuard],
   },
 ];
 
@@ -86,7 +84,6 @@ const routes: Routes = [
         window.open(getResolvedUrl(route), '_self');
       },
     },
-    AuthGuard,
   ],
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
