@@ -11,19 +11,16 @@ import {
 } from '@cirrus/models';
 import { produceConfig } from './produce-config';
 // eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+import { ElementRef, HostListener, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { filter, map, tap } from 'rxjs/operators';
+import { BehaviorSubject } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
 import { BluePopUpComponent } from '../blue-pop-up/blue-pop-up.component';
 import { UiDownloadService } from '../course-completion/ui-download.service';
-import { CoursePreviewVideoPlayerComponent } from '../course-preview-video-player/course-preview-video-player.component';
 import { downloadPdf } from '../helpers/DownloadPdf';
 import { CirrusSanitizerService } from '../shared/cirrus-sanitizer.service';
-import { TermsAgreementServiceService } from './terms-agreement-service.service';
-import { HostListener } from '@angular/core';
-import { ViewChild } from '@angular/core';
-import { ElementRef } from '@angular/core';
 import { UiCourseService } from '../ui-course.service';
+import { TermsAgreementServiceService } from './terms-agreement-service.service';
 @Component({
   selector: 'cirrus-course-landing-page',
   templateUrl: './course-landing-page.component.html',
@@ -56,12 +53,10 @@ export class CourseLandingPageComponent {
   private _size = Breakpoints.Large;
 
   private previewVideoUrlSubject = new BehaviorSubject<string | null>(null);
-  public previewVideoUrl$ = this.previewVideoUrlSubject
-    .asObservable()
-    .pipe(
-      filter(url => url !== null),
-      map(url => this.cirrusSanitizer.getSafeResourceUrl(url as string)),
-    );
+  public previewVideoUrl$ = this.previewVideoUrlSubject.asObservable().pipe(
+    filter(url => url !== null),
+    map(url => this.cirrusSanitizer.getSafeResourceUrl(url as string))
+  );
 
   public isSticky = false;
   @ViewChild('coursePlayer') coursePlayerEl!: ElementRef;
@@ -155,35 +150,7 @@ export class CourseLandingPageComponent {
   }
 
   enroll() {
-    if (this.user?.id || this.order?.id) {
-      this.enrollFreeCourseOrAddToCart(this.order, this.course);
-    } else {
-      // user is not logged in, add course order to local storage and log em in
-      this.uiCourseService
-        .courseEnrollForUnauth(this.course)
-        .subscribe(() => {
-          this.router.navigate(['/shopping-cart']);
-        });
-    }
-  }
-
-  enrollFreeCourseOrAddToCart(order: IOrder | null, course: ICourseOverview) {
-    if (this.isCourseFree(course)) {
-      // hit user_course route automatically create a user_course and refresh page
-      this.uiCourseService
-        .freeCourseEnroll(course)
-        .subscribe((user_course) => {
-          this.refreshCourse.emit(user_course.course_id);
-        });
-    }
-    else {
-      // add it to the order and send to shopping cart
-      this.uiCourseService
-        .courseEnroll(course, order)
-        .subscribe(() => {
-          this.router.navigate(['/shopping-cart']);
-        });
-    }
+    this.router.navigate(['/courses', this.course.id, 'enroll']);
   }
 
   isCourseFree(course: ICourseOverview) {
@@ -205,8 +172,8 @@ export class CourseLandingPageComponent {
     if (this.course.course_overview_video) {
       const courseVideoInfo = {
         ...this.course.course_overview_video,
-        courseTitle: this.course.title
-      }
+        courseTitle: this.course.title,
+      };
       this.uiCourseService.watchPreview(courseVideoInfo);
     }
   }
@@ -223,7 +190,7 @@ export class CourseLandingPageComponent {
         : (this.environment.defaultLessonThumbnail as string),
       badge: course.badge?.badge_image,
       list_price: course.list_price ? course.list_price : 0,
-      overview: course.sales_desc ? course.sales_desc : course.overview
+      overview: course.sales_desc ? course.sales_desc : course.overview,
     };
   }
 
@@ -281,7 +248,6 @@ export class CourseLandingPageComponent {
         downloadPdf(data, 'trans');
       });
   }
-
 
   @HostListener('window:scroll', ['$event'])
   checkScroll() {

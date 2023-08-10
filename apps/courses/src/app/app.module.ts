@@ -52,6 +52,7 @@ import {
 import { MatRippleModule } from '@angular/material/core';
 import { NextLessonRedirectComponent } from './next-lesson-redirect/next-lesson-redirect.component';
 import { OrderEffects } from './store/effects/order.effects';
+import { CourseEnrollmentComponent } from './course-enrollment/course-enrollment.component';
 
 @NgModule({
   declarations: [
@@ -64,6 +65,7 @@ import { OrderEffects } from './store/effects/order.effects';
     CourseLessonsRouteComponent,
     CourseEnrollmentsRouteComponent,
     NextLessonRedirectComponent,
+    CourseEnrollmentComponent,
   ],
   imports: [
     BrowserModule,
