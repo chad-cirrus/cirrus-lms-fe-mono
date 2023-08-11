@@ -61,3 +61,18 @@ p.welcome-back {
   align-self: end;
   margin-bottom: 5px;
 }
+
+
+.profile-icon.logged-in {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  width: 32px;
+  height: 32px;
+  border-radius: 100%;
+  border: solid 1px #fff;
+  font-size: 0.81rem;
+  font-weight: 300;
+  line-height: 1em;
+}

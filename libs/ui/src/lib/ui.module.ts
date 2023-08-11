@@ -73,6 +73,7 @@ import { TableFormatPipe } from './table-format.pipe';
 import { LessonTypePipe } from './helpers/LessonTypePipe';
 import { FilterComponent } from './filter/filter.component';
 import { FormatFilterPipe } from './format-filter.pipe';
+import { NameToInitialsPipe } from './helpers/NameToInitialsPipe';
 
 import { HoursLandingTypeToTextPipe } from './helpers/HoursLandingTypeToText.pipe';
 import { HoursLandingTypeToIconPipe } from './helpers/HoursLandingTypeToIcon.pipe';
@@ -152,6 +153,7 @@ import { FullstoryService } from './lib-services/fullstory/fullstory.service';
     TableFormatPipe,
     ConvertToSpacesPipe,
     LessonTypePipe,
+    NameToInitialsPipe,
     HoursLandingTypeToTextPipe,
     HoursLandingTypeToIconPipe,
     FilterComponent,
@@ -207,6 +209,7 @@ import { FullstoryService } from './lib-services/fullstory/fullstory.service';
     TableFormatPipe,
     ConvertToSpacesPipe,
     LessonTypePipe,
+    NameToInitialsPipe,
     HoursLandingTypeToTextPipe,
     HoursLandingTypeToIconPipe,
     FilterComponent,
