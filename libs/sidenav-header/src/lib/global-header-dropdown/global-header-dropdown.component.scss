@@ -60,8 +60,11 @@ p.welcome-back {
 .chevron-icon {
   align-self: end;
   margin-bottom: 5px;
+  display: none;
+  @include breakpoint(mobile) {
+    display: block;
+  }
 }
-
 
 .profile-icon.logged-in {
   display: flex;
