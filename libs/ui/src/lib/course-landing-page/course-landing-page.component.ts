@@ -81,12 +81,12 @@ export class CourseLandingPageComponent {
     if (!value.course_attempt?.id) {
       this.setPreviewCourseConfig(value);
 
-      if(value.course_overview_video?.url) {
+      if (value.course_overview_video?.url) {
         this.previewVideoUrlSubject.next(
           `https://player.vimeo.com/video/${value.course_overview_video?.url}?app_id=122963`
         );
       }
-      
+
       return;
     }
 
@@ -123,6 +123,7 @@ export class CourseLandingPageComponent {
     private dialog: MatDialog,
     private tcService: TermsAgreementServiceService,
     private cirrusSanitizer: CirrusSanitizerService,
+
     @Inject('environment') environment: Record<string, unknown>
   ) {
     this.environment = environment;
@@ -155,17 +156,42 @@ export class CourseLandingPageComponent {
 
   enroll() {
     if (this.user?.id || this.order?.id) {
-      this.downloadService
-        .courseEnroll(this.course, this.order)
-        .subscribe(() => {
-          this.router.navigate(['/shopping-cart']);
-        });
+      this.enrollFreeCourseOrAddToCart(this.order, this.course);
     } else {
-      this.downloadService
+      // user is not logged in, add course order to local storage and log em in
+      this.uiCourseService
         .courseEnrollForUnauth(this.course)
         .subscribe(() => {
           this.router.navigate(['/shopping-cart']);
-      });
+        });
+    }
+  }
+
+  enrollFreeCourseOrAddToCart(order: IOrder | null, course: ICourseOverview) {
+    if (this.isCourseFree(course)) {
+      // hit user_course route automatically create a user_course and refresh page
+      this.uiCourseService
+        .freeCourseEnroll(course)
+        .subscribe((user_course) => {
+          this.refreshCourse.emit(user_course.course_id);
+        });
+    }
+    else {
+      // add it to the order and send to shopping cart
+      this.uiCourseService
+        .courseEnroll(course, order)
+        .subscribe(() => {
+          this.router.navigate(['/shopping-cart']);
+        });
+    }
+  }
+
+  isCourseFree(course: ICourseOverview) {
+    if (course?.list_price) {
+      return course?.list_price < 1
+    }
+    else {
+      return true
     }
   }
 
@@ -197,7 +223,7 @@ export class CourseLandingPageComponent {
         : (this.environment.defaultLessonThumbnail as string),
       badge: course.badge?.badge_image,
       list_price: course.list_price ? course.list_price : 0,
-      overview: course.sales_desc? course.sales_desc : course.overview
+      overview: course.sales_desc ? course.sales_desc : course.overview
     };
   }
 
@@ -241,7 +267,7 @@ export class CourseLandingPageComponent {
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result.data === 'Confirm') {
-        this.downloadService.courseReEnroll(payload).subscribe(() => {
+        this.uiCourseService.courseReEnroll(payload).subscribe(() => {
           this.refreshCourse.emit(payload.course_id);
         });
       }
