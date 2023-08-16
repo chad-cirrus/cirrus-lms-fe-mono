@@ -328,17 +328,21 @@ mat-table mat-cell.mdc-data-table__cell {
     font-size: 0.875rem;
     text-align: center;
     height: 18px;
-    padding: 0 9px;
+    padding: 0 8px;
     border-radius: 50px;
     background: #FF3939;
     position: absolute;
+    top: -0.75rem;
+    width: auto;
   }
   &.mat-badge-medium.mat-badge-after .mat-badge-content {
     right: -29px;
   }
-  &.mat-badge-medium.mat-badge-above .mat-badge-content {
-    top: -11px;
-  }
+}
+.mat-badge-start-left {
+ .mat-badge.mat-badge-warn .mat-badge-content {
+  right: initial !important;
+ }
 }
 
 
