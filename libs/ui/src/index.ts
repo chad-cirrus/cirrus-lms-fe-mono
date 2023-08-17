@@ -57,3 +57,4 @@ export * from './lib/shared/user.service';
 
 export * from './lib/helpers/NameToInitialsPipe';
 export * from './lib/mock-data/mock-courses.data';
+export * from './lib/ui-course.service';

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ICourseOverview, IOrder } from '@cirrus/models';
+import { IOrder } from '@cirrus/models';
 import { FeatureFlagService } from '@cirrus/ui';
 import { Store } from '@ngrx/store';
-import { Observable, combineLatest, of } from 'rxjs';
+import { Observable, combineLatest } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 import { fetchCourseOverview } from '../store/actions/course.actions';
 import { CourseState } from '../store/reducers/course.reducer';
@@ -31,7 +31,7 @@ export class CourseComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private store: Store<CourseState>,
-    private featureFlagService: FeatureFlagService
+    private featureFlagService: FeatureFlagService,
   ) {}
 
   ngOnInit(): void {
