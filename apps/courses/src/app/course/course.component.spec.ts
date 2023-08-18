@@ -4,14 +4,17 @@ import { CourseLandingPageComponent, UiDownloadService } from '@cirrus/ui';
 import { StoreModule } from '@ngrx/store';
 import { coursesReducers } from '../store/reducers';
 
-import { CourseComponent } from './course.component';
-import { MatIconTestingModule } from '@angular/material/icon/testing';
 import { MatIcon } from '@angular/material/icon';
-import { MockComponent } from 'ng-mocks';
+import { MatIconTestingModule } from '@angular/material/icon/testing';
 import { MatTabsModule } from '@angular/material/tabs';
 import { FeatureFlagService } from '@cirrus/ui';
+import { MockComponent } from 'ng-mocks';
+import { of } from 'rxjs';
+import { CourseComponent } from './course.component';
 class MockFeatureFlagService {
-
+  isFeatureEnabled() {
+    return of(false);
+  }
 }
 
 describe('CourseComponent', () => {
@@ -20,20 +23,11 @@ describe('CourseComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [
-        RouterTestingModule,
-        StoreModule.forRoot(coursesReducers),
-        MatIconTestingModule,
-        MatTabsModule,
-      ],
-      declarations: [
-        CourseComponent,
-        MockComponent(CourseLandingPageComponent),
-        MatIcon,
-      ],
+      imports: [RouterTestingModule, StoreModule.forRoot(coursesReducers), MatIconTestingModule, MatTabsModule],
+      declarations: [CourseComponent, MockComponent(CourseLandingPageComponent), MatIcon],
       providers: [
         { provide: UiDownloadService, useClass: MockUIDownloadService },
-        { provide: FeatureFlagService, useClass: MockFeatureFlagService},
+        { provide: FeatureFlagService, useClass: MockFeatureFlagService },
       ],
     }).compileComponents();
   });
