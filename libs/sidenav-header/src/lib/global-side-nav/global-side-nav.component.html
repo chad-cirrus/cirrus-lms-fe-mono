@@ -16,7 +16,7 @@
         </div>
         <div
           *ngIf="cirrusUser.role !== 'pilot'"
-          routerLink="instructor/dashboard"
+          [routerLink]="instructorStudentsUrl"
           class="image-container sidenav-link-wrapper"
           routerLinkActive="active"
         >

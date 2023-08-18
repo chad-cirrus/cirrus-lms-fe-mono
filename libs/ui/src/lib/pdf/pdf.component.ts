@@ -16,7 +16,7 @@ export class PdfComponent extends LessonContentComponent implements OnInit {
     super();
   }
 
-  ngOnInit(): void {
+  override ngOnInit(): void {
     super.ngOnInit();
     this.hidePrevAndNext.emit(false);
     super.ngOnInit();

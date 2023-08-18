@@ -59,7 +59,7 @@ describe('AppComponent', () => {
         { provide: UiDownloadService, useValue: {} },
         { provide: CoursesFacadeService, useClass: MockCoursesFacadeService },
         { provide: UserService, useClass: MockUserService },
-        { provide: SidenavHeaderService, useClass: SidenavHeaderService },
+        { provide: SidenavHeaderService, useClass: MockSidenavHeaderService },
         { provide: NotificationService, useClass: MockNotificationService },
       ],
     }).compileComponents();
@@ -107,4 +107,8 @@ class MockNotificationService {
   getNotificationsCount() {
     return of(0);
   }
+}
+
+class MockSidenavHeaderService {
+  showNotifications$ = of(true);
 }

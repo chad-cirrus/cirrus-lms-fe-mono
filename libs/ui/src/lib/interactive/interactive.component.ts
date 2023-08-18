@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { SafeResourceUrl } from '@angular/platform-browser';
-import { IContent, PROGRESS_STATUS } from '@cirrus/models';
+import { IContent } from '@cirrus/models';
 import { LessonContentComponent } from '../LessonContentComponent';
 import { CirrusSanitizerService } from '../shared/cirrus-sanitizer.service';
 
@@ -20,12 +20,12 @@ export class InteractiveComponent
   }
 
   @Input()
-  set content(content: IContent) {
+  override set content(content: IContent) {
     super.content = content;
     this._url = this.cirrusSanitizer.getSafeResourceUrl(content.content_file);
   }
 
-  get content(): IContent {
+  override get content(): IContent {
     return super.content;
   }
 
@@ -33,7 +33,7 @@ export class InteractiveComponent
     super();
   }
 
-  ngOnInit(): void {
+  override ngOnInit(): void {
     super.ngOnInit();
     this.hidePrevAndNext.emit(false);
   }

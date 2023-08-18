@@ -2,13 +2,15 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { GlobalSideNavComponent } from './global-side-nav.component';
 import { ICirrusUser } from '@cirrus/models';
-import { MockComponent } from 'ng-mocks';
 import { BadgeComponent } from '@cirrus/badge';
+import { MockComponent } from 'ng-mocks';
+import { of } from 'rxjs';
+import { SidenavHeaderService } from '../sidenav-header.service';
 
 describe('GlobalSideNavComponent', () => {
   let component: GlobalSideNavComponent;
   let fixture: ComponentFixture<GlobalSideNavComponent>;
-  let nullCirrusUser: ICirrusUser = {
+  const nullCirrusUser: ICirrusUser = {
     authentication_token: '',
     ctc_admin: false,
     deactivated: false,
@@ -20,12 +22,15 @@ describe('GlobalSideNavComponent', () => {
     name: '',
     role: 'pilot',
     salesforce_id: '',
-    sf_lms_role: ''
+    sf_lms_role: '',
   };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [GlobalSideNavComponent, MockComponent(BadgeComponent)],
+      providers: [
+        { provide: SidenavHeaderService, useClass: MockSidenavHeaderService },
+      ],
     }).compileComponents();
   });
 
@@ -40,3 +45,9 @@ describe('GlobalSideNavComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+
+class MockSidenavHeaderService {
+  isFeatureFlagEnabled() {
+    return of(true);
+  }
+}

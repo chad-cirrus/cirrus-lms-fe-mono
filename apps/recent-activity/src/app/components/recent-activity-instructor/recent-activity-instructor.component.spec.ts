@@ -41,7 +41,7 @@ describe('RecentActivityInstructorComponent', () => {
       ],
       providers: [
         { provide: RecentActivityService, useClass: MockRecentActivityService },
-        { provide: SidenavHeaderService, useClass: SidenavHeaderService },
+        { provide: SidenavHeaderService, useClass: MockSidenavHeaderService },
       ],
     }).compileComponents();
   });
@@ -73,3 +73,5 @@ class MockRecentActivityService {
 
   getRecentActivityAndNotificationsInstructor(): void {}
 }
+
+class MockSidenavHeaderService {}

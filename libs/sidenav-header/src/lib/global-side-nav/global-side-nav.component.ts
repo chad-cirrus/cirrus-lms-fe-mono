@@ -11,6 +11,7 @@ import { Subject } from 'rxjs';
 import { ICirrusUser } from '@cirrus/models';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { map, takeUntil } from 'rxjs/operators';
+import { SidenavHeaderService } from '../sidenav-header.service';
 
 @Component({
   selector: 'cirrus-global-side-nav',
@@ -31,8 +32,9 @@ export class GlobalSideNavComponent implements OnInit, OnDestroy {
 
   disableToggle!: boolean;
   currentUrl = '';
+  instructorStudentsUrl = 'instructor/dashboard';
 
-  constructor(private breakpointObserver: BreakpointObserver) {}
+  constructor(private breakpointObserver: BreakpointObserver, private sidenavService: SidenavHeaderService) {}
 
   ngOnInit(): void {
     this.breakpointObserver
@@ -47,6 +49,13 @@ export class GlobalSideNavComponent implements OnInit, OnDestroy {
         this.disableToggle = isTablet;
         this.toggleCollapse(isTablet);
       });
+
+      this.sidenavService.isFeatureFlagEnabled('my_students')
+        .subscribe(enabled => {
+          if (enabled) {
+            this.instructorStudentsUrl = 'students';
+          }
+        })
   }
 
   ngOnDestroy() {

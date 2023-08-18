@@ -31,7 +31,7 @@ const routes: Routes = [
           'my-courses',
           'instructors',
           'instructor',
-          'my-students',
+          'students',
           'course-catalog',
           'library',
           'reports',

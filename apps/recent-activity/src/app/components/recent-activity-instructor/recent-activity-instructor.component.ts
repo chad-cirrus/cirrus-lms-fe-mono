@@ -5,10 +5,7 @@ import { SidenavHeaderService } from '@cirrus/sidenav-header';
 import { combineLatest, Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import {
-  IRecentActivityInstructors,
   IStudent,
-  IStudentAchievement,
-  RecentStudents,
 } from '../../models/IRecentActivityInstructors';
 import { RecentActivityService } from '../../services/recent-activity.service';
 import { UserState } from '../../store/reducers/cirrus-user.reducer';

@@ -49,9 +49,9 @@
       <div class="recent-students-empty-wrapper">
         <div class="recent-students-empty-content">
           <p class="body-copy-medium">
-            You have no recent or connected students at this time.
+            You have no recent or connected students at this time. View the my students page to browse all students.
           </p>
-          <a class="primary-btn" href="/course-catalog">Browse All Students</a>
+          <a *ngIf="isMyStudentsEnabled$ | async" class="primary-btn" href="/students">Browse All Students</a>
         </div>
       </div>
     </ng-template>

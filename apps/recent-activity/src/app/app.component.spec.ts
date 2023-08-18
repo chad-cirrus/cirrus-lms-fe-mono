@@ -32,7 +32,7 @@ describe('AppComponent', () => {
         { provide: RecentActivityService, useClass: MockRecentActivityService },
         { provide: RecentActivityFacade, useClass: MockRecentActivityFacade },
         { provide: NotificationService, useClass: MockNotificationService },
-        { provide: SidenavHeaderService, useClass: SidenavHeaderService },
+        { provide: SidenavHeaderService, useClass: MockSidenavHeaderService },
         { provide: UserService, useClass: MockUserService },
       ]
     }).compileComponents();
@@ -83,3 +83,5 @@ class MockUserService {
   };
   getMyOrders() { return of(this.nullOrder); }
 }
+
+class MockSidenavHeaderService {}

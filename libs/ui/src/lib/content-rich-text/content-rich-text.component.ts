@@ -26,7 +26,7 @@ export class ContentRichTextComponent
     super();
   }
 
-  ngOnInit(): void {
+  override ngOnInit(): void {
     this.hidePrevAndNext.emit(false);
     super.ngOnInit();
     this._html = this.overview ? this.overview : this.content.content_html;

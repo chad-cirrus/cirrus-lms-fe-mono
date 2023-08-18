@@ -25,7 +25,7 @@ const routes: Routes = [
           'courses',
           'instructors',
           'instructor',
-          'my-students',
+          'students',
           'course-catalog',
           'learning-catalog',
           'library',
