@@ -16,9 +16,7 @@ const getResolvedUrl = (route: ActivatedRouteSnapshot): string => {
   const params = Object.keys(route.params)
     .map(k => `${k}=${route.params[k]}`)
     .join('&');
-  const path = route.pathFromRoot
-    .map(v => v.url.map(segment => segment.path).join('/'))
-    .join('/');
+  const path = route.pathFromRoot.map(v => v.url.map(segment => segment.path).join('/')).join('/');
   return params.length > 0 ? `${path}?${params}` : path;
 };
 
@@ -47,7 +45,6 @@ const routes: Routes = [
           'shopping-cart',
           'sign-in',
           'sign-out',
-          'sign-in',
         ].includes(url[0].path)
       ) {
         return { consumed: url };
