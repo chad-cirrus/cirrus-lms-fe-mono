@@ -38,6 +38,7 @@ const routes: Routes = [
           'training-partners',
           'edit-profile',
           'shopping-cart',
+          'sign-in',
           'sign-out',
         ].includes(url[0].path)
       ) {

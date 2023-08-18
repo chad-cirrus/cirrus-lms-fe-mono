@@ -1,28 +1,47 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { GlobalUserMenusComponent } from './global-user-menus.component';
 import { OverlayModule } from '@angular/cdk/overlay';
-import { GlobalHeaderDropdownComponent } from '../global-header-dropdown/global-header-dropdown.component';
+import { ICirrusUser } from '@cirrus/models';
+import { NameToInitialsPipe } from '@cirrus/ui';
 import { MockComponent } from 'ng-mocks';
+import { GlobalHeaderDropdownComponent } from '../global-header-dropdown/global-header-dropdown.component';
+import { GlobalUserMenusComponent } from './global-user-menus.component';
 
 describe('GlobalUserMenusComponent', () => {
   let component: GlobalUserMenusComponent;
   let fixture: ComponentFixture<GlobalUserMenusComponent>;
-  let environment: Record<string, unknown> = {};
+  const environment: Record<string, unknown> = {};
+  const user: ICirrusUser = {
+    authentication_token: '',
+    ctc_admin: false,
+    deactivated: false,
+    email: '',
+    firstname: '',
+    full_sfid: '',
+    id: 0,
+    lastname: '',
+    name: '',
+    role: '',
+    salesforce_id: '',
+    sf_lms_role: '',
+  };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [GlobalUserMenusComponent, MockComponent(GlobalHeaderDropdownComponent)],
-      providers: [
-        { provide: 'environment', useValue: environment },
+      declarations: [
+        GlobalUserMenusComponent,
+        MockComponent(GlobalHeaderDropdownComponent),
+        NameToInitialsPipe,
       ],
-      imports:[OverlayModule]
+      providers: [{ provide: 'environment', useValue: environment }],
+      imports: [OverlayModule],
     }).compileComponents();
   });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(GlobalUserMenusComponent);
     component = fixture.componentInstance;
+    component.cirrusUser = user;
     fixture.detectChanges();
   });
 

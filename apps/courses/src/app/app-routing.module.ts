@@ -44,6 +44,7 @@ const routes: Routes = [
           'edit-profile',
           'recent-activity',
           'shopping-cart',
+          'sign-in',
           'sign-out',
         ].includes(url[0].path)
       ) {

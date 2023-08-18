@@ -1,150 +1,158 @@
-<div cdkOverlayOrigin #originOverlay="cdkOverlayOrigin" (click)="toggleMenu()">
-  <cirrus-global-header-dropdown
-    [isScreenSmall]="isScreenSmall"
-    [cirrusUser]="cirrusUser"
-  ></cirrus-global-header-dropdown>
-</div>
-<ng-template
-  cdkConnectedOverlay
-  cdkConnectedOverlayHasBackdrop
-  cdkConnectedOverlayBackdropClass="cdk-overlay-transparent-backdrop"
-  [cdkConnectedOverlayOrigin]="originOverlay"
-  [cdkConnectedOverlayOpen]="(showPanel$ | async)!"
->
-  <section>
-    <div
-      [ngClass]="
-        isScreenSmall ? 'dropdown-container-hamburger' : 'dropdown-container'
-      "
-    >
-      <cirrus-global-menu-slider
-        [activePane]="isLeftVisible ? 'left' : 'right'"
-      >
-        <div leftPane>
-          <div
-            *ngIf="showDashboard"
-            fxLayout="row"
-            fxLayoutAlign="space-between"
-            class="menu-item small"
-            (click)="isLeftVisible = false"
-          >
-            <div>Dashboard</div>
-            <div><mat-icon>keyboard_arrow_right</mat-icon></div>
-          </div>
-
-          <div class="menu-item small">
-            <a [href]="editProfileUrl" target="_blank"> Edit Profile </a>
-          </div>
-
-          <div
-            class="menu-item-with-border small"
-            routerLink="purchase-history"
-          >
-            Purchase History
-          </div>
-          <div class="menu-item small">
-            <a
-              href="https://www.cirrusapproach.com/learn-to-fly/"
-              target="_blank"
-            >
-              Learn to Fly
-              <svg
-                width="14"
-                height="14"
-                viewBox="0 0 22 22"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M7.78883 1H1V20.6122H20.6122V13.8233"
-                  stroke="#C4C4C4"
-                  stroke-width="0.92"
-                  stroke-linejoin="round"
-                />
-                <path
-                  d="M21.0716 1C21.0716 0.745949 20.8656 0.54 20.6116 0.54H16.4716C16.2175 0.54 16.0116 0.745949 16.0116 1C16.0116 1.25405 16.2175 1.46 16.4716 1.46H20.1516V5.14C20.1516 5.39405 20.3575 5.6 20.6116 5.6C20.8656 5.6 21.0716 5.39405 21.0716 5.14V1ZM9.62214 12.64L20.9369 1.32527L20.2863 0.674731L8.97161 11.9894L9.62214 12.64Z"
-                  fill="#C4C4C4"
-                />
-              </svg>
-            </a>
-          </div>
-          <div class="menu-item menu-item-with-border small">
-            <a
-              href="https://www.cirrusapproach.com/flight-fix/"
-              target="_blank"
-            >
-              Flight Fix
-              <svg
-                width="14"
-                height="14"
-                viewBox="0 0 22 22"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M7.78883 1H1V20.6122H20.6122V13.8233"
-                  stroke="#C4C4C4"
-                  stroke-width="0.92"
-                  stroke-linejoin="round"
-                />
-                <path
-                  d="M21.0716 1C21.0716 0.745949 20.8656 0.54 20.6116 0.54H16.4716C16.2175 0.54 16.0116 0.745949 16.0116 1C16.0116 1.25405 16.2175 1.46 16.4716 1.46H20.1516V5.14C20.1516 5.39405 20.3575 5.6 20.6116 5.6C20.8656 5.6 21.0716 5.39405 21.0716 5.14V1ZM9.62214 12.64L20.9369 1.32527L20.2863 0.674731L8.97161 11.9894L9.62214 12.64Z"
-                  fill="#C4C4C4"
-                />
-              </svg>
-            </a>
-          </div>
-          <div
-            *ngIf="!cirrusImpersonationReturnUser?.id"
-            class="menu-item small"
-            (click)="emitLogout()"
-          >
-            Logout
-          </div>
-          <div
-            *ngIf="cirrusImpersonationReturnUser?.id"
-            class="menu-item small"
-            (click)="emitImpersonationLogout()"
-          >
-            Impersonation Logout
-          </div>
-        </div>
-
-        <div
-          rightPane
-          fxLayout="column"
-          fxLayoutAlign="center center"
-          class="right-pane"
-        >
-          <div
-            fxLayout="row"
-            class="menu-item menu-item-with-border small"
-            (click)="isLeftVisible = true"
-          >
-            <div>
-              <img
-                class="chevron"
-                src="courses/images/svg/mobile-left-chevron.svg"
-              />
-            </div>
-            <div class="back-text">Back</div>
-          </div>
-          <div
-            class="menu-item small"
-            routerLink="ctc/dashboard"
-            *ngIf="showCTCDashboard"
-          >
-            CTC Dashboard
-          </div>
-          <div
-            class="menu-item small border-radius-bottom-fix"
-            routerLink="admin/dashboard"
-            *ngIf="showLMSDashboard"
-          >
-            LMS Dashboard
-          </div>
-        </div>
-      </cirrus-global-menu-slider>
+<div class="container">
+  <div class="profile-icon logged-in">
+    {{ cirrusUser.name | nameToInitials }}
+  </div>
+  <button class="login-button" *ngIf="(isLoggedIn$ | async) === false" (click)="signIn()">
+    Sign In
+  </button>
+  <div class="logged-in-menu" [hidden]="(isLoggedIn$ | async) === false">
+    <div cdkOverlayOrigin #originOverlay="cdkOverlayOrigin" (click)="toggleMenu()">
+      <cirrus-global-header-dropdown
+        [isScreenSmall]="isScreenSmall"
+        [cirrusUser]="cirrusUser"
+      ></cirrus-global-header-dropdown>
     </div>
-  </section>
-</ng-template>
+    <ng-template
+      cdkConnectedOverlay
+      cdkConnectedOverlayHasBackdrop
+      cdkConnectedOverlayBackdropClass="cdk-overlay-transparent-backdrop"
+      [cdkConnectedOverlayOrigin]="originOverlay"
+      [cdkConnectedOverlayOpen]="(showPanel$ | async)!"
+    >
+      <section>
+        <div
+          [ngClass]="
+            isScreenSmall ? 'dropdown-container-hamburger' : 'dropdown-container'
+          "
+        >
+          <cirrus-global-menu-slider
+            [activePane]="isLeftVisible ? 'left' : 'right'"
+          >
+            <div leftPane>
+              <div
+                *ngIf="showDashboard"
+                class="menu-item small menu-item__dashboard"
+                (click)="isLeftVisible = false"
+              >
+                <div>Dashboard</div>
+                <div><mat-icon>keyboard_arrow_right</mat-icon></div>
+              </div>
+
+              <div class="menu-item small">
+                <a [href]="editProfileUrl" target="_blank"> Edit Profile </a>
+              </div>
+
+              <div
+                class="menu-item-with-border small"
+                routerLink="purchase-history"
+              >
+                Purchase History
+              </div>
+              <div class="menu-item small">
+                <a
+                  href="https://www.cirrusapproach.com/learn-to-fly/"
+                  target="_blank"
+                >
+                  Learn to Fly
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 22 22"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M7.78883 1H1V20.6122H20.6122V13.8233"
+                      stroke="#C4C4C4"
+                      stroke-width="0.92"
+                      stroke-linejoin="round"
+                    />
+                    <path
+                      d="M21.0716 1C21.0716 0.745949 20.8656 0.54 20.6116 0.54H16.4716C16.2175 0.54 16.0116 0.745949 16.0116 1C16.0116 1.25405 16.2175 1.46 16.4716 1.46H20.1516V5.14C20.1516 5.39405 20.3575 5.6 20.6116 5.6C20.8656 5.6 21.0716 5.39405 21.0716 5.14V1ZM9.62214 12.64L20.9369 1.32527L20.2863 0.674731L8.97161 11.9894L9.62214 12.64Z"
+                      fill="#C4C4C4"
+                    />
+                  </svg>
+                </a>
+              </div>
+              <div class="menu-item menu-item-with-border small">
+                <a
+                  href="https://www.cirrusapproach.com/flight-fix/"
+                  target="_blank"
+                >
+                  Flight Fix
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 22 22"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M7.78883 1H1V20.6122H20.6122V13.8233"
+                      stroke="#C4C4C4"
+                      stroke-width="0.92"
+                      stroke-linejoin="round"
+                    />
+                    <path
+                      d="M21.0716 1C21.0716 0.745949 20.8656 0.54 20.6116 0.54H16.4716C16.2175 0.54 16.0116 0.745949 16.0116 1C16.0116 1.25405 16.2175 1.46 16.4716 1.46H20.1516V5.14C20.1516 5.39405 20.3575 5.6 20.6116 5.6C20.8656 5.6 21.0716 5.39405 21.0716 5.14V1ZM9.62214 12.64L20.9369 1.32527L20.2863 0.674731L8.97161 11.9894L9.62214 12.64Z"
+                      fill="#C4C4C4"
+                    />
+                  </svg>
+                </a>
+              </div>
+              <div
+                *ngIf="!cirrusImpersonationReturnUser?.id"
+                class="menu-item small"
+                (click)="emitLogout()"
+              >
+                Logout
+              </div>
+              <div
+                *ngIf="cirrusImpersonationReturnUser?.id"
+                class="menu-item small"
+                (click)="emitImpersonationLogout()"
+              >
+                Impersonation Logout
+              </div>
+            </div>
+
+            <div
+              rightPane
+              fxLayout="column"
+              fxLayoutAlign="center center"
+              class="right-pane"
+            >
+              <div
+                fxLayout="row"
+                class="menu-item menu-item-with-border small"
+                (click)="isLeftVisible = true"
+              >
+                <div>
+                  <img
+                    class="chevron"
+                    src="courses/images/svg/mobile-left-chevron.svg"
+                  />
+                </div>
+                <div class="back-text">Back</div>
+              </div>
+              <div
+                class="menu-item small"
+                routerLink="ctc/dashboard"
+                *ngIf="showCTCDashboard"
+              >
+                CTC Dashboard
+              </div>
+              <div
+                class="menu-item small border-radius-bottom-fix"
+                routerLink="admin/dashboard"
+                *ngIf="showLMSDashboard"
+              >
+                LMS Dashboard
+              </div>
+            </div>
+          </cirrus-global-menu-slider>
+        </div>
+      </section>
+    </ng-template>
+  </div>
+</div>

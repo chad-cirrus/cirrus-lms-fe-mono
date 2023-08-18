@@ -84,7 +84,6 @@ export class AppComponent
       scroller,
       route
     );
-
   }
 
   ngOnInit() {
@@ -115,7 +114,7 @@ export class AppComponent
     if (cirrusUser) {
       this.courseService.getNotifications();
     }
-    
+
     this.store.dispatch(setCirrusUser({ cirrusUser }));
 
     this.viewToggle.valueChanges.subscribe(instructorView =>
