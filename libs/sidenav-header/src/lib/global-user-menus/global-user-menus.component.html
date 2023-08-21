@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="profile-icon logged-in">
+  <div *ngIf="(isLoggedIn$ | async) === true" class="profile-icon logged-in">
     {{ cirrusUser.name | nameToInitials }}
   </div>
   <button class="login-button" *ngIf="(isLoggedIn$ | async) === false" (click)="signIn()">
