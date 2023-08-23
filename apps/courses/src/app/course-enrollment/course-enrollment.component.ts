@@ -9,15 +9,17 @@ import { fetchCourseOverview } from '../store/actions/course.actions';
 import { selectCourseOverview } from '../store/selectors/course.selector';
 import { selectOrder } from '../store/selectors/orders.selector';
 
+const isNullObject = (obj: { id: number }): boolean => {
+  return obj === undefined || obj === null || obj.id === undefined || obj.id === null || obj.id === 0;
+};
+
 @Component({
   selector: 'cirrus-course-enrollment',
   template: '<mat-spinner color="accent"></mat-spinner>',
 })
 export class CourseEnrollmentComponent implements OnInit {
   private course$ = this.store.select(selectCourseOverview);
-  private order$ = this.store
-    .select(selectOrder)
-    .pipe(map(order => order.order));
+  private order$ = this.store.select(selectOrder).pipe(map(order => order.order));
 
   constructor(
     private store: Store,
@@ -38,7 +40,7 @@ export class CourseEnrollmentComponent implements OnInit {
     });
     combineLatest([this.course$, this.order$])
       .pipe(
-        filter(([course, order]) => course.id !== 0 && order.id !== 0),
+        filter(([course, order]) => !isNullObject(course) && !isNullObject(order)),
         first(),
       )
       .subscribe(([course, order]) => {
