@@ -7,7 +7,7 @@ import { setCirrusUser, setScreenSize } from './store/actions';
 import { AppState } from './store/reducers';
 import { selectLessonStateBusy } from './store/selectors/lessons.selector';
 import { ICirrusUser, INotification } from '@cirrus/models';
-import { selectCirrusUser } from './store/selectors/cirrus-user.selector';
+import { selectCirrusUser, selectIsLoggedIn } from './store/selectors/cirrus-user.selector';
 import { merge, Observable, Subscription } from 'rxjs';
 import { UntypedFormControl } from '@angular/forms';
 import {
@@ -45,6 +45,7 @@ export class AppComponent
   lessonStateBusy$ = this.store.select(selectLessonStateBusy).pipe(delay(1));
 
   cirrusUser$ = this.store.select(selectCirrusUser);
+  isLoggedIn$: Observable<boolean> = this.store.select(selectIsLoggedIn);
 
   project = environment.project;
 

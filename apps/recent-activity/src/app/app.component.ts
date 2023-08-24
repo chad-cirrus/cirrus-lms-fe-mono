@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from './store/reducers';
 import { ICirrusUser, INotification } from '@cirrus/models';
 import { setCirrusUser } from './store/actions/cirrus-user.actions';
-import { selectCirrusUser } from './store/selectors/cirrus-user.selector';
+import { selectCirrusUser, selectIsLoggedIn } from './store/selectors/cirrus-user.selector';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { map, takeUntil } from 'rxjs/operators';
 import { setScreenSize } from './store/actions/view.actions';
@@ -27,6 +27,7 @@ export class AppComponent
   implements OnInit, OnDestroy
 {
   cirrusUser$ = this.store.select(selectCirrusUser);
+  isLoggedIn$: Observable<boolean> = this.store.select(selectIsLoggedIn);
   isScreenSmall$: Observable<boolean> = this.store.select(selectIsScreenSmall);
 
   project = environment.project;

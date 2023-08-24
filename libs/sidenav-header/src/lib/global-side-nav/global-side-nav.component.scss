@@ -70,6 +70,10 @@
     background: $gray3;
     color: $white;
     font-weight: 500;
+
+    a {
+      color: $white;
+    }
   }
 
   @include breakpoint(mobile) {
@@ -78,6 +82,25 @@
 
   .side-nav-link {
     margin-left: 18px;
+  }
+
+  a {
+    display: flex;
+    align-items: center;
+    place-content: center flex-start;
+    flex-direction: row;
+    font-family: "akzidenz";
+    font-weight: 400;
+    font-style: normal;
+    font-size: 1rem;
+    color: $gray4;
+    width: 100%;
+    text-decoration: none;
+  
+    .side-nav-link {
+      margin-left: 18px;
+      font-size: 1rem;
+    }
   }
 }
 

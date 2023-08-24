@@ -18,6 +18,36 @@
 <mat-menu #menu="matMenu" backdropClass="mat-ui-menu-override">
   <div class="menu-wrapper">
     <div
+      *ngIf="!isLoggedIn"
+      class="image-container mobile-menu-link-wrapper"
+      routerLinkActive="active"
+    >
+      <a href="https://www.cirrusapproach.com/learn-to-fly/">
+        <img
+          [src]="deployUrl + '/images/svg/learn-to-fly-icon.svg'"
+          height="26px"
+          width="26px"
+        />
+        <span class="mobile-menu-item-text">Learn To Fly</span>
+      </a>
+    </div>
+
+    <div
+      *ngIf="!isLoggedIn"
+      class="image-container mobile-menu-link-wrapper"
+      routerLinkActive="active"
+    >
+      <a href="https://www.cirrusapproach.com/flight-fix/">
+        <img
+          [src]="deployUrl + '/images/svg/flight-fix-icon.svg'"
+          height="26px"
+          width="26px"
+        />
+        <span class="mobile-menu-item-text">Flight Fix</span>
+        </a>
+    </div>
+    <div
+      *ngIf="isLoggedIn"
       routerLink="recent-activity"
       class="image-container mobile-menu-link-wrapper"
       routerLinkActive="active"
@@ -30,7 +60,7 @@
       <span class="mobile-menu-item-text">Recent Activity</span>
     </div>
     <div
-      *ngIf="cirrusUser.role !== 'pilot'"
+      *ngIf="cirrusUser.role !== 'pilot' && isLoggedIn"
       routerLink="instructor/dashboard"
       class="image-container mobile-menu-link-wrapper"
       routerLinkActive="active"
@@ -43,6 +73,7 @@
       <span class="mobile-menu-item-text">My Students</span>
     </div>
     <div
+      *ngIf="isLoggedIn"
       routerLink="my-courses"
       class="image-container mobile-menu-link-wrapper"
       routerLinkActive="active"
@@ -67,6 +98,7 @@
       <span class="mobile-menu-item-text">Course Catalog</span>
     </div>
     <div
+      *ngIf="isLoggedIn"
       routerLink="training-partners"
       class="image-container mobile-menu-link-wrapper"
       routerLinkActive="active"
@@ -79,6 +111,7 @@
       <span class="mobile-menu-item-text">Training Partners</span>
     </div>
     <div
+      *ngIf="isLoggedIn"
       class="image-container mobile-menu-link-wrapper"
       routerLinkActive="active"
       routerLink="library"
@@ -90,7 +123,8 @@
       />
       <span class="mobile-menu-item-text">Library</span>
     </div>
-    <div
+    <div 
+      *ngIf="isLoggedIn"
       class="image-container mobile-menu-link-wrapper"
       routerLinkActive="active"
       (click)="showNotifications()"

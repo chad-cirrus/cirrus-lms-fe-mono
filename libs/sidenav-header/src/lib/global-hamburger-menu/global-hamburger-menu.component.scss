@@ -20,6 +20,36 @@
     color: $white;
     font-weight: bold;
   }
+
+  @media (hover:hover) {
+    &:hover {
+      a {
+        color: #fff;
+      }
+    }
+  }
+
+  a {
+    display: flex;
+    align-items: center;
+    place-content: center flex-start;
+    flex-direction: row;
+    font-family: "akzidenz";
+    font-weight: 400;
+    font-style: normal;
+    font-size: 1rem;
+    color: $gray5;
+    width: 100%;
+    text-decoration: none;
+    @media (min-width: 600px) {
+      margin-top: 16px;
+    }
+
+    .mobile-menu-item-text {
+      margin-left: 18px;
+      font-size: 1rem;
+    }
+  }
 }
 
 .hamburger-menu-icon-container {

@@ -22,6 +22,7 @@ import { SidenavHeaderService } from '../sidenav-header.service';
 export class GlobalSideNavComponent implements OnInit, OnDestroy {
   destroyed = new Subject<void>();
   @Input() cirrusUser!: ICirrusUser;
+  @Input() isLoggedIn!: boolean | null;
   @Input() notificationCount!: number;
   @Input() deployUrl = '';
 
