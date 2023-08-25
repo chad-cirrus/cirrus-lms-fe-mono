@@ -40,7 +40,7 @@ export class CourseEnrollmentComponent implements OnInit {
     });
     combineLatest([this.course$, this.order$])
       .pipe(
-        filter(([course, order]) => !isNullObject(course) && !isNullObject(order)),
+        filter(([course]) => !isNullObject(course)),
         first(),
       )
       .subscribe(([course, order]) => {
