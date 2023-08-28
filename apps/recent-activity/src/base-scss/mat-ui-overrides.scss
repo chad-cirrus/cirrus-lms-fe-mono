@@ -877,3 +877,22 @@ apx-chart .apexcharts-toolbar {
     font-size: 0.75rem;
   }
 }
+
+
+/**
+ * Material Spinner Component
+ * @desc Styles default styles for Material Spinners
+ * @locations: Achievements page, download transcript & certificate buttons
+ * @component Material Spinner
+ */
+.mat-progress-spinner circle, 
+.mat-spinner circle {
+  stroke: $cirrus-blue;
+}
+
+.spinner-white {
+  .mat-progress-spinner circle, 
+  .mat-spinner circle {
+    stroke: #fff;
+  }
+}

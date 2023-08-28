@@ -17,7 +17,7 @@
       fxLayoutGap="1.5rem"
     >
       <div *ngIf="certificateLoading$ | async; else cert">
-        <mat-spinner color="accent" [diameter]="35"></mat-spinner>
+        <mat-spinner class="spinner-white" [diameter]="35"></mat-spinner>
       </div>
       <ng-template #cert>
         <button
@@ -29,7 +29,7 @@
         </button>
       </ng-template>
       <div *ngIf="transcriptLoading$ | async; else transcript">
-        <mat-spinner color="accent" [diameter]="35"></mat-spinner>
+        <mat-spinner class="spinner-white" [diameter]="35"></mat-spinner>
       </div>
       <ng-template #transcript>
         <button
