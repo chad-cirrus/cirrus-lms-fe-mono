@@ -121,6 +121,7 @@
         "
       >
         <div
+          *ngIf="isLoggedIn"
           class="alarm-badge sidenav-icon-link"
           (click)="emitToggleNotificationsMenu()"
         >
