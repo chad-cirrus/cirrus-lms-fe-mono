@@ -86,6 +86,14 @@ ul.student-name {
   }
 }
 
+::ng-deep .main-container:not( .sidenav-collapsed ) {
+  .sidenav-wrapper {
+    @include breakpoint(tablet) {
+      width: 244px;
+    }
+  }
+}
+
 .content-container {
   background: $black;
   color: $white;
