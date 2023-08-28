@@ -601,6 +601,10 @@ apx-chart .apexcharts-toolbar {
       display: flex;
       flex-direction: column;
       justify-content: center;
+
+      .title {
+        font-family: 'akzidenz-grotesk_bqmedium';
+      }
     }
 
     cirrus-cta-button {
@@ -687,6 +691,10 @@ apx-chart .apexcharts-toolbar {
         font-size: 1.125rem;
         line-height: 21.6px;
         margin-left: 6rem;
+
+        .course-price-container {
+          font-size: 0.75rem;
+        }
       }
 
     }
@@ -864,5 +872,8 @@ apx-chart .apexcharts-toolbar {
     @media screen and (min-width: 1280px) {
       display: none;
     }
+  }
+  cirrus-course-player .course-price-container.course-price-mobile {
+    font-size: 0.75rem;
   }
 }
