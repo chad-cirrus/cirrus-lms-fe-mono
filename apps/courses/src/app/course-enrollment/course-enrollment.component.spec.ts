@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Store, StoreModule } from '@ngrx/store';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
@@ -15,7 +16,7 @@ describe('CourseEnrollmentComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [StoreModule.forRoot({}), RouterTestingModule],
+      imports: [StoreModule.forRoot({}), RouterTestingModule, MatProgressSpinnerModule],
       declarations: [CourseEnrollmentComponent],
       providers: [provideMockStore(), { provide: UiCourseService, useClass: MockUICourseService }],
     }).compileComponents();
