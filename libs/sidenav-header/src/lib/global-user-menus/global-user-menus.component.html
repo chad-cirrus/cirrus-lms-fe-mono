@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" (click)="toggleMenu()">
   <div *ngIf="(isLoggedIn$ | async) === true" class="profile-icon logged-in">
     {{ cirrusUser.name | nameToInitials }}
   </div>
@@ -6,7 +6,7 @@
     Sign In
   </button>
   <div class="logged-in-menu" [hidden]="(isLoggedIn$ | async) === false">
-    <div cdkOverlayOrigin #originOverlay="cdkOverlayOrigin" (click)="toggleMenu()">
+    <div cdkOverlayOrigin #originOverlay="cdkOverlayOrigin">
       <cirrus-global-header-dropdown
         [isScreenSmall]="isScreenSmall"
         [cirrusUser]="cirrusUser"
