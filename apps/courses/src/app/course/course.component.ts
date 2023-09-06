@@ -25,38 +25,18 @@ export class CourseComponent implements OnInit {
     .select(selectOrder)
     .pipe(map(order => order.order));
 
-  lastPathSegment = this.router.url.split('/').pop() || '';
+  isCourseRootUrl = !isNaN(Number(this.router.url.split('/').pop() || ''));
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private store: Store<CourseState>,
-    private featureFlagService: FeatureFlagService,
   ) {}
 
   ngOnInit(): void {
-    combineLatest([
-      this.courseOverview$,
-      this.featureFlagService.isFeatureEnabled('course_preview'),
-    ])
-      .pipe(filter(([overview]) => overview.id !== 0))
-      .subscribe(([overview, isCoursePreviewEnabled]) => {
-        const isEnrolled = !!overview.course_attempt?.id;
-        const isCourseRootUrl = !isNaN(Number(this.lastPathSegment));
-        const isCourseStarted = overview.progress?.status !== 'not_started';
-
-        const redirectToOverview =
-          (isCourseRootUrl && !isCourseStarted) ||
-          (!isEnrolled && isCoursePreviewEnabled);
-        const redirectToLessons = isCourseRootUrl && isCourseStarted;
-        const redirectToCatalog = !isEnrolled && !isCoursePreviewEnabled;
-
-        if (redirectToOverview)
-          this.router.navigate(['/courses', overview.id, 'overview']);
-        if (redirectToLessons)
-          this.router.navigate(['/courses', overview.id, 'lessons']);
-        if (redirectToCatalog) this.router.navigate(['/course-catalog']);
-      });
+    if (this.isCourseRootUrl) {
+      this.router.navigate(['overview'], { relativeTo: this.route });
+    }
 
     this.route.params.subscribe(({ courseId }) => {
       this.setCourse(courseId);
