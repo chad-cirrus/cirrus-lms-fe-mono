@@ -43,7 +43,6 @@ export class CourseEnrollmentComponent implements OnInit {
    * indicator on the course and order features in the store to determine when the data is loaded.
    */
   ngOnInit(): void {
-    this.store.subscribe(state => console.log('store state', state));
     this.store.dispatch(
       fetchCourseOverview({
         courseId: this.route.parent?.snapshot.params['courseId'],
@@ -59,7 +58,7 @@ export class CourseEnrollmentComponent implements OnInit {
         if (isCourseFree(course)) {
           this.uiCourseService.freeCourseEnroll(course).subscribe(() => {
             this.store.dispatch(fetchCourseOverview({ courseId: course.id }));
-            this.router.navigate(['/courses', course.id]);
+            this.router.navigate(['/courses', course.id, 'overview']);
           });
         } else {
           this.uiCourseService.courseEnroll(course, order).subscribe(() => {
