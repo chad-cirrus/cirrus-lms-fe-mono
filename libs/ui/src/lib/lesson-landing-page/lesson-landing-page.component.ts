@@ -199,7 +199,7 @@ export class LessonLandingPageComponent implements OnInit, OnDestroy {
   }
 
   navigateToCourse() {
-    this.router.navigate([`/courses/${this.courseOverview.id}}`]);
+    this.router.navigate([`/courses/${this.courseOverview.id}`]);
   }
 
   openModal() {

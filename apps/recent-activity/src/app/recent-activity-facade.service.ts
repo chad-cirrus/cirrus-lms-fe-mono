@@ -9,6 +9,7 @@ import {
 import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { RecentActivityService } from './services/recent-activity.service';
+import { FullstoryService } from '@cirrus/ui';
 
 @Injectable({
   providedIn: 'root',
@@ -28,7 +29,8 @@ export class RecentActivityFacade {
     private connectionService: ConnectionsService,
     private downloadService: UiDownloadService,
     private notificationService: NotificationService,
-    private featureFlagService: FeatureFlagService
+    private featureFlagService: FeatureFlagService,
+    private fullstoryService: FullstoryService
   ) {}
 
   getRecentActivityPayload() {
@@ -67,5 +69,9 @@ export class RecentActivityFacade {
 
   isFeatureFlagEnabled(featureName: string): Observable<boolean> {
     return this.featureFlagService.isFeatureEnabled(featureName);
+  }
+
+  fullstoryInit() {
+    this.fullstoryService.init();
   }
 }

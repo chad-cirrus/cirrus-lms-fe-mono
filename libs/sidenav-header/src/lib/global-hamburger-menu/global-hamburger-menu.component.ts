@@ -15,6 +15,7 @@ import { ICirrusUser } from '@cirrus/models';
 })
 export class GlobalHamburgerMenuComponent {
   @Input() cirrusUser!: ICirrusUser;
+  @Input() isLoggedIn!: boolean | null;
   @Output() displayHamburger = new EventEmitter<any>();
   @Input() notificationCount!: number;
   @Output() toggleNotificationsMenu = new EventEmitter();

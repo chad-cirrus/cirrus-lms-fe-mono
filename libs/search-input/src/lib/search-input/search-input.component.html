@@ -34,8 +34,8 @@
           <mat-option *ngFor="let item of list" (click)="selectedItem(item)">
             <div>
               <div>
-                <div>
-                  {{ item.name | titlecase }}
+                <div class="search-result-item-name">
+                  {{ item.name }}
                 </div>
                 <div class="sub">
                   {{ item.status | formatFilter | titlecase }}

@@ -37,8 +37,23 @@
   }
 }
 
+
+$badgeImagePadding : 14px;
+
 .badge-image {
-  margin-left: 14px;
+  flex: 0 0 calc(95px + $badgeImagePadding);
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  padding: $badgeImagePadding 0 $badgeImagePadding $badgeImagePadding;
+
+  
+  @include breakpoint(mobile) {
+    flex: 0 0 calc(75px + $badgeImagePadding);
+  }
+  @include breakpoint(desktop) {
+    flex: 0 0 calc(125px + $badgeImagePadding);
+  }
 }
 
 .badge-info {
@@ -46,28 +61,18 @@
   @include breakpoint(mobile) {
     margin-left: 25px;
   }
-  @include breakpoint(tablet) {
-    margin-left: 25px;
-  }
 }
 
 img {
-  height: 95px;
-  width: 95px;
+  width: 100%;
+  height: auto;
+  max-height: 100%;
+  align-self: center;
   filter: drop-shadow(0px 0px 5px rgba(255,255,255,0.5));
   
   &.grey {
       filter: grayscale(1) drop-shadow(0px 0px 5px rgba(255,255,255,0.5));
       opacity:.5;
-  }
-    
-  @include breakpoint(mobile) {
-    height: 75px;
-    width: 75px;
-  }
-  @include breakpoint(tablet) {
-    height: 125px;
-    width: 125px;
   }
 }
 

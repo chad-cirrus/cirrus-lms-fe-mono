@@ -25,7 +25,7 @@ const routes: Routes = [
           'courses',
           'instructors',
           'instructor',
-          'my-students',
+          'students',
           'course-catalog',
           'learning-catalog',
           'library',
@@ -38,6 +38,7 @@ const routes: Routes = [
           'training-partners',
           'edit-profile',
           'shopping-cart',
+          'sign-in',
           'sign-out',
         ].includes(url[0].path)
       ) {

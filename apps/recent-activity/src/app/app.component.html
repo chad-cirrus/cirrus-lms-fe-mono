@@ -2,6 +2,7 @@
   <div>
     <cirrus-global-header
       [cirrusUser]="(cirrusUser$ | async)!"
+      [isLoggedIn]="isLoggedIn$ | async"
       [cirrusImpersonationReturnUser]="(cirrusImpersonateReturnUser$ | async)!"
       [notificationCount]="(notificationCountRecentActivity$ | async)!"
       (logout)="logout()"
@@ -17,12 +18,12 @@
       <div class="sidenav-wrapper" *ngIf="(isScreenSmall$ | async) === false">
         <cirrus-global-side-nav
           [cirrusUser]="(cirrusUser$ | async)!"
+          [isLoggedIn]="isLoggedIn$ | async"
           (emitCollapse)="toggleCollapse($event)"
           [notificationCount]="(notificationCountRecentActivity$ | async)!"
           (toggleNotificationsMenu)="toggleNotificationsMenu()"
           [deployUrl]="'recent-activity'"
         ></cirrus-global-side-nav>
-        <!--        <cirrus-global-side-nav></cirrus-global-side-nav>-->
       </div>
       <div
         class="content-container"

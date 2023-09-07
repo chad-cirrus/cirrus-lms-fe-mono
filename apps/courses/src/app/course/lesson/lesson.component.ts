@@ -63,11 +63,10 @@ export class LessonComponent implements OnInit, OnDestroy {
   isScreenSmall$: Observable<boolean> = this.store.select(selectIsScreenSmall);
   sideNavOpen$: Observable<boolean> = this.store.select(selectSideNavOpen);
   lessonSubscription = new Subscription();
-
   courseOverview$ = this.store.select(selectCourseOverview);
   stages$ = this.courseOverview$.pipe(map(overview => overview.stages));
 
-  coursId!: number;
+  courseId!: number;
   lessonId!: number;
   @ViewChild('snav') sidenav!: MatSidenav;
   lessonCompleted$!: Observable<string>;
@@ -88,14 +87,21 @@ export class LessonComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.lessonSubscription.add(
+      this.courseOverview$.subscribe(course => {
+        if (!course.course_attempt) {
+          this.router.navigate(['/course-catalog']);
+        }
+      })
+    )
+
+    this.lessonSubscription.add(
       this.route.params.subscribe(({ courseId, stageId, lessonId }) => {
-        this.coursId = parseInt(courseId);
+        this.courseId = parseInt(courseId);
         this.lessonId = parseInt(lessonId);
         this.store.dispatch(fetchLessons({ courseId, stageId, lessonId }));
         this.store.dispatch(fetchCourseOverview({ courseId }));
       })
     );
-
     this.lessonCompleted$ = this.courseService.lessonComplete$;
 
     this.lessonSubscription.add(

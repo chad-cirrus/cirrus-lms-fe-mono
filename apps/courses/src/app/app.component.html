@@ -2,6 +2,7 @@
   <div>
     <cirrus-global-header
       [cirrusUser]="(cirrusUser$ | async)!"
+      [isLoggedIn]="isLoggedIn$ | async"
       [cirrusImpersonationReturnUser]="(cirrusImpersonateReturnUser$ | async)!"
       [notificationCount]="(notifications$ | async)?.length!"
       (logout)="logout()"
@@ -17,6 +18,7 @@
       <div class="sidenav-wrapper" *ngIf="(isScreenSmall$ | async) === false">
         <cirrus-global-side-nav
           [cirrusUser]="(cirrusUser$ | async)!"
+          [isLoggedIn]="isLoggedIn$ | async"
           (emitCollapse)="toggleCollapse($event)"
           [notificationCount]="(notifications$ | async)?.length!"
           (toggleNotificationsMenu)="toggleNotificationsMenu()"
@@ -44,7 +46,7 @@
           #outletContainer
         >
           <div *ngIf="loadingIndicator$ | async" class="spinner-container">
-            <mat-spinner class="mat-spinner" color="accent"></mat-spinner>
+            <mat-spinner class="mat-spinner"></mat-spinner>
           </div>
           <router-outlet>
            

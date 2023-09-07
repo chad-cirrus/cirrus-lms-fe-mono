@@ -328,17 +328,21 @@ mat-table mat-cell.mdc-data-table__cell {
     font-size: 0.875rem;
     text-align: center;
     height: 18px;
-    padding: 0 9px;
+    padding: 0 8px;
     border-radius: 50px;
     background: #FF3939;
     position: absolute;
+    top: -0.75rem;
+    width: auto;
   }
   &.mat-badge-medium.mat-badge-after .mat-badge-content {
     right: -29px;
   }
-  &.mat-badge-medium.mat-badge-above .mat-badge-content {
-    top: -11px;
-  }
+}
+.mat-badge-start-left {
+ .mat-badge.mat-badge-warn .mat-badge-content {
+  right: initial !important;
+ }
 }
 
 
@@ -544,8 +548,6 @@ apx-chart .apexcharts-toolbar {
   z-index: 4;
 }
 
-
-
 .course-preview-container {
   position: relative;
   height: 74px;
@@ -575,6 +577,7 @@ apx-chart .apexcharts-toolbar {
 
       & > div {
         flex-direction: row !important;
+        align-items: center !important;
       }
     }
 
@@ -598,6 +601,10 @@ apx-chart .apexcharts-toolbar {
       display: flex;
       flex-direction: column;
       justify-content: center;
+
+      .title {
+        font-family: 'akzidenz-grotesk_bqmedium';
+      }
     }
 
     cirrus-cta-button {
@@ -684,6 +691,10 @@ apx-chart .apexcharts-toolbar {
         font-size: 1.125rem;
         line-height: 21.6px;
         margin-left: 6rem;
+
+        .course-price-container {
+          font-size: 0.75rem;
+        }
       }
 
     }
@@ -728,7 +739,6 @@ apx-chart .apexcharts-toolbar {
         right: 3.1rem;
         box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
       }
-      
       .container {
         border-radius: 6px;
 
@@ -854,5 +864,35 @@ apx-chart .apexcharts-toolbar {
     .description .chapter {
       font-size: 20px;
     }
+  }
+
+  cirrus-course-player .course-price-container.course-price-desktop,
+  cirrus-course-player .course-price-container.course-price-mobile {
+    display: none;
+    @media screen and (min-width: 1280px) {
+      display: none;
+    }
+  }
+  cirrus-course-player .course-price-container.course-price-mobile {
+    font-size: 0.75rem;
+  }
+}
+
+
+/**
+ * Material Spinner Component
+ * @desc Styles default styles for Material Spinners
+ * @locations: Achievements page, download transcript & certificate buttons
+ * @component Material Spinner
+ */
+.mat-progress-spinner circle, 
+.mat-spinner circle {
+  stroke: $cirrus-blue;
+}
+
+.spinner-white {
+  .mat-progress-spinner circle, 
+  .mat-spinner circle {
+    stroke: #fff;
   }
 }

@@ -4,6 +4,7 @@
 
     <cirrus-badge
       [badgeNumber]="notifications.length > 99 ? '99+' : notifications.length"
+      class="mat-badge-start-left"
     ></cirrus-badge>
   </div>
   <div class="lists" *ngIf="notifications.length; else noNotifications">

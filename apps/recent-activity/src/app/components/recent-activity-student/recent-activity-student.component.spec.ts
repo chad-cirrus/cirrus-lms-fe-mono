@@ -38,7 +38,7 @@ describe('RecentActivityComponent', () => {
       providers: [
         provideMockStore(),
         { provide: RecentActivityService, useClass: MockRecentActivityService },
-        { provide: SidenavHeaderService, useClass: SidenavHeaderService },
+        { provide: SidenavHeaderService, useClass: MockSidenavHeaderService },
       ]
     }).compileComponents();
 
@@ -68,3 +68,5 @@ class MockRecentActivityService {
 
   getRecentActivityAndNotifications(): void {}
 }
+
+class MockSidenavHeaderService {}

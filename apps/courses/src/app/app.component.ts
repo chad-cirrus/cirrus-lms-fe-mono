@@ -1,55 +1,43 @@
+import { BreakpointObserver } from '@angular/cdk/layout';
+import { ViewportScroller } from '@angular/common';
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { UntypedFormControl } from '@angular/forms';
+import { MatSidenav } from '@angular/material/sidenav';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ICirrusUser, INotification } from '@cirrus/models';
+import { SidenavHeaderService } from '@cirrus/sidenav-header';
+import { CirrusBaseComponent, ErrorService, NotificationService, UserService } from '@cirrus/ui';
 import { Store } from '@ngrx/store';
+import { Observable, Subscription, merge } from 'rxjs';
 import { delay, map, takeUntil } from 'rxjs/operators';
+import { environment } from '../environments/environment';
 import { AppService } from './app.service';
+import { CoursesService } from './course/course.service';
+import { CoursesFacadeService } from './courses-facade.service';
 import * as appActions from './store/actions';
 import { setCirrusUser, setScreenSize } from './store/actions';
-import { AppState } from './store/reducers';
-import { selectLessonStateBusy } from './store/selectors/lessons.selector';
-import { ICirrusUser, INotification } from '@cirrus/models';
-import { selectCirrusUser } from './store/selectors/cirrus-user.selector';
-import { merge, Observable, Subscription } from 'rxjs';
-import { UntypedFormControl } from '@angular/forms';
-import {
-  selectIsScreenSmall,
-  selectSideNavOpen,
-} from './store/selectors/view.selector';
-import { MatSidenav } from '@angular/material/sidenav';
-import { BreakpointObserver } from '@angular/cdk/layout';
-import { CoursesService } from './course/course.service';
-import {
-  CirrusBaseComponent,
-  ErrorService,
-  NotificationService,
-  UserService,
-} from '@cirrus/ui';
-import { environment } from '../environments/environment';
-import { CoursesFacadeService } from './courses-facade.service';
-import { SidenavHeaderService } from '@cirrus/sidenav-header';
-import { ActivatedRoute, Router } from '@angular/router';
-import { ViewportScroller } from '@angular/common';
 import { fetchOrders } from './store/actions/orders.actions';
-import { mockOrder } from './course/testData';
+import { AppState } from './store/reducers';
+import { selectCirrusUser, selectIsLoggedIn } from './store/selectors/cirrus-user.selector';
+import { selectLessonStateBusy } from './store/selectors/lessons.selector';
+import { selectIsScreenSmall, selectSideNavOpen } from './store/selectors/view.selector';
 
 @Component({
   selector: 'cirrus-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent
-  extends CirrusBaseComponent
-  implements OnInit, OnDestroy
-{
+export class AppComponent extends CirrusBaseComponent implements OnInit, OnDestroy {
   student = 'John Doe';
   viewToggle = new UntypedFormControl(false);
   lessonStateBusy$ = this.store.select(selectLessonStateBusy).pipe(delay(1));
 
   cirrusUser$ = this.store.select(selectCirrusUser);
+  isLoggedIn$: Observable<boolean> = this.store.select(selectIsLoggedIn);
 
   project = environment.project;
 
-  notifications$: Observable<INotification[]> =
-    this.courseService.notifications$;
+  notifications$: Observable<INotification[]> = this.courseService.notifications$;
 
   sideNavOpen$: Observable<boolean> = this.store.select(selectSideNavOpen);
   ftgNotPilot = 160;
@@ -72,7 +60,7 @@ export class AppComponent
     sidenavHeaderService: SidenavHeaderService,
     notificationService: NotificationService,
     errorService: ErrorService,
-    route: ActivatedRoute
+    route: ActivatedRoute,
   ) {
     super(
       userService,
@@ -82,20 +70,20 @@ export class AppComponent
       errorService,
       router,
       scroller,
-      route
+      route,
     );
   }
 
   ngOnInit() {
     super.ngOnInit();
 
-    const cirrusUser = JSON.parse(
-      <string>localStorage.getItem('cirrus-user')
-    ) as ICirrusUser;
+    this.facade.fullstoryInit();
 
-    this.myOrders$.subscribe(order => {
+    const cirrusUser = JSON.parse(<string>localStorage.getItem('cirrus-user')) as ICirrusUser;
+
+    this.myOrders$.subscribe(() => {
       if (cirrusUser) {
-        this.store.dispatch(fetchOrders({ order }));
+        this.store.dispatch(fetchOrders());
       }
     });
 
@@ -105,18 +93,16 @@ export class AppComponent
 
     this.breakPoint$
       .pipe(takeUntil(this.destroyed), map(this.getBreakpoint))
-      .subscribe(screenSize =>
-        this.store.dispatch(setScreenSize({ screenSize }))
-      );
+      .subscribe(screenSize => this.store.dispatch(setScreenSize({ screenSize })));
 
     if (cirrusUser) {
       this.courseService.getNotifications();
     }
-    
+
     this.store.dispatch(setCirrusUser({ cirrusUser }));
 
     this.viewToggle.valueChanges.subscribe(instructorView =>
-      this.store.dispatch(appActions.setInstructorView({ instructorView }))
+      this.store.dispatch(appActions.setInstructorView({ instructorView })),
     );
   }
 

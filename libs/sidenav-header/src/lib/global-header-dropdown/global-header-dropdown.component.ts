@@ -8,6 +8,7 @@ import {
 } from '@angular/core';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { ICirrusUser, ROLE } from '@cirrus/models';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'cirrus-global-header-dropdown',

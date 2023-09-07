@@ -73,15 +73,15 @@ export class AssessmentComponent
   ];
 
   @Input()
-  public get menuOpen(): boolean {
+  public override get menuOpen(): boolean {
     return this._isMenuOpen;
   }
 
-  public set menuOpen(value: boolean) {
+  public override set menuOpen(value: boolean) {
     this._isMenuOpen = value;
   }
 
-  ngOnInit(): void {
+  override ngOnInit(): void {
     super.ngOnInit();
 
     this.hidePrevAndNext.emit(false);

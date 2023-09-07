@@ -4,6 +4,8 @@ import {
   ConnectionsService,
   UiDownloadService,
   NotificationService,
+  FullstoryService,
+  FullStoryEventData,
 } from '@cirrus/ui';
 import { tap } from 'rxjs/operators';
 import { CoursesService } from './course/course.service';
@@ -18,7 +20,8 @@ export class CoursesFacadeService {
     private courseService: CoursesService,
     private connectionService: ConnectionsService,
     private downloadService: UiDownloadService,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private fullstoryService: FullstoryService
   ) {}
 
   getNotifications() {
@@ -53,5 +56,13 @@ export class CoursesFacadeService {
 
   downloadCertificate(course_attempt_id: number) {
     return this.downloadService.downloadCertificate(course_attempt_id);
+  }
+
+  fullstoryInit() {
+    this.fullstoryService.init();
+  }
+
+  fullstoryEvent(eventName: string, eventProperties: FullStoryEventData) {
+    this.fullstoryService.event(eventName, eventProperties);
   }
 }

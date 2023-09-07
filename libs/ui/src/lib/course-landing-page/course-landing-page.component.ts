@@ -1,5 +1,5 @@
 import { Breakpoints } from '@angular/cdk/layout';
-import { Component, EventEmitter, importProvidersFrom, Inject, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Inject, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import {
   ICirrusUser,
@@ -11,19 +11,16 @@ import {
 } from '@cirrus/models';
 import { produceConfig } from './produce-config';
 // eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+import { ElementRef, HostListener, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { filter, map, tap } from 'rxjs/operators';
+import { BehaviorSubject } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
 import { BluePopUpComponent } from '../blue-pop-up/blue-pop-up.component';
 import { UiDownloadService } from '../course-completion/ui-download.service';
-import { CoursePreviewVideoPlayerComponent } from '../course-preview-video-player/course-preview-video-player.component';
 import { downloadPdf } from '../helpers/DownloadPdf';
 import { CirrusSanitizerService } from '../shared/cirrus-sanitizer.service';
-import { TermsAgreementServiceService } from './terms-agreement-service.service';
-import { HostListener } from '@angular/core';
-import { ViewChild } from '@angular/core';
-import { ElementRef } from '@angular/core';
 import { UiCourseService } from '../ui-course.service';
+import { TermsAgreementServiceService } from './terms-agreement-service.service';
 @Component({
   selector: 'cirrus-course-landing-page',
   templateUrl: './course-landing-page.component.html',
@@ -56,12 +53,10 @@ export class CourseLandingPageComponent {
   private _size = Breakpoints.Large;
 
   private previewVideoUrlSubject = new BehaviorSubject<string | null>(null);
-  public previewVideoUrl$ = this.previewVideoUrlSubject
-    .asObservable()
-    .pipe(
-      filter(url => url !== null),
-      map(url => this.cirrusSanitizer.getSafeResourceUrl(url as string)),
-    );
+  public previewVideoUrl$ = this.previewVideoUrlSubject.asObservable().pipe(
+    filter(url => url !== null),
+    map(url => this.cirrusSanitizer.getSafeResourceUrl(url as string))
+  );
 
   public isSticky = false;
   @ViewChild('coursePlayer') coursePlayerEl!: ElementRef;
@@ -81,12 +76,12 @@ export class CourseLandingPageComponent {
     if (!value.course_attempt?.id) {
       this.setPreviewCourseConfig(value);
 
-      if(value.course_overview_video?.url) {
+      if (value.course_overview_video?.url) {
         this.previewVideoUrlSubject.next(
           `https://player.vimeo.com/video/${value.course_overview_video?.url}?app_id=122963`
         );
       }
-      
+
       return;
     }
 
@@ -123,6 +118,7 @@ export class CourseLandingPageComponent {
     private dialog: MatDialog,
     private tcService: TermsAgreementServiceService,
     private cirrusSanitizer: CirrusSanitizerService,
+
     @Inject('environment') environment: Record<string, unknown>
   ) {
     this.environment = environment;
@@ -154,18 +150,15 @@ export class CourseLandingPageComponent {
   }
 
   enroll() {
-    if (this.order?.id) {
-      this.downloadService
-        .courseEnroll(this.course, this.order)
-        .subscribe(() => {
-          this.router.navigate(['/shopping-cart']);
-        });
-    } else {
-      this.downloadService
-        .courseEnroll(this.course, this.order)
-        .subscribe(() => {
-          this.router.navigate(['/shopping-cart']);
-      });
+    this.router.navigate(['/courses', this.course.id, 'enroll']);
+  }
+
+  isCourseFree(course: ICourseOverview) {
+    if (course?.list_price) {
+      return course?.list_price < 1
+    }
+    else {
+      return true
     }
   }
 
@@ -179,8 +172,8 @@ export class CourseLandingPageComponent {
     if (this.course.course_overview_video) {
       const courseVideoInfo = {
         ...this.course.course_overview_video,
-        courseTitle: this.course.title
-      }
+        courseTitle: this.course.title,
+      };
       this.uiCourseService.watchPreview(courseVideoInfo);
     }
   }
@@ -195,9 +188,9 @@ export class CourseLandingPageComponent {
       thumbnail: course.thumbnail_image_url
         ? course.thumbnail_image_url
         : (this.environment.defaultLessonThumbnail as string),
-      badge: course.badge.badge_image,
+      badge: course.badge?.badge_image,
       list_price: course.list_price ? course.list_price : 0,
-      overview: course.sales_desc? course.sales_desc : course.overview
+      overview: course.sales_desc ? course.sales_desc : course.overview,
     };
   }
 
@@ -241,7 +234,7 @@ export class CourseLandingPageComponent {
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result.data === 'Confirm') {
-        this.downloadService.courseReEnroll(payload).subscribe(() => {
+        this.uiCourseService.courseReEnroll(payload).subscribe(() => {
           this.refreshCourse.emit(payload.course_id);
         });
       }
@@ -255,7 +248,6 @@ export class CourseLandingPageComponent {
         downloadPdf(data, 'trans');
       });
   }
-
 
   @HostListener('window:scroll', ['$event'])
   checkScroll() {

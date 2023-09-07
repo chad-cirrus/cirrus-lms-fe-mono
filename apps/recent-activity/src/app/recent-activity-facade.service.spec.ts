@@ -7,6 +7,7 @@ import {
   FeatureFlagService,
   NotificationService,
   UiDownloadService,
+  FullstoryService
 } from '@cirrus/ui';
 
 describe('RecentActivityFacade', () => {
@@ -20,6 +21,7 @@ describe('RecentActivityFacade', () => {
         { provide: UiDownloadService, useClass: MockUIDownloadService },
         { provide: NotificationService, useClass: MockNotificationService },
         { provide: FeatureFlagService, useClass: MockFeatureFlagService },
+        { provide: FullstoryService, useClass: MockFullstoryService}
       ],
     });
     service = TestBed.inject(RecentActivityFacade);
@@ -34,3 +36,4 @@ class MockConnectionsService {}
 class MockUIDownloadService {}
 class MockNotificationService {}
 class MockFeatureFlagService {}
+class MockFullstoryService {}

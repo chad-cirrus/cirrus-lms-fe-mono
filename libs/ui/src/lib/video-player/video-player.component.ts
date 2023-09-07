@@ -45,8 +45,7 @@ export class VideoPlayerComponent
     });
   }
 
-  ngOnDestroy(): void {
-    console.log('this content', this.content);
+  override ngOnDestroy(): void {
     if (this.content?.progress) {
       this.updateProgress.emit({
         id: this.content.progress.id,

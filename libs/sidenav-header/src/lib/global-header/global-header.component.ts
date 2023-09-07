@@ -9,13 +9,14 @@ import { ICirrusUser } from '@cirrus/models';
 import { Observable } from 'rxjs';
 
 @Component({
-  selector: 'cirrus-global-header',
+selector: 'cirrus-global-header',
   templateUrl: './global-header.component.html',
   styleUrls: ['./global-header.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
 })
 export class GlobalHeaderComponent {
   @Input() cirrusUser!: ICirrusUser;
+  @Input() isLoggedIn!: boolean | null;
   @Input() deployUrl = '';
   @Input() cirrusImpersonationReturnUser!: ICirrusUser;
   @Input() isScreenSmall = false;

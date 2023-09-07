@@ -1,4 +1,6 @@
+// @use '../styles/variables' as *;
 @import '../base-scss/import';
+
 
 .filter-search {
   width: 100%;
@@ -58,4 +60,13 @@
 
 .sub {
   color: $gray4;
+  font-size: 0.875rem;
+  font-weight: 400;
+}
+
+
+.search-result-item-name {
+  font-family: 'akzidenz-medium';
+  font-size: 1rem;
+  font-weight: 500;
 }

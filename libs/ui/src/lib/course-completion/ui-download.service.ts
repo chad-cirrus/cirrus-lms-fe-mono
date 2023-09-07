@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { ICourse, ICourseOverview, IOrder } from '@cirrus/models';
+import { ICourseOverview, IOrder } from '@cirrus/models';
 import { BehaviorSubject, Observable, of } from 'rxjs';
-import { concatMap, filter, finalize, tap } from 'rxjs/operators';
+import { concatMap, finalize, tap } from 'rxjs/operators';
 
 @Injectable()
 export class UiDownloadService {
@@ -58,64 +58,4 @@ export class UiDownloadService {
       finalize(() => this.transcriptLoadingSubject.next(false))
     );
   }
-
-  courseReEnroll(payload: ReEnrollPayload) {
-    const { course_id, user_id } = payload;
-    return this.http.post(
-      `${this.environment.baseUrl}/api/v3/courses/reenroll/${course_id}/${user_id}`,
-      {}
-    );
-  }
-
-  courseEnroll(course: ICourseOverview, order: any): Observable<any> {
-    const previousCartItems = [...order.order_line_items];
-    const courseExistsInCart = previousCartItems.filter((item) => item.product_id === course.id).length !== 0;
-    if(courseExistsInCart) {
-      return of(true)
-    }
-
-    const formatOrder = {
-      order: {
-        order_line_items: [
-          {
-            product_id: course.id,
-            product: {
-              list_price: course.list_price,
-            },
-          },
-          ...previousCartItems,
-        ],
-      },
-    };
-
-    if (order?.id) {
-      return this.http.post(
-        `${this.environment.baseUrl}/api/v3/orders/update-cart`,
-        formatOrder
-      );
-    } else {
-      const unAuthOrder = {
-        order: {
-          order_line_items: [
-            {
-              product_id: course.id,
-              product: {
-                list_price: course.list_price,
-                title: course.title,
-                thumbnail_image_url: course.thumbnail_image_url
-              },
-            }
-          ]
-        }
-      }
-      localStorage.setItem('checkout-state', JSON.stringify(unAuthOrder));
-      localStorage.setItem('is-checkout', 'true');
-      return of(true);
-    }
-  }
-}
-
-interface ReEnrollPayload {
-  course_id: number;
-  user_id: number;
 }

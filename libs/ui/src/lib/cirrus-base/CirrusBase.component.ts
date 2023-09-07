@@ -26,7 +26,6 @@ import {
   Router,
 } from '@angular/router';
 import { ViewportScroller } from '@angular/common';
-
 @Component({
   template: `<p>works</p>`,
 })
@@ -83,7 +82,8 @@ export abstract class CirrusBaseComponent implements OnInit, OnDestroy {
     protected router: Router,
     protected scroller: ViewportScroller,
     protected route: ActivatedRoute
-  ) {}
+  ) {
+  }
 
   ngOnInit() {
     this.sidenavHeaderService.showNotifications$

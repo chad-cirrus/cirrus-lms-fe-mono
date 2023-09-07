@@ -116,3 +116,7 @@ export interface ICourseContentStat {
   completed: number;
   total: number;
 }
+
+export const isCourseFree = (course: ICourseOverview) => {
+  return course.list_price === undefined || course.list_price < 1;
+};

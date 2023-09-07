@@ -83,12 +83,12 @@
           <span class="ect-label">Estimated Course Time</span>
         </div>
       </div>
-      <div fxFlex.xs="1 1 100%" fxFlex.gt-md="1 1 35%">
+      <div fxFlex.xs="1 1 100%" style="margin-bottom: 2.5rem;">
         <cirrus-course-summary-counts
           [courseSummaryCounts]="courseOverview.summary_counts"
         ></cirrus-course-summary-counts>
       </div>
-      <div fxFlex.xs="1 1 100%" fxFlex.gt-md="1 1 35%">
+      <div fxFlex.xs="1 1 100%" style="margin-bottom: 1rem;">
         <div
           *ngIf="
             courseOverview.summary_counts.assessments &&
@@ -97,7 +97,7 @@
           class="training-partner-container"
         >
           <h3>Training Partner</h3>
-          <p class="about--version">
+          <p style="margin-bottom: 0;">
             You will need to partner with a Cirrus Training Center (CTC) or a Cirrus Specialized Flight Instructor (CSIP) in order to complete this course.
           </p>
 

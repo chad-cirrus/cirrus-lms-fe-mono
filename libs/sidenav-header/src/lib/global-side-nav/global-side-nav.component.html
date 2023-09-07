@@ -2,7 +2,35 @@
   <div>
     <div>
       <div>
-        <div
+        <div *ngIf="!isLoggedIn"
+          class="image-container sidenav-link-wrapper"
+          routerLinkActive="active"
+        >
+          <a href="https://www.cirrusapproach.com/learn-to-fly/" target="_blank">
+            <img
+              [src]="deployUrl + '/images/svg/learn-to-fly-icon.svg'"
+              height="26px"
+              width="26px"
+            />
+            <span class="side-nav-link" *ngIf="!collapse">Learn To Fly</span>
+          </a>
+        </div>
+
+        <div *ngIf="!isLoggedIn"
+          class="image-container sidenav-link-wrapper"
+          routerLinkActive="active"
+        >
+          <a href="https://www.youtube.com/playlist?list=PLEZkne-402vDOF39xpPCqDttnRfm90QuZ" target="_blank">
+            <img
+              [src]="deployUrl + '/images/svg/flight-fix-icon.svg'"
+              height="26px"
+              width="26px"
+            />
+            <span class="side-nav-link" *ngIf="!collapse">Flight Fix</span>
+          </a>
+        </div>
+        
+        <div *ngIf="isLoggedIn"
           routerLink="recent-activity"
           class="image-container sidenav-link-wrapper"
           routerLinkActive="active"
@@ -15,8 +43,8 @@
           <span class="side-nav-link" *ngIf="!collapse">Recent Activity</span>
         </div>
         <div
-          *ngIf="cirrusUser.role !== 'pilot'"
-          routerLink="instructor/dashboard"
+          *ngIf="cirrusUser.role !== 'pilot' && isLoggedIn"
+          [routerLink]="instructorStudentsUrl"
           class="image-container sidenav-link-wrapper"
           routerLinkActive="active"
         >
@@ -28,6 +56,7 @@
           <span class="side-nav-link" *ngIf="!collapse">My Students</span>
         </div>
         <div
+          *ngIf="isLoggedIn"
           routerLink="my-courses"
           class="image-container sidenav-link-wrapper"
           routerLinkActive="active"
@@ -52,6 +81,7 @@
           <span class="side-nav-link" *ngIf="!collapse">Course Catalog</span>
         </div>
         <div
+          *ngIf="isLoggedIn"
           routerLink="training-partners"
           class="image-container sidenav-link-wrapper"
           routerLinkActive="active"
@@ -64,6 +94,7 @@
           <span class="side-nav-link" *ngIf="!collapse">Training Partners</span>
         </div>
         <div
+          *ngIf="isLoggedIn"
           class="image-container sidenav-link-wrapper"
           routerLinkActive="active"
           routerLink="library"
@@ -90,11 +121,12 @@
         "
       >
         <div
+          *ngIf="isLoggedIn"
           class="alarm-badge sidenav-icon-link"
           (click)="emitToggleNotificationsMenu()"
         >
           <img [src]="deployUrl + '/images/svg/alarm.svg'" />
-          <cirrus-badge [badgeNumber]="notificationCount"></cirrus-badge>
+          <cirrus-badge [badgeNumber]="notificationCount > 99 ? '99+' : notificationCount" class="mat-badge-start-left"></cirrus-badge>
         </div>
 
         <a class="sidenav-icon-link" href="https://www.cirrusapproach.com/help-center/" target="_blank" >

@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { SafeResourceUrl } from '@angular/platform-browser';
-import { IContent, PROGRESS_STATUS } from '@cirrus/models';
+import { IContent } from '@cirrus/models';
 import { LessonContentComponent } from '../LessonContentComponent';
 import { CirrusSanitizerService } from '../shared/cirrus-sanitizer.service';
 
@@ -20,14 +20,14 @@ export class ContentImageComponent
   }
 
   @Input()
-  set content(content: IContent) {
+  override set content(content: IContent) {
     super.content = content;
     this._upload_image = this.cirrusSanitizer.getSafeResourceUrl(
       content.upload_image
     );
   }
 
-  get content(): IContent {
+  override get content(): IContent {
     return super.content;
   }
 
@@ -35,7 +35,7 @@ export class ContentImageComponent
     super();
   }
 
-  ngOnInit(): void {
+  override ngOnInit(): void {
     this.hidePrevAndNext.emit(false);
     super.ngOnInit();
   }

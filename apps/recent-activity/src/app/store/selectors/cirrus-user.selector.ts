@@ -13,3 +13,8 @@ export const selectRole = createSelector(
   selectCirrusUserFeature,
   state => state && state.role
 );
+
+export const selectIsLoggedIn = createSelector(
+  selectCirrusUserFeature,
+  state => !!state && !!state.id && state.id !== 0
+);

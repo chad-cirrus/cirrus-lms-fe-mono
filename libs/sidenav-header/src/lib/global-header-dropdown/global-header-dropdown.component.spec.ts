@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { GlobalHeaderDropdownComponent } from './global-header-dropdown.component';
 import { ICirrusUser } from '@cirrus/models';
+import { NameToInitialsPipe } from 'libs/ui/src/lib/helpers/NameToInitialsPipe';
 
 describe('GlobalHeaderDropdownComponent', () => {
   let component: GlobalHeaderDropdownComponent;
@@ -18,13 +19,13 @@ describe('GlobalHeaderDropdownComponent', () => {
     name: '',
     role: '',
     salesforce_id: '',
-    sf_lms_role: ''
+    sf_lms_role: '',
   };
   let isScreenSmall = false;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [GlobalHeaderDropdownComponent],
+      declarations: [GlobalHeaderDropdownComponent, NameToInitialsPipe],
     }).compileComponents();
   });
 
