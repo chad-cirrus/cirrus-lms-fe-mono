@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { INotification } from '@cirrus/models';
+import { INotification, ICirrusUser } from '@cirrus/models';
 import {
   ConnectionsService,
   UiDownloadService,
@@ -73,5 +73,9 @@ export class RecentActivityFacade {
 
   fullstoryInit() {
     this.fullstoryService.init();
+  }
+
+  fullStoryIdentify(cirrusUser: ICirrusUser) {
+    this.fullstoryService.identify(cirrusUser);
   }
 }
