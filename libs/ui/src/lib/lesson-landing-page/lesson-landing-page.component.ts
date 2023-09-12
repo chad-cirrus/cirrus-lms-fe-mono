@@ -230,7 +230,7 @@ export class LessonLandingPageComponent implements OnInit, OnDestroy {
     );
 
     if (!contentNotStarted && !contentInProgress) {
-      this.playNextLessonContent.emit(this.courseOverview);
+      this.playNextLessonContent.emit({courseOverview: this.courseOverview, lesson: this.lesson});
       return;
     }
 

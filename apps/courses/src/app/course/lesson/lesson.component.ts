@@ -42,9 +42,8 @@ import { environment } from '../../../environments/environment';
 import { fetchCourseOverview } from '../../store/actions/course.actions';
 import {
   selectCourseOverview,
-  selectNextLessonPath,
 } from '../../store/selectors/course.selector';
-
+import { nextLesson, nextLessonUrlSegments } from '../../shared/helpers/next-lesson';
 @Component({
   selector: 'cirrus-lesson',
   templateUrl: './lesson.component.html',
@@ -72,8 +71,6 @@ export class LessonComponent implements OnInit, OnDestroy {
   lessonCompleted$!: Observable<string>;
   defaultMobile = environment.defaultMobileLesson;
   defaultDesktop = environment.defaultDesktopLesson;
-
-  nextLesson$ = this.store.select(selectNextLessonPath);
 
   constructor(
     private route: ActivatedRoute,
@@ -135,6 +132,10 @@ export class LessonComponent implements OnInit, OnDestroy {
               : courseOverview.progress.status !== PROGRESS_STATUS.completed;
 
           if (showCompletionDialog) {
+            const nextLesson$ = this.courseOverview$.pipe(
+              map(courseOverview => nextLesson(courseOverview, lesson))
+            );
+
             this.dialog
               .open(component, {
                 data,
@@ -143,10 +144,10 @@ export class LessonComponent implements OnInit, OnDestroy {
                 width: '100%',
               })
               .afterClosed()
-              .pipe(withLatestFrom(this.nextLesson$))
+              .pipe(withLatestFrom(nextLesson$))
               .subscribe(([response, nextLesson]) => {
                 if (response === LESSON_COMPLETION_CTA.nextLesson) {
-                  this.router.navigate([nextLesson]);
+                  this.router.navigate(nextLessonUrlSegments(nextLesson));
                 } else {
                   console.log('none of the above');
                 }
@@ -189,10 +190,13 @@ export class LessonComponent implements OnInit, OnDestroy {
     this.contentPlayerDialogService.displayContentPlayerBComponent(content.id);
   }
 
-  playNextLessonContent() {
-    this.nextLesson$
-      .subscribe(nextLesson => this.router.navigate([nextLesson]))
-      .unsubscribe();
+  playNextLessonContent(event: any) {
+    const {lesson} = event;
+    
+    this.courseOverview$.subscribe(overview => {
+      const getNextLesson = nextLesson(overview, lesson);
+      this.router.navigate(nextLessonUrlSegments(getNextLesson));
+    }).unsubscribe();
   }
 
   openSideNav() {
