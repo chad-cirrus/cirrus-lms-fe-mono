@@ -83,6 +83,7 @@ export class AppComponent extends CirrusBaseComponent implements OnInit, OnDestr
 
     this.myOrders$.subscribe(() => {
       if (cirrusUser) {
+        this.facade.fullStoryIdentify(cirrusUser);
         this.store.dispatch(fetchOrders());
       }
     });

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { INotification } from '@cirrus/models';
+import { ICirrusUser, INotification } from '@cirrus/models';
 import {
   ConnectionsService,
   UiDownloadService,
@@ -64,5 +64,9 @@ export class CoursesFacadeService {
 
   fullstoryEvent(eventName: string, eventProperties: FullStoryEventData) {
     this.fullstoryService.event(eventName, eventProperties);
+  }
+
+  fullStoryIdentify(cirrusUser: ICirrusUser) {
+    this.fullstoryService.identify(cirrusUser);
   }
 }

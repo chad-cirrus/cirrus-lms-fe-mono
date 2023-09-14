@@ -24,8 +24,7 @@ import { ViewportScroller } from '@angular/common';
 })
 export class AppComponent
   extends CirrusBaseComponent
-  implements OnInit, OnDestroy
-{
+  implements OnInit, OnDestroy {
   cirrusUser$ = this.store.select(selectCirrusUser);
   isLoggedIn$: Observable<boolean> = this.store.select(selectIsLoggedIn);
   isScreenSmall$: Observable<boolean> = this.store.select(selectIsScreenSmall);
@@ -72,6 +71,9 @@ export class AppComponent
     const cirrusUser = JSON.parse(
       <string>localStorage.getItem('cirrus-user')
     ) as ICirrusUser;
+    if (cirrusUser) {
+      this.facade.fullStoryIdentify(cirrusUser);
+    }
     this.store.dispatch(setCirrusUser({ cirrusUser }));
     this.breakPoint$
       .pipe(takeUntil(this.destroyed), map(this.getBreakpoint))

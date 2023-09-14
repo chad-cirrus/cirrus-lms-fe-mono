@@ -26,7 +26,7 @@
     <cirrus-lesson-landing-page
       [checkoutOffsRequired]="checkoutOffsRequired$ | async"
       [lesson]="(lesson$ | async)!"
-      (playNextLessonContent)="playNextLessonContent()"
+      (playNextLessonContent)="playNextLessonContent($event)"
       (fetchMediaOutput)="fetchMedia($event)"
       (fetchMediaOutputIntro)="fetchMediaForIntroVideo($event)"
       (displayOverviewOutput)="displayOverview($event)"

@@ -5,8 +5,7 @@
 export const environment = {
   production: false,
   baseUrl: 'http://cirrusapproach.local:3000',
-  profile:
-    'https://cirfullsb-cirrusaircraftvpo.cs41.force.com/approachsso/s/profile/',
+  profile: 'https://cirrusaircraft.com?app_name=Salesforce&option=oauthredirect&redirect_url=https%3A%2f%2fcirrusaircraft.com%2faccount%2fprofile',
   defaultMobileLesson:
     'https://cirrusapproachherokuprod.blob.core.windows.net/cirruslmsherokudevcontainer/content-items/images/default-lesson-hero-mobile.jpg',
   defaultDesktopLesson:
