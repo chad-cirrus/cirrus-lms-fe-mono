@@ -38,11 +38,11 @@ describe('FlightInstructionHoursComponent', () => {
     const value = [
       {
         type: FlightLogStatsType.RollingCalendarFlightLogs,
-        completed: [{ total: 50, month: 'APR', year: '2022' }],
+        calendar_completed: [{ total: 50, month: 'APR', year: '2022' }],
       },
       {
         type: FlightLogStatsType.CalendarYearFlightLogs,
-        completed: [{ total: 30, month: 'MAY', year: '2022' }],
+        calendar_completed: [{ total: 30, month: 'MAY', year: '2022' }],
       },
     ];
 

@@ -25,7 +25,7 @@ export interface OverallProgress {
 
 export interface InstructorFlightLogStats {
   type: FlightLogStatsType;
-  completed: FlightInstructionHour[];
+  calendar_completed: FlightInstructionHour[];
 }
 
 export interface IStudent {
