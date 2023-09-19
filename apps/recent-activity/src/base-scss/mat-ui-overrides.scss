@@ -567,6 +567,13 @@ apx-chart .apexcharts-toolbar {
       right: 0;
       width: 100%;
       box-shadow: 2px 8px 24px 0px rgba(0, 0, 0, 0.80);
+
+      .container {
+        & > div {
+          max-width: 60rem;
+        }
+      }
+      
     }
 
     .container {
@@ -677,6 +684,7 @@ apx-chart .apexcharts-toolbar {
 
         .header {
           width: calc(100% - 50px - 112px - 1rem);
+          // width: 100%;
           position:absolute;
         }
       }
@@ -687,13 +695,14 @@ apx-chart .apexcharts-toolbar {
         top: 0.4rem;
       }
 
+      // .lesson-info .text-container {}
       .description {
         font-size: 1.125rem;
         line-height: 21.6px;
         margin-left: 6rem;
 
         .course-price-container {
-          font-size: 0.75rem;
+          font-size: 0.875rem;
         }
       }
 
@@ -714,6 +723,18 @@ apx-chart .apexcharts-toolbar {
 
       &.sticky {
         width: calc(100% - 245px);
+        
+      }
+
+      .stripes,
+      .description .title {
+        max-width: calc(100% - 7rem);
+      }
+      .description {
+        width: 100%;
+        justify-content: space-between;
+        flex-direction: row;
+        align-items: center;
       }
 
       button {
@@ -733,67 +754,139 @@ apx-chart .apexcharts-toolbar {
       top: 285px;
 
       &.sticky {
-        position: fixed;
-        top: 150px;
-        width: 310px;
-        right: 3.1rem;
-        box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
-      }
-      .container {
-        border-radius: 6px;
+        // position: fixed;
 
-        & > div {
-          flex-direction: column !important;
-          align-items: flex-start !important;
+        width: calc(100% - 245px);
+        top: 78px;
+        right: 0;
+        left: initial;
+        .stripes,
+        .description .title {
+          max-width: calc(100% - 7rem);
+        }
+
+        .text-container {
+          .header {
+            max-width: calc(60rem - 50px - 112px - 1rem);
+          }
+          .description {
+            .title {
+              max-width: 21rem;
+            }
+            
+          }
+        }
+
+        .lesson-info .text-container .description {
+          font-size: 1.125rem !important;
+          line-height: 21.6px !important;
+          margin-left: 6rem;
+          max-width: 100% !important;
+        }
+
+        .course-price-container.course-price-mobile {
+          display: block;
+          margin-left: auto;
+        }
+        .course-price-container.course-price-desktop {
+          display: none;
+        }
+        .watch-preview-container {
+          margin-bottom: 0;
+          width: 12rem;
+          margin-left: 1rem;
+          img {
+            max-width: 35px;
+          }
+        }
+        .description {
+          justify-content: flex-start;
         }
       }
 
-      .stripes {
-        -webkit-clip-path: polygon(0 0, 100% 0, 85% 100%, 0% 100%);
-        clip-path: polygon(0 0, 100% 0, 85% 100%, 0% 100%);
-      }
+      &:not(.sticky) {
 
-      .lesson-info {
-        margin-right: 0 !important;
-        flex-direction: column !important;
+        .stripes,
+        .description .title {
+          max-width: 100%;
+        }
+        .container {
+          border-radius: 6px;
+  
+          & > div {
+            flex-direction: column !important;
+            align-items: flex-start !important;
+          }
+        }
+  
+        .stripes {
+          -webkit-clip-path: polygon(0 0, 100% 0, 85% 100%, 0% 100%);
+          clip-path: polygon(0 0, 100% 0, 85% 100%, 0% 100%);
+        }
+  
+        .lesson-info {
+          margin-right: 0 !important;
+          flex-direction: column !important;
+        }
+        
+        .text-container {
+          align-items: flex-start;
+          flex-direction: column;
+          margin-right: 0;
+          .header {
+            width: 100%;
+            position:relative;
+          }
+        }
+
+        .course-preview-divider {
+          display: block;
+          border-top: solid 1px #969696;
+          width: 100%;
+          margin-bottom: 1rem;
+        }
+
+        .course-price-container {
+          margin-bottom: 1rem;
+        }
+
+        .course-price-container.course-price-mobile {
+          display: none;
+        }
+        .course-price-container.course-price-desktop {
+          display: block;
+        }
+  
+        .description {
+          margin-top: 1.5rem;
+          margin-left: 0;
+          margin-bottom: 0.72rem;
+          flex-direction: column;
+        }
+  
+        cirrus-cta-button {
+          width: 100% !important;
+          max-width: 158px !important;
+          
+          button {
+            height: 39px;
+            width: 100%;
+          }
+  
+          span.mdc-button__label {
+            font-size: 1.06rem;
+          }
+  
+        }
+  
+        .watch-preview {
+          img {
+            max-width: 35px;  
+          }
+        }
+
       }
       
-      .text-container {
-        align-items: flex-start;
-        flex-direction: column;
-        margin-right: 0;
-        .header {
-          width: 100%;
-          position:relative;
-        }
-      }
-
-      .description {
-        margin-top: 1.5rem;
-        margin-left: 0;
-        margin-bottom: 0.72rem;
-      }
-
-      cirrus-cta-button {
-        width: 100% !important;
-        max-width: 158px !important;
-        
-        button {
-          height: 39px;
-          width: 100%;
-        }
-
-        span.mdc-button__label {
-          font-size: 1.06rem;
-        }
-
-      }
-
-      .watch-preview {
-        img {
-          max-width: 35px;  
-        }
-      }
 
     }
 
@@ -804,7 +897,6 @@ apx-chart .apexcharts-toolbar {
     .watch-preview-container {
       display: block !important;
       width: 100%;
-      margin-bottom: 0.72rem;
     }
   }
   
@@ -827,6 +919,9 @@ apx-chart .apexcharts-toolbar {
     @media screen and (min-width: 1280px) {
       cirrus-course-player {
         width: 310px;
+        &.sticky {
+          width: calc(100vw - 124px);
+        }
       }
     }
   }
@@ -836,18 +931,6 @@ apx-chart .apexcharts-toolbar {
   display: none;
 }
 
-.course-preview-container {
-
-  @media screen and (min-width: 1280px) {
-    .course-preview-divider {
-      display: block;
-      border-top: solid 1px #969696;
-      width: 100%;
-      margin-bottom: 1rem;
-    }
-  }
-  
-}
 
 
 .course-started {
@@ -868,10 +951,10 @@ apx-chart .apexcharts-toolbar {
 
   cirrus-course-player .course-price-container.course-price-desktop,
   cirrus-course-player .course-price-container.course-price-mobile {
-    display: none;
-    @media screen and (min-width: 1280px) {
-      display: none;
-    }
+    // display: none;
+    // @media screen and (min-width: 1280px) {
+    //   display: none;
+    // }
   }
   cirrus-course-player .course-price-container.course-price-mobile {
     font-size: 0.75rem;

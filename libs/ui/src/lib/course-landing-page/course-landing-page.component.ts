@@ -267,7 +267,7 @@ export class CourseLandingPageComponent {
       this._size == '(min-width: 1280px) and (max-width: 1919.98px)' ||
       this._size == '(min-width: 1920px)'
     ) {
-      this.isSticky = window.scrollY >= 130;
+      this.isSticky = window.scrollY >= 206;
     }
   }
 

@@ -98,7 +98,6 @@ cirrus-cta-button {
 @media screen and (min-width: 1280px) {
   .container {
     .lesson-info {
-      margin-right: 15px;
       .thumbnail-container {
         img {
           height: 80px;
@@ -125,17 +124,8 @@ cirrus-cta-button {
   }
 
   .course-price-container {
-    margin-bottom: 1rem;
     .course-price {
       font-weight: bold; 
-    }
-  
-    &.course-price-mobile {
-      display: none;
-    }
-    &.course-price-desktop {
-      display: block;
-      width: 100%;
     }
   }
 }
