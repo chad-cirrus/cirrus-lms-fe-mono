@@ -560,6 +560,10 @@ apx-chart .apexcharts-toolbar {
     left: -20px;
     z-index: 2;
 
+    .mat-primary.mat-mdc-button-base:hover {
+      box-shadow: none;
+    }
+
     &.sticky {
       position: fixed;
       top: 65px;
@@ -717,9 +721,17 @@ apx-chart .apexcharts-toolbar {
   }
 
   @media (min-width: 960px) {
+
     cirrus-course-player {
       width: calc(100vw - 245px);
       left: -49px;
+
+      .course-price-container.course-price-desktop {
+        font-size: 1.125rem;
+      }
+      .course-price-container.course-price-mobile {
+        font-size: 1.125rem;
+      }
 
       &.sticky {
         width: calc(100% - 245px);
@@ -728,7 +740,10 @@ apx-chart .apexcharts-toolbar {
 
       .stripes,
       .description .title {
-        max-width: calc(100% - 7rem);
+        max-width: calc(100% - 8rem);
+      }
+      .description .title {
+        font-size: 1.3125rem;
       }
       .description {
         width: 100%;
@@ -794,7 +809,7 @@ apx-chart .apexcharts-toolbar {
         .watch-preview-container {
           margin-bottom: 0;
           width: 12rem;
-          margin-left: 1rem;
+          margin-left: 2.5rem;
           img {
             max-width: 35px;
           }
