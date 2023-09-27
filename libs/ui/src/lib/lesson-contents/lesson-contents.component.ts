@@ -18,7 +18,12 @@ export class LessonContentsComponent {
   @Input()
   set lesson(val: ILesson) {
     this._lesson = val;
-    this._contents.next(val.contents);
+    
+    if (!this.instructorView) {
+      this._contents.next(val.contents);
+    } else {
+      this._contents.next(val.instructor_contents);
+    }
   }
 
   get lesson() {

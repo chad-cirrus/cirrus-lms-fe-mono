@@ -21,7 +21,7 @@ export class LessonContentPlayerMenuComponent {
     this._menuItems = value.map(item => ({
       ...item,
       icon:
-        item.progress.status === PROGRESS_STATUS.not_started
+        item.progress === null || item.progress?.status === PROGRESS_STATUS.not_started
           ? item.icon
           : progressIconMapper(item.progress.status),
     }));

@@ -42,6 +42,12 @@
             fxLayoutGap="16px"
           >
             <span>{{ title }}</span>
+            <div class="instructor-view-alert" *ngIf="instructorView$ | async">
+              <img
+                  src="courses/images/svg/yellow-warning-icon.svg"
+                />
+              Viewing Instructor Lesson Content
+            </div>
             <div
               *ngIf="
                 (checkoutOffsRequired$ | async) &&
