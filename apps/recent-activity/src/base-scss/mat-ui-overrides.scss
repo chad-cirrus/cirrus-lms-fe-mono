@@ -967,10 +967,7 @@ apx-chart .apexcharts-toolbar {
 
   cirrus-course-player .course-price-container.course-price-desktop,
   cirrus-course-player .course-price-container.course-price-mobile {
-    // display: none;
-    // @media screen and (min-width: 1280px) {
-    //   display: none;
-    // }
+    display: none;
   }
   cirrus-course-player .course-price-container.course-price-mobile {
     font-size: 0.75rem;
