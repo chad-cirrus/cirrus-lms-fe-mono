@@ -73,7 +73,7 @@ export class ImageFormatterPipe implements PipeTransform {
         'completed_night_dual_received_hours',
         'recent-activity/images/svg/completed-night-pic.svg',
       ],
-      ['completed_night_pic_hours', 'recent-activity/images/svg/pic.svg'],
+      ['completed_night_pic_hours', 'recent-activity/images/svg/night-pic.svg'],
     ]);
 
     return myMap.get(value);
