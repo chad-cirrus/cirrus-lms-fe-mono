@@ -612,6 +612,10 @@ apx-chart .apexcharts-toolbar {
       display: flex;
       flex-direction: column;
       justify-content: center;
+      margin-left: 0;
+      @include breakpoint(mobile) {
+        margin-left: 1rem;
+      }
 
       .title {
         font-family: 'akzidenz-grotesk_bqmedium';
@@ -959,18 +963,18 @@ apx-chart .apexcharts-toolbar {
       display: block;
     }
 
-    .description .title,
-    .description .chapter {
-      font-size: 20px;
+    .description {
+      margin-left: 1rem;
+      .title,
+      .chapter {
+        font-size: 20px;
+      }
     }
   }
 
   cirrus-course-player .course-price-container.course-price-desktop,
   cirrus-course-player .course-price-container.course-price-mobile {
-    // display: none;
-    // @media screen and (min-width: 1280px) {
-    //   display: none;
-    // }
+    display: none;
   }
   cirrus-course-player .course-price-container.course-price-mobile {
     font-size: 0.75rem;
