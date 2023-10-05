@@ -95,8 +95,8 @@ export class FlightInstructionHoursComponent {
   }
 
   formatDisplayDates(value: InstructorFlightLogStats): void {
-    const firstCompleted = value.completed[0];
-    const lastCompleted = value.completed[value.completed.length - 1];
+    const firstCompleted = value.calendar_completed[0];
+    const lastCompleted = value.calendar_completed[value.calendar_completed.length - 1];
 
     const firstAndLastWeek = `${firstCompleted.range} to ${lastCompleted.range}`;
 
@@ -106,7 +106,7 @@ export class FlightInstructionHoursComponent {
       lastCompleted.year
     }`);
 
-    this.displayDateRange = value.completed[0].range
+    this.displayDateRange = value.calendar_completed[0].range
       ? firstAndLastWeek
       : firstAndLastMonth;
   }
@@ -116,7 +116,7 @@ export class FlightInstructionHoursComponent {
       return;
     }
 
-    this.displayTotalHours = value.completed.reduce(
+    this.displayTotalHours = value.calendar_completed.reduce(
       (partialSum, num) => partialSum + num.total,
       0
     );
@@ -124,7 +124,7 @@ export class FlightInstructionHoursComponent {
     this.formatDisplayDates(value);
 
     const data: ChartData = {
-      data: value.completed,
+      data: value.calendar_completed,
       chartColors: FlightInstructionColors,
       title: '',
       csvRightColumnTitle: 'Flight Hours',

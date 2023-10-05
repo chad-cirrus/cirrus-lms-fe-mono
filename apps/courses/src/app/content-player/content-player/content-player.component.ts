@@ -24,6 +24,7 @@ import { Store } from '@ngrx/store';
 import { BehaviorSubject, combineLatest, Observable, Subject } from 'rxjs';
 import {
   delay,
+  filter,
   map,
   startWith,
   take,
@@ -45,7 +46,7 @@ import { IContentPlayerData } from '../content-player-dialog.service';
 import { PlaceholderDirective } from '../PlaceHolderDirective';
 import { CONTENT_PLAYER_ICONS } from './content-player-icons';
 import { findNextContent, INextContentResponse } from './findNextContent';
-import { selectIsScreenTabletOrSmaller } from '../../store/selectors/view.selector';
+import { selectInstructorView, selectIsScreenTabletOrSmaller } from '../../store/selectors/view.selector';
 
 export interface INextContentRequest {
   type: string;
@@ -66,7 +67,8 @@ export class ContentPlayerComponent
   lesson$ = this.store
     .select(selectLesson)
     .pipe(tap(lesson => (this.lesson_title = lesson.title)));
-
+  instructorView$ = this.store.select(selectInstructorView);
+  
   private _nextContentRequest = new Subject<INextContentRequest>();
   nextContentRequest$ = this._nextContentRequest.asObservable();
 
@@ -97,9 +99,9 @@ export class ContentPlayerComponent
 
   currentContentItem$: Observable<INextContentResponse> =
     this.nextContentRequest$.pipe(
-      withLatestFrom(this.lesson$, this.menuItems$, this.currentId$),
-      map(([contentRequest, lesson, menuItems, currentId]) => {
-        return findNextContent(contentRequest, lesson, menuItems, currentId);
+      withLatestFrom(this.lesson$, this.menuItems$, this.currentId$, this.instructorView$),
+      map(([contentRequest, lesson, menuItems, currentId, instructorView]) => {
+        return findNextContent(contentRequest, lesson, menuItems, currentId, instructorView);
       }),
       tap(response => this._currentId.next(response.content?.id as number))
     );
@@ -250,42 +252,47 @@ export class ContentPlayerComponent
   }
 
   updateProgress(progress: IProgress) {
-    this.lesson$.pipe(take(1)).subscribe(lesson => {
-      const contentToBeUpdated = lesson.contents.filter(
-        c => c.progress.id === progress.id
-      )[0];
-      const { content_type } = contentToBeUpdated;
-      if ([9, 10].includes(content_type)) {
-        return;
-      }
-      if (
-        contentToBeUpdated &&
-        contentToBeUpdated.progress &&
-        contentToBeUpdated.progress.status !== 'completed'
-      ) {
-        if (progress.status === PROGRESS_STATUS.in_progress) {
-          this.store.dispatch(
-            startProgress({
-              id: progress.id,
-              courseId: lesson.course_id,
-              stageId: lesson.stage_id,
-              lessonId: lesson.id,
-              assessment: [9, 10].includes(content_type),
-            })
-          );
-        } else {
-          this.store.dispatch(
-            completeProgress({
-              id: progress.id,
-              courseId: lesson.course_id,
-              stageId: lesson.stage_id,
-              lessonId: lesson.id,
-              progress,
-              assessment: [9, 10].includes(content_type),
-            })
-          );
+    combineLatest([this.lesson$, this.instructorView$])
+      .pipe(
+        take(1),
+        filter(([lesson, instructorViewEnabled]) => !instructorViewEnabled)
+      )
+      .subscribe(([lesson, instructorViewEnabled]) => {
+        const contentToBeUpdated = lesson.contents.filter(
+          c => c.progress.id === progress.id
+        )[0];
+        const { content_type } = contentToBeUpdated;
+        if ([9, 10].includes(content_type)) {
+          return;
         }
-      }
-    });
+        if (
+          contentToBeUpdated &&
+          contentToBeUpdated.progress &&
+          contentToBeUpdated.progress.status !== 'completed'
+        ) {
+          if (progress.status === PROGRESS_STATUS.in_progress) {
+            this.store.dispatch(
+              startProgress({
+                id: progress.id,
+                courseId: lesson.course_id,
+                stageId: lesson.stage_id,
+                lessonId: lesson.id,
+                assessment: [9, 10].includes(content_type),
+              })
+            );
+          } else {
+            this.store.dispatch(
+              completeProgress({
+                id: progress.id,
+                courseId: lesson.course_id,
+                stageId: lesson.stage_id,
+                lessonId: lesson.id,
+                progress,
+                assessment: [9, 10].includes(content_type),
+              })
+            );
+          }
+        }
+      });
   }
 }

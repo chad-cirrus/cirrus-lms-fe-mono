@@ -86,7 +86,7 @@ export abstract class LessonContentComponent implements OnInit, OnDestroy {
       const {
         progress: { id },
       } = this.content;
-
+      
       this.updateProgress.emit({
         id,
         status: PROGRESS_STATUS.in_progress,
@@ -95,7 +95,7 @@ export abstract class LessonContentComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if (!this.overview) {
+    if (!this.overview && this.content?.progress) {
       this.updateProgress.emit({
         id: this.content.progress.id,
         status: PROGRESS_STATUS.completed,

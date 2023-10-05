@@ -1,5 +1,5 @@
 import { IContent, IContentPlayerMenuItem, ILesson, IProgress, PROGRESS_STATUS, ProgressType } from '@cirrus/models';
-import { findNextContent } from './findNextContent';
+import { findNextContent, getNextContent } from './findNextContent';
 
 let nullProgress: IProgress = { id: 0, scorm: { grade: 0, pass: false }, status: '' };
 let nullContent: IContent = {
@@ -225,7 +225,98 @@ const lesson: ILesson = {
       show_comments: false,
     },
   ],
-  instructor_contents: [],
+  instructor_contents: [
+    {
+      id: 123,
+      order: 0,
+      title: 'Intro',
+      subtitle: 'Intro Video: Icing Awareness Course',
+      progress: {
+        id: 0,
+        status: 'not_started',
+      },
+      score: 0,
+      url: '355991595',
+      meta_tags: [],
+      content_tasks: [],
+      quiz: null,
+      content_type: 0,
+      desc: 'Intro video for the icing awareness course.',
+      content_file: '',
+      placeholder_image:
+        'https://content.cirrusapproach.com/cirruslmsherokuprodcontainer/content-items/scorm/d754d0afe672c18526c66d5c2e2a8311.1_Intro.jpg',
+      jet_scoring: false,
+      content_html: '',
+      created_by: 'Cirrus Aircraft',
+      upload_image: '',
+      content_filename: '',
+      starter_file: '',
+      blob_directory: '',
+      show_comments: true,
+    },
+    {
+      id: 456,
+      order: 1,
+      title:
+        'SR22 TKS Anti-Ice System POH Supplement (Perspective+ Avionics Only)',
+      subtitle:
+        'SR22 TKS Anti-Ice System POH Supplement (Perspective+ Avionics Only)',
+      progress: {
+        id: 0,
+        status: 'not_started',
+      },
+      score: 0,
+      url: '',
+      meta_tags: [],
+      content_tasks: [],
+      quiz: null,
+      content_type: 6,
+      desc: 'SR22 TKS Anti-Ice System POH Supplement. Aircraft Serials w/ Perspective+ avionics only.',
+      content_file:
+        'https://content.cirrusapproach.com/cirruslmsherokuprodcontainer/content-items/content-files/4e9b1f216c4b925c37d17a6ff15f0fSR22 TKS Anti-Ice System (Perspective  Avionics Only) - Revision 2.pdf',
+      placeholder_image:
+        'https://cirrusapproachherokuprod.blob.core.windows.net/cirruslmsherokuprodcontainer/content-items/content-files/4e8a24281afe2416a49896f3dcb09bIcingSuppCover.jpg',
+      jet_scoring: false,
+      content_html: '',
+      created_by: 'Cirrus Aircraft',
+      upload_image: '',
+      content_filename:
+        'SR22 TKS Anti-Ice System (Perspective+ Avionics Only) - Revision 2.pdf',
+      starter_file: '',
+      blob_directory: '',
+      show_comments: false,
+    },
+    {
+      id: 789,
+      order: 2,
+      title: 'SR22 TKS Anti-Ice POH Supplement System',
+      subtitle: 'SR22 TKS Anti-Ice POH Supplement System',
+      progress: {
+        id: 0,
+        status: 'not_started',
+      },
+      score: 0,
+      url: '',
+      meta_tags: [],
+      content_tasks: [],
+      quiz: null,
+      content_type: 6,
+      desc: 'SR22 TKS Anti-Ice System POH Supplement.',
+      content_file:
+        'https://content.cirrusapproach.com/cirruslmsherokuprodcontainer/content-items/content-files/3a8142f395fbfa719133990bd71397SR22 TKS Anti-Ice System POH Supplement - Original Issue.pdf',
+      placeholder_image:
+        'https://content.cirrusapproach.com/cirruslmsherokuprodcontainer/content-items/content-files/1252c1a49839e2cb138fe633d94297Thumbnail-SR22 TKS Anti-Ice System POH Supplement.png',
+      jet_scoring: false,
+      content_html: '',
+      created_by: 'Cirrus Aircraft',
+      upload_image: '',
+      content_filename:
+        'SR22 TKS Anti-Ice System POH Supplement - Original Issue.pdf',
+      starter_file: '',
+      blob_directory: '',
+      show_comments: false,
+    },
+  ],
   progress: {
     id: 1774633,
     status: 'in_progress',
@@ -348,6 +439,88 @@ const menuItems: IContentPlayerMenuItem[] = [
   },
 ];
 
+const instructorMenuItems: IContentPlayerMenuItem[] = [
+  {
+    icon: 'courses/images/svg/document_button.svg',
+    id: 123,
+    text: 'Intro',
+    progress: {
+      id: 1,
+      status: 'not_started',
+    },
+  },
+  {
+    icon: 'courses/images/svg/document_button.svg',
+    id: 456,
+    text:
+      'SR22 TKS Anti-Ice System POH Supplement (Perspective+ Avionics Only)',
+    progress: {
+      id: 2,
+      status: 'not_started',
+    },
+  },
+  {
+    icon: 'courses/images/svg/document_button.svg',
+    id: 789,
+    text: 'SR22 TKS Anti-Ice POH Supplement System',
+    progress: {
+      id: 3,
+      status: 'not_started',
+    },
+  }, 
+]
+
+describe('find next content index', () => {
+  test('should return next content index in instructor view when we are not on last content item', () => {
+    const currentId = 123;
+    const payload = { type: 'next', id: currentId };
+    const result = getNextContent(payload, lesson, instructorMenuItems, currentId, true);
+    const expectedResult = { state: 'next', content: lesson.instructor_contents[1] };
+
+    expect(result).toEqual(expectedResult);
+  });
+
+  test('should return first content index in instructor view when we are on last content item', () => {
+    const currentId = 789;
+    const payload = { type: 'next', id: currentId };
+    const result = getNextContent(payload, lesson, instructorMenuItems, currentId, true);
+    const expectedResult = { state: 'next', content: lesson.instructor_contents[0] }
+
+    expect(result).toEqual(expectedResult);
+  });
+
+  test('should return next content index when we are not on last content item in student view', () => {
+    const currentId = 593;
+    const payload = { type: 'next', id: currentId };
+    const result = getNextContent(payload, lesson, menuItems, currentId, false);
+    const expectedResult = { state: 'next', content: lesson.contents[1] };
+
+    expect(result).toEqual(expectedResult);
+  });
+
+  test('should return next-incomplete content item when on last content item in student view', () => {
+    const currentId = 911;
+    const payload = { type: 'next', id: currentId };
+    const result = getNextContent(payload, lesson, menuItems, currentId, false);
+    const expectedResult = { state: 'next-incomplete', content: lesson.contents[3] };
+
+    expect(result).toEqual(expectedResult);
+  });
+
+  test('should return lesson-complete when all lesson content items are complete in student view', () => {
+    const currentId = 911;
+    const payload = { type: 'next', id: currentId };
+    let completedLesson = lesson;
+    let completedMenuItems = menuItems;
+
+    completedLesson.contents.map(content => content.progress.status = 'completed' );
+    completedMenuItems.map(menuItem => menuItem.progress.status = 'completed');
+    const result = getNextContent(payload, completedLesson, completedMenuItems, currentId, false);
+
+    expect(result).toEqual({state: 'lesson-complete', content: undefined});
+  });
+});
+
 describe('find next content helper function', () => {
   test('should return the initial id', () => {
     const payLoad = {
@@ -355,7 +528,7 @@ describe('find next content helper function', () => {
       id: 593,
     };
 
-    const response = findNextContent(payLoad, lesson, menuItems, 0);
+    const response = findNextContent(payLoad, lesson, menuItems, 0, false);
 
     expect(response.content?.id).toBe(593);
     expect(response.state).toBe('initial');
@@ -366,7 +539,7 @@ describe('find next content helper function', () => {
       type: 'next',
     };
 
-    const response = findNextContent(payLoad, lesson, menuItems, 593);
+    const response = findNextContent(payLoad, lesson, menuItems, 593, false);
 
     expect(response.content?.id).toBe(605);
     expect(response.state).toBe('next');
@@ -377,7 +550,7 @@ describe('find next content helper function', () => {
       type: 'prev',
     };
 
-    const response = findNextContent(payLoad, lesson, menuItems, 605);
+    const response = findNextContent(payLoad, lesson, menuItems, 605, false);
 
     expect(response.content?.id).toBe(593);
     expect(response.state).toBe('prev');
@@ -388,7 +561,7 @@ describe('find next content helper function', () => {
       type: 'prev',
     };
 
-    const response = findNextContent(payLoad, lesson, menuItems, 593);
+    const response = findNextContent(payLoad, lesson, menuItems, 593, false);
 
     expect(response.content).toBe(undefined);
     expect(response.state).toBe('no-prev');
@@ -458,7 +631,8 @@ describe('find next content helper function', () => {
       payload,
       lesson,
       menuItemsAllComplete,
-      911
+      911,
+      false
     );
 
     expect(response.content).toBe(undefined);
@@ -529,7 +703,8 @@ describe('find next content helper function', () => {
       payload,
       lesson,
       menuItemsSomeComplete,
-      911
+      911,
+      false
     );
 
     expect(response.state).toBe('next-incomplete');

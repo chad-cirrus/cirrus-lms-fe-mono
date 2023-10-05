@@ -2,6 +2,7 @@ import { CONTENT_TYPE, IContentPlayerMenuItem } from '@cirrus/models';
 import { mapContentTypeToIcon } from '@cirrus/ui';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import * as fromLesson from '../reducers/lesson.reducer';
+import { selectInstructorView } from './view.selector';
 
 export const selectLessonFeature =
   createFeatureSelector<fromLesson.LessonState>('lesson');
@@ -35,14 +36,16 @@ export const selectCheckOffRequired = createSelector(
       .filter(status => status !== 'completed').length > 0
 );
 
-export const selectMenuItems = createSelector(selectLesson, lesson =>
-  lesson.contents.map(
-    c =>
-      ({
-        icon: mapContentTypeToIcon(c.content_type),
-        text: c.title,
-        id: c.id,
-        progress: c.progress,
-      } as IContentPlayerMenuItem)
-  )
+export const selectMenuItems = createSelector(selectLesson, selectInstructorView, (lesson, instructorView) => {
+  const displayContents = instructorView ? lesson.instructor_contents : lesson.contents;
+  return  displayContents.map(
+      c =>
+        ({
+          icon: mapContentTypeToIcon(c.content_type),
+          text: c.title,
+          id: c.id,
+          progress: c.progress,
+        } as IContentPlayerMenuItem)
+    )
+    }
 );

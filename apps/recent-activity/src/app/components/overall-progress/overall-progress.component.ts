@@ -47,17 +47,17 @@ export class OverallProgressComponent {
     ) {
       return;
     }
-
+console.log('verallProgress.logbook_stats[5]', this.overallProgress.logbook_stats[5])
     const data: ChartData =
       this.tabIndex === 0
         ? {
-            data: this.overallProgress.logbook_stats[5].completed,
+            data: this.overallProgress.logbook_stats[5].calendar_completed,
             chartColors: LogBookChartColors,
             title: 'Flight Hours in the Last 12 Months',
             csvRightColumnTitle: 'Flight Hours',
           }
         : {
-            data: this.overallProgress.course_work_stats[5].completed,
+            data: this.overallProgress.course_work_stats[5].calendar_completed,
             chartColors: CourseWorkChartColors,
             title: 'Lessons Completed in the Last 12 Months',
             csvRightColumnTitle: 'Completed',

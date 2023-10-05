@@ -133,7 +133,8 @@
           <img [src]="deployUrl + '/images/svg/clarity_help-line.svg'" />
         </a>
 
-        <span class="sidenav-icon-link" *ngIf="!disableToggle">
+        <span id="collapsible-sidenav-trigger" class="sidenav-icon-link"
+          *ngIf="!disableToggle" (click)="toggleCollapse()">
           <img
             [src]="
               collapse
@@ -142,7 +143,6 @@
                 : deployUrl +
                   '/images/svg/fluent_panel-left-expand-28-regular.svg'
             "
-            (click)="toggleCollapse()"
           />
         </span>
       </div>

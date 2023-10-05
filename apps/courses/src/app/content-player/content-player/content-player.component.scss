@@ -80,6 +80,21 @@
           font-weight: 400;
           font-size: 1rem;
           letter-spacing: 0.02em;
+
+          .instructor-view-alert {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            color: $alert-yellow;
+            line-height: 1.5rem;
+            font-size: 0.875rem;
+
+            img {
+              height: 15px;
+              width: 15px;
+              margin-right: .25rem;
+            }
+          }
         }
       }
 

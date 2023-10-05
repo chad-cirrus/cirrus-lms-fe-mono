@@ -9,7 +9,7 @@
     "
   ></div>
 
-  <div class="contents-list-container" *ngIf="!instructorView">
+  <div class="contents-list-container">
     <div
       *ngFor="let content of contents$ | async; let i = index"
       class="content-item"
@@ -22,4 +22,5 @@
       ></cirrus-lesson-content-item>
     </div>
   </div>
+
 </div>

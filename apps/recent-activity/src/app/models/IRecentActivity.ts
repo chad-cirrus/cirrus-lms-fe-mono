@@ -3,11 +3,13 @@ import { ICoursesForRecentActivity } from '@cirrus/models';
 export interface LogbookStat {
   type: string;
   completed: [];
+  calendar_completed: [];
 }
 
 export interface CourseWorkStat {
   type: string;
   completed: [];
+  calendar_completed: [];
 }
 
 export interface IacraStat {
