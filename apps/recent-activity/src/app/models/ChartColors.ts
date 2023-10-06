@@ -3,7 +3,7 @@ export interface ChartColors {
   gradientToColors: string[];
 }
 
-export const CourseWorkChartColors = {
+export const LogBookChartColors = {
   gradientFromColors: ['#FF8000'],
   gradientToColors: [
     '#00FF00',
@@ -21,7 +21,7 @@ export const CourseWorkChartColors = {
   ],
 };
 
-export const LogBookChartColors = {
+export const CourseWorkChartColors = {
   gradientFromColors: ['#7E128F'],
   gradientToColors: [
     '#6F44CA',
