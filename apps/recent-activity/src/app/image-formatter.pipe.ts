@@ -21,7 +21,7 @@ export class ImageFormatterPipe implements PipeTransform {
       ],
       [
         'completed_cross_country_hours',
-        'recent-activity/images/svg/ground-hours-icon.svg',
+        'recent-activity/images/svg/cross-country-icon.svg',
       ],
       [
         'lesson',
