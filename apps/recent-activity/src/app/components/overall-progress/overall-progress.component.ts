@@ -47,7 +47,6 @@ export class OverallProgressComponent {
     ) {
       return;
     }
-console.log('verallProgress.logbook_stats[5]', this.overallProgress.logbook_stats[5])
     const data: ChartData =
       this.tabIndex === 0
         ? {
