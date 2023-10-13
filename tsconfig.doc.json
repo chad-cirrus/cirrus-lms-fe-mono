@@ -1,0 +1,14 @@
+{
+  "include": [
+    "apps/atc/src/**/*.ts",
+    "apps/courses/src/**/*.ts",
+    "apps/recent-activity/src/**/*.ts",
+  ],
+  "exclude": [
+    "src/test.ts",
+    "src/**/*.spec.ts",
+    "apps/atc/src/**/*.spec.ts",
+    "apps/courses/src/**/*.spec.ts",
+    "apps/recent-activity/src/**/*.spec.ts",
+  ]
+}
