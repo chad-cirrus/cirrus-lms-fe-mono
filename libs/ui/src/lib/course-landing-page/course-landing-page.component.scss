@@ -3,7 +3,7 @@
 .lesson-image {
   min-height: 450px;
   padding: 95px 20px 0;
-  margin-bottom: 50px;
+  // margin-bottom: 50px;
   width: 100%;
   background-image: cover;
 }
@@ -78,9 +78,10 @@ mat-spinner {
 }
 
 cirrus-course-progress {
-  display: inline-block;
+  display: block;
   width: 100%;
   margin: 20px 0 40px;
+  max-width: 653px;
 }
 
 cirrus-cta-button {
@@ -145,7 +146,7 @@ cirrus-cta-button {
 
 @media (min-width: 1400px) {
   .lesson-image {
-    height: calc( 75vh - 80px );
+    height: 40vw;
   }
 }
 
@@ -239,6 +240,57 @@ cirrus-cta-button {
     }
     .course-stat-value {
       font-size: 2.75rem;
+    }
+  }
+}
+
+
+.course-state-started {
+
+  .course-started {
+    padding: 0 20px 3rem;
+  
+    @media screen and (min-width: 600px) {
+      padding-left: 25px;
+      padding-right: 25px;
+    }
+    @media (min-width: 960px) {
+      padding-left: 50px;
+      padding-right: 50px;
+    }
+  }
+
+  .lesson-image {
+    padding: 95px 20px 50px;
+  }
+  
+  @media (min-width: 960px) {
+    .lesson-image {
+      margin-bottom: -100px;
+    }
+  }
+
+  @media (min-width: 600px) {
+    .lesson-image {
+      padding: 140px 25px 150px;
+    }
+  }
+  @media (min-width: 960px) {
+    .lesson-image {
+      min-height: 550px;
+      padding: 140px 50px 150px;
+    }
+  }
+
+}
+
+
+.lesson-hero.course-state-preview {
+  margin-bottom: 3rem;
+
+  @media screen and (min-width: 1280px) {
+    .lesson-image {
+      padding-bottom: 50px;
     }
   }
 }
