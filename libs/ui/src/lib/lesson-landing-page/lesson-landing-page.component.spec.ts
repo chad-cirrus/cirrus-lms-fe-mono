@@ -12,6 +12,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatIconTestingModule } from '@angular/material/icon/testing';
 import { MatIcon } from '@angular/material/icon';
 import { CtaButtonComponent } from '@cirrus/ui';
+import { LessonIntroVideoComponent } from './lesson-intro-video/lesson-intro-video.component';
 
 describe('LessonLandingPageComponent', () => {
   let component: LessonLandingPageComponent;
@@ -23,6 +24,7 @@ describe('LessonLandingPageComponent', () => {
       declarations: [
         MatIcon,
         LessonLandingPageComponent,
+        LessonIntroVideoComponent,
         MockComponent(LessonContentsComponent),
         MockComponent(LessonProgressComponent),
         EncodeUriPipe,

@@ -155,24 +155,6 @@ cirrus-lesson-progress.instructor-view {
   pointer-events: all;
 }
 
-.intro-video {
-  padding: 16px 0;
-
-  .intro-video-title {
-    margin: 0;
-  }
-
-  .intro-video-play {
-    display: inline-block;
-    cursor: pointer;
-    padding: 20px 0 0;
-
-    .intro-video-subtitle {
-      color: $gray4;
-    }
-  }
-}
-
 .cirrus-progress-row {
   position: relative;
   margin-top: 12px;
