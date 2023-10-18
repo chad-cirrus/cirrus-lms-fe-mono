@@ -13,6 +13,7 @@ import {
   MatDialogRef as MatDialogRef,
 } from '@angular/material/dialog';
 import {
+  CONTENT_TYPE,
   IContent,
   ILessonFlightLog,
   IProgress,
@@ -68,7 +69,7 @@ export class ContentPlayerComponent
     .select(selectLesson)
     .pipe(tap(lesson => (this.lesson_title = lesson.title)));
   instructorView$ = this.store.select(selectInstructorView);
-  
+
   private _nextContentRequest = new Subject<INextContentRequest>();
   nextContentRequest$ = this._nextContentRequest.asObservable();
 
@@ -137,7 +138,7 @@ export class ContentPlayerComponent
       .subscribe(([{ content }, [tasks, logbook]]) => {
         if (content !== undefined) {
           this.vcref.ViewContainerRef.clear();
-          this.addPadding = [9, 10].indexOf(content.content_type) < 0;
+          this.addPadding = [CONTENT_TYPE.flight_assessment, CONTENT_TYPE.ground_assessment].indexOf(content.content_type) < 0;
           this.currentContentType = content.content_type;
           this.title = content.title;
           this.createComponent(content, tasks, logbook);
@@ -190,7 +191,7 @@ export class ContentPlayerComponent
     component.tasks = tasks;
     component.logbook = logbook;
     component.lessonTitle = this.lesson_title;
-    
+
     component.hidePrevAndNext.subscribe(value => {
       this._hideBtns.next(value);
       this.changeDetectorRef.detectChanges();
@@ -262,7 +263,7 @@ export class ContentPlayerComponent
           c => c.progress.id === progress.id
         )[0];
         const { content_type } = contentToBeUpdated;
-        if ([9, 10].includes(content_type)) {
+        if ([CONTENT_TYPE.flight_assessment, CONTENT_TYPE.ground_assessment].includes(content_type)) {
           return;
         }
         if (
@@ -277,8 +278,8 @@ export class ContentPlayerComponent
                 courseId: lesson.course_id,
                 stageId: lesson.stage_id,
                 lessonId: lesson.id,
-                assessment: [9, 10].includes(content_type),
-              })
+                assessment: [CONTENT_TYPE.flight_assessment, CONTENT_TYPE.ground_assessment].includes(content_type),
+              }),
             );
           } else {
             this.store.dispatch(
@@ -288,8 +289,8 @@ export class ContentPlayerComponent
                 stageId: lesson.stage_id,
                 lessonId: lesson.id,
                 progress,
-                assessment: [9, 10].includes(content_type),
-              })
+                assessment: [CONTENT_TYPE.flight_assessment, CONTENT_TYPE.ground_assessment].includes(content_type),
+              }),
             );
           }
         }
