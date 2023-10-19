@@ -5,7 +5,6 @@
   </div>
 </div>
 
-
 <div class="lesson-hero" [ngClass]="course.course_attempt?.id ? 'course-state-started' : 'course-state-preview'">
   
   <div class="lesson-image" [ngStyle]="background$ | async">
@@ -13,6 +12,11 @@
     <mat-divider></mat-divider>
     <div class="course-sub-title" *ngIf="course.subtitle">
       <p class="large">{{ course.subtitle }}</p>
+    </div>
+
+    <div *ngIf="course.course_attempt?.id && course.course_overview_video" class="watch-course-intro" (click)="watchPreview()">
+      <img class="play-logo" src="courses/images/svg/play-logo.svg" />
+      <p>Watch Course Intro</p>
     </div>
 
     <!-- STATE: Course NOT Started AND HAS Course Content Stats -->

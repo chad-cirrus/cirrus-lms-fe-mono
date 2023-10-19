@@ -9,6 +9,7 @@ import {
   ContentCounts,
   IBadge,
   ICertificate,
+  IContent,
   ICourseOverview,
   ICourseOverviewLesson,
   ILessonsstats,
@@ -43,7 +44,7 @@ describe('CourseLandingPageComponent', () => {
     certificate: certificate,
     completed_at: '',
     course_attempt: {
-      id: 0,
+      id: 1234,
       user_course: {
         accepted_agreement: false,
         accepted_agreement_at: '',
@@ -97,7 +98,48 @@ describe('CourseLandingPageComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should hide watch preview cta in header when user is enrolled and intro video is null', () => {
+    const courseLandingPageElement = fixture.debugElement.nativeElement;
+    expect(courseLandingPageElement.querySelector('.watch-course-intro')).toBeFalsy();
+  });
+
+  it('should show watch preview cta in header when user is enrolled and intro video is truthy', () => {
+    component.course = {...course, course_overview_video: mockCourseOverviewVideo()};
+    fixture.detectChanges();
+    const courseLandingPageElement = fixture.debugElement.nativeElement;
+    expect(courseLandingPageElement.querySelector('.watch-course-intro')).toBeTruthy();
+  });
 });
 
 class MockUIDownloadService {}
 class MockCirrusSanitizerService {}
+
+function mockCourseOverviewVideo(): IContent {
+  return {
+    id: 401,
+    order: 0,
+    title: 'Course Intro Video',
+    subtitle: 'This is the Course Intro Video',
+    progress: { id: 1, status: 'not_completed' },
+    score: 0,
+    url: '309005652',
+    meta_tags: [],
+    content_tasks: [],
+    quiz: '',
+    content_type: 0,
+    desc: 'Perspective & Perspective+ Avionics Course',
+    content_file: '',
+    placeholder_image:
+      'https://cirrusapproachherokuprod.blob.core.windows.net/cirruslmsherokuprodcontainer/content-items/content-files/5c480eb38443724475091bf0d91ba12.2.png',
+    jet_scoring: false,
+    content_html: '',
+    created_by: '',
+    upload_image: '',
+    content_filename: '',
+    starter_file: '',
+    blob_directory: '',
+    show_comments: false,
+    courseTitle: ''
+  };
+}
