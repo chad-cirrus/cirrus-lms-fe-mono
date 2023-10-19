@@ -1,4 +1,4 @@
-import { CONTENT_TYPE } from '..';
+import { CONTENT_TYPE } from './ContentType';
 
 export interface IPlayListItem {
   id: number;
