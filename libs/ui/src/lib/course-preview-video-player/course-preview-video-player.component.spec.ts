@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { CoursePreviewVideoPlayerComponent } from './course-preview-video-player.component';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { VideoPlayerComponent } from '../video-player/video-player.component';
 
 jest.mock('@vimeo/player', () => {
   return { default: function() {
@@ -17,7 +18,7 @@ describe('CoursePreviewVideoPlayerComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CoursePreviewVideoPlayerComponent ],
+      declarations: [ CoursePreviewVideoPlayerComponent, VideoPlayerComponent ],
       providers: [
         { provide: MAT_DIALOG_DATA, useValue: {} },
         { provide: MatDialogRef, useValue: {} },

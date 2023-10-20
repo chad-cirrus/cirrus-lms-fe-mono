@@ -18,6 +18,25 @@ h1 {
   }
 }
 
+.watch-course-intro {
+  display: flex;
+  align-items: center;
+  height: 35px;
+  width: 199px;
+  margin-top: 1rem;
+  cursor: pointer;
+
+  .play-logo {
+    height: 1.5rem;
+    width: 1.5rem;
+    margin-right: .5rem
+  }
+  p {
+    width: 100%;
+    margin: 0;
+  }
+}
+
 .download-document {
   display: flex;
   gap: 16px;

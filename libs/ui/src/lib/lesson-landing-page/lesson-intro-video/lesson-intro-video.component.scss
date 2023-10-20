@@ -1,0 +1,20 @@
+@use '../styles/variables' as *;
+
+.intro-video {
+    padding: 16px 0;
+  
+    .intro-video-title {
+      margin: 0;
+    }
+  
+    .intro-video-play {
+      display: inline-block;
+      cursor: pointer;
+      padding: 20px 0 0;
+  
+      .intro-video-subtitle {
+        color: $gray4;
+      }
+    }
+  }
+  

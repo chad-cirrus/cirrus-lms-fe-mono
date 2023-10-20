@@ -13,6 +13,7 @@ import { InstructorBarComponent } from './instructor-bar/instructor-bar.componen
 import { LessonContentItemComponent } from './lesson-content-item/lesson-content-item.component';
 import { LessonContentsComponent } from './lesson-contents/lesson-contents.component';
 import { LessonLandingPageComponent } from './lesson-landing-page/lesson-landing-page.component';
+import { LessonIntroVideoComponent } from './lesson-landing-page/lesson-intro-video/lesson-intro-video.component';
 import { LessonProgressComponent } from './lesson-progress/lesson-progress.component';
 import { MenuSliderComponent } from './menu-slider/menu-slider.component';
 import { ProgressCardComponent } from './progress-card/progress-card.component';
@@ -104,6 +105,7 @@ import { FullstoryService } from './lib-services/fullstory/fullstory.service';
   ],
   declarations: [
     LessonLandingPageComponent,
+    LessonIntroVideoComponent,
     LessonContentItemComponent,
     ProgressCardComponent,
     ProgressIndicatorComponent,
