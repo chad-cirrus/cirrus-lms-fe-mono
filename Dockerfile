@@ -9,7 +9,7 @@ ADD . /cirrus-lms-fe-mono
 RUN yarn upgrade cypress
 RUN yarn
 
-EXPOSE 4201
+EXPOSE 4201 4202
 #ENTRYPOINT ["tail", "-f", "/dev/null"]
 
 # must call docker run with hosts addition: docker run -td -p 127.0.0.1:4201:4201 --add-host=cirrusapproach.local:0.0.0.0 chadk/cirrus-lms-fe-mono
