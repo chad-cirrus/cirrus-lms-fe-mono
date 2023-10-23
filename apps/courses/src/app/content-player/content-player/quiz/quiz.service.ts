@@ -23,6 +23,7 @@ export interface IQuizRequest {
   name: string;
   desc: string;
   quiz_questions: IQuestion[];
+  subjects: string[];
 }
 
 @Injectable({
