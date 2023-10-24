@@ -33,5 +33,101 @@
         </ul>
       </div>
     </div>
+
+    <div class="quiz-question-box" style="display: none;">
+
+
+      <div class="qqb-progress-bar"><span class="qqb-progress-bar-complete" style="width: 100%;"></span></div>
+    
+      <div class="qqb-meta">
+        <div class="qqb-progress">Question $CURRENT_QUESTION of $TOTAL_QUESTIONS</div>
+        <div class="qqb-timer">
+          <svg width="17" height="19" viewBox="0 0 17 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6.79297 2.83142V0.75H9.67297V2.86837" fill="#14A0FF" />
+            <path fill-rule="evenodd" clip-rule="evenodd"
+              d="M6.04297 0.75C6.04297 0.335786 6.37876 0 6.79297 0H9.67297C10.0872 0 10.423 0.335786 10.423 0.75V2.86837C10.423 3.28259 10.0872 3.61837 9.67297 3.61837C9.25876 3.61837 8.92297 3.28259 8.92297 2.86837V1.5H7.54297V2.83142C7.54297 3.24564 7.20718 3.58142 6.79297 3.58142C6.37876 3.58142 6.04297 3.24564 6.04297 2.83142V0.75Z"
+              fill="#14A0FF" />
+            <path d="M11.5801 3.68129L12.2828 2.48047L13.5315 3.18865L12.8099 4.40794" fill="#14A0FF" />
+            <path fill-rule="evenodd" clip-rule="evenodd"
+              d="M11.6355 2.10165C11.8427 1.74758 12.296 1.6257 12.6528 1.82809L13.9015 2.53627C14.0766 2.63558 14.2044 2.80112 14.2562 2.99565C14.308 3.19018 14.2794 3.39737 14.1769 3.57061L13.4553 4.78991C13.2444 5.14638 12.7844 5.26434 12.4279 5.05338C12.1405 4.8833 12.0081 4.55133 12.0782 4.24225C11.842 4.45206 11.4887 4.4968 11.2013 4.32859C10.8438 4.11938 10.7236 3.65997 10.9328 3.30247L11.6355 2.10165Z"
+              fill="#14A0FF" />
+            <path fill-rule="evenodd" clip-rule="evenodd"
+              d="M8.27941 3.79883C4.52194 3.79883 1.5 6.78469 1.5 10.4385C1.5 14.0923 4.52194 17.0782 8.27941 17.0782C12.0369 17.0782 15.0588 14.0923 15.0588 10.4385C15.0588 6.78469 12.0369 3.79883 8.27941 3.79883ZM0 10.4385C0 5.9299 3.72013 2.29883 8.27941 2.29883C12.8387 2.29883 16.5588 5.9299 16.5588 10.4385C16.5588 14.9471 12.8387 18.5782 8.27941 18.5782C3.72013 18.5782 0 14.9471 0 10.4385Z"
+              fill="#14A0FF" />
+            <path
+              d="M8.2792 11.8845C9.09355 11.8845 9.75371 11.2366 9.75371 10.4374C9.75371 9.63814 9.09355 8.99023 8.2792 8.99023C7.46485 8.99023 6.80469 9.63814 6.80469 10.4374C6.80469 11.2366 7.46485 11.8845 8.2792 11.8845Z"
+              fill="#14A0FF" />
+            <path fill-rule="evenodd" clip-rule="evenodd"
+              d="M11.1961 5.93438C11.5441 6.15907 11.644 6.62331 11.4193 6.97128L8.96601 10.7708C8.74132 11.1188 8.27708 11.2187 7.9291 10.994C7.58113 10.7694 7.48118 10.3051 7.70587 9.95714L10.1592 6.15762C10.3839 5.80964 10.8481 5.70969 11.1961 5.93438Z"
+              fill="#14A0FF" />
+          </svg>
+          $TIME_USED
+        </div>
+      </div>
+    
+      <h4 class="qqb-question">$EXAMPLE_QUESTION</h4>
+    
+      <div class="qqb-answers --multiple-choice">
+    
+        <div class="qqb-action">Select one</div>
+    
+        <ul class="qqb-answer-items">
+          <li class="qqb-answer-item" data-answer-value=""><span class="qqb-answer-select-icon"></span>$OPTION_1</li>
+          <li class="qqb-answer-item" data-answer-value=""><span class="qqb-answer-select-icon"></span>$OPTION_2</li>
+        </ul>
+    
+      </div>
+    
+      <div class="qqb-answers --true-false">
+    
+        <!-- <div class="qqb-action">Select one</div> -->
+    
+        <ul class="qqb-answer-items">
+          <li class="qqb-answer-item" data-answer-value="true">
+            <span class="qqb-answer-select-icon">
+              <svg width="14" height="11" viewBox="0 0 14 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1.41406 4.80939L5.33563 8.84979L12.5252 1.44238" stroke="#0077C8" stroke-width="2" />
+              </svg>
+            </span>
+            True
+          </li>
+          <li class="qqb-answer-item" data-answer-value="false">
+            <span class="qqb-answer-select-icon">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1.28353 1.38053L10.6169 10.7139M10.6172 1.28643L1.28383 10.6198" stroke="#0077C8"
+                  stroke-width="2" />
+              </svg>
+            </span>
+            False
+          </li>
+        </ul>
+    
+      </div>
+    
+      <div class="qqb-controls">
+    
+        <button class="qqb-control-back">
+          <svg width="10" height="18" viewBox="0 0 10 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M7.55558e-07 8.65234C7.70356e-07 8.48307 0.0325525 8.32682 0.097657 8.18359C0.162762 8.04036 0.260418 7.90364 0.390626 7.77344L7.99805 0.332031C8.21289 0.110678 8.47982 -1.27776e-07 8.79883 -9.98874e-08C9.00716 -8.16743e-08 9.19922 0.0520839 9.375 0.15625C9.55078 0.253906 9.69076 0.390625 9.79492 0.566406C9.89258 0.735678 9.94141 0.924479 9.94141 1.13281C9.94141 1.44531 9.82422 1.722 9.58985 1.96289L2.73438 8.65234L9.58984 15.3418C9.82422 15.5827 9.94141 15.8561 9.94141 16.1621C9.94141 16.377 9.89258 16.569 9.79492 16.7383C9.69076 16.9076 9.55078 17.041 9.375 17.1387C9.19922 17.2428 9.00716 17.2949 8.79883 17.2949C8.47982 17.2949 8.21289 17.1875 7.99805 16.9727L0.390626 9.53125C0.260418 9.40104 0.162761 9.26432 0.097657 9.12109C0.0325525 8.97786 7.4076e-07 8.82161 7.55558e-07 8.65234Z"
+              fill="#14A0FF" />
+          </svg>
+          $BACK_BUTTON
+        </button>
+    
+        <button class="qqb-control-submit">
+          $SUBMIT_BUTTON
+    
+          <svg width="14" height="11" viewBox="0 0 14 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0.835938 4.78788L5.2477 9.33333L13.3359 1" stroke="white" stroke-width="1.66667" />
+          </svg>
+        </button>
+    
+        <!-- <div class="quiz-control-fullscreen"></div> -->
+    
+      </div>
+    
+    </div>
+    
   </div>
 </div>
