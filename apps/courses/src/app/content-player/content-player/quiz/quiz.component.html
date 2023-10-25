@@ -1,37 +1,106 @@
 <div #wrapper class="quiz-container">
   <div class="container">
-    <h1></h1>
-
-    <div class="quiz-overview">
+    <div class="quiz-overview" *ngIf="inProcess === false && quizCompleted === false">
       <header class="quiz-overview-header">
         <div class="quiz-overview-content">
           <div class="quiz-title-wrapper">
-            <h2 class="quiz-lesson-number">{{content.title}}</h2>
+            <h2 class="quiz-lesson-number">{{ content.title }}</h2>
             <h4 class="quiz-total-questions">
-              {{this.getQuestionCount()}} Questions <span class="quiz-duration">(approximately 15 minutes)</span>
+              {{ this.getQuestionCount() }} Questions <span class="quiz-duration">({{ approximateDuration }})</span>
             </h4>
           </div>
 
           <div class="quiz-button-wrapper">
-            <button class="quiz-start">Start Quiz</button>
-            <div class="quiz-warning-label"><span class="quiz-warning-label-icon">i</span> This is a timed Quiz</div>
+            <button class="quiz-start" (click)="startQuiz()">Start Quiz</button>
+            <div class="quiz-warning-label" *ngIf="isQuizTimed === true">
+              <span class="quiz-warning-label-icon">i</span> This is a timed Quiz
+            </div>
           </div>
         </div>
 
         <div class="quiz-icon">
-          <img src="courses/images/svg/quiz_icon.svg">
+          <img src="courses/images/svg/quiz_icon.svg" />
         </div>
       </header>
-
       <div class="quiz-tags">
         <h6>Subject Content</h6>
 
-        <ul class="quiz-tag-list">
-          <li class="quiz-tag">Tag1</li>
-          <li class="quiz-tag">Tag2</li>
-          <li class="quiz-tag">Tag3</li>
+        <ul class="quiz-tag-list" *ngFor="let subject of this.getSubjectList()">
+          <li class="quiz-tag">{{ subject }}</li>
         </ul>
       </div>
+    </div>
+
+    <div class="quiz-question-box" *ngIf="inProcess === true && quizCompleted === false">
+      <div class="qqb-progress-bar"><span class="qqb-progress-bar-complete" style="width: 100%"></span></div>
+
+      <div class="qqb-meta">
+        <div class="qqb-progress">Question {{ this.currentQuestion + 1 }} of {{ this.getQuestionCount() }}</div>
+        <div class="qqb-timer" *ngIf="isQuizTimed === true">
+          <img src="courses/images/svg/quiz_question_timer_icon.svg" />
+          {{ quizTimeUsed }}
+        </div>
+      </div>
+
+      <h4 class="qqb-question">{{ this.quiz.quiz_questions[this.currentQuestion].body }}</h4>
+
+      <div class="qqb-answers --multiple-choice" *ngIf="this.quiz.quiz_questions[this.currentQuestion].question_options.length > 2">
+        <div class="qqb-action">Select one</div>
+
+        <ul class="qqb-answer-items" *ngFor="let question of this.quiz.quiz_questions[this.currentQuestion].question_options">
+          <li class="qqb-answer-item" data-answer-value="">
+            <input type="radio" name="question-option" class="qqb-answer-select-icon" (click)="this.selectAnswer(this.quiz.quiz_questions[this.currentQuestion].id, question.id)">{{ question.description }}
+          </li>
+        </ul>
+      </div>
+
+      <div class="qqb-answers --true-false" *ngIf="this.quiz.quiz_questions[this.currentQuestion].question_options.length === 2">
+        <!-- <div class="qqb-action">Select one</div> -->
+
+        <ul class="qqb-answer-items">
+          <li class="qqb-answer-item" data-answer-value="true">
+            <span class="qqb-answer-select-icon">
+              <svg width="14" height="11" viewBox="0 0 14 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1.41406 4.80939L5.33563 8.84979L12.5252 1.44238" stroke="#0077C8" stroke-width="2" />
+              </svg>
+            </span>
+            True
+          </li>
+          <li class="qqb-answer-item" data-answer-value="false">
+            <span class="qqb-answer-select-icon">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M1.28353 1.38053L10.6169 10.7139M10.6172 1.28643L1.28383 10.6198"
+                  stroke="#0077C8"
+                  stroke-width="2"
+                />
+              </svg>
+            </span>
+            False
+          </li>
+        </ul>
+      </div>
+
+      <div class="qqb-controls">
+        <button class="qqb-control-back" (click)="goBack()">
+          <img src="courses/images/svg/quiz_question_back_button_icon.svg" />
+          BACK
+        </button>
+
+        <button class="qqb-control-submit" (click)="submitAnswer()" disabled="disabled">
+          SUBMIT
+
+          <svg width="14" height="11" viewBox="0 0 14 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0.835938 4.78788L5.2477 9.33333L13.3359 1" stroke="white" stroke-width="1.66667" />
+          </svg>
+        </button>
+
+        <!-- <div class="quiz-control-fullscreen"></div> -->
+      </div>
+    </div>
+
+    <div class="quiz-complete" *ngIf="inProcess === true && quizCompleted === true">
+      <h1>You have completed this quiz!</h1>
     </div>
   </div>
 </div>

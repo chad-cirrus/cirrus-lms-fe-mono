@@ -23,7 +23,14 @@ export interface IQuizRequest {
   name: string;
   desc: string;
   quiz_questions: IQuestion[];
-  subjects: string[];
+  subjects?: string[];
+}
+
+export class Answer {
+  quiz_id!: number;
+  question_id!: number;
+  answer!: number;
+  timestamp!: Date;
 }
 
 @Injectable({
@@ -35,6 +42,6 @@ export class QuizService {
   getQuiz(id: number): Observable<IQuizRequest> {
     return this.http
       .get<IQuizRequest>(`${environment.baseUrl}/api/v4/quizzes/${id}`)
-      .pipe(map(response => response));
+      .pipe(map(response => response['quiz']));
   }
 }
