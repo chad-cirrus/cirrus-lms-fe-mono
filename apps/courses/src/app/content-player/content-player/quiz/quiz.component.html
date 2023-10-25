@@ -1,6 +1,6 @@
 <div #wrapper class="quiz-container">
   <div class="container">
-    <div class="quiz-overview" *ngIf="inProcess === false && quizCompleted === false">
+    <div class="quiz-overview" *ngIf="isQuizInProcess() === false && isQuizCompleted() === false">
       <header class="quiz-overview-header">
         <div class="quiz-overview-content">
           <div class="quiz-title-wrapper">
@@ -31,30 +31,30 @@
       </div>
     </div>
 
-    <div class="quiz-question-box" *ngIf="inProcess === true && quizCompleted === false">
+    <div class="quiz-question-box" *ngIf="isQuizInProcess() === true && isQuizCompleted() === false">
       <div class="qqb-progress-bar"><span class="qqb-progress-bar-complete" style="width: 100%"></span></div>
 
       <div class="qqb-meta">
-        <div class="qqb-progress">Question {{ this.currentQuestion + 1 }} of {{ this.getQuestionCount() }}</div>
+        <div class="qqb-progress">Question {{ this.quizAttempt.current_question + 1 }} of {{ this.getQuestionCount() }}</div>
         <div class="qqb-timer" *ngIf="isQuizTimed === true">
           <img src="courses/images/svg/quiz_question_timer_icon.svg" />
           {{ quizTimeUsed }}
         </div>
       </div>
 
-      <h4 class="qqb-question">{{ this.quiz.quiz_questions[this.currentQuestion].body }}</h4>
+      <h4 class="qqb-question">{{ this.quiz.quiz_questions[this.quizAttempt.current_question].body }}</h4>
 
-      <div class="qqb-answers --multiple-choice" *ngIf="this.quiz.quiz_questions[this.currentQuestion].question_options.length > 2">
+      <div class="qqb-answers --multiple-choice" *ngIf="this.quiz.quiz_questions[this.quizAttempt.current_question].question_options.length > 2">
         <div class="qqb-action">Select one</div>
 
-        <ul class="qqb-answer-items" *ngFor="let question of this.quiz.quiz_questions[this.currentQuestion].question_options">
+        <ul class="qqb-answer-items" *ngFor="let question of this.quiz.quiz_questions[this.quizAttempt.current_question].question_options">
           <li class="qqb-answer-item" data-answer-value="">
-            <input type="radio" name="question-option" class="qqb-answer-select-icon" (click)="this.selectAnswer(this.quiz.quiz_questions[this.currentQuestion].id, question.id)">{{ question.description }}
+            <input type="radio" name="question-option" class="qqb-answer-select-icon" (click)="this.selectAnswer(this.quiz.quiz_questions[this.quizAttempt.current_question].id, question.id)">{{ question.description }}
           </li>
         </ul>
       </div>
 
-      <div class="qqb-answers --true-false" *ngIf="this.quiz.quiz_questions[this.currentQuestion].question_options.length === 2">
+      <div class="qqb-answers --true-false" *ngIf="this.quiz.quiz_questions[this.quizAttempt.current_question].question_options.length === 2">
         <!-- <div class="qqb-action">Select one</div> -->
 
         <ul class="qqb-answer-items">
@@ -87,7 +87,7 @@
           BACK
         </button>
 
-        <button class="qqb-control-submit" (click)="submitAnswer()" disabled="disabled">
+        <button class="qqb-control-submit" (click)="submitAnswer()" [disabled]="(this.selectedAnswer | json) === '{}'">
           SUBMIT
 
           <svg width="14" height="11" viewBox="0 0 14 11" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -99,7 +99,7 @@
       </div>
     </div>
 
-    <div class="quiz-complete" *ngIf="inProcess === true && quizCompleted === true">
+    <div class="quiz-complete" *ngIf="isQuizInProcess() === true && isQuizCompleted() === true">
       <h1>You have completed this quiz!</h1>
     </div>
   </div>

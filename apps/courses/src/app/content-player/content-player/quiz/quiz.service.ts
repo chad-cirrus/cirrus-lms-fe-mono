@@ -33,6 +33,13 @@ export class Answer {
   timestamp!: Date;
 }
 
+export class QuizAttempt {
+  quiz_id!: number;
+  quiz_start_time: Date | undefined;
+  current_question = -1;
+  answers!: Answer[];
+}
+
 @Injectable({
   providedIn: 'root',
 })

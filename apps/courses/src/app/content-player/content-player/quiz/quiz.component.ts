@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IContent } from '@cirrus/models';
 import { LessonContentComponent } from '@cirrus/ui';
-import { IQuizRequest, QuizService, Answer } from './quiz.service';
+import { IQuizRequest, QuizService, QuizAttempt, Answer } from './quiz.service';
 
 /**
  * Component for displaying a quiz
@@ -27,11 +27,7 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
   }
 
   quiz!: IQuizRequest;
-  inProcess = false;
-  quizCompleted = false;
-  currentQuestion = -1;
-  quizStartTime: Date | undefined;
-  answers: Answer[] = [];
+  quizAttempt = new QuizAttempt();
 
   /// TODO: replace next line when api returns actual value
   approximateDuration = '3 million minutes';
@@ -111,9 +107,8 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
    * @returns {void}
    */
   startQuiz(): void {
-    this.inProcess = true;
-    this.quizStartTime = new Date();
-    this.currentQuestion = 0;
+    this.quizAttempt.quiz_start_time = new Date();
+    this.quizAttempt.current_question = 0;
     this.hidePrevAndNext.emit(true);
   }
 
@@ -125,10 +120,7 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
    * @returns void
    */
   goBack() {
-    this.currentQuestion--;
-    if (this.currentQuestion == -1) {
-      this.inProcess = false;
-    }
+    this.quizAttempt.current_question--;
   }
 
   /**
@@ -140,17 +132,35 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
     this.selectedAnswer = { quiz_id: this.quiz.id, question_id: questionId, answer: answerId, timestamp: new Date() };
   }
 
+  isQuizInProcess(): boolean {
+    return this.quizAttempt.current_question > -1;
+  }
+
+  isQuizCompleted(): boolean {
+    let _result = false;
+
+    if (
+      this.quizAttempt.answers &&
+      this.quizAttempt.answers.length > 0 &&
+      this.quizAttempt.answers.length === this.quiz.quiz_questions.length
+    ) {
+      _result = true;
+    }
+    return _result;
+  }
   /**
    * Submits the selected answer for the current question and increments the currentQuestion index.
    * If the current question is the last question in the quiz, the quizCompleted boolean is set to true.
    */
   submitAnswer() {
-    this.answers[this.currentQuestion] = this.selectedAnswer;
-    this.currentQuestion++;
+    if(!this.quizAttempt.answers){
+      this.quizAttempt.answers = [];
+    }
+    this.quizAttempt.answers[this.quizAttempt.current_question] = this.selectedAnswer;
+    this.quizAttempt.current_question++;
     this.selectedAnswer = new Answer();
-    if (this.currentQuestion === this.quiz.quiz_questions.length - 1) {
-      console.log('answers:', this.answers);
-      this.quizCompleted = true;
+    if (this.isQuizCompleted()) {
+      console.log('answers:', this.quizAttempt);
       this.hidePrevAndNext.emit(false);
     }
   }
