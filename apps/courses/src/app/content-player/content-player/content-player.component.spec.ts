@@ -6,6 +6,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TaskService } from '../../task.service';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { coursesReducers } from '../../store/reducers';
+import { LessonContentPlayerMenuComponent } from '@cirrus/ui';
 
 describe('ContentPlayerComponent', () => {
   let component: ContentPlayerComponent;
@@ -25,7 +26,7 @@ describe('ContentPlayerComponent', () => {
           { provide: MatDialogRef, useValue: {} },
           TaskService,
         ],
-        declarations: [ContentPlayerComponent],
+        declarations: [ContentPlayerComponent, LessonContentPlayerMenuComponent],
       })
       .compileComponents();
   });
