@@ -65,6 +65,8 @@ export class ContentPlayerComponent
   destroy$: Subject<boolean> = new Subject<boolean>();
   firstContentId = 0;
   menuItems$ = this.store.select(selectMenuItems);
+  isScreenTabletOrSmaller$ = this.store.select(selectIsScreenTabletOrSmaller);
+
   lesson$ = this.store
     .select(selectLesson)
     .pipe(tap(lesson => (this.lesson_title = lesson.title)));
@@ -107,7 +109,7 @@ export class ContentPlayerComponent
       tap(response => this._currentId.next(response.content?.id as number))
     );
 
-  private _menuOpen = new BehaviorSubject<boolean>(false);
+  private _menuOpen = new BehaviorSubject<boolean>(true);
   menuOpen$ = this._menuOpen.asObservable();
 
   get icons() {
@@ -133,9 +135,10 @@ export class ContentPlayerComponent
     combineLatest([
       this.currentContentItem$,
       this.taskService.tasksAndLogBooks$,
+      this.isScreenTabletOrSmaller$
     ])
       .pipe(delay(0), takeUntil(this.destroy$))
-      .subscribe(([{ content }, [tasks, logbook]]) => {
+      .subscribe(([{ content }, [tasks, logbook], isScreenTabletOrSmaller]) => {
         if (content !== undefined) {
           this.vcref.ViewContainerRef.clear();
           this.addPadding = [CONTENT_TYPE.flight_assessment, CONTENT_TYPE.ground_assessment].indexOf(content.content_type) < 0;
@@ -144,14 +147,9 @@ export class ContentPlayerComponent
           this.createComponent(content, tasks, logbook);
           this.changeDetectorRef.detectChanges();
 
-          this.store
-            .select(selectIsScreenTabletOrSmaller)
-            .pipe(take(1))
-            .subscribe(isScreenTabletOrSmaller => {
-              if (isScreenTabletOrSmaller) {
-                this.handleCloseMenu();
-              }
-            });
+          if (isScreenTabletOrSmaller) {
+            this.handleCloseMenu();
+          }
         } else {
           this.dialogRef.close();
         }
