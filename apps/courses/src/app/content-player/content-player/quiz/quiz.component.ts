@@ -121,6 +121,7 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
    */
   goBack() {
     this.quizAttempt.current_question--;
+    if (this.quizAttempt.current_question === -1) this.hidePrevAndNext.emit(false);
   }
 
   /**
