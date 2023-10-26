@@ -132,36 +132,71 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
     this.selectedAnswer = { quiz_id: this.quiz.id, question_id: questionId, answer: answerId, timestamp: new Date() };
   }
 
+  /**
+   * Checks if the selected answer is correct
+   * @returns {boolean} - true if the selected answer is correct, false otherwise
+   */
+  checkAnswer(): boolean {
+    if (this.selectedAnswer.answer == this.quiz.quiz_questions[this.quizAttempt.current_question].correct_option.id)
+      return true;
+    else return false;
+  }
+
+  /**
+   * Checks if a quiz is in progress
+   * @returns {boolean} - true if a quiz is in progress, false otherwise
+   */
   isQuizInProcess(): boolean {
     return this.quizAttempt.current_question > -1;
   }
 
+  /**
+   * Checks if a quiz has been completed
+   *
+   * @returns {boolean} true if the quiz has been completed, false otherwise
+   */
   isQuizCompleted(): boolean {
-    let _result = false;
-
     if (
       this.quizAttempt.answers &&
       this.quizAttempt.answers.length > 0 &&
       this.quizAttempt.answers.length === this.quiz.quiz_questions.length
     ) {
-      _result = true;
+      return true;
     }
-    return _result;
+    return false;
   }
+
   /**
    * Submits the selected answer for the current question and increments the currentQuestion index.
    * If the current question is the last question in the quiz, the quizCompleted boolean is set to true.
    */
   submitAnswer() {
-    if(!this.quizAttempt.answers){
+    if (!this.quizAttempt.answers) {
       this.quizAttempt.answers = [];
     }
+
     this.quizAttempt.answers[this.quizAttempt.current_question] = this.selectedAnswer;
+    if (this.checkAnswer()) console.log('Correct answer!');
+    else console.log('Wrong answer!');
+
     this.quizAttempt.current_question++;
     this.selectedAnswer = new Answer();
     if (this.isQuizCompleted()) {
-      console.log('answers:', this.quizAttempt);
       this.hidePrevAndNext.emit(false);
     }
+  }
+
+  /**
+   * Calculates the score of a quiz attempt.
+   * @returns {string} The score of the quiz attempt in the form of "correctAnswers out of totalQuestions correct. (percentage%)"
+   */
+  getScore(): string {
+    let _correctAnswers = 0;
+    let _percentage = 0.0;
+    for (let i = 0; i < this.quiz.quiz_questions.length; i++) {
+      if (this.quizAttempt.answers[i].answer === this.quiz.quiz_questions[i].correct_option.id) _correctAnswers++;
+    }
+    _percentage = (_correctAnswers / this.quiz.quiz_questions.length) * 100;
+    return `${_correctAnswers} out of ${this.quiz.quiz_questions.length} correct. (${_percentage.toFixed(2)}%)`;
   }
 }

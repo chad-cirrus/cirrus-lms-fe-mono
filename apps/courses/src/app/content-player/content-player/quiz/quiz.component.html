@@ -25,8 +25,8 @@
       <div class="quiz-tags">
         <h6>Subject Content</h6>
 
-        <ul class="quiz-tag-list" *ngFor="let subject of this.getSubjectList()">
-          <li class="quiz-tag">{{ subject }}</li>
+        <ul class="quiz-tag-list">
+          <li *ngFor="let subject of this.getSubjectList()" class="quiz-tag">{{ subject }}</li>
         </ul>
       </div>
     </div>
@@ -35,7 +35,9 @@
       <div class="qqb-progress-bar"><span class="qqb-progress-bar-complete" style="width: 100%"></span></div>
 
       <div class="qqb-meta">
-        <div class="qqb-progress">Question {{ this.quizAttempt.current_question + 1 }} of {{ this.getQuestionCount() }}</div>
+        <div class="qqb-progress">
+          Question {{ this.quizAttempt.current_question + 1 }} of {{ this.getQuestionCount() }}
+        </div>
         <div class="qqb-timer" *ngIf="isQuizTimed === true">
           <img src="courses/images/svg/quiz_question_timer_icon.svg" />
           {{ quizTimeUsed }}
@@ -44,17 +46,31 @@
 
       <h4 class="qqb-question">{{ this.quiz.quiz_questions[this.quizAttempt.current_question].body }}</h4>
 
-      <div class="qqb-answers --multiple-choice" *ngIf="this.quiz.quiz_questions[this.quizAttempt.current_question].question_options.length > 2">
+      <div
+        class="qqb-answers --multiple-choice"
+        *ngIf="this.quiz.quiz_questions[this.quizAttempt.current_question].question_options.length > 2"
+      >
         <div class="qqb-action">Select one</div>
 
-        <ul class="qqb-answer-items" *ngFor="let question of this.quiz.quiz_questions[this.quizAttempt.current_question].question_options">
+        <ul
+          class="qqb-answer-items"
+          *ngFor="let question of this.quiz.quiz_questions[this.quizAttempt.current_question].question_options"
+        >
           <li class="qqb-answer-item" data-answer-value="">
-            <input type="radio" name="question-option" class="qqb-answer-select-icon" (click)="this.selectAnswer(this.quiz.quiz_questions[this.quizAttempt.current_question].id, question.id)">{{ question.description }}
+            <input
+              type="radio"
+              name="question-option"
+              class="qqb-answer-select-icon"
+              (click)="this.selectAnswer(this.quiz.quiz_questions[this.quizAttempt.current_question].id, question.id)"
+            />{{ question.description }}
           </li>
         </ul>
       </div>
 
-      <div class="qqb-answers --true-false" *ngIf="this.quiz.quiz_questions[this.quizAttempt.current_question].question_options.length === 2">
+      <div
+        class="qqb-answers --true-false"
+        *ngIf="this.quiz.quiz_questions[this.quizAttempt.current_question].question_options.length === 2"
+      >
         <!-- <div class="qqb-action">Select one</div> -->
 
         <ul class="qqb-answer-items">
@@ -100,7 +116,8 @@
     </div>
 
     <div class="quiz-complete" *ngIf="isQuizInProcess() === true && isQuizCompleted() === true">
-      <h1>You have completed this quiz!</h1>
+      <h1>Quiz Complete!</h1>
+      <h3>{{ getScore() }}</h3>
     </div>
   </div>
 </div>
