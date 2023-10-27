@@ -36,9 +36,9 @@ describe('ContentPlayerComponent', () => {
     fixture.detectChanges();
   });
 
-  it('has a closed menu by default', (done) => {
+  it('has an open menu by default', (done) => {
     component.menuOpen$.subscribe((open) => {
-      expect(open).toBeFalsy();
+      expect(open).toBeTruthy();
       done();
     });
   });

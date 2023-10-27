@@ -1,13 +1,19 @@
-import { Pipe, PipeTransform } from "@angular/core";
+import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: "nameToInitials"
+  name: 'nameToInitials'
 })
 export class NameToInitialsPipe implements PipeTransform {
   transform(fullName: string): any {
-    return fullName
-      .split(" ")
-      .map(n => n[0])
-      .join("");
+    if (!fullName?.trim()) return '';
+
+    const fullNameArray = fullName.trim().split(' ');
+    const firstInitial = fullNameArray[0].charAt(0).toUpperCase();
+  
+    if (fullNameArray.length === 1) return firstInitial;
+  
+    const lastInitial = fullNameArray[fullNameArray.length - 1].charAt(0).toUpperCase();
+  
+    return `${firstInitial}${lastInitial}`;
   }
 }
