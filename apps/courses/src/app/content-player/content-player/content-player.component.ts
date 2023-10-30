@@ -109,7 +109,7 @@ export class ContentPlayerComponent
       tap(response => this._currentId.next(response.content?.id as number))
     );
 
-  private _menuOpen = new BehaviorSubject<boolean>(true);
+  private _menuOpen = new BehaviorSubject<boolean>(false);
   menuOpen$ = this._menuOpen.asObservable();
 
   get icons() {
@@ -134,11 +134,10 @@ export class ContentPlayerComponent
 
     combineLatest([
       this.currentContentItem$,
-      this.taskService.tasksAndLogBooks$,
-      this.isScreenTabletOrSmaller$
+      this.taskService.tasksAndLogBooks$
     ])
       .pipe(delay(0), takeUntil(this.destroy$))
-      .subscribe(([{ content }, [tasks, logbook], isScreenTabletOrSmaller]) => {
+      .subscribe(([{ content }, [tasks, logbook]]) => {
         if (content !== undefined) {
           this.vcref.ViewContainerRef.clear();
           this.addPadding = [CONTENT_TYPE.flight_assessment, CONTENT_TYPE.ground_assessment].indexOf(content.content_type) < 0;
@@ -146,14 +145,18 @@ export class ContentPlayerComponent
           this.title = content.title;
           this.createComponent(content, tasks, logbook);
           this.changeDetectorRef.detectChanges();
-
-          if (isScreenTabletOrSmaller) {
-            this.handleCloseMenu();
-          }
         } else {
           this.dialogRef.close();
         }
       });
+
+    this.isScreenTabletOrSmaller$.pipe(takeUntil(this.destroy$)).subscribe(isSmallScreen => {
+      if (isSmallScreen) {
+        this.handleCloseMenu();
+      } else {
+        this.toggleMenu();
+      }
+    });
   }
 
   ngAfterViewInit(): void {
