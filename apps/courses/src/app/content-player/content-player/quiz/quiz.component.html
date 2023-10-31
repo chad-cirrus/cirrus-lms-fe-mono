@@ -52,17 +52,17 @@
       >
         <div class="qqb-action">Select one</div>
 
-        <ul
-          class="qqb-answer-items"
-          *ngFor="let question of this.quiz.quiz_questions[this.quizAttempt.current_question].question_options"
-        >
-          <li class="qqb-answer-item" data-answer-value="">
-            <input
-              type="radio"
-              name="question-option"
-              class="qqb-answer-select-icon"
-              (click)="this.selectAnswer(this.quiz.quiz_questions[this.quizAttempt.current_question].id, question.id)"
-            />{{ question.description }}
+        <ul class="qqb-answer-items">
+          <li class="qqb-answer-item" 
+            data-answer-value="" 
+            *ngFor="let question of this.quiz.quiz_questions[this.quizAttempt.current_question].question_options" 
+            (click)="this.selectAnswer(this.quiz.quiz_questions[this.quizAttempt.current_question].id, question.id)">
+            <span class="qqb-answer-select-icon">
+              <svg width="14" height="11" viewBox="0 0 14 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1.44922 4.79007L5.17256 8.62625L11.9987 1.59326" stroke="#0077C8" stroke-width="3"/>
+              </svg>
+            </span>
+            {{ question.description }}
           </li>
         </ul>
       </div>
@@ -74,7 +74,7 @@
         <!-- <div class="qqb-action">Select one</div> -->
 
         <ul class="qqb-answer-items">
-          <li class="qqb-answer-item button" data-answer-value="true" (click)="this.selectAnswer(this.quiz.quiz_questions[this.quizAttempt.current_question].id, this.quiz.quiz_questions[this.quizAttempt.current_question].question_options[0].id)">
+          <li class="qqb-answer-item" data-answer-value="true" (click)="this.selectAnswer(this.quiz.quiz_questions[this.quizAttempt.current_question].id, this.quiz.quiz_questions[this.quizAttempt.current_question].question_options[0].id)">
             <span class="qqb-answer-select-icon">
               <svg width="14" height="11" viewBox="0 0 14 11" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M1.41406 4.80939L5.33563 8.84979L12.5252 1.44238" stroke="#0077C8" stroke-width="2" />
@@ -82,7 +82,7 @@
             </span>
             {{ this.quiz.quiz_questions[this.quizAttempt.current_question].question_options[0].description}}
           </li>
-          <li class="qqb-answer-item button" data-answer-value="false" (click)="this.selectAnswer(this.quiz.quiz_questions[this.quizAttempt.current_question].id, this.quiz.quiz_questions[this.quizAttempt.current_question].question_options[1].id)">
+          <li class="qqb-answer-item" data-answer-value="false" (click)="this.selectAnswer(this.quiz.quiz_questions[this.quizAttempt.current_question].id, this.quiz.quiz_questions[this.quizAttempt.current_question].question_options[1].id)">
             <span class="qqb-answer-select-icon">
               <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
