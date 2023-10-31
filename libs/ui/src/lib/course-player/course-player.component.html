@@ -25,8 +25,8 @@
 
         <div class="description">
           <div class="course-header" *ngIf="config.header">{{ config.header }}</div>
-          <span class="chapter">{{ config.index }}</span>
-          <span class="title">{{ config.title }}</span>
+          <div class="chapter" *ngIf="config.index">{{ config.index }}</div>
+          <div class="title">{{ config.title }}</div>
 
           <div class="watch-preview-container" *ngIf="config.preview">
             <div class="watch-preview" (click)="emitWatchPreview()">
