@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Renderer2 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IContent } from '@cirrus/models';
 import { LessonContentComponent } from '@cirrus/ui';
@@ -19,7 +19,7 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
    * Constructor for the QuizComponent
    * @param quizService Injects the QuizService to get the quiz
    */
-  constructor(private quizService: QuizService) {
+  constructor(private quizService: QuizService, private renderer: Renderer2) {
     super();
     this.quizService.getQuiz(0).subscribe(response => {
       this.quiz = response;
@@ -73,6 +73,9 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
     this.hidePrevAndNext.emit(false);
   }
 
+  menuToggle(event: MouseEvent) {
+    this.renderer.addClass(event.target, '--selected');
+  }
   /**
    * getQuestionCount()
    *
@@ -131,6 +134,7 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
    */
   selectAnswer(questionId: number, answerId: number) {
     this.selectedAnswer = { quiz_id: this.quiz.id, question_id: questionId, answer: answerId, timestamp: new Date() };
+    console.log(this.selectedAnswer);
   }
 
   /**
