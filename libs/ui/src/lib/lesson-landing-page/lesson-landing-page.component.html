@@ -100,33 +100,12 @@
         [progress]="lesson.progress_stats"
       ></cirrus-lesson-progress-stats>
     </div>
-    <div
-      class="intro-video"
-      *ngIf="
-        lesson.student_intro_video &&
-        lesson.student_intro_video.content.content_type === 0 &&
-        (instructorView$ | async) === false
-      "
-    >
-      <h4 class="intro-video-title">Intro Video</h4>
-      <div class="intro-video-play" (click)="playIntroVideo()">
-        <div fxLayout="row" fxLayoutGap="18px">
-          <mat-icon svgIcon="play"></mat-icon>
-
-          <div
-            *ngIf="!lesson.student_intro_video.title; else customIntroText"
-            class="intro-video-subtitle"
-          >
-            Lesson Introduction Video
-          </div>
-          <ng-template #customIntroText>
-            <div class="intro-video-subtitle">
-              {{ lesson.student_intro_video.title }}
-            </div>
-          </ng-template>
-        </div>
-      </div>
-    </div>
+    <cirrus-lesson-intro-video
+      [instructorView]="instructorView$ | async"
+      [studentIntroVideo]="lesson.student_intro_video"
+      [instructorIntroVideo]="lesson.instructor_intro_video"
+      (playVideoClicked)="playIntroVideo()"
+    ></cirrus-lesson-intro-video>
     <br *ngIf="instructorView$ | async" />
 
     <div #contentList>

@@ -111,22 +111,6 @@ export class LessonLandingPageComponent implements OnInit, OnDestroy {
     return 'courses/images/svg/play_button_filled_in.svg';
   }
 
-  get hasVideo() {
-    return (
-      (this.lesson.student_intro_video &&
-        this.lesson.student_intro_video.content.content_type === 0) ||
-      (this.lesson.instructor_intro_video &&
-        this.lesson.instructor_intro_video.content.content_type === 0)
-    );
-  }
-
-  get noTitle() {
-    return (
-      !this.lesson.student_intro_video?.title &&
-      !this.lesson.instructor_intro_video?.title
-    );
-  }
-
   constructor(
     private dialog: MatDialog,
     private sanitizer: DomSanitizer,

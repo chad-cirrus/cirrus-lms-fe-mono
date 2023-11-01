@@ -1,0 +1,12 @@
+<div
+  class="intro-video"
+  *ngIf="willDisplay()"
+>
+  <h4 class="intro-video-title">Intro Video</h4>
+  <div class="intro-video-play" (click)="onPlayVideoClick()">
+    <div fxLayout="row" fxLayoutGap="18px">
+      <mat-icon svgIcon="play"></mat-icon>
+      <div class="intro-video-subtitle">{{subtitle()}}</div>
+    </div>
+  </div>
+</div>

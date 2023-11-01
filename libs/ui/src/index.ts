@@ -39,6 +39,7 @@ export * from './lib/pdf/pdf.component';
 export * from './lib/table-format.pipe';
 export * from './lib/ui.module';
 export * from './lib/video-player/video-player.component';
+export * from './lib/lesson-content-player-menu/lesson-content-player-menu.component';
 
 export * from './lib/lib-services/connections/connections.service';
 export * from './lib/lib-services/error/error.service';

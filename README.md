@@ -1,7 +1,45 @@
 
 
 # Cirrus
+This is the mono repo for Cirrus Learning Management.
 
+## Compodoc documentation generator
+A website can be genereted for documentation of the app.
+
+https://github.com/compodoc/compodoc
+
+inside the root of the repo is a file named tsconfig.doc.json.
+This file contains the setup for the documentation generator.
+
+To add it to a project:
+'``yarn add @compodoc/compodoc```
+
+To generate the documentation:
+```npx compodoc -p tsconfig.doc.json```
+
+To serve the generated output on local web server:
+```npx compodoc -s --port 8090 -d ./documentation```
+
+## Docker
+https://docs.docker.com/engine/install/
+
+example build command:
+```
+docker build . -t <your username here>/cirrus-lms-fe-mono
+```
+You can list this image from above: ```docker images```
+
+Run command: 
+```
+docker run -td -p 127.0.0.1:4201:4201 --add-host=cirrusapproach.local:0.0.0.0 <your-username>/cirrus-lms-fe-mono
+```
+
+# Useful links
+## rx.js
+
+https://rxjs.dev/
+
+## Nx
 This project was generated using [Nx](https://nx.dev).
 
 <p style="text-align: center;"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="450"></p>
@@ -103,3 +141,24 @@ Nx Cloud pairs with Nx in order to enable you to build and test code more rapidl
 Teams using Nx gain the advantage of building full-stack applications with their preferred framework alongside Nx’s advanced code generation and project dependency graph, plus a unified experience for both frontend and backend developers.
 
 Visit [Nx Cloud](https://nx.app/) to learn more.
+
+
+# install nvm (node version manager: https://github.com/nvm-sh/nvm)
+# from this stackoverflow post: https://stackoverflow.com/a/43497744
+ENV NVM_DIR /home/node/nvm
+RUN mkdir -p $NVM_DIR
+RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.1/install.sh | bash
+ENV NODE_VERSION v16.14.2
+RUN /bin/bash -c "source $NVM_DIR/nvm.sh && nvm install $NODE_VERSION && nvm use --delete-prefix $NODE_VERSION"
+
+ENV NODE_PATH $NVM_DIR/versions/node/$NODE_VERSION/lib/node_modules
+ENV PATH      $NVM_DIR/versions/node/$NODE_VERSION/bin:$PATH
+
+# install app
+RUN mkdir -p /cirrus-lms-fe-mono
+WORKDIR /cirrus-lms-fe-mono
+ADD . /cirrus-lms-fe-mono
+RUN npm install -g -s --no-progress yarn && \
+  yarn && \
+  yarn run build && \
+  yarn cache clean
