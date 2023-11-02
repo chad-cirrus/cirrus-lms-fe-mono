@@ -18,4 +18,22 @@ export class IACRAComponent {
   constructor(private store: Store) {}
 
   @Input() iacraStats!: IacraStat[];
+
+  public get formattedIacraStats(): IacraStat[] {
+    if (!this.iacraStats) {
+      return [];
+    }
+    
+    return this.iacraStats.map((iacraStat) => ({
+      ...iacraStat,
+      completed: this.shouldConvertToFloat(iacraStat.type, iacraStat.completed)
+        ? Number(iacraStat.completed).toFixed(1)
+        : iacraStat.completed,
+    }));
+  }
+
+  shouldConvertToFloat(statType: string, statValue: any): boolean {
+    const chartValuesToNotFloat = ['completed_night_takeoffs', 'completed_night_landings'];
+    return (typeof statValue === 'number' && !chartValuesToNotFloat.includes(statType));
+  }
 }

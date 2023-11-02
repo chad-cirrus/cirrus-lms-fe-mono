@@ -2,8 +2,8 @@ import { ICoursesForRecentActivity } from '@cirrus/models';
 
 export interface LogbookStat {
   type: string;
-  completed: [];
-  calendar_completed: [];
+  completed: any;
+  calendar_completed: any[];
 }
 
 export interface CourseWorkStat {
@@ -14,7 +14,7 @@ export interface CourseWorkStat {
 
 export interface IacraStat {
   type: string;
-  completed: [];
+  completed: any;
 }
 
 export interface OverallProgress {

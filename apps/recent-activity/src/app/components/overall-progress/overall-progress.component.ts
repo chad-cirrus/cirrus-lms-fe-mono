@@ -47,6 +47,7 @@ export class OverallProgressComponent {
     ) {
       return;
     }
+
     const data: ChartData =
       this.tabIndex === 0
         ? {
