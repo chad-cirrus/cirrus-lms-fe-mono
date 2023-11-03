@@ -369,11 +369,21 @@
 
   text-align: center;
   color: #fff;
-  background-color: #C9582C;
   padding: 6rem 1.5rem;
   border-radius: 12px;
 
+  &.--fail {
+    background-color: #C9582C;
+  }
+  &.--pass {
+    background-color: #10a9a9;
+    .quiz-results-icon {
+      display: block;
+    }
+  }
+
   .quiz-results-icon {
+    display: none;
     height: 40px;
     width: 40px;
     margin: 0 auto;
