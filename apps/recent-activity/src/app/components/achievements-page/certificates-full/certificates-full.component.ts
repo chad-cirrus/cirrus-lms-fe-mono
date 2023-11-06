@@ -5,6 +5,7 @@ import { downloadPdf, UiDownloadService } from '@cirrus/ui';
 import { UntypedFormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
+import { PdfDownloadFile } from '@cirrus/models';
 
 @Component({
   selector: 'cirrus-certificates-full',
@@ -40,8 +41,8 @@ export class CertificatesFullComponent {
   download(cert: Certificate) {
     this.user_certificate_id = cert.id;
     this.facade.downloadCertificate(cert.id).subscribe(
-      (data: Blob) => {
-        downloadPdf(data, 'cert');
+      (data: PdfDownloadFile) => {
+        downloadPdf(data);
       },
       () => {
         // do nothing

@@ -7,6 +7,7 @@ import {
   ICoursePlayerConfig,
   IOrder,
   PROGRESS_STATUS,
+  PdfDownloadFile,
   TermsAgreementSubtitleText,
 } from '@cirrus/models';
 import { produceConfig } from './produce-config';
@@ -198,8 +199,8 @@ export class CourseLandingPageComponent {
     if (this.course.certificate.id) {
       this.downloadService
         .downloadCertificate(this.course.certificate.id)
-        .subscribe((data: Blob) => {
-          downloadPdf(data, 'cert');
+        .subscribe((data: PdfDownloadFile) => {
+          downloadPdf(data);
         });
     }
   }
@@ -244,8 +245,8 @@ export class CourseLandingPageComponent {
   downloadTranscript() {
     this.downloadService
       .downloadTranscript(this.course.id, 0)
-      .subscribe((data: Blob) => {
-        downloadPdf(data, 'trans');
+      .subscribe((data: PdfDownloadFile) => {
+        downloadPdf(data);
       });
   }
 

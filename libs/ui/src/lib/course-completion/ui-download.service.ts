@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { ICourseOverview, IOrder } from '@cirrus/models';
+import { ICourseOverview, IOrder, PdfDownloadFile } from '@cirrus/models';
 import { BehaviorSubject, Observable, of } from 'rxjs';
-import { concatMap, finalize, tap } from 'rxjs/operators';
+import { concatMap, finalize, tap, map } from 'rxjs/operators';
 
 @Injectable()
 export class UiDownloadService {
@@ -37,25 +37,63 @@ export class UiDownloadService {
     return this.http.get(url);
   }
 
-  downloadCertificate(user_certificate_id: number) {
+  downloadCertificate(user_certificate_id: number): Observable<PdfDownloadFile> {
     const url = `${this.environment['baseUrl']}/api/v4/user_certificates/${user_certificate_id}`;
+    
     return of(null).pipe(
       tap(() => this.certificateLoadingSubject.next(true)),
-      concatMap(() => this.http.get(url, { responseType: 'blob' })),
+      concatMap(() => this.http.get(url, { observe: 'response', responseType: 'blob' })),
+      map(response => {
+        const contentDisposition = response.headers.get('Content-Disposition');
+        const name = this.parseFilename(contentDisposition as string);
+        const newPdfFile: PdfDownloadFile = {
+          filename: name,
+          file: response.body as Blob
+        }
+
+        return newPdfFile;
+      }),
       finalize(() => this.certificateLoadingSubject.next(false))
     );
   }
 
-  downloadTranscript(course_id: number, course_attempt_id: number) {
+  downloadTranscript(course_id: number, course_attempt_id: number): Observable<PdfDownloadFile> {
     const param =
       course_attempt_id > 0 ? `?course_attempt_id=${course_attempt_id}` : '';
     const url =
       `${this.environment['baseUrl']}/api/v4/courses/${course_id}/transcript.pdf` +
       param;
+
     return of(null).pipe(
       tap(() => this.transcriptLoadingSubject.next(true)),
-      concatMap(() => this.http.get(url, { responseType: 'blob' })),
+      concatMap(() => this.http.get(url, { observe: 'response', responseType: 'blob' })),
+      map(response => {
+        const contentDisposition = response.headers.get('Content-Disposition');
+        const name = this.parseFilename(contentDisposition as string);
+        const newPdfFile: PdfDownloadFile = {
+          filename: name,
+          file: response.body as Blob
+        }
+
+        return newPdfFile;
+      }),
       finalize(() => this.transcriptLoadingSubject.next(false))
     );
+  }
+
+  parseFilename(contentDisposition: string): string {
+    const filenameStarRegex = /filename\*=UTF-8''([^;]+)/;
+    const matchesStar = filenameStarRegex.exec(contentDisposition);
+    if (matchesStar && matchesStar[1]) {
+      return decodeURIComponent(matchesStar[1]);
+    }
+
+    const filenameRegex = /filename="([^"]+)"/;
+    const matches = filenameRegex.exec(contentDisposition);
+    if (matches && matches[1]) {
+      return matches[1];
+    }
+
+    return '';
   }
 }

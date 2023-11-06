@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { INotification, ICirrusUser } from '@cirrus/models';
+import { INotification, ICirrusUser, PdfDownloadFile } from '@cirrus/models';
 import {
   ConnectionsService,
   UiDownloadService,
@@ -63,7 +63,7 @@ export class RecentActivityFacade {
       .pipe(tap(() => this.getRecentActivityPayload()));
   }
 
-  downloadCertificate(user_certificate_id: number) {
+  downloadCertificate(user_certificate_id: number): Observable<PdfDownloadFile> {
     return this.downloadService.downloadCertificate(user_certificate_id);
   }
 
