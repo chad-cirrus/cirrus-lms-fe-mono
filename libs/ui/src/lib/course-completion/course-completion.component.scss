@@ -92,9 +92,12 @@
   }
 }
 
+.badge img {
+  width: 170px;
+  height: auto;
+}
 @media (min-width: 960px) {
   .badge img {
     width: 234px;
-    height: auto;
   }
 }
