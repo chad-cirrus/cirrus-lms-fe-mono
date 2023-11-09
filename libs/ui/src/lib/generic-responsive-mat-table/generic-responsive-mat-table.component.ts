@@ -42,7 +42,6 @@ export class GenericResponsiveMatTableComponent implements AfterViewInit {
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
-    // this.dataSource.sort = this.sort;x
   }
 
   rowSelect(row: any) {

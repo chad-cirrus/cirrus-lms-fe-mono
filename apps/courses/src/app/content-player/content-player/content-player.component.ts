@@ -154,6 +154,14 @@ export class ContentPlayerComponent
           this.dialogRef.close();
         }
       });
+
+    this.isScreenTabletOrSmaller$.pipe(takeUntil(this.destroy$)).subscribe(isSmallScreen => {
+      if (isSmallScreen) {
+        this.handleCloseMenu();
+      } else {
+        this.toggleMenu();
+      }
+    });
   }
 
   ngAfterViewInit(): void {

@@ -102,7 +102,7 @@
           fxLayout="row"
           fxLayoutAlign="start center"
           (click)="downloadCert()"
-          *ngIf="course.certificate.id"
+          *ngIf="course?.certificate?.id"
         >
           <div *ngIf="certificateLoading$ | async; else value">
             <mat-spinner class="spinner-white" [diameter]="35"></mat-spinner>

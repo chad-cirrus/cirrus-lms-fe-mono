@@ -7,6 +7,7 @@ import {
   ICoursePlayerConfig,
   IOrder,
   PROGRESS_STATUS,
+  PdfDownloadFile,
   TermsAgreementSubtitleText,
 } from '@cirrus/models';
 import { produceConfig } from './produce-config';
@@ -198,8 +199,8 @@ export class CourseLandingPageComponent {
     if (this.course.certificate.id) {
       this.downloadService
         .downloadCertificate(this.course.certificate.id)
-        .subscribe((data: Blob) => {
-          downloadPdf(data, 'cert');
+        .subscribe((data: PdfDownloadFile) => {
+          downloadPdf(data);
         });
     }
   }
@@ -244,30 +245,29 @@ export class CourseLandingPageComponent {
   downloadTranscript() {
     this.downloadService
       .downloadTranscript(this.course.id, 0)
-      .subscribe((data: Blob) => {
-        downloadPdf(data, 'trans');
+      .subscribe((data: PdfDownloadFile) => {
+        downloadPdf(data);
       });
   }
 
   @HostListener('window:scroll', ['$event'])
   checkScroll() {
-    if (this._size == '(max-width: 599.98px)') {
+    if (this.coursePlayerEl && this.coursePlayerEl.nativeElement) {
       const distanceToTop =
-        this.coursePlayerEl.nativeElement.getBoundingClientRect().top;
-
-      this.isSticky = distanceToTop <= 65;
-    } else if (
-      this._size == '(min-width: 600px) and (max-width: 959.98px)' ||
-      this._size == '(min-width: 960px) and (max-width: 1279.98px)'
-    ) {
-      const distanceToTop =
-        this.coursePlayerEl.nativeElement.getBoundingClientRect().top;
-      this.isSticky = distanceToTop <= 78;
-    } else if (
-      this._size == '(min-width: 1280px) and (max-width: 1919.98px)' ||
-      this._size == '(min-width: 1920px)'
-    ) {
-      this.isSticky = window.scrollY >= 206;
+          this.coursePlayerEl.nativeElement.getBoundingClientRect().top;
+      if (this._size == '(max-width: 599.98px)') {
+        this.isSticky = distanceToTop <= 65;
+      } else if (
+        this._size == '(min-width: 600px) and (max-width: 959.98px)' ||
+        this._size == '(min-width: 960px) and (max-width: 1279.98px)'
+      ) {
+        this.isSticky = distanceToTop <= 78;
+      } else if (
+        this._size == '(min-width: 1280px) and (max-width: 1919.98px)' ||
+        this._size == '(min-width: 1920px)'
+      ) {
+        this.isSticky = window.scrollY >= 206;
+      }
     }
   }
 

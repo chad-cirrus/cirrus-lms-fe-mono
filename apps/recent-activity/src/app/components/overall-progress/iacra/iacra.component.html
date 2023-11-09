@@ -1,7 +1,7 @@
 <h5 class="title heading-5">Lifetime Cirrus Approach IACRA Totals</h5>
 
 <div class="iacra-wrapper">
-  <div *ngFor="let iacra of iacraStats; let odd = odd" class="iacra-item">
+  <div *ngFor="let iacra of formattedIacraStats; let odd = odd" class="iacra-item">
     <div class="iacra-item-container">
       <img class="image" [src]="iacra.type | imageFormatter" />
       <h5 class="type heading-5">{{ iacra.type | formatIacraType }}</h5>

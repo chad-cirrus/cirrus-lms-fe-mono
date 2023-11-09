@@ -3,6 +3,7 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { LESSON_COMPLETION_CTA } from '../completion-dialog/LessonCompletionCtas';
 import { downloadPdf } from '../helpers/DownloadPdf';
 import { UiDownloadService } from './ui-download.service';
+import { PdfDownloadFile } from '@cirrus/models';
 
 export interface ICourseCompletionData {
   badge: string;
@@ -27,7 +28,7 @@ export class CourseCompletionComponent implements OnInit {
 
   certificateLoading$ = this.uiDownloadService.certificateLoading$;
   transcriptLoading$ = this.uiDownloadService.transcriptloading$;
-  courseId = 0;
+  courseCertificateId = 0;
 
   get lessonCompletionCta() {
     return LESSON_COMPLETION_CTA;
@@ -39,23 +40,25 @@ export class CourseCompletionComponent implements OnInit {
 
   getCourseUserCertificateId() {
     this.uiDownloadService.getCourse(this.data.course_id).subscribe(course => {
-      this.courseId = course.certificate.id;
+      if (course.certificate && course.certificate.id) {
+        this.courseCertificateId = course.certificate.id;
+      }
     });
   }
 
   downloadCert() {
     this.uiDownloadService
-      .downloadCertificate(this.courseId)
-      .subscribe((data: Blob) => {
-        downloadPdf(data, 'cert');
+      .downloadCertificate(this.courseCertificateId)
+      .subscribe((data: PdfDownloadFile) => {
+        downloadPdf(data);
       });
   }
 
   downloadTranscript() {
     this.uiDownloadService
       .downloadTranscript(this.data.course_id, 0)
-      .subscribe((data: Blob) => {
-        downloadPdf(data, 'trans');
+      .subscribe((data: PdfDownloadFile) => {
+        downloadPdf(data);
       });
   }
 }

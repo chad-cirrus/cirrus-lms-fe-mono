@@ -213,6 +213,7 @@
   }
 
 
+
   .qqb-action {
     font-size: 1.125rem;
     color: #D1D1D1;
@@ -225,20 +226,59 @@
   }
 
   .qqb-answer-item {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
     font-size: 1.25rem;
     background-color: #356da5;
     border-radius: 5px;
     margin: 0.5rem 0;
-    padding: 0.5rem 1rem
+    padding: 0.5rem 1rem;
+
+    &.--selected {
+      border: solid 2px #fff;
+
+      .qqb-answer-select-icon {
+        background-color: #fff;
+
+        svg {
+          display: block;
+          max-height: 8px;
+        }
+      }
+    }
+
+    &.--wrong-answer {
+      border: solid 2px #C9582C;
+      background-color: #2E2E2E;
+      .qqb-answer-select-icon {
+        background-color: #C9582C;
+        svg {
+          display: block;
+          max-height: 8px;
+          path {
+            stroke: #fff;
+          }
+        }
+      }
+    }
   }
 
   .qqb-answer-select-icon {
-    display: inline-block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
     height: 1rem;
     width: 1rem;
     background-color: #80a5c4;
     border-radius: 100%;
     margin-right: 1rem;
+
+    svg {
+      display: none;
+    }
   }
 
   .qqb-answers.--true-false {
@@ -248,28 +288,28 @@
       justify-content: center;
       gap: 1rem;
     }
-  
     .qqb-answer-item {
       display: flex;
       align-items: center;
       justify-content: center;
       width: calc(250px - 2rem);
       height: calc(84px - 1rem);
-  
       font-size: 1.75rem;
       font-family: 'Akzidenz-Grotesk BQ';
       font-weight: 500;
       text-align: center;
     }
-  
     .qqb-answer-select-icon {
       display: flex;
       justify-content: center;
       align-items: center;
-  
       height: 2rem;
       width: 2rem;
       margin-right: 1.5rem;
+      svg {
+        display: block;
+        max-height: initial;
+      }
     }
   }
 
@@ -317,4 +357,115 @@
       max-height: 1rem;
     }
   }
+}
+
+
+
+
+/**
+ * Quiz Complete
+ */
+.quiz-complete {
+
+  text-align: center;
+  color: #fff;
+  padding: 6rem 1.5rem;
+  border-radius: 12px;
+
+  &.--fail {
+    background-color: #C9582C;
+  }
+  &.--pass {
+    background-color: #10a9a9;
+    .quiz-results-icon {
+      display: block;
+    }
+  }
+
+  .quiz-results-icon {
+    display: none;
+    height: 40px;
+    width: 40px;
+    margin: 0 auto;
+  }
+
+  .quiz-results-title {
+    margin: 1rem 0 1.5rem;
+    font-size: 1.75rem;
+    font-family: 'akzidenz-grotesk_bqmedium';
+  }
+
+  .quiz-results {
+
+    .label {
+      color: #000;
+      font-size: 1rem;
+      font-weight: 500;
+      font-family: 'akzidenz-grotesk_bqmedium';
+    }
+
+    .quiz-results-score {
+      font-size: 3.75rem;
+      font-family: 'Berthold Akzidenz Grotesk BE';
+      letter-spacing: -1.5px;
+    }
+
+  }
+
+  .quiz-results-meta {
+
+    p {
+      font-size: 1.125rem;
+      margin-bottom: 0.5rem;
+    }
+  }
+
+  .quiz-results-time-data {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    color: #000;
+    font-size: 0.875rem;
+
+    .quiz-results-time {
+      color: #fff;
+    }
+
+    .quiz-results-time-icon {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+  }
+
+  .quiz-results-next-steps {
+    margin-top: 1rem;
+  }
+
+  .btn {
+    height: 48px;
+    padding: 0 1.5rem;
+    margin: 1rem;
+    border-radius: 2rem;
+    
+    font-family: 'akzidenz-grotesk_bqmedium';
+    font-size: 1.063rem;
+    font-weight: 500;
+    text-align: center;
+    color: #fff;
+
+    &.btn-primary {
+      border: solid 2px #1F1F1F;
+      background-color: #1F1F1F;
+    }
+
+    &.btn-secondary {
+      border: solid 2px #fff;
+      background-color: transparent;
+    }
+    
+  }
+
 }
