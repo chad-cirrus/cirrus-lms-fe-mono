@@ -148,6 +148,7 @@ export class LessonLandingPageComponent implements OnInit, OnDestroy {
     const { student_intro_video, overview } = this.lesson;
     if (
       !student_intro_video &&
+      overview &&
       this.lesson.progress.status === LessonStatus.NOT_STARTED
     ) {
       setTimeout(() => {
