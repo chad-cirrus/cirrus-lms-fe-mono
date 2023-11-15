@@ -1,15 +1,15 @@
 import { Component, OnInit, Renderer2 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LessonContentComponent } from '@cirrus/ui';
+import {  QuizService,} from './quiz.service';
 import {
   IQuizRequest,
-  QuizService,
   IQuizTracker,
   Answer,
   IStartQuizAttempt,
-  IStartQuizResponse,
   IAnswerResponse,
-} from './quiz.service';
+} from './quiz.types';
+
 import { AppState } from '../../../store/reducers';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
