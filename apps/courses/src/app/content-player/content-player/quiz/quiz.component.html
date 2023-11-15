@@ -37,7 +37,7 @@
 
     <div class="qqb-meta">
       <div class="qqb-progress">
-        Question {{ this.quizAttempt.current_question + 1 }} of {{ this.getQuestionCount() }}
+        Question {{ this.quizTracker.current_question + 1 }} of {{ this.getQuestionCount() }}
       </div>
       <div class="qqb-timer" *ngIf="isQuizTimed === true">
         <img src="courses/images/svg/quiz_question_timer_icon.svg" />
@@ -45,11 +45,11 @@
       </div>
     </div>
 
-    <h4 class="qqb-question">{{ this.quiz.quiz_questions[this.quizAttempt.current_question].body }}</h4>
+    <h4 class="qqb-question">{{ this.quiz.quiz_questions[this.quizTracker.current_question].body }}</h4>
 
     <div
       class="qqb-answers --multiple-choice"
-      *ngIf="this.quiz.quiz_questions[this.quizAttempt.current_question].question_options.length > 2"
+      *ngIf="this.quiz.quiz_questions[this.quizTracker.current_question].question_options.length > 2"
     >
       <div class="qqb-action">Select one</div>
 
@@ -57,11 +57,11 @@
         <li
           class="qqb-answer-item"
           [ngClass]="{
-            '--selected': this.selectedAnswer.answer === question.id
+            '--selected': this.quizTracker?.answers?.[this.quizTracker.current_question]?.answer === question.id
           }"
           data-answer-value=""
-          *ngFor="let question of this.quiz.quiz_questions[this.quizAttempt.current_question].question_options"
-          (click)="this.selectAnswer(this.quiz.quiz_questions[this.quizAttempt.current_question].id, question.id)"
+          *ngFor="let question of this.quiz.quiz_questions[this.quizTracker.current_question].question_options"
+          (click)="this.selectAnswer(this.quiz.quiz_questions[this.quizTracker.current_question].id, question.id)"
         >
           <span class="qqb-answer-select-icon">
             <svg width="14" height="11" viewBox="0 0 14 11" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -75,7 +75,7 @@
 
     <div
       class="qqb-answers --true-false"
-      *ngIf="this.quiz.quiz_questions[this.quizAttempt.current_question].question_options.length === 2"
+      *ngIf="this.quiz.quiz_questions[this.quizTracker.current_question].question_options.length === 2"
     >
       <!-- <div class="qqb-action">Select one</div> -->
 
@@ -84,14 +84,14 @@
           class="qqb-answer-item"
           [ngClass]="{
             '--selected':
-              this.selectedAnswer.answer ===
-              quiz.quiz_questions[this.quizAttempt.current_question].question_options[0].id
+              this.quizTracker.answers[this.quizTracker.current_question].answer ===
+              quiz.quiz_questions[this.quizTracker.current_question].question_options[0].id
           }"
           data-answer-value="true"
           (click)="
             this.selectAnswer(
-              this.quiz.quiz_questions[this.quizAttempt.current_question].id,
-              this.quiz.quiz_questions[this.quizAttempt.current_question].question_options[0].id
+              this.quiz.quiz_questions[this.quizTracker.current_question].id,
+              this.quiz.quiz_questions[this.quizTracker.current_question].question_options[0].id
             )
           "
         >
@@ -100,20 +100,20 @@
               <path d="M1.41406 4.80939L5.33563 8.84979L12.5252 1.44238" stroke="#0077C8" stroke-width="2" />
             </svg>
           </span>
-          {{ this.quiz.quiz_questions[this.quizAttempt.current_question].question_options[0].description }}
+          {{ this.quiz.quiz_questions[this.quizTracker.current_question].question_options[0].description }}
         </li>
         <li
           class="qqb-answer-item"
           [ngClass]="{
             '--selected':
-              this.selectedAnswer.answer ===
-              quiz.quiz_questions[this.quizAttempt.current_question].question_options[1].id
+              this.quizTracker.answers[this.quizTracker.current_question].answer ===
+              quiz.quiz_questions[this.quizTracker.current_question].question_options[1].id
           }"
           data-answer-value="false"
           (click)="
             this.selectAnswer(
-              this.quiz.quiz_questions[this.quizAttempt.current_question].id,
-              this.quiz.quiz_questions[this.quizAttempt.current_question].question_options[1].id
+              this.quiz.quiz_questions[this.quizTracker.current_question].id,
+              this.quiz.quiz_questions[this.quizTracker.current_question].question_options[1].id
             )
           "
         >
@@ -126,7 +126,7 @@
               />
             </svg>
           </span>
-          {{ this.quiz.quiz_questions[this.quizAttempt.current_question].question_options[1].description }}
+          {{ this.quiz.quiz_questions[this.quizTracker.current_question].question_options[1].description }}
         </li>
       </ul>
     </div>
@@ -137,7 +137,7 @@
         BACK
       </button>
 
-      <button class="qqb-control-submit" (click)="submitAnswer()" [disabled]="(this.selectedAnswer | json) === '{}'">
+      <button class="qqb-control-submit" (click)="submitAnswer()" [disabled]="(this.quizTracker.answers[this.quizTracker.current_question] | json) === '{}'">
         SUBMIT
 
         <svg width="14" height="11" viewBox="0 0 14 11" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -186,7 +186,7 @@
             <path fill-rule="evenodd" clip-rule="evenodd" d="M8.78983 4.47199C9.06302 4.64131 9.14149 4.99114 8.96509 5.25337L7.03903 8.11659C6.86263 8.37881 6.49817 8.45413 6.22498 8.28481C5.95179 8.11549 5.87332 7.76566 6.04972 7.50343L7.97578 4.64021C8.15218 4.37799 8.51664 4.30267 8.78983 4.47199Z" fill="#1F1F1F"/>
           </svg>
         </div>
-          
+
         <span>Elapsed Time</span>
         <div class="quiz-results-time">$TOTAL_QUIZ_TIME</div>
       </div>
@@ -202,10 +202,10 @@
   <div class="qqb-question-result">
 
     <div class="background-overlay"></div>
-    
+
     <div class="qqb-result-box">
       <div class="qqb-result-box-wrapper">
-        
+
         <div class="qqb-result-icon">
           <svg width="100%" height="100%" viewBox="0 0 54 49" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;">
             <g transform="matrix(1,0,0,1,-1.4388,0)">
@@ -227,7 +227,7 @@
         <button class="btn btn-qqb-result-action">$ACTION_TEXT</button>
 
       </div>
-      
+
     </div>
 
   </div>

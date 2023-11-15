@@ -25,6 +25,11 @@ export interface IQuestionOption {
  * @export
  * @interface IQuestion
  */
+/**
+ * Represents a quiz question.
+ *
+ * @interface IQuestion
+ */
 export interface IQuestion {
   /**
    * Unique ID of the question
@@ -84,6 +89,18 @@ export interface IQuizRequest {
   subjects?: string[];
 }
 
+export interface IStartQuizAttempt {
+  course_attempt_id: number;
+  stage_id: number;
+  lesson_id: number;
+  content_id: number;
+  quiz_id: number;
+}
+
+export interface IStartQuizResponse {
+  quiz_attempt: IQuizAttempt;
+}
+
 export interface IQuizAttempt {
   id: number;
   course_attempt_id: number;
@@ -91,21 +108,41 @@ export interface IQuizAttempt {
   lesson_id: number;
   content_id: number;
   quiz_id: number;
-  snapshot: any;
+  snapshot: unknown;
   score: number;
   created_at: string;
   updated_at: string;
   graded_at: string;
 }
 
-export interface IQuizData {
-  quiz_attempt: IQuizAttempt;
+export interface IStartQuiz {
+  quiz_attempt: IStartQuizAttempt;
 }
 
 export interface IQuizTracker {
   answers: Answer[];
-  quiz_data: IQuizData;
+  responses: IAnswerResponse[];
+  attempt_id: number;
   current_question: number;
+}
+
+export interface IQuizQuestion {
+  id: number;
+  body: string;
+  desc: string;
+  correct_option: IQuestionOption;
+}
+
+export interface IQuizAttemptResponse {
+  id: number;
+  quiz_attempt_id: number;
+  question_option_id: number;
+  correct: boolean;
+  quiz_question: IQuizQuestion;
+}
+
+export interface IAnswerResponse {
+  quiz_attempt_response: IQuizAttemptResponse;
 }
 
 /**
@@ -114,12 +151,6 @@ export interface IQuizTracker {
  * @class Answer
  */
 export class Answer {
-  /**
-   * ID of the quiz
-   * @type {number}
-   * @memberof Answer
-   */
-  quiz_id!: number;
   /**
    * quiz question id being answered
    * @type {number}
@@ -131,13 +162,7 @@ export class Answer {
    * @type {number}
    * @memberof Answer
    */
-  answer!: number;
-  /**
-   * The timestamp of the Answer
-   * @type {Date}
-   * @memberof Answer
-   */
-  timestamp!: Date;
+  answer: number | undefined;
 }
 
 @Injectable({
@@ -165,9 +190,36 @@ export class QuizService {
       .pipe(map(response => response['quiz']));
   }
 
-  startQuiz(attempt: IQuizData): Observable<IQuizData> {
+  /**
+   * Starts a new quiz attempt.
+   * @param attempt The quiz attempt data.
+   * @returns An observable of the start quiz response.
+   */
+  startQuiz(attempt: IStartQuizAttempt): Observable<IStartQuizResponse> {
+    const attemptData: IStartQuiz = { quiz_attempt: attempt };
     return this.http
-      .post<IQuizData>(`${environment.baseUrl}/api/v5/quiz_attempts`, attempt)
+      .post<IStartQuizResponse>(`${environment.baseUrl}/api/v5/quiz_attempts`, attemptData)
+      .pipe(map(response => response));
+  }
+
+  /**
+   *
+   * @method submitAnswer
+   * @description Submits a student's answer to a quiz question
+   * @param {Answer} answer - The answer to submit
+   * @returns {Observable<IAnswerResponse>} An observable containing the response from the server
+   */
+  submitAnswer(attempt_id: number, answer: Answer): Observable<IAnswerResponse> {
+    const _data = {
+      quiz_attempt_response: {
+        question_option_id: answer.answer,
+      },
+    };
+    return this.http
+      .post<IAnswerResponse>(
+        `${environment.baseUrl}/api/v5/quiz_attempts/${attempt_id}/quiz_questions/${answer.question_id}/quiz_attempt_responses`,
+        _data,
+      )
       .pipe(map(response => response));
   }
 }

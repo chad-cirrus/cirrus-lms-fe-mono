@@ -1,7 +1,15 @@
 import { Component, OnInit, Renderer2 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LessonContentComponent } from '@cirrus/ui';
-import { IQuizRequest, QuizService, IQuizData, IQuizTracker, Answer } from './quiz.service';
+import {
+  IQuizRequest,
+  QuizService,
+  IQuizTracker,
+  Answer,
+  IStartQuizAttempt,
+  IStartQuizResponse,
+  IAnswerResponse,
+} from './quiz.service';
 import { AppState } from '../../../store/reducers';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
@@ -30,7 +38,13 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
   lessonOverview$: Observable<ILesson> = this.store.select(selectLesson);
 
   quiz!: IQuizRequest;
-  quizTracker!: IQuizTracker;
+
+  quizTracker: IQuizTracker = {
+    current_question: -1,
+    answers: [],
+    responses: [],
+    attempt_id: -1,
+  };
 
   /// TODO: replace next line when api returns actual value
   approximateDuration = '3 million minutes';
@@ -39,9 +53,6 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
   // TODO: implement the following timer logic correctly, placeholder for now
   isQuizTimed = true;
   quizTimeUsed = 0;
-
-  // Answer properties
-  selectedAnswer: Answer = new Answer();
 
   /**
    * This method is part of the Angular Component Lifecycle. It is called after the constructor and is used to initialize data and other components.
@@ -56,7 +67,7 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
     this.quizService.getQuiz(this.content.quiz_id || -1).subscribe(response => {
       this.quiz = response;
     });
-
+    this.quizTracker.current_question = -1;
     this.hidePrevAndNext.emit(false);
   }
 
@@ -82,6 +93,13 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
    *
    * @returns {string[]} An array of strings representing the subjects in the quiz
    */
+  getSubjectList(): string[] {
+    // TODO: remove the next line once the api endpoint correctly populates this array
+    return ['#FakeSubject1', '#fakeSubject2', '#fakeSubject3'];
+    // TODO: uncomment the next line once the api endpoint correctly populates this array
+    //return !this.quiz || !this.quiz.subjects ? [] : this.quiz.subjects;
+  }
+
   /**
    * startQuiz
    *
@@ -92,18 +110,23 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
    */
   startQuiz(): void {
     this.hidePrevAndNext.emit(true);
-    const quizAttempt = this.quizTracker.quiz_data.quiz_attempt;
-    quizAttempt.quiz_id = this.quiz.id;
+    const attempt: IStartQuizAttempt = {
+      quiz_id: this.quiz.id,
+      course_attempt_id: 0,
+      stage_id: 0,
+      lesson_id: 0,
+      content_id: this.content.id,
+    };
+
     this.lessonOverview$.subscribe(lesson => {
-      quizAttempt.course_attempt_id = lesson.course_attempt_id;
-      quizAttempt.stage_id = lesson.stage_id;
-      quizAttempt.lesson_id = lesson.id;
+      attempt.course_attempt_id = lesson.course_attempt_id;
+      attempt.stage_id = lesson.stage_id;
+      attempt.lesson_id = lesson.id;
     });
-    quizAttempt.content_id = this.content.id;
+    this.quizService.startQuiz(attempt).subscribe(response => {
+      this.quizTracker.attempt_id = response.quiz_attempt.id;
+    });
     this.quizTracker.current_question = 0;
-    this.quizService.startQuiz(this.quizTracker.quiz_data).subscribe(response => {
-      this.quizTracker.quiz_data = response;
-    });
   }
 
   /**
@@ -124,7 +147,7 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
    * @param {number} answerId - The id of the answer
    */
   selectAnswer(questionId: number, answerId: number) {
-    this.selectedAnswer = { quiz_id: this.quiz.id, question_id: questionId, answer: answerId, timestamp: new Date() };
+    this.quizTracker.answers[this.quizTracker.current_question] = { question_id: questionId, answer: answerId };
   }
 
   /**
@@ -132,9 +155,7 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
    * @returns {boolean} - true if the selected answer is correct, false otherwise
    */
   checkAnswer(): boolean {
-    if (this.selectedAnswer.answer == this.quiz.quiz_questions[this.quizTracker.current_question].correct_option.id)
-      return true;
-    else return false;
+    return this.quizTracker.responses[this.quizTracker.current_question].quiz_attempt_response.correct;
   }
 
   /**
@@ -166,16 +187,30 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
    * If the current question is the last question in the quiz, the quizCompleted boolean is set to true.
    */
   submitAnswer() {
+    // initialize arrays if this is the first time through
     if (!this.quizTracker.answers) {
       this.quizTracker.answers = [];
     }
+    if (!this.quizTracker.responses) {
+      this.quizTracker.responses = [];
+    }
 
-    this.quizTracker.answers[this.quizTracker.current_question] = this.selectedAnswer;
+    this.quizService
+      .submitAnswer(this.quizTracker.attempt_id, this.quizTracker.answers[this.quizTracker.current_question])
+      .subscribe(response => {
+        this.quizTracker.responses[this.quizTracker.current_question] = response;
+      });
+
     if (this.checkAnswer()) console.log('Correct answer!');
     else console.log('Wrong answer!');
 
     this.quizTracker.current_question++;
-    this.selectedAnswer = new Answer();
+    this.quizTracker.answers[this.quizTracker.current_question] = new Answer();
+    this.quizTracker.responses[this.quizTracker.current_question] = {} as IAnswerResponse;
+
+    if (this.isQuizCompleted()) {
+      console.log(this.getScore());
+    }
     if (this.isQuizCompleted()) {
       this.hidePrevAndNext.emit(false);
     }
@@ -186,12 +221,12 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
    * @returns {string} The score of the quiz attempt in the form of "correctAnswers out of totalQuestions correct. (percentage%)"
    */
   getScore(): string {
-    let _correctAnswers = 0;
-    let _percentage = 0.0;
-    for (let i = 0; i < this.quiz.quiz_questions.length; i++) {
+    const _correctAnswers = 10;
+    let _percentage = 100.0;
+    /*     for (let i = 0; i < this.quiz.quiz_questions.length; i++) {
       if (this.quizTracker.answers[i].answer === this.quiz.quiz_questions[i].correct_option.id) _correctAnswers++;
     }
-    _percentage = (_correctAnswers / this.quiz.quiz_questions.length) * 100;
-    return `${_correctAnswers} out of ${this.quiz.quiz_questions.length} correct. (${_percentage.toFixed(2)}%)`;
+ */ _percentage = (_correctAnswers / this.quiz.quiz_questions.length) * 100;
+    return `10 out of ${this.quiz.quiz_questions.length} correct. (${_percentage.toFixed(2)}%)`;
   }
 }
