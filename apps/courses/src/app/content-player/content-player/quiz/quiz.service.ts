@@ -84,6 +84,30 @@ export interface IQuizRequest {
   subjects?: string[];
 }
 
+export interface IQuizAttempt {
+  id: number;
+  course_attempt_id: number;
+  stage_id: number;
+  lesson_id: number;
+  content_id: number;
+  quiz_id: number;
+  snapshot: any;
+  score: number;
+  created_at: string;
+  updated_at: string;
+  graded_at: string;
+}
+
+export interface IQuizData {
+  quiz_attempt: IQuizAttempt;
+}
+
+export interface IQuizTracker {
+  answers: Answer[];
+  quiz_data: IQuizData;
+  current_question: number;
+}
+
 /**
  * Represents a student's answer to a quiz question
  * @export
@@ -116,32 +140,6 @@ export class Answer {
   timestamp!: Date;
 }
 
-/**
- * Class representing a student's quiz attempt
- * @export
- * @class QuizAttempt
- */
-export class QuizAttempt {
-  /**
-   * ID of the quiz
-   */
-  quiz_id!: number;
-  /**
-   * Marks the moment a student started a quiz
-   * @type {Date}
-   * @memberof Answer
-   */
-  quiz_start_time: Date | undefined;
-  /**
-   * The zero based index of which question is being presented
-   * -1 is the default and represents the quiz is still on the overview page
-   * @type {number}
-   * @memberof Answer
-   */
-  current_question = -1;
-  answers!: Answer[];
-}
-
 @Injectable({
   providedIn: 'root',
 })
@@ -165,5 +163,11 @@ export class QuizService {
     return this.http
       .get<IQuizRequest>(`${environment.baseUrl}/api/v4/quizzes/${id}`)
       .pipe(map(response => response['quiz']));
+  }
+
+  startQuiz(attempt: IQuizData): Observable<IQuizData> {
+    return this.http
+      .post<IQuizData>(`${environment.baseUrl}/api/v5/quiz_attempts`, attempt)
+      .pipe(map(response => response));
   }
 }
