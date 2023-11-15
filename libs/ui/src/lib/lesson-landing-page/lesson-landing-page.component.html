@@ -37,22 +37,15 @@
   </ng-template>
 
   <div
-    class="lesson-image"
+    class="lesson-hero"
     fxLayout="column"
     fxLayoutAlign="center start"
-    [ngStyle]="{
-      background:
-        'linear-gradient(90deg, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0.33) 44.11%, ' +
-        'rgba(0, 0, 0, 0) 61.94%), linear-gradient(360deg,#000000 1.79%,rgba(0,0,0,.24) 19.37%,rgba(0,0,0,0) 25%), ' +
-        'url(' +
-        (bgImage | encodeUri) +
-        ') no-repeat center',
-      'background-size': 'cover',
-      '-webkit-background-size': 'cover',
-      '-moz-background-size': 'cover',
-      '-o-background-size': 'cover'
-    }"
   >
+    <div class="lesson-hero-image">
+      <div class="lesson-hero-image-overlay"></div>
+      <img src="{{ bgImage | encodeUri }}">
+    </div>
+    
     <div class="btn-container">
       <div class="example-sidenav-content">
         <button
