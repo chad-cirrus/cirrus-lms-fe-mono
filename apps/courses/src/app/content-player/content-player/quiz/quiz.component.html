@@ -39,7 +39,7 @@
       </div>
       <div class="qqb-timer" *ngIf="isQuizTimed === true">
         <img src="courses/images/svg/quiz_question_timer_icon.svg" />
-        {{ quizTimeUsed }}
+        {{getElapsedTime()}}
       </div>
     </div>
 
