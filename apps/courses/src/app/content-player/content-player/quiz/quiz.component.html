@@ -1,6 +1,4 @@
 <div #wrapper class="quiz-container">
-
-
   <div class="quiz-overview" *ngIf="isQuizInProcess() === false && isQuizCompleted() === false">
     <header class="quiz-overview-header">
       <div class="quiz-overview-content">
@@ -37,19 +35,19 @@
 
     <div class="qqb-meta">
       <div class="qqb-progress">
-        Question {{ this.quizAttempt.current_question + 1 }} of {{ this.getQuestionCount() }}
+        Question {{ this.quizTracker.current_question + 1 }} of {{ this.getQuestionCount() }}
       </div>
       <div class="qqb-timer" *ngIf="isQuizTimed === true">
         <img src="courses/images/svg/quiz_question_timer_icon.svg" />
-        {{ quizTimeUsed }}
+        {{getElapsedTime()}}
       </div>
     </div>
 
-    <h4 class="qqb-question">{{ this.quiz.quiz_questions[this.quizAttempt.current_question].body }}</h4>
+    <h4 class="qqb-question">{{ this.quiz.quiz_questions[this.quizTracker.current_question].body }}</h4>
 
     <div
       class="qqb-answers --multiple-choice"
-      *ngIf="this.quiz.quiz_questions[this.quizAttempt.current_question].question_options.length > 2"
+      *ngIf="this.quiz.quiz_questions[this.quizTracker.current_question].question_options.length > 2"
     >
       <div class="qqb-action">Select one</div>
 
@@ -57,11 +55,11 @@
         <li
           class="qqb-answer-item"
           [ngClass]="{
-            '--selected': this.selectedAnswer.answer === question.id
+            '--selected': this.quizTracker?.answers?.[this.quizTracker.current_question]?.answer === question.id
           }"
           data-answer-value=""
-          *ngFor="let question of this.quiz.quiz_questions[this.quizAttempt.current_question].question_options"
-          (click)="this.selectAnswer(this.quiz.quiz_questions[this.quizAttempt.current_question].id, question.id)"
+          *ngFor="let question of this.quiz.quiz_questions[this.quizTracker.current_question].question_options"
+          (click)="this.selectAnswer(this.quiz.quiz_questions[this.quizTracker.current_question].id, question.id)"
         >
           <span class="qqb-answer-select-icon">
             <svg width="14" height="11" viewBox="0 0 14 11" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -75,7 +73,7 @@
 
     <div
       class="qqb-answers --true-false"
-      *ngIf="this.quiz.quiz_questions[this.quizAttempt.current_question].question_options.length === 2"
+      *ngIf="this.quiz.quiz_questions[this.quizTracker.current_question].question_options.length === 2"
     >
       <!-- <div class="qqb-action">Select one</div> -->
 
@@ -84,14 +82,13 @@
           class="qqb-answer-item"
           [ngClass]="{
             '--selected':
-              this.selectedAnswer.answer ===
-              quiz.quiz_questions[this.quizAttempt.current_question].question_options[0].id
+              (this.quizTracker?.answers?.[this.quizTracker.current_question]?.answer === quiz.quiz_questions[quizTracker.current_question].question_options[0].id)
           }"
           data-answer-value="true"
           (click)="
-            this.selectAnswer(
-              this.quiz.quiz_questions[this.quizAttempt.current_question].id,
-              this.quiz.quiz_questions[this.quizAttempt.current_question].question_options[0].id
+            selectAnswer(
+              quiz.quiz_questions[quizTracker.current_question].id,
+              quiz.quiz_questions[quizTracker.current_question].question_options[0].id
             )
           "
         >
@@ -100,20 +97,20 @@
               <path d="M1.41406 4.80939L5.33563 8.84979L12.5252 1.44238" stroke="#0077C8" stroke-width="2" />
             </svg>
           </span>
-          {{ this.quiz.quiz_questions[this.quizAttempt.current_question].question_options[0].description }}
+          {{ quiz.quiz_questions[quizTracker.current_question].question_options[0].description }}
         </li>
         <li
           class="qqb-answer-item"
           [ngClass]="{
             '--selected':
-              this.selectedAnswer.answer ===
-              quiz.quiz_questions[this.quizAttempt.current_question].question_options[1].id
+              this.quizTracker?.answers?.[this.quizTracker.current_question]?.answer ===
+              quiz.quiz_questions[this.quizTracker.current_question].question_options[1].id
           }"
           data-answer-value="false"
           (click)="
             this.selectAnswer(
-              this.quiz.quiz_questions[this.quizAttempt.current_question].id,
-              this.quiz.quiz_questions[this.quizAttempt.current_question].question_options[1].id
+              this.quiz.quiz_questions[this.quizTracker.current_question].id,
+              this.quiz.quiz_questions[this.quizTracker.current_question].question_options[1].id
             )
           "
         >
@@ -126,7 +123,7 @@
               />
             </svg>
           </span>
-          {{ this.quiz.quiz_questions[this.quizAttempt.current_question].question_options[1].description }}
+          {{ this.quiz.quiz_questions[this.quizTracker.current_question].question_options[1].description }}
         </li>
       </ul>
     </div>
@@ -137,7 +134,11 @@
         BACK
       </button>
 
-      <button class="qqb-control-submit" (click)="submitAnswer()" [disabled]="(this.selectedAnswer | json) === '{}'">
+      <button
+        class="qqb-control-submit"
+        (click)="submitAnswer()"
+        [disabled]="(quizTracker.answers[quizTracker.current_question] | json) === '{}'"
+      >
         SUBMIT
 
         <svg width="14" height="11" viewBox="0 0 14 11" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -150,17 +151,44 @@
   </div>
 
   <div class="quiz-complete" *ngIf="isQuizInProcess() === true && isQuizCompleted() === true">
-
     <div class="quiz-results-icon">
-      <svg width="100%" height="100%" viewBox="0 0 53 49" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;">
+      <svg
+        width="100%"
+        height="100%"
+        viewBox="0 0 53 49"
+        version="1.1"
+        xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+        xml:space="preserve"
+        xmlns:serif="http://www.serif.com/"
+        style="fill-rule: evenodd; clip-rule: evenodd; stroke-linecap: round"
+      >
         <g transform="matrix(1,0,0,1,7.57567,3.2856)">
-          <path d="M18.924,0.395L23.357,14.038L37.703,14.038L26.097,22.47L30.53,36.113L18.924,27.681L7.319,36.113L11.752,22.47L0.146,14.038L14.491,14.038L18.924,0.395Z" style="fill:rgb(0,255,255);fill-rule:nonzero;"/>
+          <path
+            d="M18.924,0.395L23.357,14.038L37.703,14.038L26.097,22.47L30.53,36.113L18.924,27.681L7.319,36.113L11.752,22.47L0.146,14.038L14.491,14.038L18.924,0.395Z"
+            style="fill: rgb(0, 255, 255); fill-rule: nonzero"
+          />
         </g>
-        <path d="M27.521,40.49L27.521,47.67" style="fill:none;fill-rule:nonzero;stroke:white;stroke-width:2.39px;"/>
-        <path d="M44.614,29L51.367,31.439" style="fill:none;fill-rule:nonzero;stroke:white;stroke-width:2.39px;"/>
-        <path d="M8.4,29.988L1.465,31.847" style="fill:none;fill-rule:nonzero;stroke:white;stroke-width:2.39px;"/>
-        <path d="M14.931,8.367L10.55,2.678" style="fill:none;fill-rule:nonzero;stroke:white;stroke-width:2.39px;"/>
-        <path d="M37.994,7.192L42.096,1.299" style="fill:none;fill-rule:nonzero;stroke:white;stroke-width:2.39px;"/>
+        <path
+          d="M27.521,40.49L27.521,47.67"
+          style="fill: none; fill-rule: nonzero; stroke: white; stroke-width: 2.39px"
+        />
+        <path
+          d="M44.614,29L51.367,31.439"
+          style="fill: none; fill-rule: nonzero; stroke: white; stroke-width: 2.39px"
+        />
+        <path
+          d="M8.4,29.988L1.465,31.847"
+          style="fill: none; fill-rule: nonzero; stroke: white; stroke-width: 2.39px"
+        />
+        <path
+          d="M14.931,8.367L10.55,2.678"
+          style="fill: none; fill-rule: nonzero; stroke: white; stroke-width: 2.39px"
+        />
+        <path
+          d="M37.994,7.192L42.096,1.299"
+          style="fill: none; fill-rule: nonzero; stroke: white; stroke-width: 2.39px"
+        />
       </svg>
     </div>
 
@@ -174,21 +202,43 @@
     <div class="quiz-results-meta">
       <p>You must pass with a 88% or higher to contine.</p>
       <div class="quiz-results-time-data">
-
         <div class="quiz-results-time-icon">
           <svg width="13" height="14" viewBox="0 0 13 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M5.33302 2.13368V0.56518H7.59405V2.16153" fill="#1F1F1F"/>
-            <path fill-rule="evenodd" clip-rule="evenodd" d="M4.74421 0.56518C4.74421 0.25304 5.00783 0 5.33302 0H7.59405C7.91924 0 8.18286 0.25304 8.18286 0.56518V2.16153C8.18286 2.47367 7.91924 2.72671 7.59405 2.72671C7.26886 2.72671 7.00524 2.47367 7.00524 2.16153V1.13036H5.92183V2.13368C5.92183 2.44582 5.65821 2.69886 5.33302 2.69886C5.00783 2.69886 4.74421 2.44582 4.74421 2.13368V0.56518Z" fill="#1F1F1F"/>
-            <path d="M9.09129 2.77412L9.643 1.86921L10.6233 2.40288L10.0568 3.3217" fill="#1F1F1F"/>
-            <path fill-rule="evenodd" clip-rule="evenodd" d="M9.13481 1.58375C9.29749 1.31693 9.65332 1.22508 9.93348 1.3776L10.9138 1.91126C11.0512 1.9861 11.1516 2.11085 11.1923 2.25744C11.2329 2.40403 11.2105 2.56016 11.13 2.69072L10.5635 3.60955C10.3979 3.87817 10.0368 3.96706 9.7569 3.80809C9.53126 3.67992 9.42735 3.42975 9.48236 3.19684C9.29693 3.35495 9.01955 3.38867 8.79389 3.26191C8.51322 3.10425 8.41885 2.75805 8.5831 2.48866L9.13481 1.58375Z" fill="#1F1F1F"/>
-            <path fill-rule="evenodd" clip-rule="evenodd" d="M6.5 2.86269C3.55008 2.86269 1.17762 5.11276 1.17762 7.86617C1.17762 10.6196 3.55008 12.8696 6.5 12.8696C9.44992 12.8696 11.8224 10.6196 11.8224 7.86617C11.8224 5.11276 9.44992 2.86269 6.5 2.86269ZM0 7.86617C0 4.46861 2.9206 1.73233 6.5 1.73233C10.0794 1.73233 13 4.46861 13 7.86617C13 11.2637 10.0794 14 6.5 14C2.9206 14 0 11.2637 0 7.86617Z" fill="#1F1F1F"/>
-            <path d="M6.49983 8.95585C7.13916 8.95585 7.65744 8.46761 7.65744 7.86532C7.65744 7.26304 7.13916 6.7748 6.49983 6.7748C5.8605 6.7748 5.34222 7.26304 5.34222 7.86532C5.34222 8.46761 5.8605 8.95585 6.49983 8.95585Z" fill="#1F1F1F"/>
-            <path fill-rule="evenodd" clip-rule="evenodd" d="M8.78983 4.47199C9.06302 4.64131 9.14149 4.99114 8.96509 5.25337L7.03903 8.11659C6.86263 8.37881 6.49817 8.45413 6.22498 8.28481C5.95179 8.11549 5.87332 7.76566 6.04972 7.50343L7.97578 4.64021C8.15218 4.37799 8.51664 4.30267 8.78983 4.47199Z" fill="#1F1F1F"/>
+            <path d="M5.33302 2.13368V0.56518H7.59405V2.16153" fill="#1F1F1F" />
+            <path
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M4.74421 0.56518C4.74421 0.25304 5.00783 0 5.33302 0H7.59405C7.91924 0 8.18286 0.25304 8.18286 0.56518V2.16153C8.18286 2.47367 7.91924 2.72671 7.59405 2.72671C7.26886 2.72671 7.00524 2.47367 7.00524 2.16153V1.13036H5.92183V2.13368C5.92183 2.44582 5.65821 2.69886 5.33302 2.69886C5.00783 2.69886 4.74421 2.44582 4.74421 2.13368V0.56518Z"
+              fill="#1F1F1F"
+            />
+            <path d="M9.09129 2.77412L9.643 1.86921L10.6233 2.40288L10.0568 3.3217" fill="#1F1F1F" />
+            <path
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M9.13481 1.58375C9.29749 1.31693 9.65332 1.22508 9.93348 1.3776L10.9138 1.91126C11.0512 1.9861 11.1516 2.11085 11.1923 2.25744C11.2329 2.40403 11.2105 2.56016 11.13 2.69072L10.5635 3.60955C10.3979 3.87817 10.0368 3.96706 9.7569 3.80809C9.53126 3.67992 9.42735 3.42975 9.48236 3.19684C9.29693 3.35495 9.01955 3.38867 8.79389 3.26191C8.51322 3.10425 8.41885 2.75805 8.5831 2.48866L9.13481 1.58375Z"
+              fill="#1F1F1F"
+            />
+            <path
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M6.5 2.86269C3.55008 2.86269 1.17762 5.11276 1.17762 7.86617C1.17762 10.6196 3.55008 12.8696 6.5 12.8696C9.44992 12.8696 11.8224 10.6196 11.8224 7.86617C11.8224 5.11276 9.44992 2.86269 6.5 2.86269ZM0 7.86617C0 4.46861 2.9206 1.73233 6.5 1.73233C10.0794 1.73233 13 4.46861 13 7.86617C13 11.2637 10.0794 14 6.5 14C2.9206 14 0 11.2637 0 7.86617Z"
+              fill="#1F1F1F"
+            />
+            <path
+              d="M6.49983 8.95585C7.13916 8.95585 7.65744 8.46761 7.65744 7.86532C7.65744 7.26304 7.13916 6.7748 6.49983 6.7748C5.8605 6.7748 5.34222 7.26304 5.34222 7.86532C5.34222 8.46761 5.8605 8.95585 6.49983 8.95585Z"
+              fill="#1F1F1F"
+            />
+            <path
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M8.78983 4.47199C9.06302 4.64131 9.14149 4.99114 8.96509 5.25337L7.03903 8.11659C6.86263 8.37881 6.49817 8.45413 6.22498 8.28481C5.95179 8.11549 5.87332 7.76566 6.04972 7.50343L7.97578 4.64021C8.15218 4.37799 8.51664 4.30267 8.78983 4.47199Z"
+              fill="#1F1F1F"
+            />
           </svg>
         </div>
-          
+
         <span>Elapsed Time</span>
-        <div class="quiz-results-time">$TOTAL_QUIZ_TIME</div>
+        <div class="quiz-results-time">{{getElapsedTime()}}</div>
       </div>
     </div>
 
@@ -196,39 +246,61 @@
       <button class="btn btn-secondary">$SECONDARY_ACTION_TEXT</button>
       <button class="btn btn-primary">$PRIMARY_ACTION_TEXT</button>
     </div>
-
   </div>
 
-  <div class="qqb-question-result">
-
+  <div class="qqb-question-result {{ answeredQuestionResultClass }}">
     <div class="background-overlay"></div>
-    
+
     <div class="qqb-result-box">
       <div class="qqb-result-box-wrapper">
-        
         <div class="qqb-result-icon">
-          <svg width="100%" height="100%" viewBox="0 0 54 49" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;">
+          <svg
+            width="100%"
+            height="100%"
+            viewBox="0 0 54 49"
+            version="1.1"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            xml:space="preserve"
+            xmlns:serif="http://www.serif.com/"
+            style="fill-rule: evenodd; clip-rule: evenodd; stroke-linecap: round"
+          >
             <g transform="matrix(1,0,0,1,-1.4388,0)">
-                <path d="M28.439,40.441L28.439,47.621" style="fill:none;fill-rule:nonzero;stroke:rgb(255,214,0);stroke-width:2.39px;"/>
+              <path
+                d="M28.439,40.441L28.439,47.621"
+                style="fill: none; fill-rule: nonzero; stroke: rgb(255, 214, 0); stroke-width: 2.39px"
+              />
             </g>
-            <path d="M45.532,28.951L52.285,31.391" style="fill:none;fill-rule:nonzero;stroke:rgb(255,214,0);stroke-width:2.39px;"/>
-            <path d="M9.318,29.94L2.383,31.798" style="fill:none;fill-rule:nonzero;stroke:rgb(255,214,0);stroke-width:2.39px;"/>
+            <path
+              d="M45.532,28.951L52.285,31.391"
+              style="fill: none; fill-rule: nonzero; stroke: rgb(255, 214, 0); stroke-width: 2.39px"
+            />
+            <path
+              d="M9.318,29.94L2.383,31.798"
+              style="fill: none; fill-rule: nonzero; stroke: rgb(255, 214, 0); stroke-width: 2.39px"
+            />
             <g transform="matrix(1,0,0,1,0,-1.37173)">
-                <path d="M15.849,8.318L11.468,2.63" style="fill:none;fill-rule:nonzero;stroke:rgb(255,214,0);stroke-width:2.39px;"/>
+              <path
+                d="M15.849,8.318L11.468,2.63"
+                style="fill: none; fill-rule: nonzero; stroke: rgb(255, 214, 0); stroke-width: 2.39px"
+              />
             </g>
-            <path d="M38.912,7.143L43.014,1.25" style="fill:none;fill-rule:nonzero;stroke:rgb(255,214,0);stroke-width:2.39px;"/>
+            <path
+              d="M38.912,7.143L43.014,1.25"
+              style="fill: none; fill-rule: nonzero; stroke: rgb(255, 214, 0); stroke-width: 2.39px"
+            />
             <g transform="matrix(1,0,0,1,8.15769,4.92696)">
-                <path d="M18.842,0.345L23.275,13.988L37.621,13.988L26.015,22.42L30.448,36.063L18.842,27.631L7.237,36.063L11.67,22.42L0.064,13.988L14.409,13.988L18.842,0.345Z" style="fill:rgb(0,255,255);fill-rule:nonzero;"/>
+              <path
+                d="M18.842,0.345L23.275,13.988L37.621,13.988L26.015,22.42L30.448,36.063L18.842,27.631L7.237,36.063L11.67,22.42L0.064,13.988L14.409,13.988L18.842,0.345Z"
+                style="fill: rgb(0, 255, 255); fill-rule: nonzero"
+              />
             </g>
           </svg>
         </div>
-        <h4 class="qqb-result-title">$RESULT_TITLE</h4>
+        <h4 class="qqb-result-title">{{ questionResultTitle }}</h4>
         <p class="qqb-result-description">Unfortunately you selected the incorrect response.</p>
-        <button class="btn btn-qqb-result-action">$ACTION_TEXT</button>
-
+        <button class="btn btn-qqb-result-action" (click)="nextQuestion()">Next</button>
       </div>
-      
     </div>
-
   </div>
 </div>

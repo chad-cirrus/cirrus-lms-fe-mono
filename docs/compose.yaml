@@ -1,0 +1,14 @@
+version: '3'
+services:
+  compodoc:
+    image: node:14
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    working_dir: /usr/src/app
+    command: >
+      bash -c "npm install -g @compodoc/compodoc &&
+               npm install &&
+               compodoc -p tsconfig.json -s"
+    ports:
+      - 8080:8080
