@@ -1,14 +1,8 @@
 import { Component, OnInit, Renderer2 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LessonContentComponent } from '@cirrus/ui';
-import {  QuizService,} from './quiz.service';
-import {
-  IQuizRequest,
-  IQuizTracker,
-  Answer,
-  IStartQuizAttempt,
-  IAnswerResponse,
-} from './quiz.types';
+import { QuizService } from './quiz.service';
+import { IAnswerResponse, IQuizAttempt, IQuizRequest, IQuizTracker, IStartQuizAttempt } from './quiz.types';
 
 import { AppState } from '../../../store/reducers';
 import { Store } from '@ngrx/store';
@@ -44,7 +38,11 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
     answers: [],
     responses: [],
     attempt_id: -1,
+    started_at: new Date('01-01-1970'),
   };
+
+  answeredQuestionResultClass = '';
+  questionResultTitle = '';
 
   /// TODO: replace next line when api returns actual value
   approximateDuration = '3 million minutes';
@@ -125,8 +123,9 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
     });
     this.quizService.startQuiz(attempt).subscribe(response => {
       this.quizTracker.attempt_id = response.quiz_attempt.id;
+      this.quizTracker.started_at = new Date();
+      this.quizTracker.current_question = 0;
     });
-    this.quizTracker.current_question = 0;
   }
 
   /**
@@ -155,7 +154,13 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
    * @returns {boolean} - true if the selected answer is correct, false otherwise
    */
   checkAnswer(): boolean {
-    return this.quizTracker.responses[this.quizTracker.current_question].quiz_attempt_response.correct;
+    if (
+      this.quizTracker.responses[this.quizTracker.current_question] &&
+      this.quizTracker.responses[this.quizTracker.current_question].quiz_attempt_response
+    ) {
+      return this.quizTracker.responses[this.quizTracker.current_question].quiz_attempt_response.correct;
+    }
+    return false;
   }
 
   /**
@@ -173,18 +178,27 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
    */
   isQuizCompleted(): boolean {
     if (
-      this.quizTracker.answers &&
-      this.quizTracker.answers.length > 0 &&
-      this.quizTracker.answers.length === this.quiz.quiz_questions.length
+      this.quizTracker.responses &&
+      this.quizTracker.responses.length > 0 &&
+      this.quizTracker.responses.length === this.quiz.quiz_questions.length
     ) {
       return true;
     }
     return false;
   }
 
+  getSelectedAnswerId(): number {
+    if (
+      this.quizTracker.answers &&
+      this.quizTracker.answers[this.quizTracker.current_question] &&
+      typeof this.quizTracker.answers[this.quizTracker.current_question].answer !== 'undefined'
+    ) {
+      return this.quizTracker.answers[this.quizTracker.current_question].answer as number;
+    }
+    return -1;
+  }
   /**
-   * Submits the selected answer for the current question and increments the currentQuestion index.
-   * If the current question is the last question in the quiz, the quizCompleted boolean is set to true.
+   * Submits the selected answer for the current question to the api.
    */
   submitAnswer() {
     // initialize arrays if this is the first time through
@@ -198,19 +212,32 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
     this.quizService
       .submitAnswer(this.quizTracker.attempt_id, this.quizTracker.answers[this.quizTracker.current_question])
       .subscribe(response => {
-        this.quizTracker.responses[this.quizTracker.current_question] = response;
+        this.processResponse(response);
       });
+  }
 
-    if (this.checkAnswer()) console.log('Correct answer!');
-    else console.log('Wrong answer!');
-
-    this.quizTracker.current_question++;
-    this.quizTracker.answers[this.quizTracker.current_question] = new Answer();
-    this.quizTracker.responses[this.quizTracker.current_question] = {} as IAnswerResponse;
-
-    if (this.isQuizCompleted()) {
-      console.log(this.getScore());
+  /**
+   * Processs the response from the api for the answered question.
+   * If the current question is the last question in the quiz, the quizCompleted boolean is set to true.
+   */
+  processResponse(response: IAnswerResponse) {
+    this.quizTracker.responses[this.quizTracker.current_question] = response;
+    if (this.checkAnswer()) {
+      this.answeredQuestionResultClass = ' --correct';
+      this.questionResultTitle = 'Correct!';
+    } else {
+      this.answeredQuestionResultClass = ' --incorrect';
     }
+  }
+
+  /**
+   * Increments the current question index and resets the answered question result class and title.
+   * If the quiz is completed, emits an event to show the previous and next buttons.
+   */
+  nextQuestion() {
+    this.answeredQuestionResultClass = '';
+    this.questionResultTitle = '';
+    this.quizTracker.current_question++;
     if (this.isQuizCompleted()) {
       this.hidePrevAndNext.emit(false);
     }
@@ -221,12 +248,30 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
    * @returns {string} The score of the quiz attempt in the form of "correctAnswers out of totalQuestions correct. (percentage%)"
    */
   getScore(): string {
-    const _correctAnswers = 10;
-    let _percentage = 100.0;
-    /*     for (let i = 0; i < this.quiz.quiz_questions.length; i++) {
-      if (this.quizTracker.answers[i].answer === this.quiz.quiz_questions[i].correct_option.id) _correctAnswers++;
+    let _correctAnswers = 0;
+    let _percentage = 0.0;
+    for (let i = 0; i < this.quiz.quiz_questions.length; i++) {
+      if (this.quizTracker.responses[i].quiz_attempt_response.correct) _correctAnswers++;
     }
- */ _percentage = (_correctAnswers / this.quiz.quiz_questions.length) * 100;
-    return `10 out of ${this.quiz.quiz_questions.length} correct. (${_percentage.toFixed(2)}%)`;
+    _percentage = (_correctAnswers / this.quiz.quiz_questions.length) * 100;
+    return `${_correctAnswers} out of ${this.quiz.quiz_questions.length} correct. (${_percentage.toFixed(2)}%)`;
+  }
+
+  /**
+   * Calculates and returns the elapsed time since the quiz started.
+   * The time is returned as a string in the format "mm:ss".
+   * @returns {string} The elapsed time in the format "mm:ss".
+   */
+  getElapsedTime() {
+    const dateObj = new Date(this.quizTracker.started_at);
+    const now = new Date();
+
+    const diffInMs = now.getTime() - dateObj.getTime();
+    const diffInSeconds = Math.floor(diffInMs / 1000);
+
+    const minutes = Math.floor(diffInSeconds / 60);
+    const seconds = diffInSeconds % 60;
+
+    return `${minutes}:${seconds}`;
   }
 }

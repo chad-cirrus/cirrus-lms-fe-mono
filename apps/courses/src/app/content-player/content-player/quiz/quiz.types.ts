@@ -253,6 +253,8 @@ export interface IQuizTracker {
    * @type {number}
    */
   current_question: number;
+
+  started_at: Date;
 }
 
 /**

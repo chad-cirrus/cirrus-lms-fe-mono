@@ -54,6 +54,8 @@ export class QuizService {
     const _data = {
       quiz_attempt_response: {
         question_option_id: answer.answer,
+        quiz_question_id: answer.question_id,
+        quiz_attempt_id: attempt_id,
       },
     };
     return this.http
