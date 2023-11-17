@@ -290,29 +290,19 @@ cirrus-cta-button {
     padding: 95px 20px 50px;
     
     @media (min-width: 600px) {
-      padding: 140px 25px 150px;
+      padding: 140px 25px 50px;
     }
     
     @media (min-width: 960px) {
       min-height: 550px;
-      padding: 140px 50px 150px;
-      margin-bottom: -100px;
+      padding: 140px 50px 50px;
     }
   }
 
   .course-started {
-    padding: 0 20px 3rem;
     z-index: 3;
     position: relative;
-  
-    @media screen and (min-width: 600px) {
-      padding-left: 25px;
-      padding-right: 25px;
-    }
-    @media (min-width: 960px) {
-      padding-left: 50px;
-      padding-right: 50px;
-    }
+    margin-top: 6rem;
   }
 
 }
@@ -328,19 +318,14 @@ cirrus-cta-button {
   }
 }
 
-@media screen and (min-width: 1920px) and (min-height: 900px) {
+.lesson-hero.course-state-started {
+  min-height: calc(42vw + 120px);
+}
+@media screen and (min-width: 1920px) {
   .course-state-started .course-started {
-    position: absolute;
-    top: calc(90vh - 260px - 3rem);
     width: 100%;
   }
   .lesson-hero.course-state-started {
-    margin-bottom: 280px;
-  }
-}
-
-@media screen and (min-width: 1920px) and (min-height: 1200px) {
-  .course-state-started .course-started {
-    top: calc(80vh - 260px - 3rem);
+    min-height: 50vw;
   }
 }
