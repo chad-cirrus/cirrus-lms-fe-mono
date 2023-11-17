@@ -184,9 +184,9 @@ export interface IQuizAttempt {
 
   /**
    * The snapshot of the quiz attempt.
-   * @type {unknown}
+   * @type {string}
    */
-  snapshot: unknown;
+  snapshot: string;
 
   /**
    * The score of the quiz attempt.

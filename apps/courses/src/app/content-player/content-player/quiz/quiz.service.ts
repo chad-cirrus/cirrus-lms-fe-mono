@@ -5,7 +5,6 @@ import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { Answer, IAnswerResponse, IQuizRequest, IStartQuiz, IStartQuizAttempt, IStartQuizResponse } from './quiz.types';
 
-
 @Injectable({
   providedIn: 'root',
 })
@@ -63,6 +62,17 @@ export class QuizService {
         `${environment.baseUrl}/api/v5/quiz_attempts/${attempt_id}/quiz_questions/${answer.question_id}/quiz_attempt_responses`,
         _data,
       )
+      .pipe(map(response => response));
+  }
+
+  /**
+   * Grades a quiz attempt.
+   * @param attempt_id The ID of the quiz attempt to grade.
+   * @returns An observable that emits the response from the server.
+   */
+  gradeQuiz(attempt_id: number): Observable<any> {
+    return this.http
+      .post<any>(`${environment.baseUrl}/api/v5/quiz_attempts/${attempt_id}/submit`, {})
       .pipe(map(response => response));
   }
 }

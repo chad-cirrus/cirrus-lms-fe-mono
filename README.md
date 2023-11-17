@@ -4,7 +4,7 @@
 This is the mono repo for Cirrus Learning Management.
 
 ## Compodoc documentation generator
-A website can be genereted for documentation of the app.
+A website can be generated for documentation of the app.
 
 https://github.com/compodoc/compodoc
 
