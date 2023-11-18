@@ -2,7 +2,7 @@ import { Component, OnInit, Renderer2 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LessonContentComponent } from '@cirrus/ui';
 import { QuizService } from './quiz.service';
-import { IAnswerResponse, IQuizAttempt, IQuizRequest, IQuizTracker, IStartQuizAttempt } from './quiz.types';
+import { IAnswerResponse, IQuizRequest, IQuizTracker, IStartQuizAttempt } from './quiz.types';
 
 import { AppState } from '../../../store/reducers';
 import { Store } from '@ngrx/store';
@@ -187,6 +187,11 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
     return false;
   }
 
+  /**
+   * Returns the ID of the currently selected answer for the current question in the quiz.
+   * If no answer is selected, returns -1.
+   * @returns The ID of the currently selected answer, or -1 if no answer is selected.
+   */
   getSelectedAnswerId(): number {
     if (
       this.quizTracker.answers &&
@@ -197,6 +202,7 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
     }
     return -1;
   }
+
   /**
    * Submits the selected answer for the current question to the api.
    */
@@ -239,8 +245,20 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
     this.questionResultTitle = '';
     this.quizTracker.current_question++;
     if (this.isQuizCompleted()) {
+/*       this.quizService.gradeQuiz(this.quizTracker.attempt_id).subscribe(response => {
+      });
+ */
       this.hidePrevAndNext.emit(false);
     }
+  }
+
+  /**
+   * Determines whether the back button should be hidden.
+   * @returns A boolean indicating whether the back button should be hidden.
+   */
+  shouldHideBackButton(): boolean {
+    if(this.quizTracker.current_question <=0) return false;
+    return true;
   }
 
   /**

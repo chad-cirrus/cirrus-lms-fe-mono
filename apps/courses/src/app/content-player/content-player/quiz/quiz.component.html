@@ -129,7 +129,7 @@
     </div>
 
     <div class="qqb-controls">
-      <button class="qqb-control-back" (click)="goBack()">
+      <button class="qqb-control-back" [style.display]="shouldHideBackButton() ? 'none' : 'inline-block'"(click)="goBack()">
         <img src="courses/images/svg/quiz_question_back_button_icon.svg" />
         BACK
       </button>
