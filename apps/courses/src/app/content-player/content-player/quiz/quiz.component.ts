@@ -44,9 +44,6 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
   answeredQuestionResultClass = '';
   questionResultTitle = '';
 
-  /// TODO: replace next line when api returns actual value
-  approximateDuration = '3 million minutes';
-
   /// Timed Quiz properties
   // TODO: implement the following timer logic correctly, placeholder for now
   isQuizTimed = true;
