@@ -340,6 +340,14 @@
     &:hover {
       cursor: pointer;
     }
+    &.--selected {
+      background-color: #fff;
+      color: #0077C8;
+
+      svg path {
+        stroke: #0077C8;
+      }
+    }
   }
 
   .qqb-control-back {
