@@ -38,19 +38,17 @@ button.snav-desktop {
 
   @extend .snav-open-button;
 }
-.lesson-image .btn-container {
+.lesson-hero .btn-container {
   min-height: 92px;
-}
-
-mat-drawer {
-  box-shadow: -4px -2px 8px rgba(0, 0, 0, 0.25);
-}
-
-.btn-container {
   padding-top: 15px;
   width: 100%;
   display: flex;
   justify-content: flex-end;
+  position: absolute;
+}
+
+mat-drawer {
+  box-shadow: -4px -2px 8px rgba(0, 0, 0, 0.25);
 }
 
 .dropdown-container {
@@ -60,16 +58,18 @@ mat-drawer {
   background: rgba(31, 31, 31, 1);
 }
 
-.lesson-image {
-  -webkit-background-size: cover !important;
-  -moz-background-size: cover !important;
-  -o-background-size: cover !important;
-  background-size: cover !important;
+.lesson-hero {
+  position: relative;
+  min-height: 300px;
+  align-items: flex-start;
 
   .content {
     width: 100%;
-    // margin-left: 0px;
-    // padding: 64px 16px 0;
+    z-index: 2;
+    margin-top: 48px;
+    position: absolute;
+    top: 0;
+    padding-top: 2rem;
 
     .mat-divider {
       border-top-color: rgba(255, 255, 255);
@@ -171,34 +171,8 @@ cirrus-lesson-progress.instructor-view {
     /* Chrome/Safari/Webkit */
     width: 0px;
   }
-
-  //leaving this in here as I will bring it back in later, it worked previously until someone else made adjustments to fix the lesson landing page again
-  // @media (max-width: 960px) {
-  //   &:before {
-  //     content: ' ';
-  //     display: block;
-  //     position: absolute;
-  //     top: 0;
-  //     left: 0;
-  //     height: 100%;
-  //     width: 35px;
-  //     background: linear-gradient(90deg, #000000 3%, rgba(31, 31, 31, 0) 100%);
-  //     pointer-events: none;
-  //   }
-
-  //   &:after {
-  //     content: ' ';
-  //     display: block;
-  //     position: absolute;
-  //     top: 0;
-  //     right: 0;
-  //     height: 100%;
-  //     width: 35px;
-  //     background: linear-gradient(270deg, #000000 3%, rgba(31, 31, 31, 0) 100%);
-  //     pointer-events: none;
-  //   }
-  // }
 }
+
 
 cirrus-progress-card {
   min-width: 130px;
@@ -218,15 +192,12 @@ cirrus-progress-card:last-child {
 .contents-list-container {
   .content-item {
     margin-top: 8px;
-    // margin: 8px;
   }
 }
 
 @media (min-width: 600px) {
-  .lesson-image {
+  .lesson-hero {
     .content {
-      margin-top: 48px;
-      // padding: 48px 24px 0 24px;
 
       .lesson-label {
         margin-bottom: 10px;
@@ -260,11 +231,9 @@ cirrus-progress-card:last-child {
 }
 
 @media (min-width: 960px) {
-  .lesson-image {
+  .lesson-hero {
     .content {
       padding-top: 96px;
-      // margin-left: 40px;
-      // padding: 96px 40px 0 40px;
 
       p {
         margin: 25px 0 50px;
@@ -427,5 +396,27 @@ label > span.mat-slide-toggle-bar .cloaked {
 
   @media (min-width: 960px) {
     padding: 0 50px;
+  }
+}
+
+
+
+.lesson-hero-image {
+  position: relative;
+  top: 0;
+  z-index: 1;
+  width: 100%;
+
+  .lesson-hero-image-overlay {
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0.33) 44.11%, rgba(0, 0, 0, 0) 61.94%), linear-gradient(360deg,#000000 1.79%,rgba(0,0,0,.24) 19.37%,rgba(0,0,0,0) 25%);
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+
+  img {
+    width: 100%;
   }
 }

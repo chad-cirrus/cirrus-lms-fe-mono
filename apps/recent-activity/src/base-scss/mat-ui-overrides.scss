@@ -550,7 +550,8 @@ apx-chart .apexcharts-toolbar {
 
 .course-preview-container {
   position: relative;
-  height: 74px;
+  height: 105px;
+  margin-bottom: 1rem;
 
   cirrus-course-player {
     display: inline-block;
@@ -770,7 +771,7 @@ apx-chart .apexcharts-toolbar {
       width: 310px;
       left:initial;
       position: absolute;
-      top: 285px;
+      top: calc(285px - 140px);
 
       &.sticky {
         // position: fixed;

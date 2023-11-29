@@ -11,7 +11,7 @@ export interface IContent {
   url: string;
   meta_tags: string[];
   content_tasks: IContentTask[];
-  quiz: any;
+  quiz: unknown;
   content_type: number;
   desc: string;
   content_file: string;
@@ -25,6 +25,7 @@ export interface IContent {
   blob_directory: string;
   show_comments: boolean;
   courseTitle?: string;
+  quiz_id?: number;
 }
 
 export enum CONTENT_STATUS {

@@ -134,11 +134,10 @@ export class ContentPlayerComponent
 
     combineLatest([
       this.currentContentItem$,
-      this.taskService.tasksAndLogBooks$,
-      this.isScreenTabletOrSmaller$
+      this.taskService.tasksAndLogBooks$
     ])
       .pipe(delay(0), takeUntil(this.destroy$))
-      .subscribe(([{ content }, [tasks, logbook], isScreenTabletOrSmaller]) => {
+      .subscribe(([{ content }, [tasks, logbook]]) => {
         if (content !== undefined) {
           this.vcref.ViewContainerRef.clear();
           this.addPadding = [CONTENT_TYPE.flight_assessment, CONTENT_TYPE.ground_assessment].indexOf(content.content_type) < 0;
@@ -146,10 +145,6 @@ export class ContentPlayerComponent
           this.title = content.title;
           this.createComponent(content, tasks, logbook);
           this.changeDetectorRef.detectChanges();
-
-          if (isScreenTabletOrSmaller) {
-            this.handleCloseMenu();
-          }
         } else {
           this.dialogRef.close();
         }

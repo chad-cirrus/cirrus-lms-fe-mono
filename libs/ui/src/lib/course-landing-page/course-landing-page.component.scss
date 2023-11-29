@@ -1,11 +1,31 @@
 @use '../styles/variables' as var;
 
-.lesson-image {
-  min-height: 450px;
-  padding: 95px 20px 0;
-  margin-bottom: 50px;
+.lesson-hero-content {
+  min-height: 300px;
+  // padding: 95px 20px 0;
+  padding: 20px 20px 0;
   width: 100%;
-  background-image: cover;
+  position: relative;
+  z-index: 2;
+}
+
+
+.lesson-hero-image {
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+
+  .lesson-hero-image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+  img {
+    width: 100%;
+  }
+
 }
 
 h1 {
@@ -97,9 +117,10 @@ mat-spinner {
 }
 
 cirrus-course-progress {
-  display: inline-block;
+  display: block;
   width: 100%;
   margin: 20px 0 40px;
+  max-width: 653px;
 }
 
 cirrus-cta-button {
@@ -127,7 +148,7 @@ cirrus-cta-button {
 }
 
 @media (min-width: 600px) {
-  .lesson-image {
+  .lesson-hero-content {
     padding: 140px 25px 0;
   }
   h1 {
@@ -146,7 +167,7 @@ cirrus-cta-button {
 }
 
 @media (min-width: 960px) {
-  .lesson-image {
+  .lesson-hero-content {
     min-height: 550px;
     padding: 140px 50px 0;
   }
@@ -163,8 +184,8 @@ cirrus-cta-button {
 }
 
 @media (min-width: 1400px) {
-  .lesson-image {
-    height: calc( 75vh - 80px );
+  .lesson-hero-content {
+    height: 40vw;
   }
 }
 
@@ -259,5 +280,52 @@ cirrus-cta-button {
     .course-stat-value {
       font-size: 2.75rem;
     }
+  }
+}
+
+
+.course-state-started {
+
+  .lesson-hero-content {
+    padding: 95px 20px 50px;
+    
+    @media (min-width: 600px) {
+      padding: 140px 25px 50px;
+    }
+    
+    @media (min-width: 960px) {
+      min-height: 550px;
+      padding: 140px 50px 50px;
+    }
+  }
+
+  .course-started {
+    z-index: 3;
+    position: relative;
+    margin-top: 6rem;
+  }
+
+}
+
+.lesson-hero.course-state-preview {
+  margin-bottom: 3rem;
+  position: relative;
+
+  @media screen and (min-width: 1280px) {
+    .lesson-hero-content {
+      padding-bottom: 50px;
+    }
+  }
+}
+
+.lesson-hero.course-state-started {
+  min-height: calc(42vw + 120px);
+}
+@media screen and (min-width: 1920px) {
+  .course-state-started .course-started {
+    width: 100%;
+  }
+  .lesson-hero.course-state-started {
+    min-height: 50vw;
   }
 }

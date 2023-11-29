@@ -276,11 +276,7 @@ export class CourseLandingPageComponent {
       this._size === Breakpoints.XSmall
         ? this.course.mobile_hero_image_url
         : this.course.desktop_hero_image_url;
-    this.background.next({
-      ['background']: `linear-gradient(90deg, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0.33) 44.11%, rgba(0, 0, 0, 0) 100%),
-                  linear-gradient(360deg,#000000 1.79%,rgba(0,0,0,.24) 19.37%,rgba(0,0,0,0) 25%),
-                  url(${encodeURI(uri)}) no-repeat top / cover`,
-    });
+      this.background.next(uri);
   }
 }
 
