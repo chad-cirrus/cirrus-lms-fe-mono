@@ -227,9 +227,10 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
     this.quizTracker.responses[this.quizTracker.current_question] = response;
     if (this.checkAnswer()) {
       this.answeredQuestionResultClass = ' --correct';
-      this.questionResultTitle = 'Correct!';
+      this.questionResultTitle = 'Nicely done!';
     } else {
       this.answeredQuestionResultClass = ' --incorrect';
+      this.questionResultTitle = 'Sorry, try again.';
     }
   }
 
