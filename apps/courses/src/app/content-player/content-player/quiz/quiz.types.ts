@@ -91,6 +91,30 @@ export interface IQuizRequest {
    * @memberof IQuizRequest
    */
   subjects?: string[];
+  /**
+   * Category Id of this quiz
+   * @type {number}
+   * @memberof IQuizRequest
+   */
+  quiz_category_id: number;
+  /**
+   * Number of questions in this quiz
+   * @type {number}
+   * @memberof IQuizRequest
+   */
+  quiz_questions_count: number;
+  /**
+   * Percentage of correct answers needed to pass this quiz
+   * @type {number}
+   * @memberof IQuizRequest
+   */
+  pass_percentage: number;
+  /**
+   * Estimated duration of this quiz in minutes
+   * @type {number}
+   * @memberof IQuizRequest
+   */
+  approximate_duration: number;
 }
 
 /**

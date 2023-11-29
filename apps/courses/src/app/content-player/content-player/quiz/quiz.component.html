@@ -5,7 +5,10 @@
         <div class="quiz-title-wrapper">
           <h2 class="quiz-lesson-number">{{ content.title }}</h2>
           <h4 class="quiz-total-questions">
-            {{ this.getQuestionCount() }} Questions <span class="quiz-duration">({{ approximateDuration }})</span>
+            {{ this.getQuestionCount() }} Questions
+            <span *ngIf="this.quiz.approximate_duration > 0" class="quiz-duration"
+              >({{ this.quiz.approximate_duration }} minutes)</span
+            >
           </h4>
         </div>
 
@@ -39,7 +42,7 @@
       </div>
       <div class="qqb-timer" *ngIf="isQuizTimed === true">
         <img src="courses/images/svg/quiz_question_timer_icon.svg" />
-        {{getElapsedTime()}}
+        {{ getElapsedTime() }}
       </div>
     </div>
 
@@ -129,7 +132,11 @@
     </div>
 
     <div class="qqb-controls">
-      <button class="qqb-control-back" [style.display]="shouldHideBackButton() ? 'none' : 'inline-block'"(click)="goBack()">
+      <button
+        class="qqb-control-back"
+        [style.display]="shouldHideBackButton() ? 'none' : 'inline-block'"
+        (click)="goBack()"
+      >
         <img src="courses/images/svg/quiz_question_back_button_icon.svg" />
         BACK
       </button>
@@ -241,7 +248,7 @@
         </div>
 
         <span>Elapsed Time</span>
-        <div class="quiz-results-time">{{getElapsedTime()}}</div>
+        <div class="quiz-results-time">{{ getElapsedTime() }}</div>
       </div>
     </div>
 
