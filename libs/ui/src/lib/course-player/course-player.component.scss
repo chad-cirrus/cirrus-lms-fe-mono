@@ -49,10 +49,17 @@ cirrus-cta-button {
   margin-right: 8px;
 }
 
-// .description {
-//   margin-left: 1rem;
-// }
+.description {
+  flex-direction: row;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
 
+  .course-header {
+    width: 100%;
+  }
+}
 
 .watch-preview-container {
   display: flex;
@@ -127,28 +134,3 @@ cirrus-cta-button {
     }
   }
 }
-
-
-// .course-started {
-//   .text-container {
-//     display: flex;
-//     justify-content: center;
-//     align-items: center;
-
-//     .thumbnail {
-//       margin: auto 1rem auto 0;
-//       display: block;
-//     }
-
-//     .description .title,
-//     .description .chapter {
-//       font-size: 20px;
-//     }
-//   }
-// }
-
-
-
-
-
-
