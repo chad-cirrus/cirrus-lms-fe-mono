@@ -26,23 +26,7 @@
       <p class="about--version small">Version: {{ version }}</p>
 
       <div *ngIf="!courseOverview.course_attempt">
-        <div class="support-container">
-          <h3>Supported Devices</h3>
-          <div class="devices">
-            <div>Desktop</div>
-            <div class="device">Tablet</div>
-            <div class="device">Mobile</div>
-          </div>
-        </div>
-        <div class="have-questions-container">
-          <h3>Have Questions?</h3>
-          <p class="about--version">
-            If you need help purchasing this course or have any questions,
-            please contact us at <a href="mailto:learning@cirrusaircraft.com">learning@cirrusaircraft.com</a> and we’ll be happy
-            to help you through the signup process and get you flying in no
-            time!
-          </p>
-        </div>
+        <cirrus-course-support-section class="--mobile"></cirrus-course-support-section>
       </div>
     </div>
     <div
@@ -126,6 +110,10 @@
             you will be able to connect with a training partner.
           </p>
         </div>
+      </div>
+
+      <div *ngIf="!courseOverview.course_attempt">
+        <cirrus-course-support-section class="--desktop"></cirrus-course-support-section>
       </div>
       
 

@@ -55,6 +55,7 @@ import { CourseLessonItemComponent } from './course-lesson-item/course-lesson-it
 import { CourseLessonsComponent } from './course-lessons/course-lessons.component';
 import { CourseOverviewLessonProgressBarComponent } from './course-overview-lesson-progress-bar/course-overview-lesson-progress-bar.component';
 import { CourseOverviewComponent } from './course-overview/course-overview.component';
+import { CourseSupportSectionComponent } from './course-overview/course-support-section/course-support-section.component';
 import { CoursePlayerComponent } from './course-player/course-player.component';
 import { CourseProgressCompletedComponent } from './course-progress-completed/course-progress-completed.component';
 import { CourseProgressComponent } from './course-progress/course-progress.component';
@@ -147,6 +148,7 @@ import { FullstoryService } from './lib-services/fullstory/fullstory.service';
     CourseLessonContentCountComponent,
     CoursesTabEnrollmentHistoryComponent,
     CourseOverviewComponent,
+    CourseSupportSectionComponent,
     CourseSummaryCountsComponent,
     CourseContentProgressCircleComponent,
     CourseOverviewLessonProgressBarComponent,
@@ -204,6 +206,7 @@ import { FullstoryService } from './lib-services/fullstory/fullstory.service';
     CourseLessonContentCountComponent,
     CoursesTabEnrollmentHistoryComponent,
     CourseOverviewComponent,
+    CourseSupportSectionComponent,
     CourseSummaryCountsComponent,
     CourseContentProgressCircleComponent,
     CourseOverviewLessonProgressBarComponent,

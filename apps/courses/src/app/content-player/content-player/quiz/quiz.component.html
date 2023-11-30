@@ -145,6 +145,9 @@
         class="qqb-control-submit"
         (click)="submitAnswer()"
         [disabled]="(quizTracker.answers[quizTracker.current_question] | json) === '{}'"
+        [ngClass]="{
+          '--selected': this.quizTracker?.answers?.[this.quizTracker.current_question]?.answer
+        }"
       >
         SUBMIT
 
