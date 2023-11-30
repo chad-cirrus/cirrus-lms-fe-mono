@@ -1,0 +1,86 @@
+@use '../../styles/variables' as var;
+
+// Control where the support section is diplayed based on device size.
+.support-section {
+    display: none;
+}
+:host {
+    @media  screen and (max-width: 959px) {
+        &.--mobile .support-section {
+            display: block;
+        }
+    }
+    @media  screen and (min-width: 960px) {
+        &.--desktop  .support-section {
+            display: block;
+        }
+    }
+}
+
+
+.support-container,
+.have-questions-container {
+  padding-top: 29px;
+}
+
+.devices {
+    font-size: 1.125rem;
+    color: var.$gray5;
+    display: flex;
+    gap: 52px;
+    flex-direction: row;
+}
+
+.device {
+    height: 7rem;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-direction: column;
+    padding-top: 17px;
+  
+    .device-icon-wrapper { 
+        height: 100%;
+        margin-bottom: 1rem; 
+    }
+    &.--desktop .device-icon-wrapper { max-height: 47px; }
+    &.--tablet .device-icon-wrapper  { max-height: 36px; }
+    &.--mobile .device-icon-wrapper  { max-height: 28px; }
+  
+    img {
+        height: 100%;
+    }
+    
+}
+
+@media (min-width: 600px) {
+    .device {
+        padding-top: 0
+    }
+}
+
+@media (min-width: 960px) {
+    .devices {
+        gap: 0;
+        flex-direction: column;
+    }
+    
+    .device {
+        flex-direction: row;
+        justify-content: flex-start;
+        height: 3rem;
+  
+        .device-icon-wrapper { 
+            width: 30px;
+            margin-right: 1rem;
+            margin-bottom: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        &.--desktop .device-icon-wrapper { max-height: 25px; }
+        &.--tablet .device-icon-wrapper  { max-height: 21px; }
+        &.--mobile .device-icon-wrapper  { max-height: 17px; }
+    }
+}
+

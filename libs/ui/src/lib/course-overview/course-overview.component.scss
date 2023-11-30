@@ -29,21 +29,6 @@ section:not(:last-child) {
   }
 }
 
-.support-container,
-.have-questions-container {
-  padding-top: 29px;
-}
-
-.devices {
-  flex-direction: column;
-  font-size: 1.125rem;
-  color: var.$gray5;
-}
-
-.device {
-  padding-top: 17px;
-}
-
 .started-date {
   color: #969696;
   margin-bottom: 40px;
@@ -139,14 +124,6 @@ section:not(:last-child) {
       padding-bottom: 30px;
     }
   }
-  .devices {
-    display: flex;
-    gap: 52px;
-    flex-direction: row;
-  }
-  .device {
-    padding-top: 0
-  }
 }
 
 @media (min-width: 960px) {
@@ -162,7 +139,6 @@ section:not(:last-child) {
     border-bottom: none;
     border-left: 1px solid #3a3a3a;
   }
-
   .started-date {
     line-height: 38px;
   }

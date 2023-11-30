@@ -15,6 +15,7 @@ export * from './lib/course-lesson-item/course-lesson-item.component';
 export * from './lib/course-lessons/course-lessons.component';
 export * from './lib/course-overview-lesson-progress-bar/course-overview-lesson-progress-bar.component';
 export * from './lib/course-overview/course-overview.component';
+export * from './lib/course-overview/course-support-section/course-support-section.component';
 export * from './lib/course-player/course-player.component';
 export * from './lib/course-progress/course-progress.component';
 export * from './lib/course-summary-counts/course-summary-counts.component';
