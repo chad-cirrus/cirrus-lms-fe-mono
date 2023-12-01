@@ -46,7 +46,7 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
 
   /// Timed Quiz properties
   // TODO: implement the following timer logic correctly, placeholder for now
-  isQuizTimed = true;
+  isQuizTimed = false;
   quizTimeUsed = 0;
 
   /**
@@ -243,9 +243,6 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
     this.questionResultTitle = '';
     this.quizTracker.current_question++;
     if (this.isQuizCompleted()) {
-      /*       this.quizService.gradeQuiz(this.quizTracker.attempt_id).subscribe(response => {
-      });
- */
       this.hidePrevAndNext.emit(false);
     }
   }
@@ -296,10 +293,6 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
    * @returns {boolea} True if passed, otherwise false.
    */
   studentHasPassed(): boolean {
-/*    if (this.isQuizCompleted() && this.quizTracker.responses.length === 0) {
-      return false;
-    }
-*/
     const correctAnswers = this.quizTracker.responses.filter(response => response.quiz_attempt_response.correct);
     const percentage = (correctAnswers.length / this.quiz.quiz_questions.length) * 100;
     return percentage >= this.quiz.pass_percentage;
@@ -333,7 +326,7 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
   }
 
   /**
-   * Returns the text for the secondar button on the quiz results screen based on student's score.
+   * Returns the text for the secondary button on the quiz results screen based on student's score.
    * @returns {string} The text for the secondary button on the quiz results screen.
    */
   getResultsSecondaryButtonText(): string {
@@ -342,5 +335,17 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
       _buttonText = 'Review';
     }
     return _buttonText;
+  }
+
+  /**
+   * Returns the approximate duration of the quiz in minutes.
+   * @returns {number} The approximate duration of the quiz in minutes.
+   */
+  getApproximateDuration(): number {
+    let _approximte_duration = 0;
+    if (this.quiz) {
+      _approximte_duration = this.quiz.approximate_duration;
+    }
+    return _approximte_duration;
   }
 }
