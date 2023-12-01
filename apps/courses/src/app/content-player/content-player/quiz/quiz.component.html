@@ -6,7 +6,7 @@
           <h2 class="quiz-lesson-number">{{ content.title }}</h2>
           <h4 class="quiz-total-questions">
             {{ this.getQuestionCount() }} Questions
-            <span *ngIf="this.quiz.approximate_duration > 0" class="quiz-duration"
+            <span *ngIf="getApproximateDuration() > 0" class="quiz-duration"
               >(approx. {{ this.quiz.approximate_duration }} min)</span
             >
           </h4>
@@ -246,9 +246,11 @@
             />
           </svg>
         </div>
+        <div *ngIf="isQuizTimed">
+          <span>Elapsed Time</span>
 
-        <span>Elapsed Time</span>
-        <div class="quiz-results-time">{{ getElapsedTime() }}</div>
+          <div class="quiz-results-time">{{ getElapsedTime() }}</div>
+        </div>
       </div>
     </div>
 
