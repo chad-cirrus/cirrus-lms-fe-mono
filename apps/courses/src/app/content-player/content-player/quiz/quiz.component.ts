@@ -243,7 +243,7 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
     this.questionResultTitle = '';
     this.quizTracker.current_question++;
     if (this.isQuizCompleted()) {
-/*       this.quizService.gradeQuiz(this.quizTracker.attempt_id).subscribe(response => {
+      /*       this.quizService.gradeQuiz(this.quizTracker.attempt_id).subscribe(response => {
       });
  */
       this.hidePrevAndNext.emit(false);
@@ -255,7 +255,7 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
    * @returns A boolean indicating whether the back button should be hidden.
    */
   shouldHideBackButton(): boolean {
-    if(this.quizTracker.current_question <=0) return false;
+    if (this.quizTracker.current_question <= 0) return false;
     return true;
   }
 
@@ -289,5 +289,58 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
     const seconds = diffInSeconds % 60;
 
     return `${minutes}:${seconds}`;
+  }
+
+  /**
+   * Calculates and returns if the student passed the quiz/test or not.
+   * @returns {boolea} True if passed, otherwise false.
+   */
+  studentHasPassed(): boolean {
+/*    if (this.isQuizCompleted() && this.quizTracker.responses.length === 0) {
+      return false;
+    }
+*/
+    const correctAnswers = this.quizTracker.responses.filter(response => response.quiz_attempt_response.correct);
+    const percentage = (correctAnswers.length / this.quiz.quiz_questions.length) * 100;
+    return percentage >= this.quiz.pass_percentage;
+  }
+
+  /**
+   * Returns the title for the quiz results screen.
+   * @returns {string} The title text for the quiz results.
+   */
+  getResultsTitle(): string {
+    let _titleText = 'Please finish the quiz to see your results.';
+    if (this.isQuizCompleted()) {
+      if (this.studentHasPassed()) {
+        _titleText = 'Congratulations, you passed!';
+      } else {
+        _titleText = 'Nice try, but you did not pass.';
+      }
+    }
+    return _titleText;
+  }
+
+  /** Returns the text for the primary button on the quiz results screen based on student's score.
+   * @returns {string} The text for the primary button on the quiz results screen.
+   */
+  getResultsPrimaryButtonText(): string {
+    let _buttonText = 'Retake';
+    if (this.isQuizCompleted() && this.studentHasPassed()) {
+      _buttonText = 'Continue';
+    }
+    return _buttonText;
+  }
+
+  /**
+   * Returns the text for the secondar button on the quiz results screen based on student's score.
+   * @returns {string} The text for the secondary button on the quiz results screen.
+   */
+  getResultsSecondaryButtonText(): string {
+    let _buttonText = 'Skip';
+    if (this.isQuizCompleted()) {
+      _buttonText = 'Review';
+    }
+    return _buttonText;
   }
 }

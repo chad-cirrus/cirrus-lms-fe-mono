@@ -7,7 +7,7 @@
           <h4 class="quiz-total-questions">
             {{ this.getQuestionCount() }} Questions
             <span *ngIf="this.quiz.approximate_duration > 0" class="quiz-duration"
-              >({{ this.quiz.approximate_duration }} minutes)</span
+              >(approx. {{ this.quiz.approximate_duration }} min)</span
             >
           </h4>
         </div>
@@ -202,7 +202,7 @@
       </svg>
     </div>
 
-    <h2 class="quiz-results-title">$RESULTS_TITLE</h2>
+    <h2 class="quiz-results-title">{{ getResultsTitle() }}</h2>
 
     <div class="quiz-results">
       <div class="label">Final Score</div>
@@ -210,7 +210,7 @@
     </div>
 
     <div class="quiz-results-meta">
-      <p>You must pass with a 88% or higher to contine.</p>
+      <p *ngIf="quiz.pass_percentage > 0">You must pass with a {{ quiz.pass_percentage }}% or higher to contine.</p>
       <div class="quiz-results-time-data">
         <div class="quiz-results-time-icon">
           <svg width="13" height="14" viewBox="0 0 13 14" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -253,8 +253,8 @@
     </div>
 
     <div class="quiz-results-next-steps">
-      <button class="btn btn-secondary">$SECONDARY_ACTION_TEXT</button>
-      <button class="btn btn-primary">$PRIMARY_ACTION_TEXT</button>
+      <button class="btn btn-secondary">{{ getResultsSecondaryButtonText() }}</button>
+      <button class="btn btn-primary">{{ getResultsPrimaryButtonText() }}</button>
     </div>
   </div>
 
