@@ -373,4 +373,5 @@ export class Answer {
    * @memberof Answer
    */
   answer: number | undefined;
+  attempt_count: number = 0;
 }
