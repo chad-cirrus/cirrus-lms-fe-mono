@@ -63,12 +63,32 @@ mat-drawer {
   min-height: 300px;
   align-items: flex-start;
 
-  .content {
-    width: 100%;
-    z-index: 2;
-    margin-top: 48px;
+  .lesson-hero-image {
     position: absolute;
     top: 0;
+    z-index: 1;
+    width: 100%;
+  
+    .lesson-hero-image-overlay {
+      background: linear-gradient(90deg, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0.33) 75%, rgba(0, 0, 0, 0) 95%), linear-gradient(360deg,#000000 1.79%,rgba(0,0,0,.24) 19.37%,rgba(0,0,0,0) 25%);
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+    }
+  
+    img {
+      width: 100%;
+    }
+  }
+
+  .content {
+    width: 100%;
+    position: relative;
+    top: 0;
+    z-index: 2;
+    margin-top: 48px;
     padding-top: 2rem;
 
     .mat-divider {
@@ -132,6 +152,26 @@ mat-drawer {
       }
     }
   }
+  @media (min-width: 960px) {
+    .lesson-hero-image {
+      position: relative;
+      max-height: 705px;
+      aspect-ratio: 1.45/1;
+      .lesson-hero-image-overlay {
+        background: linear-gradient(90deg, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0.33) 44.11%, rgba(0, 0, 0, 0) 61.94%), linear-gradient(360deg,#000000 1.79%,rgba(0,0,0,.24) 19.37%,rgba(0,0,0,0) 25%);
+      }
+      img {
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+      }
+    }
+  }
+  @media (min-width: 1400px) {
+    .lesson-hero-image {
+      position: relative;
+    }
+  }
 }
 
 cirrus-lesson-progress.instructor-view {
@@ -159,6 +199,7 @@ cirrus-lesson-progress.instructor-view {
   position: relative;
   margin-top: 12px;
   margin: 12px 12px 0 -20px;
+  z-index: 1;
   overflow-x: scroll;
   width: 100vw;
   scrollbar-width: none;
@@ -233,6 +274,7 @@ cirrus-progress-card:last-child {
 @media (min-width: 960px) {
   .lesson-hero {
     .content {
+      position: absolute;
       padding-top: 96px;
 
       p {
@@ -382,9 +424,12 @@ label > span.mat-slide-toggle-bar .cloaked {
   }
 }
 
-.lesson-landing-wrapper,
 .lesson-landing-wrapper {
-  background: $black;
+  position: relative;
+  z-index: 1;
+  @media (min-width: 1200px) {
+    margin-top: -70px;
+  }
 }
 
 .content {
@@ -396,27 +441,5 @@ label > span.mat-slide-toggle-bar .cloaked {
 
   @media (min-width: 960px) {
     padding: 0 50px;
-  }
-}
-
-
-
-.lesson-hero-image {
-  position: relative;
-  top: 0;
-  z-index: 1;
-  width: 100%;
-
-  .lesson-hero-image-overlay {
-    background: linear-gradient(90deg, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0.33) 44.11%, rgba(0, 0, 0, 0) 61.94%), linear-gradient(360deg,#000000 1.79%,rgba(0,0,0,.24) 19.37%,rgba(0,0,0,0) 25%);
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-  }
-
-  img {
-    width: 100%;
   }
 }
