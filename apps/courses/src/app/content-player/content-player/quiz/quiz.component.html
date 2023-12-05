@@ -174,7 +174,14 @@
     </div>
   </div>
 
-  <div class="quiz-complete" *ngIf="isQuizInProcess() === true && isQuizCompleted() === true">
+  <div
+    class="quiz-complete"
+    *ngIf="isQuizInProcess() === true && isQuizCompleted() === true"
+    [ngClass]="{
+      '--pass': this.studentHasPassed() === true,
+      '--fail': this.studentHasPassed() === false
+    }"
+  >
     <div class="quiz-results-icon">
       <svg
         width="100%"
@@ -225,7 +232,7 @@
 
     <div class="quiz-results-meta">
       <p *ngIf="quiz.pass_percentage > 0">You must pass with a {{ quiz.pass_percentage }}% or higher to contine.</p>
-      <div class="quiz-results-time-data">
+      <div *ngIf="isQuizTimed" class="quiz-results-time-data">
         <div class="quiz-results-time-icon">
           <svg width="13" height="14" viewBox="0 0 13 14" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M5.33302 2.13368V0.56518H7.59405V2.16153" fill="#1F1F1F" />
@@ -260,11 +267,9 @@
             />
           </svg>
         </div>
-        <div *ngIf="isQuizTimed">
-          <span>Elapsed Time</span>
+        <span>Elapsed Time</span>
 
-          <div class="quiz-results-time">{{ getElapsedTime() }}</div>
-        </div>
+        <div class="quiz-results-time">{{ getElapsedTime() }}</div>
       </div>
     </div>
 
