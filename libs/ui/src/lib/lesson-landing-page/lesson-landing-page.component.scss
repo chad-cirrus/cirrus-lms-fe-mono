@@ -154,7 +154,6 @@ mat-drawer {
   }
   @media (min-width: 960px) {
     .lesson-hero-image {
-      position: relative;
       max-height: 705px;
       aspect-ratio: 1.45/1;
       .lesson-hero-image-overlay {
@@ -165,11 +164,6 @@ mat-drawer {
         object-fit: cover;
         object-position: center;
       }
-    }
-  }
-  @media (min-width: 1400px) {
-    .lesson-hero-image {
-      position: relative;
     }
   }
 }
@@ -257,7 +251,7 @@ cirrus-progress-card:last-child {
       }
 
       .start-lesson {
-        margin: 35px 0 80px;
+        margin: 35px 0 0;
         width: auto;
         button {
           height: 40px;
@@ -274,7 +268,6 @@ cirrus-progress-card:last-child {
 @media (min-width: 960px) {
   .lesson-hero {
     .content {
-      position: absolute;
       padding-top: 96px;
 
       p {
@@ -349,6 +342,16 @@ cirrus-progress-card:last-child {
 
   .intro-video {
     padding: 16px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .lesson-hero {
+    .content {
+      .start-lesson {
+        margin: 55px 0 150px;
+      }
+    }
   }
 }
 
@@ -428,7 +431,7 @@ label > span.mat-slide-toggle-bar .cloaked {
   position: relative;
   z-index: 1;
   @media (min-width: 1200px) {
-    margin-top: -70px;
+    margin-top: -40px;
   }
 }
 
