@@ -58,8 +58,9 @@
         <li
           class="qqb-answer-item"
           [ngClass]="{
-              '--selected': this.quizTracker?.answers?.[this.quizTracker.current_question]?.answer === question.id
-            }"
+            '--selected': this.quizTracker?.answers?.[this.quizTracker.current_question]?.answer === question.id,
+            '--correct': showCorrectAnswer(question.id)
+          }"
           data-answer-value=""
           *ngFor="let question of this.quiz.quiz_questions[this.quizTracker.current_question].question_options"
           (click)="this.selectAnswer(this.quiz.quiz_questions[this.quizTracker.current_question].id, question.id)"
@@ -85,7 +86,8 @@
           class="qqb-answer-item"
           [ngClass]="{
             '--selected':
-              (this.quizTracker?.answers?.[this.quizTracker.current_question]?.answer === quiz.quiz_questions[quizTracker.current_question].question_options[0].id)
+              (this.quizTracker?.answers?.[this.quizTracker.current_question]?.answer === quiz.quiz_questions[quizTracker.current_question].question_options[0].id),
+            '--correct': showCorrectAnswer(quiz.quiz_questions[quizTracker.current_question].question_options[0].id)
           }"
           data-answer-value="true"
           (click)="
@@ -107,7 +109,8 @@
           [ngClass]="{
             '--selected':
               this.quizTracker?.answers?.[this.quizTracker.current_question]?.answer ===
-              quiz.quiz_questions[this.quizTracker.current_question].question_options[1].id
+              quiz.quiz_questions[this.quizTracker.current_question].question_options[1].id,
+            '--correct': showCorrectAnswer(quiz.quiz_questions[this.quizTracker.current_question].question_options[1].id)
           }"
           data-answer-value="false"
           (click)="
@@ -143,6 +146,7 @@
 
       <button
         class="qqb-control-submit"
+        [style.display]="shouldHideSubmitButton() ? 'none' : 'inline-block'"
         (click)="submitAnswer()"
         [disabled]="(quizTracker.answers[quizTracker.current_question] | json) === '{}'"
         [ngClass]="{
@@ -154,6 +158,16 @@
         <svg width="14" height="11" viewBox="0 0 14 11" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M0.835938 4.78788L5.2477 9.33333L13.3359 1" stroke="white" stroke-width="1.66667" />
         </svg>
+      </button>
+
+      <button
+        class="qqb-control-next"
+        [style.display]="shouldHideSubmitButton() ? 'inline-block' : 'none'"
+        (click)="nextQuestion()"
+        [disabled]="(quizTracker.answers[quizTracker.current_question] | json) === '{}'"
+      >
+        NEXT
+        <img src="courses/images/svg/quiz_question_back_button_icon.svg" />
       </button>
 
       <!-- <div class="quiz-control-fullscreen"></div> -->
@@ -315,8 +329,8 @@
           </svg>
         </div>
         <h4 class="qqb-result-title">{{ questionResultTitle }}</h4>
-        <p class="qqb-result-description">Unfortunately you selected the incorrect response.</p>
-        <button class="btn btn-qqb-result-action" (click)="nextQuestion()">Next</button>
+        <p class="qqb-result-description">{{ questionResultSubtitle }}</p>
+        <button class="btn btn-qqb-result-action" (click)="popupButtonClick()">{{ questionResultButtonText }}</button>
       </div>
     </div>
   </div>

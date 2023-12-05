@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { LessonContentComponent } from '@cirrus/ui';
 import { QuizService } from './quiz.service';
 import { IAnswerResponse, IQuizRequest, IQuizTracker, IStartQuizAttempt } from './quiz.types';
+import { CORRECT_RESPONSE_POPUP, INCORRECT_RESPONSE_POPUP_RETRY, INCORRECT_RESPONSE_POPUP_FINAL } from './quiz.constants';
 
 import { AppState } from '../../../store/reducers';
 import { Store } from '@ngrx/store';
@@ -43,6 +44,8 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
 
   answeredQuestionResultClass = '';
   questionResultTitle = '';
+  questionResultSubtitle = '';
+  questionResultButtonText = '';
 
   /// Timed Quiz properties
   // TODO: implement the following timer logic correctly, placeholder for now
@@ -143,7 +146,10 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
    * @param {number} answerId - The id of the answer
    */
   selectAnswer(questionId: number, answerId: number) {
-    this.quizTracker.answers[this.quizTracker.current_question] = { question_id: questionId, answer: answerId };
+    const attemptCount = this.quizTracker.answers[this.quizTracker.current_question]?.attempt_count || 0;
+
+    this.quizTracker.answers[this.quizTracker.current_question] = { question_id: questionId, answer: answerId, 
+      attempt_count: attemptCount};
   }
 
   /**
@@ -179,7 +185,13 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
       this.quizTracker.responses.length > 0 &&
       this.quizTracker.responses.length === this.quiz.quiz_questions.length
     ) {
-      return true;
+      if (this.checkAnswer()) {
+        return true;
+      } else {
+        const attemptCount = this.quizTracker.answers[this.quizTracker.current_question]?.attempt_count || 0;
+
+        return (this.isMultipleChoiceQuestion() && attemptCount > 1) || !this.isMultipleChoiceQuestion();
+      }
     }
     return false;
   }
@@ -211,7 +223,8 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
     if (!this.quizTracker.responses) {
       this.quizTracker.responses = [];
     }
-
+    this.quizTracker.answers[this.quizTracker.current_question].attempt_count++;
+    
     this.quizService
       .submitAnswer(this.quizTracker.attempt_id, this.quizTracker.answers[this.quizTracker.current_question])
       .subscribe(response => {
@@ -224,13 +237,62 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
    * If the current question is the last question in the quiz, the quizCompleted boolean is set to true.
    */
   processResponse(response: IAnswerResponse) {
+    const answer = this.quizTracker.answers[this.quizTracker.current_question];
+    const attemptCount = answer?.attempt_count || 0;
+
     this.quizTracker.responses[this.quizTracker.current_question] = response;
     if (this.checkAnswer()) {
-      this.answeredQuestionResultClass = ' --correct';
-      this.questionResultTitle = 'Nicely done!';
+      this.setPopupForCorrectResponse();
     } else {
-      this.answeredQuestionResultClass = ' --incorrect';
-      this.questionResultTitle = 'Sorry, try again.';
+      if ((this.isMultipleChoiceQuestion() && attemptCount > 1) || !this.isMultipleChoiceQuestion()) {
+        this.setPopupForLastIncorrectResponse();
+      } else {
+        this.setPopupForFirstIncorrectResponse();
+      }
+    }
+  }
+
+  setPopupForCorrectResponse() {
+    this.answeredQuestionResultClass = CORRECT_RESPONSE_POPUP.class;
+    this.questionResultTitle = CORRECT_RESPONSE_POPUP.title;
+    this.questionResultSubtitle = CORRECT_RESPONSE_POPUP.subtitle;
+    this.questionResultButtonText = CORRECT_RESPONSE_POPUP.buttonText;
+  }
+
+  setPopupForFirstIncorrectResponse() {
+    this.answeredQuestionResultClass = INCORRECT_RESPONSE_POPUP_RETRY.class;
+    this.questionResultTitle = INCORRECT_RESPONSE_POPUP_RETRY.title;
+    this.questionResultSubtitle = INCORRECT_RESPONSE_POPUP_RETRY.subtitle;
+    this.questionResultButtonText = INCORRECT_RESPONSE_POPUP_RETRY.buttonText;
+  }
+
+  setPopupForLastIncorrectResponse() {
+    this.answeredQuestionResultClass = INCORRECT_RESPONSE_POPUP_RETRY.class;
+    this.questionResultTitle = INCORRECT_RESPONSE_POPUP_FINAL.title;
+    this.questionResultSubtitle = INCORRECT_RESPONSE_POPUP_FINAL.subtitle;
+    this.questionResultButtonText = INCORRECT_RESPONSE_POPUP_FINAL.buttonText; 
+  }
+
+  resetQuestionResultPopup() {
+    this.answeredQuestionResultClass = '';
+    this.questionResultTitle = '';
+    this.questionResultSubtitle = '';
+    this.questionResultButtonText = '';
+  }
+
+  isMultipleChoiceQuestion(): boolean {
+    return this.quiz.quiz_questions[this.quizTracker.current_question].question_options.length > 2;
+  }
+  
+  /**
+   * Handles the click event for the popup button.
+   * If a user has an incorrect answer, it should not navigate to the next question.
+   */
+  popupButtonClick() {
+    if (this.checkAnswer()) {
+      this.nextQuestion();
+    } else {
+      this.resetQuestionResultPopup();
     }
   }
 
@@ -239,9 +301,11 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
    * If the quiz is completed, emits an event to show the previous and next buttons.
    */
   nextQuestion() {
-    this.answeredQuestionResultClass = '';
-    this.questionResultTitle = '';
-    this.quizTracker.current_question++;
+    this.resetQuestionResultPopup();
+    if (this.quizTracker.current_question < this.quiz.quiz_questions.length - 1) {
+      this.quizTracker.current_question++;
+    }
+
     if (this.isQuizCompleted()) {
       this.hidePrevAndNext.emit(false);
     }
@@ -254,6 +318,19 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
   shouldHideBackButton(): boolean {
     if (this.quizTracker.current_question <= 0) return false;
     return true;
+  }
+  
+  /**
+   * Determines whether the submit button should be hidden and the next button should be displayed.
+   * @returns A boolean indicating whether the submit button should be hidden and the next button should be displayed.
+   */
+  shouldHideSubmitButton(): boolean {
+    const answer = this.quizTracker.answers[this.quizTracker.current_question];
+    const attemptCount = answer?.attempt_count || 0;
+    const exhaustedMultipleChoiceAttempts = (this.isMultipleChoiceQuestion() && attemptCount > 1);
+    const exhaustedSingleChoiceAttempts = (!this.isMultipleChoiceQuestion() && attemptCount > 0);
+
+    return attemptCount > 0 && ( exhaustedMultipleChoiceAttempts || exhaustedSingleChoiceAttempts);
   }
 
   /**
@@ -289,8 +366,23 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
   }
 
   /**
+   * Determines whether to display the correct answer for a given question
+   * @returns {boolean} True if user has exhausted attempts, otherwise false.
+   */
+  showCorrectAnswer(optionId: number): boolean {
+    const attemptCount = this.quizTracker.answers[this.quizTracker.current_question]?.attempt_count || 0;
+    const response = this.quizTracker.responses[this.quizTracker.current_question]?.quiz_attempt_response;
+    const correctOptionId = response?.quiz_question.correct_option.id;
+
+    if (this.isMultipleChoiceQuestion()) {
+        return attemptCount > 1 && optionId === correctOptionId;
+    } else {
+        return attemptCount > 0 && optionId === correctOptionId;
+    }
+  }
+  /**
    * Calculates and returns if the student passed the quiz/test or not.
-   * @returns {boolea} True if passed, otherwise false.
+   * @returns {boolean} True if passed, otherwise false.
    */
   studentHasPassed(): boolean {
     const correctAnswers = this.quizTracker.responses.filter(response => response.quiz_attempt_response.correct);
