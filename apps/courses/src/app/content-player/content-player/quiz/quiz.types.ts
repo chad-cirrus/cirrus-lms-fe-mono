@@ -115,6 +115,12 @@ export interface IQuizRequest {
    * @memberof IQuizRequest
    */
   approximate_duration: number;
+
+  /**
+   * The quiz attempt information.
+   * @type {IQuizAttempt}
+   */
+  quiz_attempt?: IQuizAttempt;
 }
 
 /**
@@ -278,7 +284,17 @@ export interface IQuizTracker {
    */
   current_question: number;
 
+  /**
+   * The timestamped date and time the quiz was started.
+   * @type {Date}
+   */
   started_at: Date;
+
+  /**
+   * The quiz attempt information.
+   * @type {IQuizAttempt}
+   */
+  attempt?: IQuizAttempt;
 }
 
 /**

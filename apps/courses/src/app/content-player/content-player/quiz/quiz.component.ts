@@ -3,7 +3,11 @@ import { CommonModule } from '@angular/common';
 import { LessonContentComponent } from '@cirrus/ui';
 import { QuizService } from './quiz.service';
 import { IAnswerResponse, IQuizRequest, IQuizTracker, IStartQuizAttempt } from './quiz.types';
-import { CORRECT_RESPONSE_POPUP, INCORRECT_RESPONSE_POPUP_RETRY, INCORRECT_RESPONSE_POPUP_FINAL } from './quiz.constants';
+import {
+  CORRECT_RESPONSE_POPUP,
+  INCORRECT_RESPONSE_POPUP_RETRY,
+  INCORRECT_RESPONSE_POPUP_FINAL,
+} from './quiz.constants';
 
 import { AppState } from '../../../store/reducers';
 import { Store } from '@ngrx/store';
@@ -148,8 +152,11 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
   selectAnswer(questionId: number, answerId: number) {
     const attemptCount = this.quizTracker.answers[this.quizTracker.current_question]?.attempt_count || 0;
 
-    this.quizTracker.answers[this.quizTracker.current_question] = { question_id: questionId, answer: answerId, 
-      attempt_count: attemptCount};
+    this.quizTracker.answers[this.quizTracker.current_question] = {
+      question_id: questionId,
+      answer: answerId,
+      attempt_count: attemptCount,
+    };
   }
 
   /**
@@ -224,7 +231,7 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
       this.quizTracker.responses = [];
     }
     this.quizTracker.answers[this.quizTracker.current_question].attempt_count++;
-    
+
     this.quizService
       .submitAnswer(this.quizTracker.attempt_id, this.quizTracker.answers[this.quizTracker.current_question])
       .subscribe(response => {
@@ -270,7 +277,7 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
     this.answeredQuestionResultClass = INCORRECT_RESPONSE_POPUP_RETRY.class;
     this.questionResultTitle = INCORRECT_RESPONSE_POPUP_FINAL.title;
     this.questionResultSubtitle = INCORRECT_RESPONSE_POPUP_FINAL.subtitle;
-    this.questionResultButtonText = INCORRECT_RESPONSE_POPUP_FINAL.buttonText; 
+    this.questionResultButtonText = INCORRECT_RESPONSE_POPUP_FINAL.buttonText;
   }
 
   resetQuestionResultPopup() {
@@ -283,7 +290,7 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
   isMultipleChoiceQuestion(): boolean {
     return this.quiz.quiz_questions[this.quizTracker.current_question].question_options.length > 2;
   }
-  
+
   /**
    * Handles the click event for the popup button.
    * If a user has an incorrect answer, it should not navigate to the next question.
@@ -308,6 +315,9 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
 
     if (this.isQuizCompleted()) {
       this.hidePrevAndNext.emit(false);
+      this.quizService.gradeQuiz(this.quizTracker.attempt_id).subscribe(response => {
+        this.quizTracker.attempt = response;
+      });
     }
   }
 
@@ -319,7 +329,7 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
     if (this.quizTracker.current_question <= 0) return false;
     return true;
   }
-  
+
   /**
    * Determines whether the submit button should be hidden and the next button should be displayed.
    * @returns A boolean indicating whether the submit button should be hidden and the next button should be displayed.
@@ -327,10 +337,10 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
   shouldHideSubmitButton(): boolean {
     const answer = this.quizTracker.answers[this.quizTracker.current_question];
     const attemptCount = answer?.attempt_count || 0;
-    const exhaustedMultipleChoiceAttempts = (this.isMultipleChoiceQuestion() && attemptCount > 1);
-    const exhaustedSingleChoiceAttempts = (!this.isMultipleChoiceQuestion() && attemptCount > 0);
+    const exhaustedMultipleChoiceAttempts = this.isMultipleChoiceQuestion() && attemptCount > 1;
+    const exhaustedSingleChoiceAttempts = !this.isMultipleChoiceQuestion() && attemptCount > 0;
 
-    return attemptCount > 0 && ( exhaustedMultipleChoiceAttempts || exhaustedSingleChoiceAttempts);
+    return attemptCount > 0 && (exhaustedMultipleChoiceAttempts || exhaustedSingleChoiceAttempts);
   }
 
   /**
@@ -375,9 +385,9 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
     const correctOptionId = response?.quiz_question.correct_option.id;
 
     if (this.isMultipleChoiceQuestion()) {
-        return attemptCount > 1 && optionId === correctOptionId;
+      return attemptCount > 1 && optionId === correctOptionId;
     } else {
-        return attemptCount > 0 && optionId === correctOptionId;
+      return attemptCount > 0 && optionId === correctOptionId;
     }
   }
   /**
