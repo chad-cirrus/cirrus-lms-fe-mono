@@ -154,8 +154,8 @@ mat-drawer {
   }
   @media (min-width: 960px) {
     .lesson-hero-image {
+      height: 45vw;
       max-height: 705px;
-      aspect-ratio: 1.45/1;
       .lesson-hero-image-overlay {
         background: linear-gradient(90deg, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0.33) 44.11%, rgba(0, 0, 0, 0) 61.94%), linear-gradient(360deg,#000000 1.79%,rgba(0,0,0,.24) 19.37%,rgba(0,0,0,0) 25%);
       }
@@ -431,7 +431,9 @@ label > span.mat-slide-toggle-bar .cloaked {
   position: relative;
   z-index: 1;
   @media (min-width: 1200px) {
-    margin-top: -40px;
+    &.courses-main-content-inner-wrapper {
+      margin-top: -20px;
+    }
   }
 }
 
