@@ -40,18 +40,17 @@ h1 {
 .watch-course-intro {
   display: flex;
   align-items: center;
-  height: 35px;
-  width: 199px;
-  margin-top: 1rem;
+  max-width: 199px;
+  margin-top: 2rem;
   cursor: pointer;
 
-  .play-logo {
-    height: 1.5rem;
-    width: 1.5rem;
-    margin-right: .5rem
+  img {
+    width: 2.125rem;
+    height: 2.125rem;
+    margin-right: .75rem;
   }
   p {
-    width: 100%;
+    font-family: var.$akzidenz-grotesk_bqlight;
     margin: 0;
   }
 }
