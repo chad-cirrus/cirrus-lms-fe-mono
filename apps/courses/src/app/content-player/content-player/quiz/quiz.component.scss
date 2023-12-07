@@ -242,6 +242,15 @@
 
     &.--correct {
       background-color: #147A7A;
+
+      .qqb-answer-select-icon {
+        background-color: #fff;
+
+        svg {
+          display: block;
+          max-height: 8px;
+        }
+      }
     }
 
     &.--selected {
