@@ -46,6 +46,7 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
     started_at: new Date('01-01-1970'),
   };
 
+  course_attempt_id = 0;
   answeredQuestionResultClass = '';
   questionResultTitle = '';
   questionResultSubtitle = '';
@@ -65,11 +66,13 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
    */
   ngOnInit(): void {
     super.ngOnInit();
-
-    this.quizService.getQuiz(this.content.quiz_id || -1).subscribe(response => {
-      this.quiz = response;
+    this.lessonOverview$.subscribe(lesson => {
+      this.course_attempt_id = lesson.course_attempt_id;
     });
-    this.quizTracker.current_question = -1;
+    this.quizService.getQuiz(this.content.quiz_id || -1, this.course_attempt_id).subscribe(response => {
+      this.quiz = response;
+      this.loadResponses();
+    });
     this.hidePrevAndNext.emit(false);
   }
 
@@ -187,6 +190,10 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
    * @returns {boolean} true if the quiz has been completed, false otherwise
    */
   isQuizCompleted(): boolean {
+    if (this.quiz && this.quiz.quiz_attempt?.score !== undefined && this.quiz.quiz_attempt?.score > 0) {
+      return true;
+    }
+
     if (
       this.quizTracker.responses &&
       this.quizTracker.responses.length > 0 &&
@@ -256,6 +263,16 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
       } else {
         this.setPopupForFirstIncorrectResponse();
       }
+    }
+  }
+
+  loadResponses(): void {
+    if (this.quiz.quiz_attempt && this.quiz.quiz_questions) {
+      this.quizTracker.current_question = 0;
+      this.quiz.quiz_questions.forEach((response, index) => {
+        this.quizTracker.responses[index] = response as IAnswerResponse;
+        this.quizTracker.current_question++;
+      });
     }
   }
 
@@ -354,7 +371,7 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
       if (this.quizTracker.responses[i].quiz_attempt_response.correct) _correctAnswers++;
     }
     _percentage = (_correctAnswers / this.quiz.quiz_questions.length) * 100;
-    return `${_correctAnswers} out of ${this.quiz.quiz_questions.length} correct. (${_percentage.toFixed(2)}%)`;
+    return `${_percentage.toFixed(2)}%`;
   }
 
   /**
@@ -382,7 +399,7 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
   showCorrectAnswer(optionId: number): boolean {
     const attemptCount = this.quizTracker.answers[this.quizTracker.current_question]?.attempt_count || 0;
     const response = this.quizTracker.responses[this.quizTracker.current_question]?.quiz_attempt_response;
-    const correctOptionId = response?.quiz_question.correct_option.id;
+    const correctOptionId = response?.quiz_question?.correct_option.id;
 
     if (this.isMultipleChoiceQuestion()) {
       return attemptCount > 1 && optionId === correctOptionId;

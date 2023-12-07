@@ -3,7 +3,15 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { Answer, IAnswerResponse, IQuizAttempt, IQuizRequest, IStartQuiz, IStartQuizAttempt, IStartQuizResponse } from './quiz.types';
+import {
+  Answer,
+  IAnswerResponse,
+  IQuizAttempt,
+  IQuizRequest,
+  IStartQuiz,
+  IStartQuizAttempt,
+  IStartQuizResponse,
+} from './quiz.types';
 
 @Injectable({
   providedIn: 'root',
@@ -24,9 +32,9 @@ export class QuizService {
    * @param {number} id - The id of the quiz to get data for
    * @returns {Observable<IQuizRequest>} An observable containing the quiz data
    */
-  getQuiz(id: number): Observable<IQuizRequest> {
+  getQuiz(id: number, course_attempt_id: number): Observable<IQuizRequest> {
     return this.http
-      .get<IQuizRequest>(`${environment.baseUrl}/api/v4/quizzes/${id}`)
+      .get<IQuizRequest>(`${environment.baseUrl}/api/v4/quizzes/${id}?course_attempt_id=${course_attempt_id}`)
       .pipe(map(response => response['content_player/quiz']));
   }
 

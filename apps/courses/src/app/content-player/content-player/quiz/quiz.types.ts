@@ -47,10 +47,14 @@ export interface IQuestion {
    * @type {IQuestionOption}
    */
   correct_option: IQuestionOption;
+
+  quiz_attempt_response?: IQuizAttemptResponse;
 }
 
 /**
  * Interface representing the quiz object returned from the api
+ * endpoint api/v4/quizzes/{quiz id}?course_attempt_id={course attempt id}
+
  * @export
  * @interface IQuizRequest
  *
@@ -360,7 +364,7 @@ export interface IQuizAttemptResponse {
    * The quiz question related to the response.
    * @type {IQuizQuestion}
    */
-  quiz_question: IQuizQuestion;
+  quiz_question?: IQuizQuestion;
 }
 
 /**
@@ -389,5 +393,11 @@ export class Answer {
    * @memberof Answer
    */
   answer: number | undefined;
-  attempt_count: number = 0;
+
+  /**
+   * number of times the user has attempted to answer this question
+   * @type {number}
+   * @memberof Answer
+   */
+  attempt_count = 0;
 }
