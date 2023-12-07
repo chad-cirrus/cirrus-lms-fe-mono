@@ -176,7 +176,7 @@
 
   <div
     class="quiz-complete"
-    *ngIf="isQuizInProcess() === true && isQuizCompleted() === true"
+    *ngIf="isQuizCompleted() === true"
     [ngClass]="{
       '--pass': this.studentHasPassed() === true,
       '--fail': this.studentHasPassed() === false
@@ -231,7 +231,7 @@
     </div>
 
     <div class="quiz-results-meta">
-      <p *ngIf="quiz.pass_percentage > 0">You must pass with a {{ quiz.pass_percentage }}% or higher to contine.</p>
+      <p *ngIf="quiz.pass_percentage > 0">You must pass with a {{ quiz.pass_percentage }}% or higher to continue.</p>
       <div *ngIf="isQuizTimed" class="quiz-results-time-data">
         <div class="quiz-results-time-icon">
           <svg width="13" height="14" viewBox="0 0 13 14" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -272,11 +272,12 @@
         <div class="quiz-results-time">{{ getElapsedTime() }}</div>
       </div>
     </div>
-
+    <!--  TODO: Add next steps buttons functionality, commenting out for now to avoid confusion
     <div class="quiz-results-next-steps">
       <button class="btn btn-secondary">{{ getResultsSecondaryButtonText() }}</button>
       <button class="btn btn-primary">{{ getResultsPrimaryButtonText() }}</button>
     </div>
+-->
   </div>
 
   <div class="qqb-question-result {{ answeredQuestionResultClass }}">
