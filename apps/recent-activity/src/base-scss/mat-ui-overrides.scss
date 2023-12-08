@@ -613,6 +613,7 @@ apx-chart .apexcharts-toolbar {
       display: flex;
       flex-direction: column;
       justify-content: center;
+      align-items: flex-start;
       margin-left: 0;
       @include breakpoint(mobile) {
         margin-left: 1rem;
