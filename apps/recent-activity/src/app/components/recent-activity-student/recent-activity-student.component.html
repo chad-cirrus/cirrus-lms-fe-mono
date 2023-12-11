@@ -8,7 +8,7 @@
     <div class="recent-activity-welcome-heading content-wrapper">
       <div class="welcome-message">
         <header class="welcome-header">
-          <h1 class="heading-3">Welcome back, {{ user?.firstname }}</h1>
+          <h1 class="heading-3">Welcome back, <span class="user-name">{{ user?.firstname }}</span></h1>
           <div *ngIf="user?.role === 'instructor'">
             <cirrus-toggle-instructor-student
               *cirrusFeature="'instructor_recent_activity'"

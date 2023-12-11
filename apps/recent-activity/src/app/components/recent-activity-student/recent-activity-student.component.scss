@@ -68,6 +68,10 @@ cirrus-recent-activity-student {
   align-items: start;
   justify-content: flex-start;
 
+  .user-name {
+    text-transform: capitalize;
+  }
+
   @include breakpoint(desktop) {
     flex-direction: row;
   }
