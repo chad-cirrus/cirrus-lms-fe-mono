@@ -206,16 +206,18 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
     if (
       this.quizTracker.responses &&
       this.quizTracker.responses.length > 0 &&
+      this.quizTracker.current_question === this.quiz.quiz_questions.length &&
       _answeredQuestions === this.quiz.quiz_questions.length
     ) {
-      if (this.checkAnswer()) {
+      return true;
+/*       if (this.checkAnswer()) {
         return true;
       } else {
         const attemptCount = this.quizTracker.answers[this.quizTracker.current_question]?.attempt_count || 0;
 
         return (this.isMultipleChoiceQuestion() && attemptCount > 1) || !this.isMultipleChoiceQuestion();
       }
-    }
+ */    }
     return false;
   }
 
@@ -344,7 +346,7 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
    */
   nextQuestion() {
     this.resetQuestionResultPopup();
-    if (this.quizTracker.current_question < this.quiz.quiz_questions.length - 1) {
+    if (this.quizTracker.current_question < this.quiz.quiz_questions.length ) {
       this.quizTracker.current_question++;
     }
 
