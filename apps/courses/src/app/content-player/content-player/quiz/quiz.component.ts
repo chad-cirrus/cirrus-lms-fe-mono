@@ -128,11 +128,19 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
       attempt.stage_id = lesson.stage_id;
       attempt.lesson_id = lesson.id;
     });
-    this.quizService.startQuiz(attempt).subscribe(response => {
-      this.quizTracker.attempt_id = response.quiz_attempt.id;
-      this.quizTracker.started_at = new Date();
-      this.quizTracker.current_question = 0;
-    });
+    if (this.quiz.quiz_attempt) {
+      this.quizTracker.attempt_id = this.quiz.quiz_attempt.id;
+      this.quizTracker.started_at = new Date(this.quiz.quiz_attempt.created_at);
+      const _answeredQuestions = this.quizTracker.responses.filter(response => response.quiz_attempt_response).length;
+      this.quizTracker.current_question = _answeredQuestions || 0;
+    } else {
+      this.quizService.startQuiz(attempt).subscribe(response => {
+        this.quizTracker.attempt_id = response.quiz_attempt.id;
+        this.quizTracker.started_at = new Date(response.quiz_attempt.created_at);
+        const _answeredQuestions = this.quizTracker.responses.filter(response => response.quiz_attempt_response).length;
+        this.quizTracker.current_question = _answeredQuestions || 0;
+      });
+    }
   }
 
   /**
@@ -190,14 +198,15 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
    * @returns {boolean} true if the quiz has been completed, false otherwise
    */
   isQuizCompleted(): boolean {
-    if (this.quiz && this.quiz.quiz_attempt?.score !== undefined && this.quiz.quiz_attempt?.score > 0) {
+    if (this.quiz && this.quiz.quiz_attempt?.score !== undefined && this.quiz.quiz_attempt?.score !== null) {
       return true;
     }
+    const _answeredQuestions = this.quizTracker.responses.filter(response => response.quiz_attempt_response).length;
 
     if (
       this.quizTracker.responses &&
       this.quizTracker.responses.length > 0 &&
-      this.quizTracker.responses.length === this.quiz.quiz_questions.length
+      _answeredQuestions === this.quiz.quiz_questions.length
     ) {
       if (this.checkAnswer()) {
         return true;
@@ -266,12 +275,13 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
     }
   }
 
+  /** Loads the responses for the quiz attempt from the server on initialization. *
+   * @returns void
+   * */
   loadResponses(): void {
     if (this.quiz.quiz_attempt && this.quiz.quiz_questions) {
-      this.quizTracker.current_question = 0;
       this.quiz.quiz_questions.forEach((response, index) => {
         this.quizTracker.responses[index] = response as IAnswerResponse;
-        this.quizTracker.current_question++;
       });
     }
   }
@@ -304,8 +314,16 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
     this.questionResultButtonText = '';
   }
 
+  /**
+   * Determines whether the current question is a multiple choice question.
+   * @returns A boolean indicating whether the current question is a multiple choice question.
+   * */
   isMultipleChoiceQuestion(): boolean {
-    return this.quiz.quiz_questions[this.quizTracker.current_question].question_options.length > 2;
+    let _result = false;
+    if (this.quiz.quiz_questions && this.quiz.quiz_questions[this.quizTracker.current_question]) {
+      _result = this.quiz.quiz_questions[this.quizTracker.current_question].question_options.length > 2;
+    }
+    return _result;
   }
 
   /**
@@ -368,10 +386,26 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
     let _correctAnswers = 0;
     let _percentage = 0.0;
     for (let i = 0; i < this.quiz.quiz_questions.length; i++) {
-      if (this.quizTracker.responses[i].quiz_attempt_response.correct) _correctAnswers++;
+      if (
+        this.quizTracker.responses[i].quiz_attempt_response &&
+        this.quizTracker.responses[i].quiz_attempt_response.correct
+      )
+        _correctAnswers++;
     }
     _percentage = (_correctAnswers / this.quiz.quiz_questions.length) * 100;
     return `${_percentage.toFixed(2)}%`;
+  }
+
+  /**
+   * Calculates and returns the text for the start button based on the student's progress.
+   * @returns {string} The text for the start button.
+   * */
+  getStartButtonText(): string {
+    let _buttonText = 'Start';
+    if (this.quizTracker.responses.length > 0) {
+      _buttonText = 'Resume';
+    }
+    return _buttonText + ' Quiz';
   }
 
   /**
@@ -412,7 +446,9 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
    * @returns {boolean} True if passed, otherwise false.
    */
   studentHasPassed(): boolean {
-    const correctAnswers = this.quizTracker.responses.filter(response => response.quiz_attempt_response.correct);
+    const correctAnswers = this.quizTracker.responses.filter(
+      response => response.quiz_attempt_response && response.quiz_attempt_response.correct,
+    );
     const percentage = (correctAnswers.length / this.quiz.quiz_questions.length) * 100;
     return percentage >= this.quiz.pass_percentage;
   }

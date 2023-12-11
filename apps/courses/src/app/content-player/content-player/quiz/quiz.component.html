@@ -13,7 +13,7 @@
         </div>
 
         <div class="quiz-button-wrapper">
-          <button class="quiz-start" (click)="startQuiz()">Start Quiz</button>
+          <button class="quiz-start" (click)="startQuiz()">{{getStartButtonText()}}</button>
           <div class="quiz-warning-label" *ngIf="isQuizTimed === true">
             <span class="quiz-warning-label-icon">i</span> This is a timed Quiz
           </div>
@@ -37,7 +37,7 @@
     <div class="qqb-progress-bar"><span class="qqb-progress-bar-complete" style="width: 100%"></span></div>
 
     <div class="qqb-meta">
-      <div class="qqb-progress">
+      <div class="qqb-progress" *ngIf="this.quizTracker.current_question > -1">
         Question {{ this.quizTracker.current_question + 1 }} of {{ this.getQuestionCount() }}
       </div>
       <div class="qqb-timer" *ngIf="isQuizTimed === true">
@@ -46,11 +46,16 @@
       </div>
     </div>
 
-    <h4 class="qqb-question">{{ this.quiz.quiz_questions[this.quizTracker.current_question].body }}</h4>
+    <h4 class="qqb-question" *ngIf="this.quizTracker.current_question > -1">
+      {{ this.quiz.quiz_questions[this.quizTracker.current_question].body }}
+    </h4>
 
     <div
       class="qqb-answers --multiple-choice"
-      *ngIf="this.quiz.quiz_questions[this.quizTracker.current_question].question_options.length > 2"
+      *ngIf="
+        this.quizTracker.current_question > -1 &&
+        this.quiz.quiz_questions[this.quizTracker.current_question].question_options.length > 2
+      "
     >
       <div class="qqb-action">Select one</div>
 
@@ -272,8 +277,8 @@
         <div class="quiz-results-time">{{ getElapsedTime() }}</div>
       </div>
     </div>
-    <!--  TODO: Add next steps buttons functionality, commenting out for now to avoid confusion
-    <div class="quiz-results-next-steps">
+    <!--  TODO: Add next steps buttons functionality, commenting out for now to avoid user confusion in ui until this is implemented
+      <div class="quiz-results-next-steps">
       <button class="btn btn-secondary">{{ getResultsSecondaryButtonText() }}</button>
       <button class="btn btn-primary">{{ getResultsPrimaryButtonText() }}</button>
     </div>
