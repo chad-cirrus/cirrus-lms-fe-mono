@@ -530,6 +530,7 @@ cirrus-video-player {
 .cdk-overlay-pane.course-preview-video {
   max-width: 100% !important;
   padding: 16px;
+  overflow-y: auto;
   @include breakpoint(tablet) {
     padding: 35px;
   }
