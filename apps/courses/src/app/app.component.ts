@@ -3,13 +3,13 @@ import { ViewportScroller } from '@angular/common';
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { UntypedFormControl } from '@angular/forms';
 import { MatSidenav } from '@angular/material/sidenav';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { ICirrusUser, INotification } from '@cirrus/models';
 import { SidenavHeaderService } from '@cirrus/sidenav-header';
 import { CirrusBaseComponent, ErrorService, NotificationService, UserService } from '@cirrus/ui';
 import { Store } from '@ngrx/store';
 import { Observable, Subscription, merge } from 'rxjs';
-import { delay, map, takeUntil } from 'rxjs/operators';
+import { delay, filter, map, takeUntil } from 'rxjs/operators';
 import { environment } from '../environments/environment';
 import { AppService } from './app.service';
 import { CoursesService } from './course/course.service';
@@ -72,6 +72,16 @@ export class AppComponent extends CirrusBaseComponent implements OnInit, OnDestr
       scroller,
       route,
     );
+
+    this.router.events.pipe(
+      filter((event): event is NavigationEnd => event instanceof NavigationEnd)
+      ).subscribe((event) => {
+        window['dataLayer'] = window['dataLayer'] || [];
+        window['dataLayer'].push({
+          'event': 'pageView',
+          'pagePath': event.urlAfterRedirects
+        });
+      })
   }
 
   ngOnInit() {

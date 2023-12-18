@@ -6,7 +6,7 @@ import { ICirrusUser, INotification } from '@cirrus/models';
 import { setCirrusUser } from './store/actions/cirrus-user.actions';
 import { selectCirrusUser, selectIsLoggedIn } from './store/selectors/cirrus-user.selector';
 import { BreakpointObserver } from '@angular/cdk/layout';
-import { map, takeUntil } from 'rxjs/operators';
+import { filter, map, takeUntil } from 'rxjs/operators';
 import { setScreenSize } from './store/actions/view.actions';
 import { selectIsScreenSmall } from './store/selectors/view.selector';
 import { CirrusBaseComponent, ErrorService, NotificationService, UserService } from '@cirrus/ui';
@@ -14,7 +14,7 @@ import { environment } from '../environments/environment';
 import { RecentActivityService } from './services/recent-activity.service';
 import { RecentActivityFacade } from './recent-activity-facade.service';
 import { SidenavHeaderService } from '@cirrus/sidenav-header';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { ViewportScroller } from '@angular/common';
 
 @Component({
@@ -61,6 +61,16 @@ export class AppComponent
       scroller,
       route
     );
+
+      this.router.events.pipe(
+        filter((event): event is NavigationEnd => event instanceof NavigationEnd)
+      ).subscribe((event: NavigationEnd) => {
+        (window as any)['dataLayer'] = (window as any)['dataLayer'] || [];
+        (window as any)['dataLayer'].push({
+          'event': 'pageView',
+          'pagePath': event.urlAfterRedirects
+        });
+      });
   }
 
   ngOnInit() {
