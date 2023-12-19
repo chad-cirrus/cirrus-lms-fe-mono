@@ -68,10 +68,11 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
     super.ngOnInit();
     this.lessonOverview$.subscribe(lesson => {
       this.course_attempt_id = lesson.course_attempt_id;
-    });
-    this.quizService.getQuiz(this.content.quiz_id || -1, this.course_attempt_id).subscribe(response => {
-      this.quiz = response;
-      this.loadResponses();
+
+      this.quizService.getQuiz(this.content.quiz_id || -1, this.course_attempt_id, lesson.id, lesson.stage_id).subscribe(response => {
+        this.quiz = response;
+        this.loadResponses();
+      });
     });
     this.hidePrevAndNext.emit(false);
   }
