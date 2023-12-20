@@ -206,25 +206,17 @@ export class LessonLandingPageComponent implements OnInit, OnDestroy {
   }
 
   playCurrentContent() {
-    const contentNotStarted = this.lesson.contents.find(
-      c => c.progress.status === LessonStatus.NOT_STARTED
-    );
+    const firstContentNotCompleted = this.lesson.contents.find(c => {
+      return c.progress.status === LessonStatus.NOT_STARTED || c.progress.status === LessonStatus.IN_PROGRESS;
+    });
 
-    const contentInProgress = this.lesson.contents.find(
-      c => c.progress.status === LessonStatus.IN_PROGRESS
-    );
-
-    if (!contentNotStarted && !contentInProgress) {
+    if (!firstContentNotCompleted) {
       this.playNextLessonContent.emit({courseOverview: this.courseOverview, lesson: this.lesson});
       return;
     }
 
     setTimeout(() => {
-      if (contentNotStarted) {
-        this.fetchMediaOutput.next(contentNotStarted);
-      } else {
-        this.fetchMediaOutput.next(contentInProgress);
-      }
+      this.fetchMediaOutput.next(firstContentNotCompleted);
     }, 1000);
   }
 
