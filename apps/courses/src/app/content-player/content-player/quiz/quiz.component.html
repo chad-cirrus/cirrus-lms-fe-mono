@@ -281,12 +281,10 @@
         <div class="quiz-results-time">{{ getElapsedTime() }}</div>
       </div>
     </div>
-    <!--  TODO: Add next steps buttons functionality, commenting out for now to avoid user confusion in ui until this is implemented
-      <div class="quiz-results-next-steps">
-      <button class="btn btn-secondary">{{ getResultsSecondaryButtonText() }}</button>
-      <button class="btn btn-primary">{{ getResultsPrimaryButtonText() }}</button>
+    <div class="quiz-results-next-steps" *ngIf="!studentHasPassed()">
+      <!-- <button class="btn btn-secondary">{{ getResultsSecondaryButtonText() }}</button> -->
+      <button class="btn btn-primary" (click)="retakeQuiz()">{{ getResultsPrimaryButtonText() }}</button>
     </div>
--->
   </div>
 
   <div class="qqb-question-result {{ answeredQuestionResultClass }}">

@@ -383,13 +383,13 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
     let _percentage = 0.0;
     for (let i = 0; i < this.quiz.quiz_questions.length; i++) {
       if (
-        this.quizTracker.responses[i].quiz_attempt_response &&
-        this.quizTracker.responses[i].quiz_attempt_response.correct
+        this.quizTracker.responses[i]?.quiz_attempt_response &&
+        this.quizTracker.responses[i]?.quiz_attempt_response.correct
       )
         _correctAnswers++;
     }
     _percentage = (_correctAnswers / this.quiz.quiz_questions.length) * 100;
-    return `${_percentage.toFixed(2)}%`;
+    return `${_percentage.toFixed(0)}%`;
   }
 
   /**
@@ -498,5 +498,19 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
       _approximte_duration = this.quiz.approximate_duration;
     }
     return _approximte_duration;
+  }
+
+  /** 
+   * Allows users to reattempt a failed quiz, resets quiz
+   * Resets quiz tracker and puts user back to the start quiz screen
+   */
+  retakeQuiz() {
+    this.quizTracker = {
+      current_question: -1,
+      answers: [],
+      responses: [],
+      attempt_id: -1,
+      started_at: new Date('01-01-1970'),
+    };
   }
 }
