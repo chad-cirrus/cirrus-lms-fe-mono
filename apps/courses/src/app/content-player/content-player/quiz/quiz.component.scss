@@ -216,7 +216,12 @@
     }
   }
 
-
+  .qqb-question-image {
+    height: auto;
+    max-width: 100%;
+    margin: 0 auto 2rem;
+    display: block;
+  }
 
   .qqb-action {
     font-size: 1.125rem;

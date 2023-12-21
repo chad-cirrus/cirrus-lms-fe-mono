@@ -50,6 +50,10 @@
       {{ this.quiz.quiz_questions[this.quizTracker.current_question].body }}
     </h4>
 
+    <div class="qqb-question-image-container" *ngIf="this.quiz.quiz_questions[this.quizTracker.current_question].image_url">
+      <img  class="qqb-question-image" src="{{ this.quiz.quiz_questions[this.quizTracker.current_question].image_url }}" alt="{{ this.quiz.quiz_questions[this.quizTracker.current_question].image_title }}">
+    </div>
+
     <div
       class="qqb-answers --multiple-choice"
       *ngIf="

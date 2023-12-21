@@ -222,9 +222,11 @@ function getQuizContent(): IQuizRequest {
                 desc: '',
                 correct_option: {id: 11, description: 'Mongolia'},
                 question_options: [
-                    { id: 11, description: 'Mongolia' },
-                    { id: 12, description: 'China' }
-                ]
+                    { id: 11, description: 'Mongolia'},
+                    { id: 12, description: 'China'}
+                ],
+                image_url: '', 
+                image_title: ''
             },
             {
                 id: 34,
@@ -232,10 +234,12 @@ function getQuizContent(): IQuizRequest {
                 desc: '',
                 correct_option: {id: 4, description: '6-10%'},
                 question_options: [
-                    { id: 4, description: '6-10%' },
-                    { id: 5, description: '10-20%' },
-                    { id: 6, description: '30-40%' }
-                ]
+                    { id: 4, description: '6-10%'},
+                    { id: 5, description: '10-20%'},
+                    { id: 6, description: '30-40%'}
+                ],
+                image_url: '', 
+                image_title: ''
             },
             {
                 id: 33,
@@ -245,8 +249,10 @@ function getQuizContent(): IQuizRequest {
                 question_options: [
                     { id: 1, description: '36-48 bears'},
                     { id: 2, description: '100-200 bears'},
-                    { id: 3, description: '10-20 bears' }
-                ]
+                    { id: 3, description: '10-20 bears'}
+                ],
+                image_url: '', 
+                image_title: ''
             }
         ]
     }

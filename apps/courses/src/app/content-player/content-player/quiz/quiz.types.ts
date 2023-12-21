@@ -49,6 +49,18 @@ export interface IQuestion {
   correct_option: IQuestionOption;
 
   quiz_attempt_response?: IQuizAttemptResponse;
+
+  /**
+   * Image URL for the uploded quiz question image
+   * @type {string}
+   */
+  image_url: string;
+  
+  /**
+   * The image Title for the uploaded quiz question image
+   * @type {string}
+   */
+  image_title: string;
 }
 
 /**
