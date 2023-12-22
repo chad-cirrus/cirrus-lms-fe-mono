@@ -24,7 +24,7 @@ mat-sidenav {
 
 mat-sidenav-container {
   background: #000000;
-  .mat-drawer-container-has-open {
+  &.mat-drawer-container-has-open {
     z-index: 5;
     @media (min-width: 600px) {
       z-index: 1;
