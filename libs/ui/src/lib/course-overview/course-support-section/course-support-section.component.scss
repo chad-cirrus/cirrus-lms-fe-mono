@@ -23,6 +23,13 @@
   padding-top: 29px;
 }
 
+.about--version a {
+    color: var.$cirrus-blue;
+    &:hover {
+        color: var.$cirrus-blue-hover;
+    }
+}
+
 .devices {
     font-size: 1.125rem;
     color: var.$gray5;
