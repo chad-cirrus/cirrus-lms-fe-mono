@@ -11,7 +11,8 @@ import {
 
 import { AppState } from '../../../store/reducers';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Observable, Subject, Subscription, timer } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { ILesson } from '@cirrus/models';
 import { selectLesson } from '../../../store/selectors/lessons.selector';
 
@@ -44,6 +45,7 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
     responses: [],
     attempt_id: -1,
     started_at: new Date('01-01-1970'),
+    elapsed_time_in_seconds: 0,
   };
 
   course_attempt_id = 0;
@@ -53,9 +55,9 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
   questionResultButtonText = '';
 
   /// Timed Quiz properties
-  // TODO: implement the following timer logic correctly, placeholder for now
-  isQuizTimed = false;
-  quizTimeUsed = 0;
+  quizEnd$ = new Subject();
+  timerSubscription: Subscription | undefined;
+  quizTimer: Observable<number> | undefined;
 
   /**
    * This method is part of the Angular Component Lifecycle. It is called after the constructor and is used to initialize data and other components.
@@ -69,10 +71,12 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
     this.lessonOverview$.subscribe(lesson => {
       this.course_attempt_id = lesson.course_attempt_id;
 
-      this.quizService.getQuiz(this.content.quiz_id || -1, this.course_attempt_id, lesson.id, lesson.stage_id).subscribe(response => {
-        this.quiz = response;
-        this.loadResponses();
-      });
+      this.quizService
+        .getQuiz(this.content.quiz_id || -1, this.course_attempt_id, lesson.id, lesson.stage_id)
+        .subscribe(response => {
+          this.quiz = response;
+          this.loadResponses();
+        });
     });
     this.hidePrevAndNext.emit(false);
   }
@@ -106,6 +110,18 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
     //return !this.quiz || !this.quiz.subjects ? [] : this.quiz.subjects;
   }
 
+  startQuizTimer(): void {
+    const quizTimeLimit = 60 * (this.quiz?.time_limit_in_minutes ?? 0); // 30 minutes, for example
+
+    this.quizTimer = timer(0, 1000);
+    this.timerSubscription = this.quizTimer.pipe(takeUntil(this.quizEnd$)).subscribe(() => {
+      this.quizTracker.elapsed_time_in_seconds++;
+
+      if (this.quizTracker.elapsed_time_in_seconds >= quizTimeLimit) {
+        this.nextQuestion();
+      }
+    });
+  }
   /**
    * startQuiz
    *
@@ -130,17 +146,22 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
       attempt.lesson_id = lesson.id;
     });
     if (this.quiz.quiz_attempt) {
+      // This quiz is in progress, so we need to resume it updating some of the quizTracker properties
       this.quizTracker.attempt_id = this.quiz.quiz_attempt.id;
       this.quizTracker.started_at = new Date(this.quiz.quiz_attempt.created_at);
       const _answeredQuestions = this.quizTracker.responses.filter(response => response.quiz_attempt_response).length;
       this.quizTracker.current_question = _answeredQuestions || 0;
     } else {
+      // This quiz has not been started yet, so we need to start it
       this.quizService.startQuiz(attempt).subscribe(response => {
         this.quizTracker.attempt_id = response.quiz_attempt.id;
         this.quizTracker.started_at = new Date(response.quiz_attempt.created_at);
         const _answeredQuestions = this.quizTracker.responses.filter(response => response.quiz_attempt_response).length;
         this.quizTracker.current_question = _answeredQuestions || 0;
       });
+    }
+    if (this.quiz.time_limit_in_minutes && this.quiz.time_limit_in_minutes > 0) {
+      this.startQuizTimer();
     }
   }
 
@@ -202,6 +223,14 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
     if (this.quiz && this.quiz.quiz_attempt?.score !== undefined && this.quiz.quiz_attempt?.score !== null) {
       return true;
     }
+
+    // timed quiz processing
+    if (this.quiz?.time_limit_in_minutes && this.quiz?.time_limit_in_minutes > 0) {
+      if (this.quizTracker.elapsed_time_in_seconds >= this.quiz.time_limit_in_minutes * 60) {
+        return true;
+      }
+    }
+
     const _answeredQuestions = this.quizTracker.responses.filter(response => response.quiz_attempt_response).length;
 
     if (
@@ -213,6 +242,15 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
       return true;
     }
     return false;
+  }
+
+  /**
+   * Gets time limit in minutes if a timed quiz
+   *
+   * @returns {number} 0 if not a timed quiz, otherwise time limit in minutes
+   * */
+  getQuizTimeLimit(): number {
+    return !this.quiz || !this.quiz.time_limit_in_minutes ? 0 : this.quiz.time_limit_in_minutes;
   }
 
   /**
@@ -335,6 +373,24 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
   }
 
   /**
+   * Ends the quiz.
+   */
+  endQuiz(): void {
+    // Signal that the quiz has ended
+    this.quizEnd$.next();
+
+    // Stop the timer
+    if (this.timerSubscription) {
+      this.timerSubscription.unsubscribe();
+    }
+    this.hidePrevAndNext.emit(false);
+
+    // Grade the quiz
+    this.quizService.gradeQuiz(this.quizTracker.attempt_id).subscribe(response => {
+      this.quizTracker.attempt = response;
+    });
+  }
+  /**
    * Increments the current question index and resets the answered question result class and title.
    * If the quiz is completed, emits an event to show the previous and next buttons.
    */
@@ -345,10 +401,7 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
     }
 
     if (this.isQuizCompleted()) {
-      this.hidePrevAndNext.emit(false);
-      this.quizService.gradeQuiz(this.quizTracker.attempt_id).subscribe(response => {
-        this.quizTracker.attempt = response;
-      });
+      this.endQuiz();
     }
   }
 
@@ -405,21 +458,36 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
   }
 
   /**
+   * Calculates and returns the time remaining for the student to take the quiz.
+   * The time is returned as a string in the format "mm:ss".
+   * @returns {string} The elapsed time in the format "mm:ss".
+   */
+  getTimeRemaining() {
+    const timeLimit = !this.quiz.time_limit_in_minutes ? 0 : this.quiz.time_limit_in_minutes * 60;
+    const totalSeconds = timeLimit - this.quizTracker.elapsed_time_in_seconds;
+
+    const minutes = Math.floor(totalSeconds / 60);
+    const seconds = totalSeconds % 60;
+
+    // Pad the seconds with a leading zero if they are less than 10
+    const paddedSeconds = seconds < 10 ? `0${seconds}` : seconds;
+
+    return `${minutes}:${paddedSeconds}`;
+  }
+
+  /**
    * Calculates and returns the elapsed time since the quiz started.
    * The time is returned as a string in the format "mm:ss".
    * @returns {string} The elapsed time in the format "mm:ss".
    */
   getElapsedTime() {
-    const dateObj = new Date(this.quizTracker.started_at);
-    const now = new Date();
+    const minutes = Math.floor(this.quizTracker.elapsed_time_in_seconds / 60);
+    const seconds = this.quizTracker.elapsed_time_in_seconds % 60;
 
-    const diffInMs = now.getTime() - dateObj.getTime();
-    const diffInSeconds = Math.floor(diffInMs / 1000);
+    // Pad the seconds with a leading zero if they are less than 10
+    const paddedSeconds = seconds < 10 ? `0${seconds}` : seconds;
 
-    const minutes = Math.floor(diffInSeconds / 60);
-    const seconds = diffInSeconds % 60;
-
-    return `${minutes}:${seconds}`;
+    return `${minutes}:${paddedSeconds}`;
   }
 
   /**
@@ -500,7 +568,7 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
     return _approximte_duration;
   }
 
-  /** 
+  /**
    * Allows users to reattempt a failed quiz, resets quiz
    * Resets quiz tracker and puts user back to the start quiz screen
    */
@@ -511,6 +579,7 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
       responses: [],
       attempt_id: -1,
       started_at: new Date('01-01-1970'),
+      elapsed_time_in_seconds: 0,
     };
   }
 }
