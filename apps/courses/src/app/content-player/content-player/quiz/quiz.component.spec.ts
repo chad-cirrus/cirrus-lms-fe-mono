@@ -47,10 +47,11 @@ describe('QuizComponent', () => {
                 quiz_attempt_id: 1,
                 correct: true,
                 quiz_question: getQuizContent().quiz_questions[1],
-                question_option_id: 37
+                question_option_id: 37,
             }}],
             attempt_id: 1,
             started_at: new Date('01-01-1970'),
+            elapsed_time_in_seconds: 0,
         }
 
         expect(component.shouldHideSubmitButton()).toBeFalsy();
@@ -82,6 +83,7 @@ describe('QuizComponent', () => {
             }}],
             attempt_id: 1,
             started_at: new Date('01-01-1970'),
+            elapsed_time_in_seconds: 0,
         }
 
         expect(component.shouldHideSubmitButton()).toBeFalsy();
@@ -113,6 +115,7 @@ describe('QuizComponent', () => {
             }}],
             attempt_id: 1,
             started_at: new Date('01-01-1970'),
+            elapsed_time_in_seconds: 0,
         }
 
         expect(component.shouldHideSubmitButton()).toBeTruthy();
@@ -124,12 +127,13 @@ describe('QuizComponent', () => {
     it('should correctly evaluate a question with less than two options as not multiple choice', () => {
         component.quiz = getQuizContent();
         component.quizTracker = {
-            current_question: 0,
-            answers: [],
-            responses: [],
-            attempt_id: -1,
-            started_at: new Date('01-01-1970'),
-        }
+          current_question: 0,
+          answers: [],
+          responses: [],
+          attempt_id: -1,
+          started_at: new Date('01-01-1970'),
+          elapsed_time_in_seconds: 0,
+        };
 
         expect(component.isMultipleChoiceQuestion()).toBeFalsy();
     });
@@ -137,12 +141,13 @@ describe('QuizComponent', () => {
     it('should correctly evaluate a question with three or more options is multiple choice', () => {
         component.quiz = getQuizContent();
         component.quizTracker = {
-            current_question: 1,
-            answers: [],
-            responses: [],
-            attempt_id: -1,
-            started_at: new Date('01-01-1970'),
-        }
+          current_question: 1,
+          answers: [],
+          responses: [],
+          attempt_id: -1,
+          started_at: new Date('01-01-1970'),
+          elapsed_time_in_seconds: 0,
+        };
 
         expect(component.isMultipleChoiceQuestion()).toBeTruthy();
     });
@@ -225,7 +230,7 @@ function getQuizContent(): IQuizRequest {
                     { id: 11, description: 'Mongolia'},
                     { id: 12, description: 'China'}
                 ],
-                image_url: '', 
+                image_url: '',
                 image_title: ''
             },
             {
@@ -238,7 +243,7 @@ function getQuizContent(): IQuizRequest {
                     { id: 5, description: '10-20%'},
                     { id: 6, description: '30-40%'}
                 ],
-                image_url: '', 
+                image_url: '',
                 image_title: ''
             },
             {
@@ -251,7 +256,7 @@ function getQuizContent(): IQuizRequest {
                     { id: 2, description: '100-200 bears'},
                     { id: 3, description: '10-20 bears'}
                 ],
-                image_url: '', 
+                image_url: '',
                 image_title: ''
             }
         ]
