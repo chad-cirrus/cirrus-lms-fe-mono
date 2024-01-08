@@ -55,7 +55,7 @@ export interface IQuestion {
    * @type {string}
    */
   image_url: string;
-  
+
   /**
    * The image Title for the uploaded quiz question image
    * @type {string}
@@ -137,6 +137,12 @@ export interface IQuizRequest {
    * @type {IQuizAttempt}
    */
   quiz_attempt?: IQuizAttempt;
+
+  /**
+   * The time limit the student has to take the quiz.
+   * @type {number}
+   */
+  time_limit_in_minutes?: number | 0;
 }
 
 /**
@@ -311,6 +317,12 @@ export interface IQuizTracker {
    * @type {IQuizAttempt}
    */
   attempt?: IQuizAttempt;
+
+  /**
+   * Holds the elapsed time for the quiz attempt.
+   * @type {number}
+   */
+  elapsed_time_in_seconds: number;
 }
 
 /**

@@ -14,8 +14,8 @@
 
         <div class="quiz-button-wrapper">
           <button class="quiz-start" (click)="startQuiz()">{{getStartButtonText()}}</button>
-          <div class="quiz-warning-label" *ngIf="isQuizTimed === true">
-            <span class="quiz-warning-label-icon">i</span> This is a timed Quiz
+          <div class="quiz-warning-label" *ngIf="getQuizTimeLimit() > 0">
+            <span class="quiz-warning-label-icon">i</span> This is a timed quiz: {{ getQuizTimeLimit() }} minutes long
           </div>
         </div>
       </div>
@@ -40,9 +40,9 @@
       <div class="qqb-progress" *ngIf="this.quizTracker.current_question > -1">
         Question {{ this.quizTracker.current_question + 1 }} of {{ this.getQuestionCount() }}
       </div>
-      <div class="qqb-timer" *ngIf="isQuizTimed === true">
+      <div class="qqb-timer" *ngIf="getQuizTimeLimit() > 0">
         <img src="courses/images/svg/quiz_question_timer_icon.svg" />
-        {{ getElapsedTime() }}
+        {{ getTimeRemaining() }}
       </div>
     </div>
 
@@ -241,7 +241,7 @@
 
     <div class="quiz-results-meta">
       <p *ngIf="quiz.pass_percentage > 0">You must pass with a {{ quiz.pass_percentage }}% or higher to continue.</p>
-      <div *ngIf="isQuizTimed" class="quiz-results-time-data">
+      <div *ngIf="getQuizTimeLimit() > 0" class="quiz-results-time-data">
         <div class="quiz-results-time-icon">
           <svg width="13" height="14" viewBox="0 0 13 14" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M5.33302 2.13368V0.56518H7.59405V2.16153" fill="#1F1F1F" />
