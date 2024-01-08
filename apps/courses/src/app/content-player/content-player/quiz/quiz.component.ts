@@ -56,8 +56,8 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
 
   /// Timed Quiz properties
   quizEnd$ = new Subject();
-  timerSubscription: Subscription | undefined;
-  quizTimer: Observable<number> | undefined;
+  timerSubscription?: Subscription;
+  quizTimer?: Observable<number>;
 
   /**
    * This method is part of the Angular Component Lifecycle. It is called after the constructor and is used to initialize data and other components.
@@ -122,6 +122,7 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
       }
     });
   }
+
   /**
    * startQuiz
    *

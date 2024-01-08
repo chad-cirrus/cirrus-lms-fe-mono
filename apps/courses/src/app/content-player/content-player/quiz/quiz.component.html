@@ -15,7 +15,7 @@
         <div class="quiz-button-wrapper">
           <button class="quiz-start" (click)="startQuiz()">{{getStartButtonText()}}</button>
           <div class="quiz-warning-label" *ngIf="getQuizTimeLimit() > 0">
-            <span class="quiz-warning-label-icon">i</span> You will have {{ getQuizTimeLimit() }} minutes to complete this quiz.
+            <span class="quiz-warning-label-icon">i</span> This is a timed quiz: {{ getQuizTimeLimit() }} minutes long
           </div>
         </div>
       </div>
