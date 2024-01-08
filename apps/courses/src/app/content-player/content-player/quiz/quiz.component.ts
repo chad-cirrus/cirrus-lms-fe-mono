@@ -453,6 +453,12 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
     let _buttonText = 'Start';
     if (this.quizTracker.responses.length > 0) {
       _buttonText = 'Resume';
+      if (
+        (this.quiz.quiz_attempt?.score === null || this.quiz.quiz_attempt?.score === undefined) &&
+        !this.studentHasPassed()
+      ) {
+        _buttonText = 'Retake';
+      }
     }
     return _buttonText + ' Quiz';
   }
@@ -505,8 +511,11 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
       return attemptCount > 0 && optionId === correctOptionId;
     }
   }
+
   /**
    * Calculates and returns if the student passed the quiz/test or not.
+   * The api determines pass percentage via admin data entry, this just takes that number at face value.
+   * In other words the user interface considers a zero pass percentage is a legitimate value, unless/until the product team changes that logic.
    * @returns {boolean} True if passed, otherwise false.
    */
   studentHasPassed(): boolean {
@@ -581,5 +590,7 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
       started_at: new Date('01-01-1970'),
       elapsed_time_in_seconds: 0,
     };
+    delete this.quiz.quiz_attempt;
+    this.startQuiz();
   }
 }
