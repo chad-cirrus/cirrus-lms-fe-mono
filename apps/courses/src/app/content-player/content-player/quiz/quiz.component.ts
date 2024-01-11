@@ -7,6 +7,7 @@ import {
   CORRECT_RESPONSE_POPUP,
   INCORRECT_RESPONSE_POPUP_RETRY,
   INCORRECT_RESPONSE_POPUP_FINAL,
+  OUT_OF_TIME_POPUP_RETRY,
 } from './quiz.constants';
 
 import { AppState } from '../../../store/reducers';
@@ -53,6 +54,11 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
   questionResultTitle = '';
   questionResultSubtitle = '';
   questionResultButtonText = '';
+
+  outOfTimeClass = '';
+  outOfTimeTitle = '';
+  outOfTimeSubtitle = '';
+  outOfTimeButtonText = '';
 
   /// Timed Quiz properties
   quizEnd$ = new Subject();
@@ -335,6 +341,13 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
     this.questionResultButtonText = INCORRECT_RESPONSE_POPUP_RETRY.buttonText;
   }
 
+  setPopupForOutOfTimeResponse() {
+    this.outOfTimeClass = OUT_OF_TIME_POPUP_RETRY.class;
+    this.outOfTimeTitle = OUT_OF_TIME_POPUP_RETRY.title;
+    this.outOfTimeSubtitle = OUT_OF_TIME_POPUP_RETRY.subtitle;
+    this.outOfTimeButtonText = OUT_OF_TIME_POPUP_RETRY.buttonText;
+  }
+
   setPopupForLastIncorrectResponse() {
     this.answeredQuestionResultClass = INCORRECT_RESPONSE_POPUP_RETRY.class;
     this.questionResultTitle = INCORRECT_RESPONSE_POPUP_FINAL.title;
@@ -383,13 +396,18 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
     // Stop the timer
     if (this.timerSubscription) {
       this.timerSubscription.unsubscribe();
+      this.setPopupForOutOfTimeResponse();
+    } else {
+      this.hidePrevAndNext.emit(false);
+      
+      // Grade the quiz
+      this.quizService.gradeQuiz(this.quizTracker.attempt_id).subscribe(response => {
+        this.quizTracker.attempt = response;
+      });
     }
-    this.hidePrevAndNext.emit(false);
+    
 
-    // Grade the quiz
-    this.quizService.gradeQuiz(this.quizTracker.attempt_id).subscribe(response => {
-      this.quizTracker.attempt = response;
-    });
+    
   }
   /**
    * Increments the current question index and resets the answered question result class and title.

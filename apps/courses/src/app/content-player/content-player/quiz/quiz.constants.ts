@@ -17,4 +17,11 @@ export const INCORRECT_RESPONSE_POPUP_FINAL = {
     subtitle: 'That is incorrect. Please try again.',
     buttonText: 'Continue',
     class: ' --incorrect',
-  };
+};
+
+export const OUT_OF_TIME_POPUP_RETRY = {
+    title: 'Sorry, try again.',
+    subtitle: 'Unfortunately you ran out of time, please try again.',
+    buttonText: 'Retry',
+    class: ' --incorrect',
+};
