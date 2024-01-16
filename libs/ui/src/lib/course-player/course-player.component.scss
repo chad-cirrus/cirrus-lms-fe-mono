@@ -63,7 +63,7 @@ cirrus-cta-button {
 
 .watch-preview-container {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
 }
 
 .watch-preview {
@@ -130,7 +130,7 @@ cirrus-cta-button {
 
   .course-price-container {
     .course-price {
-      font-weight: bold; 
+      font-weight: bold;
     }
   }
 }

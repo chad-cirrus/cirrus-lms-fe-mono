@@ -125,6 +125,7 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
 
       if (this.quizTracker.elapsed_time_in_seconds >= quizTimeLimit) {
         this.nextQuestion();
+        this.setPopupForOutOfTimeResponse();
       }
     });
   }
@@ -327,6 +328,9 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
     }
   }
 
+  /*
+   * Sets the popup properties for a student's correct question response.
+   */
   setPopupForCorrectResponse() {
     this.answeredQuestionResultClass = CORRECT_RESPONSE_POPUP.class;
     this.questionResultTitle = CORRECT_RESPONSE_POPUP.title;
@@ -334,6 +338,9 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
     this.questionResultButtonText = CORRECT_RESPONSE_POPUP.buttonText;
   }
 
+  /** Sets the popup properties for a student's incorrect question response. *
+   * @returns void
+   * */
   setPopupForFirstIncorrectResponse() {
     this.answeredQuestionResultClass = INCORRECT_RESPONSE_POPUP_RETRY.class;
     this.questionResultTitle = INCORRECT_RESPONSE_POPUP_RETRY.title;
@@ -341,12 +348,19 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
     this.questionResultButtonText = INCORRECT_RESPONSE_POPUP_RETRY.buttonText;
   }
 
+  /** Sets the popup properties for a student's incorrect question response. *
+   * @returns void
+   * */
   setPopupForOutOfTimeResponse() {
     this.outOfTimeClass = OUT_OF_TIME_POPUP_RETRY.class;
     this.outOfTimeTitle = OUT_OF_TIME_POPUP_RETRY.title;
     this.outOfTimeSubtitle = OUT_OF_TIME_POPUP_RETRY.subtitle;
     this.outOfTimeButtonText = OUT_OF_TIME_POPUP_RETRY.buttonText;
   }
+
+  /** Sets the popup properties for a student's incorrect question response. *
+   * @returns void
+   * */
 
   setPopupForLastIncorrectResponse() {
     this.answeredQuestionResultClass = INCORRECT_RESPONSE_POPUP_RETRY.class;
@@ -355,6 +369,10 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
     this.questionResultButtonText = INCORRECT_RESPONSE_POPUP_FINAL.buttonText;
   }
 
+  /**
+   * Resets the properties for the answered question result popup.
+   * @returns void
+   */
   resetQuestionResultPopup() {
     this.answeredQuestionResultClass = '';
     this.questionResultTitle = '';
@@ -393,22 +411,19 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
     // Signal that the quiz has ended
     this.quizEnd$.next();
 
+    // Grade the quiz
+    this.quizService.gradeQuiz(this.quizTracker.attempt_id).subscribe(response => {
+      this.quizTracker.attempt = response;
+      console.log('Quiz attempt graded', response);
+    });
+    this.hidePrevAndNext.emit(false);
+
     // Stop the timer
     if (this.timerSubscription) {
       this.timerSubscription.unsubscribe();
-      this.setPopupForOutOfTimeResponse();
-    } else {
-      this.hidePrevAndNext.emit(false);
-      
-      // Grade the quiz
-      this.quizService.gradeQuiz(this.quizTracker.attempt_id).subscribe(response => {
-        this.quizTracker.attempt = response;
-      });
     }
-    
-
-    
   }
+
   /**
    * Increments the current question index and resets the answered question result class and title.
    * If the quiz is completed, emits an event to show the previous and next buttons.
@@ -473,7 +488,7 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
     if (this.quizTracker.responses.length > 0) {
       _buttonText = 'Resume';
       if (
-        (this.quiz.quiz_attempt?.score === null || this.quiz.quiz_attempt?.score === undefined) &&
+        (this.quiz.quiz_attempt?.score !== null && this.quiz.quiz_attempt?.score !== undefined) &&
         !this.studentHasPassed()
       ) {
         _buttonText = 'Retake';
