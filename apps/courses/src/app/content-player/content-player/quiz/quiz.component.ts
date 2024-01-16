@@ -414,7 +414,6 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
     // Grade the quiz
     this.quizService.gradeQuiz(this.quizTracker.attempt_id).subscribe(response => {
       this.quizTracker.attempt = response;
-      console.log('Quiz attempt graded', response);
     });
     this.hidePrevAndNext.emit(false);
 
