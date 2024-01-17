@@ -418,11 +418,10 @@
 
 }
 
-.qqb-question-result,
-.qqb-out-of-time {
+.qqb-question-result {
 
   display: none;
-  
+
   .background-overlay {
     position: absolute;
     top: 0;
@@ -514,7 +513,7 @@
       color: #fff;
     }
     .qqb-result-description {
-     display: block; 
+     display: block;
     }
   }
 }
@@ -615,7 +614,7 @@
     padding: 0 1.5rem;
     margin: 1rem;
     border-radius: 2rem;
-    
+
     font-family: 'akzidenz-grotesk_bqmedium';
     font-size: 1.063rem;
     font-weight: 500;
@@ -635,7 +634,7 @@
       border: solid 2px #fff;
       background-color: transparent;
     }
-    
+
   }
 
 }

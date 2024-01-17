@@ -7,7 +7,6 @@ import {
   CORRECT_RESPONSE_POPUP,
   INCORRECT_RESPONSE_POPUP_RETRY,
   INCORRECT_RESPONSE_POPUP_FINAL,
-  OUT_OF_TIME_POPUP_RETRY,
 } from './quiz.constants';
 
 import { AppState } from '../../../store/reducers';
@@ -16,6 +15,7 @@ import { Observable, Subject, Subscription, timer } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { ILesson } from '@cirrus/models';
 import { selectLesson } from '../../../store/selectors/lessons.selector';
+import { QqbOutOfTimeComponent } from './qqb-out-of-time/qqbOutOfTime.component';
 
 /**
  * Component for displaying a quiz
@@ -25,14 +25,18 @@ import { selectLesson } from '../../../store/selectors/lessons.selector';
   templateUrl: './quiz.component.html',
   styleUrls: ['quiz.component.scss'],
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, QqbOutOfTimeComponent],
 })
 export class QuizComponent extends LessonContentComponent implements OnInit {
   /**
    * Constructor for the QuizComponent
    * @param quizService Injects the QuizService to get the quiz
    */
-  constructor(private quizService: QuizService, private renderer: Renderer2, private store: Store<AppState>) {
+  constructor(
+    private quizService: QuizService,
+    private renderer: Renderer2,
+    private store: Store<AppState>,
+  ) {
     super();
   }
 
@@ -55,15 +59,11 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
   questionResultSubtitle = '';
   questionResultButtonText = '';
 
-  outOfTimeClass = '';
-  outOfTimeTitle = '';
-  outOfTimeSubtitle = '';
-  outOfTimeButtonText = '';
-
   /// Timed Quiz properties
   quizEnd$ = new Subject();
   timerSubscription?: Subscription;
   quizTimer?: Observable<number>;
+  showOutOfTimePopup = false;
 
   /**
    * This method is part of the Angular Component Lifecycle. It is called after the constructor and is used to initialize data and other components.
@@ -125,7 +125,7 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
 
       if (this.quizTracker.elapsed_time_in_seconds >= quizTimeLimit) {
         this.nextQuestion();
-        this.setPopupForOutOfTimeResponse();
+        this.showOutOfTimePopup = true;
       }
     });
   }
@@ -351,16 +351,6 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
   /** Sets the popup properties for a student's incorrect question response. *
    * @returns void
    * */
-  setPopupForOutOfTimeResponse() {
-    this.outOfTimeClass = OUT_OF_TIME_POPUP_RETRY.class;
-    this.outOfTimeTitle = OUT_OF_TIME_POPUP_RETRY.title;
-    this.outOfTimeSubtitle = OUT_OF_TIME_POPUP_RETRY.subtitle;
-    this.outOfTimeButtonText = OUT_OF_TIME_POPUP_RETRY.buttonText;
-  }
-
-  /** Sets the popup properties for a student's incorrect question response. *
-   * @returns void
-   * */
 
   setPopupForLastIncorrectResponse() {
     this.answeredQuestionResultClass = INCORRECT_RESPONSE_POPUP_RETRY.class;
@@ -411,11 +401,12 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
     // Signal that the quiz has ended
     this.quizEnd$.next();
 
+    this.hidePrevAndNext.emit(false);
+
     // Grade the quiz
     this.quizService.gradeQuiz(this.quizTracker.attempt_id).subscribe(response => {
       this.quizTracker.attempt = response;
     });
-    this.hidePrevAndNext.emit(false);
 
     // Stop the timer
     if (this.timerSubscription) {
@@ -487,7 +478,8 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
     if (this.quizTracker.responses.length > 0) {
       _buttonText = 'Resume';
       if (
-        (this.quiz.quiz_attempt?.score !== null && this.quiz.quiz_attempt?.score !== undefined) &&
+        this.quiz.quiz_attempt?.score !== null &&
+        this.quiz.quiz_attempt?.score !== undefined &&
         !this.studentHasPassed()
       ) {
         _buttonText = 'Retake';
