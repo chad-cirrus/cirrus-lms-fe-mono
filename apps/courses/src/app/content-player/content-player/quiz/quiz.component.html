@@ -13,7 +13,7 @@
         </div>
 
         <div class="quiz-button-wrapper">
-          <button class="quiz-start" (click)="startQuiz()">{{getStartButtonText()}}</button>
+          <button class="quiz-start" (click)="startQuiz()">{{ getStartButtonText() }}</button>
           <div class="quiz-warning-label" *ngIf="getQuizTimeLimit() > 0">
             <span class="quiz-warning-label-icon">i</span> This is a timed quiz: {{ getQuizTimeLimit() }} minutes long
           </div>
@@ -50,8 +50,15 @@
       {{ this.quiz.quiz_questions[this.quizTracker.current_question].body }}
     </h4>
 
-    <div class="qqb-question-image-container" *ngIf="this.quiz.quiz_questions[this.quizTracker.current_question].image_url">
-      <img  class="qqb-question-image" src="{{ this.quiz.quiz_questions[this.quizTracker.current_question].image_url }}" alt="{{ this.quiz.quiz_questions[this.quizTracker.current_question].image_title }}">
+    <div
+      class="qqb-question-image-container"
+      *ngIf="this.quiz.quiz_questions[this.quizTracker.current_question].image_url"
+    >
+      <img
+        class="qqb-question-image"
+        src="{{ this.quiz.quiz_questions[this.quizTracker.current_question].image_url }}"
+        alt="{{ this.quiz.quiz_questions[this.quizTracker.current_question].image_title }}"
+      />
     </div>
 
     <div
@@ -88,8 +95,6 @@
       class="qqb-answers --true-false"
       *ngIf="this.quiz.quiz_questions[this.quizTracker.current_question].question_options.length === 2"
     >
-      <!-- <div class="qqb-action">Select one</div> -->
-
       <ul class="qqb-answer-items">
         <li
           class="qqb-answer-item"
@@ -182,6 +187,7 @@
       <!-- <div class="quiz-control-fullscreen"></div> -->
     </div>
   </div>
+  <cirrus-qqb-out-of-time *ngIf="showOutOfTimePopup" (buttonClicked)="showOutOfTimePopup=false"> </cirrus-qqb-out-of-time>
 
   <div
     class="quiz-complete"

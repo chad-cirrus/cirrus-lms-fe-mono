@@ -19,7 +19,7 @@ import {
 /**
  *
  * @class QuizService
- * @description A service for getting quiz data from a server
+ * @description A service for calling the quiz API
  * @param {HttpClient} http - The HttpClient used for making requests
  */
 export class QuizService {
@@ -28,7 +28,7 @@ export class QuizService {
   /**
    *
    * @method getQuiz
-   * @description Makes a request to the server to get quiz data
+   * @description Makes a request to the API to get quiz data
    * @param {number} id - The id of the quiz to get data for
    * @returns {Observable<IQuizRequest>} An observable containing the quiz data
    */
@@ -39,9 +39,9 @@ export class QuizService {
   }
 
   /**
-   * Starts a new quiz attempt.
+   * Calls the API to start a new quiz attempt.
    * @param attempt The quiz attempt data.
-   * @returns An observable of the start quiz response.
+   * @returns An observable of the start quiz attempt response.
    */
   startQuiz(attempt: IStartQuizAttempt): Observable<IStartQuizResponse> {
     const attemptData: IStartQuiz = { quiz_attempt: attempt };
@@ -51,7 +51,7 @@ export class QuizService {
   }
 
   /**
-   *
+   * Submits a student's answer to the quiz API.
    * @method submitAnswer
    * @description Submits a student's answer to a quiz question
    * @param {Answer} answer - The answer to submit
@@ -74,7 +74,7 @@ export class QuizService {
   }
 
   /**
-   * Grades a quiz attempt.
+   * Calls the API grade quiz attempt endpoint.
    * @param attempt_id The ID of the quiz attempt to grade.
    * @returns An observable that emits the response from the server.
    */

@@ -12,7 +12,7 @@ inside the root of the repo is a file named tsconfig.doc.json.
 This file contains the setup for the documentation generator.
 
 To add it to a project:
-'``yarn add @compodoc/compodoc```
+'``yarn add --dev @compodoc/compodoc```
 
 To generate the documentation:
 ```npx compodoc -p tsconfig.doc.json```
