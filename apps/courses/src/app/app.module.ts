@@ -38,7 +38,7 @@ import { A11yModule } from '@angular/cdk/a11y';
 import { ContentPlayerModule } from './content-player/content-player.module';
 import { ProgressEffects } from './store/effects/progress.effects';
 import { environment } from '../environments/environment';
-
+import { FullScreenImageDialogComponent } from './full-screen-image-dialog/full-screen-image-dialog.component';
 import { HttpErrorInterceptor } from './interceptors/http-error.interceptor';
 
 import { CourseOverviewRouteComponent } from './course/course-overview-route/course-overview-route.component';
@@ -86,6 +86,7 @@ import { CourseEnrollmentComponent } from './course-enrollment/course-enrollment
     OverlayModule,
     A11yModule,
     ContentPlayerModule,
+    FullScreenImageDialogComponent,
     MatIconRegistryModule,
     MatTabsModule,
     ErrorNotificationModule,

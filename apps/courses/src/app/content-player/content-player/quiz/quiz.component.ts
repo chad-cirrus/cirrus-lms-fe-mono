@@ -1,4 +1,4 @@
-import { Component, OnInit, Renderer2 } from '@angular/core';
+import { Component, OnInit, Renderer2, Inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LessonContentComponent } from '@cirrus/ui';
 import { QuizService } from './quiz.service';
@@ -8,6 +8,10 @@ import {
   INCORRECT_RESPONSE_POPUP_RETRY,
   INCORRECT_RESPONSE_POPUP_FINAL,
 } from './quiz.constants';
+
+import { MatDialog } from '@angular/material/dialog';
+// import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { FullScreenImageDialogComponent } from '../../../full-screen-image-dialog/full-screen-image-dialog.component';
 
 import { AppState } from '../../../store/reducers';
 import { Store } from '@ngrx/store';
@@ -27,16 +31,19 @@ import { QqbOutOfTimeComponent } from './qqb-out-of-time/qqbOutOfTime.component'
   standalone: true,
   imports: [CommonModule, QqbOutOfTimeComponent],
 })
+
 export class QuizComponent extends LessonContentComponent implements OnInit {
+  
   /**
    * Constructor for the QuizComponent
    * @param quizService Injects the QuizService to get the quiz
    */
   constructor(
-    private quizService: QuizService,
-    private renderer: Renderer2,
+    private dialog: MatDialog,
+    private quizService: QuizService, 
+    private renderer: Renderer2, 
     private store: Store<AppState>,
-  ) {
+    ) {
     super();
   }
 
@@ -617,5 +624,24 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
     };
     delete this.quiz.quiz_attempt;
     this.startQuiz();
+  }
+
+  /**
+   * Open Full Screen Image Dialog
+   * 
+   * Open an image in full screen viewing mode via a dialog
+   * 
+   */
+  openFullScreenImage() {
+    this.dialog.open(FullScreenImageDialogComponent, {
+      panelClass: 'full-screen-image-dialog',
+      height: '100%',
+      width: '100%',
+      maxWidth: '100%',
+      data: {
+        imgUrl : this.quiz.quiz_questions[this.quizTracker.current_question].image_url,
+        imgTitle : this.quiz.quiz_questions[this.quizTracker.current_question].image_title
+      }
+    })
   }
 }

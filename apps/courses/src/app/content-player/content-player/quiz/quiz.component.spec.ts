@@ -6,17 +6,27 @@ import { coursesReducers } from '../../../store/reducers';
 import { QuizService } from './quiz.service';
 import { IContent } from '@cirrus/models';
 import { IQuizRequest } from './quiz.types';
+import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 
 describe('QuizComponent', () => {
   let component: QuizComponent;
   let fixture: ComponentFixture<QuizComponent>;
 
   beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [QuizComponent, HttpClientTestingModule, StoreModule.forRoot(coursesReducers)],
-      providers: [QuizService],
-      declarations: [],
-    }).compileComponents();
+    await TestBed
+      .configureTestingModule({
+        imports: [
+          QuizComponent,
+          HttpClientTestingModule,
+          StoreModule.forRoot(coursesReducers),
+          MatDialogModule,
+        ],
+        providers: [QuizService,
+          { provide: MAT_DIALOG_DATA, useValue: {} },
+          { provide: MatDialogRef, useValue: {} },],
+        declarations: [],
+      })
+      .compileComponents();
   });
 
   beforeEach(() => {
@@ -173,7 +183,6 @@ describe('QuizComponent', () => {
       started_at: new Date('01-01-1970'),
       elapsed_time_in_seconds: 0,
     };
-
     expect(component.shouldHideSubmitButton()).toBeFalsy();
     expect(component.showCorrectAnswer(4)).toBeFalsy();
     expect(component.showCorrectAnswer(5)).toBeFalsy();
@@ -271,7 +280,6 @@ describe('QuizComponent', () => {
 
     expect(component.isMultipleChoiceQuestion()).toBeFalsy();
   });
-
   it('should return 0 if quiz or quiz time limit is not defined', () => {
     component.quiz = {
       id: 1,
@@ -318,6 +326,7 @@ describe('QuizComponent', () => {
     expect(component.isMultipleChoiceQuestion()).toBeTruthy();
   });
 });
+
 
 function getContent(): IContent {
   return {

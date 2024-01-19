@@ -643,3 +643,36 @@
   }
 
 }
+
+
+/**
+ * Full Screen Image 
+ */ 
+.full-screen-image-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  
+  .toggle-full-screen-image {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 1rem;
+    padding: 0;
+    background-color: transparent;
+    border: none;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  .full-screen-image-wrapper  {
+    position: relative;
+
+    .full-screen-image-open-icon {
+      display: block;
+    }
+  }
+
+}

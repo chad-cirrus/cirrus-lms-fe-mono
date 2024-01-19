@@ -1,0 +1,24 @@
+<div class="full-screen-image-container">
+    <span class="full-screen-image-wrapper --full-screen-image">
+
+        <button class="toggle-full-screen-image" (click)="close()">
+
+            <!-- Close Icon -->
+            <span class="full-screen-image-close-icon">
+                <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect y="0.71875" width="24" height="24" rx="1.6" fill="#3A3A3A"/>
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M9.58262 15.1666C9.78618 15.3532 9.79994 15.6695 9.61334 15.873L6.27092 19.5193C6.08433 19.7229 5.76804 19.7366 5.56448 19.55C5.36092 19.3634 5.34717 19.0471 5.53377 18.8436L8.87619 15.1973C9.06278 14.9937 9.37907 14.98 9.58262 15.1666Z" fill="white"/>
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M7.26953 13.4121C7.26953 13.136 7.49339 12.9121 7.76953 12.9121H11.0665C11.3426 12.9121 11.5665 13.136 11.5665 13.4121V16.709C11.5665 16.9852 11.3426 17.209 11.0665 17.209C10.7903 17.209 10.5665 16.9852 10.5665 16.709V13.9121H7.76953C7.49339 13.9121 7.26953 13.6883 7.26953 13.4121Z" fill="white"/>
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M15.1127 9.18303C14.9091 8.99643 14.8954 8.68015 15.082 8.47659L18.4244 4.83032C18.611 4.62676 18.9273 4.61301 19.1308 4.7996C19.3344 4.9862 19.3481 5.30248 19.1615 5.50604L15.8191 9.15231C15.6325 9.35587 15.3162 9.36962 15.1127 9.18303Z" fill="white"/>
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M17.4258 10.9375C17.4258 11.2136 17.2019 11.4375 16.9258 11.4375L13.6288 11.4375C13.3527 11.4375 13.1288 11.2136 13.1288 10.9375L13.1288 7.64056C13.1288 7.36442 13.3527 7.14056 13.6288 7.14056C13.905 7.14056 14.1288 7.36442 14.1288 7.64056L14.1288 10.4375L16.9258 10.4375C17.2019 10.4375 17.4258 10.6614 17.4258 10.9375Z" fill="white"/>
+                </svg>
+            </span>
+            
+        </button>
+        
+        <span class="full-screen-image">
+            <img src="{{ this.imageData.imgUrl }}" alt="{{ this.imageData.imgTitle }}">
+        </span>
+
+    </span>
+</div>
