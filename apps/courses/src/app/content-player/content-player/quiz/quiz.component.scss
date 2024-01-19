@@ -99,25 +99,30 @@
     align-items: center;
     justify-content: center;
 
+    span {
+      line-height: 1em;
+      font-family: "akzidenz-grotesk_bqmedium";
+      font-weight: 500;
+      font-size: 1.25rem;
+      &.quiz-warning-label-icon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-right: 0.5rem;
+        width: 1.25rem;
+        height: 1.25rem;
+        padding: 0;
+        margin: 0;
+        border: solid 2px #FFD600;
+        border-radius: 100%;
+        font-size: 1.063rem;
+      }
+    }
+
     @media screen and (min-width: 600px) {
       padding: 0;
       margin-left: 2rem;
     }
-  }
-
-  .quiz-warning-label-icon {
-    border: solid 2px #FFD600;
-    border-radius: 100%;
-    width: 1rem;
-    height: 1rem;
-    display: inline-block;
-    padding: 0;
-    margin: 0;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 0.75rem;
-    margin-right: 0.5rem;
   }
 
 
