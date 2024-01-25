@@ -3,7 +3,6 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "ng": "nx",
     "postinstall": "node ./decorate-angular-cli.js && ngcc --properties es2020 browser module main",
     "heroku-start": "node dist/apps/atc/main.js",
     "serve": "nx serve",
@@ -13,7 +12,7 @@
     "start": "nx serve:production",
     "build": "bash ./build.sh",
     "build-projects": "nx run-many --target=build --projects=courses,atc,recent-activity",
-    "build-storybook": "ng build-storybook ui --projectBuildConfig=ui:build-storybook",
+    "build-storybook": "nx build-storybook ui --projectBuildConfig=ui:build-storybook",
     "test": "nx test"
   },
   "private": true,
