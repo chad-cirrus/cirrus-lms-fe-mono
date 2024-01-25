@@ -1,4 +1,4 @@
-// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+// eslint-disable-next-line @nx/enforce-module-boundaries
 import { IContent, ILesson } from '@cirrus/models';
 
 export const testIcingContentsOneInprogress: IContent[] = [
@@ -33,10 +33,8 @@ export const testIcingContentsOneInprogress: IContent[] = [
   {
     id: 605,
     order: 1,
-    title:
-      'SR22 TKS Anti-Ice System POH Supplement (Perspective+ Avionics Only)',
-    subtitle:
-      'SR22 TKS Anti-Ice System POH Supplement (Perspective+ Avionics Only)',
+    title: 'SR22 TKS Anti-Ice System POH Supplement (Perspective+ Avionics Only)',
+    subtitle: 'SR22 TKS Anti-Ice System POH Supplement (Perspective+ Avionics Only)',
     score: 0,
     url: '',
     meta_tags: [],
@@ -52,8 +50,7 @@ export const testIcingContentsOneInprogress: IContent[] = [
     content_html: '',
     created_by: 'Cirrus Aircraft',
     upload_image: '',
-    content_filename:
-      'SR22 TKS Anti-Ice System (Perspective+ Avionics Only) - Revision 2.pdf',
+    content_filename: 'SR22 TKS Anti-Ice System (Perspective+ Avionics Only) - Revision 2.pdf',
     starter_file: '',
     blob_directory: '',
     show_comments: false,
@@ -82,8 +79,7 @@ export const testIcingContentsOneInprogress: IContent[] = [
     content_html: '',
     created_by: 'Cirrus Aircraft',
     upload_image: '',
-    content_filename:
-      'SR22 TKS Anti-Ice System POH Supplement - Original Issue.pdf',
+    content_filename: 'SR22 TKS Anti-Ice System POH Supplement - Original Issue.pdf',
     starter_file: '',
     blob_directory: '',
     show_comments: false,
@@ -95,10 +91,8 @@ export const testIcingContentsOneInprogress: IContent[] = [
   {
     id: 553,
     order: 3,
-    title:
-      'SR22T TKS Anti-Ice System POH Supplement (Perspective+ Avionics Only)',
-    subtitle:
-      'SR22T TKS Anti-Ice System POH Supplement (Perspective+ Avionics Only)',
+    title: 'SR22T TKS Anti-Ice System POH Supplement (Perspective+ Avionics Only)',
+    subtitle: 'SR22T TKS Anti-Ice System POH Supplement (Perspective+ Avionics Only)',
     score: 0,
     url: '',
     meta_tags: [],
@@ -114,8 +108,7 @@ export const testIcingContentsOneInprogress: IContent[] = [
     content_html: '',
     created_by: 'Cirrus Aircraft',
     upload_image: '',
-    content_filename:
-      'SR22T TKS Anti-Ice System (Perspective+ Avionics Only) - Revision 2.pdf',
+    content_filename: 'SR22T TKS Anti-Ice System (Perspective+ Avionics Only) - Revision 2.pdf',
     starter_file: '',
     blob_directory: '',
     show_comments: false,
@@ -144,8 +137,7 @@ export const testIcingContentsOneInprogress: IContent[] = [
     content_html: '',
     created_by: 'Cirrus Aircraft',
     upload_image: '',
-    content_filename:
-      'SR22T TKS Anti-Ice System POH Supplement - Original Issue.pdf',
+    content_filename: 'SR22T TKS Anti-Ice System POH Supplement - Original Issue.pdf',
     starter_file: '',
     blob_directory: '',
     show_comments: false,
@@ -306,10 +298,8 @@ export const testDataIcingAwarenessCourse: ILesson = {
     {
       id: 605,
       order: 1,
-      title:
-        'SR22 TKS Anti-Ice System POH Supplement (Perspective+ Avionics Only)',
-      subtitle:
-        'SR22 TKS Anti-Ice System POH Supplement (Perspective+ Avionics Only)',
+      title: 'SR22 TKS Anti-Ice System POH Supplement (Perspective+ Avionics Only)',
+      subtitle: 'SR22 TKS Anti-Ice System POH Supplement (Perspective+ Avionics Only)',
       score: 0,
       url: '',
       meta_tags: [],
@@ -325,8 +315,7 @@ export const testDataIcingAwarenessCourse: ILesson = {
       content_html: '',
       created_by: 'Cirrus Aircraft',
       upload_image: '',
-      content_filename:
-        'SR22 TKS Anti-Ice System (Perspective+ Avionics Only) - Revision 2.pdf',
+      content_filename: 'SR22 TKS Anti-Ice System (Perspective+ Avionics Only) - Revision 2.pdf',
       starter_file: '',
       blob_directory: '',
       show_comments: false,
@@ -355,8 +344,7 @@ export const testDataIcingAwarenessCourse: ILesson = {
       content_html: '',
       created_by: 'Cirrus Aircraft',
       upload_image: '',
-      content_filename:
-        'SR22 TKS Anti-Ice System POH Supplement - Original Issue.pdf',
+      content_filename: 'SR22 TKS Anti-Ice System POH Supplement - Original Issue.pdf',
       starter_file: '',
       blob_directory: '',
       show_comments: false,
@@ -368,10 +356,8 @@ export const testDataIcingAwarenessCourse: ILesson = {
     {
       id: 553,
       order: 3,
-      title:
-        'SR22T TKS Anti-Ice System POH Supplement (Perspective+ Avionics Only)',
-      subtitle:
-        'SR22T TKS Anti-Ice System POH Supplement (Perspective+ Avionics Only)',
+      title: 'SR22T TKS Anti-Ice System POH Supplement (Perspective+ Avionics Only)',
+      subtitle: 'SR22T TKS Anti-Ice System POH Supplement (Perspective+ Avionics Only)',
       score: 0,
       url: '',
       meta_tags: [],
@@ -387,8 +373,7 @@ export const testDataIcingAwarenessCourse: ILesson = {
       content_html: '',
       created_by: 'Cirrus Aircraft',
       upload_image: '',
-      content_filename:
-        'SR22T TKS Anti-Ice System (Perspective+ Avionics Only) - Revision 2.pdf',
+      content_filename: 'SR22T TKS Anti-Ice System (Perspective+ Avionics Only) - Revision 2.pdf',
       starter_file: '',
       blob_directory: '',
       show_comments: false,
@@ -417,8 +402,7 @@ export const testDataIcingAwarenessCourse: ILesson = {
       content_html: '',
       created_by: 'Cirrus Aircraft',
       upload_image: '',
-      content_filename:
-        'SR22T TKS Anti-Ice System POH Supplement - Original Issue.pdf',
+      content_filename: 'SR22T TKS Anti-Ice System POH Supplement - Original Issue.pdf',
       starter_file: '',
       blob_directory: '',
       show_comments: false,

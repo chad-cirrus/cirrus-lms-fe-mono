@@ -11,7 +11,7 @@ import {
   TermsAgreementSubtitleText,
 } from '@cirrus/models';
 import { produceConfig } from './produce-config';
-// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+// eslint-disable-next-line @nx/enforce-module-boundaries
 import { ElementRef, HostListener, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { BehaviorSubject } from 'rxjs';
@@ -56,7 +56,7 @@ export class CourseLandingPageComponent {
   private previewVideoUrlSubject = new BehaviorSubject<string | null>(null);
   public previewVideoUrl$ = this.previewVideoUrlSubject.asObservable().pipe(
     filter(url => url !== null),
-    map(url => this.cirrusSanitizer.getSafeResourceUrl(url as string))
+    map(url => this.cirrusSanitizer.getSafeResourceUrl(url as string)),
   );
 
   public isSticky = false;
@@ -69,9 +69,7 @@ export class CourseLandingPageComponent {
   @Input()
   set course(value: ICourseOverview) {
     this._course = value;
-    this.breadcrumbsTitle = value.course_attempt?.id
-      ? 'My Courses'
-      : 'Course Catalog';
+    this.breadcrumbsTitle = value.course_attempt?.id ? 'My Courses' : 'Course Catalog';
     this.setBackground();
 
     if (!value.course_attempt?.id) {
@@ -79,21 +77,18 @@ export class CourseLandingPageComponent {
 
       if (value.course_overview_video?.url) {
         this.previewVideoUrlSubject.next(
-          `https://player.vimeo.com/video/${value.course_overview_video?.url}?app_id=122963`
+          `https://player.vimeo.com/video/${value.course_overview_video?.url}?app_id=122963`,
         );
       }
 
       return;
     }
 
-    if (
-      value.next_lesson !== null &&
-      Object.keys(value.next_lesson).length > 0
-    ) {
+    if (value.next_lesson !== null && Object.keys(value.next_lesson).length > 0) {
       this.coursePlayerConfig = produceConfig(
         value.next_lesson,
         value.progress,
-        this.environment.defaultLessonThumbnail as string
+        this.environment.defaultLessonThumbnail as string,
       );
     }
   }
@@ -120,31 +115,24 @@ export class CourseLandingPageComponent {
     private tcService: TermsAgreementServiceService,
     private cirrusSanitizer: CirrusSanitizerService,
 
-    @Inject('environment') environment: Record<string, unknown>
+    @Inject('environment') environment: Record<string, unknown>,
   ) {
     this.environment = environment;
   }
 
   navigateToCoursesOrCatalog() {
-    const path = this.course.course_attempt?.id
-      ? `/my-courses`
-      : '/course-catalog';
+    const path = this.course.course_attempt?.id ? `/my-courses` : '/course-catalog';
     this.router.navigate([path]);
   }
 
   navigateToNextLesson() {
     const { accepted_agreement } = this.course.course_attempt.user_course;
     if (!accepted_agreement) {
-      this.tcService
-        .openTermsAndConditionsModal(
-          this.course,
-          TermsAgreementSubtitleText.START
-        )
-        .subscribe(bool => {
-          if (bool) {
-            this.navigate();
-          }
-        });
+      this.tcService.openTermsAndConditionsModal(this.course, TermsAgreementSubtitleText.START).subscribe(bool => {
+        if (bool) {
+          this.navigate();
+        }
+      });
     } else {
       this.navigate();
     }
@@ -156,10 +144,9 @@ export class CourseLandingPageComponent {
 
   isCourseFree(course: ICourseOverview) {
     if (course?.list_price) {
-      return course?.list_price < 1
-    }
-    else {
-      return true
+      return course?.list_price < 1;
+    } else {
+      return true;
     }
   }
 
@@ -197,11 +184,9 @@ export class CourseLandingPageComponent {
 
   downloadCert() {
     if (this.course.certificate.id) {
-      this.downloadService
-        .downloadCertificate(this.course.certificate.id)
-        .subscribe((data: PdfDownloadFile) => {
-          downloadPdf(data);
-        });
+      this.downloadService.downloadCertificate(this.course.certificate.id).subscribe((data: PdfDownloadFile) => {
+        downloadPdf(data);
+      });
     }
   }
 
@@ -210,16 +195,11 @@ export class CourseLandingPageComponent {
       course_id: this.course.id,
       user_id: this.user.id,
     };
-    this.tcService
-      .openTermsAndConditionsModal(
-        this.course,
-        TermsAgreementSubtitleText.REENROLL
-      )
-      .subscribe(bool => {
-        if (bool) {
-          this.openConfirmationModal(payload);
-        }
-      });
+    this.tcService.openTermsAndConditionsModal(this.course, TermsAgreementSubtitleText.REENROLL).subscribe(bool => {
+      if (bool) {
+        this.openConfirmationModal(payload);
+      }
+    });
   }
 
   openConfirmationModal(payload: ModalPayload) {
@@ -243,18 +223,15 @@ export class CourseLandingPageComponent {
   }
 
   downloadTranscript() {
-    this.downloadService
-      .downloadTranscript(this.course.id, 0)
-      .subscribe((data: PdfDownloadFile) => {
-        downloadPdf(data);
-      });
+    this.downloadService.downloadTranscript(this.course.id, 0).subscribe((data: PdfDownloadFile) => {
+      downloadPdf(data);
+    });
   }
 
   @HostListener('window:scroll', ['$event'])
   checkScroll() {
     if (this.coursePlayerEl && this.coursePlayerEl.nativeElement) {
-      const distanceToTop =
-          this.coursePlayerEl.nativeElement.getBoundingClientRect().top;
+      const distanceToTop = this.coursePlayerEl.nativeElement.getBoundingClientRect().top;
       if (this._size == '(max-width: 599.98px)') {
         this.isSticky = distanceToTop <= 65;
       } else if (
@@ -273,10 +250,8 @@ export class CourseLandingPageComponent {
 
   private setBackground() {
     const uri =
-      this._size === Breakpoints.XSmall
-        ? this.course.mobile_hero_image_url
-        : this.course.desktop_hero_image_url;
-      this.background.next(uri);
+      this._size === Breakpoints.XSmall ? this.course.mobile_hero_image_url : this.course.desktop_hero_image_url;
+    this.background.next(uri);
   }
 }
 

@@ -6,7 +6,7 @@
   "prefix": "cirrus",
   "targets": {
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "outputs": ["coverage/libs/badge"],
       "options": {
         "jestConfig": "libs/badge/jest.config.ts",
@@ -14,12 +14,9 @@
       }
     },
     "lint": {
-      "executor": "@nrwl/linter:eslint",
+      "executor": "@nx/linter:eslint",
       "options": {
-        "lintFilePatterns": [
-          "libs/badge/src/**/*.ts",
-          "libs/badge/src/**/*.html"
-        ]
+        "lintFilePatterns": ["libs/badge/src/**/*.ts", "libs/badge/src/**/*.html"]
       }
     }
   },

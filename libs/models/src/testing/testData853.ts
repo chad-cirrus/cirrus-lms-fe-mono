@@ -1,4 +1,4 @@
-// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+// eslint-disable-next-line @nx/enforce-module-boundaries
 import { ILesson } from '@cirrus/models';
 
 export const testDataReccurent853: ILesson = {

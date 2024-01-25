@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { CONTENT_STATUS, IContent, IProgress } from '@cirrus/models';
-// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+// eslint-disable-next-line @nx/enforce-module-boundaries
 import { CirrusMaterialModule } from '@cirrus/ui';
 
 import { LessonContentItemComponent } from './lesson-content-item.component';
@@ -30,7 +30,7 @@ const contentItem: IContent = {
   show_comments: true,
   order: 0,
   content_tasks: [],
-  quiz: undefined
+  quiz: undefined,
 };
 
 describe('LessonContentItemComponent', () => {
@@ -58,9 +58,7 @@ describe('LessonContentItemComponent', () => {
   it('should display a title', async () => {
     const titleElement = fixture.debugElement.nativeElement;
 
-    expect(titleElement.textContent).toContain(
-      'Primary Flight Controls'
-    );
+    expect(titleElement.textContent).toContain('Primary Flight Controls');
   });
 
   it('should display in progress when not completed', () => {
@@ -69,9 +67,7 @@ describe('LessonContentItemComponent', () => {
     fixture.detectChanges();
     const titleElement = fixture.debugElement.nativeElement;
 
-    expect(titleElement.querySelector('.lesson-content-item__progress').textContent).toContain(
-      'In Progress'
-    );
+    expect(titleElement.querySelector('.lesson-content-item__progress').textContent).toContain('In Progress');
   });
 
   it('should display in completd when status is completed', () => {
@@ -80,8 +76,6 @@ describe('LessonContentItemComponent', () => {
     fixture.detectChanges();
     const titleElement = fixture.debugElement.nativeElement;
 
-    expect(titleElement.querySelector('.lesson-content-item__progress').textContent).toContain(
-      'Completed'
-    );
+    expect(titleElement.querySelector('.lesson-content-item__progress').textContent).toContain('Completed');
   });
 });

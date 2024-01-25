@@ -1,4 +1,4 @@
-/* eslint-disable @nrwl/nx/enforce-module-boundaries */
+/* eslint-disable @nx/enforce-module-boundaries */
 export * from './lib/LessonContentComponent';
 export * from './lib/assessment/assessment.component';
 export * from './lib/cirrus-material.module';

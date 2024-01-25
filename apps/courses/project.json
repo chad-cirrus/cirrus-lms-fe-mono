@@ -6,7 +6,7 @@
   "prefix": "cirrus",
   "targets": {
     "build": {
-      "executor": "@nrwl/angular:webpack-browser",
+      "executor": "@nx/angular:webpack-browser",
       "outputs": ["{options.outputPath}"],
       "options": {
         "deployUrl": "/courses/",
@@ -136,7 +136,7 @@
       "defaultConfiguration": "production"
     },
     "serve": {
-      "executor": "@nrwl/angular:webpack-dev-server",
+      "executor": "@nx/angular:webpack-dev-server",
       "configurations": {
         "production": {
           "browserTarget": "courses:build:production"
@@ -166,16 +166,13 @@
       }
     },
     "lint": {
-      "executor": "@nrwl/linter:eslint",
+      "executor": "@nx/linter:eslint",
       "options": {
-        "lintFilePatterns": [
-          "apps/courses/src/**/*.ts",
-          "apps/courses/src/**/*.html"
-        ]
+        "lintFilePatterns": ["apps/courses/src/**/*.ts", "apps/courses/src/**/*.html"]
       }
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "outputs": ["coverage/apps/courses"],
       "options": {
         "jestConfig": "apps/courses/jest.config.ts",
@@ -183,9 +180,8 @@
       }
     },
     "storybook": {
-      "executor": "@nrwl/storybook:storybook",
+      "executor": "@nx/storybook:storybook",
       "options": {
-        "uiFramework": "@storybook/angular",
         "port": 4400,
         "configDir": "apps/courses/.storybook"
       },
@@ -196,10 +192,9 @@
       }
     },
     "build-storybook": {
-      "executor": "@nrwl/storybook:build",
+      "executor": "@nx/storybook:build",
       "outputs": ["{options.outputDir}"],
       "options": {
-        "uiFramework": "@storybook/angular",
         "styles": ["apps/courses/src/styles.scss"],
         "stylePreprocessorOptions": {
           "includePaths": ["libs/ui/src/lib/styles"]

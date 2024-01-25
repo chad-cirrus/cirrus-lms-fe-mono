@@ -1,7 +1,7 @@
 import { InjectionToken, NgModule } from '@angular/core';
 import { ActivatedRouteSnapshot, RouterModule, Routes } from '@angular/router';
 
-// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+// eslint-disable-next-line @nx/enforce-module-boundaries
 import { isAuthenticated } from '@cirrus/auth';
 import { CourseEnrollmentComponent } from './course-enrollment/course-enrollment.component';
 import { CourseEnrollmentsRouteComponent } from './course/course-enrollments-route/course-enrollments-route.component';
@@ -17,6 +17,7 @@ const getResolvedUrl = (route: ActivatedRouteSnapshot): string => {
     .map(k => `${k}=${route.params[k]}`)
     .join('&');
   const path = route.pathFromRoot.map(v => v.url.map(segment => segment.path).join('/')).join('/');
+  console.log('path', path, 'params', params);
   return params.length > 0 ? `${path}?${params}` : path;
 };
 
@@ -86,11 +87,11 @@ const routes: Routes = [
     {
       provide: coursesUrlProvider,
       useValue: (route: ActivatedRouteSnapshot) => {
-        window.open(getResolvedUrl(route), '_self');
+        window.open(getResolvedUrl(route));//, '_self');
       },
     },
   ],
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {enableTracing: true}),],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

@@ -6,7 +6,7 @@
   "prefix": "cirrus",
   "targets": {
     "build": {
-      "executor": "@nrwl/angular:webpack-browser",
+      "executor": "@nx/angular:webpack-browser",
       "outputs": ["{options.outputPath}"],
       "options": {
         "deployUrl": "/recent-activity/",
@@ -128,7 +128,7 @@
       "defaultConfiguration": "production"
     },
     "serve": {
-      "executor": "@nrwl/angular:webpack-dev-server",
+      "executor": "@nx/angular:webpack-dev-server",
       "configurations": {
         "production": {
           "browserTarget": "recent-activity:build:production"
@@ -156,16 +156,13 @@
       }
     },
     "lint": {
-      "executor": "@nrwl/linter:eslint",
+      "executor": "@nx/linter:eslint",
       "options": {
-        "lintFilePatterns": [
-          "apps/recent-activity/src/**/*.ts",
-          "apps/recent-activity/src/**/*.html"
-        ]
+        "lintFilePatterns": ["apps/recent-activity/src/**/*.ts", "apps/recent-activity/src/**/*.html"]
       }
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "outputs": ["coverage/apps/recent-activity"],
       "options": {
         "jestConfig": "apps/recent-activity/jest.config.ts",
@@ -173,9 +170,8 @@
       }
     },
     "storybook": {
-      "executor": "@nrwl/storybook:storybook",
+      "executor": "@nx/storybook:storybook",
       "options": {
-        "uiFramework": "@storybook/angular",
         "port": 4400,
         "configDir": "apps/recent-activity/.storybook"
       },
@@ -186,10 +182,9 @@
       }
     },
     "build-storybook": {
-      "executor": "@nrwl/storybook:build",
+      "executor": "@nx/storybook:build",
       "outputs": ["{options.outputDir}"],
       "options": {
-        "uiFramework": "@storybook/angular",
         "styles": ["./apps/recent-activity/src/styles.scss"],
         "configDir": "apps/recent-activity/.storybook",
         "outputDir": "dist/storybook/recent-activity"

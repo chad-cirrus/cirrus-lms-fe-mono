@@ -1,4 +1,4 @@
-// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+// eslint-disable-next-line @nx/enforce-module-boundaries
 import {
   ContentCounts,
   IBadge,
@@ -46,8 +46,7 @@ const progressStats: ProgressStat[] = [
 
 export const testData: ILesson = {
   id: 832,
-  system_desc:
-    'The SR Series Systems self-study lesson for flight training courses.',
+  system_desc: 'The SR Series Systems self-study lesson for flight training courses.',
 
   updated_at: '2020-02-14T20:21:44.256Z',
   subtitle: 'SR Series Systems Self Study Lesson - Flight Training Courses',
@@ -235,8 +234,7 @@ export const testData: ILesson = {
 
 export const testData2: ILesson = {
   id: 832,
-  system_desc:
-    'The SR Series Systems self-study lesson for flight training courses.',
+  system_desc: 'The SR Series Systems self-study lesson for flight training courses.',
   updated_at: '2020-02-14T20:21:44.256Z',
   course_attempt_id: 0,
   course_id: 0,
