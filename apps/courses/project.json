@@ -136,47 +136,43 @@
       "defaultConfiguration": "production"
     },
     "serve": {
-      "executor": "@nx/angular:webpack-dev-server",
+      "executor": "@nx/angular:dev-server",
       "configurations": {
         "production": {
-          "browserTarget": "courses:build:production"
+          "buildTarget": "courses:build:production"
         },
         "staging": {
-          "browserTarget": "courses:build:staging"
+          "buildTarget": "courses:build:staging"
         },
         "uat": {
-          "browserTarget": "courses:build:uat"
+          "buildTarget": "courses:build:uat"
         },
         "development": {
           "host": "cirrusapproach.local",
-          "browserTarget": "courses:build:development"
+          "buildTarget": "courses:build:development"
         }
       },
       "defaultConfiguration": "development",
       "options": {
         "host": "cirrusapproach.local",
         "port": 4201,
-        "browserTarget": "courses:build:development"
+        "buildTarget": "courses:build:development"
       }
     },
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
-        "browserTarget": "courses:build"
+        "buildTarget": "courses:build"
       }
     },
     "lint": {
-      "executor": "@nx/linter:eslint",
-      "options": {
-        "lintFilePatterns": ["apps/courses/src/**/*.ts", "apps/courses/src/**/*.html"]
-      }
+      "executor": "@nx/eslint:lint"
     },
     "test": {
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/apps/courses"],
       "options": {
-        "jestConfig": "apps/courses/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "apps/courses/jest.config.ts"
       }
     },
     "storybook": {

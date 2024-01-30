@@ -9,15 +9,11 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/sidenav-header"],
       "options": {
-        "jestConfig": "libs/sidenav-header/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "libs/sidenav-header/jest.config.ts"
       }
     },
     "lint": {
-      "executor": "@nx/linter:eslint",
-      "options": {
-        "lintFilePatterns": ["libs/sidenav-header/src/**/*.ts", "libs/sidenav-header/src/**/*.html"]
-      }
+      "executor": "@nx/eslint:lint"
     }
   },
   "tags": []

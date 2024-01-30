@@ -36,18 +36,14 @@
       }
     },
     "lint": {
-      "executor": "@nx/linter:eslint",
-      "outputs": ["{options.outputFile}"],
-      "options": {
-        "lintFilePatterns": ["apps/atc/**/*.ts"]
-      }
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"]
     },
     "test": {
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/apps/atc"],
       "options": {
-        "jestConfig": "apps/atc/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "apps/atc/jest.config.ts"
       }
     }
   },

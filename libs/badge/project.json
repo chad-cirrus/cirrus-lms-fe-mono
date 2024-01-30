@@ -9,15 +9,11 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/badge"],
       "options": {
-        "jestConfig": "libs/badge/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "libs/badge/jest.config.ts"
       }
     },
     "lint": {
-      "executor": "@nx/linter:eslint",
-      "options": {
-        "lintFilePatterns": ["libs/badge/src/**/*.ts", "libs/badge/src/**/*.html"]
-      }
+      "executor": "@nx/eslint:lint"
     }
   },
   "tags": []

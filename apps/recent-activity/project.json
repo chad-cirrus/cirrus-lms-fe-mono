@@ -128,19 +128,19 @@
       "defaultConfiguration": "production"
     },
     "serve": {
-      "executor": "@nx/angular:webpack-dev-server",
+      "executor": "@nx/angular:dev-server",
       "configurations": {
         "production": {
-          "browserTarget": "recent-activity:build:production"
+          "buildTarget": "recent-activity:build:production"
         },
         "staging": {
-          "browserTarget": "recent-activity:build:staging"
+          "buildTarget": "recent-activity:build:staging"
         },
         "uat": {
-          "browserTarget": "recent-activity:build:uat"
+          "buildTarget": "recent-activity:build:uat"
         },
         "development": {
-          "browserTarget": "recent-activity:build:development"
+          "buildTarget": "recent-activity:build:development"
         }
       },
       "defaultConfiguration": "development",
@@ -152,21 +152,17 @@
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
-        "browserTarget": "recent-activity:build"
+        "buildTarget": "recent-activity:build"
       }
     },
     "lint": {
-      "executor": "@nx/linter:eslint",
-      "options": {
-        "lintFilePatterns": ["apps/recent-activity/src/**/*.ts", "apps/recent-activity/src/**/*.html"]
-      }
+      "executor": "@nx/eslint:lint"
     },
     "test": {
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/apps/recent-activity"],
       "options": {
-        "jestConfig": "apps/recent-activity/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "apps/recent-activity/jest.config.ts"
       }
     },
     "storybook": {
