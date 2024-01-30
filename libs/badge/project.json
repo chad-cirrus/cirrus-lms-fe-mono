@@ -7,7 +7,7 @@
   "targets": {
     "test": {
       "executor": "@nx/jest:jest",
-      "outputs": ["coverage/libs/badge"],
+      "outputs": ["{workspaceRoot}/coverage/libs/badge"],
       "options": {
         "jestConfig": "libs/badge/jest.config.ts",
         "passWithNoTests": true

@@ -7,7 +7,7 @@
   "targets": {
     "test": {
       "executor": "@nx/jest:jest",
-      "outputs": ["coverage/libs/search-input"],
+      "outputs": ["{workspaceRoot}/coverage/libs/search-input"],
       "options": {
         "jestConfig": "libs/search-input/jest.config.ts",
         "passWithNoTests": true

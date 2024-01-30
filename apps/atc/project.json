@@ -44,7 +44,7 @@
     },
     "test": {
       "executor": "@nx/jest:jest",
-      "outputs": ["coverage/apps/atc"],
+      "outputs": ["{workspaceRoot}/coverage/apps/atc"],
       "options": {
         "jestConfig": "apps/atc/jest.config.ts",
         "passWithNoTests": true

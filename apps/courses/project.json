@@ -173,7 +173,7 @@
     },
     "test": {
       "executor": "@nx/jest:jest",
-      "outputs": ["coverage/apps/courses"],
+      "outputs": ["{workspaceRoot}/coverage/apps/courses"],
       "options": {
         "jestConfig": "apps/courses/jest.config.ts",
         "passWithNoTests": true

@@ -163,7 +163,7 @@
     },
     "test": {
       "executor": "@nx/jest:jest",
-      "outputs": ["coverage/apps/recent-activity"],
+      "outputs": ["{workspaceRoot}/coverage/apps/recent-activity"],
       "options": {
         "jestConfig": "apps/recent-activity/jest.config.ts",
         "passWithNoTests": true

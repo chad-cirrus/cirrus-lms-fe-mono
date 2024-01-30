@@ -7,7 +7,7 @@
   "targets": {
     "test": {
       "executor": "@nx/jest:jest",
-      "outputs": ["coverage/libs/notification-menu"],
+      "outputs": ["{workspaceRoot}/coverage/libs/notification-menu"],
       "options": {
         "jestConfig": "libs/notification-menu/jest.config.ts",
         "passWithNoTests": true
