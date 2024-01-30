@@ -1,3 +1,4 @@
+import { filter } from 'rxjs/operators';
 import { Component, Input } from '@angular/core';
 
 import { ICertificate, IEnrollmentHistory, PdfDownloadFile } from '@cirrus/models';
@@ -54,7 +55,7 @@ export class CoursesTabEnrollmentHistoryComponent {
     },
   ];
 
-  constructor(private uiDownloadService: UiDownloadService) {}
+  constructor(private uiDownloadService: UiDownloadService) { }
 
   rowSelected(row: any) {
     console.log('event', row);
@@ -64,8 +65,11 @@ export class CoursesTabEnrollmentHistoryComponent {
     const { type, value } = obj;
     if (value === null) return;
     if (type.mat_col_name === 'user_certificate') {
+      // for now, just get course cert. will introduce stage cert in table later
+      const course_certificate = value.user_certificates.find((uc: ICertificate) => uc.certifiable_type === 'Course');
+
       this.uiDownloadService
-        .downloadCertificate(value.user_certificate.id)
+        .downloadCertificate(course_certificate.id)
         .subscribe((data: PdfDownloadFile) => {
           downloadPdf(data);
         });

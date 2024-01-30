@@ -66,6 +66,7 @@ export interface IBadge {
 export interface ICertificate {
   id?: number;
   expiration: string | null;
+  certifiable_type?: string;
 }
 
 export interface ICourseOverviewLesson {
