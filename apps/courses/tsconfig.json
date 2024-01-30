@@ -21,8 +21,7 @@
     "strict": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
-    "suppressImplicitAnyIndexErrors": true,
-    "target": "es2020"
+    "target": "es2022"
   },
   "angularCompilerOptions": {
     "strictInjectionParameters": true,

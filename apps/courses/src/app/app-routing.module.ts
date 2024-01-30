@@ -87,11 +87,11 @@ const routes: Routes = [
     {
       provide: coursesUrlProvider,
       useValue: (route: ActivatedRouteSnapshot) => {
-        window.open(getResolvedUrl(route));//, '_self');
+        window.open(getResolvedUrl(route), '_self');
       },
     },
   ],
-  imports: [RouterModule.forRoot(routes, {enableTracing: true}),],
+  imports: [RouterModule.forRoot(routes),],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

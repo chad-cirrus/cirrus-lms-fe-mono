@@ -35,7 +35,7 @@ export class QuizService {
   getQuiz(id: number, course_attempt_id: number, lesson_id: number, stage_id: number): Observable<IQuizRequest> {
     return this.http
       .get<IQuizRequest>(`${environment.baseUrl}/api/v4/quizzes/${id}?course_attempt_id=${course_attempt_id}&lesson_id=${lesson_id}&stage_id=${stage_id}`)
-      .pipe(map(response => response['content_player/quiz']));
+      .pipe(map(response => response['content_player/quiz' as keyof object] as IQuizRequest));
   }
 
   /**

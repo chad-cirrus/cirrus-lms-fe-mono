@@ -76,8 +76,8 @@ export class AppComponent extends CirrusBaseComponent implements OnInit, OnDestr
     this.router.events.pipe(
       filter((event): event is NavigationEnd => event instanceof NavigationEnd)
       ).subscribe((event) => {
-        window['dataLayer'] = window['dataLayer'] || [];
-        window['dataLayer'].push({
+        (window as { [key: string]: any })['dataLayer'] = (window as { [key: string]: any })['dataLayer'] || [];
+        (window as { [key: string]: any })['dataLayer'].push({
           'event': 'pageView',
           'pagePath': event.urlAfterRedirects
         });
