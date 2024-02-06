@@ -4,6 +4,8 @@ import { LESSON_COMPLETION_CTA } from '../completion-dialog/LessonCompletionCtas
 import { downloadPdf } from '../helpers/DownloadPdf';
 import { UiDownloadService } from './ui-download.service';
 import { PdfDownloadFile } from '@cirrus/models';
+import { IDownloadableDocument } from '../download-documents/IDownloadbleDocument';
+import { DOWNLOADABLE_DOCUMENT_TYPE } from '../download-documents/DOWNLOADABLE_DOCUMENT_TYPE';
 
 export interface ICourseCompletionData {
   badge: string;
@@ -23,42 +25,70 @@ export class CourseCompletionComponent implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA)
     public data: ICourseCompletionData,
-    private uiDownloadService: UiDownloadService
+    private uiDownloadService: UiDownloadService,
   ) {}
 
   certificateLoading$ = this.uiDownloadService.certificateLoading$;
   transcriptLoading$ = this.uiDownloadService.transcriptloading$;
-  courseCertificateId = 0;
+
+  certificateList: IDownloadableDocument[] | undefined;
+  courseTranscript: IDownloadableDocument | undefined;
+  courseCertificate: IDownloadableDocument | undefined;
 
   get lessonCompletionCta() {
     return LESSON_COMPLETION_CTA;
   }
 
   ngOnInit(): void {
-    this.getCourseUserCertificateId();
+    this.courseTranscript = { documentType: DOWNLOADABLE_DOCUMENT_TYPE.transcript, displayText: 'Course Transcript', id: 0 };
+    this.loadDocumentList();
   }
 
-  getCourseUserCertificateId() {
+  loadDocumentList() {
     this.uiDownloadService.getCourse(this.data.course_id).subscribe(course => {
+      console.log('course', course);
+      this.courseTranscript = {
+        id: course.certificate.id ? course.certificate.id : -1,
+        documentType: DOWNLOADABLE_DOCUMENT_TYPE.transcript,
+        displayText: 'Course Transcript',
+      };
+
       if (course.certificate && course.certificate.id) {
-        this.courseCertificateId = course.certificate.id;
+        this.courseCertificate = {
+          id: course.certificate.id,
+          documentType: DOWNLOADABLE_DOCUMENT_TYPE.courseCertificate,
+          displayText: 'Course Certificate',
+        };
+      }
+      if(course.awarded_certificates) {
+        this.certificateList = course.awarded_certificates.map((cert) => {
+          return {
+            id: cert.id ? cert.id : -1,
+            documentType: DOWNLOADABLE_DOCUMENT_TYPE.stageCertificate,
+            name: cert.certifiable_name,
+            displayText: cert.certifiable_name,
+
+          } as IDownloadableDocument;
+        });
       }
     });
   }
 
-  downloadCert() {
-    this.uiDownloadService
-      .downloadCertificate(this.courseCertificateId)
-      .subscribe((data: PdfDownloadFile) => {
-        downloadPdf(data);
-      });
+  downloadCourseCertificate() {
+    this.uiDownloadService.downloadCertificate(this.courseCertificate?.id).subscribe((data: PdfDownloadFile) => {
+      downloadPdf(data);
+    });
+  }
+
+  downloadStageCertificate() {
+    this.uiDownloadService.downloadCertificate(this.courseTranscript?.id).subscribe((data: PdfDownloadFile) => {
+      downloadPdf(data);
+    });
   }
 
   downloadTranscript() {
-    this.uiDownloadService
-      .downloadTranscript(this.data.course_id, 0)
-      .subscribe((data: PdfDownloadFile) => {
-        downloadPdf(data);
-      });
+    this.uiDownloadService.downloadTranscript(this.data.course_id, 0).subscribe((data: PdfDownloadFile) => {
+      downloadPdf(data);
+    });
   }
 }

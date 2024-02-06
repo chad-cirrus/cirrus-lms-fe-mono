@@ -35,6 +35,7 @@ export interface ICourseOverview {
   badge: IBadge;
   course_overview_video?: IContent;
   sales_desc?: string;
+  awarded_certificates?: ICertificate[];
 }
 
 export interface UserCourse {
@@ -63,10 +64,30 @@ export interface IBadge {
   isActive: boolean;
 }
 
+/**
+ * Represents a certificate.
+ */
 export interface ICertificate {
+  /**
+   * Certificate ID.
+   */
   id?: number;
+  /**
+   * Explanation of the certificate expiration.
+   */
   expiration: string | null;
+  /**
+   * Certificate type: stage, course, or other.
+   */
   certifiable_type?: string;
+  /**
+   * Name of the certificate.
+   */
+  certifiable_name?: string;
+  /**
+   * Date the certificate was issued.
+   */
+  certified_on?: string;
 }
 
 export interface ICourseOverviewLesson {

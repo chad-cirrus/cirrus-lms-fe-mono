@@ -4,13 +4,19 @@
   </div>
   <div class="main">
     <h2 class="message">You've completed {{ lesson$ | async }}</h2>
-
+    <div class="stage-certificate-panel" *ngIf="certificate !== undefined">
+      <button class="download-certificate" mat-raised-button (click)="downloadCertificate()">
+        <img src="courses/images/svg/awarded_certificate_icon.svg" />
+        Download Stage Certificate
+      </button>
+      <div>Completed certificates are now accessible in the Course Enrollments tab.</div>
+    </div>
     <div class="buttons">
       <button class="review-lesson" mat-button (click)="close('review')">
         Review Lesson
       </button>
       <button class="next-lesson" mat-button (click)="close('next')">
-        Next Lesson
+        Next Lessons
       </button>
     </div>
   </div>

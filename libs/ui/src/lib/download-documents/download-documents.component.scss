@@ -1,0 +1,96 @@
+@use '../styles/variables' as var;
+@use '../styles/mixins' as *;
+
+.download-documents {
+  position: relative;
+  width: 100%;
+  max-width: 825px;
+
+  .download-items {
+    padding: 0.5rem 1rem;
+    list-style: none;
+    border: 1px solid var.$gray7;
+    border-radius: 5px;
+
+    .download-item {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      justify-content: flex-start;
+      padding: 0.75rem 0.5rem;
+
+      &:hover {
+        cursor: pointer;
+      }
+
+      &.--transcript {
+        border-top: solid 1px var.$gray7;
+      }
+
+      .download-item-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 1rem;
+      }
+
+      .download-item-title {
+        font-size: 1.063rem;
+      }
+
+      .download-item-button {
+        margin-left: auto;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        background: none;
+        border: none;
+        color: var.$white;
+        padding-left: 1.5rem;
+
+        &:hover {
+          cursor: pointer;
+        }
+
+        .download-item-button-text {
+          font-size: 0.938rem;
+          display: none;
+
+          @media screen and (min-width: 600px) {
+            display: block;
+          }
+        }
+
+        .download-item-button-icon {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          height: 20px;
+          width: 22px;
+
+          @media screen and (min-width: 600px) {
+            margin-right: 1rem;
+            height: 20px;
+            width: 14px;
+          }
+
+          svg {
+            height: 20px;
+            width: 15px;
+          }
+        }
+      }
+    }
+
+  }
+}
+
+.download-documents-backgrounds {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  z-index: -1;
+  opacity: 0.35;
+  background-color: var.$gray2;
+  border-radius: 5px;
+}
