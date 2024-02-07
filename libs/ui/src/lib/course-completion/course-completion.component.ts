@@ -35,6 +35,11 @@ export class CourseCompletionComponent implements OnInit {
   courseTranscript: IDownloadableDocument | undefined;
   courseCertificate: IDownloadableDocument | undefined;
 
+  /**
+   * Gets the lesson completion call-to-action.
+   *
+   * @returns The lesson completion call-to-action.
+   */
   get lessonCompletionCta() {
     return LESSON_COMPLETION_CTA;
   }
@@ -46,7 +51,7 @@ export class CourseCompletionComponent implements OnInit {
 
   loadDocumentList() {
     this.uiDownloadService.getCourse(this.data.course_id).subscribe(course => {
-      console.log('course', course);
+
       this.courseTranscript = {
         id: course.certificate.id ? course.certificate.id : -1,
         documentType: DOWNLOADABLE_DOCUMENT_TYPE.transcript,
@@ -60,7 +65,7 @@ export class CourseCompletionComponent implements OnInit {
           displayText: 'Course Certificate',
         };
       }
-      if(course.awarded_certificates) {
+      if(course.awarded_certificates && course.awarded_certificates?.length > 0) {
         this.certificateList = course.awarded_certificates.map((cert) => {
           return {
             id: cert.id ? cert.id : -1,
