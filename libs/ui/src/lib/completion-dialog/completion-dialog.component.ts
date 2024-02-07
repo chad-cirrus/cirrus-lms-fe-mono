@@ -11,12 +11,20 @@ import { downloadPdf } from '../helpers/DownloadPdf';
   templateUrl: './completion-dialog.component.html',
   styleUrls: ['./completion-dialog.component.scss'],
 })
+
+/**
+ * Represents a component for the completion dialog, for lesson completion.
+ */
 export class CompletionDialogComponent implements AfterViewInit, OnInit {
   private _lesson = new BehaviorSubject<string>('');
   lesson$ = this._lesson.asObservable();
 
   certificate: ICertificate | undefined;
 
+  /**
+   * Gets the lesson completion CTA.
+   * @returns The lesson completion CTA.
+   */
   get lessonCompletionCta() {
     return LESSON_COMPLETION_CTA;
   }
@@ -52,6 +60,9 @@ export class CompletionDialogComponent implements AfterViewInit, OnInit {
     this.changeDetectorRef.detectChanges();
   }
 
+  /**
+   * Downloads the certificate.
+   */
   downloadCertificate() {
     if (this.certificate === undefined) return;
     this.uiDownloadService.downloadCertificate(this.certificate.id).subscribe(pdf => {
@@ -59,10 +70,33 @@ export class CompletionDialogComponent implements AfterViewInit, OnInit {
     });
   }
 
+  /**
+   * Retrieves the completion message based on the current state of the component.
+   * If the certificate is undefined, it returns a message indicating the completion of the lesson.
+   * If the certificate is defined, it returns a message indicating the completion of the lesson and the earned certificate.
+   * @returns The completion message.
+   */
+  getCompletionMessage(): string {
+    if (this.certificate === undefined) {
+      return `You've completed ${this.lesson$}!`;
+    } else {
+      return `You've completed ${this.lesson$}, and have earned the ${this.certificate.certifiable_name} certificate!`;
+    }
+  }
+
+  /**
+   * Retrieves the name of a stage based on its ID.
+   * @param stageId The ID of the stage.
+   * @returns The name of the stage, or an empty string if the stage is not found.
+   */
   getStageName(stageId: number) {
     return this.data.course.stages.find(stage => stage.id === stageId)?.title ?? '';
   }
 
+  /**
+   * Closes the completion dialog with the specified close type.
+   * @param closeType - The type of close action to perform.
+   */
   close(closeType: string) {
     this.ngZone.run(() => {
       this.dialogRef.close(
