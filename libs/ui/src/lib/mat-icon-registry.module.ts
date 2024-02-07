@@ -34,6 +34,10 @@ export class MatIconRegistryModule {
         this.domSanitizer.bypassSecurityTrustResourceUrl('courses/images/svg/awarded_certificate_icon.svg'),
       )
       .addSvgIcon(
+        'course_transcript_icon',
+        this.domSanitizer.bypassSecurityTrustResourceUrl('courses/images/svg/course_transcript_icon.svg'),
+      )
+      .addSvgIcon(
         'assessments_icon_circle',
         this.domSanitizer.bypassSecurityTrustResourceUrl('courses/images/svg/assessments_icon_circle.svg'),
       )

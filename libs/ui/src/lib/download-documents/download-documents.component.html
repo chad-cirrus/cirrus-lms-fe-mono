@@ -6,15 +6,15 @@
     <button (click)="buttonClicked.emit(certificate)">Download</button>
   </div>
 </div>
-  <div>
-    <img src="courses/images/svg/awarded_certificate_icon.svg" />
-    <div>{{ transcript?.displayText }}</div>
-    <mat-icon class="download_arrow" svgIcon="download_arrow"></mat-icon>
-    <button (click)="buttonClicked.emit(transcript)">Download</button>
-  </div>
-  <div>
-    <img src="courses/images/svg/awarded_certificate_icon.svg" />
-    <div>{{ courseCertificate?.displayText }}</div>
-    <mat-icon class="download_arrow" svgIcon="download_arrow"></mat-icon>
-    <button (click)="buttonClicked.emit(courseCertificate)">Download</button>
-  </div>
+<div>
+  <img src="courses/images/svg/awarded_certificate_icon.svg" />
+  <div>{{ courseCertificate?.displayText }}</div>
+  <mat-icon class="download_arrow" svgIcon="download_arrow"></mat-icon>
+  <button (click)="buttonClicked.emit(courseCertificate)">Download</button>
+</div>
+<div>
+  <img src="courses/images/svg/course_transcript_icon.svg" />
+  <div>{{ transcript?.displayText }}</div>
+  <mat-icon class="download_arrow" svgIcon="download_arrow"></mat-icon>
+  <button (click)="buttonClicked.emit(transcript)">Download</button>
+</div>
