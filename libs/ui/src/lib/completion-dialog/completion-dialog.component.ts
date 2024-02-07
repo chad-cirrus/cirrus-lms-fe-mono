@@ -77,10 +77,15 @@ export class CompletionDialogComponent implements AfterViewInit, OnInit {
    * @returns The completion message.
    */
   getCompletionMessage(): string {
+    let lessonText = '';
+    this.lesson$.subscribe(lesson => {
+      lessonText = lesson;
+    });
+
     if (this.certificate === undefined) {
-      return `You've completed ${this.lesson$}!`;
+      return `You've completed ${lessonText}!`;
     } else {
-      return `You've completed ${this.lesson$}, and have earned the ${this.certificate.certifiable_name} certificate!`;
+      return `You've completed ${lessonText}, and have earned the ${this.certificate.certifiable_name} certificate!`;
     }
   }
 
