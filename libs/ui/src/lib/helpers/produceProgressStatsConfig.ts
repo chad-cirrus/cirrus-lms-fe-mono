@@ -21,7 +21,7 @@ const iconUrlDictionary: { [key: string]: string } = {
   [CourseContentType.GroundAssessment]:
     'courses/images/svg/ground-assessment-progress-icon.svg',
 };
-const labelDictionary: { [key: string]: string } = {
+const                                      labelDictionary: { [key: string]: string } = {
   [CourseContentType.SelfStudy]: 'Self Study',
   [CourseContentType.FlightAssessment]: 'Flight Assessment',
   [CourseContentType.GroundAssessment]: 'Ground Assessment',
@@ -30,11 +30,19 @@ const labelDictionary: { [key: string]: string } = {
 export const produceProgressStatsConfig = (
   stats: ICourseContentStat[]
 ): ProgressStatConfig[] => {
-  const configs: ProgressStatConfig[] = stats.map(stat => ({
-    iconUrl: iconUrlDictionary[stat.type],
-    label: labelDictionary[stat.type],
-    completed: stat.completed,
-    total: stat.total,
-  }));
+  const configs: ProgressStatConfig[] = stats
+    .filter(stat =>
+      [
+        CourseContentType.SelfStudy.toString(),
+        CourseContentType.FlightAssessment.toString(),
+        CourseContentType.GroundAssessment.toString(),
+      ].includes(stat.type)
+    )
+    .map(stat => ({
+      iconUrl: iconUrlDictionary[stat.type],
+      label: labelDictionary[stat.type],
+      completed: stat.completed,
+      total: stat.total,
+    }));
   return configs;
 };
