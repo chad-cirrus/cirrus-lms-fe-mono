@@ -1,13 +1,19 @@
 @use '../styles/variables' as var;
 @use '../styles/mixins' as *;
 
+
+:host {
+  width: 100%;
+}
+
 .download-documents {
   position: relative;
-  width: 100%;
-  max-width: 825px;
+  width: 670px;
+  max-width: 100%;
+  margin: 1rem auto;
 
   .download-items {
-    padding: 0.5rem 1rem;
+    padding: 0.5rem 1rem; 
     list-style: none;
     border: 1px solid var.$gray7;
     border-radius: 5px;

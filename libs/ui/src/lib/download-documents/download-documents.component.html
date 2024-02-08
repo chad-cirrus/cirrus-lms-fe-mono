@@ -1,20 +1,67 @@
-<div *ngFor="let certificate of certificateList">
-  <div>
-    <img src="courses/images/svg/awarded_certificate_icon.svg" />
-    <div>{{ certificate.displayText }}</div>
-    <mat-icon class="download_arrow" svgIcon="download_arrow"></mat-icon>
-    <button (click)="buttonClicked.emit(certificate)">Download</button>
-  </div>
-</div>
-<div>
-  <img src="courses/images/svg/awarded_certificate_icon.svg" />
-  <div>{{ courseCertificate?.displayText }}</div>
-  <mat-icon class="download_arrow" svgIcon="download_arrow"></mat-icon>
-  <button (click)="buttonClicked.emit(courseCertificate)">Download</button>
-</div>
-<div>
-  <img src="courses/images/svg/course_transcript_icon.svg" />
-  <div>{{ transcript?.displayText }}</div>
-  <mat-icon class="download_arrow" svgIcon="download_arrow"></mat-icon>
-  <button (click)="buttonClicked.emit(transcript)">Download</button>
+<div class="download-documents">
+
+  <div class="download-documents-backgrounds"></div>
+
+  <ul class="download-items">
+
+    
+    <li class="download-item" *ngFor="let certificate of certificateList">
+      <div class="download-item-icon">
+        <img src="courses/images/svg/awarded_certificate_icon.svg" />
+      </div>
+      <div class="download-item-title">{{ certificate.displayText }}</div>
+      <button class="download-item-button" (click)="buttonClicked.emit(certificate)">
+        <div class="download-item-button-icon">
+          <!-- <div *ngIf="this.certificatesDownloading[awarded_certificate.id] else value">
+            <mat-spinner class="spinner-white" [diameter]="35"></mat-spinner>
+          </div>
+          <ng-template #value>
+            <mat-icon class="download_arrow"  svgIcon="download_arrow"></mat-icon>
+          </ng-template> -->
+          <mat-icon class="download_arrow" svgIcon="download_arrow"></mat-icon>
+        </div>
+        <div class="download-item-button-text">Download</div>
+      </button>
+    </li>
+
+    <li class="download-item">
+      <div class="download-item-icon">
+        <img src="courses/images/svg/awarded_certificate_icon.svg" />
+      </div>
+      <div class="download-item-title">{{ courseCertificate?.displayText }}</div>
+      <button class="download-item-button" (click)="buttonClicked.emit(courseCertificate)">
+        <div class="download-item-button-icon">
+          <!-- <div *ngIf="this.certificatesDownloading[awarded_certificate.id] else value">
+            <mat-spinner class="spinner-white" [diameter]="35"></mat-spinner>
+          </div>
+          <ng-template #value>
+            <mat-icon class="download_arrow"  svgIcon="download_arrow"></mat-icon>
+          </ng-template> -->
+          <mat-icon class="download_arrow" svgIcon="download_arrow"></mat-icon>
+        </div>
+        <div class="download-item-button-text">Download</div>
+      </button>
+    </li>
+    
+    <li class="download-item --transcript">
+      <div class="download-item-icon">
+        <img src="courses/images/svg/course_transcript_icon.svg" />
+      </div>
+      <div class="download-item-title">{{ transcript?.displayText }}</div>
+      <button class="download-item-button" (click)="buttonClicked.emit(transcript)">
+        <div class="download-item-button-icon">
+          <!-- <div *ngIf="this.certificatesDownloading[awarded_certificate.id] else value">
+            <mat-spinner class="spinner-white" [diameter]="35"></mat-spinner>
+          </div>
+          <ng-template #value>
+            <mat-icon class="download_arrow"  svgIcon="download_arrow"></mat-icon>
+          </ng-template> -->
+          <mat-icon class="download_arrow" svgIcon="download_arrow"></mat-icon>
+        </div>
+        <div class="download-item-button-text">Download</div>
+      </button>
+    </li>
+
+  </ul>
+
 </div>
