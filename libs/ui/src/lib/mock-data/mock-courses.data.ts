@@ -47,6 +47,7 @@ export const course351: ICourseOverview = {
     },
   },
   thumbnail_image_url: '',
+  certificate_stats: { completed: 1, total: 2 },
   course_content_stats: [
     {
       type: 'self_study',
@@ -469,6 +470,7 @@ export const course357: ICourseOverview = {
   thumbnail_image_url: '',
   mobile_hero_image_url: '',
   can_reenroll: true,
+  certificate_stats: { completed: 1, total: 2 },
   lessons_stats: { completed: 1, total: 7 },
   summary_counts: { lessons: 7, documents: 3, assessments: 6 },
   certificate: { expiration: null },
@@ -681,6 +683,7 @@ export const course351Completed: ICourseOverview = {
   },
   completed_at: '',
   thumbnail_image_url: '',
+  certificate_stats: { completed: 1, total: 2 },
   course_content_stats: [
     {
       type: 'self_study',
@@ -1058,6 +1061,7 @@ export const course466: ICourseOverview = {
   mobile_hero_image_url: '',
   thumbnail_image_url: '',
   can_reenroll: true,
+  certificate_stats: { completed: 1, total: 2 },
   lessons_stats: { completed: 0, total: 12 },
   summary_counts: { lessons: 12, videos: 50 },
   certificate: { expiration: null },
@@ -1316,6 +1320,7 @@ export const course357CourseNotStarted: ICourseOverview = {
   mobile_hero_image_url: '',
   can_reenroll: true,
   lessons_stats: { completed: 1, total: 7 },
+  certificate_stats: {total: 2, completed: 1},
   summary_counts: { lessons: 7, documents: 3, assessments: 6 },
   certificate: { expiration: null },
   completed_at: '',

@@ -61,6 +61,7 @@ const course: ICourseOverview = {
   mobile_hero_image_url: '',
   can_reenroll: true,
   lessons_stats: { completed: 1, total: 15 },
+  certificate_stats: { completed: 2, total: 3 },
   stages: [
     {
       id: 243,

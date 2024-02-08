@@ -110,6 +110,7 @@
       "
       [completed_at]="course.completed_at"
       [lessonStats]="course.lessons_stats"
+      [certificateStats]="course.certificate_stats"
     ></cirrus-course-progress>
 
     <ng-template #completedCourse>
@@ -126,8 +127,7 @@
         </p>
       </div>
     </ng-template>
-
-
+    
     <cirrus-course-player
       *ngIf="
         course.progress.status !== PROGRESS_STATUS.completed;
