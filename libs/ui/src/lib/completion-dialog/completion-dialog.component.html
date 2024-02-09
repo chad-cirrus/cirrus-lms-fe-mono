@@ -5,9 +5,9 @@
   <div class="main">
     <h2 class="message">{{ getCompletionMessage() }}</h2>
     <div class="stage-certificate-panel" *ngIf="certificate !== undefined">
-      <button class="download-certificate" mat-raised-button (click)="downloadCertificate()">
+      <button class="download-certificate btn-secondary-white" (click)="downloadCertificate()">
         <img src="courses/images/svg/awarded_certificate_icon.svg" />
-        Download Stage Certificate
+        Download Certificate
       </button>
       <div>Completed certificates are now accessible in the Course Enrollments tab.</div>
     </div>
