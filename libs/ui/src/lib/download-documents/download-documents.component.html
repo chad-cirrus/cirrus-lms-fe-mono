@@ -4,7 +4,7 @@
 
   <ul class="download-items">
 
-    
+
     <li class="download-item" *ngFor="let certificate of certificateList">
       <div class="download-item-icon">
         <img src="courses/images/svg/awarded_certificate_icon.svg" />
@@ -12,18 +12,17 @@
       <div class="download-item-title">{{ certificate.displayText }}</div>
       <button class="download-item-button" (click)="buttonClicked.emit(certificate)">
         <div class="download-item-button-icon">
-          <!-- <div *ngIf="this.certificatesDownloading[awarded_certificate.id] else value">
+          <div *ngIf=" 1===1 else default">
             <mat-spinner class="spinner-white" [diameter]="35"></mat-spinner>
           </div>
-          <ng-template #value>
+          <ng-template #default>
             <mat-icon class="download_arrow"  svgIcon="download_arrow"></mat-icon>
           </ng-template> -->
-          <mat-icon class="download_arrow" svgIcon="download_arrow"></mat-icon>
         </div>
         <div class="download-item-button-text">Download</div>
       </button>
     </li>
-    
+
     <li class="download-item --transcript">
       <div class="download-item-icon">
         <img src="courses/images/svg/course_transcript_icon.svg" />
@@ -31,13 +30,12 @@
       <div class="download-item-title">{{ transcript?.displayText }}</div>
       <button class="download-item-button" (click)="buttonClicked.emit(transcript)">
         <div class="download-item-button-icon">
-          <!-- <div *ngIf="this.certificatesDownloading[awarded_certificate.id] else value">
+          <div *ngIf="1===1 else default">
             <mat-spinner class="spinner-white" [diameter]="35"></mat-spinner>
           </div>
-          <ng-template #value>
+          <ng-template #default>
             <mat-icon class="download_arrow"  svgIcon="download_arrow"></mat-icon>
           </ng-template> -->
-          <mat-icon class="download_arrow" svgIcon="download_arrow"></mat-icon>
         </div>
         <div class="download-item-button-text">Download</div>
       </button>

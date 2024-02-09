@@ -1,7 +1,8 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IDownloadableDocument } from './IDownloadbleDocument';
-import { MatIconModule } from '@angular/material/icon';
+import { MatIconModule, } from '@angular/material/icon';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 /**
  * Displays a list of downloadable documents.
@@ -10,7 +11,7 @@ import { MatIconModule } from '@angular/material/icon';
 @Component({
   selector: 'cirrus-ui-download-documents',
   standalone: true,
-  imports: [CommonModule, MatIconModule],
+  imports: [CommonModule, MatIconModule, MatProgressSpinnerModule],
   templateUrl: './download-documents.component.html',
   styleUrls: ['./download-documents.component.scss'],
 })
