@@ -10,13 +10,13 @@
         <img src="courses/images/svg/awarded_certificate_icon.svg" />
       </div>
       <div class="download-item-title">{{ certificate.displayText }}</div>
-      <button class="download-item-button" (click)="buttonClicked.emit(certificate)">
+      <button class="download-item-button" (click)="downloadClicked.emit(certificate)">
         <div class="download-item-button-icon">
-          <div *ngIf=" 1===1 else default">
+          <div *ngIf="1===1 else default">
             <mat-spinner class="spinner-white" [diameter]="35"></mat-spinner>
           </div>
           <ng-template #default>
-            <mat-icon class="download_arrow"  svgIcon="download_arrow"></mat-icon>
+            <mat-icon class="download_arrow" svgIcon="download_arrow"></mat-icon>
           </ng-template> -->
         </div>
         <div class="download-item-button-text">Download</div>
@@ -28,7 +28,7 @@
         <img src="courses/images/svg/course_transcript_icon.svg" />
       </div>
       <div class="download-item-title">{{ transcript?.displayText }}</div>
-      <button class="download-item-button" (click)="buttonClicked.emit(transcript)">
+      <button class="download-item-button" (click)="downloadClicked.emit(transcript)">
         <div class="download-item-button-icon">
           <div *ngIf="1===1 else default">
             <mat-spinner class="spinner-white" [diameter]="35"></mat-spinner>

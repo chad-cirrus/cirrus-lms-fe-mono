@@ -45,13 +45,16 @@ export class CourseCompletionComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.courseTranscript = { documentType: DOWNLOADABLE_DOCUMENT_TYPE.transcript, displayText: 'Course Transcript', id: 0 };
+    this.courseTranscript = {
+      documentType: DOWNLOADABLE_DOCUMENT_TYPE.transcript,
+      displayText: 'Course Transcript',
+      id: 0,
+    };
     this.loadDocumentList();
   }
 
   loadDocumentList() {
     this.uiDownloadService.getCourse(this.data.course_id).subscribe(course => {
-
       this.courseTranscript = {
         id: course.certificate.id ? course.certificate.id : -1,
         documentType: DOWNLOADABLE_DOCUMENT_TYPE.transcript,
@@ -65,35 +68,28 @@ export class CourseCompletionComponent implements OnInit {
           displayText: 'Course Certificate',
         };
       }
-      if(course.awarded_certificates && course.awarded_certificates?.length > 0) {
-        this.certificateList = course.awarded_certificates.map((cert) => {
+      if (course.awarded_certificates && course.awarded_certificates?.length > 0) {
+        this.certificateList = course.awarded_certificates.map(cert => {
           return {
             id: cert.id ? cert.id : -1,
             documentType: DOWNLOADABLE_DOCUMENT_TYPE.stageCertificate,
             name: cert.certifiable_name,
             displayText: cert.certifiable_name,
-
           } as IDownloadableDocument;
         });
       }
     });
   }
 
-  downloadCourseCertificate() {
-    this.uiDownloadService.downloadCertificate(this.courseCertificate?.id).subscribe((data: PdfDownloadFile) => {
-      downloadPdf(data);
-    });
-  }
-
-  downloadStageCertificate() {
-    this.uiDownloadService.downloadCertificate(this.courseTranscript?.id).subscribe((data: PdfDownloadFile) => {
-      downloadPdf(data);
-    });
-  }
-
-  downloadTranscript() {
-    this.uiDownloadService.downloadTranscript(this.data.course_id, 0).subscribe((data: PdfDownloadFile) => {
-      downloadPdf(data);
-    });
+  downloadClicked(document: IDownloadableDocument) {
+    if (document.documentType === DOWNLOADABLE_DOCUMENT_TYPE.transcript) {
+      this.uiDownloadService.downloadTranscript(this.data.course_id, 0).subscribe((data: PdfDownloadFile) => {
+        downloadPdf(data);
+      });
+    } else {
+      this.uiDownloadService.downloadCertificate(document.id).subscribe((data: PdfDownloadFile) => {
+        downloadPdf(data);
+      });
+    }
   }
 }
