@@ -22,6 +22,7 @@ import { downloadPdf } from '../helpers/DownloadPdf';
 import { CirrusSanitizerService } from '../shared/cirrus-sanitizer.service';
 import { UiCourseService } from '../ui-course.service';
 import { TermsAgreementServiceService } from './terms-agreement-service.service';
+import { stat } from 'fs';
 @Component({
   selector: 'cirrus-course-landing-page',
   templateUrl: './course-landing-page.component.html',
@@ -110,6 +111,12 @@ export class CourseLandingPageComponent {
 
   get PROGRESS_STATUS() {
     return PROGRESS_STATUS;
+  }
+
+  get filtered_course_content_stats() {
+    return this.course.course_content_stats.filter(
+      stat => ['self_study', 'flight_assessment', 'ground_assessment'].includes(stat.type)
+    );
   }
 
   constructor(
