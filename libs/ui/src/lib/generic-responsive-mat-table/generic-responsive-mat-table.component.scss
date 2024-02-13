@@ -60,7 +60,15 @@ mat-cell.mat-mdc-cell {
 
   }
 }
-
+    .certificate-list {
+      padding: 0;
+      margin: 0;
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      margin-left: -0.36rem;
+      margin-right: -0.36rem;
+    }
 //styling for mobile layout only. Usually we'd do mobile first but skiping that for simplicity here
 @media (max-width: 599px) {
   mat-header-cell.mat-mdc-header-cell {

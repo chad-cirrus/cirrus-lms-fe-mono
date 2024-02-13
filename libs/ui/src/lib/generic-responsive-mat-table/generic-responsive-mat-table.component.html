@@ -1,38 +1,35 @@
 <div class="gen-table mat-elevation-z8">
-  <mat-table [dataSource]="dataSource" matSort>
+  <mat-table [dataSource]="dataSource" multiTemplateDataRows matSort>
     <div *ngFor="let column of columns">
       <ng-container matColumnDef="{{ column.mat_col_name }}">
         <mat-header-cell *matHeaderCellDef mat-sort-header>
           {{ column.name }}
         </mat-header-cell>
-        <mat-cell
-          *matCellDef="let row"
-          [attr.data-label]="column.name"
-          (click)="rowSelect(row)"
-        >
+        <mat-cell *matCellDef="let row" [attr.data-label]="column.name" (click)="rowSelect(row)">
           <div class="value" (click)="valueSelect($event, row, column)">
-            <div
-              *ngIf="
-                (column.isLoading$ | async) &&
-                  row.id === (selectedRowId$ | async);
-                else value
-              "
-            >
+            <div *ngIf="(column.isLoading$ | async) && row.id === (selectedRowId$ | async); else value">
               <mat-spinner [diameter]="20"></mat-spinner>
             </div>
             <ng-template #value>
               <img
-                *ngIf="
-                  (row[column.mat_col_name] | tableFormat: column:row) ===
-                  'Download'
-                "
+                *ngIf="(row[column.mat_col_name] | tableFormat : column : row) === 'Download'"
                 [src]="column.icon"
                 class="icon-container"
               />
             </ng-template>
-            <div>
-              {{ row[column.mat_col_name] | tableFormat: column:row }}
+
+            <div *ngIf="column.mat_col_name !== 'user_certificate' || row.user_certificates?.length === 0; else certificateTemplate">
+              {{ row[column.mat_col_name] | tableFormat : column : row }}
             </div>
+            <ng-template #certificateTemplate>
+              <ul class="certificate-list">
+              <li *ngFor="let cert of row.user_certificates" >
+                <div (click)="certificateSelect(cert)">
+                  {{ cert.certifiable_name }}
+                </div>
+              </li>
+              </ul>
+            </ng-template>
           </div>
         </mat-cell>
       </ng-container>

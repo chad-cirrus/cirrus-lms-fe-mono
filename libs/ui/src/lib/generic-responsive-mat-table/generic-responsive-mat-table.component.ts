@@ -11,6 +11,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { Observable } from 'rxjs';
 import { UiDownloadService } from '../course-completion/ui-download.service';
+import { ICertificate } from '@cirrus/models';
 
 @Component({
   selector: 'cirrus-generic-responsive-mat-table',
@@ -26,6 +27,7 @@ export class GenericResponsiveMatTableComponent implements AfterViewInit {
   @Input() columns!: Column[];
   @Output() emitValue = new EventEmitter();
   @Output() emitRow = new EventEmitter();
+  @Output() emitCertificate = new EventEmitter();
 
   @Input()
   set data(value: any) {
@@ -46,6 +48,10 @@ export class GenericResponsiveMatTableComponent implements AfterViewInit {
 
   rowSelect(row: any) {
     this.emitRow.emit(row);
+  }
+
+  certificateSelect(certificate: ICertificate) {
+    this.emitCertificate.emit(certificate);
   }
 
   valueSelect($event: MouseEvent, value: any, type: Column) {
