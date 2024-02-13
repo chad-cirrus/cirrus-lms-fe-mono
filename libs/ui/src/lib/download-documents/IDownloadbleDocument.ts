@@ -16,4 +16,8 @@ export interface IDownloadableDocument {
    * The display text of the document (e.g. "Air Frame Course Transcript") to be shown to the user.
    */
   displayText: string;
+  /**
+   * The UUID of the document, used to uniquely identify the current document being downloaded.
+   */
+  uuid: string;
 }

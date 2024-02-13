@@ -28,12 +28,18 @@ export class CourseCompletionComponent implements OnInit {
     private uiDownloadService: UiDownloadService,
   ) {}
 
-  certificateLoading$ = this.uiDownloadService.certificateLoading$;
-  transcriptLoading$ = this.uiDownloadService.transcriptloading$;
-
   certificateList: IDownloadableDocument[] | undefined;
   courseTranscript: IDownloadableDocument | undefined;
   courseCertificate: IDownloadableDocument | undefined;
+
+  /**
+   * The current document being downloaded, undefined if no document is being downloaded.
+   * @type {IDownloadableDocument | undefined}
+   * @memberof DownloadDocumentsComponent
+   * @public
+   * @default undefined
+    */
+  currentDocument: IDownloadableDocument | undefined;
 
   /**
    * Gets the lesson completion call-to-action.
@@ -49,16 +55,25 @@ export class CourseCompletionComponent implements OnInit {
       documentType: DOWNLOADABLE_DOCUMENT_TYPE.transcript,
       displayText: 'Course Transcript',
       id: 0,
+      uuid: '',
     };
     this.loadDocumentList();
   }
 
+  /**
+   * Loads the list of downloadable documents.
+   * @private
+   * @memberof DownloadDocumentsComponent
+   * @returns {void}
+   * @default undefined
+   */
   loadDocumentList() {
     this.uiDownloadService.getCourse(this.data.course_id).subscribe(course => {
       this.courseTranscript = {
         id: course.certificate.id ? course.certificate.id : -1,
         documentType: DOWNLOADABLE_DOCUMENT_TYPE.transcript,
         displayText: 'Course Transcript',
+        uuid: self.crypto.randomUUID(),
       };
 
       if (course.certificate && course.certificate.id) {
@@ -66,6 +81,7 @@ export class CourseCompletionComponent implements OnInit {
           id: course.certificate.id,
           documentType: DOWNLOADABLE_DOCUMENT_TYPE.courseCertificate,
           displayText: 'Course Certificate',
+          uuid: self.crypto.randomUUID(),
         };
       }
       if (course.awarded_certificates && course.awarded_certificates?.length > 0) {
@@ -75,20 +91,31 @@ export class CourseCompletionComponent implements OnInit {
             documentType: DOWNLOADABLE_DOCUMENT_TYPE.stageCertificate,
             name: cert.certifiable_name,
             displayText: cert.certifiable_name,
+            uuid : self.crypto.randomUUID(),
           } as IDownloadableDocument;
         });
       }
     });
   }
 
-  downloadClicked(document: IDownloadableDocument) {
+  /**
+   * Handles the download button click event.
+   * @param {IDownloadableDocument} document The document to download.
+   * @memberof DownloadDocumentsComponent
+   * @returns {void}
+   * @default undefined
+   */
+  downloadClicked(document: IDownloadableDocument): void {
+    this.currentDocument = document;
     if (document.documentType === DOWNLOADABLE_DOCUMENT_TYPE.transcript) {
       this.uiDownloadService.downloadTranscript(this.data.course_id, 0).subscribe((data: PdfDownloadFile) => {
         downloadPdf(data);
+        this.currentDocument = undefined;
       });
     } else {
       this.uiDownloadService.downloadCertificate(document.id).subscribe((data: PdfDownloadFile) => {
         downloadPdf(data);
+        this.currentDocument = undefined;
       });
     }
   }

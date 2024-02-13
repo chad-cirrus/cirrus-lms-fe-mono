@@ -3,8 +3,6 @@ import { CommonModule } from '@angular/common';
 import { IDownloadableDocument } from './IDownloadbleDocument';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { PdfDownloadFile } from '@cirrus/models';
 
 /**
  * Displays a list of downloadable documents.
@@ -18,6 +16,7 @@ import { PdfDownloadFile } from '@cirrus/models';
   styleUrls: ['./download-documents.component.scss'],
 })
 export class DownloadDocumentsComponent {
+
   /**
    * List of downloadable certificates.
    */
@@ -34,43 +33,26 @@ export class DownloadDocumentsComponent {
   @Input() courseCertificate: IDownloadableDocument | undefined;
 
   /**
+   * The current document being downloaded, undefined if no document is being downloaded.
+   */
+  @Input() currentDocument :IDownloadableDocument | undefined;
+
+  /**
    * Event emitted when a button is clicked.
    */
   @Output() downloadClicked = new EventEmitter<IDownloadableDocument>();
 
-  private certificateLoadingSubject = new BehaviorSubject(false);
-  certificateLoading$ = this.certificateLoadingSubject.asObservable();
-
-  private transcriptLoadingSubject = new BehaviorSubject(false);
-  transcriptLoading$ = this.transcriptLoadingSubject.asObservable();
-
-  downloadPdf(pdf: PdfDownloadFile): Observable<void> {
-    return new Observable(observer => {
-      const file = new Blob([pdf.file], { type: 'application/pdf' });
-      const fileURL = URL.createObjectURL(file);
-      const a = document.createElement('a');
-      a.href = fileURL;
-      a.target = '_blank';
-      a.download = pdf.filename;
-      document.body.appendChild(a);
-      a.click();
-
-      // Notify the observer that the download has started
-      observer.next();
-
-      // Notify the observer that the download is complete
-      a.addEventListener('click', () => {
-        observer.complete();
-      });
-
-      // Handle any errors
-      a.addEventListener('error', err => {
-        observer.error(err);
-      });
-    });
-  }
-
+  /**
+   * The loading state of the certificate.
+   * @type {BehaviorSubject<boolean>}
+   * @memberof DownloadDocumentsComponent
+   * @public
+   * @default new BehaviorSubject(false)
+   * @readonly
+   */
   onDownloadClicked(document: IDownloadableDocument) {
     this.downloadClicked.emit(document);
+    this.currentDocument = document;
   }
+
 }

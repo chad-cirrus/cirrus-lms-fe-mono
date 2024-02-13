@@ -1,10 +1,7 @@
 <div class="download-documents">
-
   <div class="download-documents-backgrounds"></div>
 
   <ul class="download-items">
-
-
     <li class="download-item" *ngFor="let certificate of certificateList">
       <div class="download-item-icon">
         <img src="courses/images/svg/awarded_certificate_icon.svg" />
@@ -12,12 +9,12 @@
       <div class="download-item-title">{{ certificate.displayText }}</div>
       <button class="download-item-button" (click)="downloadClicked.emit(certificate)">
         <div class="download-item-button-icon">
-          <div *ngIf="1===1 else default">
+          <div *ngIf="(currentDocument !== undefined && currentDocument.uuid === certificate.uuid); else downloadIcon">
             <mat-spinner class="spinner-white" [diameter]="35"></mat-spinner>
           </div>
-          <ng-template #default>
+          <ng-template #downloadIcon>
             <mat-icon class="download_arrow" svgIcon="download_arrow"></mat-icon>
-          </ng-template> -->
+          </ng-template>
         </div>
         <div class="download-item-button-text">Download</div>
       </button>
@@ -30,17 +27,15 @@
       <div class="download-item-title">{{ transcript?.displayText }}</div>
       <button class="download-item-button" (click)="downloadClicked.emit(transcript)">
         <div class="download-item-button-icon">
-          <div *ngIf="1===1 else default">
+          <div *ngIf="(currentDocument !== undefined && currentDocument.uuid === transcript?.uuid); else downloadIcon">
             <mat-spinner class="spinner-white" [diameter]="35"></mat-spinner>
           </div>
-          <ng-template #default>
-            <mat-icon class="download_arrow"  svgIcon="download_arrow"></mat-icon>
-          </ng-template> -->
+          <ng-template #downloadIcon>
+            <mat-icon class="download_arrow" svgIcon="download_arrow"></mat-icon>
+          </ng-template>
         </div>
         <div class="download-item-button-text">Download</div>
       </button>
     </li>
-
   </ul>
-
 </div>

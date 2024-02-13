@@ -1,4 +1,4 @@
-import { Component, OnInit, Renderer2, Inject } from '@angular/core';
+import { Component, OnInit, Renderer2 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LessonContentComponent } from '@cirrus/ui';
 import { QuizService } from './quiz.service';
@@ -33,15 +33,15 @@ import { QqbOutOfTimeComponent } from './qqb-out-of-time/qqbOutOfTime.component'
 })
 
 export class QuizComponent extends LessonContentComponent implements OnInit {
-  
+
   /**
    * Constructor for the QuizComponent
    * @param quizService Injects the QuizService to get the quiz
    */
   constructor(
     private dialog: MatDialog,
-    private quizService: QuizService, 
-    private renderer: Renderer2, 
+    private quizService: QuizService,
+    private renderer: Renderer2,
     private store: Store<AppState>,
     ) {
     super();
@@ -628,9 +628,9 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
 
   /**
    * Open Full Screen Image Dialog
-   * 
+   *
    * Open an image in full screen viewing mode via a dialog
-   * 
+   *
    */
   openFullScreenImage() {
     this.dialog.open(FullScreenImageDialogComponent, {
