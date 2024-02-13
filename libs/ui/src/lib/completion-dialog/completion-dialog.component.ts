@@ -85,7 +85,7 @@ export class CompletionDialogComponent implements AfterViewInit, OnInit {
     if (this.certificate === undefined) {
       return `You've completed ${lessonText}!`;
     } else {
-      return `You've completed ${lessonText}, and have earned the ${this.certificate.certifiable_name} certificate!`;
+      return `You've completed ${lessonText} and have earned the ${this.certificate.certifiable_name} certificate!`;
     }
   }
 
