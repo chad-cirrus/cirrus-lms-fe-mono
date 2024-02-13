@@ -9,6 +9,7 @@ import {
   ContentCounts,
   IBadge,
   ICertificate,
+  ICertificatestats,
   IContent,
   ICourseOverview,
   ICourseOverviewLesson,
@@ -19,6 +20,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MockComponent } from 'ng-mocks';
 import { HttpClientModule } from '@angular/common/http';
 import { CirrusSanitizerService } from '../shared/cirrus-sanitizer.service';
+import { anonymize } from '@fullstory/browser';
 
 describe('CourseLandingPageComponent', () => {
   let component: CourseLandingPageComponent;
@@ -28,6 +30,7 @@ describe('CourseLandingPageComponent', () => {
   const progress: IProgress = { id: 0, status: '' };
   const lesson: Partial<ICourseOverviewLesson> = {};
   const lessonStats: ILessonsstats = { completed: 0, total: 0 };
+  const certificateStats: ICertificatestats = { completed: 0, total: 0 };
   const certificate: ICertificate = { expiration: '' };
   const badge: IBadge = {
     badge_image: '',
@@ -70,6 +73,7 @@ describe('CourseLandingPageComponent', () => {
     summary_counts: summaryCounts,
     thumbnail_image_url: '',
     title: '',
+    certificate_stats: certificateStats,
   };
 
   beforeEach(async () => {

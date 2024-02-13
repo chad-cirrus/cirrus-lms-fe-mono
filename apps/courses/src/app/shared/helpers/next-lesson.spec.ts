@@ -74,6 +74,7 @@ const mockCourseOverview = (): ICourseOverview => {
         mobile_hero_image_url: '',
         can_reenroll: true,
         lessons_stats: { completed: 1, total: 15 },
+        certificate_stats: { completed: 1, total: 5 },
         stages: [
           {
             id: 123,
@@ -281,7 +282,7 @@ const mockLesson = () => {
 }
 
 const mockCompletedCourseOverview = (): ICourseOverview => {
-    let course: ICourseOverview = {
+    const course: ICourseOverview = {
         badge: badge,
         certificate: certificate,
         completed_at: '2023-09-09',
@@ -316,6 +317,7 @@ const mockCompletedCourseOverview = (): ICourseOverview => {
         mobile_hero_image_url: '',
         can_reenroll: true,
         lessons_stats: { completed: 1, total: 15 },
+        certificate_stats: { completed: 1, total: 4 },
         stages: [
           {
             id: 123,

@@ -48,6 +48,10 @@ export const initialCourseState: CourseState = {
       completed: 0,
       total: 0,
     },
+    certificate_stats: {
+      completed: 0,
+      total: 0,
+    },
     progress: {
       id: 0,
       status: '',

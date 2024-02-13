@@ -27,6 +27,7 @@ export interface ICourseOverview {
   can_reenroll: boolean;
   hours_and_landings_stats: IHoursAndLandingsStat[];
   lessons_stats: ILessonsstats;
+  certificate_stats: ICertificatestats;
   summary_counts: ContentCounts;
   stages: ICourseOverviewStage[];
   progress: IProgress;
@@ -112,6 +113,11 @@ export interface ContentCounts {
   videos?: number;
   quizzes?: number;
   documents?: number;
+}
+
+export interface ICertificatestats {
+  completed: number;
+  total: number;
 }
 
 export interface ILessonsstats {
