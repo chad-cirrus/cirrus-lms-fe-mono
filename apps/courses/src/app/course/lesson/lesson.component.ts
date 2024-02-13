@@ -115,6 +115,8 @@ export class LessonComponent implements OnInit, OnDestroy {
             progress_type === 'lesson'
               ? {
                   lesson: this._lesson.title,
+                  course: courseOverview,
+                  stageId: this._lesson.stage_id
                 }
               : {
                   badge: courseOverview?.badge?.badge_image
@@ -192,7 +194,7 @@ export class LessonComponent implements OnInit, OnDestroy {
 
   playNextLessonContent(event: any) {
     const {lesson} = event;
-    
+
     this.courseOverview$.subscribe(overview => {
       const getNextLesson = nextLesson(overview, lesson);
       this.router.navigate(nextLessonUrlSegments(getNextLesson));
