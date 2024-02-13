@@ -79,4 +79,8 @@ const _mockCourseOverview: ICourseOverview = {
   course_overview_video: {} as IContent,
   sales_desc: 'sales_desc',
   awarded_certificates: [] as ICertificate[],
+  certificate_stats: {
+    completed: 0,
+    total: 0
+  },
 };
