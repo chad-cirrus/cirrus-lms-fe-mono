@@ -6,30 +6,46 @@
           {{ column.name }}
         </mat-header-cell>
         <mat-cell *matCellDef="let row" [attr.data-label]="column.name" (click)="rowSelect(row)">
-          <div class="value" (click)="valueSelect($event, row, column)">
-            <div *ngIf="(column.isLoading$ | async) && row.id === (selectedRowId$ | async); else value">
-              <mat-spinner [diameter]="20"></mat-spinner>
-            </div>
-            <ng-template #value>
-              <img
-                *ngIf="(row[column.mat_col_name] | tableFormat : column : row) === 'Download'"
-                [src]="column.icon"
-                class="icon-container"
-              />
-            </ng-template>
+          <div (click)="valueSelect($event, row, column)" [ngClass]="column.name !== 'Certificate' ? 'value' : '' ">
 
             <div *ngIf="column.mat_col_name !== 'user_certificate' || row.user_certificates?.length === 0; else certificateTemplate">
               {{ row[column.mat_col_name] | tableFormat : column : row }}
             </div>
             <ng-template #certificateTemplate>
               <ul class="certificate-list">
-              <li *ngFor="let cert of row.user_certificates" >
-                <div (click)="certificateSelect(cert)">
-                  {{ cert.certifiable_name }}
-                </div>
-              </li>
+                <li *ngFor="let cert of row.user_certificates" (click)="certificateSelect(cert)">
+
+                    
+                    {{ cert.certifiable_name }}
+
+                    <div *ngIf="(column.isLoading$ | async) && row.id === (selectedRowId$ | async); else value">
+                      <mat-spinner [diameter]="20"></mat-spinner>
+                    </div>
+                    <ng-template #value>
+                      <img
+                        *ngIf="(row[column.mat_col_name] | tableFormat : column : row) === 'Download'"
+                        [src]="column.icon"
+                        class="icon-container"
+                      />
+                    </ng-template>
+                    
+                </li>
               </ul>
             </ng-template>
+
+            <div class="icon-wrapper" *ngIf="column.name === 'Transcript'">
+              <div *ngIf="(column.isLoading$ | async) && row.id === (selectedRowId$ | async); else value">
+                <mat-spinner [diameter]="20"></mat-spinner>
+              </div>
+              <ng-template #value>
+                <img
+                  *ngIf="(row[column.mat_col_name] | tableFormat : column : row) === 'Download'"
+                  [src]="column.icon"
+                  class="icon-container"
+                />
+              </ng-template>
+            </div>
+
           </div>
         </mat-cell>
       </ng-container>
