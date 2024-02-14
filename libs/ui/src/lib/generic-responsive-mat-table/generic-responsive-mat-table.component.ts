@@ -38,6 +38,7 @@ export class GenericResponsiveMatTableComponent implements AfterViewInit {
     return this._data;
   }
 
+  selectedCertificateId :number | undefined = undefined;
   selectedRowId$ = this.uiDownloadService.selectedRowId$;
 
   constructor(private uiDownloadService: UiDownloadService) {}
@@ -52,6 +53,7 @@ export class GenericResponsiveMatTableComponent implements AfterViewInit {
 
   certificateSelect(certificate: ICertificate) {
     this.emitCertificate.emit(certificate);
+    this.selectedCertificateId = certificate.id;
   }
 
   valueSelect($event: MouseEvent, value: any, type: Column) {

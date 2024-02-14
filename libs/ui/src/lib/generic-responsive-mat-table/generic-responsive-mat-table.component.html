@@ -15,10 +15,10 @@
               <ul class="certificate-list">
                 <li *ngFor="let cert of row.user_certificates" (click)="certificateSelect(cert)">
 
-                    
+
                     {{ cert.certifiable_name }}
 
-                    <div *ngIf="(column.isLoading$ | async) && row.id === (selectedRowId$ | async); else value">
+                    <div *ngIf="(column.isLoading$ | async) && selectedCertificateId === cert.id; else value">
                       <mat-spinner [diameter]="20"></mat-spinner>
                     </div>
                     <ng-template #value>
@@ -28,7 +28,7 @@
                         class="icon-container"
                       />
                     </ng-template>
-                    
+
                 </li>
               </ul>
             </ng-template>
