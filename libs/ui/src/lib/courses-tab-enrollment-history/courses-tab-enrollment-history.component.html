@@ -4,12 +4,13 @@
       {{ certificate.expiration }}
     </p>
 
-    <cirrus-generic-responsive-mat-table
+     <cirrus-generic-responsive-mat-table
       [data]="enrollments"
       [columns]="columns"
       [displayedColumns]="displayedColumns"
       (emitValue)="valueSelected($event)"
       (emitRow)="rowSelected($event)"
+      (emitCertificate)="certificateSelected($event)"
     ></cirrus-generic-responsive-mat-table>
   </div>
 </div>

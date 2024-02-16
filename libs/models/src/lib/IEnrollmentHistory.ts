@@ -12,8 +12,8 @@ export interface IEnrollmentHistory {
       | PROGRESS_STATUS.in_progress
       | PROGRESS_STATUS.not_started;
   };
-  user_certificate: {
+  user_certificates: [{
     id: number;
     expires_on: string | null;
-  } | null;
+  }] | null;
 }

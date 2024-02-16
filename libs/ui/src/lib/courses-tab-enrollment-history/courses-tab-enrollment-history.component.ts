@@ -1,4 +1,3 @@
-import { filter } from 'rxjs/operators';
 import { Component, Input } from '@angular/core';
 
 import { ICertificate, IEnrollmentHistory, PdfDownloadFile } from '@cirrus/models';
@@ -22,12 +21,7 @@ export class CoursesTabEnrollmentHistoryComponent {
   certificateLoading$ = this.uiDownloadService.certificateLoading$;
   loading!: boolean;
 
-  displayedColumns: string[] = [
-    'enrollment_date',
-    'course_version',
-    'transcript_available',
-    'user_certificate',
-  ];
+  displayedColumns: string[] = ['enrollment_date', 'course_version', 'transcript_available', 'user_certificate'];
 
   columns: Column[] = [
     {
@@ -55,30 +49,25 @@ export class CoursesTabEnrollmentHistoryComponent {
     },
   ];
 
-  constructor(private uiDownloadService: UiDownloadService) { }
+  constructor(private uiDownloadService: UiDownloadService) {}
 
   rowSelected(row: any) {
-    console.log('event', row);
+    return;
+  }
+
+  certificateSelected(certificate: ICertificate) {
+    this.uiDownloadService.downloadCertificate(certificate.id).subscribe((data: PdfDownloadFile) => {
+      downloadPdf(data);
+    });
   }
 
   valueSelected(obj: any) {
     const { type, value } = obj;
     if (value === null) return;
-    if (type.mat_col_name === 'user_certificate') {
-      // for now, just get course cert. will introduce stage cert in table later
-      const course_certificate = value.user_certificates.find((uc: ICertificate) => uc.certifiable_type === 'Course');
-
-      this.uiDownloadService
-        .downloadCertificate(course_certificate.id)
-        .subscribe((data: PdfDownloadFile) => {
-          downloadPdf(data);
-        });
-    } else {
-      this.uiDownloadService
-        .downloadTranscript(this.courseId, value.id || 0)
-        .subscribe((data: PdfDownloadFile) => {
-          downloadPdf(data);
-        });
+    if (type.mat_col_name === 'transcript_available') {
+      this.uiDownloadService.downloadTranscript(this.courseId, value.id || 0).subscribe((data: PdfDownloadFile) => {
+        downloadPdf(data);
+      });
     }
   }
 }
