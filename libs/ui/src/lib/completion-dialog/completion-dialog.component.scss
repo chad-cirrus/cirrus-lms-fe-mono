@@ -110,6 +110,8 @@
 
 .stage-certificate-panel {
   text-align: center;
+  font-family: 'Akzidenz-Grotesk BQ';
+  font-weight: 500;
 
   .download-certificate.btn-secondary-white {
     display: flex;
@@ -119,6 +121,7 @@
     border-radius: 6px;
     padding: 1rem 2rem;
     font-size: 1.188rem;
+    color: $gray2;
   
     &:hover {
       cursor: pointer;
