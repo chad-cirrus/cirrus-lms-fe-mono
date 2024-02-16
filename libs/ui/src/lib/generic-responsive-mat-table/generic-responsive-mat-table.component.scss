@@ -53,12 +53,6 @@ mat-cell.mat-mdc-cell {
 
   &.mat-column-transcript_available,
   &.mat-column-user_certificate {
-    .value {
-      &:hover {
-        cursor: pointer;
-        text-decoration: underline;
-      }
-    }
     .icon-wrapper {
       display: flex;
       align-items: center;
@@ -76,11 +70,16 @@ mat-cell.mat-mdc-cell {
       flex-direction: row;
       justify-content: space-between;
       width: calc(100% - 36vw);
+      
+      &:hover {
+        cursor: pointer;
+        text-decoration: underline;
+      }      
     }
   }
 
   &.mat-column-user_certificate {
-    
+
     & > div {
       width: calc(100% - 36vw);
     }
@@ -91,17 +90,21 @@ mat-cell.mat-mdc-cell {
       list-style: none;
       display: flex;
       flex-direction: column;
+      width: 100%;
     
       li {
-        padding: 0.5rem 0;
         display: flex;
-        align-items: flex-start;
+        align-items: center;
         justify-content: space-between;
         word-break: break-word;
+        margin-bottom: 1rem;
         
         &:hover {
           cursor: pointer;
           text-decoration: underline;
+        }
+        &:last-child {
+          margin-bottom: 0;
         }
       }
 
