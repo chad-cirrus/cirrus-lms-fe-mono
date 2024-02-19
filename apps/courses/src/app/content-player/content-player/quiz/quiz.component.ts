@@ -614,6 +614,7 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
    * Resets quiz tracker and puts user back to the start quiz screen
    */
   retakeQuiz() {
+    this.showOutOfTimePopup = false;
     this.quizTracker = {
       current_question: -1,
       answers: [],
