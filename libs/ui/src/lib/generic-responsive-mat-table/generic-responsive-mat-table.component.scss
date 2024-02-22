@@ -59,7 +59,7 @@ mat-cell.mat-mdc-cell {
       justify-content: space-between;
     }
     .icon-container {
-      margin: 0.25rem 0.5rem;
+      margin: 0.25rem 0.5rem 0.25rem 0;
     }
 
   }
@@ -68,8 +68,8 @@ mat-cell.mat-mdc-cell {
     .value {
       display: flex;
       flex-direction: row;
-      justify-content: space-between;
-      width: calc(100% - 36vw);
+      justify-content: flex-start;
+      align-items: center;
       
       &:hover {
         cursor: pointer;
@@ -84,6 +84,10 @@ mat-cell.mat-mdc-cell {
       width: calc(100% - 36vw);
     }
 
+    .icon-wrapper {
+      margin-right: 1rem;
+    }
+
     .certificate-list {
       padding: 0;
       margin: 0;
@@ -94,8 +98,8 @@ mat-cell.mat-mdc-cell {
     
       li {
         display: flex;
-        align-items: center;
-        justify-content: space-between;
+        align-items: flex-start;
+        justify-content: flex-start;
         word-break: break-word;
         margin-bottom: 1rem;
         
@@ -119,13 +123,18 @@ mat-cell.mat-mdc-cell {
       .value {
         display: flex;
         align-items: center;
-        justify-content: space-between;
       }
   
     }
   
     &.mat-column-user_certificate {
       & > div {
+        width: 100%;
+      }
+    }
+
+    &.mat-column-transcript_available {
+      .value {
         width: 100%;
       }
     }
