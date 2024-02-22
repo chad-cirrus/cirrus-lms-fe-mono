@@ -31,9 +31,7 @@ import { QqbOutOfTimeComponent } from './qqb-out-of-time/qqbOutOfTime.component'
   standalone: true,
   imports: [CommonModule, QqbOutOfTimeComponent],
 })
-
 export class QuizComponent extends LessonContentComponent implements OnInit {
-
   /**
    * Constructor for the QuizComponent
    * @param quizService Injects the QuizService to get the quiz
@@ -43,7 +41,7 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
     private quizService: QuizService,
     private renderer: Renderer2,
     private store: Store<AppState>,
-    ) {
+  ) {
     super();
   }
 
@@ -160,6 +158,12 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
       attempt.stage_id = lesson.stage_id;
       attempt.lesson_id = lesson.id;
     });
+
+    // A timed quiz should not resume, so we need to reset it
+    if (this.quiz.quiz_attempt && this.quiz.time_limit_in_minutes && this.quiz.time_limit_in_minutes > 0) {
+      this.retakeQuiz();
+    }
+
     if (this.quiz.quiz_attempt) {
       // This quiz is in progress, so we need to resume it updating some of the quizTracker properties
       this.quizTracker.attempt_id = this.quiz.quiz_attempt.id;
@@ -640,9 +644,9 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
       width: '100%',
       maxWidth: '100%',
       data: {
-        imgUrl : this.quiz.quiz_questions[this.quizTracker.current_question].image_url,
-        imgTitle : this.quiz.quiz_questions[this.quizTracker.current_question].image_title
-      }
-    })
+        imgUrl: this.quiz.quiz_questions[this.quizTracker.current_question].image_url,
+        imgTitle: this.quiz.quiz_questions[this.quizTracker.current_question].image_title,
+      },
+    });
   }
 }
