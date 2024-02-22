@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CourseCompletionComponent } from './course-completion.component';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
-import { UiDownloadService } from '@cirrus/ui';
+import { UiDownloadService } from './ui-download.service';
 import { of } from 'rxjs';
 
 describe('CourseCompletionComponent', () => {
