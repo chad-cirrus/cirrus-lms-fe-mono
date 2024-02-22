@@ -23,6 +23,8 @@ import { CirrusSanitizerService } from '../shared/cirrus-sanitizer.service';
 import { UiCourseService } from '../ui-course.service';
 import { TermsAgreementServiceService } from './terms-agreement-service.service';
 import { stat } from 'fs';
+import { FullstoryService } from '../lib-services/fullstory/fullstory.service';
+import { FullStoryEvent } from '../lib-services/fullstory/full-story-event';
 @Component({
   selector: 'cirrus-course-landing-page',
   templateUrl: './course-landing-page.component.html',
@@ -70,6 +72,28 @@ export class CourseLandingPageComponent {
   @Input()
   set course(value: ICourseOverview) {
     this._course = value;
+
+    //FS vars for page identification of the single course 
+    let courseStatus: string =
+     this._course?.completed_at ? "Course Completed" :
+     this._course.course_attempt?.id ? "Enrolled" :
+     "Product Page";
+   
+    let fullStoryData = {
+      'page_state': courseStatus
+    }
+
+    const fullstoryEvent = new FullStoryEvent(
+      this._course.title,
+      '',
+      '',
+      fullStoryData
+    );
+
+    this.fullStoryService.event(
+      "Page State", fullstoryEvent
+    );
+
     this.breadcrumbsTitle = value.course_attempt?.id
       ? 'My Courses'
       : 'Course Catalog';
@@ -126,10 +150,11 @@ export class CourseLandingPageComponent {
     private dialog: MatDialog,
     private tcService: TermsAgreementServiceService,
     private cirrusSanitizer: CirrusSanitizerService,
+    private fullStoryService: FullstoryService,
 
     @Inject('environment') environment: Record<string, unknown>
   ) {
-    this.environment = environment;
+    this.environment = environment;    
   }
 
   navigateToCoursesOrCatalog() {
