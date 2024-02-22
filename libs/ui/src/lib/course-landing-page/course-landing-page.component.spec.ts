@@ -4,7 +4,7 @@ import { CourseLandingPageComponent } from './course-landing-page.component';
 import { CoursePlayerComponent } from '../course-player/course-player.component';
 import { CourseProgressComponent } from '../course-progress/course-progress.component';
 import { UiDownloadService } from '../course-completion/ui-download.service';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import {
   ContentCounts,
   IBadge,
@@ -21,6 +21,7 @@ import { MockComponent } from 'ng-mocks';
 import { HttpClientModule } from '@angular/common/http';
 import { CirrusSanitizerService } from '../shared/cirrus-sanitizer.service';
 import { anonymize } from '@fullstory/browser';
+import { of } from 'rxjs';
 
 describe('CourseLandingPageComponent', () => {
   let component: CourseLandingPageComponent;
@@ -88,6 +89,8 @@ describe('CourseLandingPageComponent', () => {
         { provide: UiDownloadService, useClass: MockUIDownloadService },
         { provide: CirrusSanitizerService, useClass: MockCirrusSanitizerService },
         { provide: 'environment', useValue: environment },
+        { provide: MAT_DIALOG_DATA, useValue: {} },
+        { provide: MatDialogRef, useValue: {} },
       ],
     }).compileComponents();
   });
@@ -108,7 +111,7 @@ describe('CourseLandingPageComponent', () => {
     expect(courseLandingPageElement.querySelector('.watch-course-intro')).toBeFalsy();
   });
 
-  xit('should show watch preview cta in header when user is enrolled and intro video is truthy', () => {
+  it('should show watch preview cta in header when user is enrolled and intro video is truthy', () => {
     component.course = {...course, course_overview_video: mockCourseOverviewVideo()};
     fixture.detectChanges();
     const courseLandingPageElement = fixture.debugElement.nativeElement;
@@ -116,7 +119,7 @@ describe('CourseLandingPageComponent', () => {
   });
 });
 
-class MockUIDownloadService {}
+// class MockUIDownloadService {}
 class MockCirrusSanitizerService {}
 
 function mockCourseOverviewVideo(): IContent {
@@ -146,4 +149,10 @@ function mockCourseOverviewVideo(): IContent {
     show_comments: false,
     courseTitle: ''
   };
+}
+
+class MockUIDownloadService {
+  getCourse(course_id: number): any {
+    return of('');
+  }
 }
