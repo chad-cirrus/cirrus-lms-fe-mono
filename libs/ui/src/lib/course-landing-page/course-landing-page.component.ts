@@ -90,7 +90,7 @@ export class CourseLandingPageComponent {
     this._course = value;
 
     //FS vars for page identification of the single course 
-    this.fullStoryService.init();
+    this.fullStoryInit();
 
     let courseStatus: string =
      this._course?.completed_at ? "Course Completed" :
@@ -179,6 +179,10 @@ export class CourseLandingPageComponent {
     @Inject('environment') environment: Record<string, unknown>
   ) {
     this.environment = environment;    
+  }
+
+  fullStoryInit() {
+    this.fullStoryService.init();
   }
 
   navigateToCoursesOrCatalog() {
