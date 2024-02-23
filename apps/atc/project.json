@@ -5,14 +5,14 @@
   "projectType": "application",
   "targets": {
     "build": {
-      "executor": "@nrwl/webpack:webpack",
+      "executor": "@nx/esbuild:esbuild",
       "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/apps/atc",
         "main": "apps/atc/src/main.ts",
         "tsConfig": "apps/atc/tsconfig.app.json",
         "assets": ["apps/atc/src/assets"],
-        "target": "node",
+        "target": "ES2022",
         "compiler": "tsc"
       },
       "configurations": {
