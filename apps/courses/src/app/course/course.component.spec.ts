@@ -10,7 +10,7 @@ import { FeatureFlagService } from '@cirrus/ui';
 import { MockComponent } from 'ng-mocks';
 import { of } from 'rxjs';
 import { CourseComponent } from './course.component';
-import { MatIcon, MatIconModule } from '@angular/material/icon';
+import { MatIconModule } from '@angular/material/icon';
 class MockFeatureFlagService {
   isFeatureEnabled() {
     return of(false);

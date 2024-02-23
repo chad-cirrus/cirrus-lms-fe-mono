@@ -10,8 +10,8 @@ import { LessonProgressStatsComponent } from '../lesson-progress-stats/lesson-pr
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconTestingModule } from '@angular/material/icon/testing';
-import { MatIcon } from '@angular/material/icon';
-import { CtaButtonComponent } from '@cirrus/ui';
+import { MatIconModule } from '@angular/material/icon';
+import { CtaButtonComponent } from '../cta-button/cta-button.component';
 import { LessonIntroVideoComponent } from './lesson-intro-video/lesson-intro-video.component';
 
 describe('LessonLandingPageComponent', () => {
@@ -20,9 +20,8 @@ describe('LessonLandingPageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [FlexLayoutModule, MatDialogModule, MatDividerModule, MatIconTestingModule],
+      imports: [FlexLayoutModule, MatDialogModule, MatDividerModule, MatIconTestingModule, MatIconModule],
       declarations: [
-        MatIcon,
         LessonLandingPageComponent,
         LessonIntroVideoComponent,
         MockComponent(LessonContentsComponent),
