@@ -24,6 +24,7 @@ import { UiCourseService } from '../ui-course.service';
 import { TermsAgreementServiceService } from './terms-agreement-service.service';
 import { FullstoryService } from '../lib-services/fullstory/fullstory.service';
 import { FullStoryEvent } from '../lib-services/fullstory/full-story-event';
+import { CoursesFacadeService } from '../../../../../apps/courses/src/app/courses-facade.service';
 
 import { IDownloadableDocument } from '../download-documents/IDownloadbleDocument';
 import { DOWNLOADABLE_DOCUMENT_TYPE } from '../download-documents/DOWNLOADABLE_DOCUMENT_TYPE';
@@ -90,7 +91,7 @@ export class CourseLandingPageComponent {
     this._course = value;
 
     //FS vars for page identification of the single course 
-    this.fullStoryService.init();
+    this.facadeService.fullstoryInit();
 
     let courseStatus: string =
      this._course?.completed_at ? "Course Completed" :
@@ -171,6 +172,7 @@ export class CourseLandingPageComponent {
     private tcService: TermsAgreementServiceService,
     private cirrusSanitizer: CirrusSanitizerService,
     private fullStoryService: FullstoryService,
+    private facadeService: CoursesFacadeService,
     
     @Inject(MAT_DIALOG_DATA)
     public data: ICourseCompletionData,
