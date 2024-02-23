@@ -4,7 +4,6 @@ import { CourseLandingPageComponent, UiDownloadService } from '@cirrus/ui';
 import { StoreModule } from '@ngrx/store';
 import { coursesReducers } from '../store/reducers';
 
-import { MatIcon } from '@angular/material/icon';
 import { MatIconTestingModule } from '@angular/material/icon/testing';
 import { MatTabsModule } from '@angular/material/tabs';
 import { FeatureFlagService } from '@cirrus/ui';
