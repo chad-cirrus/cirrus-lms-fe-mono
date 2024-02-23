@@ -3,15 +3,17 @@
     <img src="courses/images/svg/close-btn-heavy.svg" />
   </div>
   <div class="main">
-    <h2 class="message">You've completed {{ lesson$ | async }}</h2>
-
+    <h2 class="message">{{ getCompletionMessage() }}</h2>
+    <div class="stage-certificate-panel" *ngIf="certificate !== undefined">
+      <button class="download-certificate btn-secondary-white" (click)="downloadCertificate()">
+        <img src="courses/images/svg/awarded_certificate_icon.svg" />
+        Download Certificate
+      </button>
+      <div>Completed certificates are now accessible in the Enrollment History tab.</div>
+    </div>
     <div class="buttons">
-      <button class="review-lesson" mat-button (click)="close('review')">
-        Review Lesson
-      </button>
-      <button class="next-lesson" mat-button (click)="close('next')">
-        Next Lesson
-      </button>
+      <button class="review-lesson" mat-button (click)="close('review')">Review Lesson</button>
+      <button class="next-lesson" mat-button (click)="close('next')">Next Lesson</button>
     </div>
   </div>
 </div>

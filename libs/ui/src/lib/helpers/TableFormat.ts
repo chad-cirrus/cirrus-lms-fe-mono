@@ -3,9 +3,8 @@ export const formatTranscript = (row: any) => {
 };
 
 export const formatCertificate = (row: any) => {
-  console.log('row', row);
   const completedOrProgress =
     row.progress.status === 'completed' ? 'Completed' : 'In Progress';
 
-  return row.user_certificate ? 'Download' : completedOrProgress;
+  return row.user_certificates?.length > 0 ? 'Download' : completedOrProgress;
 };

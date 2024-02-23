@@ -464,4 +464,5 @@ export const courseOverview: ICourseOverview = {
   summary_counts,
   thumbnail_image_url: '',
   title: '',
+  certificate_stats: { completed: 0, total: 0 },
 };

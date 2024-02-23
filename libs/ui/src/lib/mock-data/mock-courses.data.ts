@@ -47,6 +47,7 @@ export const course351: ICourseOverview = {
     },
   },
   thumbnail_image_url: '',
+  certificate_stats: { completed: 1, total: 2 },
   course_content_stats: [
     {
       type: 'self_study',
@@ -424,7 +425,7 @@ export const course351: ICourseOverview = {
         id: 1775461,
         status: PROGRESS_STATUS.in_progress,
       },
-      user_certificate: { id: 0, expires_on: '' },
+      user_certificates: [{ id: 0, expires_on: '' }],
     },
   ],
   next_lesson: {
@@ -469,6 +470,7 @@ export const course357: ICourseOverview = {
   thumbnail_image_url: '',
   mobile_hero_image_url: '',
   can_reenroll: true,
+  certificate_stats: { completed: 1, total: 2 },
   lessons_stats: { completed: 1, total: 7 },
   summary_counts: { lessons: 7, documents: 3, assessments: 6 },
   certificate: { expiration: null },
@@ -616,7 +618,7 @@ export const course357: ICourseOverview = {
       enrollment_date: '08/03/22 - present',
       transcript_available: false,
       progress: { id: 1775575, status: PROGRESS_STATUS.in_progress },
-      user_certificate: null,
+      user_certificates: null,
     },
   ],
   next_lesson: {
@@ -681,6 +683,7 @@ export const course351Completed: ICourseOverview = {
   },
   completed_at: '',
   thumbnail_image_url: '',
+  certificate_stats: { completed: 1, total: 2 },
   course_content_stats: [
     {
       type: 'self_study',
@@ -1026,7 +1029,7 @@ export const course351Completed: ICourseOverview = {
         id: 1775688,
         status: PROGRESS_STATUS.in_progress,
       },
-      user_certificate: null,
+      user_certificates: null,
     },
   ],
   next_lesson: {},
@@ -1058,6 +1061,7 @@ export const course466: ICourseOverview = {
   mobile_hero_image_url: '',
   thumbnail_image_url: '',
   can_reenroll: true,
+  certificate_stats: { completed: 1, total: 2 },
   lessons_stats: { completed: 0, total: 12 },
   summary_counts: { lessons: 12, videos: 50 },
   certificate: { expiration: null },
@@ -1270,7 +1274,7 @@ export const course466: ICourseOverview = {
       enrollment_date: '09/15/22 - present',
       transcript_available: false,
       progress: { id: 1776117, status: PROGRESS_STATUS.in_progress },
-      user_certificate: null,
+      user_certificates: null,
     },
   ],
   next_lesson: {
@@ -1316,6 +1320,7 @@ export const course357CourseNotStarted: ICourseOverview = {
   mobile_hero_image_url: '',
   can_reenroll: true,
   lessons_stats: { completed: 1, total: 7 },
+  certificate_stats: {total: 2, completed: 1},
   summary_counts: { lessons: 7, documents: 3, assessments: 6 },
   certificate: { expiration: null },
   completed_at: '',
@@ -1462,7 +1467,7 @@ export const course357CourseNotStarted: ICourseOverview = {
       enrollment_date: '08/03/22 - present',
       transcript_available: false,
       progress: { id: 1775575, status: PROGRESS_STATUS.not_started },
-      user_certificate: null,
+      user_certificates: null,
     },
   ],
   next_lesson: {

@@ -25,7 +25,7 @@
   @media (min-width: 600px) {
     .mat-mdc-cell:last-child,
     .mat-mdc-header-cell:last-child {
-      max-width: 100px;
+      max-width: 200px;
     }
   }
 }
@@ -45,21 +45,104 @@ mat-cell.mat-mdc-cell {
   font-size: 1rem;
   line-height: 22px;
   letter-spacing: 0.03em;
+  align-items: flex-start;
 
-  &.mat-column-transcript_available,&.mat-column-user_certificate {
+  .value {
+    padding: 0.75rem 0;
+  }
+
+  &.mat-column-transcript_available,
+  &.mat-column-user_certificate {
+    .icon-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .icon-container {
+      margin: 0.25rem 0.5rem 0.25rem 0;
+    }
+
+  }
+
+  &.mat-column-transcript_available {
     .value {
       display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: center;
+      
       &:hover {
         cursor: pointer;
         text-decoration: underline;
+      }      
+    }
+  }
+
+  &.mat-column-user_certificate {
+
+    & > div {
+      width: calc(100% - 36vw);
+    }
+
+    .icon-wrapper {
+      margin-right: 1rem;
+    }
+
+    .certificate-list {
+      padding: 0;
+      margin: 0;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    
+      li {
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+        word-break: break-word;
+        margin-bottom: 1rem;
+        
+        &:hover {
+          cursor: pointer;
+          text-decoration: underline;
+        }
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+
+    }
+
+  }
+
+  @media (min-width: 600px) {
+
+    &.mat-column-transcript_available,
+    &.mat-column-user_certificate {
+      .value {
+        display: flex;
+        align-items: center;
+      }
+  
+    }
+  
+    &.mat-column-user_certificate {
+      & > div {
+        width: 100%;
       }
     }
-    .icon-container {
-      margin-right: .5rem;
+
+    &.mat-column-transcript_available {
+      .value {
+        width: 100%;
+      }
     }
 
   }
 }
+
+
 
 //styling for mobile layout only. Usually we'd do mobile first but skiping that for simplicity here
 @media (max-width: 599px) {

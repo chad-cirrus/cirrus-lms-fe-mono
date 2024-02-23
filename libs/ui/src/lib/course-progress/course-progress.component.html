@@ -14,7 +14,7 @@
   ></mat-progress-bar>
   <div
     fxLayout="column"
-    fxLayoutAlign="start start"
+    fxLayoutAlign="center"
     fxLayoutGap="12px"
     fxLayout.gt-xs="row"
     fxLayoutGap.gt-xs="36px"
@@ -31,5 +31,16 @@
         of {{ lessonStats.total }} lessons completed
       </span>
     </div>
+
+    <div class="certificates-awarded" (click)="clickAndScroll()">
+      <div class="certificates-awarded-icon">
+        <img src="courses/images/svg/certificate-award.svg">
+      </div>
+      <div class="certificates-awarded-text">
+          <span class="lessons-completed-bold">{{ this.certificateStats.completed }}</span>
+          of {{ this.certificateStats.total }} certificates awarded
+      </div>
+    </div>
+    
   </div>
 </div>

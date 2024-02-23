@@ -26,6 +26,9 @@
 !.vscode/launch.json
 !.vscode/extensions.json
 
+# NX
+/.nx
+
 # misc
 /.angular/cache
 /.sass-cache

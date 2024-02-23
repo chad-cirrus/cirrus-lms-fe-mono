@@ -118,7 +118,6 @@ cirrus-course-progress {
   display: block;
   width: 100%;
   margin: 20px 0 40px;
-  max-width: 653px;
 }
 
 cirrus-cta-button {
@@ -346,4 +345,11 @@ cirrus-cta-button {
   .lesson-hero.course-state-started {
     min-height: 50vw;
   }
+}
+
+
+.course-started ::ng-deep .download-documents {
+  margin: 1rem 0;
+  max-width: 824px;
+  width: 100%;
 }

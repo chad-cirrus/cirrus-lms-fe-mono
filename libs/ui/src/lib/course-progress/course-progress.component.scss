@@ -2,6 +2,7 @@
 
 .mat-mdc-progress-bar {
   border-radius: 200px;
+  max-width: 653px;
 }
 
 .course-progress {
@@ -32,9 +33,25 @@
   }
 }
 
+.certificates-awarded {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  &:hover {
+    cursor: pointer;
+  }
+  
+  .certificates-awarded-icon {
+    margin-right: 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
 @media (min-width: 960px) {
   .course-progress {
-    max-width: 653px;
     .lessons-completed{
       font-size: 1.125rem;
       color: #ffffff;

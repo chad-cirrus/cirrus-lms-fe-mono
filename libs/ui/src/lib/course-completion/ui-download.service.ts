@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { PdfDownloadFile } from '@cirrus/models';
+import { ICourseOverview, PdfDownloadFile } from '@cirrus/models';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { concatMap, finalize, tap, map } from 'rxjs/operators';
 
@@ -32,12 +32,12 @@ export class UiDownloadService {
     this.selectedIdSubject.next(value);
   }
 
-  getCourse(course_id: number): Observable<any> {
+  getCourse(course_id: number): Observable<ICourseOverview> {
     const url = `${this.environment['baseUrl']}/api/v4/courses/${course_id}}`;
-    return this.http.get(url);
+    return this.http.get<ICourseOverview>(url);
   }
 
-  downloadCertificate(user_certificate_id: number): Observable<PdfDownloadFile> {
+  downloadCertificate(user_certificate_id: number | undefined): Observable<PdfDownloadFile> {
     const url = `${this.environment['baseUrl']}/api/v4/user_certificates/${user_certificate_id}`;
 
     return of(null).pipe(
