@@ -24,7 +24,7 @@ describe('CourseComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [RouterTestingModule, StoreModule.forRoot(coursesReducers), MatIconTestingModule, MatTabsModule],
-      declarations: [CourseComponent, MockComponent(CourseLandingPageComponent), MatIcon],
+      declarations: [CourseComponent, MockComponent(CourseLandingPageComponent)],
       providers: [
         { provide: UiDownloadService, useClass: MockUIDownloadService },
         { provide: FeatureFlagService, useClass: MockFeatureFlagService },
