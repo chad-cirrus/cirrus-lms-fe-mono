@@ -22,6 +22,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { CirrusSanitizerService } from '../shared/cirrus-sanitizer.service';
 import { anonymize } from '@fullstory/browser';
 import { of } from 'rxjs';
+import { FullstoryService } from '../lib-services/fullstory/fullstory.service';
 
 describe('CourseLandingPageComponent', () => {
   let component: CourseLandingPageComponent;
@@ -91,6 +92,7 @@ describe('CourseLandingPageComponent', () => {
         { provide: 'environment', useValue: environment },
         { provide: MAT_DIALOG_DATA, useValue: {} },
         { provide: MatDialogRef, useValue: {} },
+        { provide: FullstoryService, useClass: MockFullstoryService}
       ],
     }).compileComponents();
   });
@@ -156,3 +158,5 @@ class MockUIDownloadService {
     return of('');
   }
 }
+
+class MockFullstoryService {}
