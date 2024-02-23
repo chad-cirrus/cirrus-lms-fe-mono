@@ -57,7 +57,7 @@ export class CourseCompletionComponent implements OnInit {
       id: 0,
       uuid: '',
     };
-    this.loadDocumentList();
+    this.loadDocumentList(this.data.course_id);
   }
 
   /**
@@ -67,8 +67,8 @@ export class CourseCompletionComponent implements OnInit {
    * @returns {void}
    * @default undefined
    */
-  loadDocumentList() {
-    this.uiDownloadService.getCourse(this.data.course_id).subscribe(course => {
+  loadDocumentList(id:number) {
+    this.uiDownloadService.getCourse(id).subscribe(course => {
       this.courseTranscript = {
         id: course.certificate.id ? course.certificate.id : -1,
         documentType: DOWNLOADABLE_DOCUMENT_TYPE.transcript,

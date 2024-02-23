@@ -13,7 +13,7 @@ import {
 import { produceConfig } from './produce-config';
 // eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
 import { ElementRef, HostListener, ViewChild } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { BehaviorSubject } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 import { BluePopUpComponent } from '../blue-pop-up/blue-pop-up.component';
@@ -22,9 +22,12 @@ import { downloadPdf } from '../helpers/DownloadPdf';
 import { CirrusSanitizerService } from '../shared/cirrus-sanitizer.service';
 import { UiCourseService } from '../ui-course.service';
 import { TermsAgreementServiceService } from './terms-agreement-service.service';
-import { stat } from 'fs';
 import { FullstoryService } from '../lib-services/fullstory/fullstory.service';
 import { FullStoryEvent } from '../lib-services/fullstory/full-story-event';
+
+import { IDownloadableDocument } from '../download-documents/IDownloadbleDocument';
+import { DOWNLOADABLE_DOCUMENT_TYPE } from '../download-documents/DOWNLOADABLE_DOCUMENT_TYPE';
+import { ICourseCompletionData } from '../course-completion/course-completion.component';
 @Component({
   selector: 'cirrus-course-landing-page',
   templateUrl: './course-landing-page.component.html',
@@ -34,6 +37,19 @@ export class CourseLandingPageComponent {
   private readonly environment: Record<string, unknown>;
   certificateLoading$ = this.downloadService.certificateLoading$;
   transcriptLoading$ = this.downloadService.transcriptloading$;
+
+  certificateList: IDownloadableDocument[] | undefined;
+  courseTranscript: IDownloadableDocument | undefined;
+  courseCertificate: IDownloadableDocument | undefined;
+
+  /**
+   * The current document being downloaded, undefined if no document is being downloaded.
+   * @type {IDownloadableDocument | undefined}
+   * @memberof DownloadDocumentsComponent
+   * @public
+   * @default undefined
+    */
+  currentDocument: IDownloadableDocument | undefined;
 
   @Input() user!: ICirrusUser;
 
@@ -96,6 +112,8 @@ export class CourseLandingPageComponent {
       "Page State", fullstoryEvent
     );
 
+    this.loadDocumentList(this._course.id);
+    
     this.breadcrumbsTitle = value.course_attempt?.id
       ? 'My Courses'
       : 'Course Catalog';
@@ -153,6 +171,10 @@ export class CourseLandingPageComponent {
     private tcService: TermsAgreementServiceService,
     private cirrusSanitizer: CirrusSanitizerService,
     private fullStoryService: FullstoryService,
+    
+    @Inject(MAT_DIALOG_DATA)
+    public data: ICourseCompletionData,
+    private uiDownloadService: UiDownloadService,
 
     @Inject('environment') environment: Record<string, unknown>
   ) {
@@ -302,6 +324,66 @@ export class CourseLandingPageComponent {
       ) {
         this.isSticky = window.scrollY >= 206;
       }
+    }
+  }
+
+  /**
+   * Loads the list of downloadable documents.
+   * @private
+   * @memberof DownloadDocumentsComponent
+   * @returns {void}
+   * @default undefined
+   */
+  loadDocumentList(id:number) {
+    this.uiDownloadService.getCourse(id).subscribe(course => {
+      this.courseTranscript = {
+        id: course.certificate.id ? course.certificate.id : -1,
+        documentType: DOWNLOADABLE_DOCUMENT_TYPE.transcript,
+        displayText: 'Course Transcript',
+        uuid: self.crypto.randomUUID(),
+      };
+
+      if (course.certificate && course.certificate.id) {
+        this.courseCertificate = {
+          id: course.certificate.id,
+          documentType: DOWNLOADABLE_DOCUMENT_TYPE.courseCertificate,
+          displayText: 'Course Certificate',
+          uuid: self.crypto.randomUUID(),
+        };
+      }
+      if (course.awarded_certificates && course.awarded_certificates?.length > 0) {
+        this.certificateList = course.awarded_certificates.map(cert => {
+          return {
+            id: cert.id ? cert.id : -1,
+            documentType: DOWNLOADABLE_DOCUMENT_TYPE.stageCertificate,
+            name: cert.certifiable_name,
+            displayText: cert.certifiable_name,
+            uuid : self.crypto.randomUUID(),
+          } as IDownloadableDocument;
+        });
+      }
+    });
+  }
+
+  /**
+   * Handles the download button click event.
+   * @param {IDownloadableDocument} document The document to download.
+   * @memberof DownloadDocumentsComponent
+   * @returns {void}
+   * @default undefined
+   */
+  downloadClicked(document: IDownloadableDocument): void {
+    this.currentDocument = document;
+    if (document.documentType === DOWNLOADABLE_DOCUMENT_TYPE.transcript) {
+      this.uiDownloadService.downloadTranscript(this._course.id, 0).subscribe((data: PdfDownloadFile) => {
+        downloadPdf(data);
+        this.currentDocument = undefined;
+      });
+    } else {
+      this.uiDownloadService.downloadCertificate(document.id).subscribe((data: PdfDownloadFile) => {
+        downloadPdf(data);
+        this.currentDocument = undefined;
+      });
     }
   }
 
