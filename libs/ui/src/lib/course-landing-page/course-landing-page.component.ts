@@ -89,8 +89,7 @@ export class CourseLandingPageComponent {
   set course(value: ICourseOverview) {
     this._course = value;
 
-    //FS vars for page identification of the single course 
-    this.fullStoryInit();
+    //FS vars for page identification of the single course
 
     let courseStatus: string =
      this._course?.completed_at ? "Course Completed" :

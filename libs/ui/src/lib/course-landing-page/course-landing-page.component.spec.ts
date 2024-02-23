@@ -20,7 +20,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MockComponent } from 'ng-mocks';
 import { HttpClientModule } from '@angular/common/http';
 import { CirrusSanitizerService } from '../shared/cirrus-sanitizer.service';
-import { anonymize } from '@fullstory/browser';
+
 import { of } from 'rxjs';
 import { FullstoryService } from '../lib-services/fullstory/fullstory.service';
 
