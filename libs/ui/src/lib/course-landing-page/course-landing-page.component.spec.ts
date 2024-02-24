@@ -92,7 +92,7 @@ describe('CourseLandingPageComponent', () => {
         { provide: 'environment', useValue: environment },
         { provide: MAT_DIALOG_DATA, useValue: {} },
         { provide: MatDialogRef, useValue: {} },
-        { provide: FullstoryService, useClass: MockFullstoryService}
+        { provide: FullstoryService, useValue: {}}
       ],
     }).compileComponents();
   });
@@ -158,5 +158,3 @@ class MockUIDownloadService {
     return of('');
   }
 }
-
-class MockFullstoryService {}

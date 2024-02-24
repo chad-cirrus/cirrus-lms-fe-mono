@@ -23,7 +23,7 @@ import { CirrusSanitizerService } from '../shared/cirrus-sanitizer.service';
 import { UiCourseService } from '../ui-course.service';
 import { TermsAgreementServiceService } from './terms-agreement-service.service';
 import { FullstoryService } from '../lib-services/fullstory/fullstory.service';
-import { FullStoryEvent } from '../lib-services/fullstory/full-story-event';
+import { FullStoryEvent, FullStoryEventData } from '../lib-services/fullstory/full-story-event';
 
 import { IDownloadableDocument } from '../download-documents/IDownloadbleDocument';
 import { DOWNLOADABLE_DOCUMENT_TYPE } from '../download-documents/DOWNLOADABLE_DOCUMENT_TYPE';
@@ -107,8 +107,9 @@ export class CourseLandingPageComponent {
       fullStoryData
     );
 
-    this.fullStoryService.event(
-      "Page State", fullstoryEvent
+    this.fullstoryService.event(
+      "Page State", 
+      fullstoryEvent
     );
 
     this.loadDocumentList(this._course.id);
@@ -169,7 +170,7 @@ export class CourseLandingPageComponent {
     private dialog: MatDialog,
     private tcService: TermsAgreementServiceService,
     private cirrusSanitizer: CirrusSanitizerService,
-    private fullStoryService: FullstoryService,
+    private fullstoryService: FullstoryService,
     
     @Inject(MAT_DIALOG_DATA)
     public data: ICourseCompletionData,
@@ -181,7 +182,11 @@ export class CourseLandingPageComponent {
   }
 
   fullStoryInit() {
-    this.fullStoryService.init();
+    this.fullstoryService.init();
+  }
+
+  fullstoryEvent(eventName: string, eventProperties: FullStoryEventData) {
+    this.fullstoryService.event(eventName, eventProperties);
   }
 
   navigateToCoursesOrCatalog() {
