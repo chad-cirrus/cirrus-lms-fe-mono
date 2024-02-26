@@ -52,9 +52,9 @@
 
     <div class="full-screen-image-container" *ngIf="this.quiz.quiz_questions[this.quizTracker.current_question].image_url">
       <span class="full-screen-image-wrapper">
-  
+
           <button class="toggle-full-screen-image" (click)="openFullScreenImage()">
-  
+
               <!-- Open Icon -->
               <span class="full-screen-image-open-icon">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -64,13 +64,13 @@
                       <path fill-rule="evenodd" clip-rule="evenodd" d="M13.5547 6.54492C13.5547 6.26878 13.7785 6.04492 14.0547 6.04492L17.271 6.04492C17.5472 6.04492 17.771 6.26878 17.771 6.54492L17.771 9.76125C17.771 10.0374 17.5472 10.2612 17.271 10.2612C16.9949 10.2612 16.771 10.0374 16.771 9.76125L16.771 7.04492L14.0547 7.04492C13.7785 7.04492 13.5547 6.82106 13.5547 6.54492Z" fill="white"/>
                   </svg>
               </span>
-              
+
           </button>
-          
+
           <span class="full-screen-image">
               <img src="{{ this.quiz.quiz_questions[this.quizTracker.current_question].image_url }}" alt="{{ this.quiz.quiz_questions[this.quizTracker.current_question].image_title }}">
           </span>
-  
+
       </span>
     </div>
 
@@ -302,7 +302,7 @@
     </div>
     <div class="quiz-results-next-steps" *ngIf="!studentHasPassed()">
       <!-- <button class="btn btn-secondary">{{ getResultsSecondaryButtonText() }}</button> -->
-      <button class="btn btn-primary" (click)="retakeQuiz()">{{ getResultsPrimaryButtonText() }}</button>
+      <button class="btn btn-primary" (click)="resetQuiz()">{{ getResultsPrimaryButtonText() }}</button>
     </div>
   </div>
 

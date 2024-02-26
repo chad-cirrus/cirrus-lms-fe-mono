@@ -1,4 +1,4 @@
-import { Component, OnInit, Renderer2 } from '@angular/core';
+import { Component, OnDestroy, OnInit, Renderer2 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LessonContentComponent } from '@cirrus/ui';
 import { QuizService } from './quiz.service';
@@ -17,9 +17,10 @@ import { AppState } from '../../../store/reducers';
 import { Store } from '@ngrx/store';
 import { Observable, Subject, Subscription, timer } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { ILesson } from '@cirrus/models';
+import { ILesson, PROGRESS_STATUS } from '@cirrus/models';
 import { selectLesson } from '../../../store/selectors/lessons.selector';
 import { QqbOutOfTimeComponent } from './qqb-out-of-time/qqbOutOfTime.component';
+import { completeProgress } from '../../../store/actions';
 
 /**
  * Component for displaying a quiz
@@ -31,7 +32,7 @@ import { QqbOutOfTimeComponent } from './qqb-out-of-time/qqbOutOfTime.component'
   standalone: true,
   imports: [CommonModule, QqbOutOfTimeComponent],
 })
-export class QuizComponent extends LessonContentComponent implements OnInit {
+export class QuizComponent extends LessonContentComponent implements OnInit, OnDestroy {
   /**
    * Constructor for the QuizComponent
    * @param quizService Injects the QuizService to get the quiz
@@ -44,7 +45,7 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
   ) {
     super();
   }
-
+  lesson!: ILesson;
   lessonOverview$: Observable<ILesson> = this.store.select(selectLesson);
 
   quiz!: IQuizRequest;
@@ -80,6 +81,7 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
   ngOnInit(): void {
     super.ngOnInit();
     this.lessonOverview$.subscribe(lesson => {
+      this.lesson = lesson;
       this.course_attempt_id = lesson.course_attempt_id;
 
       this.quizService
@@ -90,6 +92,31 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
         });
     });
     this.hidePrevAndNext.emit(false);
+  }
+
+  /**
+   * Lifecycle hook that is called when the component is about to be destroyed.
+   * It is responsible for cleaning up any resources or subscriptions.
+   */
+  ngOnDestroy(): void {
+    this.hidePrevAndNext.next(false);
+    if (this.isQuizCompleted()) {
+      const _progress = {
+        id: this.content.progress.id,
+        status: PROGRESS_STATUS.completed,
+      };
+      this.updateProgress.emit(_progress);
+      this.store.dispatch(
+        completeProgress({
+          id: this.content.progress.id,
+          courseId: this.lesson.course_id,
+          stageId: this.lesson.stage_id,
+          lessonId: this.lesson.id,
+          progress: _progress,
+          assessment: false,
+        }),
+      );
+    }
   }
 
   menuToggle(event: MouseEvent) {
@@ -161,7 +188,7 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
 
     // A timed quiz should not resume, so we need to reset it
     if (this.quiz.quiz_attempt && this.quiz.time_limit_in_minutes && this.quiz.time_limit_in_minutes > 0) {
-      this.retakeQuiz();
+      this.resetQuiz();
     }
 
     if (this.quiz.quiz_attempt) {
@@ -617,7 +644,7 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
    * Allows users to reattempt a failed quiz, resets quiz
    * Resets quiz tracker and puts user back to the start quiz screen
    */
-  retakeQuiz() {
+  resetQuiz(): void {
     this.quizTracker = {
       current_question: -1,
       answers: [],
