@@ -346,3 +346,10 @@ cirrus-cta-button {
     min-height: 50vw;
   }
 }
+
+
+.course-started ::ng-deep .download-documents {
+  margin: 1rem 0;
+  max-width: 824px;
+  width: 100%;
+}

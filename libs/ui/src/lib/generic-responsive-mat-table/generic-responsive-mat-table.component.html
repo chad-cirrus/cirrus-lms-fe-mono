@@ -8,30 +8,6 @@
         <mat-cell *matCellDef="let row" [attr.data-label]="column.name" (click)="rowSelect(row)">
           <div (click)="valueSelect($event, row, column)" class="value">
 
-            <div *ngIf="column.mat_col_name !== 'user_certificate' || row.user_certificates?.length === 0; else certificateTemplate">
-              {{ row[column.mat_col_name] | tableFormat : column : row }}
-            </div>
-            <ng-template #certificateTemplate>
-              <ul class="certificate-list">
-                <li *ngFor="let cert of row.user_certificates" (click)="certificateSelect(cert)">
-
-                    {{ cert.certifiable_name }}
-
-                    <div *ngIf="(column.isLoading$ | async) && selectedCertificateId === cert.id; else value">
-                      <mat-spinner [diameter]="20"></mat-spinner>
-                    </div>
-                    <ng-template #value>
-                      <img
-                        *ngIf="(row[column.mat_col_name] | tableFormat : column : row) === 'Download'"
-                        [src]="column.icon"
-                        class="icon-container"
-                      />
-                    </ng-template>
-
-                </li>
-              </ul>
-            </ng-template>
-
             <div class="icon-wrapper" *ngIf="column.name === 'Transcript'">
               <div *ngIf="(column.isLoading$ | async) && row.id === (selectedRowId$ | async); else value">
                 <mat-spinner [diameter]="20"></mat-spinner>
@@ -44,6 +20,32 @@
                 />
               </ng-template>
             </div>
+
+            <div *ngIf="column.mat_col_name !== 'user_certificate' || row.user_certificates?.length === 0; else certificateTemplate">
+              {{ row[column.mat_col_name] | tableFormat : column : row }}
+            </div>
+            <ng-template #certificateTemplate>
+              <ul class="certificate-list">
+                <li *ngFor="let cert of row.user_certificates" (click)="certificateSelect(cert)">
+
+                    <div *ngIf="(column.isLoading$ | async) && selectedCertificateId === cert.id; else value">
+                      <mat-spinner [diameter]="20"></mat-spinner>
+                    </div>
+                    <ng-template #value>
+                      <img
+                        *ngIf="(row[column.mat_col_name] | tableFormat : column : row) === 'Download'"
+                        [src]="column.icon"
+                        class="icon-container"
+                      />
+                    </ng-template>
+
+                    {{ cert.certifiable_name }}
+
+                </li>
+              </ul>
+            </ng-template>
+
+            
 
           </div>
         </mat-cell>
