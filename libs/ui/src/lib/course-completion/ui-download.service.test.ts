@@ -1,28 +1,39 @@
 import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { UiDownloadService } from './ui-download.service';
-import { ContentCounts, IBadge, ICertificate, ICertificatestats, ICourseOverview, ICourseOverviewLesson, ILessonsstats, IProgress, UserCourse } from '@cirrus/models';
+import {
+  ContentCounts,
+  IBadge,
+  ICertificate,
+  ICertificatestats,
+  ICourseOverview,
+  ICourseOverviewLesson,
+  ILessonsstats,
+  IProgress,
+  UserCourse,
+} from '@cirrus/models';
 
 describe('UiDownloadService', () => {
   let service: UiDownloadService;
   let httpMock: HttpTestingController;
 
-    beforeEach(() => {
-      TestBed.configureTestingModule({
-        imports: [HttpClientTestingModule],
-        providers: [
-          UiDownloadService,
-          { provide: 'environment', useValue: {} }, // Provide a mock value for the 'environment' dependency
-        ],
-      });
-      service = TestBed.inject(UiDownloadService);
-      httpMock = TestBed.inject(HttpTestingController);
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
+      providers: [
+        UiDownloadService,
+        { provide: 'environment', useValue: {} }, // Provide a mock value for the 'environment' dependency
+      ],
     });
+    service = TestBed.inject(UiDownloadService);
+    httpMock = TestBed.inject(HttpTestingController);
+  });
 
   afterEach(() => {
     httpMock.verify();
   });
 
+  // getCourse tests
   it('should retrieve the course overview', () => {
     const course_id = 123;
     const expectedCourse: ICourseOverview = {
@@ -61,9 +72,50 @@ describe('UiDownloadService', () => {
       expect(course).toEqual(expectedCourse);
     });
 
-  const req = httpMock.expectOne(`undefined/api/v4/courses/${course_id}`);
-  expect(req.request.method).toBe('GET');
-  req.flush(expectedCourse);
-  httpMock.verify();
+    const req = httpMock.expectOne(`undefined/api/v4/courses/${course_id}`);
+    expect(req.request.method).toBe('GET');
+    req.flush(expectedCourse);
+    httpMock.verify();
+  });
+
+  it('should parse the filename from content disposition with filename*=UTF-8 encoding', () => {
+    const service = TestBed.inject(UiDownloadService);
+    const contentDisposition = "attachment; filename*=UTF-8''%E6%B5%8B%E8%AF%95.txt";
+    const expectedFilename = '测试.txt';
+
+    const result = service.parseFilename(contentDisposition);
+
+    expect(result).toEqual(expectedFilename);
+  });
+
+  it('should parse the filename from content disposition with filename="..." encoding', () => {
+    const service = TestBed.inject(UiDownloadService);
+    const contentDisposition = 'attachment; filename="test.txt"';
+    const expectedFilename = 'test.txt';
+
+    const result = service.parseFilename(contentDisposition);
+
+    expect(result).toEqual(expectedFilename);
+  });
+
+  it('should return an empty string if the filename cannot be parsed', () => {
+    const service = TestBed.inject(UiDownloadService);
+    const contentDisposition = 'attachment; filename=invalid';
+    const expectedFilename = '';
+
+    const result = service.parseFilename(contentDisposition);
+
+    expect(result).toEqual(expectedFilename);
+  });
+
+  it('should set the selected ID', () => {
+    const service = TestBed.inject(UiDownloadService);
+    const value = 123;
+
+    service.setSelectedId(value);
+
+    service.selectedRowId$.subscribe(selectedId => {
+      expect(selectedId).toEqual(value);
+    });
   });
 });
