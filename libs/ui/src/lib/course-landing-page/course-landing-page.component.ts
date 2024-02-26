@@ -22,7 +22,8 @@ import { downloadPdf } from '../helpers/DownloadPdf';
 import { CirrusSanitizerService } from '../shared/cirrus-sanitizer.service';
 import { UiCourseService } from '../ui-course.service';
 import { TermsAgreementServiceService } from './terms-agreement-service.service';
-import { stat } from 'fs';
+import { FullstoryService } from '../lib-services/fullstory/fullstory.service';
+import { FullStoryEvent, FullStoryEventData } from '../lib-services/fullstory/full-story-event';
 
 import { IDownloadableDocument } from '../download-documents/IDownloadbleDocument';
 import { DOWNLOADABLE_DOCUMENT_TYPE } from '../download-documents/DOWNLOADABLE_DOCUMENT_TYPE';
@@ -87,7 +88,32 @@ export class CourseLandingPageComponent {
   @Input()
   set course(value: ICourseOverview) {
     this._course = value;
+
+    //FS vars for page identification of the single course
+
+    let courseStatus: string =
+     this._course?.completed_at ? "Course Completed" :
+     this._course.course_attempt?.id ? "Enrolled" :
+     "Product Page";
+   
+    let fullStoryData = {
+      'page_state': courseStatus
+    }
+
+    const fullstoryEvent = new FullStoryEvent(
+      this._course.title,
+      '',
+      '',
+      fullStoryData
+    );
+
+    this.fullstoryService.event(
+      "Page State", 
+      fullstoryEvent
+    );
+
     this.loadDocumentList(this._course.id);
+    
     this.breadcrumbsTitle = value.course_attempt?.id
       ? 'My Courses'
       : 'Course Catalog';
@@ -144,6 +170,7 @@ export class CourseLandingPageComponent {
     private dialog: MatDialog,
     private tcService: TermsAgreementServiceService,
     private cirrusSanitizer: CirrusSanitizerService,
+    private fullstoryService: FullstoryService,
     
     @Inject(MAT_DIALOG_DATA)
     public data: ICourseCompletionData,
@@ -151,7 +178,15 @@ export class CourseLandingPageComponent {
 
     @Inject('environment') environment: Record<string, unknown>
   ) {
-    this.environment = environment;
+    this.environment = environment;    
+  }
+
+  fullStoryInit() {
+    this.fullstoryService.init();
+  }
+
+  fullstoryEvent(eventName: string, eventProperties: FullStoryEventData) {
+    this.fullstoryService.event(eventName, eventProperties);
   }
 
   navigateToCoursesOrCatalog() {
