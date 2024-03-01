@@ -1,5 +1,5 @@
 import { Breakpoints } from '@angular/cdk/layout';
-import { Component, EventEmitter, Inject, Input, Output, OnInit } from '@angular/core';
+import { Component, EventEmitter, Inject, Input, Output, OnChanges } from '@angular/core';
 import { Router } from '@angular/router';
 import {
   ICirrusUser,
@@ -33,7 +33,7 @@ import { ICourseCompletionData } from '../course-completion/course-completion.co
   templateUrl: './course-landing-page.component.html',
   styleUrls: ['./course-landing-page.component.scss'],
 })
-export class CourseLandingPageComponent implements OnInit{
+export class CourseLandingPageComponent implements OnChanges {
   private readonly environment: Record<string, unknown>;
   certificateLoading$ = this.downloadService.certificateLoading$;
   transcriptLoading$ = this.downloadService.transcriptloading$;
@@ -167,7 +167,7 @@ export class CourseLandingPageComponent implements OnInit{
     this.environment = environment;
   }
 
-  ngOnInit(): void {
+  ngOnChanges(): void {
     this.loadDocumentList(this._course.id);
   }
 
