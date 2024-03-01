@@ -28,6 +28,7 @@
   }
   .lessons-completed{
     font-size: 0.875rem;
+    font-size: 1.125rem;
     line-height: 1;
     letter-spacing: 0.03em;
   }
@@ -36,7 +37,7 @@
 .certificates-awarded {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   
   &:hover {
     cursor: pointer;
@@ -53,7 +54,6 @@
 @media (min-width: 960px) {
   .course-progress {
     .lessons-completed{
-      font-size: 1.125rem;
       color: #ffffff;
       .lessons-completed-bold {
         font-family: 'akzidenz-grotesk_bqmedium';
