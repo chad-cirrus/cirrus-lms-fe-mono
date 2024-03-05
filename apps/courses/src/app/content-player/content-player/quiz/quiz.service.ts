@@ -3,15 +3,12 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import {
-  Answer,
-  IAnswerResponse,
-  IQuizAttempt,
-  IQuizRequest,
-  IStartQuiz,
-  IStartQuizAttempt,
-  IStartQuizResponse,
-} from './quiz.types';
+import { IAnswerResponse } from './models/IAnswerResponse';
+import { IQuizRequest } from './models/IQuizRequest';
+import { IQuizAttempt } from './models/IQuizAttempt';
+import { IStartQuiz } from './models/IStartQuiz';
+import { IStartQuizAttempt } from './models/IStartQuizAttempt';
+import { IStartQuizResponse } from './models/IStartQuizResponse';
 
 @Injectable({
   providedIn: 'root',
@@ -34,7 +31,9 @@ export class QuizService {
    */
   getQuiz(id: number, course_attempt_id: number, lesson_id: number, stage_id: number): Observable<IQuizRequest> {
     return this.http
-      .get<IQuizRequest>(`${environment.baseUrl}/api/v4/quizzes/${id}?course_attempt_id=${course_attempt_id}&lesson_id=${lesson_id}&stage_id=${stage_id}`)
+      .get<IQuizRequest>(
+        `${environment.baseUrl}/api/v4/quizzes/${id}?course_attempt_id=${course_attempt_id}&lesson_id=${lesson_id}&stage_id=${stage_id}`,
+      )
       .pipe(map(response => response['content_player/quiz']));
   }
 
@@ -51,24 +50,27 @@ export class QuizService {
   }
 
   /**
-   * Submits a student's answer to the quiz API.
-   * @method submitAnswer
-   * @description Submits a student's answer to a quiz question
-   * @param {Answer} answer - The answer to submit
-   * @returns {Observable<IAnswerResponse>} An observable containing the response from the server
+   * Submits an answer for a quiz question to the API.
+   *
+   * @param quiz_attempt_id - The ID of the quiz attempt.
+   * @param quiz_attempt_question_id - The ID of the quiz attempt question.
+   * @param question_option_id - The ID of the selected question option.
+   * @returns An Observable that emits the response containing the answer information.
    */
-  submitAnswer(attempt_id: number, answer: Answer): Observable<IAnswerResponse> {
-    const _data = {
-      quiz_attempt_response: {
-        question_option_id: answer.answer,
-        quiz_question_id: answer.question_id,
-        quiz_attempt_id: attempt_id,
+  submitAnswer(
+    quiz_attempt_id: number,
+    quiz_attempt_question_id: number,
+    question_option_id: number,
+  ): Observable<IAnswerResponse> {
+    const _payload = {
+      quiz_attempt_question: {
+        question_option_id: question_option_id,
       },
     };
     return this.http
-      .post<IAnswerResponse>(
-        `${environment.baseUrl}/api/v5/quiz_attempts/${attempt_id}/quiz_questions/${answer.question_id}/quiz_attempt_responses`,
-        _data,
+      .put<IAnswerResponse>(
+        `${environment.baseUrl}/api/v5/quiz_attempts/${quiz_attempt_id}/quiz_attempt_questions/${quiz_attempt_question_id}`,
+        _payload,
       )
       .pipe(map(response => response));
   }
@@ -81,6 +83,6 @@ export class QuizService {
   gradeQuiz(attempt_id: number): Observable<IQuizAttempt> {
     return this.http
       .put<IQuizAttempt>(`${environment.baseUrl}/api/v5/quiz_attempts/${attempt_id}/submit`, {})
-      .pipe(map(response => response));
+      .pipe(map(response => response['quiz_attempt']));
   }
 }

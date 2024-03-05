@@ -23,7 +23,6 @@ export class BluePopUpComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    console.log('data', this.data);
     this._html = this.cirrusSanitizer.getSafeHtml(this.data.body);
   }
 
