@@ -244,8 +244,6 @@ export class QuizComponent extends LessonContentComponent implements OnInit, OnD
     const fullStoryData = {
       answer_result: 'null', 
       answer_given: this.quiz.selectedOptionId, 
-      course_title: this.courseTitle, 
-      lesson_title: this.lesson.title, 
       content_item_title: this.content.title,
       quiz_question: this.quiz.questions['desc'],
       question_id: this.quiz.questions['id']
@@ -265,8 +263,7 @@ export class QuizComponent extends LessonContentComponent implements OnInit, OnD
       }
     }
 
-    console.log("FS Data", fullStoryData);
-    const fullstoryEvent = new FullStoryEvent(this.courseTitle, this.lesson.title, 'Quiz', fullStoryData);
+    const fullstoryEvent = new FullStoryEvent(this.courseTitle, this.lesson.title, this.content.title, fullStoryData);
     this.fullstoryService.event('Quiz Question', fullstoryEvent);
   }
 
