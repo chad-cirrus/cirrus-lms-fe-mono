@@ -1,5 +1,5 @@
 import { Breakpoints } from '@angular/cdk/layout';
-import { Component, EventEmitter, Inject, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Inject, Input, Output, OnChanges } from '@angular/core';
 import { Router } from '@angular/router';
 import {
   ICirrusUser,
@@ -22,7 +22,8 @@ import { downloadPdf } from '../helpers/DownloadPdf';
 import { CirrusSanitizerService } from '../shared/cirrus-sanitizer.service';
 import { UiCourseService } from '../ui-course.service';
 import { TermsAgreementServiceService } from './terms-agreement-service.service';
-import { stat } from 'fs';
+import { FullstoryService } from '../lib-services/fullstory/fullstory.service';
+import { FullStoryEvent, FullStoryEventData } from '../lib-services/fullstory/full-story-event';
 
 import { IDownloadableDocument } from '../download-documents/IDownloadbleDocument';
 import { DOWNLOADABLE_DOCUMENT_TYPE } from '../download-documents/DOWNLOADABLE_DOCUMENT_TYPE';
@@ -32,7 +33,7 @@ import { ICourseCompletionData } from '../course-completion/course-completion.co
   templateUrl: './course-landing-page.component.html',
   styleUrls: ['./course-landing-page.component.scss'],
 })
-export class CourseLandingPageComponent {
+export class CourseLandingPageComponent implements OnChanges {
   private readonly environment: Record<string, unknown>;
   certificateLoading$ = this.downloadService.certificateLoading$;
   transcriptLoading$ = this.downloadService.transcriptloading$;
@@ -47,7 +48,7 @@ export class CourseLandingPageComponent {
    * @memberof DownloadDocumentsComponent
    * @public
    * @default undefined
-    */
+   */
   currentDocument: IDownloadableDocument | undefined;
 
   @Input() user!: ICirrusUser;
@@ -87,10 +88,24 @@ export class CourseLandingPageComponent {
   @Input()
   set course(value: ICourseOverview) {
     this._course = value;
-    this.loadDocumentList(this._course.id);
-    this.breadcrumbsTitle = value.course_attempt?.id
-      ? 'My Courses'
-      : 'Course Catalog';
+
+    //FS vars for page identification of the single course
+
+    const courseStatus: string = this._course?.completed_at
+      ? 'Course Completed'
+      : this._course.course_attempt?.id
+      ? 'Enrolled'
+      : 'Product Page';
+
+    const fullStoryData = {
+      page_state: courseStatus,
+    };
+
+    const fullstoryEvent = new FullStoryEvent(this._course.title, '', '', fullStoryData);
+
+    this.fullstoryService.event('Page State', fullstoryEvent);
+
+    this.breadcrumbsTitle = value.course_attempt?.id ? 'My Courses' : 'Course Catalog';
     this.setBackground();
 
     if (!value.course_attempt?.id) {
@@ -129,8 +144,8 @@ export class CourseLandingPageComponent {
   }
 
   get filtered_course_content_stats() {
-    return this.course.course_content_stats.filter(
-      stat => ['self_study', 'flight_assessment', 'ground_assessment'].includes(stat.type)
+    return this.course.course_content_stats.filter(stat =>
+      ['self_study', 'flight_assessment', 'ground_assessment'].includes(stat.type),
     );
   }
 
@@ -141,7 +156,8 @@ export class CourseLandingPageComponent {
     private dialog: MatDialog,
     private tcService: TermsAgreementServiceService,
     private cirrusSanitizer: CirrusSanitizerService,
-    
+    private fullstoryService: FullstoryService,
+
     @Inject(MAT_DIALOG_DATA)
     public data: ICourseCompletionData,
     private uiDownloadService: UiDownloadService,
@@ -149,6 +165,18 @@ export class CourseLandingPageComponent {
     @Inject('environment') environment: Record<string, unknown>,
   ) {
     this.environment = environment;
+  }
+
+  ngOnChanges(): void {
+    this.loadDocumentList(this._course.id);
+  }
+
+  fullStoryInit() {
+    this.fullstoryService.init();
+  }
+
+  fullstoryEvent(eventName: string, eventProperties: FullStoryEventData) {
+    this.fullstoryService.event(eventName, eventProperties);
   }
 
   navigateToCoursesOrCatalog() {
@@ -286,10 +314,13 @@ export class CourseLandingPageComponent {
    * @returns {void}
    * @default undefined
    */
-  loadDocumentList(id:number) {
+  loadDocumentList(id: number) {
+    if (!id) {
+      return;
+    }
     this.uiDownloadService.getCourse(id).subscribe(course => {
       this.courseTranscript = {
-        id: course.certificate.id ? course.certificate.id : -1,
+        id: course.certificate && course.certificate.id ? course.certificate.id : -1,
         documentType: DOWNLOADABLE_DOCUMENT_TYPE.transcript,
         displayText: 'Course Transcript',
         uuid: self.crypto.randomUUID(),
@@ -310,7 +341,7 @@ export class CourseLandingPageComponent {
             documentType: DOWNLOADABLE_DOCUMENT_TYPE.stageCertificate,
             name: cert.certifiable_name,
             displayText: cert.certifiable_name,
-            uuid : self.crypto.randomUUID(),
+            uuid: self.crypto.randomUUID(),
           } as IDownloadableDocument;
         });
       }

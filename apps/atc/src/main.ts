@@ -15,7 +15,6 @@ if (process.env.CREATE_STORYBOOK) {
 }
 
 app.get('/:app//?*', (req, res) => {
-  console.log(req.params);
   const { params: { app } } = req;
   res.sendFile(path.join(__dirname, '..', app, 'index.html'));
 });

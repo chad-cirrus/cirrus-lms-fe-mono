@@ -33,7 +33,7 @@ export class UiDownloadService {
   }
 
   getCourse(course_id: number): Observable<ICourseOverview> {
-    const url = `${this.environment['baseUrl']}/api/v4/courses/${course_id}}`;
+    const url = `${this.environment['baseUrl']}/api/v4/courses/${course_id}`;
     return this.http.get<ICourseOverview>(url);
   }
 

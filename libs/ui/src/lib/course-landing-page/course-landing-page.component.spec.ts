@@ -20,8 +20,10 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MockComponent } from 'ng-mocks';
 import { HttpClientModule } from '@angular/common/http';
 import { CirrusSanitizerService } from '../shared/cirrus-sanitizer.service';
-import { anonymize } from '@fullstory/browser';
+
 import { of } from 'rxjs';
+import { FullstoryService } from '../lib-services/fullstory/fullstory.service';
+import { FullStoryEventData } from '../lib-services/fullstory/full-story-event';
 
 describe('CourseLandingPageComponent', () => {
   let component: CourseLandingPageComponent;
@@ -91,6 +93,7 @@ describe('CourseLandingPageComponent', () => {
         { provide: 'environment', useValue: environment },
         { provide: MAT_DIALOG_DATA, useValue: {} },
         { provide: MatDialogRef, useValue: {} },
+        { provide: FullstoryService, useClass: MockFullstoryService}
       ],
     }).compileComponents();
   });
@@ -155,4 +158,10 @@ class MockUIDownloadService {
   getCourse(course_id: number): any {
     return of('');
   }
+}
+
+class MockFullstoryService {
+  init() {}
+  event(eventName: string, eventProperties: FullStoryEventData) {}
+  identify(cirrusUser: any) {}
 }

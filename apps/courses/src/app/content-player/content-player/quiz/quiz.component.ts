@@ -1,8 +1,11 @@
-import { Component, OnInit, Renderer2 } from '@angular/core';
+import { Component, OnDestroy, OnInit, Renderer2 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LessonContentComponent } from '@cirrus/ui';
 import { QuizService } from './quiz.service';
-import { IAnswerResponse, IQuizRequest, IQuizTracker, IStartQuizAttempt } from './quiz.types';
+import { IAnswerResponse } from './models/IAnswerResponse';
+import { IQuizAttempt } from './models/IQuizAttempt';
+import { QuizStatusEnum } from './models/QuizStatusEnum';
+import { IStartQuizAttempt } from './models/IStartQuizAttempt';
 import {
   CORRECT_RESPONSE_POPUP,
   INCORRECT_RESPONSE_POPUP_RETRY,
@@ -10,16 +13,18 @@ import {
 } from './quiz.constants';
 
 import { MatDialog } from '@angular/material/dialog';
-// import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { FullScreenImageDialogComponent } from '../../../full-screen-image-dialog/full-screen-image-dialog.component';
 
 import { AppState } from '../../../store/reducers';
 import { Store } from '@ngrx/store';
 import { Observable, Subject, Subscription, timer } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { ILesson } from '@cirrus/models';
+import { ILesson, PROGRESS_STATUS } from '@cirrus/models';
 import { selectLesson } from '../../../store/selectors/lessons.selector';
 import { QqbOutOfTimeComponent } from './qqb-out-of-time/qqbOutOfTime.component';
+import { completeProgress } from '../../../store/actions';
+import { QuizClass } from './models/Quiz';
+import { QuizGradeEnum } from './models/QuizGradeEnum';
 
 /**
  * Component for displaying a quiz
@@ -31,7 +36,7 @@ import { QqbOutOfTimeComponent } from './qqb-out-of-time/qqbOutOfTime.component'
   standalone: true,
   imports: [CommonModule, QqbOutOfTimeComponent],
 })
-export class QuizComponent extends LessonContentComponent implements OnInit {
+export class QuizComponent extends LessonContentComponent implements OnInit, OnDestroy {
   /**
    * Constructor for the QuizComponent
    * @param quizService Injects the QuizService to get the quiz
@@ -44,19 +49,15 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
   ) {
     super();
   }
-
+  lesson!: ILesson;
   lessonOverview$: Observable<ILesson> = this.store.select(selectLesson);
 
-  quiz!: IQuizRequest;
+  QuizStatusEnum = QuizStatusEnum;
+  QuizGradeEnum = QuizGradeEnum;
 
-  quizTracker: IQuizTracker = {
-    current_question: -1,
-    answers: [],
-    responses: [],
-    attempt_id: -1,
-    started_at: new Date('01-01-1970'),
-    elapsed_time_in_seconds: 0,
-  };
+  quiz = new QuizClass();
+
+  quiz_attempt?: IQuizAttempt = undefined;
 
   course_attempt_id = 0;
   answeredQuestionResultClass = '';
@@ -79,32 +80,58 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
    */
   ngOnInit(): void {
     super.ngOnInit();
+    this.getQuiz();
+    this.hidePrevAndNext.emit(false);
+  }
+
+  /**
+   * Retrieves the quiz data from the server and loads it into the quiz component.
+   */
+  getQuiz() {
     this.lessonOverview$.subscribe(lesson => {
+      this.lesson = lesson;
       this.course_attempt_id = lesson.course_attempt_id;
 
       this.quizService
         .getQuiz(this.content.quiz_id || -1, this.course_attempt_id, lesson.id, lesson.stage_id)
         .subscribe(response => {
-          this.quiz = response;
-          this.loadResponses();
+          this.quiz.loadQuiz(response);
         });
     });
-    this.hidePrevAndNext.emit(false);
-  }
-
-  menuToggle(event: MouseEvent) {
-    this.renderer.addClass(event.target, '--selected');
   }
 
   /**
-   * getQuestionCount()
-   *
-   * Returns the number of questions in a quiz
-   *
-   * @returns {number} The number of questions in the quiz
+   * Lifecycle hook that is called when the component is about to be destroyed.
+   * It is responsible for cleaning up any resources or subscriptions.
    */
-  getQuestionCount(): number {
-    return !this.quiz || !this.quiz.quiz_questions ? 0 : this.quiz.quiz_questions.length;
+  ngOnDestroy(): void {
+    this.hidePrevAndNext.next(false);
+    if (this.quiz.status === QuizStatusEnum.Complete) {
+      const _progress = {
+        id: this.content.progress.id,
+        status: PROGRESS_STATUS.completed,
+      };
+      this.updateProgress.emit(_progress);
+      this.store.dispatch(
+        completeProgress({
+          id: this.content.progress.id,
+          courseId: this.lesson.course_id,
+          stageId: this.lesson.stage_id,
+          lessonId: this.lesson.id,
+          progress: _progress,
+          assessment: false,
+        }),
+      );
+    }
+  }
+
+  /**
+   * Toggles the menu and adds the '--selected' class to the target element.
+   *
+   * @param event - The mouse event that triggered the menu toggle.
+   */
+  menuToggle(event: MouseEvent) {
+    this.renderer.addClass(event.target, '--selected');
   }
 
   /**
@@ -121,14 +148,15 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
     //return !this.quiz || !this.quiz.subjects ? [] : this.quiz.subjects;
   }
 
+  /**
+   * Starts the quiz timer.
+   */
   startQuizTimer(): void {
-    const quizTimeLimit = 60 * (this.quiz?.time_limit_in_minutes ?? 0); // 30 minutes, for example
-
     this.quizTimer = timer(0, 1000);
     this.timerSubscription = this.quizTimer.pipe(takeUntil(this.quizEnd$)).subscribe(() => {
-      this.quizTracker.elapsed_time_in_seconds++;
+      this.quiz.incrementTimeElapsed();
 
-      if (this.quizTracker.elapsed_time_in_seconds >= quizTimeLimit) {
+      if (this.quiz.status === QuizStatusEnum.TimedOut) {
         this.nextQuestion();
         this.showOutOfTimePopup = true;
       }
@@ -138,13 +166,14 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
   /**
    * startQuiz
    *
-   * Starts a quiz by setting the inProcess flag to true and setting the currentQuestion to 0.
-   * It also emits an event to hide the previous and next buttons on the content player.
+   * Starts a quiz, fired by user clicking start quiz button.
+   * It call startQuiz() on the quiz object and also emits an event to hide the previous and next buttons on the content player.
    *
    * @returns {void}
    */
   startQuiz(): void {
     this.hidePrevAndNext.emit(true);
+
     const attempt: IStartQuizAttempt = {
       quiz_id: this.quiz.id,
       course_attempt_id: 0,
@@ -159,27 +188,12 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
       attempt.lesson_id = lesson.id;
     });
 
-    // A timed quiz should not resume, so we need to reset it
-    if (this.quiz.quiz_attempt && this.quiz.time_limit_in_minutes && this.quiz.time_limit_in_minutes > 0) {
-      this.retakeQuiz();
-    }
-
-    if (this.quiz.quiz_attempt) {
-      // This quiz is in progress, so we need to resume it updating some of the quizTracker properties
-      this.quizTracker.attempt_id = this.quiz.quiz_attempt.id;
-      this.quizTracker.started_at = new Date(this.quiz.quiz_attempt.created_at);
-      const _answeredQuestions = this.quizTracker.responses.filter(response => response.quiz_attempt_response).length;
-      this.quizTracker.current_question = _answeredQuestions || 0;
-    } else {
-      // This quiz has not been started yet, so we need to start it
+    if (this.quiz.status === QuizStatusEnum.NotStarted) {
       this.quizService.startQuiz(attempt).subscribe(response => {
-        this.quizTracker.attempt_id = response.quiz_attempt.id;
-        this.quizTracker.started_at = new Date(response.quiz_attempt.created_at);
-        const _answeredQuestions = this.quizTracker.responses.filter(response => response.quiz_attempt_response).length;
-        this.quizTracker.current_question = _answeredQuestions || 0;
+        this.quiz.startQuiz(response);
       });
     }
-    if (this.quiz.time_limit_in_minutes && this.quiz.time_limit_in_minutes > 0) {
+    if (this.quiz.timeLimit > 0) {
       this.startQuizTimer();
     }
   }
@@ -192,117 +206,26 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
    * @returns void
    */
   goBack() {
-    this.quizTracker.current_question--;
-    if (this.quizTracker.current_question === -1) this.hidePrevAndNext.emit(false);
-  }
+    this.resetQuestionResultPopup();
 
-  /**
-   * Select an answer for a given question
-   * @param {number} questionId - The id of the question
-   * @param {number} answerId - The id of the answer
-   */
-  selectAnswer(questionId: number, answerId: number) {
-    const attemptCount = this.quizTracker.answers[this.quizTracker.current_question]?.attempt_count || 0;
+    this.quiz.previousQuestion();
 
-    this.quizTracker.answers[this.quizTracker.current_question] = {
-      question_id: questionId,
-      answer: answerId,
-      attempt_count: attemptCount,
-    };
-  }
 
-  /**
-   * Checks if the selected answer is correct
-   * @returns {boolean} - true if the selected answer is correct, false otherwise
-   */
-  checkAnswer(): boolean {
-    if (
-      this.quizTracker.responses[this.quizTracker.current_question] &&
-      this.quizTracker.responses[this.quizTracker.current_question].quiz_attempt_response
-    ) {
-      return this.quizTracker.responses[this.quizTracker.current_question].quiz_attempt_response.correct;
+    if (this.quiz.currentQuestionIndex === 0) {
+      this.hidePrevAndNext.emit(false);
     }
-    return false;
-  }
-
-  /**
-   * Checks if a quiz is in progress
-   * @returns {boolean} - true if a quiz is in progress, false otherwise
-   */
-  isQuizInProcess(): boolean {
-    return this.quizTracker.current_question > -1;
-  }
-
-  /**
-   * Checks if a quiz has been completed
-   *
-   * @returns {boolean} true if the quiz has been completed, false otherwise
-   */
-  isQuizCompleted(): boolean {
-    if (this.quiz && this.quiz.quiz_attempt?.score !== undefined && this.quiz.quiz_attempt?.score !== null) {
-      return true;
-    }
-
-    // timed quiz processing
-    if (this.quiz?.time_limit_in_minutes && this.quiz?.time_limit_in_minutes > 0) {
-      if (this.quizTracker.elapsed_time_in_seconds >= this.quiz.time_limit_in_minutes * 60) {
-        return true;
-      }
-    }
-
-    const _answeredQuestions = this.quizTracker.responses.filter(response => response.quiz_attempt_response).length;
-
-    if (
-      this.quizTracker.responses &&
-      this.quizTracker.responses.length > 0 &&
-      this.quizTracker.current_question === this.quiz.quiz_questions.length &&
-      _answeredQuestions === this.quiz.quiz_questions.length
-    ) {
-      return true;
-    }
-    return false;
-  }
-
-  /**
-   * Gets time limit in minutes if a timed quiz
-   *
-   * @returns {number} 0 if not a timed quiz, otherwise time limit in minutes
-   * */
-  getQuizTimeLimit(): number {
-    return !this.quiz || !this.quiz.time_limit_in_minutes ? 0 : this.quiz.time_limit_in_minutes;
-  }
-
-  /**
-   * Returns the ID of the currently selected answer for the current question in the quiz.
-   * If no answer is selected, returns -1.
-   * @returns The ID of the currently selected answer, or -1 if no answer is selected.
-   */
-  getSelectedAnswerId(): number {
-    if (
-      this.quizTracker.answers &&
-      this.quizTracker.answers[this.quizTracker.current_question] &&
-      typeof this.quizTracker.answers[this.quizTracker.current_question].answer !== 'undefined'
-    ) {
-      return this.quizTracker.answers[this.quizTracker.current_question].answer as number;
-    }
-    return -1;
   }
 
   /**
    * Submits the selected answer for the current question to the api.
    */
   submitAnswer() {
-    // initialize arrays if this is the first time through
-    if (!this.quizTracker.answers) {
-      this.quizTracker.answers = [];
-    }
-    if (!this.quizTracker.responses) {
-      this.quizTracker.responses = [];
-    }
-    this.quizTracker.answers[this.quizTracker.current_question].attempt_count++;
-
     this.quizService
-      .submitAnswer(this.quizTracker.attempt_id, this.quizTracker.answers[this.quizTracker.current_question])
+      .submitAnswer(
+        this.quiz.attempt?.id ?? 0,
+        this.quiz.questions[this.quiz.currentQuestionIndex].id,
+        this.quiz.selectedOptionId,
+      )
       .subscribe(response => {
         this.processResponse(response);
       });
@@ -310,32 +233,18 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
 
   /**
    * Processs the response from the api for the answered question.
-   * If the current question is the last question in the quiz, the quizCompleted boolean is set to true.
-   */
+    */
   processResponse(response: IAnswerResponse) {
-    const answer = this.quizTracker.answers[this.quizTracker.current_question];
-    const attemptCount = answer?.attempt_count || 0;
-
-    this.quizTracker.responses[this.quizTracker.current_question] = response;
-    if (this.checkAnswer()) {
+    this.quiz.processAnswer(response);
+    const isMultipleChoiceQuestion = this.quiz.questions[this.quiz.currentQuestionIndex].options.length > 2;
+    if (response.quiz_attempt_question.correct == true) {
       this.setPopupForCorrectResponse();
     } else {
-      if ((this.isMultipleChoiceQuestion() && attemptCount > 1) || !this.isMultipleChoiceQuestion()) {
+      if ((isMultipleChoiceQuestion && this.quiz.currentAttemptCount > 1) || !isMultipleChoiceQuestion) {
         this.setPopupForLastIncorrectResponse();
       } else {
         this.setPopupForFirstIncorrectResponse();
       }
-    }
-  }
-
-  /** Loads the responses for the quiz attempt from the server on initialization. *
-   * @returns void
-   * */
-  loadResponses(): void {
-    if (this.quiz.quiz_attempt && this.quiz.quiz_questions) {
-      this.quiz.quiz_questions.forEach((response, index) => {
-        this.quizTracker.responses[index] = response as IAnswerResponse;
-      });
     }
   }
 
@@ -362,7 +271,6 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
   /** Sets the popup properties for a student's incorrect question response. *
    * @returns void
    * */
-
   setPopupForLastIncorrectResponse() {
     this.answeredQuestionResultClass = INCORRECT_RESPONSE_POPUP_RETRY.class;
     this.questionResultTitle = INCORRECT_RESPONSE_POPUP_FINAL.title;
@@ -382,23 +290,11 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
   }
 
   /**
-   * Determines whether the current question is a multiple choice question.
-   * @returns A boolean indicating whether the current question is a multiple choice question.
-   * */
-  isMultipleChoiceQuestion(): boolean {
-    let _result = false;
-    if (this.quiz.quiz_questions && this.quiz.quiz_questions[this.quizTracker.current_question]) {
-      _result = this.quiz.quiz_questions[this.quizTracker.current_question].question_options.length > 2;
-    }
-    return _result;
-  }
-
-  /**
    * Handles the click event for the popup button.
    * If a user has an incorrect answer, it should not navigate to the next question.
    */
   popupButtonClick() {
-    if (this.checkAnswer()) {
+    if (this.quiz.questions[this.quiz.currentQuestionIndex].correct) {
       this.nextQuestion();
     } else {
       this.resetQuestionResultPopup();
@@ -415,8 +311,8 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
     this.hidePrevAndNext.emit(false);
 
     // Grade the quiz
-    this.quizService.gradeQuiz(this.quizTracker.attempt_id).subscribe(response => {
-      this.quizTracker.attempt = response;
+    this.quizService.gradeQuiz(this.quiz.attempt?.id ?? 0).subscribe(response => {
+      this.quiz.endQuiz(response);
     });
 
     // Stop the timer
@@ -427,57 +323,15 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
 
   /**
    * Increments the current question index and resets the answered question result class and title.
-   * If the quiz is completed, emits an event to show the previous and next buttons.
+   * If the quiz is completed, emits an event to show the previous and next content buttons.
    */
   nextQuestion() {
     this.resetQuestionResultPopup();
-    if (this.quizTracker.current_question < this.quiz.quiz_questions.length) {
-      this.quizTracker.current_question++;
-    }
 
-    if (this.isQuizCompleted()) {
+    this.quiz.nextQuestion();
+    if (this.quiz.status === QuizStatusEnum.Complete || this.quiz.status === QuizStatusEnum.TimedOut) {
       this.endQuiz();
     }
-  }
-
-  /**
-   * Determines whether the back button should be hidden.
-   * @returns A boolean indicating whether the back button should be hidden.
-   */
-  shouldHideBackButton(): boolean {
-    if (this.quizTracker.current_question <= 0) return false;
-    return true;
-  }
-
-  /**
-   * Determines whether the submit button should be hidden and the next button should be displayed.
-   * @returns A boolean indicating whether the submit button should be hidden and the next button should be displayed.
-   */
-  shouldHideSubmitButton(): boolean {
-    const answer = this.quizTracker.answers[this.quizTracker.current_question];
-    const attemptCount = answer?.attempt_count || 0;
-    const exhaustedMultipleChoiceAttempts = this.isMultipleChoiceQuestion() && attemptCount > 1;
-    const exhaustedSingleChoiceAttempts = !this.isMultipleChoiceQuestion() && attemptCount > 0;
-
-    return attemptCount > 0 && (exhaustedMultipleChoiceAttempts || exhaustedSingleChoiceAttempts);
-  }
-
-  /**
-   * Calculates the score of a quiz attempt.
-   * @returns {string} The score of the quiz attempt in the form of "correctAnswers out of totalQuestions correct. (percentage%)"
-   */
-  getScore(): string {
-    let _correctAnswers = 0;
-    let _percentage = 0.0;
-    for (let i = 0; i < this.quiz.quiz_questions.length; i++) {
-      if (
-        this.quizTracker.responses[i]?.quiz_attempt_response &&
-        this.quizTracker.responses[i]?.quiz_attempt_response.correct
-      )
-        _correctAnswers++;
-    }
-    _percentage = (_correctAnswers / this.quiz.quiz_questions.length) * 100;
-    return `${_percentage.toFixed(0)}%`;
   }
 
   /**
@@ -486,80 +340,13 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
    * */
   getStartButtonText(): string {
     let _buttonText = 'Start';
-    if (this.quizTracker.responses.length > 0) {
+    if (this.quiz.status === QuizStatusEnum.InProgress) {
       _buttonText = 'Resume';
-      if (
-        this.quiz.quiz_attempt?.score !== null &&
-        this.quiz.quiz_attempt?.score !== undefined &&
-        !this.studentHasPassed()
-      ) {
-        _buttonText = 'Retake';
-      }
+    }
+    if (this.quiz.grade === QuizGradeEnum.Failed) {
+      _buttonText = 'Retake';
     }
     return _buttonText + ' Quiz';
-  }
-
-  /**
-   * Calculates and returns the time remaining for the student to take the quiz.
-   * The time is returned as a string in the format "mm:ss".
-   * @returns {string} The elapsed time in the format "mm:ss".
-   */
-  getTimeRemaining() {
-    const timeLimit = !this.quiz.time_limit_in_minutes ? 0 : this.quiz.time_limit_in_minutes * 60;
-    const totalSeconds = timeLimit - this.quizTracker.elapsed_time_in_seconds;
-
-    const minutes = Math.floor(totalSeconds / 60);
-    const seconds = totalSeconds % 60;
-
-    // Pad the seconds with a leading zero if they are less than 10
-    const paddedSeconds = seconds < 10 ? `0${seconds}` : seconds;
-
-    return `${minutes}:${paddedSeconds}`;
-  }
-
-  /**
-   * Calculates and returns the elapsed time since the quiz started.
-   * The time is returned as a string in the format "mm:ss".
-   * @returns {string} The elapsed time in the format "mm:ss".
-   */
-  getElapsedTime() {
-    const minutes = Math.floor(this.quizTracker.elapsed_time_in_seconds / 60);
-    const seconds = this.quizTracker.elapsed_time_in_seconds % 60;
-
-    // Pad the seconds with a leading zero if they are less than 10
-    const paddedSeconds = seconds < 10 ? `0${seconds}` : seconds;
-
-    return `${minutes}:${paddedSeconds}`;
-  }
-
-  /**
-   * Determines whether to display the correct answer for a given question
-   * @returns {boolean} True if user has exhausted attempts, otherwise false.
-   */
-  showCorrectAnswer(optionId: number): boolean {
-    const attemptCount = this.quizTracker.answers[this.quizTracker.current_question]?.attempt_count || 0;
-    const response = this.quizTracker.responses[this.quizTracker.current_question]?.quiz_attempt_response;
-    const correctOptionId = response?.quiz_question?.correct_option.id;
-
-    if (this.isMultipleChoiceQuestion()) {
-      return attemptCount > 1 && optionId === correctOptionId;
-    } else {
-      return attemptCount > 0 && optionId === correctOptionId;
-    }
-  }
-
-  /**
-   * Calculates and returns if the student passed the quiz/test or not.
-   * The api determines pass percentage via admin data entry, this just takes that number at face value.
-   * In other words the user interface considers a zero pass percentage is a legitimate value, unless/until the product team changes that logic.
-   * @returns {boolean} True if passed, otherwise false.
-   */
-  studentHasPassed(): boolean {
-    const correctAnswers = this.quizTracker.responses.filter(
-      response => response.quiz_attempt_response && response.quiz_attempt_response.correct,
-    );
-    const percentage = (correctAnswers.length / this.quiz.quiz_questions.length) * 100;
-    return percentage >= this.quiz.pass_percentage;
   }
 
   /**
@@ -568,8 +355,8 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
    */
   getResultsTitle(): string {
     let _titleText = 'Please finish the quiz to see your results.';
-    if (this.isQuizCompleted()) {
-      if (this.studentHasPassed()) {
+    if (this.quiz.status === QuizStatusEnum.Submitted || this.quiz.status === QuizStatusEnum.TimedOut) {
+      if (this.quiz.grade === QuizGradeEnum.Passed) {
         _titleText = 'Congratulations, you passed!';
       } else {
         _titleText = 'Nice try, but you did not pass.';
@@ -583,7 +370,7 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
    */
   getResultsPrimaryButtonText(): string {
     let _buttonText = 'Retake';
-    if (this.isQuizCompleted() && this.studentHasPassed()) {
+    if (this.quiz.status === QuizStatusEnum.Complete) {
       _buttonText = 'Continue';
     }
     return _buttonText;
@@ -595,39 +382,21 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
    */
   getResultsSecondaryButtonText(): string {
     let _buttonText = 'Skip';
-    if (this.isQuizCompleted()) {
+    if (this.quiz.status === QuizStatusEnum.Complete) {
       _buttonText = 'Review';
     }
     return _buttonText;
   }
 
   /**
-   * Returns the approximate duration of the quiz in minutes.
-   * @returns {number} The approximate duration of the quiz in minutes.
-   */
-  getApproximateDuration(): number {
-    let _approximte_duration = 0;
-    if (this.quiz) {
-      _approximte_duration = this.quiz.approximate_duration;
-    }
-    return _approximte_duration;
-  }
-
-  /**
-   * Allows users to reattempt a failed quiz, resets quiz
+   * Allows users to reattempt a failed quiz, resets quiz data to start over
    * Resets quiz tracker and puts user back to the start quiz screen
    */
-  retakeQuiz() {
+  retakeQuiz(): void {
     this.showOutOfTimePopup = false;
-    this.quizTracker = {
-      current_question: -1,
-      answers: [],
-      responses: [],
-      attempt_id: -1,
-      started_at: new Date('01-01-1970'),
-      elapsed_time_in_seconds: 0,
-    };
-    delete this.quiz.quiz_attempt;
+
+    this.quiz.resetQuiz();
+    this.getQuiz();
     this.startQuiz();
   }
 
@@ -638,14 +407,16 @@ export class QuizComponent extends LessonContentComponent implements OnInit {
    *
    */
   openFullScreenImage() {
+    const imgUrl = this.quiz.questions[this.quiz.currentQuestionIndex].image_url ?? '';
+    const imgTitle = this.quiz.questions[this.quiz.currentQuestionIndex].image_url ?? '';
     this.dialog.open(FullScreenImageDialogComponent, {
       panelClass: 'full-screen-image-dialog',
       height: '100%',
       width: '100%',
       maxWidth: '100%',
       data: {
-        imgUrl: this.quiz.quiz_questions[this.quizTracker.current_question].image_url,
-        imgTitle: this.quiz.quiz_questions[this.quizTracker.current_question].image_title,
+        imgUrl: imgUrl,
+        imgTitle: imgTitle,
       },
     });
   }
