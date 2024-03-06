@@ -83,6 +83,6 @@ export class QuizService {
   gradeQuiz(attempt_id: number): Observable<IQuizAttempt> {
     return this.http
       .put<IQuizAttempt>(`${environment.baseUrl}/api/v5/quiz_attempts/${attempt_id}/submit`, {})
-      .pipe(map(response => response['quiz_attempt']));
+      .pipe(map(response => response['quiz_attempt' as keyof object] as IQuizAttempt));
   }
 }
