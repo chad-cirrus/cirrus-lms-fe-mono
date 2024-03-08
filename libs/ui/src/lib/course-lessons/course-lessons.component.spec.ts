@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { CourseLessonsComponent } from './course-lessons.component';
 import { MatMenuModule } from '@angular/material/menu';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -8,6 +7,7 @@ import { SearchInputComponent } from '@cirrus/search-input';
 import { FilterComponent } from '@cirrus/ui';
 import { HttpClientModule } from '@angular/common/http';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { ICourseOverview } from '@cirrus/models'; // Import ICourseOverview interface
 
 describe('CourseLessonsComponent', () => {
   let component: CourseLessonsComponent;
@@ -23,7 +23,6 @@ describe('CourseLessonsComponent', () => {
         HttpClientModule,
         MatDialogModule,
       ],
-
       declarations: [
         CourseLessonsComponent,
         MockComponent(SearchInputComponent),
@@ -36,6 +35,8 @@ describe('CourseLessonsComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(CourseLessonsComponent);
     component = fixture.componentInstance;
+    component.course = {} as ICourseOverview;
+
     fixture.detectChanges();
   });
 
