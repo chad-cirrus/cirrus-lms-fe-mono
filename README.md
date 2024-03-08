@@ -34,6 +34,15 @@ Run command:
 docker run -td -p 127.0.0.1:4201:4201 --add-host=cirrusapproach.local:0.0.0.0 <your-username>/cirrus-lms-fe-mono
 ```
 
+# How to enable the feature flag (Quiz Management)
+https://cirrusapproach.local/flipper/features
+ 
+- add feature called quiz_admin
+- fully enable
+- add quiz created to a content item of your choosing
+- add content to a lesson of your choosing
+- add lesson in the workbook on the course editor
+
 # Useful links
 ## rx.js
 

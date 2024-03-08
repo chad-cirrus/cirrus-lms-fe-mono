@@ -11,6 +11,7 @@ import { IQuestionOption } from './models/IQuestionOption';
 import { IQuizAttemptQuestion } from './models/IQuizAttemptQuestion';
 
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { FullStoryEventData, FullstoryService } from '@cirrus/ui';
 
 describe('QuizComponent', () => {
   let component: QuizComponent;
@@ -19,7 +20,12 @@ describe('QuizComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [QuizComponent, HttpClientTestingModule, StoreModule.forRoot(coursesReducers), MatDialogModule],
-      providers: [QuizService, { provide: MAT_DIALOG_DATA, useValue: {} }, { provide: MatDialogRef, useValue: {} }],
+      providers: [
+        QuizService, 
+        { provide: MAT_DIALOG_DATA, useValue: {} }, 
+        { provide: MatDialogRef, useValue: {} },
+        { provide: FullstoryService, useClass: MockFullstoryService}
+      ],
       declarations: [],
     }).compileComponents();
   });
@@ -155,3 +161,9 @@ const fnGetMockQuizAttempt = (): IQuizAttempt => {
     quiz_attempt_questions: [fnGenerateMockIQuizAttemptQuestion()],
   };
 };
+
+class MockFullstoryService {
+  init() {}
+  event(eventName: string, eventProperties: FullStoryEventData) {}
+  identify(cirrusUser: any) {}
+}
