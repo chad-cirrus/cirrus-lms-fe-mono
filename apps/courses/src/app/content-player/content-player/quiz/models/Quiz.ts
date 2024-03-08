@@ -138,28 +138,12 @@ export class QuizClass {
   }
 
   /**
-   * Calculates and returns the elapsed time since the quiz started.
-   * The time is returned as a string in the format "mm:ss".
-   * @returns {string} The elapsed time in the format "mm:ss".
-   */
-  getElapsedTime() {
-    const minutes = Math.floor(this.elapsedSeconds / 60);
-    const seconds = this.elapsedSeconds % 60;
-
-    // Pad the seconds with a leading zero if they are less than 10
-    const paddedSeconds = seconds < 10 ? `0${seconds}` : seconds;
-
-    return `${minutes}:${paddedSeconds}`;
-  }
-
-  /**
    * Selects an answer option for the quiz.
    * @param optionId - The ID of the selected answer option.
    * @returns void
    */
   selectAnswer(optionId: number): void {
     this.selectedOptionId = optionId;
-    console.log('Selected option: ', this);
   }
 
   /**

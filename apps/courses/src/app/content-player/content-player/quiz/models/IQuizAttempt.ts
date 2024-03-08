@@ -76,4 +76,10 @@ export interface IQuizAttempt {
    * @type {Array}
    */
   quiz_attempt_questions: IQuizAttemptQuestion[];
+
+  /**
+   * The time elapsed from started_at to graded_at
+   * @type {string}
+   */
+  time_elapsed?: string;
 }
