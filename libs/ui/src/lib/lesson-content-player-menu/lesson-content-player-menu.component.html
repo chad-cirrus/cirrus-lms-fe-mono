@@ -28,7 +28,7 @@
       fxLayout="row"
       fxLayoutAlign="start center"
       fxLayoutGap="16px"
-      (click)="emitPlayContent(item.id)"
+      (click)="emitPlayContent(item.id); close()"
     >
       <div><img [src]="item.icon" alt="icon" /></div>
       <div class="item-text">{{ item.text }}</div>
