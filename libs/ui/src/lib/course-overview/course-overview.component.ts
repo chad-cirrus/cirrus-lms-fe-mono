@@ -5,6 +5,11 @@ import {
   ProgressStatConfig,
 } from '../helpers/produceProgressStatsConfig';
 
+enum ContentType {
+  SELF_STUDY = 'self_study',
+  VIDEOS = 'videos',
+  QUIZZES = 'quiz',
+}
 
 @Component({
   selector: 'cirrus-course-overview',
@@ -43,7 +48,7 @@ export class CourseOverviewComponent {
     );
 
     const totalAssessmentContent = value.course_content_stats
-      .filter(stat => stat.type !== 'self_study')
+      .filter(stat => stat.type !== ContentType.SELF_STUDY && stat.type !== ContentType.VIDEOS  && stat.type !== ContentType.QUIZZES)
       .map(stat => stat.total)
       .reduce((sum, current) => sum + current, 0);
 
