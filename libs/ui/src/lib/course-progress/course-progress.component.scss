@@ -26,11 +26,15 @@
     height: 12px;
     border-radius: 200px;
   }
-  .lessons-completed{
-    font-size: 0.875rem;
-    font-size: 1.125rem;
+  
+  .lessons-completed,
+  .certificates-awarded {
+    font-size: 1rem;
     line-height: 1;
     letter-spacing: 0.03em;
+  }
+  .lessons-completed {
+    margin: 1rem 0 1.5rem
   }
 }
 
@@ -51,13 +55,35 @@
   }
 }
 
-@media (min-width: 960px) {
-  .course-progress {
-    .lessons-completed{
-      color: #ffffff;
-      .lessons-completed-bold {
-        font-family: 'akzidenz-grotesk_bqmedium';
-      }
+.course-progress {
+  .lessons-completed, 
+  .certificates-awarded {
+    color: #ffffff;
+    .lessons-completed-bold {
+      font-family: 'akzidenz-grotesk_bqmedium';
     }
   }
 }
+
+@media (min-width: 960px) {
+
+  .course-progress {
+    .lessons-completed,
+    .certificates-awarded {
+      font-size: 1.125rem;
+      margin: 1rem 0 0.5rem 0;
+    }
+  }
+  
+
+}
+// @media (min-width: 960px) {
+//   .course-progress {
+//     .lessons-completed{
+//       color: #ffffff;
+//       .lessons-completed-bold {
+//         font-family: 'akzidenz-grotesk_bqmedium';
+//       }
+//     }
+//   }
+// }
