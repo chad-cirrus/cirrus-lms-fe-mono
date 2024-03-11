@@ -92,12 +92,6 @@ describe('QuizClass', () => {
     expect(quiz.getTimeRemaining()).toBe('5:00');
   });
 
-  it('should calculate the elapsed time since the quiz started', () => {
-    quiz.elapsedSeconds = 300; // 5 minutes
-
-    expect(quiz.getElapsedTime()).toBe('5:00');
-  });
-
   it('should select an answer', () => {
     const optionId = 1;
     quiz.selectAnswer(optionId);

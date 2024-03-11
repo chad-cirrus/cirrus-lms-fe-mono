@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit, Renderer2 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LessonContentComponent } from '@cirrus/ui';
+import { FullStoryEvent, FullStoryEventData, FullstoryService, LessonContentComponent } from '@cirrus/ui';
 import { QuizService } from './quiz.service';
 import { IAnswerResponse } from './models/IAnswerResponse';
 import { IQuizAttempt } from './models/IQuizAttempt';
@@ -25,6 +25,7 @@ import { QqbOutOfTimeComponent } from './qqb-out-of-time/qqbOutOfTime.component'
 import { completeProgress } from '../../../store/actions';
 import { QuizClass } from './models/Quiz';
 import { QuizGradeEnum } from './models/QuizGradeEnum';
+import { CoursesService } from '../../../course/course.service';
 
 /**
  * Component for displaying a quiz
@@ -46,6 +47,8 @@ export class QuizComponent extends LessonContentComponent implements OnInit, OnD
     private quizService: QuizService,
     private renderer: Renderer2,
     private store: Store<AppState>,
+    private coursesService: CoursesService,
+    private fullstoryService: FullstoryService
   ) {
     super();
   }
@@ -59,6 +62,7 @@ export class QuizComponent extends LessonContentComponent implements OnInit, OnD
 
   quiz_attempt?: IQuizAttempt = undefined;
 
+  courseTitle = '';
   course_attempt_id = 0;
   answeredQuestionResultClass = '';
   questionResultTitle = '';
@@ -82,6 +86,8 @@ export class QuizComponent extends LessonContentComponent implements OnInit, OnD
     super.ngOnInit();
     this.getQuiz();
     this.hidePrevAndNext.emit(false);
+    this.getCourseInfo();
+    this.fullStoryInit();
   }
 
   /**
@@ -235,17 +241,30 @@ export class QuizComponent extends LessonContentComponent implements OnInit, OnD
    * Processs the response from the api for the answered question.
     */
   processResponse(response: IAnswerResponse) {
+    const fullStoryData = {
+      answer_result: 'null', 
+      answer_given: this.quiz.selectedOptionId, 
+      content_item_title: this.content.title,
+      quiz_question: this.quiz.questions['desc'],
+      question_id: this.quiz.questions['id']
+    };
+
     this.quiz.processAnswer(response);
     const isMultipleChoiceQuestion = this.quiz.questions[this.quiz.currentQuestionIndex].options.length > 2;
     if (response.quiz_attempt_question.correct == true) {
+      fullStoryData.answer_result = 'correct';
       this.setPopupForCorrectResponse();
     } else {
+      fullStoryData.answer_result = 'incorrect';
       if ((isMultipleChoiceQuestion && this.quiz.currentAttemptCount > 1) || !isMultipleChoiceQuestion) {
         this.setPopupForLastIncorrectResponse();
       } else {
         this.setPopupForFirstIncorrectResponse();
       }
     }
+
+    const fullstoryEvent = new FullStoryEvent(this.courseTitle, this.lesson.title, this.content.title, fullStoryData);
+    this.fullstoryService.event('Quiz Question', fullstoryEvent);
   }
 
   /*
@@ -419,5 +438,21 @@ export class QuizComponent extends LessonContentComponent implements OnInit, OnD
         imgTitle: imgTitle,
       },
     });
+  }
+
+  getCourseInfo() {
+    this.coursesService.getCourseOverview(this.lesson.course_id).subscribe(
+      response => {
+        this.courseTitle = response.title;
+      }, 
+    )
+  }
+
+  fullStoryInit() {
+    this.fullstoryService.init();
+  }
+
+  fullstoryEvent(eventName: string, eventProperties: FullStoryEventData) {
+    this.fullstoryService.event(eventName, eventProperties);
   }
 }

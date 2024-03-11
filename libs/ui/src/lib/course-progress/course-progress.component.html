@@ -32,7 +32,7 @@
       </span>
     </div>
 
-    <div class="certificates-awarded" (click)="clickAndScroll()">
+    <div *ngIf="this.certificateStats.total > 0" class="certificates-awarded" (click)="clickAndScroll()">
       <div class="certificates-awarded-icon">
         <img src="courses/images/svg/certificate-award.svg">
       </div>
