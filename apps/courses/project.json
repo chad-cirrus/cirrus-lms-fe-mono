@@ -6,7 +6,7 @@
   "prefix": "cirrus",
   "targets": {
     "build": {
-      "executor": "@nrwl/angular:webpack-browser",
+      "executor": "@nx/angular:webpack-browser",
       "outputs": ["{options.outputPath}"],
       "options": {
         "deployUrl": "/courses/",
@@ -136,56 +136,48 @@
       "defaultConfiguration": "production"
     },
     "serve": {
-      "executor": "@nrwl/angular:webpack-dev-server",
+      "executor": "@nx/angular:dev-server",
       "configurations": {
         "production": {
-          "browserTarget": "courses:build:production"
+          "buildTarget": "courses:build:production"
         },
         "staging": {
-          "browserTarget": "courses:build:staging"
+          "buildTarget": "courses:build:staging"
         },
         "uat": {
-          "browserTarget": "courses:build:uat"
+          "buildTarget": "courses:build:uat"
         },
         "development": {
           "host": "cirrusapproach.local",
-          "browserTarget": "courses:build:development"
+          "buildTarget": "courses:build:development"
         }
       },
       "defaultConfiguration": "development",
       "options": {
         "host": "cirrusapproach.local",
         "port": 4201,
-        "browserTarget": "courses:build:development"
+        "buildTarget": "courses:build:development"
       }
     },
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
-        "browserTarget": "courses:build"
+        "buildTarget": "courses:build"
       }
     },
     "lint": {
-      "executor": "@nrwl/linter:eslint",
-      "options": {
-        "lintFilePatterns": [
-          "apps/courses/src/**/*.ts",
-          "apps/courses/src/**/*.html"
-        ]
-      }
+      "executor": "@nx/eslint:lint"
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/courses"],
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/apps/courses"],
       "options": {
-        "jestConfig": "apps/courses/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "apps/courses/jest.config.ts"
       }
     },
     "storybook": {
-      "executor": "@nrwl/storybook:storybook",
+      "executor": "@nx/storybook:storybook",
       "options": {
-        "uiFramework": "@storybook/angular",
         "port": 4400,
         "configDir": "apps/courses/.storybook"
       },
@@ -196,10 +188,9 @@
       }
     },
     "build-storybook": {
-      "executor": "@nrwl/storybook:build",
+      "executor": "@nx/storybook:build",
       "outputs": ["{options.outputDir}"],
       "options": {
-        "uiFramework": "@storybook/angular",
         "styles": ["apps/courses/src/styles.scss"],
         "stylePreprocessorOptions": {
           "includePaths": ["libs/ui/src/lib/styles"]

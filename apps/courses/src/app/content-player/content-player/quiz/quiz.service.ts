@@ -34,7 +34,7 @@ export class QuizService {
       .get<IQuizRequest>(
         `${environment.baseUrl}/api/v4/quizzes/${id}?course_attempt_id=${course_attempt_id}&lesson_id=${lesson_id}&stage_id=${stage_id}`,
       )
-      .pipe(map(response => response['content_player/quiz']));
+      .pipe(map(response => response['content_player/quiz' as keyof object] as IQuizRequest));
   }
 
   /**
@@ -83,6 +83,6 @@ export class QuizService {
   gradeQuiz(attempt_id: number): Observable<IQuizAttempt> {
     return this.http
       .put<IQuizAttempt>(`${environment.baseUrl}/api/v5/quiz_attempts/${attempt_id}/submit`, {})
-      .pipe(map(response => response['quiz_attempt']));
+      .pipe(map(response => response['quiz_attempt' as keyof object] as IQuizAttempt));
   }
 }

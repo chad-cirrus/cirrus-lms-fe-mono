@@ -6,21 +6,14 @@
   "prefix": "cirrus",
   "targets": {
     "test": {
-      "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/badge"],
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/badge"],
       "options": {
-        "jestConfig": "libs/badge/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "libs/badge/jest.config.ts"
       }
     },
     "lint": {
-      "executor": "@nrwl/linter:eslint",
-      "options": {
-        "lintFilePatterns": [
-          "libs/badge/src/**/*.ts",
-          "libs/badge/src/**/*.html"
-        ]
-      }
+      "executor": "@nx/eslint:lint"
     }
   },
   "tags": []

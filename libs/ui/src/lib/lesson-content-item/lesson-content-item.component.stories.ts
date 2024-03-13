@@ -1,4 +1,4 @@
-/* eslint-disable @nrwl/nx/enforce-module-boundaries */
+/* eslint-disable @nx/enforce-module-boundaries */
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { moduleMetadata, Story, Meta } from '@storybook/angular';
 import { testData, testData2 } from 'libs/models/src/testing/testData';
@@ -14,9 +14,7 @@ export default {
   ],
 } as Meta<LessonContentItemComponent>;
 
-const Template: Story<LessonContentItemComponent> = (
-  args: LessonContentItemComponent
-) => ({
+const Template: Story<LessonContentItemComponent> = (args: LessonContentItemComponent) => ({
   component: LessonContentItemComponent,
   props: args,
 });

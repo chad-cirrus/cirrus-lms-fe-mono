@@ -1,5 +1,5 @@
 import { Meta, moduleMetadata, Story } from '@storybook/angular';
-// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+// eslint-disable-next-line @nx/enforce-module-boundaries
 import { testDataReccurent853b } from 'libs/models/src/testing/testData853b';
 import { CirrusSanitizerService } from '../shared/cirrus-sanitizer.service';
 import { ContentImageComponent } from './content-image.component';
@@ -14,9 +14,7 @@ export default {
   ],
 } as Meta<ContentImageComponent>;
 
-const Template: Story<ContentImageComponent> = (
-  args: ContentImageComponent
-) => ({
+const Template: Story<ContentImageComponent> = (args: ContentImageComponent) => ({
   component: ContentImageComponent,
   props: args,
 });

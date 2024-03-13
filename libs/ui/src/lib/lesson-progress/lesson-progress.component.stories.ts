@@ -1,4 +1,4 @@
-/* eslint-disable @nrwl/nx/enforce-module-boundaries */
+/* eslint-disable @nx/enforce-module-boundaries */
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -17,9 +17,7 @@ export default {
   ],
 } as Meta<LessonProgressComponent>;
 
-const Template: Story<LessonProgressComponent> = (
-  args: LessonProgressComponent
-) => ({
+const Template: Story<LessonProgressComponent> = (args: LessonProgressComponent) => ({
   props: args,
 });
 

@@ -1,9 +1,9 @@
-
-
 # Cirrus
+
 This is the mono repo for Cirrus Learning Management.
 
 ## Compodoc documentation generator
+
 A website can be generated for documentation of the app.
 
 https://github.com/compodoc/compodoc
@@ -15,21 +15,25 @@ To add it to a project:
 '``yarn add --dev @compodoc/compodoc```
 
 To generate the documentation:
-```npx compodoc -p tsconfig.doc.json```
+`npx compodoc -p tsconfig.doc.json`
 
 To serve the generated output on local web server:
-```npx compodoc -s --port 8090 -d ./documentation```
+`npx compodoc -s --port 8090 -d ./documentation`
 
 ## Docker
+
 https://docs.docker.com/engine/install/
 
 example build command:
+
 ```
 docker build . -t <your username here>/cirrus-lms-fe-mono
 ```
-You can list this image from above: ```docker images```
 
-Run command: 
+You can list this image from above: `docker images`
+
+Run command:
+
 ```
 docker run -td -p 127.0.0.1:4201:4201 --add-host=cirrusapproach.local:0.0.0.0 <your-username>/cirrus-lms-fe-mono
 ```
@@ -44,11 +48,13 @@ https://cirrusapproach.local/flipper/features
 - add lesson in the workbook on the course editor
 
 # Useful links
+
 ## rx.js
 
 https://rxjs.dev/
 
 ## Nx
+
 This project was generated using [Nx](https://nx.dev).
 
 <p style="text-align: center;"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="450"></p>
@@ -72,7 +78,7 @@ These capabilities include generating applications, libraries, etc as well as th
 Below are our core plugins:
 
 - [Angular](https://angular.io)
-  - `ng add @nrwl/angular`
+  - `ng add @nx/angular`
 - [React](https://reactjs.org)
   - `ng add @nrwl/react`
 - Web (no framework frontends)
@@ -80,15 +86,15 @@ Below are our core plugins:
 - [Nest](https://nestjs.com)
   - `ng add @nrwl/nest`
 - [Express](https://expressjs.com)
-  - `ng add @nrwl/express`
+  - `ng add @nx/express`
 - [Node](https://nodejs.org)
-  - `ng add @nrwl/node`
+  - `ng add @nx/node`
 
 There are also many [community plugins](https://nx.dev/community) you could add.
 
 ## Generate an application
 
-Run `ng g @nrwl/angular:app my-app` to generate an application.
+Run `ng g @nx/angular:app my-app` to generate an application.
 
 > You can use any of the plugins above to generate applications as well.
 
@@ -96,7 +102,7 @@ When using Nx, you can create multiple applications and libraries in the same wo
 
 ## Generate a library
 
-Run `ng g @nrwl/angular:lib my-lib` to generate a library.
+Run `ng g @nx/angular:lib my-lib` to generate a library.
 
 > You can also use any of the plugins above to generate libraries as well.
 
@@ -134,11 +140,6 @@ Run `nx dep-graph` to see a diagram of the dependencies of your projects.
 
 Visit the [Nx Documentation](https://nx.dev/angular) to learn more.
 
-
-
-
-
-
 ## ☁ Nx Cloud
 
 ### Distributed Computation Caching & Distributed Task Execution
@@ -151,9 +152,10 @@ Teams using Nx gain the advantage of building full-stack applications with their
 
 Visit [Nx Cloud](https://nx.app/) to learn more.
 
-
 # install nvm (node version manager: https://github.com/nvm-sh/nvm)
+
 # from this stackoverflow post: https://stackoverflow.com/a/43497744
+
 ENV NVM_DIR /home/node/nvm
 RUN mkdir -p $NVM_DIR
 RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.1/install.sh | bash
@@ -161,13 +163,30 @@ ENV NODE_VERSION v16.14.2
 RUN /bin/bash -c "source $NVM_DIR/nvm.sh && nvm install $NODE_VERSION && nvm use --delete-prefix $NODE_VERSION"
 
 ENV NODE_PATH $NVM_DIR/versions/node/$NODE_VERSION/lib/node_modules
-ENV PATH      $NVM_DIR/versions/node/$NODE_VERSION/bin:$PATH
+ENV PATH $NVM_DIR/versions/node/$NODE_VERSION/bin:$PATH
 
 # install app
+
 RUN mkdir -p /cirrus-lms-fe-mono
 WORKDIR /cirrus-lms-fe-mono
 ADD . /cirrus-lms-fe-mono
 RUN npm install -g -s --no-progress yarn && \
-  yarn && \
-  yarn run build && \
-  yarn cache clean
+ yarn && \
+ yarn run build && \
+ yarn cache clean
+
+## Migration notes from 15.85 up
+
+Steps taken:
+
+1. `yarn nx migrate 16.1.0 --verbose`
+1. `yarn nx migrate --run-migrations`
+1. storybook migration failed from previous step so ran: ```npx storybook@7.6.10 upgrade --yes```
+1. that failed too, so after research: ```npx storybook@7.6.10 automigrate```, that was successful
+1. log showed flexlayoutmodule error, so replaced FlexLayoutModule with FlexModule in source
+1. log showed error 'decoration of angular cli did not complete successfully'.  after research: https://github.com/nrwl/nx/issues/17355
+1. errors around flexlayoutmodule , upgraded to 15.0.0-beta.42
+1. url is being rerouted incorrectly now, investigating...
+
+
+

@@ -11,7 +11,7 @@ import {
   TermsAgreementSubtitleText,
 } from '@cirrus/models';
 import { produceConfig } from './produce-config';
-// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+// eslint-disable-next-line @nx/enforce-module-boundaries
 import { ElementRef, HostListener, ViewChild } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { BehaviorSubject } from 'rxjs';

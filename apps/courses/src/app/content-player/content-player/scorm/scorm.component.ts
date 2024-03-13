@@ -57,7 +57,7 @@ export class ScormComponent
       this.courseTitle,
       this.content
     );
-    
+
     this.loadingSubject.subscribe(isLoading => {
       this.loading = isLoading;
     });
@@ -78,7 +78,7 @@ export class ScormComponent
           this.url = this.sanitizer.bypassSecurityTrustResourceUrl(
             `${environment.baseUrl}/${url.toString()}`
           );
-          window['API' as string] = this.api;
+          window['API' as keyof object] = this.api;
           this.loadingSubject.next(false);
           this.hidePrevAndNext.emit(true);
         },

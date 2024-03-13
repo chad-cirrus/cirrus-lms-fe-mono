@@ -1,4 +1,4 @@
-/* eslint-disable @nrwl/nx/enforce-module-boundaries */
+/* eslint-disable @nx/enforce-module-boundaries */
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ICirrusUser, IContent, ICourseOverview, ILesson } from '@cirrus/models';
@@ -52,9 +52,7 @@ export class LessonLandingPageComponent implements OnInit, OnDestroy {
       ['failed']: '',
     };
     this._buttonText = dictionary[this.lesson.progress.status];
-    this._introVideoTitle.next(
-      this.lesson.student_intro_video?.title as string
-    );
+    this._introVideoTitle.next(this.lesson.student_intro_video?.title as string);
   }
 
   get lesson() {
@@ -69,9 +67,9 @@ export class LessonLandingPageComponent implements OnInit, OnDestroy {
       this._introVideoTitle.next(
         instructor
           ? (this.lesson.instructor_intro_video?.title as string)
-          : (this.lesson.student_intro_video?.title as string)
+          : (this.lesson.student_intro_video?.title as string),
       );
-    })
+    }),
   ) as Observable<boolean>;
 
   get buttonText() {
@@ -111,20 +109,14 @@ export class LessonLandingPageComponent implements OnInit, OnDestroy {
     return 'courses/images/svg/play_button_filled_in.svg';
   }
 
-  constructor(
-    private dialog: MatDialog,
-    private sanitizer: DomSanitizer,
-    private router: Router
-  ) {}
+  constructor(private dialog: MatDialog, private sanitizer: DomSanitizer, private router: Router) {}
 
   ngOnInit() {
-    this.router.events
-      .pipe(takeUntil(this.destroyed))
-      .subscribe((event: Event) => {
-        if (event instanceof NavigationStart) {
-          this.instructorToggle.setValue(false);
-        }
-      });
+    this.router.events.pipe(takeUntil(this.destroyed)).subscribe((event: Event) => {
+      if (event instanceof NavigationStart) {
+        this.instructorToggle.setValue(false);
+      }
+    });
   }
 
   ngOnDestroy() {
@@ -134,32 +126,21 @@ export class LessonLandingPageComponent implements OnInit, OnDestroy {
 
   setBackgroundImage(value: boolean): string {
     if (value) {
-      return this.lesson?.mobile_hero_image_url
-        ? this.lesson?.mobile_hero_image_url
-        : this.defaultMobileLesson;
+      return this.lesson?.mobile_hero_image_url ? this.lesson?.mobile_hero_image_url : this.defaultMobileLesson;
     } else {
-      return this.lesson?.desktop_hero_image_url
-        ? this.lesson?.desktop_hero_image_url
-        : this.defaultDesktopLesson;
+      return this.lesson?.desktop_hero_image_url ? this.lesson?.desktop_hero_image_url : this.defaultDesktopLesson;
     }
   }
 
   startLesson() {
     const { student_intro_video, overview } = this.lesson;
-    if (
-      !student_intro_video &&
-      overview && 
-      this.lesson.progress.status === LessonStatus.NOT_STARTED
-    ) {
+    if (!student_intro_video && overview && this.lesson.progress.status === LessonStatus.NOT_STARTED) {
       setTimeout(() => {
         this.displayOverview(overview);
       }, 1000);
       return;
     }
-    if (
-      student_intro_video &&
-      this.lesson.progress.status === LessonStatus.NOT_STARTED
-    ) {
+    if (student_intro_video && this.lesson.progress.status === LessonStatus.NOT_STARTED) {
       this.playIntroVideo();
     } else {
       this.playCurrentContent();
@@ -211,7 +192,7 @@ export class LessonLandingPageComponent implements OnInit, OnDestroy {
     });
 
     if (!firstContentNotCompleted) {
-      this.playNextLessonContent.emit({courseOverview: this.courseOverview, lesson: this.lesson});
+      this.playNextLessonContent.emit({ courseOverview: this.courseOverview, lesson: this.lesson });
       return;
     }
 

@@ -1,15 +1,19 @@
 # NX
+
 NX is a mono repo. It's main advantage is that developers can have multiple Angular projects and libraries.
 For Cirrus Approach, the Courses, Recent-Activity and upcoming Instructor Dashboard make use of common components and data structures.
 This is why we have a Models library, a UI library, Global SideNav and Global Header library, and a Notifications' library.
 
 ## Documentation
+
 NX documentation specific to Angular can be found [here](https://nx.dev/getting-started/angular-standalone-tutorial).
 
 ## Pro Tips
-* __Plugins__ Use the NX Console plugin for VSCode or WebStorm. Makes your life a lot easier. This is how nearly 100% of the components were created.
-  * When using the NX Console to generate a component, especially in a library such as the UI library. The NX console (via Angular Schematics will automatically declare )
-****
+
+- **Plugins** Use the NX Console plugin for VSCode or WebStorm. Makes your life a lot easier. This is how nearly 100% of the components were created.
+  - When using the NX Console to generate a component, especially in a library such as the UI library. The NX console (via Angular Schematics will automatically declare )
+
+---
 
 ## Creating an nx repo
 
@@ -26,19 +30,19 @@ Say no to Nx Cloud.
 ##Setting up the Angular plugin
 Adding the Angular plugin to an existing Nx workspace can be done with the following:
 
-`yarn add -D @nrwl/angular`
+`yarn add -D @nx/angular`
 
-`npm install -D @nrwl/angular`
+`npm install -D @nx/angular`
 
-*We've used YARN with Cirrus*
+_We've used YARN with Cirrus_
 
->Unhappy about this, but I had to run `nx migrate next`, delete the node_modules directory and run yarn to reinstall all the npm packages before I could generate the angular application.
+> Unhappy about this, but I had to run `nx migrate next`, delete the node_modules directory and run yarn to reinstall all the npm packages before I could generate the angular application.
 
 ##Using the Angular Plugin: Creating a project within the MonoRepo
 
 It's straightforward to generate an Angular application:
 
-`nx g @nrwl/angular:app appName`
+`nx g @nx/angular:app appName`
 
 By default, the application will be generated with:
 
@@ -56,11 +60,11 @@ Which produces:
 
 ![img.png](dry-run.png)
 
-Let's unpack this. We are giving the project name of apollo, choosing scss and a port of 4200.  This is the default for angular apps. But I purposely did this to show the option. Currently, the legacy app is running on 4200, Courses is running on 4201, and Recent-Activity is running on 4202. It is predictable that Instructor-Experience will run on 4203. Also, though the image doesn't show it, I've checked the routing module option.
+Let's unpack this. We are giving the project name of apollo, choosing scss and a port of 4200. This is the default for angular apps. But I purposely did this to show the option. Currently, the legacy app is running on 4200, Courses is running on 4201, and Recent-Activity is running on 4202. It is predictable that Instructor-Experience will run on 4203. Also, though the image doesn't show it, I've checked the routing module option.
 
-Notice that in the terminal there is a yellow line that says 'NOTE: The "dryRun" flag means no changes were made.'  This means exactly what it says. The NX console did not create any files. It is only simulating the creation of the project. You must click the blue RUN button in the upper right-hand corner in order to make code changes and actually create the project.
+Notice that in the terminal there is a yellow line that says 'NOTE: The "dryRun" flag means no changes were made.' This means exactly what it says. The NX console did not create any files. It is only simulating the creation of the project. You must click the blue RUN button in the upper right-hand corner in order to make code changes and actually create the project.
 
->In the cirrus project we are using Angular 13 and Nrwl 13. This has an 'angular.json' file in the root of the directory. But with the repo that I am producing at the time of this documentation there is no 'angular.json' file. Instead, the project has its own 'project.json' in its project directory.
+> In the cirrus project we are using Angular 13 and Nrwl 13. This has an 'angular.json' file in the root of the directory. But with the repo that I am producing at the time of this documentation there is no 'angular.json' file. Instead, the project has its own 'project.json' in its project directory.
 
 ![img.png](project-json.png)
 
@@ -72,7 +76,7 @@ At this point I repeated the angular application generation for a second project
 
 Using the same Nx Console we can generate a Nx Library.
 
-Click Nx Console Icon in the VS CODE sidebar menu >> click 'generate' icon in the 'GENERATE & RUN TARGET' group >> in the dropdown start typing 'library' and then select '@nrwl/workspace'.
+Click Nx Console Icon in the VS CODE sidebar menu >> click 'generate' icon in the 'GENERATE & RUN TARGET' group >> in the dropdown start typing 'library' and then select '@nx/workspace'.
 
 ![img.png](workspace.png)
 

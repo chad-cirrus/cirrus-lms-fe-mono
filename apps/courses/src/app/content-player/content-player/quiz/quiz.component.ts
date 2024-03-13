@@ -444,7 +444,7 @@ export class QuizComponent extends LessonContentComponent implements OnInit, OnD
     this.coursesService.getCourseOverview(this.lesson.course_id).subscribe(
       response => {
         this.courseTitle = response.title;
-      }, 
+      },
     )
   }
 

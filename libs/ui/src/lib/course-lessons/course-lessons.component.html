@@ -3,7 +3,7 @@
   fxLayoutAlign="space-between start"
   class="courses-main-content-inner-wrapper"
 >
-  <div class="filter-container" [formGroup]="filterForm">
+  <div *ngIf="course.enrollments" class="filter-container" [formGroup]="filterForm">
     <div class="filter-search">
       <button class="filter-button" [matMenuTriggerFor]="menu">
         Filter Lessons

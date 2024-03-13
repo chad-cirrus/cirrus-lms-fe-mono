@@ -182,7 +182,7 @@ export class ContentPlayerComponent
   ) {
     const lessonContentComponentRef =
       this.vcref.ViewContainerRef.createComponent(
-        componentDictionary[content.content_type]
+        componentDictionary[content.content_type as keyof object ]
       );
 
     const component =

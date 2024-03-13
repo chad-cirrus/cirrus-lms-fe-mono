@@ -291,7 +291,7 @@
         </div>
         <span>Elapsed Time</span>
 
-        <div class="quiz-results-time">{{ quiz.getElapsedTime() }}</div>
+        <div class="quiz-results-time">{{ quiz.attempt?.time_elapsed }}</div>
       </div>
     </div>
     <div class="quiz-results-next-steps" *ngIf="quiz.grade === QuizGradeEnum.Failed">

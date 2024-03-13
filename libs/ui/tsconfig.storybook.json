@@ -1,0 +1,13 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "emitDecoratorMetadata": true
+  },
+  "exclude": ["src/**/*.spec.ts", "jest.config.ts"],
+  "include": [
+    "src/**/*",
+    ".storybook/*.js",
+    "../../apps/recent-activity/src/app/directives/clickoutside.directive.ts",
+    "../../apps/recent-activity/src/app/directives/clickoutside.directive.spec.ts"
+  ]
+}
