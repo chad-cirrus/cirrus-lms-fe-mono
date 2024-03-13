@@ -7,7 +7,7 @@ import { MediaServerService } from '../../../media.service';
 import { FullStoryEvent } from '@cirrus/ui';
 
 export class ScormAPI {
-  data: {} = {
+  data: object = {
     'cmi.core.lesson_status': 'not attempted',
   };
   grade = 0;
@@ -36,7 +36,7 @@ export class ScormAPI {
   }
 
   get lessonStatus() {
-    return this.data['cmi.core.lesson_status'];
+    return this.data['cmi.core.lesson_status' as keyof object];
   }
 
   LMSInitialize() {
@@ -46,7 +46,7 @@ export class ScormAPI {
       status,
       scorm: { pass: this.isPassed, grade: this.grade },
     };
-    this.data['cmi.suspend_data'] = this.progress.scorm_progress;
+    (this.data as { [key: string]: unknown })['cmi.suspend_data' as keyof object] = this.progress.scorm_progress;
     this.updateProgress.emit(payload);
     this.hideNavigation.emit(true);
     this.scormProgress
@@ -66,21 +66,21 @@ export class ScormAPI {
     const payload = {
       id: this.progress.id,
       status,
-      scorm: { pass: this.isPassed, grade: this.data['cmi.core.score.raw'] },
+      scorm: { pass: this.isPassed, grade: this.data['cmi.core.score.raw' as keyof object] },
     };
 
     const fullstoryEvent = new FullStoryEvent(
       this.courseTitle,
       this.lessonTitle,
       this.content.title,
-      this.data
+      this.data as { [key: string]: unknown } // Fix: Add index signature for string keys
     );
     this.facadeService.fullstoryEvent(
       fullstoryEvent.eventName,
       fullstoryEvent.eventData
     );
 
-    this.scormProgress.next(this.data['cmi.suspend_data']);
+    this.scormProgress.next(this.data['cmi.suspend_data' as keyof object]);
     this.updateProgress.emit(payload);
     this.hideNavigation.emit(!this.isPassed);
     return 'true';
@@ -101,12 +101,12 @@ export class ScormAPI {
     return 'true';
   }
 
-  LMSGetValue(key: any) {
-    return this.data[key];
+  LMSGetValue(key: object) {
+    return this.data[key as keyof object];
   }
 
-  LMSSetValue(key: any, value: any) {
-    this.data[key] = value;
+   LMSSetValue(key: string, value: unknown) {
+    this.data[key as keyof object] = value as never; // Type assertion to 'never'
     return 'true';
   }
 }

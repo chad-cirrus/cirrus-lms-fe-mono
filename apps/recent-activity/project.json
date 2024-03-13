@@ -6,7 +6,7 @@
   "prefix": "cirrus",
   "targets": {
     "build": {
-      "executor": "@nrwl/angular:webpack-browser",
+      "executor": "@nx/angular:webpack-browser",
       "outputs": ["{options.outputPath}"],
       "options": {
         "deployUrl": "/recent-activity/",
@@ -128,19 +128,19 @@
       "defaultConfiguration": "production"
     },
     "serve": {
-      "executor": "@nrwl/angular:webpack-dev-server",
+      "executor": "@nx/angular:dev-server",
       "configurations": {
         "production": {
-          "browserTarget": "recent-activity:build:production"
+          "buildTarget": "recent-activity:build:production"
         },
         "staging": {
-          "browserTarget": "recent-activity:build:staging"
+          "buildTarget": "recent-activity:build:staging"
         },
         "uat": {
-          "browserTarget": "recent-activity:build:uat"
+          "buildTarget": "recent-activity:build:uat"
         },
         "development": {
-          "browserTarget": "recent-activity:build:development"
+          "buildTarget": "recent-activity:build:development"
         }
       },
       "defaultConfiguration": "development",
@@ -152,30 +152,22 @@
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
-        "browserTarget": "recent-activity:build"
+        "buildTarget": "recent-activity:build"
       }
     },
     "lint": {
-      "executor": "@nrwl/linter:eslint",
-      "options": {
-        "lintFilePatterns": [
-          "apps/recent-activity/src/**/*.ts",
-          "apps/recent-activity/src/**/*.html"
-        ]
-      }
+      "executor": "@nx/eslint:lint"
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/recent-activity"],
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/apps/recent-activity"],
       "options": {
-        "jestConfig": "apps/recent-activity/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "apps/recent-activity/jest.config.ts"
       }
     },
     "storybook": {
-      "executor": "@nrwl/storybook:storybook",
+      "executor": "@nx/storybook:storybook",
       "options": {
-        "uiFramework": "@storybook/angular",
         "port": 4400,
         "configDir": "apps/recent-activity/.storybook"
       },
@@ -186,10 +178,9 @@
       }
     },
     "build-storybook": {
-      "executor": "@nrwl/storybook:build",
+      "executor": "@nx/storybook:build",
       "outputs": ["{options.outputDir}"],
       "options": {
-        "uiFramework": "@storybook/angular",
         "styles": ["./apps/recent-activity/src/styles.scss"],
         "configDir": "apps/recent-activity/.storybook",
         "outputDir": "dist/storybook/recent-activity"

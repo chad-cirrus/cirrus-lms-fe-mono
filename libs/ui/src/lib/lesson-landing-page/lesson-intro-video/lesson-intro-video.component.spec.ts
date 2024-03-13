@@ -1,8 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { LessonIntroVideoComponent } from './lesson-intro-video.component';
 import { InstructorIntroVideo, StudentIntroVideo } from '@cirrus/models';
-import { MatIcon } from '@angular/material/icon';
 import { MatIconTestingModule } from '@angular/material/icon/testing';
+import { MatIconModule } from '@angular/material/icon';
 
 describe('LessonIntroVideoComponent', () => {
     let component: LessonIntroVideoComponent;
@@ -10,9 +10,8 @@ describe('LessonIntroVideoComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [MatIconTestingModule],
+            imports: [MatIconTestingModule, MatIconModule],
             declarations: [
-                MatIcon,
                 LessonIntroVideoComponent
             ]
         }).compileComponents();

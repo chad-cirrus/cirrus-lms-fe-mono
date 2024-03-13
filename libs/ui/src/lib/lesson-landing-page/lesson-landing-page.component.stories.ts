@@ -1,4 +1,4 @@
-/* eslint-disable @nrwl/nx/enforce-module-boundaries */
+/* eslint-disable @nx/enforce-module-boundaries */
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -26,8 +26,7 @@ import { CtaButtonComponent } from '../cta-button/cta-button.component';
 const mockEnvironment = {
   production: false,
   baseUrl: 'http://cirrusapproach.local:3000',
-  profile:
-    'https://cirfullsb-cirrusaircraftvpo.cs41.force.com/approachsso/s/profile/',
+  profile: 'https://cirfullsb-cirrusaircraftvpo.cs41.force.com/approachsso/s/profile/',
   defaultMobileLesson:
     'https://cirrusapproachherokuprod.blob.core.windows.net/cirruslmsherokudevcontainer/content-items/images/default-lesson-hero-mobile.jpg',
   defaultDesktopLesson:
@@ -73,9 +72,7 @@ export default {
   ],
 } as Meta<LessonLandingPageComponent>;
 
-const Template: Story<LessonLandingPageComponent> = (
-  args: LessonLandingPageComponent
-) => ({
+const Template: Story<LessonLandingPageComponent> = (args: LessonLandingPageComponent) => ({
   component: LessonLandingPageComponent,
   props: args,
 });

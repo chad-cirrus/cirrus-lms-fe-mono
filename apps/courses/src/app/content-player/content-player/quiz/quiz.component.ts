@@ -242,11 +242,11 @@ export class QuizComponent extends LessonContentComponent implements OnInit, OnD
     */
   processResponse(response: IAnswerResponse) {
     const fullStoryData = {
-      answer_result: 'null', 
-      answer_given: this.quiz.selectedOptionId, 
+      answer_result: 'null',
+      answer_given: this.quiz.selectedOptionId,
       content_item_title: this.content.title,
-      quiz_question: this.quiz.questions['desc'],
-      question_id: this.quiz.questions['id']
+      quiz_question: this.quiz.questions[this.quiz.currentQuestionIndex].desc,
+      question_id: this.quiz.questions[this.quiz.currentQuestionIndex].id,
     };
 
     this.quiz.processAnswer(response);
@@ -444,7 +444,7 @@ export class QuizComponent extends LessonContentComponent implements OnInit, OnD
     this.coursesService.getCourseOverview(this.lesson.course_id).subscribe(
       response => {
         this.courseTitle = response.title;
-      }, 
+      },
     )
   }
 

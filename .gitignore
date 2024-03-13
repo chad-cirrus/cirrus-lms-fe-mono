@@ -5,6 +5,7 @@
 /tmp
 /out-tsc
 /documentation
+/.nx
 
 # dependencies
 /node_modules

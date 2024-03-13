@@ -124,7 +124,7 @@ import { RecentStudentAchievmentComponent } from './components/recent-student-ac
     FlexLayoutModule,
     MatBadgeModule,
     StoreModule.forRoot(recentActivityReducers),
-    StoreDevtoolsModule.instrument({ maxAge: 25 }),
+    StoreDevtoolsModule.instrument({ maxAge: 25 , connectInZone: true}),
     OverlayModule,
     AppRoutingModule,
     CdkAccordionModule,

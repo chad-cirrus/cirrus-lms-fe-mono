@@ -1,6 +1,6 @@
 import { CourseComponent } from './course.component';
 import { Meta, moduleMetadata, Story } from '@storybook/angular';
-// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+// eslint-disable-next-line @nx/enforce-module-boundaries
 import {
   course351,
   CourseContentProgressCircleComponent,
@@ -37,22 +37,17 @@ import { of } from 'rxjs';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTableModule } from '@angular/material/table';
-// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+// eslint-disable-next-line @nx/enforce-module-boundaries
 import { MatMenuModule } from '@angular/material/menu';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 
-import {
-  HoursAndLandingStatType,
-  ICourseOverview,
-  PROGRESS_STATUS,
-} from '@cirrus/models';
+import { HoursAndLandingStatType, ICourseOverview, PROGRESS_STATUS } from '@cirrus/models';
 
 const mockEnvironment = {
   production: false,
   baseUrl: 'http://cirrusapproach.local:3000',
-  profile:
-    'https://cirfullsb-cirrusaircraftvpo.cs41.force.com/approachsso/s/profile/',
+  profile: 'https://cirfullsb-cirrusaircraftvpo.cs41.force.com/approachsso/s/profile/',
   defaultMobileLesson:
     'https://cirrusapproachherokuprod.blob.core.windows.net/cirruslmsherokudevcontainer/content-items/images/default-lesson-hero-mobile.jpg',
   defaultDesktopLesson:
@@ -73,7 +68,7 @@ const course: ICourseOverview = {
     isActive: false,
   },
   completed_at: '',
-  course_attempt: { id: 0 },
+  course_attempt: { id: 0, user_course: { id: 0 } },
   started_at: '',
   id: 351,
   name: 'SR20 Avidyne Entegra Advanced Transition ',

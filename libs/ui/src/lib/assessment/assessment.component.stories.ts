@@ -1,4 +1,4 @@
-// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+// eslint-disable-next-line @nx/enforce-module-boundaries
 import { testDataReccurent853 } from '@cirrus/ui';
 import { Meta, moduleMetadata, Story } from '@storybook/angular';
 import { AssessmentComponent } from './assessment.component';

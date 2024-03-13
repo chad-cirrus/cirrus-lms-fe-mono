@@ -1,6 +1,6 @@
 /* eslint-disable no-useless-escape */
 import { Meta, moduleMetadata, Story } from '@storybook/angular';
-// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+// eslint-disable-next-line @nx/enforce-module-boundaries
 import { testData855 } from 'libs/models/src/testing/testData855';
 import { CirrusSanitizerService } from '../shared/cirrus-sanitizer.service';
 import { ContentRichTextComponent } from './content-rich-text.component';
@@ -15,9 +15,7 @@ export default {
   ],
 } as Meta<ContentRichTextComponent>;
 
-const Template: Story<ContentRichTextComponent> = (
-  args: ContentRichTextComponent
-) => ({
+const Template: Story<ContentRichTextComponent> = (args: ContentRichTextComponent) => ({
   component: ContentRichTextComponent,
   props: args,
 });

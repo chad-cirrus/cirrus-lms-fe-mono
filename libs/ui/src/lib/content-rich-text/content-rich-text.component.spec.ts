@@ -3,13 +3,14 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ContentRichTextComponent } from './content-rich-text.component';
 import { CirrusSanitizerService } from '../shared/cirrus-sanitizer.service';
 import { IContent, IProgress } from '@cirrus/models';
+import { ViewportScroller } from '@angular/common';
 
 describe('ContentRichTextComponent', () => {
   Object.defineProperty(global.window, 'scrollTo', () => {});
   let component: ContentRichTextComponent;
   let fixture: ComponentFixture<ContentRichTextComponent>;
-  let progress: IProgress = { id: 0, status: 'not_started' };
-  let content: IContent = {
+  const progress: IProgress = { id: 0, status: 'not_started' };
+  const content: IContent = {
     blob_directory: '',
     content_file: '',
     content_filename: '',
@@ -39,6 +40,7 @@ describe('ContentRichTextComponent', () => {
       declarations: [ ContentRichTextComponent ],
       providers: [
         { provide: CirrusSanitizerService, useClass: CirrusSanitizerService },
+        { provide: ViewportScroller, useClass: MockViewportScroller },
       ]
     })
     .compileComponents();
@@ -55,3 +57,8 @@ describe('ContentRichTextComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+
+class MockViewportScroller {
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  scrollToAnchor(): void {}
+}
