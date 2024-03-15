@@ -3,11 +3,14 @@
 .tabs-container {
   .mdc-tab {
     --mdc-tab-indicator-active-indicator-color: white;
+    --mat-tab-header-active-focus-indicator-color: white;
 
     .mdc-tab__text-label {
       font-family: $bqmedium-font;
       color: white;
       opacity: 0.6;
+      --mat-tab-header-active-label-text-color: white;
+      --mat-tab-header-active-focus-label-text-color: white;
     }
   }
 
