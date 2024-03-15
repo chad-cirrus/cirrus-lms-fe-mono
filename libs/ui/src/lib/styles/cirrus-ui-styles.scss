@@ -345,6 +345,7 @@ cirrus-course-overview-lesson-progress-bar .lesson-progress-bar {
   &.mat-mdc-progress-bar {
     --mdc-linear-progress-track-height: 12px;
     --mdc-linear-progress-active-indicator-color: #00ffff;
+    --mdc-linear-progress-active-indicator-height: 12px;
     border-radius: 10px;
 
     &.mdc-linear-progress__buffer-bar {
