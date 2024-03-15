@@ -22,6 +22,11 @@ function getClientEnvironment(configuration) {
 }
 
 module.exports = (config, options, context) => {
+  
+  config.watchOptions = {
+    ignored: /node_modules/,
+  };
+  
   config.plugins.push(
     new webpack.DefinePlugin(getClientEnvironment(context.configuration))
   );
