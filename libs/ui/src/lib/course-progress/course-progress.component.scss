@@ -8,6 +8,7 @@
 .course-progress {
   --mdc-linear-progress-track-height: 12px;
   --mdc-linear-progress-active-indicator-color: white;
+  --mdc-linear-progress-active-indicator-height: 12px;
 
   .last-completed {
     color: var.$gray4;
