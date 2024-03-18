@@ -105,8 +105,8 @@ mat-spinner {
 }
 
 .mat-divider {
-  border-top-color: rgba(255, 255, 255);
   width: calc(100vw - 16px);
+  border-top: solid 1px var.$white;
 }
 
 .course-preview-container {
