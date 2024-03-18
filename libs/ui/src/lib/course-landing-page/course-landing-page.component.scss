@@ -336,8 +336,9 @@ cirrus-cta-button {
 }
 
 .lesson-hero.course-state-started {
-  min-height: calc(42vw + 120px);
+  min-height: calc(42vw + 120px + 40px);
 }
+
 @media screen and (min-width: 1920px) {
   .course-state-started .course-started {
     width: 100%;

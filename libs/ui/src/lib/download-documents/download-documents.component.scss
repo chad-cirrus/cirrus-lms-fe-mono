@@ -17,7 +17,11 @@
     list-style: none;
     border: 1px solid var.$gray4;
     border-radius: 5px;
-
+    @media screen and (min-width: 1400px) {
+      max-height: 150px;
+      overflow-y: auto;
+    }
+    
     .download-item {
       display: flex;
       flex-direction: row;
