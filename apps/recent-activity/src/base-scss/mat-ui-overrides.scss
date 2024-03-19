@@ -1,3 +1,5 @@
+@import 'mat-ui-overrides/switch';
+
 .apexcharts-menu {
   background-color: $black !important;
   .apexcharts-menu-item:hover {
@@ -1008,3 +1010,4 @@ apx-chart .apexcharts-toolbar {
     stroke: #fff;
   }
 }
+
