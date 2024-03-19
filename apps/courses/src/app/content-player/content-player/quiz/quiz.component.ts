@@ -1,6 +1,8 @@
 import { Component, OnDestroy, OnInit, Renderer2 } from '@angular/core';
+import { ComponentType } from '@angular/cdk/portal';
 import { CommonModule } from '@angular/common';
-import { FullStoryEvent, FullStoryEventData, FullstoryService, LessonContentComponent } from '@cirrus/ui';
+import { Router } from '@angular/router';
+import { CompletionDialogComponent, CourseCompletionComponent, FullStoryEvent, FullStoryEventData, FullstoryService, LESSON_COMPLETION_CTA, LessonContentComponent } from '@cirrus/ui';
 import { QuizService } from './quiz.service';
 import { IAnswerResponse } from './models/IAnswerResponse';
 import { IQuizAttempt } from './models/IQuizAttempt';
@@ -18,7 +20,7 @@ import { FullScreenImageDialogComponent } from '../../../full-screen-image-dialo
 import { AppState } from '../../../store/reducers';
 import { Store } from '@ngrx/store';
 import { Observable, Subject, Subscription, timer } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { takeUntil, tap, withLatestFrom } from 'rxjs/operators';
 import { ILesson, PROGRESS_STATUS } from '@cirrus/models';
 import { selectLesson } from '../../../store/selectors/lessons.selector';
 import { QqbOutOfTimeComponent } from './qqb-out-of-time/qqbOutOfTime.component';
@@ -26,6 +28,9 @@ import { completeProgress } from '../../../store/actions';
 import { QuizClass } from './models/Quiz';
 import { QuizGradeEnum } from './models/QuizGradeEnum';
 import { CoursesService } from '../../../course/course.service';
+import { selectCourseOverview } from '../../../store/selectors/course.selector';
+import { selectCirrusUser } from '../../../store/selectors/cirrus-user.selector';
+import { nextLessonUrlSegments } from '../../../shared/helpers/next-lesson';
 
 /**
  * Component for displaying a quiz
@@ -38,6 +43,8 @@ import { CoursesService } from '../../../course/course.service';
   imports: [CommonModule, QqbOutOfTimeComponent],
 })
 export class QuizComponent extends LessonContentComponent implements OnInit, OnDestroy {
+  private _lesson!: ILesson;
+
   /**
    * Constructor for the QuizComponent
    * @param quizService Injects the QuizService to get the quiz
@@ -48,12 +55,20 @@ export class QuizComponent extends LessonContentComponent implements OnInit, OnD
     private renderer: Renderer2,
     private store: Store<AppState>,
     private coursesService: CoursesService,
+    private router: Router,
     private fullstoryService: FullstoryService
   ) {
     super();
   }
   lesson!: ILesson;
   lessonOverview$: Observable<ILesson> = this.store.select(selectLesson);
+  lessonCompleted$!: Observable<string>;
+  lessonSubscription = new Subscription();
+  lesson$: Observable<ILesson> = this.store.select(selectLesson).pipe(
+    tap(lesson => {
+      this._lesson = lesson;
+    })
+  );
 
   QuizStatusEnum = QuizStatusEnum;
   QuizGradeEnum = QuizGradeEnum;
@@ -64,6 +79,8 @@ export class QuizComponent extends LessonContentComponent implements OnInit, OnD
 
   courseTitle = '';
   course_attempt_id = 0;
+  courseOverview$ = this.store.select(selectCourseOverview);
+  user$ = this.store.select(selectCirrusUser);
   answeredQuestionResultClass = '';
   questionResultTitle = '';
   questionResultSubtitle = '';
@@ -338,6 +355,62 @@ export class QuizComponent extends LessonContentComponent implements OnInit, OnD
     if (this.timerSubscription) {
       this.timerSubscription.unsubscribe();
     }
+
+    //Check if lesson is complete
+    this.lessonCompleted$ = this.coursesService.lessonComplete$;
+
+      this.lessonSubscription.add(
+        this.lessonCompleted$
+        .pipe(withLatestFrom(this.courseOverview$, this.user$, this.lesson$))
+        .subscribe(([progress_type, courseOverview, user, lesson]) => {
+            const component: ComponentType<
+              CompletionDialogComponent | CourseCompletionComponent
+            > =
+              progress_type === 'lesson'
+                ? CompletionDialogComponent
+                : CourseCompletionComponent;
+            const data =
+              progress_type === 'lesson'
+                ? {
+                    lesson: this._lesson.title,
+                    course: courseOverview,
+                    stageId: this._lesson.stage_id
+                  }
+                : {
+                    badge: courseOverview?.badge?.badge_image
+                      ? courseOverview?.badge.badge_image
+                      : 'courses/images/default_badge.png',
+                    course: courseOverview.name,
+                    course_id: courseOverview.id,
+                    student: user.name,
+                    course_attempt_id: this._lesson.course_attempt_id,
+                  };
+  
+            const showCompletionDialog =
+              progress_type === 'lesson'
+                ? lesson.progress.status !== PROGRESS_STATUS.completed
+                : courseOverview.progress.status !== PROGRESS_STATUS.completed;
+  
+            if (showCompletionDialog) {
+              this.dialog
+                .open(component, {
+                  data,
+                  panelClass: 'fullscreen-dialog',
+                  height: '100%',
+                  width: '100%',
+                })
+                .afterClosed()
+                .subscribe(([response, nextLesson]) => {
+                  if (response === LESSON_COMPLETION_CTA.nextLesson) {
+                    this.router.navigate(nextLessonUrlSegments(nextLesson));
+                  } else {
+                    console.log('none of the above');
+                  }
+                  this.dialog.closeAll();
+                });
+              }
+          })
+      );
   }
 
   /**
