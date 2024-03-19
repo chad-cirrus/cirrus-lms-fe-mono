@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit, Renderer2 } from '@angular/core';
+import { ComponentType } from '@angular/cdk/portal';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { CompletionDialogComponent, CourseCompletionComponent, FullStoryEvent, FullStoryEventData, FullstoryService, LESSON_COMPLETION_CTA, LessonContentComponent } from '@cirrus/ui';
@@ -27,11 +28,9 @@ import { completeProgress } from '../../../store/actions';
 import { QuizClass } from './models/Quiz';
 import { QuizGradeEnum } from './models/QuizGradeEnum';
 import { CoursesService } from '../../../course/course.service';
-import { ComponentType } from '@angular/cdk/portal';
-import { map } from 'lodash';
 import { selectCourseOverview } from '../../../store/selectors/course.selector';
 import { selectCirrusUser } from '../../../store/selectors/cirrus-user.selector';
-import { nextLesson, nextLessonUrlSegments } from '../../../shared/helpers/next-lesson';
+import { nextLessonUrlSegments } from '../../../shared/helpers/next-lesson';
 
 /**
  * Component for displaying a quiz
