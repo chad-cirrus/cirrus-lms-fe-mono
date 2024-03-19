@@ -67,3 +67,7 @@
     }
   }
 }
+
+::ng-deep.cdk-overlay-container .mat-mdc-autocomplete-panel {
+  padding: 0px;
+}

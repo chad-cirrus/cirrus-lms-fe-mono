@@ -395,6 +395,10 @@ mat-table mat-cell.mdc-data-table__cell {
  */
 .mat-mdc-autocomplete-panel .mat-mdc-option {
   padding: 10px 16px;
+  background-color: $gray2;
+  &:hover:not(.mdc-list-item--disabled) {
+    background-color: $gray2;
+  }
 }
 
 
