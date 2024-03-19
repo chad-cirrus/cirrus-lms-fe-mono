@@ -83,14 +83,19 @@ cirrus-courses-in-progress .heading-3 {
     }
   }
 
-  .mat-progress-bar-element,
-  .mat-progress-bar {
-    border-radius: 10px;
-    height: 13px;
-  }
+  .course-slide-progress-wrapper {
 
-  .mat-progress-bar-primary.mat-progress-bar-fill.mat-progress-bar-element {
-    border-radius: 10px;
+    .mat-mdc-progress-bar.mdc-linear-progress {
+      height: 13px;
+      & > div {
+        height: 13px;
+        border-radius: 10px;
+      }
+      .mdc-linear-progress__bar-inner {
+        border-top-width: 13px;
+      }
+    }
+
   }
 }
 
