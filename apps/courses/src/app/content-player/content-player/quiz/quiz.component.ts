@@ -20,8 +20,8 @@ import { FullScreenImageDialogComponent } from '../../../full-screen-image-dialo
 import { AppState } from '../../../store/reducers';
 import { Store } from '@ngrx/store';
 import { Observable, Subject, Subscription, timer } from 'rxjs';
-import { takeUntil, tap, withLatestFrom } from 'rxjs/operators';
-import { ILesson, PROGRESS_STATUS } from '@cirrus/models';
+import { map, takeUntil, tap, withLatestFrom } from 'rxjs/operators';
+import { ICourseOverview, ILesson, PROGRESS_STATUS } from '@cirrus/models';
 import { selectLesson } from '../../../store/selectors/lessons.selector';
 import { QqbOutOfTimeComponent } from './qqb-out-of-time/qqbOutOfTime.component';
 import { completeProgress } from '../../../store/actions';
@@ -30,7 +30,7 @@ import { QuizGradeEnum } from './models/QuizGradeEnum';
 import { CoursesService } from '../../../course/course.service';
 import { selectCourseOverview } from '../../../store/selectors/course.selector';
 import { selectCirrusUser } from '../../../store/selectors/cirrus-user.selector';
-import { nextLessonUrlSegments } from '../../../shared/helpers/next-lesson';
+import { nextLesson, nextLessonUrlSegments } from '../../../shared/helpers/next-lesson';
 
 /**
  * Component for displaying a quiz
@@ -44,6 +44,7 @@ import { nextLessonUrlSegments } from '../../../shared/helpers/next-lesson';
 })
 export class QuizComponent extends LessonContentComponent implements OnInit, OnDestroy {
   private _lesson!: ILesson;
+  private _courseOverview!: ICourseOverview;
 
   /**
    * Constructor for the QuizComponent
@@ -129,7 +130,67 @@ export class QuizComponent extends LessonContentComponent implements OnInit, OnD
    */
   ngOnDestroy(): void {
     this.hidePrevAndNext.next(false);
+
+    this.courseOverview$.subscribe(
+      event => {
+        this._courseOverview = event;
+      }
+    )
+
+    //Check if quiz is complete
     if (this.quiz.status === QuizStatusEnum.Complete) {
+      //Check if lesson is complete
+      this.lessonCompleted$ = this.coursesService.lessonComplete$;
+
+      if (this.lesson.progress.status == "completed") {
+        let progress_type = 'lesson';
+
+        const component: ComponentType<
+          CompletionDialogComponent | CourseCompletionComponent
+        > =
+          progress_type === 'lesson'
+            ? CompletionDialogComponent
+            : CourseCompletionComponent;
+        const data =
+          progress_type === 'lesson'
+            ? {
+              lesson: this.lesson.title,
+              course: this._courseOverview,
+              stageId: this.lesson.stage_id
+            }
+            : {
+              badge: this._courseOverview?.badge?.badge_image
+                ? this._courseOverview?.badge.badge_image
+                : 'courses/images/default_badge.png',
+              course: this._courseOverview.name,
+              course_id: this._courseOverview.id,
+              student: 'user.name',
+              course_attempt_id: this._lesson.course_attempt_id,
+            };
+            
+        const nextLesson$ = this.courseOverview$.pipe(
+          map(courseOverview => nextLesson(courseOverview, this.lesson))
+        );
+
+        this.dialog
+          .open(component, {
+            data,
+            panelClass: 'fullscreen-dialog',
+            height: '100%',
+            width: '100%',
+          })
+          .afterClosed()
+          .pipe(withLatestFrom(nextLesson$))
+          .subscribe(([response, nextLesson]) => {
+            if (response === LESSON_COMPLETION_CTA.nextLesson) {
+              this.router.navigate(nextLessonUrlSegments(nextLesson));
+            } else {
+              console.log('none of the above');
+            }
+            this.dialog.closeAll();
+          });
+      }
+
       const _progress = {
         id: this.content.progress.id,
         status: PROGRESS_STATUS.completed,
@@ -355,62 +416,6 @@ export class QuizComponent extends LessonContentComponent implements OnInit, OnD
     if (this.timerSubscription) {
       this.timerSubscription.unsubscribe();
     }
-
-    //Check if lesson is complete
-    this.lessonCompleted$ = this.coursesService.lessonComplete$;
-
-      this.lessonSubscription.add(
-        this.lessonCompleted$
-        .pipe(withLatestFrom(this.courseOverview$, this.user$, this.lesson$))
-        .subscribe(([progress_type, courseOverview, user, lesson]) => {
-            const component: ComponentType<
-              CompletionDialogComponent | CourseCompletionComponent
-            > =
-              progress_type === 'lesson'
-                ? CompletionDialogComponent
-                : CourseCompletionComponent;
-            const data =
-              progress_type === 'lesson'
-                ? {
-                    lesson: this._lesson.title,
-                    course: courseOverview,
-                    stageId: this._lesson.stage_id
-                  }
-                : {
-                    badge: courseOverview?.badge?.badge_image
-                      ? courseOverview?.badge.badge_image
-                      : 'courses/images/default_badge.png',
-                    course: courseOverview.name,
-                    course_id: courseOverview.id,
-                    student: user.name,
-                    course_attempt_id: this._lesson.course_attempt_id,
-                  };
-  
-            const showCompletionDialog =
-              progress_type === 'lesson'
-                ? lesson.progress.status !== PROGRESS_STATUS.completed
-                : courseOverview.progress.status !== PROGRESS_STATUS.completed;
-  
-            if (showCompletionDialog) {
-              this.dialog
-                .open(component, {
-                  data,
-                  panelClass: 'fullscreen-dialog',
-                  height: '100%',
-                  width: '100%',
-                })
-                .afterClosed()
-                .subscribe(([response, nextLesson]) => {
-                  if (response === LESSON_COMPLETION_CTA.nextLesson) {
-                    this.router.navigate(nextLessonUrlSegments(nextLesson));
-                  } else {
-                    console.log('none of the above');
-                  }
-                  this.dialog.closeAll();
-                });
-              }
-          })
-      );
   }
 
   /**
