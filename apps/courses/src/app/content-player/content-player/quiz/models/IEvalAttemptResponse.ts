@@ -1,10 +1,10 @@
-import { IQuizQuestion } from "./IQuizQuestion";
+import { IEvalQuestion } from "./IEvalQuestion";
 
 /**
  * Interface for a quiz attempt response.
  * @interface
  */
-export interface IQuizAttemptResponse {
+export interface IEvalAttemptResponse {
   /**
    * The ID of the quiz attempt response.
    * @type {number}
@@ -31,7 +31,7 @@ export interface IQuizAttemptResponse {
 
   /**
    * The quiz question related to the response.
-   * @type {IQuizQuestion}
+   * @type {IEvalQuestion}
    */
-  quiz_question?: IQuizQuestion;
+  quiz_question?: IEvalQuestion;
 }

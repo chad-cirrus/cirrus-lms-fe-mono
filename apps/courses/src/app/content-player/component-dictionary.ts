@@ -8,7 +8,7 @@ import {
   PdfComponent,
 } from '@cirrus/ui';
 import { ScormComponent } from './content-player/scorm/scorm.component';
-import { QuizComponent } from './content-player/quiz/quiz.component';
+import { EvaluationComponent } from './content-player/quiz/quiz.component';
 
 export const componentDictionary = {
   [CONTENT_TYPE.vimeo]: VideoPlayerComponent,
@@ -19,5 +19,6 @@ export const componentDictionary = {
   [CONTENT_TYPE.flight_assessment]: AssessmentComponent,
   [CONTENT_TYPE.ground_assessment]: AssessmentComponent,
   [CONTENT_TYPE.interactive]: InteractiveComponent,
-  [CONTENT_TYPE.quiz]: QuizComponent,
+  [CONTENT_TYPE.quiz]: EvaluationComponent,
+  [CONTENT_TYPE.exam]:EvaluationComponent,
 };

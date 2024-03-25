@@ -26,6 +26,7 @@ export interface IContent {
   show_comments: boolean;
   courseTitle?: string;
   quiz_id?: number;
+  exam_id?: number;
 }
 
 export enum CONTENT_STATUS {

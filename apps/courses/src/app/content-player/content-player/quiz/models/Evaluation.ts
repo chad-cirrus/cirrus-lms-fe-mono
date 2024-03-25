@@ -1,25 +1,25 @@
 import { IAnswerResponse } from './IAnswerResponse';
-import { IQuizAttempt } from './IQuizAttempt';
-import { IQuizAttemptQuestion } from './IQuizAttemptQuestion';
-import { IQuizRequest } from './IQuizRequest';
-import { IStartQuizResponse } from './IStartQuizResponse';
-import { QuizGradeEnum } from './QuizGradeEnum';
-import { QuizStatusEnum } from './QuizStatusEnum';
+import { IEvalAttempt } from './IEvalAttempt';
+import { IEvalAttemptQuestion } from './IEvalAttemptQuestion';
+import { IEvalRequest } from './IEvalRequest';
+import { IStartEvalResponse } from './IStartEvalResponse';
+import { EvaluationGradeEnum } from './EvaluationGradeEnum';
+import { EvaluationStatusEnum } from './EvaluationStatusEnum';
 
-export class QuizClass {
+export class EvalClass {
   id = -1;
-  status = QuizStatusEnum.NotStarted;
-  grade = QuizGradeEnum.NotGraded;
+  status = EvaluationStatusEnum.NotStarted;
+  grade = EvaluationGradeEnum.NotGraded;
   currentQuestionIndex = -1;
   questionCount = -1;
 
   /**
    * The questions for this quiz
-   * @type {IQuizAttemptQuestion[]}
+   * @type {IEvalAttemptQuestion[]}
    * @memberof QuizClass
    * @default []
    * */
-  questions: IQuizAttemptQuestion[] = [];
+  questions: IEvalAttemptQuestion[] = [];
 
   /**
    * Aproximately how long this quiz will take in minutes
@@ -32,9 +32,9 @@ export class QuizClass {
 
   /**
    * The quiz attempt information.
-   * @type {IQuizAttempt}
+   * @type {IEvalAttempt}
    * */
-  attempt: IQuizAttempt | undefined;
+  attempt: IEvalAttempt | undefined;
 
   /**
    * The time limit for this quiz in minutes
@@ -58,7 +58,7 @@ export class QuizClass {
   /** Loads the quiz from the api on initialization. *
    * @returns void
    * */
-  loadQuiz(_request: IQuizRequest): void {
+  loadQuiz(_request: IEvalRequest): void {
     this.id = _request.id;
     this.passPercentage = _request.pass_percentage;
     this.questionCount = _request.quiz_question_count || 0;
@@ -103,7 +103,7 @@ export class QuizClass {
   incrementTimeElapsed(): void {
     this.elapsedSeconds++;
     if (this.elapsedSeconds >= this.timeLimit * 60) {
-      this.status = QuizStatusEnum.TimedOut;
+      this.status = EvaluationStatusEnum.TimedOut;
     }
   }
 
@@ -111,11 +111,11 @@ export class QuizClass {
    * Starts the quiz with the provided response.
    * @param response - The response containing the quiz attempt information.
    */
-  startQuiz(response: IStartQuizResponse): void {
-    this.status = QuizStatusEnum.InProgress;
+  startQuiz(response: IStartEvalResponse): void {
+    this.status = EvaluationStatusEnum.InProgress;
     this.attempt = response.quiz_attempt;
     this.currentQuestionIndex = 0;
-    this.questions = this.attempt?.quiz_attempt_questions as IQuizAttemptQuestion[] || [];
+    this.questions = this.attempt?.quiz_attempt_questions as IEvalAttemptQuestion[] || [];
     this.elapsedSeconds = 0;
   }
 
@@ -267,7 +267,7 @@ export class QuizClass {
     this.selectedOptionId = -1;
     this.currentAttemptCount = -1;
     if (this.currentQuestionIndex >= this.questionCount) {
-      this.status = QuizStatusEnum.Complete;
+      this.status = EvaluationStatusEnum.Complete;
     }
   }
 
@@ -276,29 +276,29 @@ export class QuizClass {
    * @param response - The quiz attempt response.
    * @returns void
    */
-  endQuiz(response: IQuizAttempt): void {
+  endQuiz(response: IEvalAttempt): void {
     this.attempt = response;
     if (response.score >= this.passPercentage) {
-      this.grade = QuizGradeEnum.Passed;
+      this.grade = EvaluationGradeEnum.Passed;
     } else {
-      this.grade = QuizGradeEnum.Failed;
+      this.grade = EvaluationGradeEnum.Failed;
     }
     this.currentQuestionIndex = -1;
-    this.status = QuizStatusEnum.Submitted;
+    this.status = EvaluationStatusEnum.Submitted;
   }
 
   /**
    * Resets the quiz to its initial state.
    */
   resetQuiz(): void {
-    this.status = QuizStatusEnum.NotStarted;
+    this.status = EvaluationStatusEnum.NotStarted;
     this.currentQuestionIndex = -1;
     this.elapsedSeconds = -1;
     this.selectedOptionId = -1;
     this.currentAttemptCount = -1;
-    this.grade = QuizGradeEnum.NotGraded;
+    this.grade = EvaluationGradeEnum.NotGraded;
     this.passPercentage = -1;
     this.questionCount = -1;
   }
 }
-export type IQuiz = QuizClass;
+export type IQuiz = EvalClass;

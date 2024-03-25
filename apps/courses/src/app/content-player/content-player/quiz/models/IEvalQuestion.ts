@@ -4,7 +4,7 @@ import { IQuestionOption } from "./IQuestionOption";
  * Interface for a quiz question.
  * @interface
  */
-export interface IQuizQuestion {
+export interface IEvalQuestion {
   /**
    * The ID of the quiz question.
    * @type {number}

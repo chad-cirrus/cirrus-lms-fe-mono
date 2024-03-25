@@ -11,6 +11,7 @@ export enum CONTENT_TYPE {
   flight_assessment,
   ground_assessment,
   image,
+  exam
 }
 
 

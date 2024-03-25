@@ -1,12 +1,12 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 
 @Component({
-  selector: 'cirrus-qqb-out-of-time',
-  templateUrl: './qqbOutOfTime.component.html',
-  styleUrls: ['./qqbOutOfTime.component.scss'],
+  selector: 'cirrus-eqb-out-of-time',
+  templateUrl: './eqbOutOfTime.component.html',
+  styleUrls: ['./eqbOutOfTime.component.scss'],
   standalone: true,
 })
-export class QqbOutOfTimeComponent {
+export class EqbOutOfTimeComponent {
   @Output() buttonClicked = new EventEmitter<void>();
 
   /** Emits an event when the button is clicked.

@@ -1,7 +1,7 @@
 /**
  * Represents the status of a quiz.
  */
-export enum QuizStatusEnum {
+export enum EvalStatusEnum {
   NotStarted = "not started",
   InProgress = "in progress",
   TimedOut = "timed out",

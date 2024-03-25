@@ -4,22 +4,22 @@ import { environment } from '../../../../environments/environment';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { IAnswerResponse } from './models/IAnswerResponse';
-import { IQuizRequest } from './models/IQuizRequest';
-import { IQuizAttempt } from './models/IQuizAttempt';
-import { IStartQuiz } from './models/IStartQuiz';
-import { IStartQuizAttempt } from './models/IStartQuizAttempt';
-import { IStartQuizResponse } from './models/IStartQuizResponse';
+import { IEvalRequest } from './models/IEvalRequest';
+import { IEvalAttempt } from './models/IEvalAttempt';
+import { IStartEvaluation } from './models/IStartEvaluation';
+import { IStartEvalAttempt } from './models/IStartEvalAttempt';
+import { IStartEvalResponse } from './models/IStartEvalResponse';
 
 @Injectable({
   providedIn: 'root',
 })
 /**
  *
- * @class QuizService
- * @description A service for calling the quiz API
+ * @class EvalService
+ * @description A service for calling the quiz and exam APIs
  * @param {HttpClient} http - The HttpClient used for making requests
  */
-export class QuizService {
+export class EvaluationService {
   constructor(private http: HttpClient) {}
 
   /**
@@ -27,25 +27,39 @@ export class QuizService {
    * @method getQuiz
    * @description Makes a request to the API to get quiz data
    * @param {number} id - The id of the quiz to get data for
-   * @returns {Observable<IQuizRequest>} An observable containing the quiz data
+   * @returns {Observable<IEvalRequest>} An observable containing the quiz data
    */
-  getQuiz(id: number, course_attempt_id: number, lesson_id: number, stage_id: number): Observable<IQuizRequest> {
+  getQuiz(id: number, course_attempt_id: number, lesson_id: number, stage_id: number): Observable<IEvalRequest> {
     return this.http
-      .get<IQuizRequest>(
+      .get<IEvalRequest>(
         `${environment.baseUrl}/api/v4/quizzes/${id}?course_attempt_id=${course_attempt_id}&lesson_id=${lesson_id}&stage_id=${stage_id}`,
       )
-      .pipe(map(response => response['content_player/quiz' as keyof object] as IQuizRequest));
+      .pipe(map(response => response['content_player/quiz' as keyof object] as IEvalRequest));
   }
 
+  /**
+   *
+   * @method getExam
+   * @description Makes a request to the API to get exam data
+   * @param {number} id - The id of the exam to get data for
+   * @returns {Observable<IEvalRequest>} An observable containing the exam data
+   */
+  getExam(id: number, course_attempt_id: number, lesson_id: number, stage_id: number): Observable<IEvalRequest> {
+    return this.http
+      .get<IEvalRequest>(
+        `${environment.baseUrl}/api/v4/exams/${id}?course_attempt_id=${course_attempt_id}&lesson_id=${lesson_id}&stage_id=${stage_id}`,
+      )
+      .pipe(map(response => response['content_player/exam' as keyof object] as IEvalRequest));
+  }
   /**
    * Calls the API to start a new quiz attempt.
    * @param attempt The quiz attempt data.
    * @returns An observable of the start quiz attempt response.
    */
-  startQuiz(attempt: IStartQuizAttempt): Observable<IStartQuizResponse> {
-    const attemptData: IStartQuiz = { quiz_attempt: attempt };
+  startQuiz(attempt: IStartEvalAttempt): Observable<IStartEvalResponse> {
+    const attemptData: IStartEvaluation = { quiz_attempt: attempt };
     return this.http
-      .post<IStartQuizResponse>(`${environment.baseUrl}/api/v5/quiz_attempts`, attemptData)
+      .post<IStartEvalResponse>(`${environment.baseUrl}/api/v5/quiz_attempts`, attemptData)
       .pipe(map(response => response));
   }
 
@@ -80,9 +94,9 @@ export class QuizService {
    * @param attempt_id The ID of the quiz attempt to grade.
    * @returns An observable that emits the response from the server.
    */
-  gradeQuiz(attempt_id: number): Observable<IQuizAttempt> {
+  gradeQuiz(attempt_id: number): Observable<IEvalAttempt> {
     return this.http
-      .put<IQuizAttempt>(`${environment.baseUrl}/api/v5/quiz_attempts/${attempt_id}/submit`, {})
-      .pipe(map(response => response['quiz_attempt' as keyof object] as IQuizAttempt));
+      .put<IEvalAttempt>(`${environment.baseUrl}/api/v5/quiz_attempts/${attempt_id}/submit`, {})
+      .pipe(map(response => response['quiz_attempt' as keyof object] as IEvalAttempt));
   }
 }
