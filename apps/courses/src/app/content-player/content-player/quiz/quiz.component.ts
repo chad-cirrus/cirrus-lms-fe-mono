@@ -396,7 +396,6 @@ export class QuizComponent extends LessonContentComponent implements OnInit, OnD
     });
 
     // Update progress
-    console.log("endquiz");
     const _progress = {
       id: this.content.progress.id,
       status: PROGRESS_STATUS.completed,
