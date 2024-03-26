@@ -21,7 +21,7 @@ import { AppState } from '../../../store/reducers';
 import { Store } from '@ngrx/store';
 import { Observable, Subject, Subscription, timer } from 'rxjs';
 import { map, takeUntil, tap, withLatestFrom } from 'rxjs/operators';
-import { ICourseOverview, ILesson, PROGRESS_STATUS } from '@cirrus/models';
+import { ICourseOverview, ILesson, PROGRESS_STATUS, PROGRESS_TYPE } from '@cirrus/models';
 import { selectLesson } from '../../../store/selectors/lessons.selector';
 import { QqbOutOfTimeComponent } from './qqb-out-of-time/qqbOutOfTime.component';
 import { completeProgress } from '../../../store/actions';
@@ -43,7 +43,6 @@ import { nextLesson, nextLessonUrlSegments } from '../../../shared/helpers/next-
   imports: [CommonModule, QqbOutOfTimeComponent],
 })
 export class QuizComponent extends LessonContentComponent implements OnInit, OnDestroy {
-  private _lesson!: ILesson;
   private _courseOverview!: ICourseOverview;
 
   /**
@@ -65,11 +64,6 @@ export class QuizComponent extends LessonContentComponent implements OnInit, OnD
   lessonOverview$: Observable<ILesson> = this.store.select(selectLesson);
   lessonCompleted$!: Observable<string>;
   lessonSubscription = new Subscription();
-  lesson$: Observable<ILesson> = this.store.select(selectLesson).pipe(
-    tap(lesson => {
-      this._lesson = lesson;
-    })
-  );
 
   QuizStatusEnum = QuizStatusEnum;
   QuizGradeEnum = QuizGradeEnum;
@@ -138,73 +132,62 @@ export class QuizComponent extends LessonContentComponent implements OnInit, OnD
     )
 
     //Check if quiz is complete
-    if (this.quiz.status === QuizStatusEnum.Complete) {
+    if (this.quiz.status === QuizStatusEnum.Complete || this.quiz.grade === QuizGradeEnum.Passed) {
       //Check if lesson is complete
       this.lessonCompleted$ = this.coursesService.lessonComplete$;
 
-      if (this.lesson.progress.status == "completed") {
-        let progress_type = 'lesson';
-
-        const component: ComponentType<
-          CompletionDialogComponent | CourseCompletionComponent
-        > =
-          progress_type === 'lesson'
-            ? CompletionDialogComponent
-            : CourseCompletionComponent;
-        const data =
-          progress_type === 'lesson'
-            ? {
-              lesson: this.lesson.title,
-              course: this._courseOverview,
-              stageId: this.lesson.stage_id
-            }
-            : {
-              badge: this._courseOverview?.badge?.badge_image
-                ? this._courseOverview?.badge.badge_image
-                : 'courses/images/default_badge.png',
-              course: this._courseOverview.name,
-              course_id: this._courseOverview.id,
-              student: 'user.name',
-              course_attempt_id: this._lesson.course_attempt_id,
-            };
-            
-        const nextLesson$ = this.courseOverview$.pipe(
-          map(courseOverview => nextLesson(courseOverview, this.lesson))
-        );
-
-        this.dialog
-          .open(component, {
-            data,
-            panelClass: 'fullscreen-dialog',
-            height: '100%',
-            width: '100%',
-          })
-          .afterClosed()
-          .pipe(withLatestFrom(nextLesson$))
-          .subscribe(([response, nextLesson]) => {
-            if (response === LESSON_COMPLETION_CTA.nextLesson) {
-              this.router.navigate(nextLessonUrlSegments(nextLesson));
-            } else {
-              console.log('none of the above');
-            }
-            this.dialog.closeAll();
-          });
+      //Check progress type
+      let progress_type;
+      if(this._courseOverview.completed_at) {
+        progress_type = PROGRESS_TYPE.course
+      } else if (this.lesson.progress.status == "completed") {
+        progress_type = PROGRESS_TYPE.lesson;
       }
 
-      const _progress = {
-        id: this.content.progress.id,
-        status: PROGRESS_STATUS.completed,
-      };
-      this.updateProgress.emit(_progress);
-      this.store.dispatch(
-        completeProgress({
-          id: this.content.progress.id,
-          courseId: this.lesson.course_id,
-          stageId: this.lesson.stage_id,
-          lessonId: this.lesson.id,
-          progress: _progress,
-          assessment: false,
-        }),
+      const component: ComponentType<
+        CompletionDialogComponent | CourseCompletionComponent
+      > =
+        progress_type === PROGRESS_TYPE.lesson
+          ? CompletionDialogComponent
+          : CourseCompletionComponent;
+      const data =
+        progress_type === PROGRESS_TYPE.lesson
+          ? {
+            lesson: this.lesson.title,
+            course: this._courseOverview,
+            stageId: this.lesson.stage_id
+          }
+          : {
+            badge: this._courseOverview?.badge?.badge_image
+              ? this._courseOverview?.badge.badge_image
+              : 'courses/images/default_badge.png',
+            course: this._courseOverview.name,
+            course_id: this._courseOverview.id,
+            student: 'user.name',
+            course_attempt_id: this.lesson.course_attempt_id,
+          };
+            
+      const nextLesson$ = this.courseOverview$.pipe(
+        map(courseOverview => nextLesson(courseOverview, this.lesson))
+      );
+
+      this.dialog
+        .open(component, {
+          data,
+          panelClass: 'fullscreen-dialog',
+          height: '100%',
+          width: '100%',
+        })
+        .afterClosed()
+        .pipe(withLatestFrom(nextLesson$))
+        .subscribe(([response, nextLesson]) => {
+          if (response === LESSON_COMPLETION_CTA.nextLesson) {
+            this.router.navigate(nextLessonUrlSegments(nextLesson));
+          } else {
+            console.log('none of the above');
+          }
+          this.dialog.closeAll();
+        }
       );
     }
   }
@@ -404,13 +387,30 @@ export class QuizComponent extends LessonContentComponent implements OnInit, OnD
   endQuiz(): void {
     // Signal that the quiz has ended
     this.quizEnd$.next();
-
     this.hidePrevAndNext.emit(false);
 
     // Grade the quiz
     this.quizService.gradeQuiz(this.quiz.attempt?.id ?? 0).subscribe(response => {
       this.quiz.endQuiz(response);
     });
+
+    // Update progress
+    const _progress = {
+      id: this.content.progress.id,
+      status: PROGRESS_STATUS.completed,
+    };
+    this.updateProgress.emit(_progress);
+    
+    this.store.dispatch(
+      completeProgress({
+        id: this.content.progress.id,
+        courseId: this.lesson.course_id,
+        stageId: this.lesson.stage_id,
+        lessonId: this.lesson.id,
+        progress: _progress,
+        assessment: false,
+      }),
+    );
 
     // Stop the timer
     if (this.timerSubscription) {
