@@ -13,7 +13,7 @@
         </div>
 
         <div class="evaluation-button-wrapper">
-          <button class="evaluation-start" (click)="startQuiz()">{{ getStartButtonText() }}</button>
+          <button class="evaluation-start" (click)="startEvaluation()">{{ getStartButtonText() }}</button>
           <div class="evaluation-warning-label" *ngIf="this.eval.timeLimit > 0">
             <span class="evaluation-warning-label-icon">!</span> <span>This is timed: {{ this.eval.timeLimit }} minutes</span>
           </div>
@@ -21,7 +21,7 @@
       </div>
 
       <div class="evaluation-icon">
-        <img src="courses/images/svg/quiz_icon.svg" />
+        <img src="{{EVALUATION_ICONS.quiz}}" />
       </div>
     </header>
     <div class="evaluation-tags">
@@ -41,7 +41,7 @@
         Question {{ eval.currentQuestionIndex + 1 }} of {{ eval.questionCount }}
       </div>
       <div class="eqb-timer" *ngIf="eval.timeLimit">
-        <img src="courses/images/svg/quiz_question_timer_icon.svg" />
+        <img src="{{EVALUATION_ICONS.timer}}" />
         {{ eval.getTimeRemaining() }}
       </div>
     </div>
@@ -162,7 +162,7 @@
         [style.display]="eval.currentQuestionIndex <= 0 ? 'none' : 'inline-block'"
         (click)="goBack()"
       >
-        <img src="courses/images/svg/quiz_question_back_button_icon.svg" />
+        <img src="{{EVALUATION_ICONS.question_back_button}}" />
         BACK
       </button>
 
@@ -188,13 +188,13 @@
         (click)="nextQuestion()"
       >
         NEXT
-        <img src="courses/images/svg/quiz_question_back_button_icon.svg" />
+        <img src="{{EVALUATION_ICONS.question_back_button}}" />
       </button>
 
       <!-- <div class="evaluation-control-fullscreen"></div> -->
     </div>
   </div>
-  <cirrus-eqb-out-of-time *ngIf="showOutOfTimePopup" (buttonClicked)="retakeQuiz()"> </cirrus-eqb-out-of-time>
+  <cirrus-eqb-out-of-time *ngIf="showOutOfTimePopup" (buttonClicked)="retakeEvaluation()"> </cirrus-eqb-out-of-time>
 
   <div
     class="evaluation-complete"
@@ -296,7 +296,7 @@
     </div>
     <div class="evaluation-results-next-steps" *ngIf="eval.grade === EvaluationGradeEnum.Failed">
       <!-- <button class="btn btn-secondary">{{ getResultsSecondaryButtonText() }}</button> -->
-      <button class="btn btn-primary" (click)="retakeQuiz()">{{ getResultsPrimaryButtonText() }}</button>
+      <button class="btn btn-primary" (click)="retakeEvaluation()">{{ getResultsPrimaryButtonText() }}</button>
     </div>
   </div>
 

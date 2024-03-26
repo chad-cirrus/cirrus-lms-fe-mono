@@ -25,12 +25,13 @@ import { CONTENT_TYPE, ICourseOverview, ILesson, PROGRESS_STATUS } from '@cirrus
 import { selectLesson } from '../../../store/selectors/lessons.selector';
 import { EqbOutOfTimeComponent } from './evaluation-out-of-time/eqbOutOfTime.component';
 import { completeProgress } from '../../../store/actions';
-import { EvalClass } from './models/Evaluation';
+import { EvaluationClass } from './models/Evaluation';
 import { EvaluationGradeEnum } from './models/EvaluationGradeEnum';
 import { CoursesService } from '../../../course/course.service';
 import { selectCourseOverview } from '../../../store/selectors/course.selector';
 import { selectCirrusUser } from '../../../store/selectors/cirrus-user.selector';
 import { nextLesson, nextLessonUrlSegments } from '../../../shared/helpers/next-lesson';
+import { EVALUATION_ICONS } from './evaluation-icons';
 
 /**
  * Component for displaying an evaluation (quiz or exam)
@@ -73,8 +74,9 @@ export class EvaluationComponent extends LessonContentComponent implements OnIni
 
   EvaluationStatusEnum = EvaluationStatusEnum;
   EvaluationGradeEnum = EvaluationGradeEnum;
+  EVALUATION_ICONS = EVALUATION_ICONS;
 
-  eval = new EvalClass();
+  eval = new EvaluationClass();
 
   quiz_attempt?: IEvalAttempt = undefined;
 
@@ -119,13 +121,13 @@ export class EvaluationComponent extends LessonContentComponent implements OnIni
         this.evaluationService
           .getQuiz(this.content.quiz_id || -1, this.course_attempt_id, lesson.id, lesson.stage_id)
           .subscribe(response => {
-            this.eval.loadQuiz(response);
+            this.eval.loadEvaluation(response);
           });
       } else {
         this.evaluationService
           .getExam(this.content.exam_id || -1, this.course_attempt_id, lesson.id, lesson.stage_id)
           .subscribe(response => {
-            this.eval.loadQuiz(response);
+            this.eval.loadEvaluation(response);
           });
       }
     });
@@ -232,9 +234,9 @@ export class EvaluationComponent extends LessonContentComponent implements OnIni
   }
 
   /**
-   * Starts the quiz timer.
+   * Starts the evaluation timer.
    */
-  startQuizTimer(): void {
+  startEvaluationTimer(): void {
     this.evaluationTimer = timer(0, 1000);
     this.timerSubscription = this.evaluationTimer.pipe(takeUntil(this.evaluationEnd$)).subscribe(() => {
       this.eval.incrementTimeElapsed();
@@ -247,14 +249,14 @@ export class EvaluationComponent extends LessonContentComponent implements OnIni
   }
 
   /**
-   * startQuiz
+   * startEvaluation
    *
-   * Starts a quiz, fired by user clicking start quiz button.
-   * It call startQuiz() on the quiz object and also emits an event to hide the previous and next buttons on the content player.
+   * Starts an evaluation, fired by user clicking start evaluation button.
+   * It calls startEvaluation() on the evaluation object and also emits an event to hide the previous and next buttons on the content player.
    *
    * @returns {void}
    */
-  startQuiz(): void {
+  startEvaluation(): void {
     this.hidePrevAndNext.emit(true);
 
     const attempt: IStartEvalAttempt = {
@@ -272,12 +274,18 @@ export class EvaluationComponent extends LessonContentComponent implements OnIni
     });
 
     if (this.eval.status === EvaluationStatusEnum.NotStarted) {
-      this.evaluationService.startQuiz(attempt).subscribe(response => {
-        this.eval.startQuiz(response);
-      });
+      if (this.content.content_type == CONTENT_TYPE.quiz) {
+        this.evaluationService.startQuiz(attempt).subscribe(response => {
+          this.eval.startEvaluation(response);
+        });
+      } else {
+        this.evaluationService.startExam(attempt).subscribe(response => {
+          this.eval.startEvaluation(response);
+        });
+      }
     }
     if (this.eval.timeLimit > 0) {
-      this.startQuizTimer();
+      this.startEvaluationTimer();
     }
   }
 
@@ -407,7 +415,7 @@ export class EvaluationComponent extends LessonContentComponent implements OnIni
 
     // Grade the quiz
     this.evaluationService.gradeQuiz(this.eval.attempt?.id ?? 0).subscribe(response => {
-      this.eval.endQuiz(response);
+      this.eval.endEvaluation(response);
     });
 
     // Stop the timer
@@ -487,12 +495,12 @@ export class EvaluationComponent extends LessonContentComponent implements OnIni
    * Allows users to reattempt a failed quiz, resets quiz data to start over
    * Resets quiz tracker and puts user back to the start quiz screen
    */
-  retakeQuiz(): void {
+  retakeEvaluation(): void {
     this.showOutOfTimePopup = false;
 
-    this.eval.resetQuiz();
+    this.eval.resetEvaluation();
     this.getEvaluation();
-    this.startQuiz();
+    this.startEvaluation();
   }
 
   /**

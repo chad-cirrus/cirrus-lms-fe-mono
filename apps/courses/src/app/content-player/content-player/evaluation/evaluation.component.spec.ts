@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { EvaluationComponent } from './quiz.component';
+import { EvaluationComponent } from './evaluation.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { StoreModule } from '@ngrx/store';
 import { coursesReducers } from '../../../store/reducers';
@@ -105,11 +105,13 @@ function getContent(): IContent {
 
 function getIQuizRequest(): IEvalRequest {
   const mockQuizAttempt: IEvalAttempt = {
+
     id: 1,
     course_attempt_id: 1,
     stage_id: 1,
     lesson_id: 1,
     content_id: 1,
+    exam_id: 0,
     quiz_id: 1,
     snapshot: 'mock snapshot',
     score: 100,
@@ -159,6 +161,7 @@ const fnGetMockQuizAttempt = (): IEvalAttempt => {
     graded_at: '2024-01-17T21:05:02.013Z',
     score: 80,
     quiz_attempt_questions: [fnGenerateMockIQuizAttemptQuestion()],
+    exam_id: 0,
   };
 };
 

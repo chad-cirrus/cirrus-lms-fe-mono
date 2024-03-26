@@ -8,7 +8,7 @@ import {
   PdfComponent,
 } from '@cirrus/ui';
 import { ScormComponent } from './content-player/scorm/scorm.component';
-import { EvaluationComponent } from './content-player/quiz/quiz.component';
+import { EvaluationComponent } from './content-player/evaluation/evaluation.component';
 
 export const componentDictionary = {
   [CONTENT_TYPE.vimeo]: VideoPlayerComponent,

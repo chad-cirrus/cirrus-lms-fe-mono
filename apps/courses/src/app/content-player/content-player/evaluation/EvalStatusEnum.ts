@@ -1,5 +1,5 @@
 /**
- * Represents the status of a quiz.
+ * Represents the status of an evaluation.
  */
 export enum EvalStatusEnum {
   NotStarted = "not started",

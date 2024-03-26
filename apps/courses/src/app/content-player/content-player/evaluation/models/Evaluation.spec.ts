@@ -4,14 +4,14 @@ import { IEvalAttempt } from './IEvalAttempt';
 import { IEvalAttemptQuestion } from './IEvalAttemptQuestion';
 import { IEvalRequest } from './IEvalRequest';
 import { IStartEvalResponse } from './IStartEvalResponse';
-import { EvalClass } from './Evaluation'; // Import the QuizClass from the correct module
+import { EvaluationClass } from './Evaluation'; // Import the QuizClass from the correct module
 import { EvaluationGradeEnum } from './EvaluationGradeEnum';
 import { EvaluationStatusEnum } from './EvaluationStatusEnum';
 describe('QuizClass', () => {
-  let quiz: EvalClass;
+  let quiz: EvaluationClass;
 
   beforeEach(() => {
-    quiz = new EvalClass();
+    quiz = new EvaluationClass();
   });
 
   it('should initialize with default values', () => {
@@ -30,7 +30,7 @@ describe('QuizClass', () => {
 
   it('should load quiz from the API', () => {
     const quizRequest: IEvalRequest = getQuizContent(); // Replace with your own implementation
-    quiz.loadQuiz(quizRequest);
+    quiz.loadEvaluation(quizRequest);
 
     expect(quiz.id).toBe(quizRequest.id);
     expect(quiz.approximateDuration).toBe(quizRequest.approximate_duration);
@@ -41,10 +41,10 @@ describe('QuizClass', () => {
 
   it('should check if the quiz is timed', () => {
     quiz.timeLimit = 0;
-    expect(quiz.isQuizTimed()).toBe(false);
+    expect(quiz.isEvaluationTimed()).toBe(false);
 
     quiz.timeLimit = 10;
-    expect(quiz.isQuizTimed()).toBe(true);
+    expect(quiz.isEvaluationTimed()).toBe(true);
   });
 
   it('should check if the quiz has attempts', () => {
@@ -77,7 +77,7 @@ describe('QuizClass', () => {
       generateMockQuizAttemptQuestion(),
       generateMockQuizAttemptQuestion(),
     ];
-    quiz.startQuiz(startQuizResponse);
+    quiz.startEvaluation(startQuizResponse);
 
     expect(quiz.status).toBe(EvaluationStatusEnum.InProgress);
     expect(quiz.attempt).toBe(startQuizResponse.quiz_attempt);
@@ -128,7 +128,7 @@ describe('QuizClass', () => {
 
   it('should end the quiz', () => {
     const quizAttempt: IEvalAttempt = {} as IEvalAttempt; // Replace with your own implementation
-    quiz.endQuiz(quizAttempt);
+    quiz.endEvaluation(quizAttempt);
 
     expect(quiz.status).toBe(EvaluationStatusEnum.Submitted);
     expect(quiz.currentQuestionIndex).toBe(-1);
@@ -143,7 +143,7 @@ describe('QuizClass', () => {
     quiz.grade = EvaluationGradeEnum.Passed;
     quiz.passPercentage = 80;
 
-    quiz.resetQuiz();
+    quiz.resetEvaluation();
 
     expect(quiz.status).toBe(EvaluationStatusEnum.NotStarted);
     expect(quiz.currentQuestionIndex).toBe(-1);
@@ -353,6 +353,7 @@ function getSubmissionResponse(): IEvalAttempt {
     stage_id: 486,
     lesson_id: 318,
     content_id: 234,
+    exam_id: 0,
     quiz_id: 5,
     score: 100,
     snapshot: 'mock snapshot',
@@ -371,6 +372,7 @@ function getMockQuizAttempt(): IEvalAttempt {
     stage_id: 1,
     lesson_id: 1,
     content_id: 1,
+    exam_id: 0,
     quiz_id: 1,
     snapshot: 'mock snapshot',
     score: 100,

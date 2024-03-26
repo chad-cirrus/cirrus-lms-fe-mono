@@ -535,14 +535,14 @@
   border-radius: 12px;
 
   &.--fail {
-    background-image: url('../../../../assets/images/quiz-results.png');
+    background-image: url('../../../../assets/images/evaluation-results.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     background-color: #C9582C;
   }
   &.--pass {
-    background-image: url('../../../../assets/images/quiz-results.png');
+    background-image: url('../../../../assets/images/evaluation-results.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;

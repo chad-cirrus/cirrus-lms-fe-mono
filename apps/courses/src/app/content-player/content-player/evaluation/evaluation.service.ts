@@ -51,6 +51,7 @@ export class EvaluationService {
       )
       .pipe(map(response => response['content_player/exam' as keyof object] as IEvalRequest));
   }
+
   /**
    * Calls the API to start a new quiz attempt.
    * @param attempt The quiz attempt data.
@@ -60,6 +61,18 @@ export class EvaluationService {
     const attemptData: IStartEvaluation = { quiz_attempt: attempt };
     return this.http
       .post<IStartEvalResponse>(`${environment.baseUrl}/api/v5/quiz_attempts`, attemptData)
+      .pipe(map(response => response));
+  }
+
+  /**
+   * Calls the API to start a new quiz attempt.
+   * @param attempt The quiz attempt data.
+   * @returns An observable of the start quiz attempt response.
+   */
+  startExam(attempt: IStartEvalAttempt): Observable<IStartEvalResponse> {
+    const attemptData: IStartEvaluation = { quiz_attempt: attempt };
+    return this.http
+      .post<IStartEvalResponse>(`${environment.baseUrl}/api/v5/exam_attempts`, attemptData)
       .pipe(map(response => response));
   }
 

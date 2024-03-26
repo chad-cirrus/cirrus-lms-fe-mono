@@ -6,7 +6,7 @@ import { IStartEvalResponse } from './IStartEvalResponse';
 import { EvaluationGradeEnum } from './EvaluationGradeEnum';
 import { EvaluationStatusEnum } from './EvaluationStatusEnum';
 
-export class EvalClass {
+export class EvaluationClass {
   id = -1;
   status = EvaluationStatusEnum.NotStarted;
   grade = EvaluationGradeEnum.NotGraded;
@@ -14,35 +14,35 @@ export class EvalClass {
   questionCount = -1;
 
   /**
-   * The questions for this quiz
+   * The questions for this evaluation
    * @type {IEvalAttemptQuestion[]}
-   * @memberof QuizClass
+   * @memberof EvaluationClass
    * @default []
    * */
   questions: IEvalAttemptQuestion[] = [];
 
   /**
-   * Aproximately how long this quiz will take in minutes
+   * Aproximately how long this evaluation will take in minutes
    *
    * @type {number}
-   * @memberof QuizClass
+   * @memberof EvaluationClass
    * @default 0
    * */
   approximateDuration = 0;
 
   /**
-   * The quiz attempt information.
+   * The evaluation attempt information.
    * @type {IEvalAttempt}
    * */
   attempt: IEvalAttempt | undefined;
 
   /**
-   * The time limit for this quiz in minutes
+   * The time limit for this evaluation in minutes
    */
   timeLimit = 0;
 
   /**
-   * The time elapsed in seconds for a timed quiz once started
+   * The time elapsed in seconds for a timed evaluation once started
    */
   elapsedSeconds = -1;
 
@@ -55,10 +55,10 @@ export class EvalClass {
 
   passPercentage = -1;
 
-  /** Loads the quiz from the api on initialization. *
+  /** Loads the evaluation from the api on initialization. *
    * @returns void
    * */
-  loadQuiz(_request: IEvalRequest): void {
+  loadEvaluation(_request: IEvalRequest): void {
     this.id = _request.id;
     this.passPercentage = _request.pass_percentage;
     this.questionCount = _request.quiz_question_count || 0;
@@ -78,16 +78,16 @@ export class EvalClass {
         this.questions = this.attempt.quiz_attempt_questions;
       }
       if (this.attempt.score !== null && this.attempt.score !== undefined) {
-        this.endQuiz(this.attempt);
+        this.endEvaluation(this.attempt);
       }
     }
   }
 
   /**
-   * Checks if the quiz has a time limit.
-   * @returns {boolean} True if the quiz has a time limit, false otherwise.
+   * Checks if the evaluation has a time limit.
+   * @returns {boolean} True if the evaluation has a time limit, false otherwise.
    */
-  isQuizTimed(): boolean {
+  isEvaluationTimed(): boolean {
     return this.timeLimit > 0;
   }
 
@@ -96,9 +96,9 @@ export class EvalClass {
   }
 
   /**
-   * Increments the time elapsed for the quiz.
-   * If the quiz is not already in progress, it sets the status to QuizStatusEnum.InProgress.
-   * If the elapsed time exceeds the time limit, it sets the status to QuizStatusEnum.TimedOut.
+   * Increments the time elapsed for the evaluation.
+   * If the evaluation is not already in progress, it sets the status to evaluationStatusEnum.InProgress.
+   * If the elapsed time exceeds the time limit, it sets the status to evaluationStatusEnum.TimedOut.
    */
   incrementTimeElapsed(): void {
     this.elapsedSeconds++;
@@ -108,10 +108,10 @@ export class EvalClass {
   }
 
   /**
-   * Starts the quiz with the provided response.
-   * @param response - The response containing the quiz attempt information.
+   * Starts the evaluation with the provided response.
+   * @param response - The response containing the evaluation attempt information.
    */
-  startQuiz(response: IStartEvalResponse): void {
+  startEvaluation(response: IStartEvalResponse): void {
     this.status = EvaluationStatusEnum.InProgress;
     this.attempt = response.quiz_attempt;
     this.currentQuestionIndex = 0;
@@ -120,7 +120,7 @@ export class EvalClass {
   }
 
   /**
-   * Calculates and returns the time remaining for the student to take the quiz.
+   * Calculates and returns the time remaining for the student to take the evaluation.
    * The time is returned as a string in the format "mm:ss".
    * @returns {string} The elapsed time in the format "mm:ss".
    */
@@ -138,7 +138,7 @@ export class EvalClass {
   }
 
   /**
-   * Selects an answer option for the quiz.
+   * Selects an answer option for the evaluation.
    * @param optionId - The ID of the selected answer option.
    * @returns void
    */
@@ -237,7 +237,7 @@ export class EvalClass {
   }
 
   /**
-   * Processes an answer submitted to the api for the current question in the quiz.
+   * Processes an answer submitted to the api for the current question in the evaluation.
    * @param response The answer response containing the user's answer.
    * @returns void
    */
@@ -251,7 +251,7 @@ export class EvalClass {
   }
 
   /**
-   * Moves to the next question in the quiz.
+   * Moves to the next question in the evaluation.
    */
   previousQuestion(): void {
     this.currentQuestionIndex--;
@@ -260,7 +260,7 @@ export class EvalClass {
   }
 
   /**
-   * Moves to the next question in the quiz.
+   * Moves to the next question in the evaluation.
    */
   nextQuestion(): void {
     this.currentQuestionIndex++;
@@ -272,11 +272,11 @@ export class EvalClass {
   }
 
   /**
-   * Ends the quiz and updates the quiz status.
-   * @param response - The quiz attempt response.
+   * Ends the evaluation and updates the evaluation status.
+   * @param response - The evaluation attempt response.
    * @returns void
    */
-  endQuiz(response: IEvalAttempt): void {
+  endEvaluation(response: IEvalAttempt): void {
     this.attempt = response;
     if (response.score >= this.passPercentage) {
       this.grade = EvaluationGradeEnum.Passed;
@@ -288,9 +288,9 @@ export class EvalClass {
   }
 
   /**
-   * Resets the quiz to its initial state.
+   * Resets the evaluation to its initial state.
    */
-  resetQuiz(): void {
+  resetEvaluation(): void {
     this.status = EvaluationStatusEnum.NotStarted;
     this.currentQuestionIndex = -1;
     this.elapsedSeconds = -1;
@@ -301,4 +301,4 @@ export class EvalClass {
     this.questionCount = -1;
   }
 }
-export type IQuiz = EvalClass;
+export type IEvaluation = EvaluationClass;
