@@ -138,10 +138,9 @@ export class QuizComponent extends LessonContentComponent implements OnInit, OnD
     )
 
     //Check if quiz is complete
-    if (this.quiz.status === QuizStatusEnum.Complete) {
+    if (this.quiz.status === QuizStatusEnum.Complete || this.quiz.grade === QuizGradeEnum.Passed) {
       //Check if lesson is complete
       this.lessonCompleted$ = this.coursesService.lessonComplete$;
-
       if (this.lesson.progress.status == "completed") {
         let progress_type = 'lesson';
 
@@ -190,22 +189,6 @@ export class QuizComponent extends LessonContentComponent implements OnInit, OnD
             this.dialog.closeAll();
           });
       }
-
-      const _progress = {
-        id: this.content.progress.id,
-        status: PROGRESS_STATUS.completed,
-      };
-      this.updateProgress.emit(_progress);
-      this.store.dispatch(
-        completeProgress({
-          id: this.content.progress.id,
-          courseId: this.lesson.course_id,
-          stageId: this.lesson.stage_id,
-          lessonId: this.lesson.id,
-          progress: _progress,
-          assessment: false,
-        }),
-      );
     }
   }
 
@@ -411,6 +394,25 @@ export class QuizComponent extends LessonContentComponent implements OnInit, OnD
     this.quizService.gradeQuiz(this.quiz.attempt?.id ?? 0).subscribe(response => {
       this.quiz.endQuiz(response);
     });
+
+    // Update progress
+    console.log("endquiz");
+    const _progress = {
+      id: this.content.progress.id,
+      status: PROGRESS_STATUS.completed,
+    };
+    this.updateProgress.emit(_progress);
+    
+    this.store.dispatch(
+      completeProgress({
+        id: this.content.progress.id,
+        courseId: this.lesson.course_id,
+        stageId: this.lesson.stage_id,
+        lessonId: this.lesson.id,
+        progress: _progress,
+        assessment: false,
+      }),
+    );
 
     // Stop the timer
     if (this.timerSubscription) {
