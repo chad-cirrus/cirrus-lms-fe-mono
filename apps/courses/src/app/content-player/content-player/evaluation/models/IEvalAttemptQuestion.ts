@@ -3,7 +3,7 @@ import { IQuestionOption } from "./IQuestionOption";
 /**
  * Represents a quiz attempt question.
  */
-export interface IQuizAttemptQuestion {
+export interface IEvalAttemptQuestion {
   /**
    * The ID of the quiz attempt question.
    * @type {number}

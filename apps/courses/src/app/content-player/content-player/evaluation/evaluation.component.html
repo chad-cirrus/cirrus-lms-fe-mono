@@ -1,59 +1,59 @@
-<div #wrapper class="quiz-container">
-  <div class="quiz-overview" *ngIf="this.quiz.status === QuizStatusEnum.NotStarted">
-    <header class="quiz-overview-header">
-      <div class="quiz-overview-content">
-        <div class="quiz-title-wrapper">
-          <h2 class="quiz-lesson-number">{{ content.title }}</h2>
-          <h4 class="quiz-total-questions">
-            {{ quiz.questionCount }} Questions
-            <span *ngIf="quiz.approximateDuration > 0" class="quiz-duration"
-              >(approx. {{ quiz.approximateDuration }} min)</span
+<div #wrapper class="evaluation-container">
+  <div class="evaluation-overview" *ngIf="this.eval.status === EvaluationStatusEnum.NotStarted">
+    <header class="evaluation-overview-header">
+      <div class="evaluation-overview-content">
+        <div class="evaluation-title-wrapper">
+          <h2 class="evaluation-lesson-number">{{ content.title }}</h2>
+          <h4 class="evaluation-total-questions">
+            {{ eval.questionCount }} Questions
+            <span *ngIf="eval.approximateDuration > 0" class="evaluation-duration"
+              >(approx. {{ eval.approximateDuration }} min)</span
             >
           </h4>
         </div>
 
-        <div class="quiz-button-wrapper">
-          <button class="quiz-start" (click)="startQuiz()">{{ getStartButtonText() }}</button>
-          <div class="quiz-warning-label" *ngIf="this.quiz.timeLimit > 0">
-            <span class="quiz-warning-label-icon">!</span> <span>This is timed: {{ this.quiz.timeLimit }} minutes</span>
+        <div class="evaluation-button-wrapper">
+          <button class="evaluation-start" (click)="startEvaluation()">{{ getStartButtonText() }}</button>
+          <div class="evaluation-warning-label" *ngIf="this.eval.timeLimit > 0">
+            <span class="evaluation-warning-label-icon">!</span> <span>This is timed: {{ this.eval.timeLimit }} minutes</span>
           </div>
         </div>
       </div>
 
-      <div class="quiz-icon">
-        <img src="courses/images/svg/quiz_icon.svg" />
+      <div class="evaluation-icon">
+        <img src="{{EVALUATION_ICONS.quiz}}" />
       </div>
     </header>
-    <div class="quiz-tags">
+    <div class="evaluation-tags">
       <h6>Subject Content</h6>
 
-      <ul class="quiz-tag-list">
-        <li *ngFor="let subject of getSubjectList()" class="quiz-tag">{{ subject }}</li>
+      <ul class="evaluation-tag-list">
+        <li *ngFor="let subject of getSubjectList()" class="evaluation-tag">{{ subject }}</li>
       </ul>
     </div>
   </div>
 
-  <div class="quiz-question-box" *ngIf="quiz.status === QuizStatusEnum.InProgress">
-    <div class="qqb-progress-bar"><span class="qqb-progress-bar-complete" style="width: 100%"></span></div>
+  <div class="evaluation-question-box" *ngIf="eval.status === EvaluationStatusEnum.InProgress">
+    <div class="eqb-progress-bar"><span class="eqb-progress-bar-complete" style="width: 100%"></span></div>
 
-    <div class="qqb-meta">
-      <div class="qqb-progress" *ngIf="quiz.status === QuizStatusEnum.InProgress">
-        Question {{ quiz.currentQuestionIndex + 1 }} of {{ quiz.questionCount }}
+    <div class="eqb-meta">
+      <div class="eqb-progress" *ngIf="eval.status === EvaluationStatusEnum.InProgress">
+        Question {{ eval.currentQuestionIndex + 1 }} of {{ eval.questionCount }}
       </div>
-      <div class="qqb-timer" *ngIf="quiz.timeLimit">
-        <img src="courses/images/svg/quiz_question_timer_icon.svg" />
-        {{ quiz.getTimeRemaining() }}
+      <div class="eqb-timer" *ngIf="eval.timeLimit">
+        <img src="{{EVALUATION_ICONS.timer}}" />
+        {{ eval.getTimeRemaining() }}
       </div>
     </div>
 
     <h4
-      class="qqb-question"
-      *ngIf="quiz.status === QuizStatusEnum.InProgress && quiz.questions[quiz.currentQuestionIndex]"
+      class="eqb-question"
+      *ngIf="eval.status === EvaluationStatusEnum.InProgress && eval.questions[eval.currentQuestionIndex]"
     >
-      {{ quiz.questions[quiz.currentQuestionIndex].body }}
+      {{ eval.questions[eval.currentQuestionIndex].body }}
     </h4>
 
-    <div class="full-screen-image-container" *ngIf="quiz.questionHasImage()">
+    <div class="full-screen-image-container" *ngIf="eval.questionHasImage()">
       <span class="full-screen-image-wrapper">
         <button class="toggle-full-screen-image" (click)="openFullScreenImage()">
           <!-- Open Icon -->
@@ -84,28 +84,28 @@
 
         <span class="full-screen-image">
           <img
-            src="{{ quiz.questions[quiz.currentQuestionIndex].image_url }}"
-            alt="{{ quiz.questions[quiz.currentQuestionIndex].image_title }}"
+            src="{{ eval.questions[eval.currentQuestionIndex].image_url }}"
+            alt="{{ eval.questions[eval.currentQuestionIndex].image_title }}"
           />
         </span>
       </span>
     </div>
 
-    <div class="qqb-answers --multiple-choice" *ngIf="quiz.isMultipleChoice()">
-      <div class="qqb-action">Select one</div>
+    <div class="eqb-answers --multiple-choice" *ngIf="eval.isMultipleChoice()">
+      <div class="eqb-action">Select one</div>
 
-      <ul class="qqb-answer-items">
+      <ul class="eqb-answer-items">
         <li
-          class="qqb-answer-item"
+          class="eqb-answer-item"
           [ngClass]="{
-            '--selected': quiz.selectedOptionId === question.id,
-            '--correct': quiz.questionAttemptCountExceeded() && quiz.isCorrectOptionId(question.id)
+            '--selected': eval.selectedOptionId === question.id,
+            '--correct': eval.questionAttemptCountExceeded() && eval.isCorrectOptionId(question.id)
           }"
           data-answer-value=""
-          *ngFor="let question of quiz.questions[quiz.currentQuestionIndex].options"
-          (click)="quiz.selectAnswer(question.id)"
+          *ngFor="let question of eval.questions[eval.currentQuestionIndex].options"
+          (click)="eval.selectAnswer(question.id)"
         >
-          <span class="qqb-answer-select-icon">
+          <span class="eqb-answer-select-icon">
             <svg width="14" height="11" viewBox="0 0 14 11" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M1.44922 4.79007L5.17256 8.62625L11.9987 1.59326" stroke="#0077C8" stroke-width="3" />
             </svg>
@@ -115,34 +115,34 @@
       </ul>
     </div>
 
-    <div class="qqb-answers --true-false" *ngIf="quiz.isTrueFalse()">
-      <ul class="qqb-answer-items">
+    <div class="eqb-answers --true-false" *ngIf="eval.isTrueFalse()">
+      <ul class="eqb-answer-items">
         <li
-          class="qqb-answer-item"
+          class="eqb-answer-item"
           [ngClass]="{
-            '--selected': quiz.selectedOptionId === quiz.questions[quiz.currentQuestionIndex].options[0].id,
-            '--correct': quiz.questionAttemptCountExceeded() && quiz.isCorrectOptionId(quiz.questions[quiz.currentQuestionIndex].options[0].id)
+            '--selected': eval.selectedOptionId === eval.questions[eval.currentQuestionIndex].options[0].id,
+            '--correct': eval.questionAttemptCountExceeded() && eval.isCorrectOptionId(eval.questions[eval.currentQuestionIndex].options[0].id)
           }"
           data-answer-value="true"
-          (click)="quiz.selectAnswer(quiz.questions[quiz.currentQuestionIndex].options[0].id)"
+          (click)="eval.selectAnswer(eval.questions[eval.currentQuestionIndex].options[0].id)"
         >
-          <span class="qqb-answer-select-icon">
+          <span class="eqb-answer-select-icon">
             <svg width="14" height="11" viewBox="0 0 14 11" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M1.41406 4.80939L5.33563 8.84979L12.5252 1.44238" stroke="#0077C8" stroke-width="2" />
             </svg>
           </span>
-          {{ quiz.questions[quiz.currentQuestionIndex].options[0].description }}
+          {{ eval.questions[eval.currentQuestionIndex].options[0].description }}
         </li>
         <li
-          class="qqb-answer-item"
+          class="eqb-answer-item"
           [ngClass]="{
-            '--selected': quiz.selectedOptionId === quiz.questions[quiz.currentQuestionIndex].options[1].id,
-            '--correct': quiz.questionAttemptCountExceeded() && quiz.isCorrectOptionId(quiz.questions[quiz.currentQuestionIndex].options[1].id)
+            '--selected': eval.selectedOptionId === eval.questions[eval.currentQuestionIndex].options[1].id,
+            '--correct': eval.questionAttemptCountExceeded() && eval.isCorrectOptionId(eval.questions[eval.currentQuestionIndex].options[1].id)
           }"
           data-answer-value="false"
-          (click)="quiz.selectAnswer(quiz.questions[quiz.currentQuestionIndex].options[1].id)"
+          (click)="eval.selectAnswer(eval.questions[eval.currentQuestionIndex].options[1].id)"
         >
-          <span class="qqb-answer-select-icon">
+          <span class="eqb-answer-select-icon">
             <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path
                 d="M1.28353 1.38053L10.6169 10.7139M10.6172 1.28643L1.28383 10.6198"
@@ -151,29 +151,29 @@
               />
             </svg>
           </span>
-          {{ quiz.questions[quiz.currentQuestionIndex].options[1].description }}
+          {{ eval.questions[eval.currentQuestionIndex].options[1].description }}
         </li>
       </ul>
     </div>
 
-    <div class="qqb-controls">
+    <div class="eqb-controls">
       <button
-        class="qqb-control-back"
-        [style.display]="quiz.currentQuestionIndex <= 0 ? 'none' : 'inline-block'"
+        class="eqb-control-back"
+        [style.display]="eval.currentQuestionIndex <= 0 ? 'none' : 'inline-block'"
         (click)="goBack()"
       >
-        <img src="courses/images/svg/quiz_question_back_button_icon.svg" />
+        <img src="{{EVALUATION_ICONS.question_back_button}}" />
         BACK
       </button>
 
       <button
         (click)="submitAnswer()"
-        [style.display]="quiz.questionAttemptCountExceeded() ? 'none' : 'inline-block'"
+        [style.display]="eval.questionAttemptCountExceeded() ? 'none' : 'inline-block'"
         [ngClass]="{
-          '--selected': quiz.selectedOptionId > -1
+          '--selected': eval.selectedOptionId > -1
         }"
 
-        class="qqb-control-submit"
+        class="eqb-control-submit"
       >
         SUBMIT
 
@@ -183,28 +183,28 @@
       </button>
 
       <button
-        class="qqb-control-next"
-        [style.display]=" quiz.questionHasBeenAnswered() ?  'inline-block':'none'"
+        class="eqb-control-next"
+        [style.display]=" eval.questionHasBeenAnswered() ?  'inline-block':'none'"
         (click)="nextQuestion()"
       >
         NEXT
-        <img src="courses/images/svg/quiz_question_back_button_icon.svg" />
+        <img src="{{EVALUATION_ICONS.question_back_button}}" />
       </button>
 
-      <!-- <div class="quiz-control-fullscreen"></div> -->
+      <!-- <div class="evaluation-control-fullscreen"></div> -->
     </div>
   </div>
-  <cirrus-qqb-out-of-time *ngIf="showOutOfTimePopup" (buttonClicked)="retakeQuiz()"> </cirrus-qqb-out-of-time>
+  <cirrus-eqb-out-of-time *ngIf="showOutOfTimePopup" (buttonClicked)="retakeEvaluation()"> </cirrus-eqb-out-of-time>
 
   <div
-    class="quiz-complete"
-    *ngIf="quiz.status === QuizStatusEnum.Submitted"
+    class="evaluation-complete"
+    *ngIf="eval.status === EvaluationStatusEnum.Submitted"
     [ngClass]="{
-      '--pass': quiz.grade === QuizGradeEnum.Passed,
-      '--fail': quiz.grade === QuizGradeEnum.Failed
+      '--pass': eval.grade === EvaluationGradeEnum.Passed,
+      '--fail': eval.grade === EvaluationGradeEnum.Failed
     }"
   >
-    <div class="quiz-results-icon">
+    <div class="evaluation-results-icon">
       <svg
         width="100%"
         height="100%"
@@ -245,17 +245,17 @@
       </svg>
     </div>
 
-    <h2 class="quiz-results-title">{{ getResultsTitle() }}</h2>
+    <h2 class="evaluation-results-title">{{ getResultsTitle() }}</h2>
 
-    <div class="quiz-results">
+    <div class="evaluation-results">
       <div class="label">Final Score</div>
-      <div class="quiz-results-score">{{ quiz.attempt?.score }}%</div>
+      <div class="evaluation-results-score">{{ eval.attempt?.score }}%</div>
     </div>
 
-    <div class="quiz-results-meta">
-      <p *ngIf="quiz.passPercentage > 0">You must pass with a {{ quiz.passPercentage }}% or higher to continue.</p>
-      <div *ngIf="quiz.timeLimit > 0" class="quiz-results-time-data">
-        <div class="quiz-results-time-icon">
+    <div class="evaluation-results-meta">
+      <p *ngIf="eval.passPercentage > 0">You must pass with a {{ eval.passPercentage }}% or higher to continue.</p>
+      <div *ngIf="eval.timeLimit > 0" class="evaluation-results-time-data">
+        <div class="evaluation-results-time-icon">
           <svg width="13" height="14" viewBox="0 0 13 14" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M5.33302 2.13368V0.56518H7.59405V2.16153" fill="#1F1F1F" />
             <path
@@ -291,21 +291,21 @@
         </div>
         <span>Elapsed Time</span>
 
-        <div class="quiz-results-time">{{ quiz.attempt?.time_elapsed }}</div>
+        <div class="evaluation-results-time">{{ eval.attempt?.time_elapsed }}</div>
       </div>
     </div>
-    <div class="quiz-results-next-steps" *ngIf="quiz.grade === QuizGradeEnum.Failed">
+    <div class="evaluation-results-next-steps" *ngIf="eval.grade === EvaluationGradeEnum.Failed">
       <!-- <button class="btn btn-secondary">{{ getResultsSecondaryButtonText() }}</button> -->
-      <button class="btn btn-primary" (click)="retakeQuiz()">{{ getResultsPrimaryButtonText() }}</button>
+      <button class="btn btn-primary" (click)="retakeEvaluation()">{{ getResultsPrimaryButtonText() }}</button>
     </div>
   </div>
 
-  <div class="qqb-question-result {{ answeredQuestionResultClass }}">
+  <div class="eqb-question-result {{ answeredQuestionResultClass }}">
     <div class="background-overlay"></div>
 
-    <div class="qqb-result-box">
-      <div class="qqb-result-box-wrapper">
-        <div class="qqb-result-icon">
+    <div class="eqb-result-box">
+      <div class="eqb-result-box-wrapper">
+        <div class="eqb-result-icon">
           <svg
             width="100%"
             height="100%"
@@ -349,9 +349,9 @@
             </g>
           </svg>
         </div>
-        <h4 class="qqb-result-title">{{ questionResultTitle }}</h4>
-        <p class="qqb-result-description">{{ questionResultSubtitle }}</p>
-        <button class="btn btn-qqb-result-action" (click)="popupButtonClick()">{{ questionResultButtonText }}</button>
+        <h4 class="eqb-result-title">{{ questionResultTitle }}</h4>
+        <p class="eqb-result-description">{{ questionResultSubtitle }}</p>
+        <button class="btn btn-eqb-result-action" (click)="popupButtonClick()">{{ questionResultButtonText }}</button>
       </div>
     </div>
   </div>

@@ -1,4 +1,4 @@
-.qqb-out-of-time {
+.eqb-out-of-time {
 
   display: none;
 
@@ -13,7 +13,7 @@
     z-index: 1;
   }
 
-  .qqb-result-box {
+  .eqb-result-box {
     z-index: 99;
     position: absolute;
     display: flex;
@@ -26,18 +26,18 @@
     right: 0;
   }
 
-  .qqb-result-icon {
+  .eqb-result-icon {
     display: none;
     max-height: 50px;
     max-width: 50px;
     margin: 0 auto;
   }
 
-  .qqb-result-title {
+  .eqb-result-title {
     margin: 1rem 0;
   }
 
-  .qqb-result-box-wrapper {
+  .eqb-result-box-wrapper {
     background-color: #1f1f1f;
     box-shadow: 0 4px 80px #ffffff;
     padding: 2rem 1.5rem;
@@ -46,7 +46,7 @@
     width: 300px;
   }
 
-  .btn-qqb-result-action {
+  .btn-eqb-result-action {
     height: 48px;
     text-align: center;
     border-radius: 60px;
@@ -61,7 +61,7 @@
     }
   }
 
-  .qqb-result-description {
+  .eqb-result-description {
     font-family: 'Akzidenz-Grotesk BQ';
     font-weight: 500;
     font-size: 1.063rem;
@@ -75,11 +75,11 @@
       background-color: #00A1A1;
     }
 
-    .qqb-result-icon {
+    .eqb-result-icon {
       display: block;
     }
 
-    .btn-qqb-result-action {
+    .btn-eqb-result-action {
       background-color: #00FFFF;
       color: #000;
     }
@@ -92,16 +92,16 @@
       background-color: #004C80;
     }
 
-    .qqb-result-title {
+    .eqb-result-title {
       color: #C9582C;
     }
 
-    .btn-qqb-result-action {
+    .btn-eqb-result-action {
       background-color: #C9582C;
       color: #fff;
     }
 
-    .qqb-result-description {
+    .eqb-result-description {
       display: block;
     }
   }

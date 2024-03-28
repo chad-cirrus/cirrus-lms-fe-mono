@@ -1,28 +1,28 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { QuizComponent } from './quiz.component';
+import { EvaluationComponent } from './evaluation.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { StoreModule } from '@ngrx/store';
 import { coursesReducers } from '../../../store/reducers';
-import { QuizService } from './quiz.service';
+import { EvaluationService } from './evaluation.service';
 import { IContent } from '@cirrus/models';
-import { IQuizRequest } from './models/IQuizRequest';
-import { IQuizAttempt } from './models/IQuizAttempt';
+import { IEvalRequest } from './models/IEvalRequest';
+import { IEvalAttempt } from './models/IEvalAttempt';
 import { IQuestionOption } from './models/IQuestionOption';
-import { IQuizAttemptQuestion } from './models/IQuizAttemptQuestion';
+import { IEvalAttemptQuestion } from './models/IEvalAttemptQuestion';
 
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { FullStoryEventData, FullstoryService } from '@cirrus/ui';
 
 describe('QuizComponent', () => {
-  let component: QuizComponent;
-  let fixture: ComponentFixture<QuizComponent>;
+  let component: EvaluationComponent;
+  let fixture: ComponentFixture<EvaluationComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [QuizComponent, HttpClientTestingModule, StoreModule.forRoot(coursesReducers), MatDialogModule],
+      imports: [EvaluationComponent, HttpClientTestingModule, StoreModule.forRoot(coursesReducers), MatDialogModule],
       providers: [
-        QuizService, 
-        { provide: MAT_DIALOG_DATA, useValue: {} }, 
+        EvaluationService,
+        { provide: MAT_DIALOG_DATA, useValue: {} },
         { provide: MatDialogRef, useValue: {} },
         { provide: FullstoryService, useClass: MockFullstoryService}
       ],
@@ -31,7 +31,7 @@ describe('QuizComponent', () => {
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(QuizComponent);
+    fixture = TestBed.createComponent(EvaluationComponent);
     component = fixture.componentInstance;
     component.content = getContent();
     fixture.detectChanges();
@@ -103,13 +103,15 @@ function getContent(): IContent {
   };
 }
 
-function getIQuizRequest(): IQuizRequest {
-  const mockQuizAttempt: IQuizAttempt = {
+function getIQuizRequest(): IEvalRequest {
+  const mockQuizAttempt: IEvalAttempt = {
+
     id: 1,
     course_attempt_id: 1,
     stage_id: 1,
     lesson_id: 1,
     content_id: 1,
+    exam_id: 0,
     quiz_id: 1,
     snapshot: 'mock snapshot',
     score: 100,
@@ -118,7 +120,7 @@ function getIQuizRequest(): IQuizRequest {
     graded_at: '2022-01-01T00:00:00Z',
     quiz_attempt_questions: [],
   };
-  return { quiz_attempt: mockQuizAttempt } as IQuizRequest;
+  return { quiz_attempt: mockQuizAttempt } as IEvalRequest;
 }
 
 function fnGenerateMockIQuestionOption(): IQuestionOption {
@@ -129,7 +131,7 @@ function fnGenerateMockIQuestionOption(): IQuestionOption {
   };
 }
 
-const fnGenerateMockIQuizAttemptQuestion = (): IQuizAttemptQuestion => {
+const fnGenerateMockIQuizAttemptQuestion = (): IEvalAttemptQuestion => {
   return {
     id: Math.floor(Math.random() * 10),
     quiz_attempt_id: Math.floor(Math.random() * 10),
@@ -142,10 +144,10 @@ const fnGenerateMockIQuizAttemptQuestion = (): IQuizAttemptQuestion => {
     image_title: '',
     responded_at: '2024-01-17T21:05:02.013Z',
     created_at: '2024-01-17T21:05:02.013Z',
-  } as IQuizAttemptQuestion;
+  } as IEvalAttemptQuestion;
 };
 
-const fnGetMockQuizAttempt = (): IQuizAttempt => {
+const fnGetMockQuizAttempt = (): IEvalAttempt => {
   return {
     id: 1,
     course_attempt_id: 1,
@@ -159,6 +161,7 @@ const fnGetMockQuizAttempt = (): IQuizAttempt => {
     graded_at: '2024-01-17T21:05:02.013Z',
     score: 80,
     quiz_attempt_questions: [fnGenerateMockIQuizAttemptQuestion()],
+    exam_id: 0,
   };
 };
 

@@ -1,10 +1,10 @@
-import { IQuizAttemptQuestion } from "./IQuizAttemptQuestion";
+import { IEvalAttemptQuestion } from "./IEvalAttemptQuestion";
 
 /**
  * Interface for a quiz attempt.
  * @interface
  */
-export interface IQuizAttempt {
+export interface IEvalAttempt {
   /**
    * The ID of the quiz attempt.
    * @type {number}
@@ -42,6 +42,12 @@ export interface IQuizAttempt {
   quiz_id: number;
 
   /**
+   * The ID of the exam.
+   * @type {number}
+   */
+  exam_id: number;
+
+  /**
    * The snapshot of the quiz attempt.
    * @type {string}
    */
@@ -75,7 +81,7 @@ export interface IQuizAttempt {
    * The array of quiz_attempt_questions of the quiz attempt.
    * @type {Array}
    */
-  quiz_attempt_questions: IQuizAttemptQuestion[];
+  quiz_attempt_questions: IEvalAttemptQuestion[];
 
   /**
    * The time elapsed from started_at to graded_at

@@ -3,16 +3,16 @@ import { ComponentType } from '@angular/cdk/portal';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { CompletionDialogComponent, CourseCompletionComponent, FullStoryEvent, FullStoryEventData, FullstoryService, LESSON_COMPLETION_CTA, LessonContentComponent } from '@cirrus/ui';
-import { QuizService } from './quiz.service';
+import { EvaluationService } from './evaluation.service';
 import { IAnswerResponse } from './models/IAnswerResponse';
-import { IQuizAttempt } from './models/IQuizAttempt';
-import { QuizStatusEnum } from './models/QuizStatusEnum';
-import { IStartQuizAttempt } from './models/IStartQuizAttempt';
+import { IEvalAttempt } from './models/IEvalAttempt';
+import { EvaluationStatusEnum } from './models/EvaluationStatusEnum';
+import { IStartEvalAttempt } from './models/IStartEvalAttempt';
 import {
   CORRECT_RESPONSE_POPUP,
   INCORRECT_RESPONSE_POPUP_RETRY,
   INCORRECT_RESPONSE_POPUP_FINAL,
-} from './quiz.constants';
+} from './evaluation.constants';
 
 import { MatDialog } from '@angular/material/dialog';
 import { FullScreenImageDialogComponent } from '../../../full-screen-image-dialog/full-screen-image-dialog.component';
@@ -21,42 +21,44 @@ import { AppState } from '../../../store/reducers';
 import { Store } from '@ngrx/store';
 import { Observable, Subject, Subscription, timer } from 'rxjs';
 import { map, takeUntil, tap, withLatestFrom } from 'rxjs/operators';
-import { ICourseOverview, ILesson, PROGRESS_STATUS, PROGRESS_TYPE } from '@cirrus/models';
+import { CONTENT_TYPE, ICourseOverview, ILesson, PROGRESS_STATUS } from '@cirrus/models';
 import { selectLesson } from '../../../store/selectors/lessons.selector';
-import { QqbOutOfTimeComponent } from './qqb-out-of-time/qqbOutOfTime.component';
+import { EqbOutOfTimeComponent } from './evaluation-out-of-time/eqbOutOfTime.component';
 import { completeProgress } from '../../../store/actions';
-import { QuizClass } from './models/Quiz';
-import { QuizGradeEnum } from './models/QuizGradeEnum';
+import { EvaluationClass } from './models/Evaluation';
+import { EvaluationGradeEnum } from './models/EvaluationGradeEnum';
 import { CoursesService } from '../../../course/course.service';
 import { selectCourseOverview } from '../../../store/selectors/course.selector';
 import { selectCirrusUser } from '../../../store/selectors/cirrus-user.selector';
 import { nextLesson, nextLessonUrlSegments } from '../../../shared/helpers/next-lesson';
+import { EVALUATION_ICONS } from './evaluation-icons';
 
 /**
- * Component for displaying a quiz
+ * Component for displaying an evaluation (quiz or exam)
  */
 @Component({
   selector: 'cirrus-quiz',
-  templateUrl: './quiz.component.html',
-  styleUrls: ['quiz.component.scss'],
+  templateUrl: './evaluation.component.html',
+  styleUrls: ['evaluation.component.scss'],
   standalone: true,
-  imports: [CommonModule, QqbOutOfTimeComponent],
+  imports: [CommonModule, EqbOutOfTimeComponent],
 })
-export class QuizComponent extends LessonContentComponent implements OnInit, OnDestroy {
+export class EvaluationComponent extends LessonContentComponent implements OnInit, OnDestroy {
+  private _lesson!: ILesson;
   private _courseOverview!: ICourseOverview;
 
   /**
-   * Constructor for the QuizComponent
-   * @param quizService Injects the QuizService to get the quiz
+   * Constructor for the EvaluationComponent
+   * @param evaluationService Injects the EvaluationService to get the quiz
    */
   constructor(
     private dialog: MatDialog,
-    private quizService: QuizService,
+    private evaluationService: EvaluationService,
     private renderer: Renderer2,
     private store: Store<AppState>,
     private coursesService: CoursesService,
     private router: Router,
-    private fullstoryService: FullstoryService
+    private fullstoryService: FullstoryService,
   ) {
     super();
   }
@@ -64,13 +66,19 @@ export class QuizComponent extends LessonContentComponent implements OnInit, OnD
   lessonOverview$: Observable<ILesson> = this.store.select(selectLesson);
   lessonCompleted$!: Observable<string>;
   lessonSubscription = new Subscription();
+  lesson$: Observable<ILesson> = this.store.select(selectLesson).pipe(
+    tap(lesson => {
+      this._lesson = lesson;
+    }),
+  );
 
-  QuizStatusEnum = QuizStatusEnum;
-  QuizGradeEnum = QuizGradeEnum;
+  EvaluationStatusEnum = EvaluationStatusEnum;
+  EvaluationGradeEnum = EvaluationGradeEnum;
+  EVALUATION_ICONS = EVALUATION_ICONS;
 
-  quiz = new QuizClass();
+  eval = new EvaluationClass();
 
-  quiz_attempt?: IQuizAttempt = undefined;
+  quiz_attempt?: IEvalAttempt = undefined;
 
   courseTitle = '';
   course_attempt_id = 0;
@@ -81,10 +89,10 @@ export class QuizComponent extends LessonContentComponent implements OnInit, OnD
   questionResultSubtitle = '';
   questionResultButtonText = '';
 
-  /// Timed Quiz properties
-  quizEnd$ = new Subject();
+  /// Timed properties
+  evaluationEnd$ = new Subject();
   timerSubscription?: Subscription;
-  quizTimer?: Observable<number>;
+  evaluationTimer?: Observable<number>;
   showOutOfTimePopup = false;
 
   /**
@@ -96,25 +104,32 @@ export class QuizComponent extends LessonContentComponent implements OnInit, OnD
    */
   ngOnInit(): void {
     super.ngOnInit();
-    this.getQuiz();
+    this.getEvaluation();
     this.hidePrevAndNext.emit(false);
     this.getCourseInfo();
     this.fullStoryInit();
   }
 
   /**
-   * Retrieves the quiz data from the server and loads it into the quiz component.
+   * Retrieves the evaluation data from the server and loads it into the component.
    */
-  getQuiz() {
+  getEvaluation() {
     this.lessonOverview$.subscribe(lesson => {
       this.lesson = lesson;
       this.course_attempt_id = lesson.course_attempt_id;
-
-      this.quizService
-        .getQuiz(this.content.quiz_id || -1, this.course_attempt_id, lesson.id, lesson.stage_id)
-        .subscribe(response => {
-          this.quiz.loadQuiz(response);
-        });
+      if (this.content.content_type == CONTENT_TYPE.quiz) {
+        this.evaluationService
+          .getQuiz(this.content.quiz_id || -1, this.course_attempt_id, lesson.id, lesson.stage_id)
+          .subscribe(response => {
+            this.eval.loadEvaluation(response);
+          });
+      } else {
+        this.evaluationService
+          .getExam(this.content.exam_id || -1, this.course_attempt_id, lesson.id, lesson.stage_id)
+          .subscribe(response => {
+            this.eval.loadEvaluation(response);
+          });
+      }
     });
   }
 
@@ -125,69 +140,72 @@ export class QuizComponent extends LessonContentComponent implements OnInit, OnD
   ngOnDestroy(): void {
     this.hidePrevAndNext.next(false);
 
-    this.courseOverview$.subscribe(
-      event => {
-        this._courseOverview = event;
-      }
-    )
+    this.courseOverview$.subscribe(event => {
+      this._courseOverview = event;
+    });
 
     //Check if quiz is complete
-    if (this.quiz.status === QuizStatusEnum.Complete || this.quiz.grade === QuizGradeEnum.Passed) {
+    if (this.eval.status === EvaluationStatusEnum.Complete) {
       //Check if lesson is complete
       this.lessonCompleted$ = this.coursesService.lessonComplete$;
 
-      //Check progress type
-      let progress_type;
-      if(this._courseOverview.completed_at) {
-        progress_type = PROGRESS_TYPE.course
-      } else if (this.lesson.progress.status == "completed") {
-        progress_type = PROGRESS_TYPE.lesson;
+      if (this.lesson.progress.status == 'completed') {
+        let progress_type = 'lesson';
+
+        const component: ComponentType<CompletionDialogComponent | CourseCompletionComponent> =
+          progress_type === 'lesson' ? CompletionDialogComponent : CourseCompletionComponent;
+        const data =
+          progress_type === 'lesson'
+            ? {
+                lesson: this.lesson.title,
+                course: this._courseOverview,
+                stageId: this.lesson.stage_id,
+              }
+            : {
+                badge: this._courseOverview?.badge?.badge_image
+                  ? this._courseOverview?.badge.badge_image
+                  : 'courses/images/default_badge.png',
+                course: this._courseOverview.name,
+                course_id: this._courseOverview.id,
+                student: 'user.name',
+                course_attempt_id: this._lesson.course_attempt_id,
+              };
+
+        const nextLesson$ = this.courseOverview$.pipe(map(courseOverview => nextLesson(courseOverview, this.lesson)));
+
+        this.dialog
+          .open(component, {
+            data,
+            panelClass: 'fullscreen-dialog',
+            height: '100%',
+            width: '100%',
+          })
+          .afterClosed()
+          .pipe(withLatestFrom(nextLesson$))
+          .subscribe(([response, nextLesson]) => {
+            if (response === LESSON_COMPLETION_CTA.nextLesson) {
+              this.router.navigate(nextLessonUrlSegments(nextLesson));
+            } else {
+              console.log('none of the above');
+            }
+            this.dialog.closeAll();
+          });
       }
 
-      const component: ComponentType<
-        CompletionDialogComponent | CourseCompletionComponent
-      > =
-        progress_type === PROGRESS_TYPE.lesson
-          ? CompletionDialogComponent
-          : CourseCompletionComponent;
-      const data =
-        progress_type === PROGRESS_TYPE.lesson
-          ? {
-            lesson: this.lesson.title,
-            course: this._courseOverview,
-            stageId: this.lesson.stage_id
-          }
-          : {
-            badge: this._courseOverview?.badge?.badge_image
-              ? this._courseOverview?.badge.badge_image
-              : 'courses/images/default_badge.png',
-            course: this._courseOverview.name,
-            course_id: this._courseOverview.id,
-            student: 'user.name',
-            course_attempt_id: this.lesson.course_attempt_id,
-          };
-            
-      const nextLesson$ = this.courseOverview$.pipe(
-        map(courseOverview => nextLesson(courseOverview, this.lesson))
-      );
-
-      this.dialog
-        .open(component, {
-          data,
-          panelClass: 'fullscreen-dialog',
-          height: '100%',
-          width: '100%',
-        })
-        .afterClosed()
-        .pipe(withLatestFrom(nextLesson$))
-        .subscribe(([response, nextLesson]) => {
-          if (response === LESSON_COMPLETION_CTA.nextLesson) {
-            this.router.navigate(nextLessonUrlSegments(nextLesson));
-          } else {
-            console.log('none of the above');
-          }
-          this.dialog.closeAll();
-        }
+      const _progress = {
+        id: this.content.progress.id,
+        status: PROGRESS_STATUS.completed,
+      };
+      this.updateProgress.emit(_progress);
+      this.store.dispatch(
+        completeProgress({
+          id: this.content.progress.id,
+          courseId: this.lesson.course_id,
+          stageId: this.lesson.stage_id,
+          lessonId: this.lesson.id,
+          progress: _progress,
+          assessment: false,
+        }),
       );
     }
   }
@@ -216,14 +234,14 @@ export class QuizComponent extends LessonContentComponent implements OnInit, OnD
   }
 
   /**
-   * Starts the quiz timer.
+   * Starts the evaluation timer.
    */
-  startQuizTimer(): void {
-    this.quizTimer = timer(0, 1000);
-    this.timerSubscription = this.quizTimer.pipe(takeUntil(this.quizEnd$)).subscribe(() => {
-      this.quiz.incrementTimeElapsed();
+  startEvaluationTimer(): void {
+    this.evaluationTimer = timer(0, 1000);
+    this.timerSubscription = this.evaluationTimer.pipe(takeUntil(this.evaluationEnd$)).subscribe(() => {
+      this.eval.incrementTimeElapsed();
 
-      if (this.quiz.status === QuizStatusEnum.TimedOut) {
+      if (this.eval.status === EvaluationStatusEnum.TimedOut) {
         this.nextQuestion();
         this.showOutOfTimePopup = true;
       }
@@ -231,18 +249,18 @@ export class QuizComponent extends LessonContentComponent implements OnInit, OnD
   }
 
   /**
-   * startQuiz
+   * startEvaluation
    *
-   * Starts a quiz, fired by user clicking start quiz button.
-   * It call startQuiz() on the quiz object and also emits an event to hide the previous and next buttons on the content player.
+   * Starts an evaluation, fired by user clicking start evaluation button.
+   * It calls startEvaluation() on the evaluation object and also emits an event to hide the previous and next buttons on the content player.
    *
    * @returns {void}
    */
-  startQuiz(): void {
+  startEvaluation(): void {
     this.hidePrevAndNext.emit(true);
 
-    const attempt: IStartQuizAttempt = {
-      quiz_id: this.quiz.id,
+    const attempt: IStartEvalAttempt = {
+      quiz_id: this.eval.id,
       course_attempt_id: 0,
       stage_id: 0,
       lesson_id: 0,
@@ -255,13 +273,19 @@ export class QuizComponent extends LessonContentComponent implements OnInit, OnD
       attempt.lesson_id = lesson.id;
     });
 
-    if (this.quiz.status === QuizStatusEnum.NotStarted) {
-      this.quizService.startQuiz(attempt).subscribe(response => {
-        this.quiz.startQuiz(response);
-      });
+    if (this.eval.status === EvaluationStatusEnum.NotStarted) {
+      if (this.content.content_type == CONTENT_TYPE.quiz) {
+        this.evaluationService.startQuiz(attempt).subscribe(response => {
+          this.eval.startEvaluation(response);
+        });
+      } else {
+        this.evaluationService.startExam(attempt).subscribe(response => {
+          this.eval.startEvaluation(response);
+        });
+      }
     }
-    if (this.quiz.timeLimit > 0) {
-      this.startQuizTimer();
+    if (this.eval.timeLimit > 0) {
+      this.startEvaluationTimer();
     }
   }
 
@@ -275,10 +299,9 @@ export class QuizComponent extends LessonContentComponent implements OnInit, OnD
   goBack() {
     this.resetQuestionResultPopup();
 
-    this.quiz.previousQuestion();
+    this.eval.previousQuestion();
 
-
-    if (this.quiz.currentQuestionIndex === 0) {
+    if (this.eval.currentQuestionIndex === 0) {
       this.hidePrevAndNext.emit(false);
     }
   }
@@ -287,11 +310,11 @@ export class QuizComponent extends LessonContentComponent implements OnInit, OnD
    * Submits the selected answer for the current question to the api.
    */
   submitAnswer() {
-    this.quizService
+    this.evaluationService
       .submitAnswer(
-        this.quiz.attempt?.id ?? 0,
-        this.quiz.questions[this.quiz.currentQuestionIndex].id,
-        this.quiz.selectedOptionId,
+        this.eval.attempt?.id ?? 0,
+        this.eval.questions[this.eval.currentQuestionIndex].id,
+        this.eval.selectedOptionId,
       )
       .subscribe(response => {
         this.processResponse(response);
@@ -300,24 +323,24 @@ export class QuizComponent extends LessonContentComponent implements OnInit, OnD
 
   /**
    * Processs the response from the api for the answered question.
-    */
+   */
   processResponse(response: IAnswerResponse) {
     const fullStoryData = {
       answer_result: 'null',
-      answer_given: this.quiz.selectedOptionId,
+      answer_given: this.eval.selectedOptionId,
       content_item_title: this.content.title,
-      quiz_question: this.quiz.questions[this.quiz.currentQuestionIndex].desc,
-      question_id: this.quiz.questions[this.quiz.currentQuestionIndex].id,
+      quiz_question: this.eval.questions[this.eval.currentQuestionIndex].desc,
+      question_id: this.eval.questions[this.eval.currentQuestionIndex].id,
     };
 
-    this.quiz.processAnswer(response);
-    const isMultipleChoiceQuestion = this.quiz.questions[this.quiz.currentQuestionIndex].options.length > 2;
+    this.eval.processAnswer(response);
+    const isMultipleChoiceQuestion = this.eval.questions[this.eval.currentQuestionIndex].options.length > 2;
     if (response.quiz_attempt_question.correct == true) {
       fullStoryData.answer_result = 'correct';
       this.setPopupForCorrectResponse();
     } else {
       fullStoryData.answer_result = 'incorrect';
-      if ((isMultipleChoiceQuestion && this.quiz.currentAttemptCount > 1) || !isMultipleChoiceQuestion) {
+      if ((isMultipleChoiceQuestion && this.eval.currentAttemptCount > 1) || !isMultipleChoiceQuestion) {
         this.setPopupForLastIncorrectResponse();
       } else {
         this.setPopupForFirstIncorrectResponse();
@@ -374,7 +397,7 @@ export class QuizComponent extends LessonContentComponent implements OnInit, OnD
    * If a user has an incorrect answer, it should not navigate to the next question.
    */
   popupButtonClick() {
-    if (this.quiz.questions[this.quiz.currentQuestionIndex].correct) {
+    if (this.eval.questions[this.eval.currentQuestionIndex].correct) {
       this.nextQuestion();
     } else {
       this.resetQuestionResultPopup();
@@ -386,31 +409,14 @@ export class QuizComponent extends LessonContentComponent implements OnInit, OnD
    */
   endQuiz(): void {
     // Signal that the quiz has ended
-    this.quizEnd$.next();
+    this.evaluationEnd$.next();
+
     this.hidePrevAndNext.emit(false);
 
     // Grade the quiz
-    this.quizService.gradeQuiz(this.quiz.attempt?.id ?? 0).subscribe(response => {
-      this.quiz.endQuiz(response);
+    this.evaluationService.gradeQuiz(this.eval.attempt?.id ?? 0).subscribe(response => {
+      this.eval.endEvaluation(response);
     });
-
-    // Update progress
-    const _progress = {
-      id: this.content.progress.id,
-      status: PROGRESS_STATUS.completed,
-    };
-    this.updateProgress.emit(_progress);
-    
-    this.store.dispatch(
-      completeProgress({
-        id: this.content.progress.id,
-        courseId: this.lesson.course_id,
-        stageId: this.lesson.stage_id,
-        lessonId: this.lesson.id,
-        progress: _progress,
-        assessment: false,
-      }),
-    );
 
     // Stop the timer
     if (this.timerSubscription) {
@@ -425,8 +431,8 @@ export class QuizComponent extends LessonContentComponent implements OnInit, OnD
   nextQuestion() {
     this.resetQuestionResultPopup();
 
-    this.quiz.nextQuestion();
-    if (this.quiz.status === QuizStatusEnum.Complete || this.quiz.status === QuizStatusEnum.TimedOut) {
+    this.eval.nextQuestion();
+    if (this.eval.status === EvaluationStatusEnum.Complete || this.eval.status === EvaluationStatusEnum.TimedOut) {
       this.endQuiz();
     }
   }
@@ -437,10 +443,10 @@ export class QuizComponent extends LessonContentComponent implements OnInit, OnD
    * */
   getStartButtonText(): string {
     let _buttonText = 'Start';
-    if (this.quiz.status === QuizStatusEnum.InProgress) {
+    if (this.eval.status === EvaluationStatusEnum.InProgress) {
       _buttonText = 'Resume';
     }
-    if (this.quiz.grade === QuizGradeEnum.Failed) {
+    if (this.eval.grade === EvaluationGradeEnum.Failed) {
       _buttonText = 'Retake';
     }
     return _buttonText + ' Quiz';
@@ -452,8 +458,8 @@ export class QuizComponent extends LessonContentComponent implements OnInit, OnD
    */
   getResultsTitle(): string {
     let _titleText = 'Please finish the quiz to see your results.';
-    if (this.quiz.status === QuizStatusEnum.Submitted || this.quiz.status === QuizStatusEnum.TimedOut) {
-      if (this.quiz.grade === QuizGradeEnum.Passed) {
+    if (this.eval.status === EvaluationStatusEnum.Submitted || this.eval.status === EvaluationStatusEnum.TimedOut) {
+      if (this.eval.grade === EvaluationGradeEnum.Passed) {
         _titleText = 'Congratulations, you passed!';
       } else {
         _titleText = 'Nice try, but you did not pass.';
@@ -467,7 +473,7 @@ export class QuizComponent extends LessonContentComponent implements OnInit, OnD
    */
   getResultsPrimaryButtonText(): string {
     let _buttonText = 'Retake';
-    if (this.quiz.status === QuizStatusEnum.Complete) {
+    if (this.eval.status === EvaluationStatusEnum.Complete) {
       _buttonText = 'Continue';
     }
     return _buttonText;
@@ -479,7 +485,7 @@ export class QuizComponent extends LessonContentComponent implements OnInit, OnD
    */
   getResultsSecondaryButtonText(): string {
     let _buttonText = 'Skip';
-    if (this.quiz.status === QuizStatusEnum.Complete) {
+    if (this.eval.status === EvaluationStatusEnum.Complete) {
       _buttonText = 'Review';
     }
     return _buttonText;
@@ -489,12 +495,12 @@ export class QuizComponent extends LessonContentComponent implements OnInit, OnD
    * Allows users to reattempt a failed quiz, resets quiz data to start over
    * Resets quiz tracker and puts user back to the start quiz screen
    */
-  retakeQuiz(): void {
+  retakeEvaluation(): void {
     this.showOutOfTimePopup = false;
 
-    this.quiz.resetQuiz();
-    this.getQuiz();
-    this.startQuiz();
+    this.eval.resetEvaluation();
+    this.getEvaluation();
+    this.startEvaluation();
   }
 
   /**
@@ -504,8 +510,8 @@ export class QuizComponent extends LessonContentComponent implements OnInit, OnD
    *
    */
   openFullScreenImage() {
-    const imgUrl = this.quiz.questions[this.quiz.currentQuestionIndex].image_url ?? '';
-    const imgTitle = this.quiz.questions[this.quiz.currentQuestionIndex].image_url ?? '';
+    const imgUrl = this.eval.questions[this.eval.currentQuestionIndex].image_url ?? '';
+    const imgTitle = this.eval.questions[this.eval.currentQuestionIndex].image_url ?? '';
     this.dialog.open(FullScreenImageDialogComponent, {
       panelClass: 'full-screen-image-dialog',
       height: '100%',
@@ -519,11 +525,9 @@ export class QuizComponent extends LessonContentComponent implements OnInit, OnD
   }
 
   getCourseInfo() {
-    this.coursesService.getCourseOverview(this.lesson.course_id).subscribe(
-      response => {
-        this.courseTitle = response.title;
-      },
-    )
+    this.coursesService.getCourseOverview(this.lesson.course_id).subscribe(response => {
+      this.courseTitle = response.title;
+    });
   }
 
   fullStoryInit() {

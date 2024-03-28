@@ -1,5 +1,5 @@
 import { IQuestionOption } from "./IQuestionOption";
-import { IQuizAttemptResponse } from "./IQuizAttemptResponse";
+import { IEvalAttemptResponse } from "./IEvalAttemptResponse";
 
 /**
  * Interface for a question.
@@ -36,7 +36,7 @@ export interface IQuestion {
    */
   correct_option: IQuestionOption;
 
-  quiz_attempt_question?: IQuizAttemptResponse;
+  quiz_attempt_question?: IEvalAttemptResponse;
 
   /**
    * Image URL for the uploded quiz question image

@@ -1,7 +1,7 @@
 /**
  * Represents the grade of a quiz.
  */
-export enum QuizGradeEnum {
+export enum EvaluationGradeEnum {
   NotGraded = 'not graded',
   Passed = 'passed',
   Failed = 'failed',

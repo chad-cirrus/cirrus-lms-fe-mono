@@ -2,7 +2,7 @@
  * Interface for starting a quiz attempt sent to the api.
  * @interface
  */
-export interface IStartQuizAttempt {
+export interface IStartEvalAttempt {
   /**
    * The ID of the course attempt.
    * @type {number}

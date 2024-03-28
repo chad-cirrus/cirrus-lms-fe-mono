@@ -1,23 +1,23 @@
 import { IAnswerResponse } from './IAnswerResponse';
 import { IQuestionOption } from './IQuestionOption';
-import { IQuizAttempt } from './IQuizAttempt';
-import { IQuizAttemptQuestion } from './IQuizAttemptQuestion';
-import { IQuizRequest } from './IQuizRequest';
-import { IStartQuizResponse } from './IStartQuizResponse';
-import { QuizClass } from './Quiz'; // Import the QuizClass from the correct module
-import { QuizGradeEnum } from './QuizGradeEnum';
-import { QuizStatusEnum } from './QuizStatusEnum';
+import { IEvalAttempt } from './IEvalAttempt';
+import { IEvalAttemptQuestion } from './IEvalAttemptQuestion';
+import { IEvalRequest } from './IEvalRequest';
+import { IStartEvalResponse } from './IStartEvalResponse';
+import { EvaluationClass } from './Evaluation'; // Import the QuizClass from the correct module
+import { EvaluationGradeEnum } from './EvaluationGradeEnum';
+import { EvaluationStatusEnum } from './EvaluationStatusEnum';
 describe('QuizClass', () => {
-  let quiz: QuizClass;
+  let quiz: EvaluationClass;
 
   beforeEach(() => {
-    quiz = new QuizClass();
+    quiz = new EvaluationClass();
   });
 
   it('should initialize with default values', () => {
     expect(quiz.id).toBe(-1);
-    expect(quiz.status).toBe(QuizStatusEnum.NotStarted);
-    expect(quiz.grade).toBe(QuizGradeEnum.NotGraded);
+    expect(quiz.status).toBe(EvaluationStatusEnum.NotStarted);
+    expect(quiz.grade).toBe(EvaluationGradeEnum.NotGraded);
     expect(quiz.currentQuestionIndex).toBe(-1);
     expect(quiz.questions).toEqual([]);
     expect(quiz.approximateDuration).toBe(0);
@@ -29,8 +29,8 @@ describe('QuizClass', () => {
   });
 
   it('should load quiz from the API', () => {
-    const quizRequest: IQuizRequest = getQuizContent(); // Replace with your own implementation
-    quiz.loadQuiz(quizRequest);
+    const quizRequest: IEvalRequest = getQuizContent(); // Replace with your own implementation
+    quiz.loadEvaluation(quizRequest);
 
     expect(quiz.id).toBe(quizRequest.id);
     expect(quiz.approximateDuration).toBe(quizRequest.approximate_duration);
@@ -41,45 +41,45 @@ describe('QuizClass', () => {
 
   it('should check if the quiz is timed', () => {
     quiz.timeLimit = 0;
-    expect(quiz.isQuizTimed()).toBe(false);
+    expect(quiz.isEvaluationTimed()).toBe(false);
 
     quiz.timeLimit = 10;
-    expect(quiz.isQuizTimed()).toBe(true);
+    expect(quiz.isEvaluationTimed()).toBe(true);
   });
 
   it('should check if the quiz has attempts', () => {
     quiz.attempt = undefined;
     expect(quiz.hasAttempts()).toBe(false);
 
-    quiz.attempt = {} as IQuizAttempt; // Replace with your own implementation
+    quiz.attempt = {} as IEvalAttempt; // Replace with your own implementation
     expect(quiz.hasAttempts()).toBe(true);
   });
 
   it('should set status to TimedOut if elapsed time is greater than time limit', () => {
-    quiz.status = QuizStatusEnum.InProgress;
+    quiz.status = EvaluationStatusEnum.InProgress;
     quiz.timeLimit = 1;
     quiz.elapsedSeconds = 50;
     quiz.incrementTimeElapsed();
-    expect(quiz.status).toBe(QuizStatusEnum.InProgress);
+    expect(quiz.status).toBe(EvaluationStatusEnum.InProgress);
     expect(quiz.elapsedSeconds).toBe(51);
 
     quiz.elapsedSeconds = 600; // 10 minutes
     quiz.timeLimit = 10;
     quiz.incrementTimeElapsed();
-    expect(quiz.status).toBe(QuizStatusEnum.TimedOut);
+    expect(quiz.status).toBe(EvaluationStatusEnum.TimedOut);
   });
 
   it('should start the quiz with the provided response', () => {
-    const startQuizResponse: IStartQuizResponse = {
+    const startQuizResponse: IStartEvalResponse = {
       quiz_attempt: getMockQuizAttempt(),
-    } as IStartQuizResponse; // Replace with your own implementation
+    } as IStartEvalResponse; // Replace with your own implementation
     startQuizResponse.quiz_attempt.quiz_attempt_questions = [
       generateMockQuizAttemptQuestion(),
       generateMockQuizAttemptQuestion(),
     ];
-    quiz.startQuiz(startQuizResponse);
+    quiz.startEvaluation(startQuizResponse);
 
-    expect(quiz.status).toBe(QuizStatusEnum.InProgress);
+    expect(quiz.status).toBe(EvaluationStatusEnum.InProgress);
     expect(quiz.attempt).toBe(startQuizResponse.quiz_attempt);
     expect(quiz.currentQuestionIndex).toBe(0);
     expect(quiz.questions).toEqual(startQuizResponse.quiz_attempt.quiz_attempt_questions);
@@ -112,7 +112,7 @@ describe('QuizClass', () => {
 
   it('should move to the next question', () => {
     quiz.currentQuestionIndex = 0;
-    quiz.questions = [{}, {}] as IQuizAttemptQuestion[];
+    quiz.questions = [{}, {}] as IEvalAttemptQuestion[];
 
     quiz.nextQuestion();
 
@@ -123,34 +123,34 @@ describe('QuizClass', () => {
     quiz.currentQuestionIndex = 1;
     quiz.nextQuestion();
 
-    expect(quiz.status).toBe(QuizStatusEnum.Complete);
+    expect(quiz.status).toBe(EvaluationStatusEnum.Complete);
   });
 
   it('should end the quiz', () => {
-    const quizAttempt: IQuizAttempt = {} as IQuizAttempt; // Replace with your own implementation
-    quiz.endQuiz(quizAttempt);
+    const quizAttempt: IEvalAttempt = {} as IEvalAttempt; // Replace with your own implementation
+    quiz.endEvaluation(quizAttempt);
 
-    expect(quiz.status).toBe(QuizStatusEnum.Submitted);
+    expect(quiz.status).toBe(EvaluationStatusEnum.Submitted);
     expect(quiz.currentQuestionIndex).toBe(-1);
   });
 
   it('should reset the quiz', () => {
-    quiz.status = QuizStatusEnum.InProgress;
+    quiz.status = EvaluationStatusEnum.InProgress;
     quiz.currentQuestionIndex = 1;
     quiz.elapsedSeconds = 300;
     quiz.selectedOptionId = 1;
     quiz.currentAttemptCount = 2;
-    quiz.grade = QuizGradeEnum.Passed;
+    quiz.grade = EvaluationGradeEnum.Passed;
     quiz.passPercentage = 80;
 
-    quiz.resetQuiz();
+    quiz.resetEvaluation();
 
-    expect(quiz.status).toBe(QuizStatusEnum.NotStarted);
+    expect(quiz.status).toBe(EvaluationStatusEnum.NotStarted);
     expect(quiz.currentQuestionIndex).toBe(-1);
     expect(quiz.elapsedSeconds).toBe(-1);
     expect(quiz.selectedOptionId).toBe(-1);
     expect(quiz.currentAttemptCount).toBe(-1);
-    expect(quiz.grade).toBe(QuizGradeEnum.NotGraded);
+    expect(quiz.grade).toBe(EvaluationGradeEnum.NotGraded);
     expect(quiz.passPercentage).toBe(-1);
   });
 
@@ -205,7 +205,7 @@ describe('QuizClass', () => {
 
     it('should return false if the current question has not been answered', () => {
       quiz.currentQuestionIndex = 0;
-      const _question: IQuizAttemptQuestion = generateMockQuizAttemptQuestion();
+      const _question: IEvalAttemptQuestion = generateMockQuizAttemptQuestion();
       _question.responded_at = null;
       quiz.questions = [_question];
       expect(quiz.questionHasBeenAnswered()).toBe(false);
@@ -213,7 +213,7 @@ describe('QuizClass', () => {
 
     it('should return true if the current question has been answered', () => {
       quiz.currentQuestionIndex = 0;
-      const _question: IQuizAttemptQuestion = generateMockQuizAttemptQuestion();
+      const _question: IEvalAttemptQuestion = generateMockQuizAttemptQuestion();
       _question.responded_at = '2024-03-02T00:18:05.298Z';
       quiz.questions = [_question];
       expect(quiz.questionHasBeenAnswered()).toBe(true);
@@ -264,7 +264,7 @@ describe('QuizClass', () => {
 
   it('should check if the selected option is correct', () => {
     quiz.currentQuestionIndex = 0;
-    const question: IQuizAttemptQuestion = generateMockQuizAttemptQuestion();
+    const question: IEvalAttemptQuestion = generateMockQuizAttemptQuestion();
     question.correct_option_id = 1;
     quiz.questions = [question];
 
@@ -281,7 +281,7 @@ const fnGenerateMockIQuestionOption = (): IQuestionOption => {
   };
 };
 
-function getSubmissionResponse(): IQuizAttempt {
+function getSubmissionResponse(): IEvalAttempt {
   const _obj = {
     quiz_attempt: {
       id: 311,
@@ -347,12 +347,13 @@ function getSubmissionResponse(): IQuizAttempt {
       ],
     },
   };
-  const response: IQuizAttempt = {
+  const response: IEvalAttempt = {
     id: 311,
     course_attempt_id: 108010,
     stage_id: 486,
     lesson_id: 318,
     content_id: 234,
+    exam_id: 0,
     quiz_id: 5,
     score: 100,
     snapshot: 'mock snapshot',
@@ -364,13 +365,14 @@ function getSubmissionResponse(): IQuizAttempt {
 
   return response;
 }
-function getMockQuizAttempt(): IQuizAttempt {
-    const mockQuizAttempt: IQuizAttempt = {
+function getMockQuizAttempt(): IEvalAttempt {
+    const mockQuizAttempt: IEvalAttempt = {
     id: 1,
     course_attempt_id: 1,
     stage_id: 1,
     lesson_id: 1,
     content_id: 1,
+    exam_id: 0,
     quiz_id: 1,
     snapshot: 'mock snapshot',
     score: 100,
@@ -381,9 +383,9 @@ function getMockQuizAttempt(): IQuizAttempt {
   };
   return mockQuizAttempt;
 }
-function getQuizContent(): IQuizRequest {
+function getQuizContent(): IEvalRequest {
 
-  const mockQuizRequest: IQuizRequest = {
+  const mockQuizRequest: IEvalRequest = {
     id: 1,
     name: 'Mock Quiz',
     desc: 'This is a mock quiz',
@@ -397,7 +399,7 @@ function getQuizContent(): IQuizRequest {
 
   return mockQuizRequest;
 }
-const generateMockQuizAttemptQuestion = (): IQuizAttemptQuestion => {
+const generateMockQuizAttemptQuestion = (): IEvalAttemptQuestion => {
   return {
     id: 1,
     desc: 'Sample description',
