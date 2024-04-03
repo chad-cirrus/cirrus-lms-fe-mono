@@ -9,6 +9,7 @@ import { IEvalAttempt } from './models/IEvalAttempt';
 import { IStartEvaluation } from './models/IStartEvaluation';
 import { IStartEvalAttempt } from './models/IStartEvalAttempt';
 import { IStartEvalResponse } from './models/IStartEvalResponse';
+import { CONTENT_TYPE, IContent, ILesson } from '@cirrus/models';
 
 @Injectable({
   providedIn: 'root',
@@ -24,32 +25,20 @@ export class EvaluationService {
 
   /**
    *
-   * @method getQuiz
-   * @description Makes a request to the API to get quiz data
-   * @param {number} id - The id of the quiz to get data for
+   * @method getEvaluation
+   * @description Makes a request to the API to get quiz or exam data
+   * @param {number} id - The id of the quiz/exam to get data for
    * @returns {Observable<IEvalRequest>} An observable containing the quiz data
    */
-  getQuiz(id: number, course_attempt_id: number, lesson_id: number, stage_id: number): Observable<IEvalRequest> {
+  getEvaluation(content: IContent, lesson: ILesson): Observable<IEvalRequest> {
+    const apiToken = content.content_type === CONTENT_TYPE.quiz ? 'quizzes' : 'exams';
+    const id = content.content_type === CONTENT_TYPE.quiz ? content.quiz_id : content.exam_id;
+    const keyName = content.content_type === CONTENT_TYPE.quiz ? 'content_player/quiz' : 'content_player/exam';
     return this.http
       .get<IEvalRequest>(
-        `${environment.baseUrl}/api/v4/quizzes/${id}?course_attempt_id=${course_attempt_id}&lesson_id=${lesson_id}&stage_id=${stage_id}`,
+        `${environment.baseUrl}/api/v4/${apiToken}/${id}?course_attempt_id=${lesson.course_attempt_id}&lesson_id=${lesson.id}&stage_id=${lesson.stage_id}`,
       )
-      .pipe(map(response => response['content_player/quiz' as keyof object] as IEvalRequest));
-  }
-
-  /**
-   *
-   * @method getExam
-   * @description Makes a request to the API to get exam data
-   * @param {number} id - The id of the exam to get data for
-   * @returns {Observable<IEvalRequest>} An observable containing the exam data
-   */
-  getExam(id: number, course_attempt_id: number, lesson_id: number, stage_id: number): Observable<IEvalRequest> {
-    return this.http
-      .get<IEvalRequest>(
-        `${environment.baseUrl}/api/v4/exams/${id}?course_attempt_id=${course_attempt_id}&lesson_id=${lesson_id}&stage_id=${stage_id}`,
-      )
-      .pipe(map(response => response['content_player/exam' as keyof object] as IEvalRequest));
+      .pipe(map(response => response[keyName as keyof object] as IEvalRequest));
   }
 
   /**
@@ -72,7 +61,7 @@ export class EvaluationService {
   startExam(attempt: IStartEvalAttempt): Observable<IStartEvalResponse> {
     const attemptData: IStartEvaluation = { quiz_attempt: attempt };
     return this.http
-      .post<IStartEvalResponse>(`${environment.baseUrl}/api/v5/exam_attempts`, attemptData)
+      .post<IStartEvalResponse>(`${environment.baseUrl}/api/v4/exam_attempts`, attemptData)
       .pipe(map(response => response));
   }
 

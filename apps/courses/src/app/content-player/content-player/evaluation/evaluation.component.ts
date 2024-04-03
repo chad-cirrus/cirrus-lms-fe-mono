@@ -21,7 +21,7 @@ import { AppState } from '../../../store/reducers';
 import { Store } from '@ngrx/store';
 import { Observable, Subject, Subscription, timer } from 'rxjs';
 import { map, takeUntil, tap, withLatestFrom } from 'rxjs/operators';
-import { CONTENT_TYPE, ICourseOverview, ILesson, PROGRESS_STATUS } from '@cirrus/models';
+import { CONTENT_TYPE, ICourseOverview, ILesson, PROGRESS_STATUS, PROGRESS_TYPE } from '@cirrus/models';
 import { selectLesson } from '../../../store/selectors/lessons.selector';
 import { EqbOutOfTimeComponent } from './evaluation-out-of-time/eqbOutOfTime.component';
 import { completeProgress } from '../../../store/actions';
@@ -44,7 +44,6 @@ import { EVALUATION_ICONS } from './evaluation-icons';
   imports: [CommonModule, EqbOutOfTimeComponent],
 })
 export class EvaluationComponent extends LessonContentComponent implements OnInit, OnDestroy {
-  private _lesson!: ILesson;
   private _courseOverview!: ICourseOverview;
 
   /**
@@ -66,11 +65,6 @@ export class EvaluationComponent extends LessonContentComponent implements OnIni
   lessonOverview$: Observable<ILesson> = this.store.select(selectLesson);
   lessonCompleted$!: Observable<string>;
   lessonSubscription = new Subscription();
-  lesson$: Observable<ILesson> = this.store.select(selectLesson).pipe(
-    tap(lesson => {
-      this._lesson = lesson;
-    }),
-  );
 
   EvaluationStatusEnum = EvaluationStatusEnum;
   EvaluationGradeEnum = EvaluationGradeEnum;
@@ -117,19 +111,9 @@ export class EvaluationComponent extends LessonContentComponent implements OnIni
     this.lessonOverview$.subscribe(lesson => {
       this.lesson = lesson;
       this.course_attempt_id = lesson.course_attempt_id;
-      if (this.content.content_type == CONTENT_TYPE.quiz) {
-        this.evaluationService
-          .getQuiz(this.content.quiz_id || -1, this.course_attempt_id, lesson.id, lesson.stage_id)
-          .subscribe(response => {
-            this.eval.loadEvaluation(response);
-          });
-      } else {
-        this.evaluationService
-          .getExam(this.content.exam_id || -1, this.course_attempt_id, lesson.id, lesson.stage_id)
-          .subscribe(response => {
-            this.eval.loadEvaluation(response);
-          });
-      }
+      this.evaluationService.getEvaluation(this.content, lesson).subscribe(response => {
+        this.eval.loadEvaluation(response);
+      });
     });
   }
 
@@ -145,68 +129,56 @@ export class EvaluationComponent extends LessonContentComponent implements OnIni
     });
 
     //Check if quiz is complete
-    if (this.eval.status === EvaluationStatusEnum.Complete) {
+    if (this.eval.status === EvaluationStatusEnum.Complete || this.eval.grade === EvaluationGradeEnum.Passed) {
       //Check if lesson is complete
       this.lessonCompleted$ = this.coursesService.lessonComplete$;
 
-      if (this.lesson.progress.status == 'completed') {
-        let progress_type = 'lesson';
-
-        const component: ComponentType<CompletionDialogComponent | CourseCompletionComponent> =
-          progress_type === 'lesson' ? CompletionDialogComponent : CourseCompletionComponent;
-        const data =
-          progress_type === 'lesson'
-            ? {
-                lesson: this.lesson.title,
-                course: this._courseOverview,
-                stageId: this.lesson.stage_id,
-              }
-            : {
-                badge: this._courseOverview?.badge?.badge_image
-                  ? this._courseOverview?.badge.badge_image
-                  : 'courses/images/default_badge.png',
-                course: this._courseOverview.name,
-                course_id: this._courseOverview.id,
-                student: 'user.name',
-                course_attempt_id: this._lesson.course_attempt_id,
-              };
-
-        const nextLesson$ = this.courseOverview$.pipe(map(courseOverview => nextLesson(courseOverview, this.lesson)));
-
-        this.dialog
-          .open(component, {
-            data,
-            panelClass: 'fullscreen-dialog',
-            height: '100%',
-            width: '100%',
-          })
-          .afterClosed()
-          .pipe(withLatestFrom(nextLesson$))
-          .subscribe(([response, nextLesson]) => {
-            if (response === LESSON_COMPLETION_CTA.nextLesson) {
-              this.router.navigate(nextLessonUrlSegments(nextLesson));
-            } else {
-              console.log('none of the above');
-            }
-            this.dialog.closeAll();
-          });
+      //Check progress type
+      let progress_type;
+      if (this._courseOverview.completed_at) {
+        progress_type = PROGRESS_TYPE.course;
+      } else if (this.lesson.progress.status == 'completed') {
+        progress_type = PROGRESS_TYPE.lesson;
       }
 
-      const _progress = {
-        id: this.content.progress.id,
-        status: PROGRESS_STATUS.completed,
-      };
-      this.updateProgress.emit(_progress);
-      this.store.dispatch(
-        completeProgress({
-          id: this.content.progress.id,
-          courseId: this.lesson.course_id,
-          stageId: this.lesson.stage_id,
-          lessonId: this.lesson.id,
-          progress: _progress,
-          assessment: false,
-        }),
-      );
+      const component: ComponentType<CompletionDialogComponent | CourseCompletionComponent> =
+        progress_type === PROGRESS_TYPE.lesson ? CompletionDialogComponent : CourseCompletionComponent;
+      const data =
+        progress_type === PROGRESS_TYPE.lesson
+          ? {
+              lesson: this.lesson.title,
+              course: this._courseOverview,
+              stageId: this.lesson.stage_id,
+            }
+          : {
+              badge: this._courseOverview?.badge?.badge_image
+                ? this._courseOverview?.badge.badge_image
+                : 'courses/images/default_badge.png',
+              course: this._courseOverview.name,
+              course_id: this._courseOverview.id,
+              student: 'user.name',
+              course_attempt_id: this.lesson.course_attempt_id,
+            };
+
+      const nextLesson$ = this.courseOverview$.pipe(map(courseOverview => nextLesson(courseOverview, this.lesson)));
+
+      this.dialog
+        .open(component, {
+          data,
+          panelClass: 'fullscreen-dialog',
+          height: '100%',
+          width: '100%',
+        })
+        .afterClosed()
+        .pipe(withLatestFrom(nextLesson$))
+        .subscribe(([response, nextLesson]) => {
+          if (response === LESSON_COMPLETION_CTA.nextLesson) {
+            this.router.navigate(nextLessonUrlSegments(nextLesson));
+          } else {
+            console.log('none of the above');
+          }
+          this.dialog.closeAll();
+        });
     }
   }
 
@@ -418,6 +390,23 @@ export class EvaluationComponent extends LessonContentComponent implements OnIni
       this.eval.endEvaluation(response);
     });
 
+    // Update progress
+    const _progress = {
+      id: this.content.progress.id,
+      status: PROGRESS_STATUS.completed,
+    };
+    this.updateProgress.emit(_progress);
+
+    this.store.dispatch(
+      completeProgress({
+        id: this.content.progress.id,
+        courseId: this.lesson.course_id,
+        stageId: this.lesson.stage_id,
+        lessonId: this.lesson.id,
+        progress: _progress,
+        assessment: false,
+      }),
+    );
     // Stop the timer
     if (this.timerSubscription) {
       this.timerSubscription.unsubscribe();

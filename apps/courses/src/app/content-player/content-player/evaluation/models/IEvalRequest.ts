@@ -74,5 +74,5 @@ export interface IEvalRequest {
    * The count of questions in this evaluation.
    * @type {number}
    */
-  quiz_question_count?: number;
+  number_of_questions?: number;
 }

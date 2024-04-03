@@ -61,7 +61,7 @@ export class EvaluationClass {
   loadEvaluation(_request: IEvalRequest): void {
     this.id = _request.id;
     this.passPercentage = _request.pass_percentage;
-    this.questionCount = _request.quiz_question_count || 0;
+    this.questionCount = _request.number_of_questions || 0;
 
     if (_request.approximate_duration) {
       this.approximateDuration = _request.approximate_duration;
