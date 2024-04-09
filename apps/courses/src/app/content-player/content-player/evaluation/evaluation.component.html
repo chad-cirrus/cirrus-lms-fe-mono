@@ -249,7 +249,7 @@
 
     <div class="evaluation-results">
       <div class="label">Final Score</div>
-      <div class="evaluation-results-score">{{ eval.attempt?.score }}%</div>
+      <div class="evaluation-results-score">{{ eval.attempt?.score | number: '1.0-0' }}%</div>
     </div>
 
     <div class="evaluation-results-meta">
