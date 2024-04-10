@@ -7,8 +7,8 @@ import { MatCardModule } from '@angular/material/card';
 describe('TaskComponent', () => {
   let component: TaskComponent;
   let fixture: ComponentFixture<TaskComponent>;
-  let progress: IProgress = { id: 0, status: '' };
-  let content: IContent = {
+  const progress: IProgress = { id: 0, status: '' };
+  const content: IContent = {
     blob_directory: '',
     content_file: '',
     content_filename: '',
@@ -23,7 +23,7 @@ describe('TaskComponent', () => {
     order: 0,
     placeholder_image: '',
     progress,
-    quiz: undefined,
+    evaluation: undefined,
     score: 0,
     show_comments: false,
     starter_file: '',

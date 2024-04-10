@@ -1,8 +1,8 @@
 import { IContent, IContentPlayerMenuItem, ILesson, IProgress, PROGRESS_STATUS, ProgressType } from '@cirrus/models';
 import { findNextContent, getNextContent } from './findNextContent';
 
-let nullProgress: IProgress = { id: 0, scorm: { grade: 0, pass: false }, status: '' };
-let nullContent: IContent = {
+const nullProgress: IProgress = { id: 0, scorm: { grade: 0, pass: false }, status: '' };
+const nullContent: IContent = {
   blob_directory: '',
   content_file: '',
   content_filename: '',
@@ -15,7 +15,7 @@ let nullContent: IContent = {
   meta_tags: [],
   placeholder_image: '',
   progress: nullProgress,
-  quiz: undefined,
+  evaluation: undefined,
   score: 0,
   show_comments: false,
   starter_file: '',
@@ -56,7 +56,7 @@ const lesson: ILesson = {
       url: '355991595',
       meta_tags: [],
       content_tasks: [],
-      quiz: null,
+      evaluation: null,
       content_type: 0,
       desc: 'Intro video for the icing awareness course.',
       content_file: '',
@@ -86,7 +86,7 @@ const lesson: ILesson = {
       url: '',
       meta_tags: [],
       content_tasks: [],
-      quiz: null,
+      evaluation: null,
       content_type: 6,
       desc: 'SR22 TKS Anti-Ice System POH Supplement. Aircraft Serials w/ Perspective+ avionics only.',
       content_file:
@@ -116,7 +116,7 @@ const lesson: ILesson = {
       url: '',
       meta_tags: [],
       content_tasks: [],
-      quiz: null,
+      evaluation: null,
       content_type: 6,
       desc: 'SR22 TKS Anti-Ice System POH Supplement.',
       content_file:
@@ -148,7 +148,7 @@ const lesson: ILesson = {
       url: '',
       meta_tags: [],
       content_tasks: [],
-      quiz: null,
+      evaluation: null,
       content_type: 6,
       desc: 'SR22T TKS Anti-Ice System POH Supplement. Aircraft Serials w/ Perspective+ avionics only.',
       content_file:
@@ -178,7 +178,7 @@ const lesson: ILesson = {
       url: '',
       meta_tags: [],
       content_tasks: [],
-      quiz: null,
+      evaluation: null,
       content_type: 6,
       desc: 'SR22T TKS Anti-Ice System POH Supplement.',
       content_file:
@@ -208,7 +208,7 @@ const lesson: ILesson = {
       url: '',
       meta_tags: [],
       content_tasks: [],
-      quiz: null,
+      evaluation: null,
       content_type: 6,
       desc: '',
       content_file:
@@ -239,7 +239,7 @@ const lesson: ILesson = {
       url: '355991595',
       meta_tags: [],
       content_tasks: [],
-      quiz: null,
+      evaluation: null,
       content_type: 0,
       desc: 'Intro video for the icing awareness course.',
       content_file: '',
@@ -269,7 +269,7 @@ const lesson: ILesson = {
       url: '',
       meta_tags: [],
       content_tasks: [],
-      quiz: null,
+      evaluation: null,
       content_type: 6,
       desc: 'SR22 TKS Anti-Ice System POH Supplement. Aircraft Serials w/ Perspective+ avionics only.',
       content_file:
@@ -299,7 +299,7 @@ const lesson: ILesson = {
       url: '',
       meta_tags: [],
       content_tasks: [],
-      quiz: null,
+      evaluation: null,
       content_type: 6,
       desc: 'SR22 TKS Anti-Ice System POH Supplement.',
       content_file:
@@ -351,7 +351,7 @@ const lesson: ILesson = {
         id: 0,
         status: '',
       },
-      quiz: null,
+      evaluation: null,
       content_tasks: [],
     },
     created_at: '2022-05-20T14:52:12.117Z',
@@ -467,7 +467,7 @@ const instructorMenuItems: IContentPlayerMenuItem[] = [
       id: 3,
       status: 'not_started',
     },
-  }, 
+  },
 ]
 
 describe('find next content index', () => {
@@ -510,8 +510,8 @@ describe('find next content index', () => {
   test('should return lesson-complete when all lesson content items are complete in student view', () => {
     const currentId = 911;
     const payload = { type: 'next', id: currentId };
-    let completedLesson = lesson;
-    let completedMenuItems = menuItems;
+    const completedLesson = lesson;
+    const completedMenuItems = menuItems;
 
     completedLesson.contents.map(content => content.progress.status = 'completed' );
     completedMenuItems.map(menuItem => menuItem.progress.status = 'completed');

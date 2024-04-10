@@ -9,5 +9,5 @@ export interface IStartEvalResponse {
    * The quiz attempt information.
    * @type {IEvalAttempt}
    */
-  quiz_attempt: IEvalAttempt;
+  evaluation_attempt: IEvalAttempt;
 }

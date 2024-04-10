@@ -25,7 +25,7 @@ describe('ContentRichTextComponent', () => {
     order: 0,
     placeholder_image: '',
     progress: progress,
-    quiz: undefined,
+    evaluation: undefined,
     score: 0,
     show_comments: false,
     starter_file: '',

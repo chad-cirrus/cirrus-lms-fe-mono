@@ -5,6 +5,7 @@ import { IEvalRequest } from './IEvalRequest';
 import { IStartEvalResponse } from './IStartEvalResponse';
 import { EvaluationGradeEnum } from './EvaluationGradeEnum';
 import { EvaluationStatusEnum } from './EvaluationStatusEnum';
+import { CONTENT_TYPE, IContent } from '@cirrus/models';
 
 export class EvaluationClass {
   id = -1;
@@ -12,6 +13,7 @@ export class EvaluationClass {
   grade = EvaluationGradeEnum.NotGraded;
   currentQuestionIndex = -1;
   questionCount = -1;
+  evaluationType = CONTENT_TYPE.quiz;
 
   /**
    * The questions for this evaluation
@@ -55,6 +57,13 @@ export class EvaluationClass {
 
   passPercentage = -1;
 
+  loadFromContent(content: IContent): void {
+    const _object : IEvalRequest = content.evaluation as IEvalRequest;
+    this.id = _object.id;
+    this.questionCount = _object.number_of_questions != undefined ? _object.number_of_questions : -1;
+    this.approximateDuration = _object.approximate_duration;
+  }
+
   /** Loads the evaluation from the api on initialization. *
    * @returns void
    * */
@@ -74,8 +83,8 @@ export class EvaluationClass {
     }
     if (_request.quiz_attempt !== null && _request.quiz_attempt !== undefined) {
       this.attempt = _request.quiz_attempt;
-      if (this.attempt.quiz_attempt_questions) {
-        this.questions = this.attempt.quiz_attempt_questions;
+      if (this.attempt.evaluation_attempt_questions) {
+        this.questions = this.attempt.evaluation_attempt_questions;
       }
       if (this.attempt.score !== null && this.attempt.score !== undefined) {
         this.endEvaluation(this.attempt);
@@ -113,9 +122,9 @@ export class EvaluationClass {
    */
   startEvaluation(response: IStartEvalResponse): void {
     this.status = EvaluationStatusEnum.InProgress;
-    this.attempt = response.quiz_attempt;
+    this.attempt = response.evaluation_attempt;
     this.currentQuestionIndex = 0;
-    this.questions = this.attempt?.quiz_attempt_questions as IEvalAttemptQuestion[] || [];
+    this.questions = (this.attempt?.evaluation_attempt_questions as IEvalAttemptQuestion[]) || [];
     this.elapsedSeconds = 0;
   }
 
@@ -242,8 +251,8 @@ export class EvaluationClass {
    * @returns void
    */
   processAnswer(response: IAnswerResponse): void {
-    this.questions[this.currentQuestionIndex] = response.quiz_attempt_question;
-    if (!response.quiz_attempt_question.correct) {
+    this.questions[this.currentQuestionIndex] = response.evaluation_attempt_question;
+    if (!response.evaluation_attempt_question.correct) {
       this.currentAttemptCount = this.currentAttemptCount === -1 ? 1 : this.currentAttemptCount + 1;
     } else {
       this.currentAttemptCount = 0;

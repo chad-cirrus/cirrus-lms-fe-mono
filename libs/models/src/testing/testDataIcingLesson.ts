@@ -11,7 +11,7 @@ export const testIcingContentsOneInprogress: IContent[] = [
     url: '355991595',
     meta_tags: [],
     content_tasks: [],
-    quiz: null,
+    evaluation: null,
     content_type: 0,
     desc: 'Intro video for the icing awareness course.',
     content_file: '',
@@ -39,7 +39,7 @@ export const testIcingContentsOneInprogress: IContent[] = [
     url: '',
     meta_tags: [],
     content_tasks: [],
-    quiz: null,
+    evaluation: null,
     content_type: 6,
     desc: 'SR22 TKS Anti-Ice System POH Supplement. Aircraft Serials w/ Perspective+ avionics only.',
     content_file:
@@ -68,7 +68,7 @@ export const testIcingContentsOneInprogress: IContent[] = [
     url: '',
     meta_tags: [],
     content_tasks: [],
-    quiz: null,
+    evaluation: null,
     content_type: 6,
     desc: 'SR22 TKS Anti-Ice System POH Supplement.',
     content_file:
@@ -97,7 +97,7 @@ export const testIcingContentsOneInprogress: IContent[] = [
     url: '',
     meta_tags: [],
     content_tasks: [],
-    quiz: null,
+    evaluation: null,
     content_type: 6,
     desc: 'SR22T TKS Anti-Ice System POH Supplement. Aircraft Serials w/ Perspective+ avionics only.',
     content_file:
@@ -126,7 +126,7 @@ export const testIcingContentsOneInprogress: IContent[] = [
     url: '',
     meta_tags: [],
     content_tasks: [],
-    quiz: null,
+    evaluation: null,
     content_type: 6,
     desc: 'SR22T TKS Anti-Ice System POH Supplement.',
     content_file:
@@ -155,7 +155,7 @@ export const testIcingContentsOneInprogress: IContent[] = [
     url: '',
     meta_tags: [],
     content_tasks: [],
-    quiz: null,
+    evaluation: null,
     content_type: 6,
     desc: '',
     content_file:
@@ -201,7 +201,7 @@ export const testDataIcingAwarenessCourse: ILesson = {
     content: {
       blob_directory: '',
       order: 0,
-      quiz: '',
+      evaluation: '',
       content_tasks: [],
       progress: { id: 1, status: 'not_completed' },
       content_file: '',
@@ -236,7 +236,7 @@ export const testDataIcingAwarenessCourse: ILesson = {
     content: {
       blob_directory: '',
       order: 0,
-      quiz: '',
+      evaluation: '',
       content_tasks: [],
       progress: { id: 1, status: 'not_completed' },
       content_file: '',
@@ -276,7 +276,7 @@ export const testDataIcingAwarenessCourse: ILesson = {
       url: '355991595',
       meta_tags: [],
       content_tasks: [],
-      quiz: null,
+      evaluation: null,
       content_type: 0,
       desc: 'Intro video for the icing awareness course.',
       content_file: '',
@@ -304,7 +304,7 @@ export const testDataIcingAwarenessCourse: ILesson = {
       url: '',
       meta_tags: [],
       content_tasks: [],
-      quiz: null,
+      evaluation: null,
       content_type: 6,
       desc: 'SR22 TKS Anti-Ice System POH Supplement. Aircraft Serials w/ Perspective+ avionics only.',
       content_file:
@@ -333,7 +333,7 @@ export const testDataIcingAwarenessCourse: ILesson = {
       url: '',
       meta_tags: [],
       content_tasks: [],
-      quiz: null,
+      evaluation: null,
       content_type: 6,
       desc: 'SR22 TKS Anti-Ice System POH Supplement.',
       content_file:
@@ -362,7 +362,7 @@ export const testDataIcingAwarenessCourse: ILesson = {
       url: '',
       meta_tags: [],
       content_tasks: [],
-      quiz: null,
+      evaluation: null,
       content_type: 6,
       desc: 'SR22T TKS Anti-Ice System POH Supplement. Aircraft Serials w/ Perspective+ avionics only.',
       content_file:
@@ -391,7 +391,7 @@ export const testDataIcingAwarenessCourse: ILesson = {
       url: '',
       meta_tags: [],
       content_tasks: [],
-      quiz: null,
+      evaluation: null,
       content_type: 6,
       desc: 'SR22T TKS Anti-Ice System POH Supplement.',
       content_file:
@@ -420,7 +420,7 @@ export const testDataIcingAwarenessCourse: ILesson = {
       url: '',
       meta_tags: [],
       content_tasks: [],
-      quiz: null,
+      evaluation: null,
       content_type: 6,
       desc: '',
       content_file:

@@ -20,7 +20,7 @@ import { FullScreenImageDialogComponent } from '../../../full-screen-image-dialo
 import { AppState } from '../../../store/reducers';
 import { Store } from '@ngrx/store';
 import { Observable, Subject, Subscription, timer } from 'rxjs';
-import { map, takeUntil, tap, withLatestFrom } from 'rxjs/operators';
+import { map, takeUntil, withLatestFrom } from 'rxjs/operators';
 import { CONTENT_TYPE, ICourseOverview, ILesson, PROGRESS_STATUS, PROGRESS_TYPE } from '@cirrus/models';
 import { selectLesson } from '../../../store/selectors/lessons.selector';
 import { EqbOutOfTimeComponent } from './evaluation-out-of-time/eqbOutOfTime.component';
@@ -32,6 +32,7 @@ import { selectCourseOverview } from '../../../store/selectors/course.selector';
 import { selectCirrusUser } from '../../../store/selectors/cirrus-user.selector';
 import { nextLesson, nextLessonUrlSegments } from '../../../shared/helpers/next-lesson';
 import { EVALUATION_ICONS } from './evaluation-icons';
+import { IEvaluationSubtype } from './models/IEvaluationSubtype';
 
 /**
  * Component for displaying an evaluation (quiz or exam)
@@ -111,6 +112,7 @@ export class EvaluationComponent extends LessonContentComponent implements OnIni
     this.lessonOverview$.subscribe(lesson => {
       this.lesson = lesson;
       this.course_attempt_id = lesson.course_attempt_id;
+      this.eval.loadFromContent(this.content);
       this.evaluationService.getEvaluation(this.content, lesson).subscribe(response => {
         this.eval.loadEvaluation(response);
       });
@@ -230,9 +232,10 @@ export class EvaluationComponent extends LessonContentComponent implements OnIni
    */
   startEvaluation(): void {
     this.hidePrevAndNext.emit(true);
-
+    const contentType = this.content.content_type === CONTENT_TYPE.quiz ? 'Quiz' : 'Exam';
+    const subtype:IEvaluationSubtype = { id: this.eval.id, type: contentType  };
     const attempt: IStartEvalAttempt = {
-      quiz_id: this.eval.id,
+      evaluation: subtype,
       course_attempt_id: 0,
       stage_id: 0,
       lesson_id: 0,
@@ -247,11 +250,11 @@ export class EvaluationComponent extends LessonContentComponent implements OnIni
 
     if (this.eval.status === EvaluationStatusEnum.NotStarted) {
       if (this.content.content_type == CONTENT_TYPE.quiz) {
-        this.evaluationService.startQuiz(attempt).subscribe(response => {
+        this.evaluationService.startEvaluation(attempt).subscribe(response => {
           this.eval.startEvaluation(response);
         });
       } else {
-        this.evaluationService.startExam(attempt).subscribe(response => {
+        this.evaluationService.startEvaluation(attempt).subscribe(response => {
           this.eval.startEvaluation(response);
         });
       }
@@ -307,7 +310,7 @@ export class EvaluationComponent extends LessonContentComponent implements OnIni
 
     this.eval.processAnswer(response);
     const isMultipleChoiceQuestion = this.eval.questions[this.eval.currentQuestionIndex].options.length > 2;
-    if (response.quiz_attempt_question.correct == true) {
+    if (response.evaluation_attempt_question.correct == true) {
       fullStoryData.answer_result = 'correct';
       this.setPopupForCorrectResponse();
     } else {
@@ -432,13 +435,18 @@ export class EvaluationComponent extends LessonContentComponent implements OnIni
    * */
   getStartButtonText(): string {
     let _buttonText = 'Start';
+    let _evaluationType = "Quiz";
     if (this.eval.status === EvaluationStatusEnum.InProgress) {
       _buttonText = 'Resume';
     }
     if (this.eval.grade === EvaluationGradeEnum.Failed) {
       _buttonText = 'Retake';
     }
-    return _buttonText + ' Quiz';
+    if(this.content.content_type === CONTENT_TYPE.exam)
+    {
+      _evaluationType = "Exam";
+    }
+    return _buttonText + ' ' + _evaluationType;
   }
 
   /**

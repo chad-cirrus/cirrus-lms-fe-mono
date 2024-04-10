@@ -71,18 +71,18 @@ describe('QuizClass', () => {
 
   it('should start the quiz with the provided response', () => {
     const startQuizResponse: IStartEvalResponse = {
-      quiz_attempt: getMockQuizAttempt(),
+      evaluation_attempt: getMockQuizAttempt(),
     } as IStartEvalResponse; // Replace with your own implementation
-    startQuizResponse.quiz_attempt.quiz_attempt_questions = [
+    startQuizResponse.evaluation_attempt.evaluation_attempt_questions = [
       generateMockQuizAttemptQuestion(),
       generateMockQuizAttemptQuestion(),
     ];
     quiz.startEvaluation(startQuizResponse);
 
     expect(quiz.status).toBe(EvaluationStatusEnum.InProgress);
-    expect(quiz.attempt).toBe(startQuizResponse.quiz_attempt);
+    expect(quiz.attempt).toBe(startQuizResponse.evaluation_attempt);
     expect(quiz.currentQuestionIndex).toBe(0);
-    expect(quiz.questions).toEqual(startQuizResponse.quiz_attempt.quiz_attempt_questions);
+    expect(quiz.questions).toEqual(startQuizResponse.evaluation_attempt.evaluation_attempt_questions);
   });
 
   it('should calculate the time remaining for the quiz', () => {
@@ -101,12 +101,12 @@ describe('QuizClass', () => {
 
   it('should submit an answer for the current question', () => {
     const answerResponse: IAnswerResponse = {
-      quiz_attempt_question: generateMockQuizAttemptQuestion(),
+      evaluation_attempt_question: generateMockQuizAttemptQuestion(),
     } as IAnswerResponse; // Replace with your own implementation
     quiz.currentQuestionIndex = 0;
     quiz.processAnswer(answerResponse);
 
-    expect(quiz.questions[0]).toBe(answerResponse.quiz_attempt_question);
+    expect(quiz.questions[0]).toBe(answerResponse.evaluation_attempt_question);
     expect(quiz.currentAttemptCount).toBe(0);
   });
 
@@ -360,7 +360,7 @@ function getSubmissionResponse(): IEvalAttempt {
     graded_at: '2024-03-02T00:18:16.700Z',
     created_at: '2024-03-02T00:18:01.232Z',
     updated_at: '2024-03-02T00:18:16.700Z',
-    quiz_attempt_questions: [],
+    evaluation_attempt_questions: [],
   };
 
   return response;
@@ -379,7 +379,7 @@ function getMockQuizAttempt(): IEvalAttempt {
     created_at: '2022-01-01T00:00:00Z',
     updated_at: '2022-01-01T00:00:00Z',
     graded_at: '2022-01-01T00:00:00Z',
-    quiz_attempt_questions: [],
+    evaluation_attempt_questions: [],
   };
   return mockQuizAttempt;
 }

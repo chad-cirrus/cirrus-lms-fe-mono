@@ -17,7 +17,6 @@ const getResolvedUrl = (route: ActivatedRouteSnapshot): string => {
     .map(k => `${k}=${route.params[k]}`)
     .join('&');
   const path = route.pathFromRoot.map(v => v.url.map(segment => segment.path).join('/')).join('/');
-  console.log('path', path, 'params', params);
   return params.length > 0 ? `${path}?${params}` : path;
 };
 

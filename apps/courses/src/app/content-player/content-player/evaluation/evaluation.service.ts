@@ -10,6 +10,8 @@ import { IStartEvaluation } from './models/IStartEvaluation';
 import { IStartEvalAttempt } from './models/IStartEvalAttempt';
 import { IStartEvalResponse } from './models/IStartEvalResponse';
 import { CONTENT_TYPE, IContent, ILesson } from '@cirrus/models';
+import { IStartExam } from './models/IStartExam';
+import { IStartExamAttempt } from './models/IStartExamAttempt';
 
 @Injectable({
   providedIn: 'root',
@@ -32,11 +34,11 @@ export class EvaluationService {
    */
   getEvaluation(content: IContent, lesson: ILesson): Observable<IEvalRequest> {
     const apiToken = content.content_type === CONTENT_TYPE.quiz ? 'quizzes' : 'exams';
-    const id = content.content_type === CONTENT_TYPE.quiz ? content.quiz_id : content.exam_id;
+    const evaluation: IEvalRequest = content.evaluation as IEvalRequest;
     const keyName = content.content_type === CONTENT_TYPE.quiz ? 'content_player/quiz' : 'content_player/exam';
     return this.http
       .get<IEvalRequest>(
-        `${environment.baseUrl}/api/v4/${apiToken}/${id}?course_attempt_id=${lesson.course_attempt_id}&lesson_id=${lesson.id}&stage_id=${lesson.stage_id}`,
+        `${environment.baseUrl}/api/v5/${apiToken}/${evaluation.id}?course_attempt_id=${lesson.course_attempt_id}&lesson_id=${lesson.id}&stage_id=${lesson.stage_id}`,
       )
       .pipe(map(response => response[keyName as keyof object] as IEvalRequest));
   }
@@ -46,10 +48,10 @@ export class EvaluationService {
    * @param attempt The quiz attempt data.
    * @returns An observable of the start quiz attempt response.
    */
-  startQuiz(attempt: IStartEvalAttempt): Observable<IStartEvalResponse> {
-    const attemptData: IStartEvaluation = { quiz_attempt: attempt };
+  startEvaluation(attempt: IStartEvalAttempt): Observable<IStartEvalResponse> {
+    const attemptData: IStartEvaluation = { evaluation_attempt: attempt };
     return this.http
-      .post<IStartEvalResponse>(`${environment.baseUrl}/api/v5/quiz_attempts`, attemptData)
+      .post<IStartEvalResponse>(`${environment.baseUrl}/api/v5/evaluation_attempts`, attemptData)
       .pipe(map(response => response));
   }
 
@@ -59,9 +61,9 @@ export class EvaluationService {
    * @returns An observable of the start quiz attempt response.
    */
   startExam(attempt: IStartEvalAttempt): Observable<IStartEvalResponse> {
-    const attemptData: IStartEvaluation = { quiz_attempt: attempt };
+    const attemptData: IStartExam = { exam_attempt: attempt };
     return this.http
-      .post<IStartEvalResponse>(`${environment.baseUrl}/api/v4/exam_attempts`, attemptData)
+      .post<IStartEvalResponse>(`${environment.baseUrl}/api/v5/evaluation_attempts`, attemptData)
       .pipe(map(response => response));
   }
 
@@ -74,18 +76,18 @@ export class EvaluationService {
    * @returns An Observable that emits the response containing the answer information.
    */
   submitAnswer(
-    quiz_attempt_id: number,
-    quiz_attempt_question_id: number,
-    question_option_id: number,
+    evaluation_attempt_id: number,
+    evaluation_attempt_question_id: number,
+    evaluation_option_id: number,
   ): Observable<IAnswerResponse> {
     const _payload = {
-      quiz_attempt_question: {
-        question_option_id: question_option_id,
+      evaluation_attempt_question: {
+        question_option_id: evaluation_option_id,
       },
     };
     return this.http
       .put<IAnswerResponse>(
-        `${environment.baseUrl}/api/v5/quiz_attempts/${quiz_attempt_id}/quiz_attempt_questions/${quiz_attempt_question_id}`,
+        `${environment.baseUrl}/api/v5/evaluation_attempts/${evaluation_attempt_id}/evaluation_attempt_questions/${evaluation_attempt_question_id}`,
         _payload,
       )
       .pipe(map(response => response));
@@ -98,7 +100,7 @@ export class EvaluationService {
    */
   gradeQuiz(attempt_id: number): Observable<IEvalAttempt> {
     return this.http
-      .put<IEvalAttempt>(`${environment.baseUrl}/api/v5/quiz_attempts/${attempt_id}/submit`, {})
-      .pipe(map(response => response['quiz_attempt' as keyof object] as IEvalAttempt));
+      .put<IEvalAttempt>(`${environment.baseUrl}/api/v5/evaluation_attempts/${attempt_id}/submit`, {})
+      .pipe(map(response => response['evaluation_attempt' as keyof object] as IEvalAttempt));
   }
 }

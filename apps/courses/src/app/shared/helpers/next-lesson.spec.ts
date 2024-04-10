@@ -39,7 +39,7 @@ describe('determine next lesson to navigate to', () => {
 
 
 const mockCourseOverview = (): ICourseOverview => {
-    let course: ICourseOverview = {
+    const course: ICourseOverview = {
         badge: badge,
         certificate: certificate,
         completed_at: '',
@@ -142,7 +142,7 @@ const mockCourseOverview = (): ICourseOverview => {
 };
 
 const mockLesson = () => {
-    let nullContent: IContent = {
+    const nullContent: IContent = {
         blob_directory: '',
         content_file: '',
         content_filename: '',
@@ -155,7 +155,7 @@ const mockLesson = () => {
         meta_tags: [],
         placeholder_image: '',
         progress: { id: 0, scorm: { grade: 0, pass: false }, status: '' },
-        quiz: undefined,
+        evaluation: undefined,
         score: 0,
         show_comments: false,
         starter_file: '',
@@ -197,7 +197,7 @@ const mockLesson = () => {
             url: '355991595',
             meta_tags: [],
             content_tasks: [],
-            quiz: null,
+            evaluation: null,
             content_type: 0,
             desc: 'Intro video for the icing awareness course.',
             content_file: '',
@@ -248,7 +248,7 @@ const mockLesson = () => {
               id: 0,
               status: '',
             },
-            quiz: null,
+            evaluation: null,
             content_tasks: [],
           },
           created_at: '2022-05-20T14:52:12.117Z',

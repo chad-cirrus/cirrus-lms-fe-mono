@@ -85,7 +85,7 @@ function getContent(): IContent {
         task_type: 'quiz',
       },
     ],
-    quiz: 'mock quiz',
+    evaluation: 'mock quiz',
     content_type: 5,
     desc: 'Mock quiz description',
     content_file: '',
@@ -99,7 +99,7 @@ function getContent(): IContent {
     blob_directory: '',
     show_comments: false,
     courseTitle: 'Mock quiz course',
-    quiz_id: 1,
+    evaluation_id: 1,
   };
 }
 
@@ -118,7 +118,7 @@ function getIQuizRequest(): IEvalRequest {
     created_at: '2022-01-01T00:00:00Z',
     updated_at: '2022-01-01T00:00:00Z',
     graded_at: '2022-01-01T00:00:00Z',
-    quiz_attempt_questions: [],
+    evaluation_attempt_questions: [],
   };
   return { quiz_attempt: mockQuizAttempt } as IEvalRequest;
 }
@@ -160,7 +160,7 @@ const fnGetMockQuizAttempt = (): IEvalAttempt => {
     updated_at: '2024-01-17T21:05:02.013Z',
     graded_at: '2024-01-17T21:05:02.013Z',
     score: 80,
-    quiz_attempt_questions: [fnGenerateMockIQuizAttemptQuestion()],
+    evaluation_attempt_questions: [fnGenerateMockIQuizAttemptQuestion()],
     exam_id: 0,
   };
 };

@@ -30,7 +30,7 @@ const contentItem: IContent = {
   show_comments: true,
   order: 0,
   content_tasks: [],
-  quiz: undefined,
+  evaluation: undefined,
 };
 
 describe('LessonContentItemComponent', () => {

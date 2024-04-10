@@ -5,6 +5,6 @@ import { IEvalAttemptQuestion } from "./IEvalAttemptQuestion";
  * @interface
  */
 export interface IAnswerResponse {
-  quiz_attempt_question: IEvalAttemptQuestion;
+  evaluation_attempt_question: IEvalAttemptQuestion;
 }
 

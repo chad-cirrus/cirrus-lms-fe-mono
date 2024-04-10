@@ -13,8 +13,8 @@ import { IContent, IProgress } from '@cirrus/models';
 describe('AssessmentComponent', () => {
   let component: AssessmentComponent;
   let fixture: ComponentFixture<AssessmentComponent>;
-  let progress: IProgress = { id: 0, scorm: { grade: 0, pass: false }, status: '' };
-  let content: IContent = {
+  const progress: IProgress = { id: 0, scorm: { grade: 0, pass: false }, status: '' };
+  const content: IContent = {
     blob_directory: '',
     content_file: '',
     content_filename: '',
@@ -29,7 +29,7 @@ describe('AssessmentComponent', () => {
     order: 0,
     placeholder_image: '',
     progress,
-    quiz: undefined,
+    evaluation: undefined,
     score: 0,
     show_comments: false,
     starter_file: '',

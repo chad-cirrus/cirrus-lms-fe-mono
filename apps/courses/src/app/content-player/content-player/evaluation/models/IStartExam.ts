@@ -1,13 +1,13 @@
 import { IStartEvalAttempt } from "./IStartEvalAttempt";
 
 /**
- * Interface for starting an evaluation (quiz or exam).
+ * Interface for starting an evaluation (exam).
  * @interface
  */
-export interface IStartEvaluation {
+export interface IStartExam {
   /**
    * The quiz attempt information.
    * @type {IStartEvalAttempt}
    */
-  evaluation_attempt: IStartEvalAttempt;
+  exam_attempt: IStartEvalAttempt;
 }

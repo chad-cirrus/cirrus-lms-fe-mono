@@ -7,8 +7,8 @@ import { IContent, IProgress } from '@cirrus/models';
 describe('InteractiveComponent', () => {
   let component: InteractiveComponent;
   let fixture: ComponentFixture<InteractiveComponent>;
-  let progress: IProgress = { id: 0, status: 'not_started' };
-  let content: IContent = {
+  const progress: IProgress = { id: 0, status: 'not_started' };
+  const content: IContent = {
     blob_directory: '',
     content_file: 'https://example.com',
     content_filename: '',
@@ -23,7 +23,7 @@ describe('InteractiveComponent', () => {
     order: 0,
     placeholder_image: '',
     progress: progress,
-    quiz: undefined,
+    evaluation: undefined,
     score: 0,
     show_comments: false,
     starter_file: '',

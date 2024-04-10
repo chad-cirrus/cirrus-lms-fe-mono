@@ -1,10 +1,8 @@
-import { IEvaluationSubtype } from "./IEvaluationSubtype";
-
 /**
- * Interface for starting a quiz attempt sent to the api.
+ * Interface for starting a exam attempt sent to the api.
  * @interface
  */
-export interface IStartEvalAttempt {
+export interface IStartExamAttempt {
   /**
    * The ID of the course attempt.
    * @type {number}
@@ -33,7 +31,5 @@ export interface IStartEvalAttempt {
    * The ID of the quiz.
    * @type {number}
    */
-  evaluation: IEvaluationSubtype;
+  exam_id: number;
 }
-
-

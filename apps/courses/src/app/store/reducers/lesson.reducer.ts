@@ -52,7 +52,7 @@ export const initialLessonState: LessonState = {
       content: {
         blob_directory: '',
         order: 0,
-        quiz: '',
+        evaluation: '',
         content_tasks: [],
         progress: { id: 1, status: 'not_completed' },
         content_file: '',
@@ -86,7 +86,7 @@ export const initialLessonState: LessonState = {
       content: {
         blob_directory: '',
         order: 0,
-        quiz: '',
+        evaluation: '',
         content_tasks: [],
         progress: { id: 1, status: 'not_completed' },
         content_file: '',

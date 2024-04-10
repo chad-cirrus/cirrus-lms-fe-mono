@@ -81,7 +81,7 @@ export interface IEvalAttempt {
    * The array of quiz_attempt_questions of the quiz attempt.
    * @type {Array}
    */
-  quiz_attempt_questions: IEvalAttemptQuestion[];
+  evaluation_attempt_questions: IEvalAttemptQuestion[];
 
   /**
    * The time elapsed from started_at to graded_at

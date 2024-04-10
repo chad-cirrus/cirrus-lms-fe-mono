@@ -86,7 +86,7 @@ export const testData: ILesson = {
       starter_file: '',
       show_comments: true,
       order: 0,
-      quiz: 0,
+      evaluation: 0,
       progress: {
         id: 0,
         status: 'completed',
@@ -114,7 +114,7 @@ export const testData: ILesson = {
       starter_file: '',
       show_comments: true,
       order: 1,
-      quiz: 0,
+      evaluation: 0,
       progress: {
         id: 0,
         status: 'not_started',
@@ -142,7 +142,7 @@ export const testData: ILesson = {
       starter_file: '',
       show_comments: true,
       order: 2,
-      quiz: 0,
+      evaluation: 0,
       progress: {
         id: 0,
         status: 'in_progress',
@@ -155,7 +155,7 @@ export const testData: ILesson = {
     content: {
       blob_directory: '',
       order: 0,
-      quiz: '',
+      evaluation: '',
       content_tasks: [],
       progress: { id: 1, status: 'not_completed' },
       content_file: '',
@@ -190,7 +190,7 @@ export const testData: ILesson = {
     content: {
       blob_directory: '',
       order: 0,
-      quiz: '',
+      evaluation: '',
       content_tasks: [],
       progress: { id: 1, status: 'not_completed' },
       content_file: '',
@@ -276,7 +276,7 @@ export const testData2: ILesson = {
       starter_file: '',
       show_comments: true,
       order: 0,
-      quiz: 0,
+      evaluation: 0,
       progress: {
         id: 0,
         status: 'not_started',
@@ -304,7 +304,7 @@ export const testData2: ILesson = {
       starter_file: '',
       show_comments: true,
       order: 1,
-      quiz: 0,
+      evaluation: 0,
       progress: {
         id: 0,
         status: 'not_started',
@@ -332,7 +332,7 @@ export const testData2: ILesson = {
       starter_file: '',
       show_comments: true,
       order: 2,
-      quiz: 0,
+      evaluation: 0,
       progress: {
         id: 0,
         status: 'not_started',
@@ -345,7 +345,7 @@ export const testData2: ILesson = {
     content: {
       blob_directory: '',
       order: 0,
-      quiz: '',
+      evaluation: '',
       content_tasks: [],
       progress: { id: 1, status: 'not_completed' },
       content_file: '',
@@ -380,7 +380,7 @@ export const testData2: ILesson = {
     content: {
       blob_directory: '',
       order: 0,
-      quiz: '',
+      evaluation: '',
       content_tasks: [],
       progress: { id: 1, status: 'not_completed' },
       content_file: '',

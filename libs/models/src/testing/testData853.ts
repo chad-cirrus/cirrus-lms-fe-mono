@@ -25,7 +25,7 @@ export const testDataReccurent853: ILesson = {
     content: {
       blob_directory: '',
       order: 0,
-      quiz: '',
+      evaluation: '',
       content_tasks: [],
       progress: { id: 1, status: 'not_completed' },
       content_file: '',
@@ -60,7 +60,7 @@ export const testDataReccurent853: ILesson = {
     content: {
       blob_directory: '',
       order: 0,
-      quiz: '',
+      evaluation: '',
       content_tasks: [],
       progress: { id: 1, status: 'not_completed' },
       content_file: '',
@@ -990,7 +990,7 @@ export const testDataReccurent853: ILesson = {
           task_type: 'perform',
         },
       ],
-      quiz: null,
+      evaluation: null,
       content_type: 9,
       desc: 'VFR Recurrent Course: Flight Lesson\nEstimated Lesson Time: .5 Hour Ground Training / 1.8 Hours Flight Training \n\n\nNormal (PERFORM)\n- Aircraft Weight and Balance, Aircraft Performance, Preflight Assessment, Engine Start, Taxiing, Before Takeoff Check, Normal Takeoff, Climb, Cruise, Descent, Traffic Pattern, Normal Landing, and After Landing, Parking and Securing\n\nManeuvers (PERFORM)\n- Slow Flight, Power-Off Stalls, Power-On Stalls, and Steep Turn\n\nAbnormals (PERFORM)\n- Unusual Attitudes, and Engine Malfunction\n\nSpecialty (PERFORM)\n- Short-Field Takeoff, Short-Field Landing, Flaps 0 and 50% Landing, and Go-Around\n\nSimulated CAPS Deployment (PERFORM ONE)\n- Engine Failure on Takeoff, Loss of Control, Spin Recovery, Structural Failure, Midair Collision, Engine Failure in Cruise (Runway within Glide), Engine Failure in Cruise (Runway not within Glide), Engine Failure in IMC, and Severe Icing',
       content_file: '',

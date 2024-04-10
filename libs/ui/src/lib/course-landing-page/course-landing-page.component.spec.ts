@@ -136,7 +136,7 @@ function mockCourseOverviewVideo(): IContent {
     url: '309005652',
     meta_tags: [],
     content_tasks: [],
-    quiz: '',
+    evaluation: '',
     content_type: 0,
     desc: 'Perspective & Perspective+ Avionics Course',
     content_file: '',
