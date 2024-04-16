@@ -11,7 +11,6 @@ import { IStartEvalAttempt } from './models/IStartEvalAttempt';
 import { IStartEvalResponse } from './models/IStartEvalResponse';
 import { CONTENT_TYPE, IContent, ILesson } from '@cirrus/models';
 import { IStartExam } from './models/IStartExam';
-import { IStartExamAttempt } from './models/IStartExamAttempt';
 
 @Injectable({
   providedIn: 'root',
@@ -98,7 +97,7 @@ export class EvaluationService {
    * @param attempt_id The ID of the quiz attempt to grade.
    * @returns An observable that emits the response from the server.
    */
-  gradeQuiz(attempt_id: number): Observable<IEvalAttempt> {
+  gradeEvaluation(attempt_id: number): Observable<IEvalAttempt> {
     return this.http
       .put<IEvalAttempt>(`${environment.baseUrl}/api/v5/evaluation_attempts/${attempt_id}/submit`, {})
       .pipe(map(response => response['evaluation_attempt' as keyof object] as IEvalAttempt));

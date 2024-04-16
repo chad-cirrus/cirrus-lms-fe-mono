@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, Renderer2 } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Renderer2 } from '@angular/core';
 import { ComponentType } from '@angular/cdk/portal';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
@@ -21,7 +21,7 @@ import { AppState } from '../../../store/reducers';
 import { Store } from '@ngrx/store';
 import { Observable, Subject, Subscription, timer } from 'rxjs';
 import { map, takeUntil, withLatestFrom } from 'rxjs/operators';
-import { CONTENT_TYPE, ICourseOverview, ILesson, PROGRESS_STATUS, PROGRESS_TYPE } from '@cirrus/models';
+import { CONTENT_TYPE, ICourseOverview, ILesson, IProgress, PROGRESS_STATUS, PROGRESS_TYPE } from '@cirrus/models';
 import { selectLesson } from '../../../store/selectors/lessons.selector';
 import { EqbOutOfTimeComponent } from './evaluation-out-of-time/eqbOutOfTime.component';
 import { completeProgress } from '../../../store/actions';
@@ -49,7 +49,7 @@ export class EvaluationComponent extends LessonContentComponent implements OnIni
 
   /**
    * Constructor for the EvaluationComponent
-   * @param evaluationService Injects the EvaluationService to get the quiz
+   * @param evaluationService Injects the EvaluationService to get the evaluation
    */
   constructor(
     private dialog: MatDialog,
@@ -73,7 +73,7 @@ export class EvaluationComponent extends LessonContentComponent implements OnIni
 
   eval = new EvaluationClass();
 
-  quiz_attempt?: IEvalAttempt = undefined;
+  evaluation_attempt?: IEvalAttempt = undefined;
 
   courseTitle = '';
   course_attempt_id = 0;
@@ -130,7 +130,7 @@ export class EvaluationComponent extends LessonContentComponent implements OnIni
       this._courseOverview = event;
     });
 
-    //Check if quiz is complete
+    //Check if evaluation is complete
     if (this.eval.status === EvaluationStatusEnum.Complete || this.eval.grade === EvaluationGradeEnum.Passed) {
       //Check if lesson is complete
       this.lessonCompleted$ = this.coursesService.lessonComplete$;
@@ -203,8 +203,7 @@ export class EvaluationComponent extends LessonContentComponent implements OnIni
   getSubjectList(): string[] {
     // TODO: remove the next line once the api endpoint correctly populates this array
     return ['#FakeSubject1', '#fakeSubject2', '#fakeSubject3'];
-    // TODO: uncomment the next line once the api endpoint correctly populates this array
-    //return !this.quiz || !this.quiz.subjects ? [] : this.quiz.subjects;
+
   }
 
   /**
@@ -233,7 +232,7 @@ export class EvaluationComponent extends LessonContentComponent implements OnIni
   startEvaluation(): void {
     this.hidePrevAndNext.emit(true);
     const contentType = this.content.content_type === CONTENT_TYPE.quiz ? 'Quiz' : 'Exam';
-    const subtype:IEvaluationSubtype = { id: this.eval.id, type: contentType  };
+    const subtype: IEvaluationSubtype = { id: this.eval.id, type: contentType };
     const attempt: IStartEvalAttempt = {
       evaluation: subtype,
       course_attempt_id: 0,
@@ -267,7 +266,7 @@ export class EvaluationComponent extends LessonContentComponent implements OnIni
   /**
    * goBack()
    *
-   * Moves the student back a question in the quiz, or resets to overview if on first question.
+   * Moves the student back a question in the evaluation, or resets to overview if on first question.
    *
    * @returns void
    */
@@ -380,20 +379,9 @@ export class EvaluationComponent extends LessonContentComponent implements OnIni
   }
 
   /**
-   * Ends the quiz.
+   * Sets the progress to completed in the store and emits an event to update the progress in the content player.
    */
-  endQuiz(): void {
-    // Signal that the quiz has ended
-    this.evaluationEnd$.next();
-
-    this.hidePrevAndNext.emit(false);
-
-    // Grade the quiz
-    this.evaluationService.gradeQuiz(this.eval.attempt?.id ?? 0).subscribe(response => {
-      this.eval.endEvaluation(response);
-    });
-
-    // Update progress
+  setProgressToCompleted(): void {
     const _progress = {
       id: this.content.progress.id,
       status: PROGRESS_STATUS.completed,
@@ -410,6 +398,25 @@ export class EvaluationComponent extends LessonContentComponent implements OnIni
         assessment: false,
       }),
     );
+  }
+
+  /**
+   * Ends the evaluation.
+   */
+  endEvaluation(): void {
+    // Signal that the evaluation has ended
+    this.evaluationEnd$.next();
+
+    this.hidePrevAndNext.emit(false);
+
+    // Grade the evaluation
+    this.evaluationService.gradeEvaluation(this.eval.attempt?.id ?? 0).subscribe(response => {
+      this.eval.endEvaluation(response);
+      if (this.eval.grade === EvaluationGradeEnum.Passed) {
+        this.setProgressToCompleted();
+      }
+    });
+
     // Stop the timer
     if (this.timerSubscription) {
       this.timerSubscription.unsubscribe();
@@ -418,14 +425,14 @@ export class EvaluationComponent extends LessonContentComponent implements OnIni
 
   /**
    * Increments the current question index and resets the answered question result class and title.
-   * If the quiz is completed, emits an event to show the previous and next content buttons.
+   * If the evaluation is completed, emits an event to show the previous and next content buttons.
    */
   nextQuestion() {
     this.resetQuestionResultPopup();
 
     this.eval.nextQuestion();
     if (this.eval.status === EvaluationStatusEnum.Complete || this.eval.status === EvaluationStatusEnum.TimedOut) {
-      this.endQuiz();
+      this.endEvaluation();
     }
   }
 
@@ -435,26 +442,28 @@ export class EvaluationComponent extends LessonContentComponent implements OnIni
    * */
   getStartButtonText(): string {
     let _buttonText = 'Start';
-    let _evaluationType = "Quiz";
+    let _evaluationType = 'Quiz';
     if (this.eval.status === EvaluationStatusEnum.InProgress) {
       _buttonText = 'Resume';
     }
     if (this.eval.grade === EvaluationGradeEnum.Failed) {
       _buttonText = 'Retake';
     }
-    if(this.content.content_type === CONTENT_TYPE.exam)
-    {
-      _evaluationType = "Exam";
+    if (this.content.content_type === CONTENT_TYPE.exam) {
+      _evaluationType = 'Exam';
     }
     return _buttonText + ' ' + _evaluationType;
   }
 
   /**
-   * Returns the title for the quiz results screen.
-   * @returns {string} The title text for the quiz results.
+   * Returns the title for the evaluation results screen.
+   * @returns {string} The title text for the evaluation results.
    */
   getResultsTitle(): string {
     let _titleText = 'Please finish the quiz to see your results.';
+    if (this.content.content_type === CONTENT_TYPE.exam) {
+      _titleText = 'Please finish the exam to see your results.';
+    }
     if (this.eval.status === EvaluationStatusEnum.Submitted || this.eval.status === EvaluationStatusEnum.TimedOut) {
       if (this.eval.grade === EvaluationGradeEnum.Passed) {
         _titleText = 'Congratulations, you passed!';
@@ -465,8 +474,8 @@ export class EvaluationComponent extends LessonContentComponent implements OnIni
     return _titleText;
   }
 
-  /** Returns the text for the primary button on the quiz results screen based on student's score.
-   * @returns {string} The text for the primary button on the quiz results screen.
+  /** Returns the text for the primary button on the evaluation results screen based on student's score.
+   * @returns {string} The text for the primary button on the evaluation results screen.
    */
   getResultsPrimaryButtonText(): string {
     let _buttonText = 'Retake';
@@ -477,8 +486,8 @@ export class EvaluationComponent extends LessonContentComponent implements OnIni
   }
 
   /**
-   * Returns the text for the secondary button on the quiz results screen based on student's score.
-   * @returns {string} The text for the secondary button on the quiz results screen.
+   * Returns the text for the secondary button on the evaluation results screen based on student's score.
+   * @returns {string} The text for the secondary button on the evaluation results screen.
    */
   getResultsSecondaryButtonText(): string {
     let _buttonText = 'Skip';
@@ -489,8 +498,8 @@ export class EvaluationComponent extends LessonContentComponent implements OnIni
   }
 
   /**
-   * Allows users to reattempt a failed quiz, resets quiz data to start over
-   * Resets quiz tracker and puts user back to the start quiz screen
+   * Allows users to reattempt a failed evaluation, resets evaluation data to start over
+   * Resets evaluation tracker and puts user back to the start evaluation screen
    */
   retakeEvaluation(): void {
     this.showOutOfTimePopup = false;
