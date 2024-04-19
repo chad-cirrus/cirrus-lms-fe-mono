@@ -80,6 +80,7 @@ export class EvaluationClass {
     }
     if (_request.quiz_questions) {
       this.questions = _request.quiz_questions;
+      this.questionCount = _request.quiz_questions.length;
     }
     if (_request.quiz_attempt !== null && _request.quiz_attempt !== undefined) {
       this.attempt = _request.quiz_attempt;
