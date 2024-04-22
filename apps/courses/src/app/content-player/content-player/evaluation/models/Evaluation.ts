@@ -58,7 +58,7 @@ export class EvaluationClass {
   passPercentage = -1;
 
   loadFromContent(content: IContent): void {
-    const _object : IEvalRequest = content.evaluation as IEvalRequest;
+    const _object: IEvalRequest = content.evaluation as IEvalRequest;
     this.id = _object.id;
     this.questionCount = _object.number_of_questions != undefined ? _object.number_of_questions : -1;
     this.approximateDuration = _object.approximate_duration;
@@ -126,6 +126,8 @@ export class EvaluationClass {
     this.attempt = response.evaluation_attempt;
     this.currentQuestionIndex = 0;
     this.questions = (this.attempt?.evaluation_attempt_questions as IEvalAttemptQuestion[]) || [];
+    this.questionCount = this.questions.length;
+
     this.elapsedSeconds = 0;
   }
 
