@@ -62,6 +62,7 @@ export class EvaluationClass {
     this.id = _object.id;
     this.questionCount = _object.number_of_questions != undefined ? _object.number_of_questions : -1;
     this.approximateDuration = _object.approximate_duration;
+
   }
 
   /** Loads the evaluation from the api on initialization. *
@@ -82,8 +83,8 @@ export class EvaluationClass {
       this.questions = _request.quiz_questions;
       this.questionCount = _request.quiz_questions.length;
     }
-    if (_request.quiz_attempt !== null && _request.quiz_attempt !== undefined) {
-      this.attempt = _request.quiz_attempt;
+    if (_request.evaluation_attempt !== null && _request.evaluation_attempt !== undefined) {
+      this.attempt = _request.evaluation_attempt;
       if (this.attempt.evaluation_attempt_questions) {
         this.questions = this.attempt.evaluation_attempt_questions;
       }

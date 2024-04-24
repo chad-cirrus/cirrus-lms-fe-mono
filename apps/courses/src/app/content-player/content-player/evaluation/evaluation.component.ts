@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnDestroy, OnInit, Renderer2 } from '@angular/core';
+import { Component, OnDestroy, OnInit, Renderer2 } from '@angular/core';
 import { ComponentType } from '@angular/cdk/portal';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
@@ -64,6 +64,7 @@ export class EvaluationComponent extends LessonContentComponent implements OnIni
   }
   lesson!: ILesson;
   lessonOverview$: Observable<ILesson> = this.store.select(selectLesson);
+
   lessonCompleted$!: Observable<string>;
   lessonSubscription = new Subscription();
 
@@ -103,6 +104,7 @@ export class EvaluationComponent extends LessonContentComponent implements OnIni
     this.hidePrevAndNext.emit(false);
     this.getCourseInfo();
     this.fullStoryInit();
+
   }
 
   /**
@@ -133,55 +135,65 @@ export class EvaluationComponent extends LessonContentComponent implements OnIni
     //Check if evaluation is complete
     if (this.eval.status === EvaluationStatusEnum.Complete || this.eval.grade === EvaluationGradeEnum.Passed) {
       //Check if lesson is complete
-      this.lessonCompleted$ = this.coursesService.lessonComplete$;
+              this.lessonCompleted$ = this.coursesService.lessonComplete$;
+        this.lessonSubscription.add(
+          this.lessonCompleted$
+            .pipe(withLatestFrom(this.courseOverview$, this.user$, this.lessonOverview$))
+            .subscribe(([progress_type, courseOverview, user, lesson]) => {
+              const component: ComponentType<CompletionDialogComponent | CourseCompletionComponent> =
+                progress_type === 'lesson' ? CompletionDialogComponent : CourseCompletionComponent;
+              const data =
+                progress_type === 'lesson'
+                  ? {
+                      lesson: this.lesson.title,
+                      course: courseOverview,
+                      stageId: this.lesson.stage_id,
+                    }
+                  : {
+                      badge: courseOverview?.badge?.badge_image
+                        ? courseOverview?.badge.badge_image
+                        : 'courses/images/default_badge.png',
+                      course: courseOverview.name,
+                      course_id: courseOverview.id,
+                      student: user.name,
+                      course_attempt_id: this.lesson.course_attempt_id,
+                    };
 
-      //Check progress type
-      let progress_type;
-      if (this._courseOverview.completed_at) {
-        progress_type = PROGRESS_TYPE.course;
-      } else if (this.lesson.progress.status == 'completed') {
-        progress_type = PROGRESS_TYPE.lesson;
-      }
+              const showCompletionDialog =
+                progress_type === 'lesson'
+                  ? lesson.progress.status !== PROGRESS_STATUS.completed
+                  : courseOverview.progress.status !== PROGRESS_STATUS.completed;
 
-      const component: ComponentType<CompletionDialogComponent | CourseCompletionComponent> =
-        progress_type === PROGRESS_TYPE.lesson ? CompletionDialogComponent : CourseCompletionComponent;
-      const data =
-        progress_type === PROGRESS_TYPE.lesson
-          ? {
-              lesson: this.lesson.title,
-              course: this._courseOverview,
-              stageId: this.lesson.stage_id,
-            }
-          : {
-              badge: this._courseOverview?.badge?.badge_image
-                ? this._courseOverview?.badge.badge_image
-                : 'courses/images/default_badge.png',
-              course: this._courseOverview.name,
-              course_id: this._courseOverview.id,
-              student: 'user.name',
-              course_attempt_id: this.lesson.course_attempt_id,
-            };
+              if (showCompletionDialog) {
+                const nextLesson$ = this.courseOverview$.pipe(
+                  map(courseOverview => nextLesson(courseOverview, lesson)),
+                );
 
-      const nextLesson$ = this.courseOverview$.pipe(map(courseOverview => nextLesson(courseOverview, this.lesson)));
+                this.dialog
+                  .open(component, {
+                    data,
+                    panelClass: 'fullscreen-dialog',
+                    height: '100%',
+                    width: '100%',
+                  })
+                  .afterClosed()
+                  .pipe(withLatestFrom(nextLesson$))
+                  .subscribe(([response, nextLesson]) => {
+                    if (response === LESSON_COMPLETION_CTA.nextLesson) {
+                      this.router.navigate(nextLessonUrlSegments(nextLesson));
+                    } else {
+                      console.log('subscription for lesson completion returned none of the above');
+                    }
+                    this.dialog.closeAll();
+                  });
+              }
+            }),
+        );
 
-      this.dialog
-        .open(component, {
-          data,
-          panelClass: 'fullscreen-dialog',
-          height: '100%',
-          width: '100%',
-        })
-        .afterClosed()
-        .pipe(withLatestFrom(nextLesson$))
-        .subscribe(([response, nextLesson]) => {
-          if (response === LESSON_COMPLETION_CTA.nextLesson) {
-            this.router.navigate(nextLessonUrlSegments(nextLesson));
-          } else {
-            console.log('none of the above');
-          }
-          this.dialog.closeAll();
-        });
     }
+    this.eval = new EvaluationClass();
+    this.lessonSubscription.unsubscribe();
+
   }
 
   /**

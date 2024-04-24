@@ -36,7 +36,7 @@ describe('QuizClass', () => {
     expect(quiz.approximateDuration).toBe(quizRequest.approximate_duration);
     expect(quiz.timeLimit).toBe(quizRequest.time_limit_in_minutes);
     expect(quiz.questions).toEqual(quizRequest.quiz_questions);
-    expect(quiz.attempt).toBe(quizRequest.quiz_attempt);
+    expect(quiz.attempt).toBe(quizRequest.evaluation_attempt);
   });
 
   it('should check if the quiz is timed', () => {
@@ -393,7 +393,7 @@ function getQuizContent(): IEvalRequest {
     pass_percentage: 80,
     approximate_duration: 30,
     subjects: ['Math', 'Science'],
-    quiz_attempt: getMockQuizAttempt(),
+    evaluation_attempt: getMockQuizAttempt(),
     time_limit_in_minutes: 60,
   };
 

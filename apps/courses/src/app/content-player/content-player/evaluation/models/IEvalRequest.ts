@@ -62,7 +62,7 @@ export interface IEvalRequest {
    * The quiz attempt information.
    * @type {IEvalAttempt}
    */
-  quiz_attempt?: IEvalAttempt;
+  evaluation_attempt?: IEvalAttempt;
 
   /**
    * The time limit the student has to take the evaluation(quiz or exam).

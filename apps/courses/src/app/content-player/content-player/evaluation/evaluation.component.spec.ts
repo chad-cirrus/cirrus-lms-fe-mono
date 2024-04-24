@@ -120,7 +120,7 @@ function getIQuizRequest(): IEvalRequest {
     graded_at: '2022-01-01T00:00:00Z',
     evaluation_attempt_questions: [],
   };
-  return { quiz_attempt: mockQuizAttempt } as IEvalRequest;
+  return { evaluation_attempt: mockQuizAttempt } as IEvalRequest;
 }
 
 function fnGenerateMockIQuestionOption(): IQuestionOption {

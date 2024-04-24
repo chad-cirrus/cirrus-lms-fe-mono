@@ -57,7 +57,9 @@ export class CourseCompletionComponent implements OnInit {
       id: 0,
       uuid: '',
     };
+    if(this.data.user_certificate_id) {
     this.loadDocumentList(this.data.course_id);
+    }
   }
 
   /**
