@@ -1,0 +1,29 @@
+{
+  "name": "ctc-admin-e2e",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/ctc-admin/ctc-admin-host-e2e/src",
+  "tags": [],
+  "implicitDependencies": ["ctc-admin"],
+  "targets": {
+    "e2e": {
+      "executor": "@nx/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/ctc-admin/ctc-admin-host-e2e/cypress.json",
+        "testingType": "e2e",
+        "devServerTarget": "ctc-admin:serve:development"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "ctc-admin:serve:production"
+        },
+        "ci": {
+          "devServerTarget": "ctc-admin:serve-static"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    }
+  }
+}

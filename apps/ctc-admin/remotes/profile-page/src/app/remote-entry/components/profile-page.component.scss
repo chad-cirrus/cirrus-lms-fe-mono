@@ -1,0 +1,45 @@
+@import '../../../styles';
+
+:host {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.page-content {
+  display: flex;
+  flex: auto;
+  flex-direction: column;
+}
+
+.ctc-profile-header {
+  background-color: $blue5;
+  color: $white;
+  padding: 50px 2rem 40px;
+
+  .location {
+    font-weight: 400;
+    font-size: 15px;
+    margin-bottom: 24px;
+  }
+  
+  .location-name {
+    font-weight: 400;
+    font-size: 30px;
+  }
+}
+
+
+
+.card {
+  ul {
+    padding: 0 0 0 1.2rem;
+    color: $gray1;
+  }
+}
+
+form#training-center-details {
+  columns: 21rem 2;
+  column-gap: 5rem;
+}

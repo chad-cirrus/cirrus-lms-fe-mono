@@ -1,0 +1,106 @@
+{
+  "name": "header",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "prefix": "app",
+  "sourceRoot": "apps/ctc-admin/remotes/header/src",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nx/angular:webpack-browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/ctc-admin/remotes/header",
+        "index": "apps/ctc-admin/remotes/header/src/index.html",
+        "main": "apps/ctc-admin/remotes/header/src/main.ts",
+        "polyfills": ["zone.js"],
+        "tsConfig": "apps/ctc-admin/remotes/header/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": ["apps/ctc-admin/remotes/header/src/favicon.ico", "apps/ctc-admin/remotes/header/src/assets"],
+        "styles": ["apps/ctc-admin/remotes/header/src/styles.scss"],
+        "scripts": [],
+        "customWebpackConfig": {
+          "path": "apps/ctc-admin/remotes/header/webpack.config.ts"
+        }
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "outputHashing": "all",
+          "customWebpackConfig": {
+            "path": "apps/ctc-admin/remotes/header/webpack.prod.config.ts"
+          }
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@nx/angular:dev-server",
+      "options": {
+        "port": 4205,
+        "publicHost": "http://localhost:4205"
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": "header:build:production"
+        },
+        "development": {
+          "buildTarget": "header:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "buildTarget": "header:build"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/ctc-admin/remotes/header/jest.config.ts"
+      }
+    },
+    "serve-static": {
+      "executor": "@nx/web:file-server",
+      "defaultConfiguration": "production",
+      "options": {
+        "buildTarget": "header:build",
+        "port": 4205,
+        "watch": false
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "header:build:development"
+        },
+        "production": {
+          "buildTarget": "header:build:production"
+        }
+      }
+    }
+  }
+}

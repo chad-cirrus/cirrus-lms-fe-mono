@@ -22,7 +22,10 @@
       "@cirrus/notification-menu": ["libs/notification-menu/src/index.ts"],
       "@cirrus/search-input": ["libs/search-input/src/index.ts"],
       "@cirrus/sidenav-header": ["libs/sidenav-header/src/index.ts"],
-      "@cirrus/ui": ["libs/ui/src/index.ts"]
+      "@cirrus/ui": ["libs/ui/src/index.ts"],
+      "header/Routes": ["apps/ctc-admin/remotes/header/src/app/remote-entry/entry.routes.ts"],
+      "profile-page/Routes": ["apps/ctc-admin/remotes/profile-page/src/app/remote-entry/entry.routes.ts"],
+      "sidebar/Routes": ["apps/ctc-admin/remotes/sidebar/src/app/remote-entry/entry.routes.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"],

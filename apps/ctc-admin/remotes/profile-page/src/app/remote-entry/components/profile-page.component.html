@@ -1,0 +1,185 @@
+<ng-container #ctcAdminHeader></ng-container>
+<ng-container #ctcAdminSidebar></ng-container>
+
+<div class="page-content">
+    <header class="ctc-profile-header">
+        <div class="location">Knoxville, TN</div>
+        <div class="location-name">Cirrus Factory Training Center (KTYS)</div>
+    </header>
+
+    <div class="ctc-profile-page">
+        <div class="tabs">
+            <button class="active">Public Profile</button>
+            <button>Operations</button>
+        </div>
+
+        <div class="tab-contents">
+            <div class="tab-content active">
+                Here is the first tab content
+                <div class="card">
+                    <form id="training-center-details" action="/" method="post">
+                        <div class="input-group">
+                            <label for="phone-number">Phone Number</label>
+                            <input type="tel" placeholder="(123)456-7890" value="" name="phone-number">
+                        </div>
+
+                        <div class="input-group">
+                            <label for="email">Email</label>
+                            <input type="email" placeholder="name@domain.com" value="" name="email">
+                        </div>
+
+                        <div class="input-group">
+                            <label for="website">Website</label>
+                            <input type="url" placeholder="https://domain.com" value="" name="website">
+                        </div>
+
+                        <div class="input-group">
+                            <label for="head-admin">Head Admin</label>
+                            <!-- <input type="text" placeholder="(123)456-7890" value="" name="phone-number"> -->
+                            <select name="head-admin">
+                                <option selected="selected">choose one</option>
+                                <option>Person A</option>
+                                <option>Person B</option>
+                                <option>Person C</option>
+                            </select>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="address-street">Street Address</label>
+                            <input type="text" placeholder="(123)456-7890" value="" name="address-street">
+                        </div>
+
+                        <div class="input-group">
+                            <label for="address-city">City</label>
+                            <input type="text" placeholder="(123)456-7890" value="" name="address-city">
+                        </div>
+
+                        <div class="input-group">
+                            <label for="address-state">State</label>
+                            <select name="address-state">
+                                <option selected="selected">choose one</option>
+                                <option>State A</option>
+                                <option>State B</option>
+                                <option>State C</option>
+                            </select>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="address-zip">Zip Code</label>
+                            <input type="number" placeholder="12345" value="" name="address-zip">
+                        </div>
+                    </form>
+                </div>
+
+                <div class="card">
+                    <header>
+                        <h5 class="subhead">Training Platforms</h5>
+                    </header>
+
+                    <ul class="training-platform-list">
+                        <li>SR20</li>
+                        <li>SR22</li>
+                        <li>SR 22T</li>
+                        <li>Vision Jet</li>
+                    </ul>
+
+                </div>
+
+                <div class="card">
+                    <header>
+                        <h5 class="subhead">Courses Offered</h5>
+                    </header>
+
+
+                    <div class="row">
+
+                        <div class="column">
+                            <section>
+                                <h6 class="subhead-small">Specialty</h6>
+                                <ul class="">
+                                    <li>Instrument Flight Procedures Course</li>
+                                    <li>Perspective & Perspective+ Avionics Course</li>
+                                    <li>SR Series Cross Country Procedures Course</li>
+                                    <li>SR Series Emergency and Abnormal Course</li>
+                                    <li>SR Series Systems Course</li>
+                                    <li>Icing Awareness Course</li>
+                                    <li>Engine Management Course</li>
+                                    <li>SR Series Maneuvers Course</li>
+                                    <li>SR Series Takeoffs and Landings Course</li>
+                                </ul>
+                            </section>
+        
+                            <section>
+                                <h6 class="subhead-small">Transition Courses</h6>
+                                <ul class="">
+                                    <li>SR22TN Perspective Transition (VFR)</li>
+                                    <li>SR22 Avidyne Entegra Transition (VFR)</li>
+                                    <li>SR22 Perspective Transition (VFR)</li>
+                                    <li>SR22T Perspective Transition (VFR)</li>
+                                </ul>
+                            </section>
+        
+                            <section>
+                                <h6 class="subhead-small">Advanced Transition</h6>
+                                <ul class="">
+                                    <li>G7 SR2X VFR+IFR Transition Course</li>
+                                    <li>SR22T Perspective+ Advanced Transition (VFR + IFR)</li>
+                                    <li>SR22 Perspective+ Advanced Transition (VFR + IFR)</li>
+                                    <li>SR22T Perspective Advanced Transition (VFR + IFR)</li>
+                                </ul>
+                            </section>
+                        </div>
+
+                        <div class="column">
+                            <section>
+                                <h6 class="subhead-small">Avionics Differences</h6>
+                                <ul class="">
+                                    <li>SR22T Airframe and Powerplant Differences Course</li>
+                                    <li>SR20 G6 Airframe and Powerplant Differences Course</li>
+                                    <li>SR22 Airframe and Powerplant Differences Course</li>
+                                    <li>SR20 Airframe and Powerplant Differences Course</li>
+                                </ul>
+                            </section>
+        
+                            <section>
+                                <h6 class="subhead-small">Airframe & Powerplant Differences</h6>
+                                <ul class="">
+                                    <li>SR22T Airframe and Powerplant Differences Course</li>
+                                    <li>SR20 G6 Airframe and Powerplant Differences Course</li>
+                                    <li>SR22 Airframe and Powerplant Differences Course</li>
+                                    <li>SR20 Airframe and Powerplant Differences Course</li>
+                                </ul>
+                            </section>
+        
+                            <section>
+                                <h6 class="subhead-small">Recurrent Training</h6>
+                                <ul class="">
+                                    <li>VFR Recurrent Check</li>
+                                    <li>IFR Recurrent Check</li>
+                                    <li>Takeoffs & Landings Flight Syllabus</li>
+                                    <li>Skill Refresher</li>
+                                </ul>
+                            </section>
+                        </div>
+
+                    </div>
+
+                    
+
+                    
+
+                </div>
+
+
+            </div>
+
+            <div class="tab-content">
+                Here is the first tab content
+                <div class="card">
+                    Card content...
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

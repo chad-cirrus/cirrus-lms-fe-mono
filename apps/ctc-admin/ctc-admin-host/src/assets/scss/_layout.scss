@@ -1,0 +1,28 @@
+// Wrappers and containers
+.wrapper {
+    margin: 0 auto;
+}
+
+.container {
+    margin: 0 auto;
+    max-width: 1400px;
+}
+
+
+
+// Grid System
+.row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+@include breakpoint(md) {
+    .column {
+        display: flex;
+        flex-direction: column;
+        flex-basis: 100%;
+        flex: 1;
+    }
+}
