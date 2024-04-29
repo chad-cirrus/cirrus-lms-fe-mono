@@ -2,7 +2,15 @@ import { Component, OnDestroy, OnInit, Renderer2 } from '@angular/core';
 import { ComponentType } from '@angular/cdk/portal';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { CompletionDialogComponent, CourseCompletionComponent, FullStoryEvent, FullStoryEventData, FullstoryService, LESSON_COMPLETION_CTA, LessonContentComponent } from '@cirrus/ui';
+import {
+  CompletionDialogComponent,
+  CourseCompletionComponent,
+  FullStoryEvent,
+  FullStoryEventData,
+  FullstoryService,
+  LESSON_COMPLETION_CTA,
+  LessonContentComponent,
+} from '@cirrus/ui';
 import { EvaluationService } from './evaluation.service';
 import { IAnswerResponse } from './models/IAnswerResponse';
 import { IEvalAttempt } from './models/IEvalAttempt';
@@ -104,7 +112,6 @@ export class EvaluationComponent extends LessonContentComponent implements OnIni
     this.hidePrevAndNext.emit(false);
     this.getCourseInfo();
     this.fullStoryInit();
-
   }
 
   /**
@@ -135,65 +142,61 @@ export class EvaluationComponent extends LessonContentComponent implements OnIni
     //Check if evaluation is complete
     if (this.eval.status === EvaluationStatusEnum.Complete || this.eval.grade === EvaluationGradeEnum.Passed) {
       //Check if lesson is complete
-              this.lessonCompleted$ = this.coursesService.lessonComplete$;
-        this.lessonSubscription.add(
-          this.lessonCompleted$
-            .pipe(withLatestFrom(this.courseOverview$, this.user$, this.lessonOverview$))
-            .subscribe(([progress_type, courseOverview, user, lesson]) => {
-              const component: ComponentType<CompletionDialogComponent | CourseCompletionComponent> =
-                progress_type === 'lesson' ? CompletionDialogComponent : CourseCompletionComponent;
-              const data =
-                progress_type === 'lesson'
-                  ? {
-                      lesson: this.lesson.title,
-                      course: courseOverview,
-                      stageId: this.lesson.stage_id,
-                    }
-                  : {
-                      badge: courseOverview?.badge?.badge_image
-                        ? courseOverview?.badge.badge_image
-                        : 'courses/images/default_badge.png',
-                      course: courseOverview.name,
-                      course_id: courseOverview.id,
-                      student: user.name,
-                      course_attempt_id: this.lesson.course_attempt_id,
-                    };
+      this.lessonCompleted$ = this.coursesService.lessonComplete$;
+      this.lessonSubscription.add(
+        this.lessonCompleted$
+          .pipe(withLatestFrom(this.courseOverview$, this.user$, this.lessonOverview$))
+          .subscribe(([progress_type, courseOverview, user, lesson]) => {
+            const component: ComponentType<CompletionDialogComponent | CourseCompletionComponent> =
+              progress_type === 'lesson' ? CompletionDialogComponent : CourseCompletionComponent;
+            const data =
+              progress_type === 'lesson'
+                ? {
+                    lesson: this.lesson.title,
+                    course: courseOverview,
+                    stageId: this.lesson.stage_id,
+                  }
+                : {
+                    badge: courseOverview?.badge?.badge_image
+                      ? courseOverview?.badge.badge_image
+                      : 'courses/images/default_badge.png',
+                    course: courseOverview.name,
+                    course_id: courseOverview.id,
+                    student: user.name,
+                    course_attempt_id: this.lesson.course_attempt_id,
+                  };
 
-              const showCompletionDialog =
-                progress_type === 'lesson'
-                  ? lesson.progress.status !== PROGRESS_STATUS.completed
-                  : courseOverview.progress.status !== PROGRESS_STATUS.completed;
+            const showCompletionDialog =
+              progress_type === 'lesson'
+                ? lesson.progress.status !== PROGRESS_STATUS.completed
+                : courseOverview.progress.status !== PROGRESS_STATUS.completed;
 
-              if (showCompletionDialog) {
-                const nextLesson$ = this.courseOverview$.pipe(
-                  map(courseOverview => nextLesson(courseOverview, lesson)),
-                );
+            if (showCompletionDialog) {
+              const nextLesson$ = this.courseOverview$.pipe(map(courseOverview => nextLesson(courseOverview, lesson)));
 
-                this.dialog
-                  .open(component, {
-                    data,
-                    panelClass: 'fullscreen-dialog',
-                    height: '100%',
-                    width: '100%',
-                  })
-                  .afterClosed()
-                  .pipe(withLatestFrom(nextLesson$))
-                  .subscribe(([response, nextLesson]) => {
-                    if (response === LESSON_COMPLETION_CTA.nextLesson) {
-                      this.router.navigate(nextLessonUrlSegments(nextLesson));
-                    } else {
-                      console.log('subscription for lesson completion returned none of the above');
-                    }
-                    this.dialog.closeAll();
-                  });
-              }
-            }),
-        );
-
+              this.dialog
+                .open(component, {
+                  data,
+                  panelClass: 'fullscreen-dialog',
+                  height: '100%',
+                  width: '100%',
+                })
+                .afterClosed()
+                .pipe(withLatestFrom(nextLesson$))
+                .subscribe(([response, nextLesson]) => {
+                  if (response === LESSON_COMPLETION_CTA.nextLesson) {
+                    this.router.navigate(nextLessonUrlSegments(nextLesson));
+                  } else {
+                    console.log('subscription for lesson completion returned none of the above');
+                  }
+                  this.dialog.closeAll();
+                });
+            }
+          }),
+      );
     }
     this.eval = new EvaluationClass();
     this.lessonSubscription.unsubscribe();
-
   }
 
   /**
@@ -215,7 +218,6 @@ export class EvaluationComponent extends LessonContentComponent implements OnIni
   getSubjectList(): string[] {
     // TODO: remove the next line once the api endpoint correctly populates this array
     return ['#FakeSubject1', '#fakeSubject2', '#fakeSubject3'];
-
   }
 
   /**
@@ -422,12 +424,14 @@ export class EvaluationComponent extends LessonContentComponent implements OnIni
     this.hidePrevAndNext.emit(false);
 
     // Grade the evaluation
-    this.evaluationService.gradeEvaluation(this.eval.attempt?.id ?? 0).subscribe(response => {
-      this.eval.endEvaluation(response);
-      if (this.eval.grade === EvaluationGradeEnum.Passed) {
-        this.setProgressToCompleted();
-      }
-    });
+    if (this.eval.attempt && this.eval.attempt?.id > 0) {
+      this.evaluationService.gradeEvaluation(this.eval.attempt?.id ?? 0).subscribe(response => {
+        this.eval.endEvaluation(response);
+        if (this.eval.grade === EvaluationGradeEnum.Passed) {
+          this.setProgressToCompleted();
+        }
+      });
+    }
 
     // Stop the timer
     if (this.timerSubscription) {
