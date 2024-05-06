@@ -43,3 +43,59 @@ form#training-center-details {
   columns: 21rem 2;
   column-gap: 5rem;
 }
+
+
+
+.mat-mdc-table {
+  .mat-mdc-cell {
+    padding: 1rem;
+  }
+
+  .mat-column-name.mat-mdc-cell {
+    @extend .subhead-small;
+    .row {
+      align-items: center;
+    }
+  }
+
+  .mat-column-action.mat-mdc-cell {
+    button {
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+    }
+  }
+}
+
+.filter-search {
+  max-width: 540px;
+}
+
+.tab-content h4 {
+  margin-bottom: 20px;
+}
+
+
+.table-item-selector {
+  color: $gray1;
+  margin: 2rem 0 0;
+  display: flex;
+  align-items: center;
+
+  label {
+    font-weight: bold;
+    color: $white;
+    margin-right: 1.333rem;
+  }
+}
+
+
+.table-background {
+  margin: 1rem 0 2rem
+}
+
+
+.checkbox-text {
+  display: inline-block;
+  margin-left: 1rem;
+}
