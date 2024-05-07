@@ -1,0 +1,90 @@
+{
+  "name": "redirector",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "prefix": "app",
+  "sourceRoot": "apps/redirector/src",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nx/angular:webpack-browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/redirector",
+        "index": "apps/redirector/src/index.html",
+        "main": "apps/redirector/src/main.ts",
+        "polyfills": ["zone.js"],
+        "tsConfig": "apps/redirector/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": ["apps/redirector/src/favicon.ico", "apps/redirector/src/assets"],
+        "styles": ["apps/redirector/src/styles.scss"],
+        "scripts": [],
+        "customWebpackConfig": {
+          "path": "apps/redirector/webpack.config.ts"
+        }
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "outputHashing": "all",
+          "customWebpackConfig": {
+            "path": "apps/redirector/webpack.prod.config.ts"
+          }
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@nx/angular:module-federation-dev-server",
+      "options": {
+        "port": 4205,
+        "proxyConfig": "apps/redirector/proxy.conf.js",
+        "publicHost": "https://cirrusapproach.local"
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": "redirector:build:production"
+        },
+        "development": {
+          "buildTarget": "redirector:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "buildTarget": "redirector:build"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/redirector/jest.config.ts"
+      }
+    }
+  }
+}
