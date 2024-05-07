@@ -1,7 +1,7 @@
 import { Component, enableProdMode } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { RedeemComponent } from './components/redeem.component';
-import { environment } from '../environments/environment';
+import { environment } from 'apps/redirector/src/environments/environment';
 
 if (environment.production) {
   enableProdMode();

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { RedemptionCodesService } from '../services/redemption-codes.service';
-import { environment } from '../../environments/environment';
+import { environment } from 'apps/redirector/src/environments/environment';
 
 @Component({
   selector: 'app-redeem',
