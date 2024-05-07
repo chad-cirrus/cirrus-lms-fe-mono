@@ -21,6 +21,6 @@ export class RedemptionCodesService {
         "Authorization": "Bearer " + localStorage.getItem("cirrus-token")
       })
     };
-    return this.http.post(`http://localhost:3000/api/v5/redemption_codes/${code}/redeem`, {}, httpOptions);
+    return this.http.post(`${this.environment.baseUrl}/api/v5/redemption_codes/${code}/redeem`, {}, httpOptions);
   }
 }

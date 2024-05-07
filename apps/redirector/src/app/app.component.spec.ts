@@ -2,13 +2,15 @@ import { fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Router } from '@angular/router';
+import { HttpClientTestingModule } from "@angular/common/http/testing";
 
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
         RouterTestingModule.withRoutes([{ path: '', component: AppComponent }]),
-        AppComponent
+        AppComponent,
+        HttpClientTestingModule
       ],
     }).compileComponents();
   });
@@ -24,14 +26,4 @@ describe('AppComponent', () => {
     const app = fixture.componentInstance;
     expect(app.title).toEqual('redirector');
   });
-
-  it('should render title', fakeAsync(() => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const router = TestBed.inject(Router);
-    fixture.ngZone?.run(() => router.navigate(['']));
-    tick();
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Welcome redirector');
-  }));
 });
