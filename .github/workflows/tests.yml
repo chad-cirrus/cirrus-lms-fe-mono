@@ -29,10 +29,10 @@ jobs:
           target: 'apps/recent-activity/src/environments/environment.ts'
 
       - name: Make Redirector test environment config available
-      uses: canastro/copy-file-action@master
-      with:
-        source: 'apps/redirector/src/environments/environment.ts.example'
-        target: 'apps/redirector/src/environments/environment.ts'
+        uses: canastro/copy-file-action@master
+        with:
+          source: 'apps/redirector/src/environments/environment.ts.example'
+          target: 'apps/redirector/src/environments/environment.ts'
 
       - name: Setup Node
         uses: actions/setup-node@v3
