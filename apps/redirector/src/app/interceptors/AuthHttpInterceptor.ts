@@ -15,6 +15,7 @@ export class AuthHttpInterceptor implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
+    console.log("intercept");
     const token = localStorage.getItem('cirrus-token');
 
     req = req.clone({
