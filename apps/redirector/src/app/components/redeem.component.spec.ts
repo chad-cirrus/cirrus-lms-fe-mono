@@ -9,7 +9,8 @@ describe('RedeemComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RedeemComponent, RouterTestingModule, HttpClientTestingModule]
+      imports: [RouterTestingModule, HttpClientTestingModule],
+      declarations: [RedeemComponent]
     }).compileComponents();
 
     fixture = TestBed.createComponent(RedeemComponent);
