@@ -57,9 +57,8 @@ export class CourseCompletionComponent implements OnInit {
       id: 0,
       uuid: '',
     };
-    if(this.data.user_certificate_id) {
+    
     this.loadDocumentList(this.data.course_id);
-    }
   }
 
   /**
@@ -71,12 +70,14 @@ export class CourseCompletionComponent implements OnInit {
    */
   loadDocumentList(id:number) {
     this.uiDownloadService.getCourse(id).subscribe(course => {
-      this.courseTranscript = {
-        id: course.certificate.id ? course.certificate.id : -1,
-        documentType: DOWNLOADABLE_DOCUMENT_TYPE.transcript,
-        displayText: 'Course Transcript',
-        uuid: self.crypto.randomUUID(),
-      };
+      if(this.data.user_certificate_id) {
+        this.courseTranscript = {
+          id: course.certificate.id ? course.certificate.id : -1,
+          documentType: DOWNLOADABLE_DOCUMENT_TYPE.transcript,
+          displayText: 'Course Transcript',
+          uuid: self.crypto.randomUUID(),
+        };
+      }
 
       if (course.certificate && course.certificate.id) {
         this.courseCertificate = {
