@@ -7,24 +7,35 @@
   .wrapper {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
   }
 }
 
 .mobile-menu-toggle {
   display: block;
   position: absolute;
-  left: 1.4rem;
+  right: 1.4rem;
+  line-height: 1rem;
+
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .logo {
-  padding-left: 1.4rem;
+  padding: 1rem;
+  line-height: 1rem;
 }
 
 .user-profile-navigation {
-  display: none;
   padding: 1.4rem;
   z-index: 8;
+
+  display: none;
+
+  // position: absolute;
+  // bottom: 0;
+  
 }
 
 button.profile-menu {
@@ -82,22 +93,24 @@ nav.profile-links {
 }
 
 
-@include breakpoint(md) {
+@include breakpoint(sm) {
+  .mobile-menu-toggle {
+    left: 1.4rem;
+  }
   .user-profile-navigation {
     display: block;
   }
-  #primary-header .wrapper {
-    justify-content: space-between;
-  }
   .logo {
     margin-left: 2.4rem;
+    padding-top: 0;
+    padding-bottom: 0;
   }
   .user-profile-navigation.open nav.profile-links,
   .user-profile-navigation:hover nav.profile-links {
     display: block;
     position: absolute;
     background-color: $white;
-    top: 5.62em;
+    top: 5.62rem;
     width: 234px;
     right: 0;
   }
@@ -113,9 +126,9 @@ nav.profile-links {
   .mobile-menu-toggle {
     display: none;
   }
-  .user-profile-navigation.open nav.profile-links {
-    top: 5.75rem;
-    width: 234px;
-    right: initial;
+  .user-profile-navigation.open nav.profile-links,
+  .user-profile-navigation:hover nav.profile-links {
+    top: 5.7rem;
+    right: 0;
   }
 }
