@@ -8,9 +8,11 @@ describe('AppComponent', () => {
     await TestBed.configureTestingModule({
       imports: [
         RouterTestingModule.withRoutes([{ path: '', component: AppComponent }]),
-        AppComponent,
         HttpClientTestingModule
       ],
+      declarations: [
+        AppComponent
+      ]
     }).compileComponents();
   });
 

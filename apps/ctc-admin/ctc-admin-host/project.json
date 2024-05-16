@@ -57,10 +57,11 @@
       "executor": "@nx/angular:module-federation-dev-server",
       "options": {
         "port": 4204,
-        "publicHost": "http://localhost:4204",
+        "publicHost": "http://cirrusapproach.local:4204",
+        "disableHostCheck": true,
         "devRemotes": [
-          "header", 
-          "sidebar", 
+          "header",
+          "sidebar",
           "profile-page"
         ]
       },
@@ -94,7 +95,7 @@
       "executor": "@nx/web:file-server",
       "options": {
         "buildTarget": "ctc-admin:build",
-        "port": 4200
+        "port": 4204
       }
     }
   }

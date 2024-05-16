@@ -1,4 +1,5 @@
-import { Route } from '@angular/router';
+import { NgModule } from '@angular/core';
+import { Route, RouterModule } from '@angular/router';
 import { ShellContainerComponent } from './components/shell-container.component';
 
 export const appRoutes: Route[] = [
@@ -11,3 +12,11 @@ export const appRoutes: Route[] = [
     component: ShellContainerComponent
   },
 ];
+
+@NgModule({
+  imports: [
+    RouterModule.forRoot(appRoutes, { initialNavigation: 'enabledBlocking' }),
+  ],
+  exports: [RouterModule],
+})
+export class AppRoutingModule {}

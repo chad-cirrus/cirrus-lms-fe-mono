@@ -1,10 +1,7 @@
 import { Component, ViewChild, ViewContainerRef } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-shell-container',
-  standalone: true,
-  imports: [CommonModule],
   templateUrl: './shell-container.component.html',
   styleUrl: './shell-container.component.scss',
 })
