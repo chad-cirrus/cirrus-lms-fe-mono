@@ -8,4 +8,10 @@ import { CommonModule } from '@angular/common';
   templateUrl: './user-profile-menu.component.html',
   styleUrl: './user-profile-menu.component.scss',
 })
+
+// @NgModule({
+//   declarations: [UserProfileMenuComponent],
+//   exports: [UserProfileMenuComponent]
+// })
+
 export class UserProfileMenuComponent {}
