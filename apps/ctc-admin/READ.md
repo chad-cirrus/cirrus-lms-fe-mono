@@ -85,7 +85,7 @@ To call components from a remote application in a host application, you can foll
     In the code of the host application, you can import components from the remote application as needed. This can be done using the dynamic loading mechanism provided by NX Module Federation.
 
 
-    ```
+    ```js
     import { Component, ViewChild, ViewContainerRef, AfterViewInit } from '@angular/core';
     import { CommonModule } from '@angular/common';
 
@@ -141,7 +141,9 @@ To call components from a remote application in a host application, you can foll
     In the code of the host application (`ctc-admin`), you can import and use the components or services provided by the new remote application as needed.
 
 
-### To spin up the host application: 
+### Setting Up Environment File
+
+To spin up the host application you will need to duplicate and rename the environment.ts.example file in the `cirrus-lms-fe-mono/apps/ctc-admin/ctc-admin-host/src/app/environments/` directory:
 
 `cp cirrus-lms-fe-mono/apps/ctc-admin/ctc-admin-host/src/app/environments/environment.ts.example cirrus-lms-fe-mono/apps/ctc-admin/ctc-admin-host/src/app/environments/environment.ts`
 
