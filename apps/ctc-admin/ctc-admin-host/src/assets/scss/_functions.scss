@@ -1,7 +1,7 @@
+@use "sass:math";
 $html-font-size: 15px;
 @function stripUnit($value) {
-    $unitMult: $value * 0 + 1;
-    @return calc($value / $unitMult);
+    @return math.div($value , ($value * 0 + 1));
 }
 @function rem($pxValue) {
     @return #{calc(stripUnit($pxValue) / stripUnit($html-font-size))}rem;

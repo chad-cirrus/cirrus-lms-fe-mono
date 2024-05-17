@@ -7,7 +7,6 @@ describe('ShellContainerComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ShellContainerComponent],
     }).compileComponents();
 
     fixture = TestBed.createComponent(ShellContainerComponent);

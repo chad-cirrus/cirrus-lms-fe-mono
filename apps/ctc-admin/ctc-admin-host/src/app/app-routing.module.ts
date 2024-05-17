@@ -1,24 +1,18 @@
 import { NgModule } from '@angular/core';
-import { AppComponent } from './app.component';
-import { RedeemComponent } from './components/redeem.component';
 import { Route, RouterModule } from '@angular/router';
+import { ShellContainerComponent } from './components/shell-container.component';
 
 export const appRoutes: Route[] = [
   {
-    path: '',
-    redirectTo: 'redeem',
-    pathMatch: 'full'
-  },
-  {
-    path: 'redeem',
-    component: AppComponent,
+    path: 'ctc-admin',
+    component: ShellContainerComponent,
     children: [
       {
-        path: 'redemption/:code/redeem',
-        component: RedeemComponent,
-      }
+        path: 'profile-page',
+        loadChildren: () => import('profile-page/Routes').then(m => m.remoteRoutes),
+      },
     ]
-  }
+  },
 ];
 
 @NgModule({
