@@ -6,11 +6,11 @@ import { Route, RouterModule } from '@angular/router';
 export const appRoutes: Route[] = [
   {
     path: '',
-    redirectTo: 'redirect',
+    redirectTo: 'redeem',
     pathMatch: 'full'
   },
   {
-    path: 'redirect',
+    path: 'redeem',
     component: AppComponent,
     children: [
       {

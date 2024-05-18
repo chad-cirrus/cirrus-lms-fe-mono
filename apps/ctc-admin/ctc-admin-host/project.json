@@ -10,6 +10,7 @@
       "executor": "@nx/angular:webpack-browser",
       "outputs": ["{options.outputPath}"],
       "options": {
+        "deployUrl": "/ctc-admin/",
         "outputPath": "dist/apps/ctc-admin/ctc-admin-host",
         "index": "apps/ctc-admin/ctc-admin-host/src/index.html",
         "main": "apps/ctc-admin/ctc-admin-host/src/main.ts",

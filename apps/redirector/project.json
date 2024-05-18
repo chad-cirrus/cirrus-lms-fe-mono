@@ -10,6 +10,7 @@
       "executor": "@nx/angular:webpack-browser",
       "outputs": ["{options.outputPath}"],
       "options": {
+        "deployUrl": "/redeem/",
         "outputPath": "dist/apps/redirector",
         "index": "apps/redirector/src/index.html",
         "main": "apps/redirector/src/main.ts",
@@ -54,11 +55,12 @@
       "defaultConfiguration": "production"
     },
     "serve": {
-      "executor": "@nx/angular:module-federation-dev-server",
+      "executor": "@nx/angular:dev-server",
       "options": {
         "port": 4208,
         "proxyConfig": "apps/redirector/proxy.conf.js",
-        "publicHost": "cirrusapproach.local"
+        "publicHost": "cirrusapproach.local/redirect",
+        "disableHostCheck": true
       },
       "configurations": {
         "production": {
