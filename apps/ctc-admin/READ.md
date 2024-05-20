@@ -1,10 +1,10 @@
-CTC Admin
-=================
+# CTC Admin
 
 This is an Angular project that utilizes NX Module Federation to modularize and share functionalities among different applications.
 
-Running the Project
--------------------
+
+
+## Running the Project
 
 ### Prerequisites
 
@@ -31,8 +31,11 @@ After starting the project, you can access it in the browser using the following
 
 `http://localhost:4204`
 
-Building the Project
---------------------
+
+
+
+## Building the Project
+
 
 To build the project for deployment, you can use the `nx build` command provided by NX. This will compile all applications and create deployment-ready packages. For example, to build the host application (`ctc-admin`), you can execute:
 
@@ -43,11 +46,11 @@ This will create the build files in the `dist/ctc-admin` folder.
 
 To build a specific remote application, simply replace `ctc-admin` with the name of the desired remote application.
 
-Creating a New Remote Application and Connecting it to the Host
----------------------------------------------------------------
+
+
+## Creating a New Remote Application and Connecting it to the Host
 
 To create a new remote application and automatically connect it to the host, you can use the following command:
-
 
 `nx g @nrwl/angular:application name-of-new-remote-application --mfeType=remote --project=ctc-admin`
 
@@ -55,8 +58,10 @@ Replace `name-of-new-remote-application` with the desired name for the new remot
 
 This command not only creates the new remote application but also automatically registers it in the `webpack.config.js` file of the host project, allowing the new remote application to be imported and used by the host.
 
-Calling Components between Applications
----------------------------------------
+
+
+## Calling Components between Applications
+
 
 To call components from a remote application in a host application, you can follow these steps:
 
@@ -80,7 +85,8 @@ To call components from a remote application in a host application, you can foll
     In the code of the host application, you can import components from the remote application as needed. This can be done using the dynamic loading mechanism provided by NX Module Federation.
 
 
-    `import { Component, ViewChild, ViewContainerRef, AfterViewInit } from '@angular/core';
+    ```js
+    import { Component, ViewChild, ViewContainerRef, AfterViewInit } from '@angular/core';
     import { CommonModule } from '@angular/common';
 
     @Component({
@@ -106,7 +112,8 @@ To call components from a remote application in a host application, you can foll
         this.headerViewContainer.createComponent(mfeHeader.RemoteEntryComponent);
         this.sidebarViewContainer.createComponent(mfeSidebar.RemoteEntryComponent);
       }
-    }`
+    }
+    ```
 
     Replace `name-of-new-remote-application/HeaderModule` with the path to the module and desired component in the remote application.
 
@@ -114,10 +121,9 @@ To call components from a remote application in a host application, you can foll
 
     After importing components from the remote application, you can use them normally in your code as you would with any other Angular component.
 
-Necessary Modifications
------------------------
+## Necessary Modifications
 
-To add new features or make changes to the project, follow these steps:
+### To add new features or make changes to the project, follow these steps:
 
 1.  Create a New Remote Application:
 
@@ -134,8 +140,17 @@ To add new features or make changes to the project, follow these steps:
 
     In the code of the host application (`ctc-admin`), you can import and use the components or services provided by the new remote application as needed.
 
-NX Module Federation
---------------------
+
+### Setting Up Environment File
+
+To spin up the host application you will need to duplicate and rename the environment.ts.example file in the `cirrus-lms-fe-mono/apps/ctc-admin/ctc-admin-host/src/app/environments/` directory:
+
+`cp cirrus-lms-fe-mono/apps/ctc-admin/ctc-admin-host/src/app/environments/environment.ts.example cirrus-lms-fe-mono/apps/ctc-admin/ctc-admin-host/src/app/environments/environment.ts`
+
+
+
+## NX Module Federation
+
 
 NX Module Federation allows for the sharing of modules between different applications efficiently and without the need for code replication. This is achieved by defining remote applications that export specific modules and importing these modules into host applications. This promotes a modular architecture and facilitates maintenance and scalability of the project.
 

@@ -1,0 +1,94 @@
+@import '../../../../styles';
+
+.user-profile-navigation {
+  padding: 1.4rem;
+  z-index: 8;
+  display: none;
+}
+
+button.profile-menu {
+  background: none;
+  border: none;
+  color: $white;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  padding: 0;
+}
+
+.user {
+  display: none;
+  margin-right: 1.5rem;
+
+  .name {
+    font-size: 1.25rem;
+    font-weight: 500;
+    line-height: 1.5rem;
+  }
+
+  .ctc-location {
+    font-size: 0.875rem;
+    line-height: 1.438rem;
+    font-weight: 400;
+  }
+}
+
+
+nav.profile-links {
+  display: none;
+
+  .icon-wrapper {
+    width: 1.5rem;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-right: 1rem;
+  }
+
+  a {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0.75rem;
+    color: $black;
+    text-decoration: none;
+
+    &:hover {
+      background-color: $gray0;
+    }
+  }
+
+}
+
+
+@include breakpoint(sm) {
+
+  .user-profile-navigation {
+    display: block;
+
+    &.open nav.profile-links,
+    &.user-profile-navigation:hover nav.profile-links {
+      display: block;
+      position: absolute;
+      background-color: $white;
+      top: 5.62rem;
+      width: 234px;
+      right: 0;
+    }
+  }
+
+}
+
+@include breakpoint(lg) {
+
+  .user {
+    display: block;
+
+    &.open nav.profile-links,
+    &.user-profile-navigation:hover nav.profile-links {
+        top: 5.7rem;
+        right: 0;
+    }
+  }
+
+}
