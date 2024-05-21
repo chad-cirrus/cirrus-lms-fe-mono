@@ -4,13 +4,13 @@ import { ShellContainerComponent } from './components/shell-container.component'
 
 export const appRoutes: Route[] = [
   {
-    path: 'profile-page',
-    loadChildren: () => import('profile-page/Routes').then(m => m.remoteRoutes),
+    path: 'ctc-admin',
+    component: ShellContainerComponent,
   },
   {
-    path: '',
-    component: ShellContainerComponent
-  },
+    path: 'ctc-admin/profile-page',
+    loadChildren: () => import('profile-page/Routes').then(m => m.remoteRoutes)
+  }
 ];
 
 @NgModule({
