@@ -4,7 +4,8 @@
     "**/*"
   ],
   "plugins": [
-    "@nx"
+    "@nx",
+    "@nx/typescript"
   ],
   "overrides": [
     {
@@ -12,7 +13,8 @@
         "*.ts",
         "*.tsx",
         "*.js",
-        "*.jsx"
+        "*.jsx",
+        "*.css"
       ],
       "rules": {
         "@nx/enforce-module-boundaries": [
@@ -38,7 +40,8 @@
         "*.tsx"
       ],
       "extends": [
-        "plugin:@nx/typescript"
+        "plugin:@nx/typescript",
+        "plugin:@css/recommended"
       ],
       "rules": {}
     },
