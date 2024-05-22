@@ -1,18 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 import { RouterTestingModule } from '@angular/router/testing';
-import { HttpClientTestingModule } from "@angular/common/http/testing";
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [
-        RouterTestingModule.withRoutes([{ path: '', component: AppComponent }]),
-        HttpClientTestingModule
-      ],
-      declarations: [
-        AppComponent
-      ]
+      imports: [RouterTestingModule.withRoutes([{ path: '', component: AppComponent }]), HttpClientTestingModule],
+      declarations: [AppComponent],
     }).compileComponents();
   });
 
@@ -22,9 +17,9 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'redirector'`, () => {
+  it(`should have as title 'redeem'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('redirector');
+    expect(app.title).toEqual('redeem');
   });
 });

@@ -7,24 +7,22 @@ export const appRoutes: Route[] = [
   {
     path: '',
     redirectTo: 'redeem',
-    pathMatch: 'full'
+    pathMatch: 'full',
   },
   {
     path: 'redeem',
     component: AppComponent,
     children: [
       {
-        path: 'redemption/:code/redeem',
+        path: 'redeem/:code',
         component: RedeemComponent,
-      }
-    ]
-  }
+      },
+    ],
+  },
 ];
 
 @NgModule({
-  imports: [
-    RouterModule.forRoot(appRoutes, { initialNavigation: 'enabledBlocking' }),
-  ],
+  imports: [RouterModule.forRoot(appRoutes, { initialNavigation: 'enabledBlocking' })],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

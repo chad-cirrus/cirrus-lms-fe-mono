@@ -12,18 +12,8 @@ import { CommonModule } from '@angular/common';
 import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    RedeemComponent
-  ],
-  imports: [
-    CommonModule,
-    BrowserModule,
-    BrowserAnimationsModule,
-    HttpClientModule,
-    RouterModule,
-    AppRoutingModule
-  ],
+  declarations: [AppComponent, RedeemComponent],
+  imports: [CommonModule, BrowserModule, BrowserAnimationsModule, HttpClientModule, RouterModule, AppRoutingModule],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
@@ -34,10 +24,9 @@ import { AppRoutingModule } from './app-routing.module';
       provide: HTTP_INTERCEPTORS,
       useClass: HttpErrorInterceptor,
       multi: true,
-    }
+    },
   ],
   exports: [RedeemComponent],
   bootstrap: [AppComponent],
 })
-
 export class AppModule {}
