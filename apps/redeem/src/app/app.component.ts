@@ -1,5 +1,5 @@
 import { Component, enableProdMode } from '@angular/core';
-import { environment } from 'apps/redirector/src/environments/environment';
+import { environment } from 'apps/redeem/src/environments/environment';
 
 if (environment.production) {
   enableProdMode();
@@ -11,8 +11,7 @@ if (environment.production) {
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
-  title = 'redirector';
+  title = 'redeem';
 
-  constructor() {
-  }
+  constructor() {}
 }

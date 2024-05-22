@@ -28,11 +28,11 @@ jobs:
           source: 'apps/recent-activity/src/environments/environment.ts.example'
           target: 'apps/recent-activity/src/environments/environment.ts'
 
-      - name: Make Redirector test environment config available
+      - name: Make Redeem test environment config available
         uses: canastro/copy-file-action@master
         with:
-          source: 'apps/redirector/src/environments/environment.ts.example'
-          target: 'apps/redirector/src/environments/environment.ts'
+          source: 'apps/redeem/src/environments/environment.ts.example'
+          target: 'apps/redeem/src/environments/environment.ts'
 
       - name: Setup Node
         uses: actions/setup-node@v3
@@ -73,11 +73,11 @@ jobs:
           source: 'apps/recent-activity/src/environments/environment.ts.example'
           target: 'apps/recent-activity/src/environments/environment.ts'
 
-      - name: Make Redirector test environment config available
+      - name: Make Redeem test environment config available
         uses: canastro/copy-file-action@master
         with:
-          source: 'apps/redirector/src/environments/environment.ts.example'
-          target: 'apps/redirector/src/environments/environment.ts'
+          source: 'apps/redeem/src/environments/environment.ts.example'
+          target: 'apps/redeem/src/environments/environment.ts'
 
       - name: Install dependencies
         run: yarn install

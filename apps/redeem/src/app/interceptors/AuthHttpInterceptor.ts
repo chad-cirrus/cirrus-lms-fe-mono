@@ -1,21 +1,12 @@
-import {
-  HttpEvent,
-  HttpEventType,
-  HttpHandler,
-  HttpInterceptor,
-  HttpRequest,
-} from '@angular/common/http';
+import { HttpEvent, HttpEventType, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
 @Injectable()
 export class AuthHttpInterceptor implements HttpInterceptor {
-  intercept(
-    req: HttpRequest<any>,
-    next: HttpHandler
-  ): Observable<HttpEvent<any>> {
-    console.log("intercept");
+  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    console.log('intercept');
     const token = localStorage.getItem('cirrus-token');
 
     req = req.clone({
@@ -37,7 +28,7 @@ export class AuthHttpInterceptor implements HttpInterceptor {
             localStorage.setItem('cirrus-user', cirrusUser);
           }
         }
-      })
+      }),
     );
   }
 }

@@ -1,9 +1,9 @@
 /* eslint-disable */
 export default {
-  displayName: 'redirector',
+  displayName: 'redeem',
   preset: '../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
-  coverageDirectory: '../../coverage/apps/redirector',
+  coverageDirectory: '../../coverage/apps/redeem',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': [
       'jest-preset-angular',

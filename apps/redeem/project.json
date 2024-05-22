@@ -1,9 +1,9 @@
 {
-  "name": "redirector",
+  "name": "redeem",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
   "prefix": "app",
-  "sourceRoot": "apps/redirector/src",
+  "sourceRoot": "apps/redeem/src",
   "tags": [],
   "targets": {
     "build": {
@@ -11,17 +11,17 @@
       "outputs": ["{options.outputPath}"],
       "options": {
         "deployUrl": "/redeem/",
-        "outputPath": "dist/apps/redirector",
-        "index": "apps/redirector/src/index.html",
-        "main": "apps/redirector/src/main.ts",
+        "outputPath": "dist/apps/redeem",
+        "index": "apps/redeem/src/index.html",
+        "main": "apps/redeem/src/main.ts",
         "polyfills": ["zone.js"],
-        "tsConfig": "apps/redirector/tsconfig.app.json",
+        "tsConfig": "apps/redeem/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
-        "assets": ["apps/redirector/src/favicon.ico", "apps/redirector/src/assets"],
-        "styles": ["apps/redirector/src/styles.scss"],
+        "assets": ["apps/redeem/src/favicon.ico", "apps/redeem/src/assets"],
+        "styles": ["apps/redeem/src/styles.scss"],
         "scripts": [],
         "customWebpackConfig": {
-          "path": "apps/redirector/webpack.config.ts"
+          "path": "apps/redeem/webpack.config.ts"
         }
       },
       "configurations": {
@@ -40,7 +40,7 @@
           ],
           "outputHashing": "all",
           "customWebpackConfig": {
-            "path": "apps/redirector/webpack.prod.config.ts"
+            "path": "apps/redeem/webpack.prod.config.ts"
           }
         },
         "development": {
@@ -58,16 +58,16 @@
       "executor": "@nx/angular:dev-server",
       "options": {
         "port": 4208,
-        "proxyConfig": "apps/redirector/proxy.conf.js",
+        "proxyConfig": "apps/redeem/proxy.conf.js",
         "publicHost": "cirrusapproach.local/redirect",
         "disableHostCheck": true
       },
       "configurations": {
         "production": {
-          "buildTarget": "redirector:build:production"
+          "buildTarget": "redeem:build:production"
         },
         "development": {
-          "buildTarget": "redirector:build:development"
+          "buildTarget": "redeem:build:development"
         }
       },
       "defaultConfiguration": "development"
@@ -75,7 +75,7 @@
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
-        "buildTarget": "redirector:build"
+        "buildTarget": "redeem:build"
       }
     },
     "lint": {
@@ -85,7 +85,7 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "apps/redirector/jest.config.ts"
+        "jestConfig": "apps/redeem/jest.config.ts"
       }
     }
   }

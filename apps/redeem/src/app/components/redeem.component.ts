@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { RedemptionCodesService } from '../services/redemption-codes.service';
-import { environment } from 'apps/redirector/src/environments/environment';
+import { environment } from '../../environments/environment.prod';
 
 @Component({
   selector: 'app-redeem',
@@ -9,15 +9,10 @@ import { environment } from 'apps/redirector/src/environments/environment';
   styleUrl: './redeem.component.scss',
 })
 export class RedeemComponent implements OnInit {
-
   redemptionCode: string | null = '';
   message: string = '';
 
-  constructor(
-    private route: ActivatedRoute,
-    private redemptionCodesService: RedemptionCodesService
-    ) {
-  }
+  constructor(private route: ActivatedRoute, private redemptionCodesService: RedemptionCodesService) {}
 
   ngOnInit() {
     this.redemptionCode = this.route.snapshot.paramMap.get('code');
@@ -28,8 +23,8 @@ export class RedeemComponent implements OnInit {
       },
       err => {
         console.log('Error: ', err);
-        this.message = 'Invalid code.'
-      }
-    )
+        this.message = 'Invalid code.';
+      },
+    );
   }
 }
