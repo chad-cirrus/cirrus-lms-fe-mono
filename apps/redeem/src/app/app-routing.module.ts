@@ -14,7 +14,7 @@ export const appRoutes: Route[] = [
     component: AppComponent,
     children: [
       {
-        path: 'redeem/:code',
+        path: ':code',
         component: RedeemComponent,
       },
     ],
