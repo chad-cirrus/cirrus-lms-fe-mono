@@ -19,7 +19,7 @@ export class RedeemComponent implements OnInit {
 
     this.redemptionCodesService.redeemCode(this.redemptionCode).subscribe(
       res => {
-        window.location.href = `${environment.baseUrl + res['redirect_url']}`;
+        window.location.href = res['redirect_url'];
       },
       err => {
         console.log('Error: ', err);
