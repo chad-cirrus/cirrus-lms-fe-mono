@@ -10,10 +10,9 @@ import { RouterModule } from '@angular/router';
 import { RedeemComponent } from './components/redeem.component';
 import { CommonModule } from '@angular/common';
 import { AppRoutingModule } from './app-routing.module';
-import { NoopComponent } from './noop.component';
 
 @NgModule({
-  declarations: [AppComponent, RedeemComponent, NoopComponent],
+  declarations: [AppComponent, RedeemComponent],
   imports: [CommonModule, BrowserModule, BrowserAnimationsModule, HttpClientModule, RouterModule, AppRoutingModule],
   providers: [
     {

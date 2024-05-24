@@ -8,7 +8,6 @@ describe('NoopComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [NoopComponent],
-      declarations: [NoopComponent],
     }).compileComponents();
 
     fixture = TestBed.createComponent(NoopComponent);
