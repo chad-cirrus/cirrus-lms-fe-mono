@@ -1,0 +1,49 @@
+// Tabs
+.tabs {
+    background-color: $blue5;
+    padding: 1rem 2rem 0 2rem;
+    position: relative;
+
+    &:after {
+        content: '';
+        background-color: #36476A;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+        opacity: 0.5;
+    }
+
+    button {
+        background-color: transparent;
+        border: none;
+        color: $white;
+        padding: 1rem;
+        border-radius: 6px 6px 0 0;
+        font-size: 16px;
+        font-weight: 400;
+        position: relative;
+        z-index: 2;
+
+        &.active {
+            background-color: $blue2;
+            font-weight: 500;
+        }
+
+    }
+}
+
+.tab-contents {
+    background-color: $blue2;
+    padding: rem(36px);
+    color: $white;
+
+    .tab-content {
+        display: none;
+
+        &.active {
+            display: block;
+        }
+    }
+}
