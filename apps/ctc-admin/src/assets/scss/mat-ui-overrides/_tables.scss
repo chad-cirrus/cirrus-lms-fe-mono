@@ -1,0 +1,23 @@
+.mat-mdc-table {
+
+    background-color: transparent;
+
+    &.table-theme-light {
+        // Headers
+        .mat-mdc-header-row {
+            color: $gray1;
+        }
+        .mat-mdc-header-cell {
+            border-bottom-color: $whiteOnblue1_015;
+        }
+
+        // Rows & Cells
+        .mat-mdc-row {
+            color: $white;
+        }
+        .mat-mdc-cell {
+            border-bottom-color: $whiteOnblue1_015;
+        }
+        
+    }
+}

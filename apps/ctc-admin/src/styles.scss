@@ -1,1 +1,26 @@
 /* You can add global styles to this file, and also import other style files */
+@import 'assets/fonts/typography';
+@import 'assets/scss/imports';
+
+html {
+  height: 100%;
+  width: 100%;
+}
+*,
+*:after,
+*:before {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: $akzidenz;
+  height: 100vh;
+  overflow-y: scroll;
+}
+
+app-header-entry {
+  width: 100%;
+}
+
