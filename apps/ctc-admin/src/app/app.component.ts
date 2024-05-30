@@ -6,14 +6,13 @@ import { ICirrusUser } from '@cirrus/models';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit {
   title = 'ctc-admin';
   cirrusUser = JSON.parse(<string>localStorage.getItem('cirrus-user')) as ICirrusUser;
 
   ngOnInit(): void {
-
-    if(!this.userIsCTCAdmin()) {
-      // window.location.href = '/learning-catalog';
+    if (!this.userIsCTCAdmin()) {
+      window.location.href = '/learning-catalog';
     }
   }
   userIsCTCAdmin(): boolean {
