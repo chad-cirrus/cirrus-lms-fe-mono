@@ -1,17 +1,18 @@
 @import '../../../styles';
 
-:host {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  width: 100%;
-  height: 100%;
-}
-
 .page-content {
   display: flex;
   flex: auto;
   flex-direction: column;
+  margin-top: 61px;
+
+  
+  @include breakpoint(sm) {
+    margin-top: 84px;
+  }
+  @include breakpoint(lg) {
+    margin-left: 195px;
+  }
 }
 
 .ctc-profile-header {
