@@ -85,8 +85,45 @@
     }
 }
 
-:host ::ng-deep .primary-sidebar .user-profile-navigation {
-    @include breakpoint(md) {
+::ng-deep .primary-sidebar .user-profile-navigation {
+
+    position: absolute;
+    bottom: 0;
+    border-top: solid 1px $blue4;
+    width: 100%;
+
+    button.profile-menu {
+        width: 100%;
+        svg {
+            margin-left: auto;
+        }
+    }
+
+
+    &.active {
+        top: 0;
+        background: $blue2;
+        padding: 0;
+
+        .profile-menu,
+        .profile-links {
+            padding: 1.4rem;
+        }
+
+        .profile-links {
+            display: block;
+            height: 100%;
+            background-color: #fff;
+
+            a {
+                padding: 1rem 0;
+                border-bottom: 1px solid #D1D1D1
+            }
+        }
+    }
+
+
+    @include breakpoint(sm) {
         display: none;
     }
 }

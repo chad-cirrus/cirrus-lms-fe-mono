@@ -12,6 +12,44 @@
     align-items: center;
     justify-content: space-between;
   }
+
+  ::ng-deep app-user-profile-menu {
+    display: none;
+    
+    @include breakpoint(sm) {
+      display: block;
+      .user-profile-navigation {
+        display: block;
+  
+        &.open nav.profile-links,
+        &.user-profile-navigation:hover nav.profile-links {
+          display: block;
+          position: absolute;
+          background-color: $white;
+          top: 5.62rem;
+          width: 234px;
+          right: 0;
+        }
+      }
+  
+    }
+  
+    @include breakpoint(lg) {
+  
+      .user {
+        display: block;
+  
+        &.open nav.profile-links,
+        &.user-profile-navigation:hover nav.profile-links {
+            top: 5.7rem;
+            right: 0;
+        }
+      }
+  
+    }
+  
+  }
+  
 }
 
 .mobile-menu-toggle {
@@ -51,42 +89,3 @@
   }
 }
 
-
-
-
-app-user-profile-menu {
-  display: none;
-  
-  @include breakpoint(sm) {
-    display: block;
-    .user-profile-navigation {
-      display: block;
-
-      &.open nav.profile-links,
-      &.user-profile-navigation:hover nav.profile-links {
-        display: block;
-        position: absolute;
-        background-color: $white;
-        top: 5.62rem;
-        width: 234px;
-        right: 0;
-      }
-    }
-
-  }
-
-  @include breakpoint(lg) {
-
-    .user {
-      display: block;
-
-      &.open nav.profile-links,
-      &.user-profile-navigation:hover nav.profile-links {
-          top: 5.7rem;
-          right: 0;
-      }
-    }
-
-  }
-
-}
