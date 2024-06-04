@@ -34,7 +34,7 @@
   
     }
   
-    @include breakpoint(lg) {
+    @include breakpoint(md) {
   
       .user {
         display: block;
@@ -80,7 +80,7 @@
   }
 }
 
-@include breakpoint(lg) {
+@include breakpoint(md) {
   .logo {
     margin-left: 0;
   }
