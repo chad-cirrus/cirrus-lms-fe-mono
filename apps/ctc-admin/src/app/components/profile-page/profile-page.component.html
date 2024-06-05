@@ -13,12 +13,12 @@
 
     <div class="ctc-profile-page">
         <div class="tabs">
-            <button class="">Public Profile</button>
-            <button class="active">Operations</button>
+            <button class="active">Public Profile</button>
+            <button class="">Operations</button>
         </div>
 
         <div class="tab-contents">
-            <div class="tab-content">
+            <div class="tab-content active">
 
                 <div class="card">
                     <form id="training-center-details" action="/" method="post">
@@ -172,7 +172,7 @@
 
             </div>
 
-            <div class="tab-content active">
+            <div class="tab-content ">
 
                 <h4>Team</h4>
 
@@ -244,4 +244,94 @@
         </div>
     </div>
 
+</div>
+
+
+<div class="edit-drawer">
+
+    <header>
+        <button class="return">
+            <svg width="12" height="22" viewBox="0 0 12 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0.238227 10.625L0.775336 10.0879L10.1503 0.712891L10.7363 0.175781L11.8105 1.25L11.2734 1.83594L2.43549 10.625L11.2734 19.4629L11.8105 20L10.7363 21.123L10.1503 20.5859L0.775336 11.2109L0.238227 10.625Z" fill="white"/>
+            </svg>
+            <h3>Training Center Profile</h3>
+        </button>
+
+        <div class="drawer-controls">
+            <button class="cancel">Cancel</button>
+            <button class="update">Update</button>
+        </div>
+    </header>
+
+    <div class="tabs tabs-thin">
+        <button class="active">Courses</button>
+        <button class="">Training Platforms</button>
+    </div>
+
+    <div class="tab-contents">
+
+        <div class="tab-content active">
+            <form>
+                <div class="search-input">
+                    <input type="search" placeholder="search">
+                    <button type="submit">
+                        <svg width="15" height="16" viewBox="0 0 15 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M10.7812 6.96875C10.7812 5.29883 9.87305 3.77539 8.4375 2.92578C6.97266 2.07617 5.18555 2.07617 3.75 2.92578C2.28516 3.77539 1.40625 5.29883 1.40625 6.96875C1.40625 8.66797 2.28516 10.1914 3.75 11.041C5.18555 11.8906 6.97266 11.8906 8.4375 11.041C9.87305 10.1914 10.7812 8.66797 10.7812 6.96875ZM9.87305 11.7734C8.81836 12.5938 7.5 13.0625 6.09375 13.0625C2.72461 13.0625 0 10.3379 0 6.96875C0 3.62891 2.72461 0.875 6.09375 0.875C9.43359 0.875 12.1875 3.62891 12.1875 6.96875C12.1875 8.4043 11.6895 9.72266 10.8691 10.7773L14.502 14.4102L15 14.9082L14.0039 15.875L13.5059 15.377L9.87305 11.7441V11.7734Z" fill="#D1D1D1"/>
+                        </svg>
+                    </button>
+                </div>
+            </form>
+
+            <section>
+                <header>
+                    <h5>Specialty</h5>
+                    <button>
+                        <label>
+                            <input type="checkbox" > Select All
+                        </label>
+                    </button>
+                </header>
+
+                <ul class="checklist">
+                    <li>
+                        <label>
+                            <input type="checkbox" checked> Instrument Flight Procedures Course
+                        </label>
+                    </li>
+                    <li>
+                        <label>
+                            <input type="checkbox"> Perspective & Perspective+ Avionics Course
+                        </label>
+                    </li> 
+                </ul>
+            </section>
+
+            <section>
+                <header>
+                    <h5>Transition Courses</h5>
+                    <button>
+                        <label>
+                            <input type="checkbox" > Select All
+                        </label>
+                    </button>
+                </header>
+
+                <ul class="checklist">
+                    <li>
+                        <label>
+                            <input type="checkbox" checked> SR22TN Perspective Transition (VFR)
+                        </label>
+                    </li>
+                    <li>
+                        <label>
+                            <input type="checkbox"> SR22 Avidyne Entegra Transition (VFR)
+                        </label>
+                    </li> 
+                </ul>
+            </section>
+        </div>
+
+        <div class="tab-content"></div>
+
+    </div>
 </div>

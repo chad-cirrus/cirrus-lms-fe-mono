@@ -32,6 +32,30 @@
         }
 
     }
+
+
+
+    &.tabs-thin {
+        background-color: transparent;
+        border-bottom: solid 1px $gray1;
+
+        &:after {
+            content: none;
+            background-color: transparent;
+        }
+
+        button {
+            background-color: transparent;
+            color: $gray1;
+    
+            &.active {
+                background-color: transparent;
+                border-bottom: solid 2px #fff;
+                color: $white;
+            }
+    
+        }
+    }
 }
 
 .tab-contents {
