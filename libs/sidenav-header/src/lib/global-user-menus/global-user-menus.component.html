@@ -147,6 +147,13 @@
                 CTC Dashboard
               </div>
               <div
+                class="menu-item small"
+                routerLink="ctc-admin"
+                *ngIf="showNewCTCDashboard"
+              >
+                New CTC Dashboard
+              </div>
+              <div
                 class="menu-item small border-radius-bottom-fix"
                 routerLink="admin/dashboard"
                 *ngIf="showLMSDashboard"

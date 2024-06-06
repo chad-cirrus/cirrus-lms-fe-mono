@@ -2,10 +2,18 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { OverlayModule } from '@angular/cdk/overlay';
 import { ICirrusUser } from '@cirrus/models';
-import { NameToInitialsPipe } from '@cirrus/ui';
+import { FeatureFlagService, NameToInitialsPipe } from '@cirrus/ui';
 import { MockComponent } from 'ng-mocks';
 import { GlobalHeaderDropdownComponent } from '../global-header-dropdown/global-header-dropdown.component';
 import { GlobalUserMenusComponent } from './global-user-menus.component';
+import { of } from 'rxjs';
+
+class MockFeatureFlagService {
+  isFeatureEnabled() {
+    return of(false);
+  }
+}
+
 
 describe('GlobalUserMenusComponent', () => {
   let component: GlobalUserMenusComponent;
@@ -28,12 +36,11 @@ describe('GlobalUserMenusComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [
-        GlobalUserMenusComponent,
-        MockComponent(GlobalHeaderDropdownComponent),
-        NameToInitialsPipe,
+      declarations: [GlobalUserMenusComponent, MockComponent(GlobalHeaderDropdownComponent), NameToInitialsPipe],
+      providers: [
+        { provide: 'environment', useValue: environment },
+        { provide: FeatureFlagService, useClass: MockFeatureFlagService },
       ],
-      providers: [{ provide: 'environment', useValue: environment }],
       imports: [OverlayModule],
     }).compileComponents();
   });

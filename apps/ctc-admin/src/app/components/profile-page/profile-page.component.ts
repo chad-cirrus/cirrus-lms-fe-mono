@@ -44,4 +44,12 @@ export class ProfilePageComponent {
   //Mat table example (remove later)
   displayedColumns: string[] = ['name', 'role', 'phone', 'email', 'action'];
   dataSource = ELEMENT_DATA;
+  private activeTab: string = 'profile';
+  setActiveTab(tab: string) {
+    this.activeTab = tab;
+  }
+  isActiveTab(tab: string) : string {
+    return this.activeTab === tab ? 'active' : '';
+  }
+
 }
