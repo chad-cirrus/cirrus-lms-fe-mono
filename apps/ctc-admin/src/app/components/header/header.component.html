@@ -2,10 +2,16 @@
 
   <div class="wrapper">
 
-      <div class="mobile-menu-toggle">
-          <svg xmlns="http://www.w3.org/2000/svg" width="23" height="18" viewBox="0 0 23 18" fill="none">
+      <div [class.active]="isMobileMenuActive" class="mobile-menu-toggle" (click)="toggleMobileMenu()">
+          <svg class="open" xmlns="http://www.w3.org/2000/svg" width="23" height="18" viewBox="0 0 23 18" fill="none">
               <path d="M1.5 16.5H21.5M1.5 9H21.5M1.5 1.5H21.5" stroke="white" stroke-width="1.7" stroke-miterlimit="2.98325" stroke-linecap="round"/>
           </svg>
+
+          <svg class="close" width="26" height="23" viewBox="0 0 26 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <line x1="3.51461" y1="20.9087" x2="22.1463" y2="2.27694" stroke="white"/>
+            <line x1="4.22172" y1="2.12692" x2="22.8534" y2="20.7586" stroke="white"/>
+        </svg>
+            
       </div>
 
       <div class="logo">

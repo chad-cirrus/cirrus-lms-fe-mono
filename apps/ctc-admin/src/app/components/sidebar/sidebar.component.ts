@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { MobileMenuService } from '../../../../../../shared/services/mobile-menu.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-sidebar',
@@ -7,4 +9,23 @@ import { Component } from '@angular/core';
 })
 export class SidebarComponent {
 
+  isMobileMenuActive = false;
+  private subscription: Subscription;
+
+  constructor(private mobileMenuService: MobileMenuService) {
+    this.subscription = new Subscription(); // Initialize the subscription property
+  }
+
+  ngOnInit() {
+    this.subscription = this.mobileMenuService.mobileMenuActive$.subscribe(
+      (active) => {
+        this.isMobileMenuActive = active;
+      }
+    );
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
+  
 }

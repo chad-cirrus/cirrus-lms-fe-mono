@@ -13,6 +13,7 @@ import { ProfilePageComponent } from './components/profile-page/profile-page.com
 import { UserProfileMenuComponent } from './components/user-profile-menu/user-profile-menu.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatTableModule } from '@angular/material/table';
+import { MobileMenuService } from '../../../../shared/services/mobile-menu.service';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,9 @@ import { MatTableModule } from '@angular/material/table';
     AppRoutingModule,
     MatTableModule,
     MatCheckboxModule
+  ],
+  providers: [
+    MobileMenuService
   ],
   exports: [],
   bootstrap: [AppComponent],

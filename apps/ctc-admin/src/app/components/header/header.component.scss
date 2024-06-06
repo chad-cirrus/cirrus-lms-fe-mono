@@ -57,9 +57,23 @@
   position: absolute;
   right: 1.4rem;
   line-height: 1rem;
+  max-width: 1.5rem;
+  padding: 1rem 0;
 
   &:hover {
     cursor: pointer;
+  }
+
+  .close {
+    display: none;
+  }
+  &.active {
+    .open {
+      display: none;
+    }
+    .close {
+      display: block;
+    }
   }
 }
 
