@@ -58,7 +58,7 @@
       "executor": "@nx/angular:module-federation-dev-server",
       "options": {
         "port": 4204,
-        "publicHost": "http://cirrusapproach.local:4204",
+        "publicHost": "https://cirrusapproach.local:4204",
         "disableHostCheck": true
       },
       "configurations": {

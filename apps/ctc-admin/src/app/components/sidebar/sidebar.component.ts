@@ -7,7 +7,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss'
 })
-export class SidebarComponent {
+export class SidebarComponent implements OnInit, OnDestroy{
 
   isMobileMenuActive = false;
   private subscription: Subscription;
@@ -27,5 +27,5 @@ export class SidebarComponent {
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
-  
+
 }
