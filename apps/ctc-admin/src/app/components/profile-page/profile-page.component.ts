@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ITrainingCenter } from '../../models/ITrainingCenter';
+import { Subscription } from 'rxjs';
+import { CtcAdminService } from '../../app.service';
 
 export interface TableData {
   name: string;
@@ -38,9 +41,7 @@ const ELEMENT_DATA: TableData[] = [
   templateUrl: './profile-page.component.html',
   styleUrl: './profile-page.component.scss',
 })
-
-
-export class ProfilePageComponent {
+export class ProfilePageComponent implements OnInit, OnDestroy{
   //Mat table example (remove later)
   displayedColumns: string[] = ['name', 'role', 'phone', 'email', 'action'];
   dataSource = ELEMENT_DATA;
@@ -48,8 +49,19 @@ export class ProfilePageComponent {
   setActiveTab(tab: string) {
     this.activeTab = tab;
   }
-  isActiveTab(tab: string) : string {
+  isActiveTab(tab: string): string {
     return this.activeTab === tab ? 'active' : '';
   }
+  trainingCenter: ITrainingCenter = {} as ITrainingCenter;
+  private subscription: Subscription = new Subscription();
 
+  constructor(private ctcAdminService: CtcAdminService) {}
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();  }
+
+  ngOnInit(): void {
+    this.subscription = this.ctcAdminService.currentTrainingCenter.subscribe(data => {
+      this.trainingCenter = data;
+    });
+  }
 }

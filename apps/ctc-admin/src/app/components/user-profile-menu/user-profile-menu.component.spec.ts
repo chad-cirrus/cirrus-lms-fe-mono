@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { UserProfileMenuComponent } from './user-profile-menu.component';
+import { HttpClientModule } from '@angular/common/http';
 
 const _user = {
   admin: null,
@@ -40,6 +41,7 @@ describe('UserProfileMenuComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [HttpClientModule],
     })
     .compileComponents();
     window.localStorage.setItem('cirrus-user', JSON.stringify(_user));

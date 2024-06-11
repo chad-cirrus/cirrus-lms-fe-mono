@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
@@ -18,6 +18,8 @@ import { ActivityComponent } from './components/activity/activity.component';
 import { InstructorsComponent } from './components/instructors/instructors.component';
 import { ClientsComponent } from './components/clients/clients.component';
 import { NotificationsComponent } from './components/notifications/notifications.component';
+import { AuthHttpInterceptor } from './interceptors/AuthHttpInterceptor';
+import { HttpErrorInterceptor } from './interceptors/http-error.interceptor';
 
 @NgModule({
   declarations: [
@@ -42,7 +44,19 @@ import { NotificationsComponent } from './components/notifications/notifications
     MatTableModule,
     MatCheckboxModule,
   ],
-  providers: [MobileMenuService],
+  providers: [
+    MobileMenuService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthHttpInterceptor,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpErrorInterceptor,
+      multi: true,
+    },
+  ],
   exports: [HeaderComponent, SidebarComponent, UserProfileMenuComponent],
   bootstrap: [AppComponent],
 })

@@ -1,7 +1,7 @@
 export const environment = {
   production: true,
-  project: 'courses',
-  baseUrl: 'https://learning.cirrusapproach.com',
+  project: 'ctc-admin',
+  baseUrl: process.env['NX_BASE_URL'],
   profile: 'https://cirrusaircraft.com?app_name=Salesforce&option=oauthredirect&redirect_url=https%3A%2f%2fcirrusaircraft.com%2faccount%2fprofile',
   defaultLessonThumbnail:
     'https://cirrusapproachherokuprod.blob.core.windows.net/cirruslmsherokudevcontainer/content-items/images/default-lesson-thumbnail.jpg',
