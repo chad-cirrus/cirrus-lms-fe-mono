@@ -5,7 +5,6 @@ import { CdkConnectedOverlay } from '@angular/cdk/overlay';
 import { map, tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
 import { FeatureFlagService } from '@cirrus/ui';
 
 @Component({
@@ -35,8 +34,6 @@ export class GlobalUserMenusComponent implements OnInit {
 
   private _cirrusUser!: ICirrusUser;
   showDashboard = false;
-  showCTCDashboard = false;
-  showNewCTCDashboard = false;
   showLMSDashboard = false;
 
   private isLoggedIn = new BehaviorSubject(false);
@@ -47,8 +44,6 @@ export class GlobalUserMenusComponent implements OnInit {
   set cirrusUser(value: ICirrusUser) {
     this._cirrusUser = value;
     this.showDashboard = value && (value.ctc_admin || value.role === ROLE.admin || value.role === ROLE.super_admin);
-    this.showCTCDashboard = this.cirrusUser.ctc_admin;
-    this.showNewCTCDashboard = this.cirrusUser.ctc_admin;
     this.showLMSDashboard = this.cirrusUser.role === ROLE.admin || this.cirrusUser.role === ROLE.super_admin;
     // The null user has an id of zero and no real user will have an id lower than this
     this.isLoggedIn.next(value.id > 0);
@@ -99,11 +94,11 @@ export class GlobalUserMenusComponent implements OnInit {
   }
 
   shouldShowCTCLink() {
-    return this.showCTCDashboard && this._cirrusUser.ctc_admin;
+    return this.isFeatureFlagEnabled('ctc_admin') && this._cirrusUser.ctc_admin;
   }
 
   shouldShowNewCTCLink() {
-    return this.showNewCTCDashboard && this._cirrusUser.ctc_admin;
+    return this.isFeatureFlagEnabled('ctc_admin_2024') && this._cirrusUser.ctc_admin;
   }
 
   isFeatureFlagEnabled(featureName: string): Observable<boolean> {

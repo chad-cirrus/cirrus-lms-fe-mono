@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IOrder } from '@cirrus/models';
-import { FeatureFlagService } from '@cirrus/ui';
 import { Store } from '@ngrx/store';
 import { Observable, combineLatest } from 'rxjs';
-import { filter, map } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { fetchCourseOverview } from '../store/actions/course.actions';
 import { CourseState } from '../store/reducers/course.reducer';
 import { selectCirrusUser } from '../store/selectors/cirrus-user.selector';

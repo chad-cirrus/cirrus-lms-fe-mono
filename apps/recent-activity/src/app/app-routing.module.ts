@@ -33,6 +33,7 @@ const routes: Routes = [
           'help-center',
           'purchase-history',
           'ctc',
+          'ctc-admin',
           'admin',
           'student-dashboard',
           'training-partners',

@@ -142,14 +142,14 @@
               <div
                 class="menu-item small"
                 routerLink="ctc/dashboard"
-                *ngIf="showCTCDashboard"
+                *ngIf="shouldShowCTCLink()"
               >
                 CTC Dashboard
               </div>
               <div
                 class="menu-item small"
                 routerLink="ctc-admin/dashboard"
-                *ngIf="showNewCTCDashboard"
+                *ngIf="shouldShowNewCTCLink()"
               >
                 New CTC Dashboard
               </div>
