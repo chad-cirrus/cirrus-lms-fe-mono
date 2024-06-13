@@ -25,6 +25,28 @@
         }
       },
       "configurations": {
+        "staging": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "2mb",
+              "maximumError": "3mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "30kb",
+              "maximumError": "35kb"
+            }
+          ],
+          "fileReplacements": [
+            {
+              "replace": "apps/ctc-admin/src/environments/environment.ts",
+              "with": "apps/ctc-admin/src/environments/environment.staging.ts"
+            }
+          ],
+          "outputHashing": "all"
+        },
+
         "production": {
           "budgets": [
             {
@@ -36,6 +58,12 @@
               "type": "anyComponentStyle",
               "maximumWarning": "7kb",
               "maximumError": "10kb"
+            }
+          ],
+          "fileReplacements": [
+            {
+              "replace": "apps/ctc-admin/src/environments/environment.ts",
+              "with": "apps/ctc-admin/src/environments/environment.production.ts"
             }
           ],
           "outputHashing": "all",

@@ -22,6 +22,12 @@ jobs:
           source: 'apps/courses/src/environments/environment.ts.example'
           target: 'apps/courses/src/environments/environment.ts'
 
+      - name: Make CTC Admin test environment config available
+        uses: canastro/copy-file-action@master
+        with:
+          source: 'apps/ctc-admin/src/environments/environment.ts.example'
+          target: 'apps/ctc-admin/src/environments/environment.ts'
+
       - name: Make Recent Activity test environment config available
         uses: canastro/copy-file-action@master
         with:
@@ -78,6 +84,12 @@ jobs:
         with:
           source: 'apps/redeem/src/environments/environment.ts.example'
           target: 'apps/redeem/src/environments/environment.ts'
+
+      - name: Make CTC Admin test environment config available
+        uses: canastro/copy-file-action@master
+        with:
+          source: 'apps/ctc-admin/src/environments/environment.ts.example'
+          target: 'apps/ctc-admin/src/environments/environment.ts'
 
       - name: Install dependencies
         run: yarn install

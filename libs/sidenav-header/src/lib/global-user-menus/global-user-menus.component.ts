@@ -20,6 +20,8 @@ export class GlobalUserMenusComponent implements OnInit {
   @Output() impersonationLogout = new EventEmitter();
 
   private destroy$ = new Subject<void>();
+  profileUrl: string = '/';
+  flightDeckUrl: string = '/';
 
   isLeftVisible = true;
   showPanel$!: Observable<boolean>;
@@ -63,16 +65,16 @@ export class GlobalUserMenusComponent implements OnInit {
   private isPanelHidden$!: Observable<boolean>;
 
   private readonly environment: Record<string, unknown>;
-  get editProfileUrl() {
-    return this.environment['profile'];
-  }
 
   constructor(
     @Inject('environment') environment: Record<string, unknown>,
     private router: Router,
     private featureFlagService: FeatureFlagService,
   ) {
+
     this.environment = environment;
+    this.profileUrl = this.environment['profile'] as string;
+    this.flightDeckUrl = this.environment['flightDeckUrl'] as string;
   }
 
   ngOnInit(): void {

@@ -5,12 +5,15 @@ import { SidebarComponent } from './sidebar.component';
 describe('SidebarComponent', () => {
   let component: SidebarComponent;
   let fixture: ComponentFixture<SidebarComponent>;
+  let environment: Record<string, unknown> = {};
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+
+      providers: [{ provide: 'environment', useValue: environment }],
     })
     .compileComponents();
-    
+
     fixture = TestBed.createComponent(SidebarComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

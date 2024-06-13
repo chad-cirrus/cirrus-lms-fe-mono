@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { ICirrusUser } from '@cirrus/models';
 import { ITrainingCenter } from '../../models/ITrainingCenter';
 import { CtcAdminService } from '../../app.service';
@@ -13,8 +13,15 @@ export class UserProfileMenuComponent implements OnInit {
   cirrusUser = JSON.parse(<string>localStorage.getItem('cirrus-user')) as ICirrusUser;
   trainingCenter: ITrainingCenter = {} as ITrainingCenter;
   private subscription: Subscription = new Subscription();
+  profileUrl: string = '/';
+  flightDeckUrl: string = '/';
+  private readonly environment: Record<string, unknown>;
 
-  constructor(private ctcAdminService: CtcAdminService) {}
+  constructor(@Inject('environment') environment: Record<string, unknown>, private ctcAdminService: CtcAdminService) {
+    this.environment = environment;
+    this.profileUrl = this.environment['profile'] as string;
+    this.flightDeckUrl = this.environment['flightDeckUrl'] as string;
+  }
 
   ngoOnDestroy(): void {
     this.subscription.unsubscribe();

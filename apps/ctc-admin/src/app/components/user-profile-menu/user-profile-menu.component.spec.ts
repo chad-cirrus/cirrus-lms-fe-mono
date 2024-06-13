@@ -34,16 +34,17 @@ const _user = {
   },
 };
 
-
 describe('UserProfileMenuComponent', () => {
   let component: UserProfileMenuComponent;
+  const environment: Record<string, unknown> = {};
+
   let fixture: ComponentFixture<UserProfileMenuComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      providers: [{ provide: 'environment', useValue: environment }],
       imports: [HttpClientModule],
-    })
-    .compileComponents();
+    }).compileComponents();
     window.localStorage.setItem('cirrus-user', JSON.stringify(_user));
 
     fixture = TestBed.createComponent(UserProfileMenuComponent);
@@ -57,11 +58,4 @@ describe('UserProfileMenuComponent', () => {
     expect(component.userIsCTCAdmin).toBeTruthy();
     expect(component.getUserInitials()).toBe('BP');
   });
-
-
 });
-
-
-
-
-
