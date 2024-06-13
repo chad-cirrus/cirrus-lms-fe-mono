@@ -1,17 +1,3 @@
 @import '../../../styles';
 
-.page-content {
-  display: flex;
-  flex: auto;
-  flex-direction: column;
-  margin-top: 61px;
-
-
-  @include breakpoint(sm) {
-    margin-top: 84px;
-  }
-  @include breakpoint(md) {
-    margin-left: 195px;
-  }
-}
 

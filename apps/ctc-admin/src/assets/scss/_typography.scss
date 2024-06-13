@@ -41,6 +41,7 @@ h1 {
     font-family: $akzidenz-extended;
     font-size: rem(25px);
     line-height: rem(25px);
+    font-weight: 400;
     @include breakpoint(md) {
         font-size: rem(40px);
         line-height: rem(40px);

@@ -13,6 +13,7 @@ import { Subscription } from 'rxjs';
 export class DashboardComponent implements OnInit {
   title = 'CTC Dashboard';
   trainingCenter: ITrainingCenter = {} as ITrainingCenter;
+  backgroundHeroImages: any;
   private subscription: Subscription = new Subscription();
 
   constructor(private ctcAdminService: CtcAdminService) {}
@@ -21,6 +22,12 @@ export class DashboardComponent implements OnInit {
     this.subscription = this.ctcAdminService.currentTrainingCenter.subscribe(data => {
       this.trainingCenter = data;
     });
+
+    this.backgroundHeroImages = [
+      {
+        imagePath: 'ctc-admin/assets/images/ctc-dashboard-hero-background.jpg'
+      }
+    ]
   }
   ngoOnDestroy(): void {
     this.subscription.unsubscribe();

@@ -1,17 +1,228 @@
 @import '../../../styles';
 
 .page-content {
-  display: flex;
-  flex: auto;
-  flex-direction: column;
-  margin-top: 61px;
-
-
-  @include breakpoint(sm) {
-    margin-top: 84px;
-  }
-  @include breakpoint(md) {
-    margin-left: 195px;
-  }
+    background: linear-gradient(270deg, #11254F 43.04%, #233E77 100%);
 }
 
+
+.hero {
+    position: relative;
+    padding: 2.4rem 0.5rem;
+    @include breakpoint(md) {
+        padding: 2.4rem;
+    }
+}
+
+
+.cirrus-badge {
+    display: none;
+    position: absolute;
+    top: 2.4rem;
+    left: 2.4rem;
+
+    @include breakpoint(lg) {
+        display: block;
+    }
+}
+
+
+.hero-header {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    color: $white;
+    margin-top: 1rem;
+    margin-bottom: 6.667rem;
+    
+    @include breakpoint(md) {
+        margin-top: 8rem;
+        margin-bottom: 5.333rem;
+    }
+
+    h1.page-title {
+        margin: 0;
+        text-align: center;
+    }
+    .date {
+      font-family: $akzidenz-medium;
+      font-size: rem(20px);
+      margin-bottom: 1.2rem;
+    }
+}
+
+
+.cirrus-bucks {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+
+
+    .title {
+        font-weight: 500;
+        font-size: 1.067rem;
+        margin: 0 0 0.5rem;
+        color: $white;
+    }
+    .redemption-pill {
+        background-color: transparentize($white, 0.8);
+        position: relative;
+        padding: 0.5rem calc(98px + 2.2rem) 0.5rem 2rem;
+        border-radius: 3.8rem;
+
+        .amount {
+            color: $white;
+            margin: 0;
+            
+        }
+        .redeem-cirrus-bucks {
+            position: absolute;
+            right: 0.25rem;
+            top: 0.25rem;
+            background-color: $white;
+            color: $black;
+            height: 1.867rem;
+            padding: 0 1.5rem;
+            display: flex;
+            align-items: center;
+            border-radius: 3.8rem;
+            text-decoration: none;
+
+            font-weight: 500;
+            font-size: 1rem;
+
+            @include breakpoint(md) {
+              right: 0;
+              top: 0;
+              height: 100%;
+          }
+        }
+        
+    }
+
+    .account {
+        font-weight: 400;
+        font-size: 0.933rem;
+        margin: 0.25rem 0 0;
+        color: $white;
+    }
+}
+
+.hero-stats {
+    margin-top: 9.667rem;
+}
+
+
+
+.background-image-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    max-width: 100%;
+    z-index: 0;
+
+    img.background-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: none;
+
+        &.active {
+            display: block;
+        }
+    }
+
+    .background-image-overlay {
+        z-index: 2;
+        width: 100%;
+        height: 100%;
+        display: block;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        opacity: 0.2;
+        background: linear-gradient(180.44deg, rgba(17, 37, 79, 0) 19.44%, #11254F 76%, #11254F 96.57%);
+    }
+}
+
+.hero-content {
+    position: inherit;
+    margin-bottom: 6rem;
+}
+
+
+
+.stats {
+    list-style: none;
+    padding: 1rem 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    .stat-block {
+        text-align: center;
+        color: $white;
+        width: 100%;
+        max-width: calc(200px + (2.4rem * 2) );
+        padding: 1rem 2.4rem;
+
+        .data-value {
+            font-family: $akzidenz;
+            font-size: rem(30px);
+            line-height: rem(30px);
+            margin-bottom: rem(18px);
+        }
+        .data-description {
+            font-family: $akzidenz-medium;
+            font-size: rem(16px);
+            line-height: 1em;
+            margin-bottom: 1rem;
+        }
+
+        .data-change {
+            background-color: transparentize($white, 0.85);
+            border-radius: 50px;
+            padding: 0.5rem;
+            text-align: center;
+            font-family: $akzidenz;
+            font-size: rem(14px);
+            line-height: 1em;
+
+            span {
+                font-family: $akzidenz;
+                font-size: rem(14px);
+                line-height: 1em;
+                margin-right: 0.21rem;
+            }
+
+            &.change-positive {
+              color: $tealNeon;
+              svg path {
+                fill: $tealNeon;
+              }
+            }
+
+            &.change-up svg {
+              transform: rotate(180deg);
+            }
+        }
+
+        @include breakpoint(md) {
+            border-right: solid 1px transparentize($white, 0.8);
+
+            &:last-child {
+                border-right: none;
+            }
+        }
+    }
+
+    @include breakpoint(md) {
+        flex-direction: row;
+    }
+}
