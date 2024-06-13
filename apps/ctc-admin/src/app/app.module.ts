@@ -20,6 +20,7 @@ import { ClientsComponent } from './components/clients/clients.component';
 import { NotificationsComponent } from './components/notifications/notifications.component';
 import { AuthHttpInterceptor } from './interceptors/AuthHttpInterceptor';
 import { HttpErrorInterceptor } from './interceptors/http-error.interceptor';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,10 @@ import { HttpErrorInterceptor } from './interceptors/http-error.interceptor';
       provide: HTTP_INTERCEPTORS,
       useClass: HttpErrorInterceptor,
       multi: true,
+    },
+    {
+      provide: 'environment',
+      useValue: environment,
     },
   ],
   exports: [HeaderComponent, SidebarComponent, UserProfileMenuComponent],

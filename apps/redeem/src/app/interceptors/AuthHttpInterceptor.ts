@@ -6,7 +6,6 @@ import { tap } from 'rxjs/operators';
 @Injectable()
 export class AuthHttpInterceptor implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    console.log('intercept');
     const token = localStorage.getItem('cirrus-token');
 
     req = req.clone({

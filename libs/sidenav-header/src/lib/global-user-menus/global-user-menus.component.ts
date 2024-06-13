@@ -26,9 +26,6 @@ export class GlobalUserMenusComponent implements OnInit {
   isLeftVisible = true;
   showPanel$!: Observable<boolean>;
 
-  ctcAdmin$!: Observable<boolean>;
-  ctcAdmin2024$!: Observable<boolean>;
-
   private togglePanel = new BehaviorSubject(false);
   togglePanel$ = this.togglePanel.asObservable();
 
@@ -50,7 +47,6 @@ export class GlobalUserMenusComponent implements OnInit {
     // The null user has an id of zero and no real user will have an id lower than this
     this.isLoggedIn.next(value.id > 0);
   }
-
   get cirrusUser() {
     return this._cirrusUser;
   }
@@ -65,13 +61,14 @@ export class GlobalUserMenusComponent implements OnInit {
   private isPanelHidden$!: Observable<boolean>;
 
   private readonly environment: Record<string, unknown>;
+  ctcAdmin2024FeatureFlag = false;
+  ctcAdminFeatureFlag = false;
 
   constructor(
     @Inject('environment') environment: Record<string, unknown>,
     private router: Router,
     private featureFlagService: FeatureFlagService,
   ) {
-
     this.environment = environment;
     this.profileUrl = this.environment['profile'] as string;
     this.flightDeckUrl = this.environment['flightDeckUrl'] as string;
@@ -83,6 +80,12 @@ export class GlobalUserMenusComponent implements OnInit {
       tap(() => this.togglePanel.next(false)),
     );
     this.showPanel$ = merge(this.togglePanel$, this.isPanelHidden$);
+    this.featureFlagService.isFeatureEnabled('ctc_admin_2024').subscribe(isEnabled => {
+      this.ctcAdmin2024FeatureFlag = isEnabled && this._cirrusUser.ctc_admin;
+    });
+    this.featureFlagService.isFeatureEnabled('ctc_admin').subscribe(isEnabled => {
+      this.ctcAdminFeatureFlag = isEnabled && this._cirrusUser.ctc_admin;
+    });
   }
 
   toggleMenu() {
@@ -93,18 +96,6 @@ export class GlobalUserMenusComponent implements OnInit {
   ngOnDestroy() {
     this.destroy$.next();
     this.destroy$.complete();
-  }
-
-  shouldShowCTCLink() {
-    return this.isFeatureFlagEnabled('ctc_admin') && this._cirrusUser.ctc_admin;
-  }
-
-  shouldShowNewCTCLink() {
-    return this.isFeatureFlagEnabled('ctc_admin_2024') && this._cirrusUser.ctc_admin;
-  }
-
-  isFeatureFlagEnabled(featureName: string): Observable<boolean> {
-    return this.featureFlagService.isFeatureEnabled(featureName);
   }
 
   emitLogout() {

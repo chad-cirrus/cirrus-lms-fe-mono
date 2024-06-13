@@ -7,11 +7,9 @@ import { tap } from 'rxjs/operators';
 export class AuthHttpInterceptor implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const token = localStorage.getItem('cirrus-token');
-    console.log('AuthHttpInterceptor localStorage:', localStorage);
     req = req.clone({
       setHeaders: { Authorization: `Bearer ${token}` },
     });
-    console.log('AuthHttpInterceptor req:', req);
     return next.handle(req).pipe(
       tap(val => {
         if (val.type === HttpEventType.Response) {
@@ -27,7 +25,6 @@ export class AuthHttpInterceptor implements HttpInterceptor {
             localStorage.setItem('cirrus-user', cirrusUser);
           }
 
-          console.log('AuthHttpInterceptor response:', val);
         }
       }),
     );

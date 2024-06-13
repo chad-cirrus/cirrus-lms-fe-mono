@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ICirrusUser } from '@cirrus/models';
 import { CtcAdminService } from './app.service';
+import { environment } from '../environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -9,6 +10,8 @@ import { CtcAdminService } from './app.service';
 })
 export class AppComponent implements OnInit {
   title = 'ctc-admin';
+  project = environment.project;
+
   cirrusUser = JSON.parse(<string>localStorage.getItem('cirrus-user')) as ICirrusUser;
 
   constructor(private ctcAdminService: CtcAdminService) {
