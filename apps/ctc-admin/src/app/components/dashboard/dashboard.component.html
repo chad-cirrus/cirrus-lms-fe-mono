@@ -43,31 +43,31 @@
                 <path d="M152.356 46.4545V45.4343H158.205C158.886 45.4343 159.498 44.8222 159.498 44.142C159.498 43.4618 158.886 42.8497 158.205 42.8497H154.601C153.308 42.8497 152.288 41.8295 152.288 40.5371C152.288 39.2448 153.308 38.2246 154.601 38.2246H159.77V39.2448H154.601C153.92 39.2448 153.308 39.857 153.308 40.5371C153.308 41.2173 153.92 41.8295 154.601 41.8295H158.205C159.498 41.8295 160.518 42.8497 160.518 44.142C160.518 45.4343 159.498 46.4545 158.205 46.4545H152.356Z" fill="white"/>
             </svg>
         </div>
-        
+
         <div class="hero-content">
-            
+
             <div class="hero-header">
-                <div class="date">November 28, 2023</div>
-                <h1 class="page-title">KTYS Cirrus Dashboard</h1>
+                <div class="date">{{ getFormattedDate() }}</div>
+                <h1 class="page-title">{{trainingCenter.name}}</h1>
             </div>
 
             <div class="cirrus-bucks">
                 <h3 class="title">Cirrus Bucks</h3>
                 <div class="redemption-pill">
-                    <h3 class="amount">$2,342,889.02</h3>
+                    <h3 class="amount">{{getFormattedCirrusBucks()}}</h3>
                     <a class="redeem-cirrus-bucks" href="">Redeem</a>
                 </div>
-                <div class="account">Account: CB0077</div>
+                <div class="account">Account: {{trainingCenter?.cirrus_bucks?.customer_number}}</div>
             </div>
 
         </div>
-        
+
     </div>
 
     <div class="stats-slider">
 
         <ul class="stats">
-            
+
             <li class="stat-block">
                 <div class="data-value">32</div>
                 <div class="data-description">Courses Completed</div>
@@ -75,7 +75,7 @@
                     <span class="change-icon">
                         <svg width="9" height="9" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M7.92188 1.10352L2.05664 6.96875H6.70312C7.0332 6.96875 7.3125 7.24805 7.3125 7.57812C7.3125 7.93359 7.0332 8.1875 6.70312 8.1875H0.609375C0.253906 8.1875 0 7.93359 0 7.57812V1.48438C0 1.1543 0.253906 0.875 0.609375 0.875C0.939453 0.875 1.21875 1.1543 1.21875 1.48438V6.13086L7.08398 0.265625C7.3125 0.0117188 7.69336 0.0117188 7.92188 0.265625C8.17578 0.494141 8.17578 0.875 7.92188 1.10352Z" fill="white"/>
-                        </svg>                            
+                        </svg>
                     </span>
                     <span class="change-value">10%</span>
                     from last 30 days
@@ -89,7 +89,7 @@
                     <span class="change-icon ">
                         <svg width="9" height="9" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M7.92188 1.10352L2.05664 6.96875H6.70312C7.0332 6.96875 7.3125 7.24805 7.3125 7.57812C7.3125 7.93359 7.0332 8.1875 6.70312 8.1875H0.609375C0.253906 8.1875 0 7.93359 0 7.57812V1.48438C0 1.1543 0.253906 0.875 0.609375 0.875C0.939453 0.875 1.21875 1.1543 1.21875 1.48438V6.13086L7.08398 0.265625C7.3125 0.0117188 7.69336 0.0117188 7.92188 0.265625C8.17578 0.494141 8.17578 0.875 7.92188 1.10352Z" fill="white"/>
-                        </svg>                            
+                        </svg>
                     </span>
                     <span class="change-value">20%</span>
                     from last 30 days
@@ -103,7 +103,7 @@
                     <span class="change-icon">
                         <svg width="9" height="9" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M7.92188 1.10352L2.05664 6.96875H6.70312C7.0332 6.96875 7.3125 7.24805 7.3125 7.57812C7.3125 7.93359 7.0332 8.1875 6.70312 8.1875H0.609375C0.253906 8.1875 0 7.93359 0 7.57812V1.48438C0 1.1543 0.253906 0.875 0.609375 0.875C0.939453 0.875 1.21875 1.1543 1.21875 1.48438V6.13086L7.08398 0.265625C7.3125 0.0117188 7.69336 0.0117188 7.92188 0.265625C8.17578 0.494141 8.17578 0.875 7.92188 1.10352Z" fill="white"/>
-                        </svg>                            
+                        </svg>
                     </span>
                     <span class="change-value">10%</span>
                     from last 30 days
@@ -117,7 +117,7 @@
                     <span class="change-icon">
                         <svg width="9" height="9" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M7.92188 1.10352L2.05664 6.96875H6.70312C7.0332 6.96875 7.3125 7.24805 7.3125 7.57812C7.3125 7.93359 7.0332 8.1875 6.70312 8.1875H0.609375C0.253906 8.1875 0 7.93359 0 7.57812V1.48438C0 1.1543 0.253906 0.875 0.609375 0.875C0.939453 0.875 1.21875 1.1543 1.21875 1.48438V6.13086L7.08398 0.265625C7.3125 0.0117188 7.69336 0.0117188 7.92188 0.265625C8.17578 0.494141 8.17578 0.875 7.92188 1.10352Z" fill="white"/>
-                        </svg>                            
+                        </svg>
                     </span>
                     <span class="change-value">15%</span>
                     from last 30 days

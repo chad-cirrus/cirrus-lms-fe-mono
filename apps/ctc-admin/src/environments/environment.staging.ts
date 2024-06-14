@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  project: 'courses',
+  project: 'ctc-admin',
   baseUrl: 'https://lmsstage.cirrusapproach.com',
   profile:
     'https://cirrusaircraft.com?app_name=Salesforce&option=oauthredirect&redirect_url=https%3A%2f%2fcirrusaircraft.com%2faccount%2fprofile',
