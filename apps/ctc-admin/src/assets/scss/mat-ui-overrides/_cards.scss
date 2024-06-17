@@ -2,6 +2,40 @@
 .card {
     background-color: $blue1;
     border-radius: 8px;
-    padding: rem(18px) rem(36px) rem(24px);
+    padding: 1.2rem 0.6rem;
+    
     margin: 2rem 0;
+
+    .card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        color: $white;
+        padding: 0 0.5rem;
+
+        .card-title {
+            margin: 0;
+        }
+
+        .card-controls {
+            display: flex;
+            flex-direction: row;
+        }
+
+        .card-action{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 0 0 1rem;
+            cursor: pointer;
+        }
+    }
+
+    .card-content {
+        margin-top: 1rem;
+    }
+
+    @include breakpoint(md) {
+        padding: rem(18px) rem(36px) rem(24px);
+    }
 }

@@ -3,13 +3,21 @@ import { CtcAdminService } from '../../app.service';
 import { ITrainingCenter } from '../../models/ITrainingCenter';
 import { Observable, of } from 'rxjs';
 import { DashboardComponent } from './dashboard.component';
+import { MatSelectModule } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { ReactiveFormsModule } from '@angular/forms';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { jest } from '@jest/globals';
-
 
 describe('DashboardComponent', () => {
   let component: DashboardComponent;
   let fixture: ComponentFixture<DashboardComponent>;
+
+  let fixtureSelectMenu: DashboardComponent;
+  let componentSelectMenu: ComponentFixture<DashboardComponent>;
+
   let trainingCenter: ITrainingCenter = {
     "name": "Gold Standard Aviation - KOPF",
     "incepts_on": "2013-09-10",
@@ -70,15 +78,44 @@ describe('DashboardComponent', () => {
     TestBed.configureTestingModule({
       declarations: [DashboardComponent],
       providers: [{ provide: CtcAdminService, useValue: ctcAdminServiceMock }],
-      imports: [HttpClientTestingModule],
+      imports: [
+        HttpClientTestingModule,
+        NoopAnimationsModule,
+        MatFormFieldModule,
+        MatSelectModule,
+        ReactiveFormsModule,
+      ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
     // Move the TestBed.overrideProvider code block before TestBed.createComponent
     TestBed.overrideProvider(CtcAdminService, { useValue: ctcAdminServiceMock });
     fixture = TestBed.createComponent(DashboardComponent);
   });
+  
+  // beforeEach(async () => {
+  //   await TestBed.configureTestingModule({
+  //     declarations: [DashboardComponent],
+  //     imports: [
+  //       NoopAnimationsModule,
+  //       MatFormFieldModule,
+  //       MatSelectModule,
+  //       ReactiveFormsModule,
+  //     ],
+  //     schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  //   }).compileComponents();
+
+  //   fixtureSelectMenu = TestBed.createComponent(DashboardComponent);
+  //   componentSelectMenu = fixtureSelectMenu.componentInstance;
+  //   fixtureSelectMenu.detectChanges();
+  // });
+
+  // it('should create', () => {
+  //   expect(fixtureSelectMenu).toBeTruthy();
+  // });
 
   afterEach(() => {
     fixture.destroy();
+    // fixtureSelectMenu.destroy();
   });
 
 

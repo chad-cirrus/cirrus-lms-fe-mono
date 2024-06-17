@@ -18,6 +18,9 @@ import { ActivityComponent } from './components/activity/activity.component';
 import { InstructorsComponent } from './components/instructors/instructors.component';
 import { ClientsComponent } from './components/clients/clients.component';
 import { NotificationsComponent } from './components/notifications/notifications.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { NgApexchartsModule } from 'ng-apexcharts';
 import { AuthHttpInterceptor } from './interceptors/AuthHttpInterceptor';
 import { HttpErrorInterceptor } from './interceptors/http-error.interceptor';
 import { environment } from '../environments/environment';
@@ -44,6 +47,9 @@ import { environment } from '../environments/environment';
     AppRoutingModule,
     MatTableModule,
     MatCheckboxModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    NgApexchartsModule,
   ],
   providers: [
     MobileMenuService,

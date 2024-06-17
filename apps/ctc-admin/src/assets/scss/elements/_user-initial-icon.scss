@@ -1,5 +1,5 @@
 .user-initials {
-  background: $userPink;
+  background-color: $userPink;
   border-radius: 10rem;
   width: 2.8rem;
   height: 2.8rem;
@@ -9,4 +9,8 @@
   line-height: 1rem;
   margin-right: 1rem;
   font-size: 1.25rem;
+
+  &.--icon-purple {
+    background-color: $userPurple;
+  }
 }

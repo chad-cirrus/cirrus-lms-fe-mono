@@ -227,3 +227,213 @@
         flex-direction: row;
     }
 }
+
+
+
+.section-title {
+    background: linear-gradient(270deg, $blue2 43.04%, $blue1 100%);
+    padding: 1rem 0 1rem 2.4rem;
+    color: $white;
+    margin-top: 0;
+
+    font-family: $akzidenz-extended;
+    font-weight: 400;
+    font-size: rem(20px);
+    line-height: rem(24px);
+    @include breakpoint(lg) {
+        font-size: rem(25px);
+        line-height: rem(30px);
+    }
+}
+
+.card-title {
+    display: flex;
+    align-items: center;
+
+    font-family: $akzidenz;
+    font-size: rem(18px);
+    line-height: rem(24px);
+}
+.live-status-icon {
+    height: 9px;
+    width: 9px;
+    background-color: #FF3939;
+    display: inline-block;
+    border-radius: 100%;
+    margin-left: rem(10px);
+}
+
+.card-content {
+    overflow: auto;
+}
+table {
+
+    .mat-mdc-cell {
+        padding: 1rem;
+    }
+    .row {
+        display: flex;
+        align-items: center;
+    }
+    button {
+        font-size: rem(14px);
+        background-color: transparent;
+        border: solid 1px $gray5;
+        border-radius: rem(20px);
+        color: $white;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: rem(10px) rem(15px);
+        line-height: 1em;
+        margin-left: auto;
+        cursor: pointer;
+    
+        svg {
+            margin-right: 0.6rem;
+        }
+    }
+
+    .user-name {
+        font-family: $akzidenz-medium;
+        font-weight: 500;
+        font-size: rem(15px);
+        line-height: rem(20px);
+
+        .user-initials {
+            height: 30px;
+            width: 30px;
+            font-family: $akzidenz-medium;
+            font-weight: 500;
+            font-size: rem(14px);
+            line-height: 1em;
+        }
+    }
+    
+}
+
+.mat-mdc-table.table-theme-light .mat-mdc-header-cell {
+    border-bottom: none;
+    padding: 1rem 1rem 1.5rem;
+}
+
+.horizontal-100-chart {
+    color: $white;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    border-bottom: solid 1px transparentize($color: $white, $amount: 0.8);
+    padding: 1rem 0.5rem;
+
+    flex-direction: column;
+
+    &:last-child {
+        border-bottom: none;
+    }
+    .chart-description {
+        
+        font-family: $akzidenz;
+        font-size: rem(15px);
+        line-height: rem(22px);
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        flex-direction: row;
+        padding-bottom: 0.9333rem;
+
+        .data-type-name {}
+        .chart-totals {
+            color: $gray1;
+
+        }
+
+        @include breakpoint(md) {
+            width: 12rem;
+            flex-direction: column;
+            padding-bottom: 0;
+        }
+    }
+
+    .horizontal-100-chart-data {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        border-radius: 4px;
+        overflow: hidden;
+
+        .data-block {
+            display: flex;
+            align-items: center;
+            padding: 1rem 0.5rem;
+            min-width: 5rem;
+
+            @include breakpoint(md) {
+                padding: 1rem 1rem;
+            }
+
+            &:has(.data-label) {
+                min-width: 9rem;
+            }
+            
+
+            & > div {
+                margin-right: 0.36rem;
+            }
+
+            .icon {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                
+
+                svg {
+                    max-height: rem(16px);
+                    @include breakpoint(md) {
+                        max-height: 1.2rem;
+                    }
+                }
+
+                
+            }
+
+            .data-block-total{
+                font-family: $akzidenz;
+                font-weight: 400;
+                font-size: rem(15px);
+                line-height: 1em;
+                padding-top: 0.125rem;
+
+                @include breakpoint(md) {
+                    font-size: rem(20px);
+                }
+            }
+            .data-label{
+                font-family: $akzidenz;
+                font-weight: 400;
+                font-size: rem(13px);
+                line-height: 1em;
+                padding-top: 0.15rem;
+            }
+            
+            &.--data-block-color-blue1 {
+                background: $statBlue1;
+            }
+            &.--data-block-color-blue2 {
+                background: $statBlue2;
+            }
+            &.--data-block-color-blue3 {
+                background: $statBlue3;
+            }
+            &.--data-block-color-gray {
+                background: $gray;
+            }
+        }
+    }
+
+    @include breakpoint(md) {
+        flex-direction: row;
+    }
+}

@@ -37,7 +37,7 @@ $akzidenz-extended: 'akzidenz-extended', Helvetica, Verdana, sans-serif;
 
 
 // Headings
-h1 {
+h1,.h1 {
     font-family: $akzidenz-extended;
     font-size: rem(25px);
     line-height: rem(25px);
@@ -47,7 +47,7 @@ h1 {
         line-height: rem(40px);
     }
 }
-h2 {
+h2,.h2 {
     font-family: $akzidenz-extended;
     font-size: rem(24px);
     line-height: rem(24px);
@@ -56,7 +56,7 @@ h2 {
         line-height: rem(30px);
     }
 }
-h3 {
+h3,.h3 {
     font-family: $akzidenz-extended;
     font-size: rem(20px);
     line-height: rem(20px);
@@ -65,7 +65,7 @@ h3 {
         line-height: rem(24px);
     }
 }
-h4 {
+h4,.h4 {
     font-family: $akzidenz-medium;
     font-size: rem(20px);
     line-height: rem(24px);

@@ -20,11 +20,11 @@ export interface ITrainingCenter {
     email: string;
   };
   shipping_address: {
-    street: string;
-    city: string;
-    state: string;
-    country: string;
-    postal_code: string;
+    street: string | null;
+    city: string | null;
+    state: string | null;
+    country: string | null;
+    postal_code: string | null;
   };
   insurance: {
     company: string;
@@ -35,6 +35,6 @@ export interface ITrainingCenter {
   };
   cirrus_bucks: {
     balance: number;
-    customer_number: string;
+    customer_number: string | null;
   };
 }
