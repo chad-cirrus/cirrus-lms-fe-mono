@@ -7,6 +7,7 @@ import { ICourses } from './models/ICourses';
 import { IAddressState } from './models/IAddressState';
 
 const states = [
+  { name: 'Please Choose', abbreviation: '--' },
   { name: 'Alabama', abbreviation: 'AL' },
   { name: 'Alaska', abbreviation: 'AK' },
   { name: 'Arizona', abbreviation: 'AZ' },

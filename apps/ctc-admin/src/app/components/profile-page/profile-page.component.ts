@@ -76,14 +76,11 @@ export class ProfilePageComponent implements OnInit, OnDestroy {
       this.trainingCenter = data;
     });
 
-    this.subscription = this.ctcAdminService.currentTrainingCenter.subscribe(data => {
-      this.trainingCenter = data;
-    });
-
     this.coursesOffered$ = this.ctcAdminService.getCoursesOffered().subscribe(data => {
       this.coursesOffered = data;
       this.loadCategoryList(this.coursesOffered);
     });
+
     this.states = this.ctcAdminService.getStateList();
   }
 

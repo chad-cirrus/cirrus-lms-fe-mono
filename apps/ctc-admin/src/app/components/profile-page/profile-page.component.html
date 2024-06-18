@@ -73,10 +73,10 @@
 
             <div class="input-group">
               <label for="address-state">State</label>
-                <select [(ngModel)]="trainingCenter.shipping_address.state" name="address-state">
+              <select [(ngModel)]="trainingCenter.shipping_address.state" name="address-state">
                 <option *ngFor="let state of states" [value]="state.abbreviation">{{ state.name }}</option>
-                </select>
-              </div>
+              </select>
+            </div>
 
             <div class="input-group">
               <label for="address-zip">Zip Code</label>
@@ -95,10 +95,7 @@
           </header>
 
           <ul class="training-platform-list">
-            <li>SR20</li>
-            <li>SR22</li>
-            <li>SR 22T</li>
-            <li>Vision Jet</li>
+            <li *ngFor="let qualification of trainingCenter.qualifications">{{ qualification }}</li>
           </ul>
         </div>
 
