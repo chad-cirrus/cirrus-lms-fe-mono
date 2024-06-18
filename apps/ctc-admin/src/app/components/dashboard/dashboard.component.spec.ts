@@ -15,9 +15,6 @@ describe('DashboardComponent', () => {
   let component: DashboardComponent;
   let fixture: ComponentFixture<DashboardComponent>;
 
-  let fixtureSelectMenu: DashboardComponent;
-  let componentSelectMenu: ComponentFixture<DashboardComponent>;
-
   let trainingCenter: ITrainingCenter = {
     "name": "Gold Standard Aviation - KOPF",
     "incepts_on": "2013-09-10",
@@ -91,31 +88,9 @@ describe('DashboardComponent', () => {
     TestBed.overrideProvider(CtcAdminService, { useValue: ctcAdminServiceMock });
     fixture = TestBed.createComponent(DashboardComponent);
   });
-  
-  // beforeEach(async () => {
-  //   await TestBed.configureTestingModule({
-  //     declarations: [DashboardComponent],
-  //     imports: [
-  //       NoopAnimationsModule,
-  //       MatFormFieldModule,
-  //       MatSelectModule,
-  //       ReactiveFormsModule,
-  //     ],
-  //     schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  //   }).compileComponents();
-
-  //   fixtureSelectMenu = TestBed.createComponent(DashboardComponent);
-  //   componentSelectMenu = fixtureSelectMenu.componentInstance;
-  //   fixtureSelectMenu.detectChanges();
-  // });
-
-  // it('should create', () => {
-  //   expect(fixtureSelectMenu).toBeTruthy();
-  // });
 
   afterEach(() => {
     fixture.destroy();
-    // fixtureSelectMenu.destroy();
   });
 
 
