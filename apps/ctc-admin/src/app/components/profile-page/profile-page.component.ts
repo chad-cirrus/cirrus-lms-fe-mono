@@ -56,7 +56,7 @@ export class ProfilePageComponent implements OnInit, OnDestroy {
   trainingCenter: ITrainingCenter = {} as ITrainingCenter;
   private subscription: Subscription = new Subscription();
   coursesOffered: ICourses | undefined = undefined;
-  categoryList: [{ key: string; value: string[] }] = [{} as { key: string; value: string[] }];
+  categoryList: { key: string; value: string[] }[] = [{} as { key: string; value: string[] }];
   coursesOffered$: Subscription = new Subscription();
 
   constructor(private ctcAdminService: CtcAdminService) {}
@@ -78,6 +78,7 @@ export class ProfilePageComponent implements OnInit, OnDestroy {
 
     this.coursesOffered$ = this.ctcAdminService.getCoursesOffered().subscribe(data => {
       this.coursesOffered = data;
+      this.categoryList = [{} as { key: string; value: string[] }];
       this.loadCategoryList(this.coursesOffered);
     });
 
@@ -106,6 +107,7 @@ export class ProfilePageComponent implements OnInit, OnDestroy {
    * @param courses - The courses offered.
    */
   loadCategoryList(courses: ICourses) {
+    this.categoryList = [{} as { key: string; value: string[] }];
     if (this.coursesOffered?.courses) {
       this.coursesOffered.courses.forEach(element => {
         element.course_categories.forEach(category => {

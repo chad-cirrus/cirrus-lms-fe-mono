@@ -103,8 +103,12 @@
           <header>
             <h5 class="subhead">Courses Offered</h5>
           </header>
-
-          <div class="row">
+          <div class="row" *ngIf="categoryList.entries.length <= 0">
+            <h6 class="subhead-small">No Courses Have Been Added</h6>
+            <p>Add the default courses offered at your CTC that you want to suggest your clients to enroll and train in with your CTC</p>
+            <button class="cta-btn">+ Add Course</button>
+          </div>
+          <div class="row" *ngIf="categoryList.length > 0">
             <div class="column">
               <section *ngFor="let category of categoryList">
                 <h6 class="subhead-small">{{ category.key }}</h6>
