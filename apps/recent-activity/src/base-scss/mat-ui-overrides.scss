@@ -1011,3 +1011,23 @@ apx-chart .apexcharts-toolbar {
   }
 }
 
+
+/**
+ * Mobile Menu Notification Icon
+ */
+.mat-mdc-menu-panel .mobile-menu-link-wrapper {
+  cirrus-badge .mat-badge-medium.mat-badge-after .mat-badge-content {
+      left: -0.75rem;
+      right: initial;
+  }
+}
+
+/**
+ * Recent Activity - Cart Notification Icon
+ */
+.shopping-cart-icon-wrapper {
+  cirrus-badge .mat-badge-medium.mat-badge-after .mat-badge-content.mat-badge-active {
+    top: 0;
+    right: initial;
+  }
+}
