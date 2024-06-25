@@ -6,6 +6,8 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { ICirrusUser } from '@cirrus/models';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'cirrus-global-hamburger-menu',
@@ -29,5 +31,10 @@ export class GlobalHamburgerMenuComponent {
 
   showNotifications() {
     this.toggleNotificationsMenu.emit();
+  }
+
+  constructor(private router: Router) { }
+  isRecentActivityPage(): boolean {
+    return this.router.url.includes('/recent-activity');
   }
 }

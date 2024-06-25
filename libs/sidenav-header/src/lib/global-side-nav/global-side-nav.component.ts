@@ -12,6 +12,7 @@ import { ICirrusUser } from '@cirrus/models';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { map, takeUntil } from 'rxjs/operators';
 import { SidenavHeaderService } from '../sidenav-header.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'cirrus-global-side-nav',
@@ -35,7 +36,12 @@ export class GlobalSideNavComponent implements OnInit, OnDestroy {
   currentUrl = '';
   instructorStudentsUrl = 'instructor/dashboard';
 
-  constructor(private breakpointObserver: BreakpointObserver, private sidenavService: SidenavHeaderService) {}
+  constructor(private breakpointObserver: BreakpointObserver, private sidenavService: SidenavHeaderService, private router: Router) {}
+
+  isRecentActivityPage(): boolean {
+    return this.router.url.includes('/recent-activity');
+  }
+
 
   ngOnInit(): void {
     this.breakpointObserver

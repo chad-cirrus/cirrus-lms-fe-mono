@@ -16,7 +16,7 @@
 </div>
 
 <mat-menu #menu="matMenu" backdropClass="mat-ui-menu-override">
-  <div class="menu-wrapper">
+  <div class="menu-wrapper" [ngClass]="{'menu-wrapper': true, 'recent-activity-menu': isRecentActivityPage()}">
     <div
       *ngIf="!isLoggedIn"
       class="image-container mobile-menu-link-wrapper"

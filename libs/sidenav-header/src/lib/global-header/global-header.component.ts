@@ -7,6 +7,7 @@ import {
 } from '@angular/core';
 import { ICirrusUser } from '@cirrus/models';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
 selector: 'cirrus-global-header',
@@ -41,6 +42,11 @@ export class GlobalHeaderComponent {
 
   openHamburgerMenu() {
     this.hamburgerMenu.emit('dksjfkajsf');
+  }
+
+  constructor(private router: Router) { }
+  isRecentActivityPage(): boolean {
+    return this.router.url.includes('/recent-activity');
   }
 
   checkoutState() {
