@@ -129,6 +129,320 @@
 
     </div>
 
+
+    
+    <div class="instructors">
+        <h4 class="section-title">Instructors</h4>
+
+        <div class="container">
+
+            <div class="card instructor-stats">
+
+                <div class="card-header">
+                    <h4 class="card-title">Stats</h4>
+                    <div class="card-controls">
+                        <div class="card-action" data-card-action="refresh">
+                            <svg width="13" height="12" viewBox="0 0 13 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12.5938 0.640625V4.70312C12.5938 5.05859 12.3145 5.3125 11.9844 5.3125H7.92188C7.56641 5.3125 7.3125 5.05859 7.3125 4.70312C7.3125 4.37305 7.56641 4.09375 7.92188 4.09375H10.4609C9.69922 2.64648 8.17578 1.65625 6.5 1.65625C4.01172 1.65625 2.03125 3.66211 2.03125 6.125C2.03125 8.61328 4.01172 10.5938 6.5 10.5938C7.54102 10.5938 8.55664 10.2383 9.34375 9.57812C9.59766 9.34961 9.97852 9.40039 10.207 9.6543C10.4102 9.9082 10.3848 10.2891 10.1309 10.5176C9.11523 11.3555 7.82031 11.8125 6.47461 11.8125C3.35156 11.8125 0.8125 9.27344 0.8125 6.125C0.8125 3.00195 3.35156 0.462891 6.47461 0.462891C8.50586 0.462891 10.3594 1.55469 11.375 3.23047V0.640625C11.375 0.310547 11.6289 0.03125 11.9844 0.03125C12.3145 0.03125 12.5938 0.310547 12.5938 0.640625Z" fill="white"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-content">
+
+                    <div class="charts-wrapper">
+                        <div class="chart-wrapper">
+                            <apx-chart
+                                [series]="chartOptionsTci.series ? chartOptionsTci.series : []"
+                                [chart]="chartOptionsTci.chart ? chartOptionsTci.chart : { type: 'donut' }"
+                                [labels]="chartOptionsTci.labels ? chartOptionsTci.labels : []"
+                                [responsive]="chartOptionsTci.responsive ? chartOptionsTci.responsive : []"
+                                [title]="chartOptionsTci.title ? chartOptionsTci.title : {}"
+                                [dataLabels]="chartOptionsTci.dataLabels ? chartOptionsTci.dataLabels : {}"
+                                [plotOptions]="chartOptionsTci.plotOptions ? chartOptionsTci.plotOptions : {}"
+                                [stroke]="chartOptionsTci.stroke ? chartOptionsTci.stroke : {}"
+                                [colors]="chartOptionsTci.colors ? chartOptionsTci.colors : {}"
+                                [legend]="chartOptionsTci.legend ? chartOptionsTci.legend : {}"
+                            ></apx-chart>
+                        </div>
+                        
+
+                        <div class="chart-wrapper">
+                            <apx-chart
+                                [series]="chartOptionsFlightHours.series ? chartOptionsFlightHours.series : []"
+                                [chart]="chartOptionsFlightHours.chart ? chartOptionsFlightHours.chart : { type: 'donut' }"
+                                [labels]="chartOptionsFlightHours.labels ? chartOptionsFlightHours.labels : []"
+                                [responsive]="chartOptionsFlightHours.responsive ? chartOptionsFlightHours.responsive : []"
+                                [title]="chartOptionsFlightHours.title ? chartOptionsFlightHours.title : {}"
+                                [dataLabels]="chartOptionsFlightHours.dataLabels ? chartOptionsFlightHours.dataLabels : {}"
+                                [plotOptions]="chartOptionsFlightHours.plotOptions ? chartOptionsFlightHours.plotOptions : {}"
+                                [stroke]="chartOptionsFlightHours.stroke ? chartOptionsFlightHours.stroke : {}"
+                                [colors]="chartOptionsFlightHours.colors ? chartOptionsFlightHours.colors : {}"
+                                [legend]="chartOptionsTci.legend ? chartOptionsTci.legend : {}"
+                            ></apx-chart>
+                        </div>
+                        
+
+                        <div class="chart-wrapper">
+                            <apx-chart
+                                [series]="chartOptionsDualGiven.series ? chartOptionsDualGiven.series : []"
+                                [chart]="chartOptionsDualGiven.chart ? chartOptionsDualGiven.chart : { type: 'donut' }"
+                                [labels]="chartOptionsDualGiven.labels ? chartOptionsDualGiven.labels : []"
+                                [responsive]="chartOptionsDualGiven.responsive ? chartOptionsDualGiven.responsive : []"
+                                [title]="chartOptionsDualGiven.title ? chartOptionsDualGiven.title : {}"
+                                [dataLabels]="chartOptionsDualGiven.dataLabels ? chartOptionsDualGiven.dataLabels : {}"
+                                [plotOptions]="chartOptionsDualGiven.plotOptions ? chartOptionsDualGiven.plotOptions : {}"
+                                [stroke]="chartOptionsDualGiven.stroke ? chartOptionsDualGiven.stroke : {}"
+                                [colors]="chartOptionsDualGiven.colors ? chartOptionsDualGiven.colors : {}"
+                                [legend]="chartOptionsTci.legend ? chartOptionsTci.legend : {}"
+                            ></apx-chart>
+
+                        </div>
+                        
+
+                        <div class="chart-wrapper">
+                            <apx-chart
+                                [series]="chartOptionsRecurrentstatus.series ? chartOptionsRecurrentstatus.series : []"
+                                [chart]="chartOptionsRecurrentstatus.chart ? chartOptionsRecurrentstatus.chart : { type: 'donut' }"
+                                [labels]="chartOptionsRecurrentstatus.labels ? chartOptionsRecurrentstatus.labels : []"
+                                [responsive]="chartOptionsRecurrentstatus.responsive ? chartOptionsRecurrentstatus.responsive : []"
+                                [title]="chartOptionsRecurrentstatus.title ? chartOptionsRecurrentstatus.title : {}"
+                                [dataLabels]="chartOptionsRecurrentstatus.dataLabels ? chartOptionsRecurrentstatus.dataLabels : {}"
+                                [plotOptions]="chartOptionsRecurrentstatus.plotOptions ? chartOptionsRecurrentstatus.plotOptions : {}"
+                                [stroke]="chartOptionsRecurrentstatus.stroke ? chartOptionsRecurrentstatus.stroke : {}"
+                                [colors]="chartOptionsRecurrentstatus.colors ? chartOptionsRecurrentstatus.colors : {}"
+                                [legend]="chartOptionsTci.legend ? chartOptionsTci.legend : {}"
+                            ></apx-chart>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="card-footer"></div>
+            </div>
+
+            <div class="instructor-card-columns">
+
+                <div class="card instructor-active-clients">
+
+                    <div class="card-header">
+                        <h4 class="card-title">Active Clients per Instructor</h4>
+                    </div>
+                    <div class="card-content">
+                        <div class="scrollable-table">
+                            <table mat-table [dataSource]="instructorActiveClientsTableData" class="mat-elevation-z8 table-theme-light table-instructor-active-clients" matSort>
+                                <ng-container matColumnDef="instructors">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Instructors </th>
+                                    <td mat-cell *matCellDef="let element" >
+                                        <div class="row instructors">
+                                            <div class="user-initials --icon-orange --small --collapsable">{{ element.instructors | initials }}</div>
+                                            {{element.instructors}}
+                                        </div>
+                                    </td>
+                                </ng-container>
+                                <ng-container matColumnDef="clients" >
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="clients-count"> Clients </th>
+                                    <td mat-cell *matCellDef="let element" class="clients-count"> {{element.clients}} </td>
+                                </ng-container>
+
+                                <tr mat-header-row *matHeaderRowDef="displayedColumnsActiveClientsPerInstructor"></tr>
+                                <tr mat-row *matRowDef="let row; columns: displayedColumnsActiveClientsPerInstructor;"></tr>
+                            </table>
+                        </div>
+        
+
+                    </div>
+                    <div class="card-footer"></div>
+                </div>
+                
+                <div class="card instructor-client-connections">
+
+                    <div class="card-header">
+                        <h4 class="card-title">Client Connections</h4>
+                        <div class="card-controls">
+                            <div class="card-action" data-card-action="refresh">
+                                <svg width="13" height="14" viewBox="0 0 13 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M12.6191 0.675781C12.7715 0.751953 12.873 0.853516 12.9492 1.00586C12.9746 1.08203 13 1.1582 13 1.23438V4.89062C13 5.24609 12.7207 5.5 12.3906 5.5C12.0352 5.5 11.7812 5.24609 11.7812 4.89062V2.70703L8.35352 6.13477C8.09961 6.38867 7.71875 6.38867 7.49023 6.13477C7.23633 5.90625 7.23633 5.52539 7.49023 5.27148L10.918 1.84375H8.73438C8.37891 1.84375 8.125 1.58984 8.125 1.23438C8.125 0.904297 8.37891 0.625 8.73438 0.625H12.3906C12.4668 0.625 12.543 0.650391 12.6191 0.675781ZM0.355469 13.5996C0.203125 13.5234 0.101562 13.3965 0.0253906 13.2695C0 13.1934 0 13.1172 0 13.0156V9.35938C0 9.0293 0.253906 8.75 0.609375 8.75C0.939453 8.75 1.21875 9.0293 1.21875 9.35938V11.5684L4.64648 8.14062C4.875 7.88672 5.25586 7.88672 5.48438 8.14062C5.73828 8.36914 5.73828 8.75 5.48438 8.97852L2.05664 12.4062H4.26562C4.5957 12.4062 4.875 12.6855 4.875 13.0156C4.875 13.3711 4.5957 13.625 4.24023 13.625H0.609375C0.507812 13.625 0.431641 13.625 0.355469 13.5996Z" fill="white"/>
+                                </svg>                                    
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-content scrollable">
+                        <ul class="client-connections">
+                            
+                            <li class="client-connection">
+                                <div class="row">
+                                    <div class="client-data">
+                                        <div class="user-initials --icon-orange --small --collapsable">{{ 'Name From Property' | initials }}</div>
+                                        <div class="client-user-name">$(client_user_name)</div>
+                                    </div>
+                                    <div class="connection-event-time">$(Time Ago / Time / Date)</div>
+                                </div>
+                                <div class="row">
+                                    <div class="">Assigned To: <a href="#">$(assigned_to_user_name)</a></div>
+                                    <div class="connection-event-action">
+                                        <div class="connection-status-label">$(status)</div>
+                                    </div>
+                                </div>
+                            </li> 
+
+                            <li class="client-connection">
+                                <div class="row">
+                                    <div class="client-data">
+                                        <div class="user-initials --icon-orange --small --collapsable">{{ 'Terry Blandnesher' | initials }}</div>
+                                        <div class="client-user-name">Terry Blandnesher</div>
+                                    </div>
+                                    <div class="connection-event-time">5 min ago</div>
+                                </div>
+                                <div class="row">
+                                    <div class="">Assigned To: <a href="#">Justin Walter</a></div>
+                                    <div class="connection-event-action">
+                                        <div class="connection-status-label --label-pending">Pending</div>
+                                    </div>
+                                </div>
+                            </li>
+
+
+                            <li class="client-connection">
+                                <div class="row">
+                                    <div class="client-data">
+                                        <div class="user-initials --icon-orange --small --collapsable">{{ 'Terry Blandnesher' | initials }}</div>
+                                        <div class="client-user-name">Terry Blandnesher</div>
+                                    </div>
+                                    <div class="connection-event-time">5 min ago</div>
+                                </div>
+                                <div class="row">
+                                    <div class="">Assigned To: <a href="#">Justin Walter</a></div>
+                                    <div class="connection-event-action">
+                                        <div class="connection-status-label --label-pending">Pending</div>
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li class="client-connection">
+                                <div class="row">
+                                    <div class="client-data">
+                                        <div class="user-initials --icon-orange --small --collapsable">{{ 'Terry Blandnesher' | initials }}</div>
+                                        <div class="client-user-name">Terry Blandnesher</div>
+                                    </div>
+                                    <div class="connection-event-time">5 min ago</div>
+                                </div>
+                                <div class="row">
+                                    <div class="">Assigned To: <a href="#">Justin Walter</a></div>
+                                    <div class="connection-event-action">
+                                        <div class="connection-status-label --label-accepted">Accepted</div>
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li class="client-connection">
+                                <div class="row">
+                                    <div class="client-data">
+                                        <div class="user-initials --icon-orange --small --collapsable">{{ 'Terry Blandnesher' | initials }}</div>
+                                        <div class="client-user-name">Terry Blandnesher</div>
+                                    </div>
+                                    <div class="connection-event-time">5 min ago</div>
+                                </div>
+                                <div class="row">
+                                    <div class="">Requested: <a href="#">KYTS CTC</a></div>
+                                    <div class="connection-event-action">
+                                        <div class="connection-status-label --label-connect">Connect</div>
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li class="client-connection">
+                                <div class="row">
+                                    <div class="client-data">
+                                        <div class="user-initials --icon-orange --small --collapsable">{{ 'Terry Blandnesher' | initials }}</div>
+                                        <div class="client-user-name">Terry Blandnesher</div>
+                                    </div>
+                                    <div class="connection-event-time">5 min ago</div>
+                                </div>
+                                <div class="row">
+                                    <div class="">Assigned To: <a href="#">Justin Walter</a></div>
+                                    <div class="connection-event-action">
+                                        <div class="connection-status-label --label-remind">Remind</div>
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li class="client-connection">
+                                <div class="row">
+                                    <div class="client-data">
+                                        <div class="user-initials --icon-orange --small --collapsable">{{ 'Terry Blandnesher' | initials }}</div>
+                                        <div class="client-user-name">Terry Blandnesher</div>
+                                    </div>
+                                    <div class="connection-event-time">5 min ago</div>
+                                </div>
+                                <div class="row">
+                                    <div class="">Assigned To: <a href="#">Justin Walter</a></div>
+                                    <div class="connection-event-action">
+                                        <div class="connection-status-label --label-pending">Pending</div>
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li class="client-connection">
+                                <div class="row">
+                                    <div class="client-data">
+                                        <div class="user-initials --icon-orange --small --collapsable">{{ 'Terry Blandnesher' | initials }}</div>
+                                        <div class="client-user-name">Terry Blandnesher</div>
+                                    </div>
+                                    <div class="connection-event-time">5 min ago</div>
+                                </div>
+                                <div class="row">
+                                    <div class="">Assigned To: <a href="#">Justin Walter</a></div>
+                                    <div class="connection-event-action">
+                                        <div class="connection-status-label --label-pending">Pending</div>
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li class="client-connection">
+                                <div class="row">
+                                    <div class="client-data">
+                                        <div class="user-initials --icon-orange --small --collapsable">{{ 'Terry Blandnesher' | initials }}</div>
+                                        <div class="client-user-name">Terry Blandnesher</div>
+                                    </div>
+                                    <div class="connection-event-time">5 min ago</div>
+                                </div>
+                                <div class="row">
+                                    <div class="">Assigned To: <a href="#">Justin Walter</a></div>
+                                    <div class="connection-event-action">
+                                        <div class="connection-status-label --label-pending">Pending</div>
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li class="client-connection">
+                                <div class="row">
+                                    <div class="client-data">
+                                        <div class="user-initials --icon-orange --small --collapsable">{{ 'Terry Blandnesher' | initials }}</div>
+                                        <div class="client-user-name">Terry Blandnesher</div>
+                                    </div>
+                                    <div class="connection-event-time">5 min ago</div>
+                                </div>
+                                <div class="row">
+                                    <div class="">Assigned To: <a href="#">Justin Walter</a></div>
+                                    <div class="connection-event-action">
+                                        <div class="connection-status-label --label-pending">Pending</div>
+                                    </div>
+                                </div>
+                            </li>
+
+                        </ul>
+                    </div>
+                    <div class="card-footer"></div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    
+
     <div class="assessments">
         <h4 class="section-title">Assessments</h4>
 

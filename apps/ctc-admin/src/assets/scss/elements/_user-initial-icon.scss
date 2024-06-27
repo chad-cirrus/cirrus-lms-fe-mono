@@ -13,4 +13,36 @@
   &.--icon-purple {
     background-color: $userPurple;
   }
+  &.--icon-orange {
+    background-color: $userOrange;
+  }
+
+  &.--small {
+    height: 25px;
+    width: 25px;
+    font-family: $akzidenz-medium;
+    font-weight: 500;
+    font-size: rem(12px);
+    line-height: 1em;
+    margin-right: 0.63rem;
+  }
+
+  &.--collapsable {
+    height: 15px;
+    width: 15px;
+    color: transparent;
+    font-size: 0px;
+    @include breakpoint(lg) {
+        color: $white;
+        width: 2.8rem;
+        height: 2.8rem;
+        font-size: 1.25rem;
+
+        &.--small {
+          height: 25px;
+          width: 25px;
+          font-size: rem(12px);
+        }
+    }
+  }
 }

@@ -10,6 +10,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { jest } from '@jest/globals';
+import { InitialsPipe } from '../../pipes/initials.pipe';
 
 describe('DashboardComponent', () => {
   let component: DashboardComponent;
@@ -73,7 +74,7 @@ describe('DashboardComponent', () => {
       currentTrainingCenter: of(trainingCenter),
     };
     TestBed.configureTestingModule({
-      declarations: [DashboardComponent],
+      declarations: [DashboardComponent, InitialsPipe],
       providers: [{ provide: CtcAdminService, useValue: ctcAdminServiceMock }],
       imports: [
         HttpClientTestingModule,

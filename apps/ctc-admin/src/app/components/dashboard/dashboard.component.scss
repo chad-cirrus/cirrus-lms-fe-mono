@@ -265,6 +265,8 @@
 
 .card-content {
     overflow: auto;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
 }
 table {
 
@@ -274,6 +276,9 @@ table {
     .row {
         display: flex;
         align-items: center;
+    }
+    .clients-count {
+        text-align: center;
     }
     button {
         font-size: rem(14px);
@@ -299,15 +304,6 @@ table {
         font-weight: 500;
         font-size: rem(15px);
         line-height: rem(20px);
-
-        .user-initials {
-            height: 30px;
-            width: 30px;
-            font-family: $akzidenz-medium;
-            font-weight: 500;
-            font-size: rem(14px);
-            line-height: 1em;
-        }
     }
     
 }
@@ -435,5 +431,165 @@ table {
 
     @include breakpoint(md) {
         flex-direction: row;
+    }
+}
+
+
+
+.instructor-card-columns {
+    display: flex;
+    align-items: flex-start;
+    justify-self: flex-start;
+    flex-direction: column;
+    .card {
+        width: 100%;
+
+        .scrollable {
+            max-height: 512px;
+            overflow: auto;
+        }
+    
+        .scrollable-table {
+            height: 512px;
+            overflow: auto;
+        
+            table {
+                border-collapse: collapse;
+            }
+            /* Set header to stick to the top of the container. */
+            .mat-mdc-table.table-theme-light .mat-mdc-header-cell {
+                position: sticky;
+                top: 0;
+            }
+            th {
+                background-color: $blue1;
+            }
+        }
+    }
+    
+
+    @include breakpoint(lg) {
+        flex-direction: row;
+        .card.instructor-client-connections {
+            max-width: 420px;
+            margin-left: 2rem;
+        }
+    }
+}
+.client-connections {
+    color: $white;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    font-size: rem(14px);
+
+    .client-connection {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        flex-direction: column;
+        border-bottom: solid 1px rgba(255, 255, 255, 0.15);
+        padding: 1rem 0.5rem;
+
+        .client-data {
+            display: flex;
+            align-items: center;
+        }
+
+        .client-user-status {
+            height: 0.75rem;
+            width: 0.75rem;
+            border-radius: 100%;
+            &.--dot-warning {
+                background-color: $userOrange;
+                margin-top: 0.4rem;
+                margin-right: 0.5rem;
+            }
+        }
+
+        .client-user-name {
+            font-size: rem(15px);
+            font-family: $akzidenz-medium;
+            font-weight: 500;
+        }
+
+        a {
+            color: $white;
+        }
+
+        .connection-event-time {
+            font-size: rem(14px);
+            text-align: right;
+            line-height: 1em;
+            margin-bottom: 0.5rem;
+        }
+
+        .connection-status-label {
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 24px;
+            font-size: rem(14px);
+            padding: 0.05rem 1rem;
+
+            &.--label-pending {
+                background-color: $blue4;
+            }
+            &.--label-accepted {
+                background-color: $white;
+                color: $blue1;
+            }
+            &.--label-remind, 
+            &.--label-connect {
+                border: solid 1px $white;
+                cursor: pointer;
+            }
+        }
+        
+    }
+
+    .row {
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        align-items: center;
+
+        &:last-child {
+            margin-top: 0.5rem;
+        }
+    }
+}
+
+.charts-wrapper {
+    display: flex;
+    padding: 1rem 0;
+    flex-direction: column;
+
+    @include breakpoint(md) {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+}
+
+.chart-wrapper {
+    width: 100%;
+    @include breakpoint(md) {
+        width: 50%;
+    }
+    @include breakpoint(lg) {
+        width: 25%;
+    }
+
+    &:last-child {
+        border-top: solid 1px transparentize($color: #fff, $amount: .85);
+        margin-top: 1.5rem;
+
+        @include breakpoint(md) {
+            border-top: none;
+            margin-top: 0;
+        }
+        @include breakpoint(lg) {
+            border-left: solid 1px transparentize($color: #fff, $amount: .85);
+        }
     }
 }

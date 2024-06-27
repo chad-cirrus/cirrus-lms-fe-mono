@@ -24,6 +24,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { AuthHttpInterceptor } from './interceptors/AuthHttpInterceptor';
 import { HttpErrorInterceptor } from './interceptors/http-error.interceptor';
 import { environment } from '../environments/environment';
+import { NgApexchartsModule } from 'ng-apexcharts';
+import { InitialsPipe } from './pipes/initials.pipe';
 
 @NgModule({
   declarations: [
@@ -37,6 +39,7 @@ import { environment } from '../environments/environment';
     InstructorsComponent,
     ClientsComponent,
     NotificationsComponent,
+    InitialsPipe,
   ],
   imports: [
     CommonModule,
@@ -50,6 +53,7 @@ import { environment } from '../environments/environment';
     FormsModule,
     MatFormFieldModule,
     MatSelectModule,
+    NgApexchartsModule
   ],
   providers: [
     MobileMenuService,
