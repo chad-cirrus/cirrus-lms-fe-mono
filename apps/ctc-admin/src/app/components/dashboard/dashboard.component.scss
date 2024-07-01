@@ -230,6 +230,11 @@
 
 
 
+.dashboard-section {
+    margin-bottom: 2rem;
+}
+
+
 .section-title {
     background: linear-gradient(270deg, $blue2 43.04%, $blue1 100%);
     padding: 1rem 0 1rem 2.4rem;
@@ -339,7 +344,6 @@ table {
         flex-direction: row;
         padding-bottom: 0.9333rem;
 
-        .data-type-name {}
         .chart-totals {
             color: $gray1;
 
@@ -436,7 +440,8 @@ table {
 
 
 
-.instructor-card-columns {
+.instructor-card-columns,
+.client-card-columns {
     display: flex;
     align-items: flex-start;
     justify-self: flex-start;
@@ -465,12 +470,19 @@ table {
                 background-color: $blue1;
             }
         }
+
+        @include breakpoint(lg) {
+            &:first-child {
+                margin-right: 0;
+            }
+        }
     }
     
 
     @include breakpoint(lg) {
         flex-direction: row;
-        .card.instructor-client-connections {
+        .card.instructor-client-connections,
+        .card.client-achievements {
             max-width: 420px;
             margin-left: 2rem;
         }
@@ -592,4 +604,204 @@ table {
             border-left: solid 1px transparentize($color: #fff, $amount: .85);
         }
     }
+}
+
+
+.stalled-coursework-cards {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    .stalled-coursework-card {
+        background-color: transparentize($color: #fff, $amount: 0.92);
+        border-radius: rem(8px);
+        padding: 1rem;
+        color: #fff;
+        width: 100%;
+        margin: 0 1rem 0 0;
+
+        &:last-child {
+            margin-right: 0;
+        }
+
+        &:hover {
+            background-color: transparentize($color: #fff, $amount: 0.85);
+            .card-controls {
+                @include breakpoint(lg) {
+                    opacity: 1;
+                }
+            }
+        }
+
+        &.--theme-danger {
+            .activity-pill .pill-content {
+                background-color: #FF3939B2;
+            }
+
+            .card-footer .data {
+                color: #E52900;
+            }
+        }
+        &.--theme-warning {
+            .activity-pill .pill-content {
+                background-color: #FE8511B2;
+            }
+            .card-footer .data {
+                color: #FE8511;
+            }
+        }
+
+        .user-name,
+        .course {
+            font-family: $akzidenz-medium;
+            font-weight: 500;
+        }
+
+        .card-controls {
+            @include breakpoint(lg) {
+                opacity: 0;
+            }
+        }
+
+
+        .activity-pill {
+            display: inline-block;
+            margin-bottom: 1rem;
+
+            svg {
+                margin-right: 0.5rem;
+            }
+
+            .pill-content {
+                border: none;
+                border-radius: 1rem;
+                padding: 0.36rem 0.9rem;
+                display: flex;
+                align-items: center;
+                justify-content: flex-start;
+                line-height: 1em;
+            }
+        }
+
+        .card-footer {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            margin-top: 1rem;
+            padding: 0 0.5rem;
+            font-family: $akzidenz-medium;
+            font-weight: 500;
+            font-size: rem(14px);
+            margin-top: 2rem;
+
+            .divider {
+                display: block;
+                background-color: #fff;
+                height: 4px;
+                width: 4px;
+                margin: 0 0.5rem;
+            }
+        }
+    }
+
+}
+
+.client-achievements .date {
+    color: $gray1;
+    line-height: 1em;
+}
+.client-achievement-cards {
+    color: $white;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    .client-achievement-card {
+        background-color: transparentize($color: #fff, $amount: 0.92);
+        padding: 1rem;
+        border-radius: 4px;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        margin: 0.6rem 0;
+
+        &:hover {
+            background-color: transparentize($color: #fff, $amount: 0.85);
+            .card-controls {
+                @include breakpoint(lg) {
+                    opacity: 1;
+                }
+            }
+        }
+
+        .card-content {
+            margin-top: 0.5rem;
+            overflow: visible;
+        }
+        .badge {
+            margin-right: 1rem;
+        }
+        .card-details {
+            width: 100%;
+        }
+        .user-name {
+            font-family: $akzidenz-medium;
+            font-weight: 500;
+        }
+        .achievement-action {
+            font-size: rem(14px);
+            line-height: rem(20px);
+            color: $gray1;
+        }
+        .card-controls {
+            @include breakpoint(lg) {
+                opacity: 0;
+            }
+        }
+    }
+    
+
+    .achievement-progress {
+        display: flex;
+        align-items: center;
+        margin-top: 0.5rem;
+    }
+    .achievement-progress-data {
+        font-size: rem(12px);
+        font-family: $akzidenz-medium;
+        font-weight: 500;
+        line-height: 1em;
+    }
+    .achievement-progress-bar {
+        background-color: transparentize($color: #fff, $amount: 0.8);
+        width: 100%;
+        height: 9px;
+        margin-left: 1rem;
+        border-radius: 30px;
+        overflow: hidden;   
+
+        .achievement-progress-bar-progress {
+            background-color: #fff;
+            height: 9px;
+        }
+    }
+}
+
+.card.client-achievements > .card-content section {
+    margin-bottom: 1.5rem;
+}
+
+.user-details {
+    display: flex;
+}
+
+.card-action button {
+    background: none;
+    border: none;
+    padding: 0 1rem;
+    cursor: pointer;
 }

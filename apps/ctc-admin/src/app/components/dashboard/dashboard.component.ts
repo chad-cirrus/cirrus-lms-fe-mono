@@ -6,6 +6,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { ChartComponent,ApexNonAxisChartSeries,ApexTitleSubtitle,ApexPlotOptions,ApexDataLabels,ApexStroke,ApexLegend,ApexAxisChartSeries,ApexChart,ApexResponsive} from 'ng-apexcharts';
 import { InitialsPipe } from '../../pipes/initials.pipe';
+import { MatSelectModule } from '@angular/material/select';
 
 export type ChartOptions = {
   series: ApexNonAxisChartSeries;
@@ -24,7 +25,6 @@ export type ChartOptions = {
 export interface InstructorActiveClientsTableData {
   instructors: string;
   clients: number;
-  
 }
 
 const instructorActiveClientsTableData: InstructorActiveClientsTableData[] = [
@@ -83,6 +83,76 @@ const instructorActiveClientsTableData: InstructorActiveClientsTableData[] = [
   {
     instructors: "Replace_Me",
     clients: 3,
+  },
+];
+
+
+
+export interface ClientsCourseEnrollmentTableData {
+  course: string;
+  enrollments: number;
+}
+
+const clientsCourseEnrollmentTableData: ClientsCourseEnrollmentTableData[] = [
+  {
+    course: "SR20 Avidyne Entegra Transition",
+    enrollments: 39,
+  },
+  {
+    course: "SR22 Perspective + Advanced Add-On (IFR)",
+    enrollments: 25,
+  },
+  {
+    course: "Private Pilot Program",
+    enrollments: 12,
+  },
+  {
+    course: "Takeoffs & Landings Flight ",
+    enrollments: 7,
+  },
+  {
+    course: "IFR Recurrent Check",
+    enrollments: 1,
+  },
+  {
+    course: "SR20 Avidyne Entegra Transition",
+    enrollments: 1,
+  },
+  {
+    course: "SR22 Perspective + Advanced Add-On (IFR)",
+    enrollments: 1,
+  },
+  {
+    course: "Private Pilot Program",
+    enrollments: 1,
+  },
+  {
+    course: "Takeoffs & Landings Flight ",
+    enrollments: 1,
+  },
+  {
+    course: "IFR Recurrent Check",
+    enrollments: 1,
+  },
+  {
+    course: "REPLACE",
+    enrollments: 1,
+  },
+  {
+    course: "REPLACE",
+    enrollments: 1,
+  },
+  {
+    course: "REPLACE",
+    enrollments: 1,
+  },
+  {
+    course: "REPLACE",
+    enrollments: 1,
+  },
+  {
+    course: "REPLACE",
+    enrollments: 1,
   },
 ];
 
@@ -149,8 +219,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
   horizontal100Chart: any;
   displayedColumns: string[] = ['client', 'date', 'assessment', 'instructor', 'action'];
   displayedColumnsActiveClientsPerInstructor: string[] = ['instructors', 'clients'];
+  displayedColumnsClientsCourseEnrollment: string[] = ['course', 'enrollments'];
   dataSource = ELEMENT_DATA;
   instructorActiveClientsTableData = new MatTableDataSource<InstructorActiveClientsTableData>(instructorActiveClientsTableData);
+  clientsCourseEnrollmentTableData = new MatTableDataSource<ClientsCourseEnrollmentTableData>(clientsCourseEnrollmentTableData);
   private subscription: Subscription = new Subscription();
 
   /**
@@ -168,9 +240,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
   public chartOptionsDualGiven: Partial<ChartOptions>;
   public chartOptionsRecurrentstatus: Partial<ChartOptions>;
 
-
   constructor(private ctcAdminService: CtcAdminService) {
     this.instructorActiveClientsTableData = new MatTableDataSource(instructorActiveClientsTableData);
+    this.clientsCourseEnrollmentTableData = new MatTableDataSource(clientsCourseEnrollmentTableData);
 
     this.chartOptions = {
       title: {

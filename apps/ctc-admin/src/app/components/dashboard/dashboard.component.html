@@ -128,10 +128,8 @@
         </ul>
 
     </div>
-
-
     
-    <div class="instructors">
+    <div class="instructors dashboard-section">
         <h4 class="section-title">Instructors</h4>
 
         <div class="container">
@@ -263,7 +261,7 @@
                             <div class="card-action" data-card-action="refresh">
                                 <svg width="13" height="14" viewBox="0 0 13 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M12.6191 0.675781C12.7715 0.751953 12.873 0.853516 12.9492 1.00586C12.9746 1.08203 13 1.1582 13 1.23438V4.89062C13 5.24609 12.7207 5.5 12.3906 5.5C12.0352 5.5 11.7812 5.24609 11.7812 4.89062V2.70703L8.35352 6.13477C8.09961 6.38867 7.71875 6.38867 7.49023 6.13477C7.23633 5.90625 7.23633 5.52539 7.49023 5.27148L10.918 1.84375H8.73438C8.37891 1.84375 8.125 1.58984 8.125 1.23438C8.125 0.904297 8.37891 0.625 8.73438 0.625H12.3906C12.4668 0.625 12.543 0.650391 12.6191 0.675781ZM0.355469 13.5996C0.203125 13.5234 0.101562 13.3965 0.0253906 13.2695C0 13.1934 0 13.1172 0 13.0156V9.35938C0 9.0293 0.253906 8.75 0.609375 8.75C0.939453 8.75 1.21875 9.0293 1.21875 9.35938V11.5684L4.64648 8.14062C4.875 7.88672 5.25586 7.88672 5.48438 8.14062C5.73828 8.36914 5.73828 8.75 5.48438 8.97852L2.05664 12.4062H4.26562C4.5957 12.4062 4.875 12.6855 4.875 13.0156C4.875 13.3711 4.5957 13.625 4.24023 13.625H0.609375C0.507812 13.625 0.431641 13.625 0.355469 13.5996Z" fill="white"/>
-                                </svg>                                    
+                                </svg>
                             </div>
                         </div>
                     </div>
@@ -441,9 +439,388 @@
         </div>
     </div>
 
-    
+    <div class="clients dashboard-section">
+        <h4 class="section-title">Clients</h4>
 
-    <div class="assessments">
+        <div class="container">
+
+            <div class="card stalled-coursework">
+                <div class="card-header">
+                    <h3 class="card-title">Stalled Coursework</h3>
+                    <div class="card-controls">
+                        <div class="card-action">
+                            <button class="prev">
+                                <svg width="8" height="12" viewBox="0 0 8 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M6.6875 11.8125C6.45898 11.8125 6.25586 11.7363 6.10352 11.584L1.22852 6.70898C0.898438 6.4043 0.898438 5.87109 1.22852 5.56641L6.10352 0.691406C6.4082 0.361328 6.94141 0.361328 7.24609 0.691406C7.57617 0.996094 7.57617 1.5293 7.24609 1.83398L2.95508 6.125L7.24609 10.4414C7.57617 10.7461 7.57617 11.2793 7.24609 11.584C7.09375 11.7363 6.89062 11.8125 6.6875 11.8125Z" fill="#D1D1D1"/>
+                                </svg>
+                            </button>
+                            <span class="current-page">1</span>/<span class="total-pages">8</span>
+                            <button class="next">
+                                <svg width="7" height="12" viewBox="0 0 7 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M1.86914 0.84375L6.51562 5.69336C6.61719 5.82031 6.69336 5.97266 6.69336 6.125C6.69336 6.27734 6.61719 6.42969 6.51562 6.53125L1.86914 11.3809C1.64062 11.6348 1.23438 11.6348 1.00586 11.4062C0.751953 11.1777 0.751953 10.7969 0.980469 10.543L5.24609 6.09961L0.980469 1.68164C0.751953 1.45312 0.751953 1.04688 1.00586 0.818359C1.23438 0.589844 1.64062 0.589844 1.86914 0.84375Z" fill="white"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <ul class="stalled-coursework-cards">
+                        <li class="stalled-coursework-card --theme-danger">
+                            <div class="card-header">
+                                <div class="user-details">
+                                    <div class="user-initials --icon-purple --small --collapsable">{{ 'User Name' | initials }}</div>
+                                    <div class="user-name">User Name</div>
+                                </div>
+                                <div class="card-controls">
+                                    <svg width="15" height="19" viewBox="0 0 15 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M7 13.5625C7.78125 13.5625 8.48438 13.9922 8.875 14.6562C9.26562 15.3594 9.26562 16.1797 8.875 16.8438C8.48438 17.5469 7.78125 17.9375 7 17.9375C6.17969 17.9375 5.47656 17.5469 5.08594 16.8438C4.69531 16.1797 4.69531 15.3594 5.08594 14.6562C5.47656 13.9922 6.17969 13.5625 7 13.5625ZM7 7.3125C7.78125 7.3125 8.48438 7.74219 8.875 8.40625C9.26562 9.10938 9.26562 9.92969 8.875 10.5938C8.48438 11.2969 7.78125 11.6875 7 11.6875C6.17969 11.6875 5.47656 11.2969 5.08594 10.5938C4.69531 9.92969 4.69531 9.10938 5.08594 8.40625C5.47656 7.74219 6.17969 7.3125 7 7.3125ZM9.1875 3.25C9.1875 4.07031 8.75781 4.77344 8.09375 5.16406C7.39062 5.55469 6.57031 5.55469 5.90625 5.16406C5.20312 4.77344 4.8125 4.07031 4.8125 3.25C4.8125 2.46875 5.20312 1.76562 5.90625 1.375C6.57031 0.984375 7.39062 0.984375 8.09375 1.375C8.75781 1.76562 9.1875 2.46875 9.1875 3.25Z" fill="white"/>
+                                    </svg>
+                                </div>
+                            </div>
+
+                            <div class="card-content">
+
+                                <span class="activity-pill">
+                                    <div class="pill-content">
+                                        <svg width="15" height="16" viewBox="0 0 15 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M7.5 0.875C11.6309 0.875 15 4.24414 15 8.375C15 12.5352 11.6309 15.875 7.5 15.875C3.33984 15.875 0 12.5352 0 8.375C0 6.32422 0.820312 4.44922 2.19727 3.07227L2.8418 3.74609C1.66992 4.94727 0.9375 6.58789 0.9375 8.375C0.9375 12.0078 3.86719 14.9375 7.5 14.9375C11.1035 14.9375 14.0625 12.0078 14.0625 8.375C14.0625 4.91797 11.3672 2.07617 7.96875 1.8418V4.15625V4.625H7.03125V4.15625V1.34375V0.875H7.5ZM5.00977 5.24023L7.82227 8.05273L8.14453 8.375L7.5 9.04883L7.14844 8.72656L4.33594 5.91406L4.01367 5.5625L4.6875 4.91797L5.00977 5.24023Z" fill="white"/>
+                                        </svg>
+                                        Active 11 weeks ago
+                                    </div>
+                                        
+                                </span>
+
+
+                                <div class="course">SR22 Perspective + Advanced Add-On (IFR)</div>
+                            </div>
+
+                            <div class="card-footer">
+                                <div class="stats-self-study"><span class="data">7/45</span> Self-Study</div>
+                                <div class="divider"></div>
+                                <div class="stats-assement"><span class="data">2/7</span> Assessments</div>
+                            </div>
+                        </li>
+
+                        <li class="stalled-coursework-card --theme-warning">
+                            <div class="card-header">
+                                <div class="user-details">
+                                    <div class="user-initials --icon-purple --small --collapsable">{{ 'User Name' | initials }}</div>
+                                    <div class="user-name">User Name</div>
+                                </div>
+                                <div class="card-controls">
+                                    <svg width="15" height="19" viewBox="0 0 15 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M7 13.5625C7.78125 13.5625 8.48438 13.9922 8.875 14.6562C9.26562 15.3594 9.26562 16.1797 8.875 16.8438C8.48438 17.5469 7.78125 17.9375 7 17.9375C6.17969 17.9375 5.47656 17.5469 5.08594 16.8438C4.69531 16.1797 4.69531 15.3594 5.08594 14.6562C5.47656 13.9922 6.17969 13.5625 7 13.5625ZM7 7.3125C7.78125 7.3125 8.48438 7.74219 8.875 8.40625C9.26562 9.10938 9.26562 9.92969 8.875 10.5938C8.48438 11.2969 7.78125 11.6875 7 11.6875C6.17969 11.6875 5.47656 11.2969 5.08594 10.5938C4.69531 9.92969 4.69531 9.10938 5.08594 8.40625C5.47656 7.74219 6.17969 7.3125 7 7.3125ZM9.1875 3.25C9.1875 4.07031 8.75781 4.77344 8.09375 5.16406C7.39062 5.55469 6.57031 5.55469 5.90625 5.16406C5.20312 4.77344 4.8125 4.07031 4.8125 3.25C4.8125 2.46875 5.20312 1.76562 5.90625 1.375C6.57031 0.984375 7.39062 0.984375 8.09375 1.375C8.75781 1.76562 9.1875 2.46875 9.1875 3.25Z" fill="white"/>
+                                    </svg>
+                                </div>
+                            </div>
+
+                            <div class="card-content">
+                                <span class="activity-pill">
+                                    <div class="pill-content">
+                                        <svg width="15" height="16" viewBox="0 0 15 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M7.5 0.875C11.6309 0.875 15 4.24414 15 8.375C15 12.5352 11.6309 15.875 7.5 15.875C3.33984 15.875 0 12.5352 0 8.375C0 6.32422 0.820312 4.44922 2.19727 3.07227L2.8418 3.74609C1.66992 4.94727 0.9375 6.58789 0.9375 8.375C0.9375 12.0078 3.86719 14.9375 7.5 14.9375C11.1035 14.9375 14.0625 12.0078 14.0625 8.375C14.0625 4.91797 11.3672 2.07617 7.96875 1.8418V4.15625V4.625H7.03125V4.15625V1.34375V0.875H7.5ZM5.00977 5.24023L7.82227 8.05273L8.14453 8.375L7.5 9.04883L7.14844 8.72656L4.33594 5.91406L4.01367 5.5625L4.6875 4.91797L5.00977 5.24023Z" fill="white"/>
+                                        </svg>
+                                        Active 11 weeks ago
+                                    </div>
+                                        
+                                </span>
+
+                                <div class="course">SR22 Perspective + Advanced Add-On (IFR)</div>
+                            </div>
+
+                            <div class="card-footer">
+                                <div class="stats-self-study"><span class="data">7/45</span> Self-Study</div>
+                                <div class="divider"></div>
+                                <div class="stats-assement"><span class="data">2/7</span> Assessments</div>
+                            </div>
+                        </li>
+
+                        <li class="stalled-coursework-card  --theme-warning">
+                            <div class="card-header">
+                                <div class="user-details">
+                                    <div class="user-initials --icon-purple --small --collapsable">{{ 'User Name' | initials }}</div>
+                                    <div class="user-name">Testing Card</div>
+                                </div>
+                                <div class="card-controls">
+                                    <svg width="15" height="19" viewBox="0 0 15 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M7 13.5625C7.78125 13.5625 8.48438 13.9922 8.875 14.6562C9.26562 15.3594 9.26562 16.1797 8.875 16.8438C8.48438 17.5469 7.78125 17.9375 7 17.9375C6.17969 17.9375 5.47656 17.5469 5.08594 16.8438C4.69531 16.1797 4.69531 15.3594 5.08594 14.6562C5.47656 13.9922 6.17969 13.5625 7 13.5625ZM7 7.3125C7.78125 7.3125 8.48438 7.74219 8.875 8.40625C9.26562 9.10938 9.26562 9.92969 8.875 10.5938C8.48438 11.2969 7.78125 11.6875 7 11.6875C6.17969 11.6875 5.47656 11.2969 5.08594 10.5938C4.69531 9.92969 4.69531 9.10938 5.08594 8.40625C5.47656 7.74219 6.17969 7.3125 7 7.3125ZM9.1875 3.25C9.1875 4.07031 8.75781 4.77344 8.09375 5.16406C7.39062 5.55469 6.57031 5.55469 5.90625 5.16406C5.20312 4.77344 4.8125 4.07031 4.8125 3.25C4.8125 2.46875 5.20312 1.76562 5.90625 1.375C6.57031 0.984375 7.39062 0.984375 8.09375 1.375C8.75781 1.76562 9.1875 2.46875 9.1875 3.25Z" fill="white"/>
+                                    </svg>
+                                </div>
+                            </div>
+
+                            <div class="card-content">
+                                <span class="activity-pill">
+                                    <div class="pill-content">
+                                        <svg width="15" height="16" viewBox="0 0 15 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M7.5 0.875C11.6309 0.875 15 4.24414 15 8.375C15 12.5352 11.6309 15.875 7.5 15.875C3.33984 15.875 0 12.5352 0 8.375C0 6.32422 0.820312 4.44922 2.19727 3.07227L2.8418 3.74609C1.66992 4.94727 0.9375 6.58789 0.9375 8.375C0.9375 12.0078 3.86719 14.9375 7.5 14.9375C11.1035 14.9375 14.0625 12.0078 14.0625 8.375C14.0625 4.91797 11.3672 2.07617 7.96875 1.8418V4.15625V4.625H7.03125V4.15625V1.34375V0.875H7.5ZM5.00977 5.24023L7.82227 8.05273L8.14453 8.375L7.5 9.04883L7.14844 8.72656L4.33594 5.91406L4.01367 5.5625L4.6875 4.91797L5.00977 5.24023Z" fill="white"/>
+                                        </svg>
+                                        Active 11 weeks ago
+                                    </div>
+                                        
+                                </span>
+
+                                <div class="course">SR22 Perspective + Advanced Add-On (IFR)</div>
+                            </div>
+
+                            <div class="card-footer">
+                                <div class="stats-self-study"><span class="data">7/45</span> Self-Study</div>
+                                <div class="divider"></div>
+                                <div class="stats-assement"><span class="data">2/7</span> Assessments</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-footer"></div>
+            </div>
+
+            <div class="client-card-columns">
+
+                <div class="card course-enrollment">
+                    <div class="card-header">
+                        <h3 class="card-title">Course Enrollment</h3>
+                        <div class="card-controls">
+                            <div class="card-action">
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="scrollable-table">
+                            <table mat-table [dataSource]="clientsCourseEnrollmentTableData" class="mat-elevation-z8 table-theme-light table-instructor-active-clients" matSort>
+                                <ng-container matColumnDef="course">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Active Courses </th>
+                                    <td mat-cell *matCellDef="let element" >
+                                        <div class="row course">
+                                            {{element.course}}
+                                        </div>
+                                    </td>
+                                </ng-container>
+                                <ng-container matColumnDef="enrollments" >
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="enrollments-count"> Active Enrollments </th>
+                                    <td mat-cell *matCellDef="let element" class="enrollments-count"> {{element.enrollments}} </td>
+                                </ng-container>
+
+                                <tr mat-header-row *matHeaderRowDef="displayedColumnsClientsCourseEnrollment"></tr>
+                                <tr mat-row *matRowDef="let row; columns: displayedColumnsClientsCourseEnrollment;"></tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="card-footer"></div>
+                </div>
+
+                <div class="card client-achievements">
+                    <div class="card-header">
+                        <h3 class="card-title">Client Achievements</h3>
+                        <div class="card-controls">
+                            <div class="card-action">
+                                <svg width="13" height="14" viewBox="0 0 13 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M12.6191 0.675781C12.7715 0.751953 12.873 0.853516 12.9492 1.00586C12.9746 1.08203 13 1.1582 13 1.23438V4.89062C13 5.24609 12.7207 5.5 12.3906 5.5C12.0352 5.5 11.7812 5.24609 11.7812 4.89062V2.70703L8.35352 6.13477C8.09961 6.38867 7.71875 6.38867 7.49023 6.13477C7.23633 5.90625 7.23633 5.52539 7.49023 5.27148L10.918 1.84375H8.73438C8.37891 1.84375 8.125 1.58984 8.125 1.23438C8.125 0.904297 8.37891 0.625 8.73438 0.625H12.3906C12.4668 0.625 12.543 0.650391 12.6191 0.675781ZM0.355469 13.5996C0.203125 13.5234 0.101562 13.3965 0.0253906 13.2695C0 13.1934 0 13.1172 0 13.0156V9.35938C0 9.0293 0.253906 8.75 0.609375 8.75C0.939453 8.75 1.21875 9.0293 1.21875 9.35938V11.5684L4.64648 8.14062C4.875 7.88672 5.25586 7.88672 5.48438 8.14062C5.73828 8.36914 5.73828 8.75 5.48438 8.97852L2.05664 12.4062H4.26562C4.5957 12.4062 4.875 12.6855 4.875 13.0156C4.875 13.3711 4.5957 13.625 4.24023 13.625H0.609375C0.507812 13.625 0.431641 13.625 0.355469 13.5996Z" fill="white"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-content scrollable">
+                        <section>
+                            <div class="date">Today</div>
+                            <ul class="client-achievement-cards">
+                                <li class="client-achievement-card">
+                                    <div class="badge">Badge Here</div>
+                                    <div class="card-details">
+                                        <div class="card-header">
+                                            <div class="user-details">
+                                                <div class="user-initials --icon-orange --small --collapsable">{{ 'User Name' | initials }}</div>
+                                                <div class="user-name">User Name</div>
+                                            </div>
+                                            <div class="card-controls">
+                                                <svg width="15" height="19" viewBox="0 0 15 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M7 13.5625C7.78125 13.5625 8.48438 13.9922 8.875 14.6562C9.26562 15.3594 9.26562 16.1797 8.875 16.8438C8.48438 17.5469 7.78125 17.9375 7 17.9375C6.17969 17.9375 5.47656 17.5469 5.08594 16.8438C4.69531 16.1797 4.69531 15.3594 5.08594 14.6562C5.47656 13.9922 6.17969 13.5625 7 13.5625ZM7 7.3125C7.78125 7.3125 8.48438 7.74219 8.875 8.40625C9.26562 9.10938 9.26562 9.92969 8.875 10.5938C8.48438 11.2969 7.78125 11.6875 7 11.6875C6.17969 11.6875 5.47656 11.2969 5.08594 10.5938C4.69531 9.92969 4.69531 9.10938 5.08594 8.40625C5.47656 7.74219 6.17969 7.3125 7 7.3125ZM9.1875 3.25C9.1875 4.07031 8.75781 4.77344 8.09375 5.16406C7.39062 5.55469 6.57031 5.55469 5.90625 5.16406C5.20312 4.77344 4.8125 4.07031 4.8125 3.25C4.8125 2.46875 5.20312 1.76562 5.90625 1.375C6.57031 0.984375 7.39062 0.984375 8.09375 1.375C8.75781 1.76562 9.1875 2.46875 9.1875 3.25Z" fill="white"/>
+                                                </svg>
+                                            </div>
+                                        </div>
+
+                                        <div class="card-content">
+                                            <div class="achievement-action">
+                                                Completed Private Pilot Program
+                                            </div>
+
+                                            <div class="achievement-progress">
+                                                <div class="achievement-progress-data">40%</div>
+                                                <div class="achievement-progress-bar">
+                                                    <div class="achievement-progress-bar-progress" style="width: 40%;"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+
+                                <li class="client-achievement-card">
+                                    <div class="badge">Badge Here</div>
+                                    <div class="card-details">
+                                        <div class="card-header">
+                                            <div class="user-details">
+                                                <div class="user-initials --icon-orange --small --collapsable">{{ 'User Name' | initials }}</div>
+                                                <div class="user-name">User Name</div>
+                                            </div>
+                                            
+                                            <div class="card-controls">
+                                                <svg width="15" height="19" viewBox="0 0 15 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M7 13.5625C7.78125 13.5625 8.48438 13.9922 8.875 14.6562C9.26562 15.3594 9.26562 16.1797 8.875 16.8438C8.48438 17.5469 7.78125 17.9375 7 17.9375C6.17969 17.9375 5.47656 17.5469 5.08594 16.8438C4.69531 16.1797 4.69531 15.3594 5.08594 14.6562C5.47656 13.9922 6.17969 13.5625 7 13.5625ZM7 7.3125C7.78125 7.3125 8.48438 7.74219 8.875 8.40625C9.26562 9.10938 9.26562 9.92969 8.875 10.5938C8.48438 11.2969 7.78125 11.6875 7 11.6875C6.17969 11.6875 5.47656 11.2969 5.08594 10.5938C4.69531 9.92969 4.69531 9.10938 5.08594 8.40625C5.47656 7.74219 6.17969 7.3125 7 7.3125ZM9.1875 3.25C9.1875 4.07031 8.75781 4.77344 8.09375 5.16406C7.39062 5.55469 6.57031 5.55469 5.90625 5.16406C5.20312 4.77344 4.8125 4.07031 4.8125 3.25C4.8125 2.46875 5.20312 1.76562 5.90625 1.375C6.57031 0.984375 7.39062 0.984375 8.09375 1.375C8.75781 1.76562 9.1875 2.46875 9.1875 3.25Z" fill="white"/>
+                                                </svg>
+                                            </div>
+                                        </div>
+
+                                        <div class="card-content">
+                                            <div class="achievement-action">
+                                                Completed Private Pilot Program
+                                            </div>
+
+                                            <div class="achievement-progress">
+                                                <div class="achievement-progress-data">40%</div>
+                                                <div class="achievement-progress-bar">
+                                                    <div class="achievement-progress-bar-progress" style="width: 40%;"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+
+                                <li class="client-achievement-card">
+                                    <div class="badge">Badge Here</div>
+                                    <div class="card-details">
+                                        <div class="card-header">
+                                            <div class="user-details">
+                                                <div class="user-initials --icon-orange --small --collapsable">{{ 'User Name' | initials }}</div>
+                                                <div class="user-name">User Name</div>
+                                            </div>
+                                            <div class="card-controls">
+                                                <svg width="15" height="19" viewBox="0 0 15 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M7 13.5625C7.78125 13.5625 8.48438 13.9922 8.875 14.6562C9.26562 15.3594 9.26562 16.1797 8.875 16.8438C8.48438 17.5469 7.78125 17.9375 7 17.9375C6.17969 17.9375 5.47656 17.5469 5.08594 16.8438C4.69531 16.1797 4.69531 15.3594 5.08594 14.6562C5.47656 13.9922 6.17969 13.5625 7 13.5625ZM7 7.3125C7.78125 7.3125 8.48438 7.74219 8.875 8.40625C9.26562 9.10938 9.26562 9.92969 8.875 10.5938C8.48438 11.2969 7.78125 11.6875 7 11.6875C6.17969 11.6875 5.47656 11.2969 5.08594 10.5938C4.69531 9.92969 4.69531 9.10938 5.08594 8.40625C5.47656 7.74219 6.17969 7.3125 7 7.3125ZM9.1875 3.25C9.1875 4.07031 8.75781 4.77344 8.09375 5.16406C7.39062 5.55469 6.57031 5.55469 5.90625 5.16406C5.20312 4.77344 4.8125 4.07031 4.8125 3.25C4.8125 2.46875 5.20312 1.76562 5.90625 1.375C6.57031 0.984375 7.39062 0.984375 8.09375 1.375C8.75781 1.76562 9.1875 2.46875 9.1875 3.25Z" fill="white"/>
+                                                </svg>
+                                            </div>
+                                        </div>
+
+                                        <div class="card-content">
+                                            <div class="achievement-action">
+                                                Completed Private Pilot Program
+                                            </div>
+
+                                            <div class="achievement-progress">
+                                                <div class="achievement-progress-data">40%</div>
+                                                <div class="achievement-progress-bar">
+                                                    <div class="achievement-progress-bar-progress" style="width: 40%;"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </section>
+
+                        <section>
+                            <div class="date">Nov 5</div>
+                            <ul class="client-achievement-cards">
+                                <li class="client-achievement-card">
+                                    <div class="badge">Badge Here</div>
+                                    <div class="card-details">
+                                        <div class="card-header">
+                                            <div class="user-details">
+                                                <div class="user-initials --icon-orange --small --collapsable">{{ 'User Name' | initials }}</div>
+                                                <div class="user-name">User Name</div>
+                                            </div>
+                                            <div class="card-controls">
+                                                <svg width="15" height="19" viewBox="0 0 15 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M7 13.5625C7.78125 13.5625 8.48438 13.9922 8.875 14.6562C9.26562 15.3594 9.26562 16.1797 8.875 16.8438C8.48438 17.5469 7.78125 17.9375 7 17.9375C6.17969 17.9375 5.47656 17.5469 5.08594 16.8438C4.69531 16.1797 4.69531 15.3594 5.08594 14.6562C5.47656 13.9922 6.17969 13.5625 7 13.5625ZM7 7.3125C7.78125 7.3125 8.48438 7.74219 8.875 8.40625C9.26562 9.10938 9.26562 9.92969 8.875 10.5938C8.48438 11.2969 7.78125 11.6875 7 11.6875C6.17969 11.6875 5.47656 11.2969 5.08594 10.5938C4.69531 9.92969 4.69531 9.10938 5.08594 8.40625C5.47656 7.74219 6.17969 7.3125 7 7.3125ZM9.1875 3.25C9.1875 4.07031 8.75781 4.77344 8.09375 5.16406C7.39062 5.55469 6.57031 5.55469 5.90625 5.16406C5.20312 4.77344 4.8125 4.07031 4.8125 3.25C4.8125 2.46875 5.20312 1.76562 5.90625 1.375C6.57031 0.984375 7.39062 0.984375 8.09375 1.375C8.75781 1.76562 9.1875 2.46875 9.1875 3.25Z" fill="white"/>
+                                                </svg>
+                                            </div>
+                                        </div>
+
+                                        <div class="card-content">
+                                            <div class="achievement-action">
+                                                Completed Private Pilot Program
+                                            </div>
+
+                                            <div class="achievement-progress">
+                                                <div class="achievement-progress-data">40%</div>
+                                                <div class="achievement-progress-bar">
+                                                    <div class="achievement-progress-bar-progress" style="width: 40%;"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+
+                                <li class="client-achievement-card">
+                                    <div class="badge">Badge Here</div>
+                                    <div class="card-details">
+                                        <div class="card-header">
+                                            <div class="user-details">
+                                                <div class="user-initials --icon-orange --small --collapsable">{{ 'User Name' | initials }}</div>
+                                                <div class="user-name">User Name</div>
+                                            </div>
+                                            <div class="card-controls">
+                                                <svg width="15" height="19" viewBox="0 0 15 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M7 13.5625C7.78125 13.5625 8.48438 13.9922 8.875 14.6562C9.26562 15.3594 9.26562 16.1797 8.875 16.8438C8.48438 17.5469 7.78125 17.9375 7 17.9375C6.17969 17.9375 5.47656 17.5469 5.08594 16.8438C4.69531 16.1797 4.69531 15.3594 5.08594 14.6562C5.47656 13.9922 6.17969 13.5625 7 13.5625ZM7 7.3125C7.78125 7.3125 8.48438 7.74219 8.875 8.40625C9.26562 9.10938 9.26562 9.92969 8.875 10.5938C8.48438 11.2969 7.78125 11.6875 7 11.6875C6.17969 11.6875 5.47656 11.2969 5.08594 10.5938C4.69531 9.92969 4.69531 9.10938 5.08594 8.40625C5.47656 7.74219 6.17969 7.3125 7 7.3125ZM9.1875 3.25C9.1875 4.07031 8.75781 4.77344 8.09375 5.16406C7.39062 5.55469 6.57031 5.55469 5.90625 5.16406C5.20312 4.77344 4.8125 4.07031 4.8125 3.25C4.8125 2.46875 5.20312 1.76562 5.90625 1.375C6.57031 0.984375 7.39062 0.984375 8.09375 1.375C8.75781 1.76562 9.1875 2.46875 9.1875 3.25Z" fill="white"/>
+                                                </svg>
+                                            </div>
+                                        </div>
+
+                                        <div class="card-content">
+                                            <div class="achievement-action">
+                                                Completed Private Pilot Program
+                                            </div>
+
+                                            <div class="achievement-progress">
+                                                <div class="achievement-progress-data">40%</div>
+                                                <div class="achievement-progress-bar">
+                                                    <div class="achievement-progress-bar-progress" style="width: 40%;"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+
+                                <li class="client-achievement-card">
+                                    <div class="badge">Badge Here</div>
+                                    <div class="card-details">
+                                        <div class="card-header">
+                                            <div class="user-details">
+                                                <div class="user-initials --icon-orange --small --collapsable">{{ 'User Name' | initials }}</div>
+                                                <div class="user-name">User Name</div>
+                                            </div>
+                                            <div class="card-controls">
+                                                <svg width="15" height="19" viewBox="0 0 15 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M7 13.5625C7.78125 13.5625 8.48438 13.9922 8.875 14.6562C9.26562 15.3594 9.26562 16.1797 8.875 16.8438C8.48438 17.5469 7.78125 17.9375 7 17.9375C6.17969 17.9375 5.47656 17.5469 5.08594 16.8438C4.69531 16.1797 4.69531 15.3594 5.08594 14.6562C5.47656 13.9922 6.17969 13.5625 7 13.5625ZM7 7.3125C7.78125 7.3125 8.48438 7.74219 8.875 8.40625C9.26562 9.10938 9.26562 9.92969 8.875 10.5938C8.48438 11.2969 7.78125 11.6875 7 11.6875C6.17969 11.6875 5.47656 11.2969 5.08594 10.5938C4.69531 9.92969 4.69531 9.10938 5.08594 8.40625C5.47656 7.74219 6.17969 7.3125 7 7.3125ZM9.1875 3.25C9.1875 4.07031 8.75781 4.77344 8.09375 5.16406C7.39062 5.55469 6.57031 5.55469 5.90625 5.16406C5.20312 4.77344 4.8125 4.07031 4.8125 3.25C4.8125 2.46875 5.20312 1.76562 5.90625 1.375C6.57031 0.984375 7.39062 0.984375 8.09375 1.375C8.75781 1.76562 9.1875 2.46875 9.1875 3.25Z" fill="white"/>
+                                                </svg>
+                                            </div>
+                                        </div>
+
+                                        <div class="card-content">
+                                            <div class="achievement-action">
+                                                Completed Private Pilot Program
+                                            </div>
+
+                                            <div class="achievement-progress">
+                                                <div class="achievement-progress-data">40%</div>
+                                                <div class="achievement-progress-bar">
+                                                    <div class="achievement-progress-bar-progress" style="width: 40%;"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </section>
+
+                    </div>
+                    <div class="card-footer"></div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <div class="assessments dashboard-section">
         <h4 class="section-title">Assessments</h4>
 
         <div class="container">

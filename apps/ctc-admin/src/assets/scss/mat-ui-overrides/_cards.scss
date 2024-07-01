@@ -3,8 +3,7 @@
     background-color: $blue1;
     border-radius: 8px;
     padding: 1.2rem 0.6rem;
-    
-    margin: 2rem 0;
+    margin: 0 0 2rem;
 
     .card-header {
         display: flex;
@@ -35,7 +34,8 @@
         margin-top: 1rem;
     }
 
-    @include breakpoint(md) {
-        padding: rem(18px) rem(36px) rem(24px);
+    @include breakpoint(lg) {
+        margin: rem(18px) rem(36px) rem(24px);
+        padding: 1.2rem rem(25px) rem(24px);
     }
 }
