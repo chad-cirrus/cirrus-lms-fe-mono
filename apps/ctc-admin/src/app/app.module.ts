@@ -5,7 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { HeaderComponent } from './components/header/header.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
@@ -26,6 +26,7 @@ import { HttpErrorInterceptor } from './interceptors/http-error.interceptor';
 import { environment } from '../environments/environment';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { InitialsPipe } from './pipes/initials.pipe';
+import { TrainingCenterEditorComponent } from './forms/training-center/training-center-editor.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { InitialsPipe } from './pipes/initials.pipe';
     ClientsComponent,
     NotificationsComponent,
     InitialsPipe,
+    TrainingCenterEditorComponent,
   ],
   imports: [
     CommonModule,
@@ -50,10 +52,10 @@ import { InitialsPipe } from './pipes/initials.pipe';
     AppRoutingModule,
     MatTableModule,
     MatCheckboxModule,
-    FormsModule,
     MatFormFieldModule,
     MatSelectModule,
-    NgApexchartsModule
+    NgApexchartsModule,
+    ReactiveFormsModule,
   ],
   providers: [
     MobileMenuService,

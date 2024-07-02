@@ -5,7 +5,9 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { ITrainingCenter } from './models/ITrainingCenter';
 import { ICourses } from './models/ICourses';
 import { IAddressState } from './models/IAddressState';
+import { map } from 'rxjs/operators';
 
+// placeholder for the list of US states until we get them from the API
 const states = [
   { name: 'Please Choose', abbreviation: '--' },
   { name: 'Alabama', abbreviation: 'AL' },
@@ -81,6 +83,18 @@ export class CtcAdminService {
   }
 
   /**
+   * Saves a training center.
+   *
+   * @param trainingCenter - The training center to be saved.
+   * @returns An observable that emits the saved training center.
+   */
+  saveTrainingCenter(trainingCenter: ITrainingCenter): Observable<ITrainingCenter> {
+    return this.http
+      .post<ITrainingCenter>(`${environment.baseUrl}/api/v5/training_center`, trainingCenter)
+      .pipe(map(response => response));
+  }
+
+  /**
    * Updates the training center information.
    * @param training_center - The updated training center object.
    */
@@ -93,9 +107,8 @@ export class CtcAdminService {
    * @returns An Observable of type any.
    */
   getCoursesOffered(): Observable<ICourses> {
-        const url = `${environment.baseUrl}/api/v5/offered_courses`;
-        return this.http.get<ICourses>(url);
-
+    const url = `${environment.baseUrl}/api/v5/offered_courses`;
+    return this.http.get<ICourses>(url);
   }
 
   /**
@@ -104,8 +117,7 @@ export class CtcAdminService {
    *
    * @returns An array of `IAddressState` objects representing the address states.
    */
-  getStateList():  IAddressState[] {
+  getStateList(): IAddressState[] {
     return states;
   }
-
 }

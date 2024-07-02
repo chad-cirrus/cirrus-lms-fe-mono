@@ -1,0 +1,78 @@
+<form [formGroup]="trainingCenterForm" (ngSubmit)="onSubmit()">
+  <button [disabled]="!trainingCenterForm.dirty || trainingCenterForm.invalid"
+    type="submit">{{submitButtonText}}</button>
+  <div class="input-group">
+    <label for="phone-number">Phone Number</label>
+    <input id="phone-number" formControlName="phone" />
+    <div
+      *ngIf="trainingCenterForm.get('phone')?.invalid && (trainingCenterForm.get('phone')?.dirty || trainingCenterForm.get('phone')?.touched)">
+      <div *ngIf="trainingCenterForm.get('phone')?.errors?.['required']">Phone number is required.</div>
+      <div *ngIf="trainingCenterForm.get('phone')?.errors?.['pattern']">Invalid phone number format.</div>
+    </div>
+  </div>
+
+  <div class="input-group">
+    <label for="email">Email</label>
+    <input id="email" formControlName="email" />
+    <div
+      *ngIf="trainingCenterForm.get('email')?.invalid && (trainingCenterForm.get('email')?.dirty || trainingCenterForm.get('email')?.touched)">
+      <div *ngIf="trainingCenterForm.get('email')?.errors?.['required']">Email is required.</div>
+      <div *ngIf="trainingCenterForm.get('email')?.errors?.['email']">Invalid email format.</div>
+    </div>
+  </div>
+
+  <div class="input-group">
+    <label for="website">Website</label>
+    <input id="website" formControlName="website" />
+    <div
+      *ngIf="trainingCenterForm.get('website')?.invalid && (trainingCenterForm.get('website')?.dirty || trainingCenterForm.get('website')?.touched)">
+      <div *ngIf="trainingCenterForm.get('website')?.errors?.['required']">Website is required.</div>
+      <div *ngIf="trainingCenterForm.get('website')?.errors?.['pattern']">Invalid website format.</div>
+    </div>
+  </div>
+
+  <div class="input-group">
+    <label for="head-admin">Head Admin</label>
+    <select name="head-admin">
+      <option selected="selected">choose one</option>
+      <option>Person A</option>
+      <option>Person B</option>
+      <option>Person C</option>
+    </select>
+  </div>
+
+  <div class="input-group">
+    <label for="address-street">Street Address</label>
+    <input id="address-street" formControlName="street" />
+    <div
+      *ngIf="trainingCenterForm.get('street')?.invalid && (trainingCenterForm.get('street')?.dirty || trainingCenterForm.get('street')?.touched)">
+      <div *ngIf="trainingCenterForm.get('street')?.errors?.['required']">Street is required.</div>
+    </div>
+  </div>
+  <div class="input-group">
+    <label for="address-city">City</label>
+    <input id="address-city" formControlName="city" />
+    <div
+      *ngIf="trainingCenterForm.get('city')?.invalid && (trainingCenterForm.get('city')?.dirty || trainingCenterForm.get('city')?.touched)">
+      <div *ngIf="trainingCenterForm.get('city')?.errors?.['required']">City is required.</div>
+    </div>
+  </div>
+  <div class="input-group">
+    <label for="address-state">State</label>
+    <select formControlName="state" id="address-state">
+      <option *ngFor="let state of states" [value]="state.abbreviation">{{ state.name }}</option>
+    </select>
+  </div>
+  <div class="input-group">
+    <label for="address-zip">Zip Code</label>
+    <input id="address-zip" formControlName="zip" />
+    <div
+      *ngIf="trainingCenterForm.get('zip')?.invalid && (trainingCenterForm.get('zip')?.dirty || trainingCenterForm.get('zip')?.touched)">
+      <div *ngIf="trainingCenterForm.get('zip')?.errors?.['required']">Zip code is required.</div>
+      <div *ngIf="trainingCenterForm.get('zip')?.errors?.['pattern']">Invalid zip code format.</div>
+    </div>
+  </div>
+
+
+
+</form>

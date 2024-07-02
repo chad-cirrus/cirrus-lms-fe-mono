@@ -1,9 +1,8 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ITrainingCenter } from '../../models/ITrainingCenter';
-import { Subscription } from 'rxjs';
+import { Subscription, Subject } from 'rxjs';
 import { CtcAdminService } from '../../app.service';
 import { ICourses } from '../../models/ICourses';
-import { IAddressState } from '../../models/IAddressState';
 
 export interface TableData {
   name: string;
@@ -52,8 +51,9 @@ export class ProfilePageComponent implements OnInit, OnDestroy {
 
   private activeTab: string = 'profile';
 
-  states: IAddressState[] = [];
   trainingCenter: ITrainingCenter = {} as ITrainingCenter;
+  trainingCenter$: Subject<ITrainingCenter> = new Subject();
+
   private subscription: Subscription = new Subscription();
   coursesOffered: ICourses | undefined = undefined;
   categoryList: { key: string; value: string[] }[] = [{} as { key: string; value: string[] }];
@@ -73,6 +73,7 @@ export class ProfilePageComponent implements OnInit, OnDestroy {
    */
   ngOnInit(): void {
     this.subscription = this.ctcAdminService.currentTrainingCenter.subscribe(data => {
+      this.trainingCenter$.next(data);
       this.trainingCenter = data;
     });
 
@@ -81,8 +82,6 @@ export class ProfilePageComponent implements OnInit, OnDestroy {
       this.categoryList = [{} as { key: string; value: string[] }];
       this.loadCategoryList(this.coursesOffered);
     });
-
-    this.states = this.ctcAdminService.getStateList();
   }
 
   /**
