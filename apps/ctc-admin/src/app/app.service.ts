@@ -90,7 +90,7 @@ export class CtcAdminService {
    */
   saveTrainingCenter(trainingCenter: ITrainingCenter): Observable<ITrainingCenter> {
     return this.http
-      .post<ITrainingCenter>(`${environment.baseUrl}/api/v5/training_center`, trainingCenter)
+      .put<ITrainingCenter>(`${environment.baseUrl}/api/v5/training_centers/${trainingCenter.id}`, trainingCenter)
       .pipe(map(response => response));
   }
 

@@ -17,6 +17,7 @@ describe('DashboardComponent', () => {
   let fixture: ComponentFixture<DashboardComponent>;
 
   let trainingCenter: ITrainingCenter = {
+    "id": "a0D0B00000FJZ2BUAX",
     "name": "Gold Standard Aviation - KOPF",
     "incepts_on": "2013-09-10",
     "audit_renewal_on": "2023-04-12",

@@ -1,4 +1,5 @@
 export interface ITrainingCenter {
+  id: string;
   name: string;
   incepts_on: string;
   audit_renewal_on: string;
