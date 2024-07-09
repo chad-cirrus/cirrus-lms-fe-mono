@@ -1,21 +1,10 @@
 {
   "root": true,
-  "ignorePatterns": [
-    "**/*"
-  ],
-  "plugins": [
-    "@nx",
-    "@nx/typescript"
-  ],
+  "ignorePatterns": ["**/*"],
+  "plugins": ["@nx", "@nx/typescript"],
   "overrides": [
     {
-      "files": [
-        "*.ts",
-        "*.tsx",
-        "*.js",
-        "*.jsx",
-        "*.css"
-      ],
+      "files": ["*.ts", "*.tsx", "*.js", "*.jsx", "*.css"],
       "rules": {
         "@nx/enforce-module-boundaries": [
           "error",
@@ -25,9 +14,7 @@
             "depConstraints": [
               {
                 "sourceTag": "*",
-                "onlyDependOnLibsWithTags": [
-                  "*"
-                ]
+                "onlyDependOnLibsWithTags": ["*"]
               }
             ]
           }
@@ -35,28 +22,21 @@
       }
     },
     {
-      "files": [
-        "*.ts",
-        "*.tsx"
-      ],
-      "extends": [
-        "plugin:@nx/typescript",
-        "plugin:@css/recommended"
-      ],
-      "rules": {}
+      "files": ["*.ts", "*.tsx"],
+      "extends": ["plugin:@nx/typescript", "plugin:@css/recommended"],
+      "rules": {
+        "@typescript-eslint/no-extra-semi": "error",
+        "no-extra-semi": "off"
+      }
     },
     {
-      "files": [
-        "*.js",
-        "*.jsx"
-      ],
-      "extends": [
-        "plugin:@nx/javascript"
-      ],
-      "rules": {}
+      "files": ["*.js", "*.jsx"],
+      "extends": ["plugin:@nx/javascript"],
+      "rules": {
+        "@typescript-eslint/no-extra-semi": "error",
+        "no-extra-semi": "off"
+      }
     }
   ],
-  "extends": [
-    "plugin:storybook/recommended"
-  ]
+  "extends": ["plugin:storybook/recommended"]
 }

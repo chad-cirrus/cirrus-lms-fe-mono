@@ -5,7 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MockComponent } from 'ng-mocks';
 import { SearchInputComponent } from '@cirrus/search-input';
 import { FilterComponent } from '@cirrus/ui';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { ICourseOverview } from '@cirrus/models'; // Import ICourseOverview interface
 
@@ -16,20 +16,17 @@ describe('CourseLessonsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [
-        MatMenuModule,
-        FormsModule,
-        ReactiveFormsModule,
-        HttpClientModule,
-        MatDialogModule,
-      ],
-      declarations: [
+    declarations: [
         CourseLessonsComponent,
         MockComponent(SearchInputComponent),
         MockComponent(FilterComponent),
-      ],
-      providers: [{ provide: 'environment', useValue: environment }],
-    }).compileComponents();
+    ],
+    imports: [MatMenuModule,
+        FormsModule,
+        ReactiveFormsModule,
+        MatDialogModule],
+    providers: [{ provide: 'environment', useValue: environment }, provideHttpClient(withInterceptorsFromDi())]
+}).compileComponents();
   });
 
   beforeEach(() => {

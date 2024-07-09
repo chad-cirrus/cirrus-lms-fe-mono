@@ -84,12 +84,12 @@ $custom-palette: (
   ),
 );
 
-$primary: material.define-palette($custom-palette);
-$accent: material.define-palette($blue-palette, A200, A100, A400);
+$primary: material.m2-define-palette($custom-palette);
+$accent: material.m2-define-palette($blue-palette, A200, A100, A400);
 
 @include material.core();
 
-$theme: material.define-dark-theme(
+$theme: material.m2-define-dark-theme(
   (
     color: (
       primary: $primary,

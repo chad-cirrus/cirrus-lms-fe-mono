@@ -1,11 +1,9 @@
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 
-@NgModule({
-  imports: [HttpClientModule],
-})
+@NgModule({ imports: [], providers: [provideHttpClient(withInterceptorsFromDi())] })
 export class MatIconRegistryModule {
   constructor(
     private matIconRegistry: MatIconRegistry,

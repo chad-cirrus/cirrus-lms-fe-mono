@@ -1,7 +1,8 @@
 import { TestBed } from '@angular/core/testing';
 
 import { FeatureFlagService } from './feature-flag.service';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('FeatureFlagService', () => {
   let service: FeatureFlagService;
@@ -9,11 +10,13 @@ describe('FeatureFlagService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
-      providers: [
+    imports: [],
+    providers: [
         { provide: 'environment', useValue: environment },
-      ],
-    });
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting(),
+    ]
+});
     service = TestBed.inject(FeatureFlagService);
   });
 

@@ -18,7 +18,7 @@ import {
 } from '@cirrus/models';
 import { MatDividerModule } from '@angular/material/divider';
 import { MockComponent } from 'ng-mocks';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { CirrusSanitizerService } from '../shared/cirrus-sanitizer.service';
 
 import { of } from 'rxjs';
@@ -81,21 +81,22 @@ describe('CourseLandingPageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [
+    declarations: [
         CourseLandingPageComponent,
         MockComponent(CourseProgressComponent),
         MockComponent(CoursePlayerComponent),
-      ],
-      imports: [MatDialogModule, MatDividerModule, HttpClientModule],
-      providers: [
+    ],
+    imports: [MatDialogModule, MatDividerModule],
+    providers: [
         { provide: UiDownloadService, useClass: MockUIDownloadService },
         { provide: CirrusSanitizerService, useClass: MockCirrusSanitizerService },
         { provide: 'environment', useValue: environment },
         { provide: MAT_DIALOG_DATA, useValue: {} },
         { provide: MatDialogRef, useValue: {} },
-        { provide: FullstoryService, useClass: MockFullstoryService}
-      ],
-    }).compileComponents();
+        { provide: FullstoryService, useClass: MockFullstoryService },
+        provideHttpClient(withInterceptorsFromDi())
+    ]
+}).compileComponents();
   });
 
   beforeEach(() => {

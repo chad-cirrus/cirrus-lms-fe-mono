@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
@@ -28,53 +28,47 @@ import { NgApexchartsModule } from 'ng-apexcharts';
 import { InitialsPipe } from './pipes/initials.pipe';
 import { TrainingCenterEditorComponent } from './forms/training-center/training-center-editor.component';
 
-@NgModule({
-  declarations: [
-    AppComponent,
-    HeaderComponent,
-    SidebarComponent,
-    ProfilePageComponent,
-    UserProfileMenuComponent,
-    DashboardComponent,
-    ActivityComponent,
-    InstructorsComponent,
-    ClientsComponent,
-    NotificationsComponent,
-    InitialsPipe,
-    TrainingCenterEditorComponent,
-  ],
-  imports: [
-    CommonModule,
-    BrowserModule,
-    BrowserAnimationsModule,
-    HttpClientModule,
-    RouterModule,
-    AppRoutingModule,
-    MatTableModule,
-    MatCheckboxModule,
-    MatFormFieldModule,
-    MatSelectModule,
-    NgApexchartsModule,
-    ReactiveFormsModule,
-  ],
-  providers: [
-    MobileMenuService,
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: AuthHttpInterceptor,
-      multi: true,
-    },
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: HttpErrorInterceptor,
-      multi: true,
-    },
-    {
-      provide: 'environment',
-      useValue: environment,
-    },
-  ],
-  exports: [HeaderComponent, SidebarComponent, UserProfileMenuComponent],
-  bootstrap: [AppComponent],
-})
+@NgModule({ declarations: [
+        AppComponent,
+        HeaderComponent,
+        SidebarComponent,
+        ProfilePageComponent,
+        UserProfileMenuComponent,
+        DashboardComponent,
+        ActivityComponent,
+        InstructorsComponent,
+        ClientsComponent,
+        NotificationsComponent,
+        InitialsPipe,
+        TrainingCenterEditorComponent,
+    ],
+    exports: [HeaderComponent, SidebarComponent, UserProfileMenuComponent],
+    bootstrap: [AppComponent], imports: [CommonModule,
+        BrowserModule,
+        BrowserAnimationsModule,
+        RouterModule,
+        AppRoutingModule,
+        MatTableModule,
+        MatCheckboxModule,
+        MatFormFieldModule,
+        MatSelectModule,
+        NgApexchartsModule,
+        ReactiveFormsModule], providers: [
+        MobileMenuService,
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: AuthHttpInterceptor,
+            multi: true,
+        },
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: HttpErrorInterceptor,
+            multi: true,
+        },
+        {
+            provide: 'environment',
+            useValue: environment,
+        },
+        provideHttpClient(withInterceptorsFromDi()),
+    ] })
 export class AppModule {}

@@ -6,7 +6,8 @@ import {
   MatDialogRef,
 } from '@angular/material/dialog';
 import { UiCourseService } from './ui-course.service';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('UiCourseService', () => {
   let service: UiCourseService;
@@ -15,14 +16,16 @@ describe('UiCourseService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [MatDialogModule, HttpClientTestingModule],
-      providers: [
+    imports: [MatDialogModule],
+    providers: [
         UiCourseService,
         { provide: MAT_DIALOG_DATA, useValue: {} },
         { provide: MatDialogRef, useValue: {} },
-        { provide: 'environment', useValue: environment }
-      ],
-    });
+        { provide: 'environment', useValue: environment },
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
+    ]
+});
     service = TestBed.inject(UiCourseService);
     dialog = TestBed.inject(MatDialog);
   });

@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { UiDownloadService } from './ui-download.service';
 import {
   ContentCounts,
@@ -12,6 +12,7 @@ import {
   IProgress,
   UserCourse,
 } from '@cirrus/models';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('UiDownloadService', () => {
   let service: UiDownloadService;
@@ -19,12 +20,14 @@ describe('UiDownloadService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
-      providers: [
+    imports: [],
+    providers: [
         UiDownloadService,
-        { provide: 'environment', useValue: {} }, // Provide a mock value for the 'environment' dependency
-      ],
-    });
+        { provide: 'environment', useValue: {} },
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting(),
+    ]
+});
     service = TestBed.inject(UiDownloadService);
     httpMock = TestBed.inject(HttpTestingController);
   });

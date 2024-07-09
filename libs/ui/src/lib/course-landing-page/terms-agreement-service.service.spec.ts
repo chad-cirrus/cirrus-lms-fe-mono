@@ -1,11 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
 import { TermsAgreementServiceService } from './terms-agreement-service.service';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ICourseOverview, TermsAgreementSubtitleText } from '@cirrus/models';
 import { of } from 'rxjs';
 import { course351 } from '../mock-data/mock-courses.data';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('TermsAgreementServiceService', () => {
   let service: TermsAgreementServiceService;
@@ -29,13 +30,15 @@ describe('TermsAgreementServiceService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
-      providers: [
+    imports: [],
+    providers: [
         TermsAgreementServiceService,
         { provide: 'environment', useValue: environment },
         { provide: MatDialog, useValue: dialogMock1 },
-      ],
-    });
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting(),
+    ]
+});
   });
 
   describe('openTermsAndConditionsModal', () => {

@@ -22,7 +22,7 @@ import { CourseComponent } from './course/course.component';
 import { AppRoutingModule } from './app-routing.module';
 import { coursesReducers } from './store/reducers';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { AuthHttpInterceptor } from './interceptors/AuthHttpInterceptor';
 import { LessonsEffects } from './store/effects/lessons.effects';
 import { LessonComponent } from './course/lesson/lesson.component';
@@ -54,66 +54,60 @@ import { NextLessonRedirectComponent } from './next-lesson-redirect/next-lesson-
 import { OrderEffects } from './store/effects/order.effects';
 import { CourseEnrollmentComponent } from './course-enrollment/course-enrollment.component';
 
-@NgModule({
-  declarations: [
-    AppComponent,
-    CourseComponent,
-    LessonComponent,
-    ScormContentDialogComponent,
-    NoopComponent,
-    CourseOverviewRouteComponent,
-    CourseLessonsRouteComponent,
-    CourseEnrollmentsRouteComponent,
-    NextLessonRedirectComponent,
-    CourseEnrollmentComponent,
-  ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    CirrusMaterialModule,
-    UiModule,
-    StoreModule.forRoot(coursesReducers),
-    extModules,
-    EffectsModule.forRoot([LessonsEffects, ProgressEffects, OrderEffects]),
-    AppRoutingModule,
-    FlexLayoutModule,
-    MatSidenavModule,
-    HttpClientModule,
-    MatDialogModule,
-    ReactiveFormsModule,
-    CommonModule,
-    MatBadgeModule,
-    OverlayModule,
-    A11yModule,
-    ContentPlayerModule,
-    FullScreenImageDialogComponent,
-    MatIconRegistryModule,
-    MatTabsModule,
-    ErrorNotificationModule,
-    NotificationsMenuModule,
-    SidenavHeaderModule,
-    MatRippleModule,
-  ],
-  providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: AuthHttpInterceptor,
-      multi: true,
-    },
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: HttpErrorInterceptor,
-      multi: true,
-    },
-    MediaServerService,
-    {
-      provide: 'environment',
-      useValue: environment,
-    },
-    NotificationService,
-    UserService,
-    SidenavHeaderService,
-  ],
-  bootstrap: [AppComponent],
-})
+@NgModule({ declarations: [
+        AppComponent,
+        CourseComponent,
+        LessonComponent,
+        ScormContentDialogComponent,
+        NoopComponent,
+        CourseOverviewRouteComponent,
+        CourseLessonsRouteComponent,
+        CourseEnrollmentsRouteComponent,
+        NextLessonRedirectComponent,
+        CourseEnrollmentComponent,
+    ],
+    bootstrap: [AppComponent], imports: [BrowserModule,
+        BrowserAnimationsModule,
+        CirrusMaterialModule,
+        UiModule,
+        StoreModule.forRoot(coursesReducers),
+        extModules,
+        EffectsModule.forRoot([LessonsEffects, ProgressEffects, OrderEffects]),
+        AppRoutingModule,
+        FlexLayoutModule,
+        MatSidenavModule,
+        MatDialogModule,
+        ReactiveFormsModule,
+        CommonModule,
+        MatBadgeModule,
+        OverlayModule,
+        A11yModule,
+        ContentPlayerModule,
+        FullScreenImageDialogComponent,
+        MatIconRegistryModule,
+        MatTabsModule,
+        ErrorNotificationModule,
+        NotificationsMenuModule,
+        SidenavHeaderModule,
+        MatRippleModule], providers: [
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: AuthHttpInterceptor,
+            multi: true,
+        },
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: HttpErrorInterceptor,
+            multi: true,
+        },
+        MediaServerService,
+        {
+            provide: 'environment',
+            useValue: environment,
+        },
+        NotificationService,
+        UserService,
+        SidenavHeaderService,
+        provideHttpClient(withInterceptorsFromDi()),
+    ] })
 export class AppModule {}
