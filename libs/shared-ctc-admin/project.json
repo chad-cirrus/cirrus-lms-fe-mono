@@ -6,6 +6,15 @@
   "tags": [],
   "projectType": "library",
   "targets": {
+    "build": {
+      "executor": "@nx/angular:webpack-browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/shared-ctc-admin",
+        "tsConfig": "libs/shared-ctc-admin/tsconfig.lib.json"
+      }
+    },
+
     "test": {
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],

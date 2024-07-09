@@ -4,6 +4,14 @@
   "sourceRoot": "apps/recent-activity-e2e/src",
   "projectType": "application",
   "targets": {
+    "build": {
+      "executor": "@nx/angular:webpack-browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/recent-activity-e2e",
+        "tsConfig": "apps/recent-activity-e2e/tsconfig.json"
+      }
+    },
     "e2e": {
       "executor": "@nx/cypress:cypress",
       "options": {

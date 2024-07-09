@@ -4,6 +4,14 @@
   "sourceRoot": "libs/models/src",
   "projectType": "library",
   "targets": {
+    "build": {
+      "executor": "@nx/angular:webpack-browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "tsConfig": "libs/models/tsconfig.lib.json",
+        "project": "libs/models/ng-package.json"
+      }
+    },
     "lint": {
       "executor": "@nx/eslint:lint",
       "outputs": ["{options.outputFile}"]

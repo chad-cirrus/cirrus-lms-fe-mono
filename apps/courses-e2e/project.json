@@ -4,6 +4,15 @@
   "sourceRoot": "apps/courses-e2e/src",
   "projectType": "application",
   "targets": {
+
+    "build": {
+      "executor": "@nx/angular:webpack-browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/courses-e2e",
+        "tsConfig": "apps/courses-e2e/tsconfig.json"
+      }
+    },
     "e2e": {
       "executor": "@nx/cypress:cypress",
       "options": {

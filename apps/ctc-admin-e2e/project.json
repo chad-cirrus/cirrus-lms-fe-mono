@@ -6,6 +6,15 @@
   "tags": [],
   "implicitDependencies": ["ctc-admin"],
   "targets": {
+    "build": {
+      "executor": "@nx/angular:webpack-browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/ctc-admin-e2e",
+        "tsConfig": "apps/ctc-admin-e2e/tsconfig.json"
+      }
+    },
+
     "e2e": {
       "executor": "@nx/cypress:cypress",
       "options": {

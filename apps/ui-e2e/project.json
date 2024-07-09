@@ -4,6 +4,14 @@
   "sourceRoot": "apps/ui-e2e/src",
   "projectType": "application",
   "targets": {
+    "build": {
+      "executor": "@nx/angular:webpack-browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/ui-e2e",
+        "tsConfig": "apps/ui-e2e/tsconfig.json"
+      }
+    },
     "e2e": {
       "executor": "@nx/cypress:cypress",
       "options": {
