@@ -5,19 +5,12 @@
   "sourceRoot": "libs/sidenav-header/src",
   "prefix": "cirrus",
   "targets": {
-    "build": {
-      "executor": "@nx/angular:webpack-browser",
-      "outputs": ["{options.outputPath}"],
-      "options": {
-        "outputPath": "dist/libs/sidenav-header",
-        "tsConfig": "libs/sidenav-header/tsconfig.lib.json"
-      }
-    },
     "test": {
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/sidenav-header"],
       "options": {
-        "jestConfig": "libs/sidenav-header/jest.config.ts"
+        "jestConfig": "libs/sidenav-header/jest.config.ts",
+        "tsConfig": "libs/sidenav-header/tsconfig.spec.json"
       }
     },
     "lint": {

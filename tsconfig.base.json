@@ -24,6 +24,7 @@
       "@cirrus/shared-ctc-admin": ["libs/shared-ctc-admin/src/index.ts"],
       "@cirrus/sidenav-header": ["libs/sidenav-header/src/index.ts"],
       "@cirrus/ui": ["libs/ui/src/index.ts"],
+      "chadly": ["chadly/src/index.ts"],
       "header/Routes": ["apps/ctc-admin/remotes/header/src/app/remote-entry/entry.routes.ts"],
       "profile-page/Routes": ["apps/ctc-admin/remotes/profile-page/src/app/remote-entry/entry.routes.ts"],
       "shared-ctc-admin": ["libs/shared-ctc-admin/src/index.ts"],

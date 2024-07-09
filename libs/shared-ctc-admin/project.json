@@ -7,7 +7,7 @@
   "projectType": "library",
   "targets": {
     "build": {
-      "executor": "@nx/angular:webpack-browser",
+      "executor": "@angular-devkit/build-angular:ng-packagr",
       "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/libs/shared-ctc-admin",

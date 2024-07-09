@@ -5,19 +5,12 @@
   "sourceRoot": "libs/search-input/src",
   "prefix": "cirrus",
   "targets": {
-    "build": {
-      "executor": "@nx/angular:webpack-browser",
-      "outputs": ["{options.outputPath}"],
-      "options": {
-        "outputPath": "dist/libs/search-input",
-        "tsConfig": "libs/search-input/tsconfig.lib.json"
-      }
-    },
     "test": {
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/search-input"],
       "options": {
-        "jestConfig": "libs/search-input/jest.config.ts"
+        "jestConfig": "libs/search-input/jest.config.ts",
+        "tsConfig": "libs/search-input/tsconfig.spec.json"
       }
     },
     "lint": {

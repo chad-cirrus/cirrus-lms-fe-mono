@@ -5,20 +5,12 @@
   "sourceRoot": "libs/badge/src",
   "prefix": "cirrus",
   "targets": {
-    "build": {
-      "executor": "@nx/angular:webpack-browser",
-      "outputs": ["{options.outputPath}"],
-      "options": {
-        "outputPath": "dist/libs/badge",
-        "tsConfig": "libs/badge/tsconfig.lib.json"
-      }
-    },
-
     "test": {
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/badge"],
       "options": {
-        "jestConfig": "libs/badge/jest.config.ts"
+        "jestConfig": "libs/badge/jest.config.ts",
+        "tsConfig": "libs/badge/tsconfig.spec.json"
       }
     },
     "lint": {

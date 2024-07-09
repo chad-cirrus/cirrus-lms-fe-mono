@@ -5,20 +5,12 @@
   "sourceRoot": "libs/auth/src",
   "prefix": "cirrus",
   "targets": {
-    "build": {
-      "executor": "@nx/angular:webpack-browser",
-      "outputs": ["{options.outputPath}"],
-      "options": {
-        "outputPath": "dist/libs/auth",
-        "tsConfig": "libs/auth/tsconfig.lib.json",
-      }
-    },
-
     "test": {
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "libs/auth/jest.config.ts"
+        "jestConfig": "libs/auth/jest.config.ts",
+        "tsConfig": "libs/auth/tsconfig.lib.json"
       }
     },
     "lint": {
