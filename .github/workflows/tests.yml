@@ -43,7 +43,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
-          node-version: 18.19
+          node-version: 20.11
 
       - name: Install dependencies
         run: yarn install
@@ -65,7 +65,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
-          node-version: 18.19
+          node-version: 20.11
 
       - name: Make Courses test environment config available
         uses: canastro/copy-file-action@master
